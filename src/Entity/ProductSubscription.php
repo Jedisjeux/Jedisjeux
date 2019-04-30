@@ -45,6 +45,13 @@ class ProductSubscription extends Subscription implements ResourceInterface
     protected $subject;
 
     /**
+     * @var CustomerInterface|null
+     *
+     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface", inversedBy="productSubscriptions")
+     */
+    protected $subscriber;
+
+    /**
      * @return Subscribable|ProductInterface|null
      */
     public function getSubject(): ?Subscribable

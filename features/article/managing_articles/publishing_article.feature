@@ -23,3 +23,4 @@ Feature: Publishing article
         And I want to edit "Puerto Rico rocks!" article
         When I publish it
         Then customer "kevin@example.com" should have received a notification for article "Puerto Rico rocks!"
+        And a notification should be sent to "kevin@example.com" for "Puerto Rico rocks!"

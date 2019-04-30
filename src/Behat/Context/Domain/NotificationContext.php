@@ -42,6 +42,7 @@ class NotificationContext implements Context
 
     /**
      * @Then customer :customer should (also )have received a notification for article :article
+     * @Then a notification should be sent to :customer for :article
      */
     public function customerShouldHaveNotificationForArticle(CustomerInterface $customer, Article $article)
     {

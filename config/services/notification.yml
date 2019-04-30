@@ -6,6 +6,7 @@ services:
     App\NotificationManager\ArticleNotificationManager:
         arguments:
             $factory: '@app.factory.notification'
+            $customerRepository: '@sylius.repository.customer'
 
     app.notification_manager.product:
         class: App\NotificationManager\ProductNotificationManager

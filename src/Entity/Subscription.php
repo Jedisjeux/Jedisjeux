@@ -31,8 +31,6 @@ abstract class Subscription
 
     /**
      * @var CustomerInterface|null
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
      */
     protected $subscriber;
 

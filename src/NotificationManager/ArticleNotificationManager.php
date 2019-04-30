@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace App\NotificationManager;
 
 use App\Entity\Article;
-use App\Entity\Customer;
 use App\Entity\CustomerInterface;
 use App\Entity\ProductSubscription;
 use App\Entity\User;
 use App\Factory\NotificationFactory;
+use App\Repository\CustomerRepository;
 use App\Repository\UserRepositoryInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -47,9 +47,9 @@ class ArticleNotificationManager
     private $appUserRepository;
 
     /**
-     * @var RepositoryInterface
+     * @var CustomerRepository
      */
-    private $productSubscriptionRepository;
+    private $customerRepository;
 
     /**
      * @var RouterInterface
@@ -65,14 +65,14 @@ class ArticleNotificationManager
         NotificationFactory $factory,
         ObjectManager $manager,
         UserRepositoryInterface $appUserRepository,
-        RepositoryInterface $productSubscriptionRepository,
+        CustomerRepository $customerRepository,
         RouterInterface $router,
         TranslatorInterface $translator
     ) {
         $this->factory = $factory;
         $this->manager = $manager;
         $this->appUserRepository = $appUserRepository;
-        $this->productSubscriptionRepository = $productSubscriptionRepository;
+        $this->customerRepository = $customerRepository;
         $this->router = $router;
         $this->translator = $translator;
     }
@@ -110,17 +110,7 @@ class ArticleNotificationManager
         }
 
         /** @var ProductSubscription[] $subscriptions */
-        $subscriptions = $this->productSubscriptionRepository->findBy(['subject' => $product]);
-
-        $customers = [];
-
-        foreach ($subscriptions as $subscription) {
-            if (!$subscription->hasOption(ProductSubscription::OPTION_FOLLOW_ARTICLES)) {
-                continue;
-            }
-
-            $customers[] = $subscription->getSubscriber();
-        }
+        $customers = $this->customerRepository->findSubscribersToProductForOption($product, ProductSubscription::OPTION_FOLLOW_ARTICLES);
 
         $this->notifyCustomers($this->translator->trans('text.notification.article.new_publication', [
             '%PRODUCT_NAME%' => $product->getName(),
