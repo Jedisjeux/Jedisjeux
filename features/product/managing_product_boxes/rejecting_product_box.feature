@@ -16,4 +16,4 @@ Feature: Rejecting a product box
         When I reject this box
         Then I should be notified that it has been successfully rejected
         And this product box should have "rejected" status
-        And there is a notification sent to "kevin@example.com"
+        And customer "kevin@example.com" should have received a notification

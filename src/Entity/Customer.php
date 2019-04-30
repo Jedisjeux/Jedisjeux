@@ -8,12 +8,13 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
 use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Customer\Model\Customer as BaseCustomer;
-use Sylius\Component\User\Model\UserAwareInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -55,6 +56,21 @@ class Customer extends BaseCustomer implements CustomerInterface, ReviewerInterf
      * @ORM\Column(type="string", nullable=true, unique=true)
      */
     private $code;
+
+    /**
+     * @var Collection|ProductSubscription[]
+     *
+     * @ORM\OneToMany(targetEntity="ProductSubscription", mappedBy="subscriber", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $productSubscriptions;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->productSubscriptions = new ArrayCollection();
+    }
+
 
     /**
      * @return Avatar|null
@@ -117,6 +133,44 @@ class Customer extends BaseCustomer implements CustomerInterface, ReviewerInterf
         if ($user instanceof AppUserInterface) {
             $user->setCustomer($this);
         }
+    }
+
+    /**
+     * @return ProductSubscription[]|Collection
+     */
+    public function getProductSubscriptions(): Collection
+    {
+        return $this->productSubscriptions;
+    }
+
+    /**
+     * @param ProductSubscription $subscription
+     *
+     * @return bool
+     */
+    public function hasProductSubscription(ProductSubscription $subscription): bool
+    {
+        return $this->productSubscriptions->contains($subscription);
+    }
+
+    /**
+     * @param ProductSubscription $subscription
+     */
+    public function addProductSubscription(ProductSubscription $subscription): void
+    {
+        if (!$this->hasProductSubscription($subscription)) {
+            $this->productSubscriptions->add($subscription);
+            $subscription->setSubscriber($this);
+        }
+    }
+
+    /**
+     * @param ProductSubscription $subscription
+     */
+    public function removeProductSubscription(ProductSubscription $subscription): void
+    {
+        $this->productSubscriptions->removeElement($subscription);
+        $subscription->setSubscriber(null);
     }
 
     /**

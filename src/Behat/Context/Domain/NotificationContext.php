@@ -33,17 +33,18 @@ class NotificationContext implements Context
     }
 
     /**
-     * @Then there is (also )a notification sent to :customer
+     * @Then customer :customer should have received a notification
      */
-    public function thereIsNotificationSentToCustomer(CustomerInterface $customer)
+    public function customerShouldHaveNotification(CustomerInterface $customer)
     {
         $this->assertNotificationExists(['recipient' => $customer]);
     }
 
     /**
-     * @Then there is (also )a notification sent to :customer for article :article
+     * @Then customer :customer should (also )have received a notification for article :article
+     * @Then a notification should be sent to :customer for :article
      */
-    public function thereIsNotificationSentToCustomerForArticle(CustomerInterface $customer, Article $article)
+    public function customerShouldHaveNotificationForArticle(CustomerInterface $customer, Article $article)
     {
         $this->assertNotificationExists([
             'recipient' => $customer,
@@ -52,9 +53,9 @@ class NotificationContext implements Context
     }
 
     /**
-     * @Then there is (also )a notification sent to :customer for product :product
+     * @Then customer :customer should (also )have received a notification for product :product
      */
-    public function thereIsNotificationSentToCustomerForProduct(CustomerInterface $customer, ProductInterface $product)
+    public function customerShouldHaveNotificationForProduct(CustomerInterface $customer, ProductInterface $product)
     {
         $this->assertNotificationExists([
             'recipient' => $customer,

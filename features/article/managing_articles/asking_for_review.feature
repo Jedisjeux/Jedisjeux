@@ -17,5 +17,5 @@ Feature: Asking for review
         When I ask for a review
         Then I should be notified that it has been successfully edited
         And this article with title "King of New York : Power Up!" should have "pending review" status
-        And there is a notification sent to "obiwan@example.com" for article "King of New York : Power Up!"
-        And there is also a notification sent to "luke@example.com" for article "King of New York : Power Up!"
+        And customer "obiwan@example.com" should have received a notification for article "King of New York : Power Up!"
+        And customer "luke@example.com" should have received a notification for article "King of New York : Power Up!"

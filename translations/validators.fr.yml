@@ -8,6 +8,8 @@ app:
     product:
         player_count:
             min_value_should_not_be_greater_than_max_value: La valeur min ne devrait pas être inférieure à la valeur max.
+    product_subscription:
+        unique: Vous suivez déjà ce jeu.
 
 zenstruck_redirect:
     source:

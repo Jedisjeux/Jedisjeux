@@ -13,6 +13,11 @@ services:
           public: false
           arguments: ["app_backend_article_create"]
 
+      App\Behat\Page\Backend\Article\CreateForProductPage:
+          parent: app.behat.page.backend.crud.create
+          public: false
+          arguments: ["app_backend_article_create_for_product"]
+
       App\Behat\Page\Backend\Article\IndexPage:
           parent: app.behat.page.backend.crud.index
           public: false

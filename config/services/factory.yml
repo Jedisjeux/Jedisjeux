@@ -13,3 +13,10 @@ services:
         public: false
         arguments:
             $factory: '@App\Factory\ProductFileFactory.inner'
+
+    app.custom.factory.product_subscription:
+        class: App\Factory\SubscriptionFactory
+        decorates: "app.factory.product_subscription"
+        public: false
+        arguments:
+            $factory: '@app.custom.factory.product_subscription.inner'

@@ -16,4 +16,4 @@ Feature: Accepting a product file
         When I accept this file
         Then I should be notified that it has been successfully accepted
         And this product file should have "accepted" status
-        And there is a notification sent to "kevin@example.com"
+        And customer "kevin@example.com" should have received a notification

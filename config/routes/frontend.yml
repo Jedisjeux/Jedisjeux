@@ -48,6 +48,10 @@ sylius_frontend_product_review:
     resource: "frontend/product_review.yml"
     prefix: /products/{slug}/reviews
 
+app_frontend_product_subscription:
+    resource: "frontend/product_subscription.yml"
+    prefix: /products/{slug}/subscriptions
+
 app_frontend_user:
     resource: "frontend/user.yml"
     prefix: /utilisateurs/{username}

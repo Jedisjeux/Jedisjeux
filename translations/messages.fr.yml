@@ -77,6 +77,10 @@ app:
         festival_list_items: Items de liste de festival
         file: Fichier
         files: Fichiers
+        follow_articles: Suivre les articles
+        follow_game_plays: Suivre les parties
+        follow_reviews: Suivre les avis
+        follow_videos: Suivre les vidéos
         forum: Forum
         framed: Encadré
         from_board_game_geek: À partir de BoardGameGeek
@@ -484,6 +488,7 @@ text:
         article:
             ask_for_review: L'article <strong>%ARTICLE_NAME%</strong> a besoin d'une relecture.
             ask_for_publication: L'article <strong>%ARTICLE_NAME%</strong> est prêt à valider.
+            new_publication: Un nouvel article pour le jeu <strong>%PRODUCT_NAME%</strong> a été publié.
         product:
             ask_for_translation: Le jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une traduction.
             ask_for_review: Le jeu <strong>%PRODUCT_NAME%</strong> a besoin d'une relecture.

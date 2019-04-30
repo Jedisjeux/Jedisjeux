@@ -5,4 +5,5 @@ app:
     product:
         player_count:
             min_value_should_not_be_greater_than_max_value: Min value should not be greater than max value.
-
+    product_subscription:
+        unique: You have already a subscription for this game.

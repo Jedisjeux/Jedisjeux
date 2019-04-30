@@ -16,4 +16,4 @@ Feature: Accepting a product box
         When I accept this box
         Then I should be notified that it has been successfully accepted
         And this product box should have "accepted" status
-        And there is a notification sent to "kevin@example.com"
+        And customer "kevin@example.com" should have received a notification

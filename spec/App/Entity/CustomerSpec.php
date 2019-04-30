@@ -6,6 +6,8 @@ use App\Entity\AppUserInterface;
 use App\Entity\Avatar;
 use App\Entity\Customer;
 use App\Entity\CustomerInterface;
+use App\Entity\ProductSubscription;
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Customer\Model\Customer as BaseCustomer;
 use Sylius\Component\User\Model\UserInterface;
@@ -82,6 +84,31 @@ class CustomerSpec extends ObjectBehavior
     {
         $this->setAvatar($avatar);
         $this->getAvatar()->shouldReturn($avatar);
+    }
+
+    function it_initializes_a_product_subscriptions_collection_by_default(): void
+    {
+        $this->getProductSubscriptions()->shouldHaveType(Collection::class);
+    }
+
+    function it_adds_product_subscriptions(ProductSubscription $subscription): void
+    {
+        $subscription->setSubscriber($this)->shouldBeCalled();
+
+        $this->addProductSubscription($subscription);
+
+        $this->hasProductSubscription($subscription)->shouldReturn(true);
+    }
+
+    function it_removes_product_subscriptions(ProductSubscription $subscription): void
+    {
+        $this->addProductSubscription($subscription);
+
+        $subscription->setSubscriber(null)->shouldBeCalled();
+
+        $this->removeProductSubscription($subscription);
+
+        $this->hasProductSubscription($subscription)->shouldReturn(false);
     }
 
     function its_to_string_conversion_returns_customer_email_when_no_user_associated(): void

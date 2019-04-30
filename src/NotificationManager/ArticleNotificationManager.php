@@ -9,12 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace App\NotificationManager;
 
 use App\Entity\Article;
+use App\Entity\CustomerInterface;
+use App\Entity\ProductSubscription;
+use App\Entity\User;
 use App\Factory\NotificationFactory;
-use App\Repository\UserRepository;
+use App\Repository\CustomerRepository;
+use App\Repository\UserRepositoryInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -27,47 +34,45 @@ class ArticleNotificationManager
     /**
      * @var NotificationFactory
      */
-    protected $factory;
+    private $factory;
 
     /**
      * @var ObjectManager
      */
-    protected $manager;
+    private $manager;
 
     /**
-     * @var UserRepository
+     * @var UserRepositoryInterface
      */
-    protected $userRepository;
+    private $appUserRepository;
+
+    /**
+     * @var CustomerRepository
+     */
+    private $customerRepository;
 
     /**
      * @var RouterInterface
      */
-    protected $router;
+    private $router;
 
     /**
      * @var TranslatorInterface
      */
-    protected $translator;
+    private $translator;
 
-    /**
-     * ProductNotificationManager constructor.
-     *
-     * @param NotificationFactory $factory
-     * @param ObjectManager       $manager
-     * @param UserRepository      $userRepository
-     * @param RouterInterface     $router
-     * @param TranslatorInterface $translator
-     */
     public function __construct(
         NotificationFactory $factory,
         ObjectManager $manager,
-        UserRepository $userRepository,
+        UserRepositoryInterface $appUserRepository,
+        CustomerRepository $customerRepository,
         RouterInterface $router,
         TranslatorInterface $translator
     ) {
         $this->factory = $factory;
         $this->manager = $manager;
-        $this->userRepository = $userRepository;
+        $this->appUserRepository = $appUserRepository;
+        $this->customerRepository = $customerRepository;
         $this->router = $router;
         $this->translator = $translator;
     }
@@ -75,10 +80,10 @@ class ArticleNotificationManager
     /**
      * @param Article $article
      */
-    public function notifyReviewers(Article $article)
+    public function notifyReviewers(Article $article): void
     {
         /** @var UserInterface[] $users */
-        $users = $this->userRepository->findByRole('ROLE_REVIEWER');
+        $users = $this->appUserRepository->findByRole('ROLE_REVIEWER');
 
         $this->notifyUsers($this->translator->trans('text.notification.article.ask_for_review', [
             '%ARTICLE_NAME%' => $article->getName(),
@@ -88,33 +93,71 @@ class ArticleNotificationManager
     /**
      * @param Article $article
      */
-    public function notifyPublishers(Article $article)
+    public function notifyPublishers(Article $article): void
     {
         /** @var UserInterface[] $users */
-        $users = $this->userRepository->findByRole('ROLE_PUBLISHER');
+        $users = $this->appUserRepository->findByRole('ROLE_PUBLISHER');
 
         $this->notifyUsers($this->translator->trans('text.notification.article.ask_for_publication', [
             '%ARTICLE_NAME%' => $article->getName(),
         ]), $article, $users);
     }
 
+    public function notifySubscribers(Article $article): void
+    {
+        if (null === $product = $article->getProduct()) {
+            return;
+        }
+
+        /** @var ProductSubscription[] $subscriptions */
+        $customers = $this->customerRepository->findSubscribersToProductForOption($product, ProductSubscription::OPTION_FOLLOW_ARTICLES);
+
+        $this->notifyCustomers($this->translator->trans('text.notification.article.new_publication', [
+            '%PRODUCT_NAME%' => $product->getName(),
+        ]), $article, $customers);
+    }
+
     /**
-     * @param string  $message
-     * @param Article $article
-     * @param array   $users
+     * @param string     $message
+     * @param Article    $article
+     * @param array|User $users
      */
-    protected function notifyUsers($message, Article $article, array $users)
+    private function notifyUsers($message, Article $article, array $users): void
     {
         foreach ($users as $user) {
-            $notification = $this->factory->createForArticle($article, $user->getCustomer());
-            $notification->setTarget($this->router->generate('app_frontend_article_show', [
-                'slug' => $article->getSlug(),
-            ]));
-            $notification->setMessage($message);
-
-            $this->manager->persist($notification);
+            $this->notifyCustomer($message, $article, $user->getCustomer());
         }
 
         $this->manager->flush();
+    }
+
+    /**
+     * @param string                  $message
+     * @param Article                 $article
+     * @param array|CustomerInterface $customers
+     */
+    private function notifyCustomers($message, Article $article, array $customers): void
+    {
+        foreach ($customers as $customer) {
+            $this->notifyCustomer($message, $article, $customer);
+        }
+
+        $this->manager->flush();
+    }
+
+    /**
+     * @param string            $message
+     * @param Article           $article
+     * @param CustomerInterface $customer
+     */
+    private function notifyCustomer($message, Article $article, CustomerInterface $customer): void
+    {
+        $notification = $this->factory->createForArticle($article, $customer);
+        $notification->setTarget($this->router->generate('app_frontend_article_show', [
+            'slug' => $article->getSlug(),
+        ]));
+        $notification->setMessage($message);
+
+        $this->manager->persist($notification);
     }
 }
