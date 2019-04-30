@@ -13,7 +13,7 @@ namespace App\Entity;
 
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
 
-interface ProductInterface extends BaseProductInterface, Subscribable
+interface ProductInterface extends BaseProductInterface, SubscribableInterface
 {
     /**
      * @return ProductVariantInterface|ProductVariant|null

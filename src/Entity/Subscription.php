@@ -18,19 +18,19 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\MappedSuperclass
  */
-abstract class Subscription
+abstract class Subscription implements SubscriptionInterface
 {
     use IdentifiableTrait;
 
     public static $defaultOptions = [];
 
     /**
-     * @var Subscribable|null
+     * @var SubscribableInterface|null
      */
     protected $subject;
 
     /**
-     * @var CustomerInterface|null
+     * @var SubscriberInterface|null
      */
     protected $subscriber;
 
@@ -47,39 +47,39 @@ abstract class Subscription
     }
 
     /**
-     * @return Subscribable|null
+     * {@inheritdoc}
      */
-    public function getSubject(): ?Subscribable
+    public function getSubject(): ?SubscribableInterface
     {
         return $this->subject;
     }
 
     /**
-     * @param Subscribable|null $subject
+     * {@inheritdoc}
      */
-    public function setSubject(?Subscribable $subject): void
+    public function setSubject(?SubscribableInterface $subject): void
     {
         $this->subject = $subject;
     }
 
     /**
-     * @return CustomerInterface|null
+     * {@inheritdoc}
      */
-    public function getSubscriber(): ?CustomerInterface
+    public function getSubscriber(): ?SubscriberInterface
     {
         return $this->subscriber;
     }
 
     /**
-     * @param CustomerInterface|null $subscriber
+     * {@inheritdoc}
      */
-    public function setSubscriber(?CustomerInterface $subscriber): void
+    public function setSubscriber(?SubscriberInterface $subscriber): void
     {
         $this->subscriber = $subscriber;
     }
 
     /**
-     * @return array
+     * {@inheritdoc}
      */
     public function getOptions(): array
     {
@@ -87,8 +87,7 @@ abstract class Subscription
     }
 
     /**
-     * @param string $option
-     * @return bool
+     * {@inheritdoc}
      */
     public function hasOption(string $option): bool
     {
@@ -96,7 +95,7 @@ abstract class Subscription
     }
 
     /**
-     * @param string $option
+     * {@inheritdoc}
      */
     public function addOption(string $option): void
     {
@@ -106,7 +105,7 @@ abstract class Subscription
     }
 
     /**
-     * @param string $option
+     * {@inheritdoc}
      */
     public function removeOption(string $option): void
     {

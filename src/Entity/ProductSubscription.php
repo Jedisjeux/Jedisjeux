@@ -14,14 +14,13 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sylius\Component\Resource\Model\ResourceInterface;
 use Webmozart\Assert\Assert;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="jdj_product_subscription")
  */
-class ProductSubscription extends Subscription implements ResourceInterface
+class ProductSubscription extends Subscription implements SubscriptionInterface
 {
     public const OPTION_FOLLOW_ARTICLES = 'follow_articles';
     public const OPTION_FOLLOW_REVIEWS = 'follow_reviews';
@@ -52,17 +51,17 @@ class ProductSubscription extends Subscription implements ResourceInterface
     protected $subscriber;
 
     /**
-     * @return Subscribable|ProductInterface|null
+     * @return SubscribableInterface|ProductInterface|null
      */
-    public function getSubject(): ?Subscribable
+    public function getSubject(): ?SubscribableInterface
     {
         return $this->subject;
     }
 
     /**
-     * @param Subscribable|ProductInterface|null $product
+     * @param SubscribableInterface|ProductInterface|null $product
      */
-    public function setSubject(?Subscribable $product): void
+    public function setSubject(?SubscribableInterface $product): void
     {
         Assert::nullOrIsInstanceOf($product, ProductInterface::class);
 

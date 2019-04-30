@@ -77,6 +77,10 @@ app:
         festival_list_items: Items de liste de festival
         file: Fichier
         files: Fichiers
+        follow_articles: Suivre les articles
+        follow_game_plays: Suivre les parties
+        follow_reviews: Suivre les avis
+        follow_videos: Suivre les vidéos
         forum: Forum
         framed: Encadré
         from_board_game_geek: À partir de BoardGameGeek

@@ -124,6 +124,7 @@ sylius_resource:
         app.product_subscription:
             classes:
                 model: App\Entity\ProductSubscription
+                form: App\Form\Type\ProductSubscriptionType
         app.product_video:
             classes:
                 model: App\Entity\ProductVideo

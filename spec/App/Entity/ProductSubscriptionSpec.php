@@ -5,7 +5,7 @@ namespace spec\App\Entity;
 use App\Entity\CustomerInterface;
 use App\Entity\ProductInterface;
 use App\Entity\ProductSubscription;
-use App\Entity\Subscribable;
+use App\Entity\SubscribableInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -48,7 +48,7 @@ class ProductSubscriptionSpec extends ObjectBehavior
         $this->getSubject()->shouldReturn($product);
     }
 
-    function it_throws_an_invalid_argument_exception_when_subject_is_not_a_product(Subscribable $subject)
+    function it_throws_an_invalid_argument_exception_when_subject_is_not_a_product(SubscribableInterface $subject)
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('setSubject', [$subject]);
     }

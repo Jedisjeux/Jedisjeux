@@ -1,0 +1,15 @@
+app_frontend_product_subscription_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: app.controller.product_subscription:createAction
+        _sylius:
+            template: 'frontend/product_subscription/create.html.twig'
+            factory:
+                method: createForSubjectWithSubscriber
+                arguments:
+                    - "expr:notFoundOnNull(service('sylius.repository.product').findOneBySlug(service('sylius.context.locale').getLocaleCode(), $slug))"
+                    - "expr:service('sylius.context.customer').getCustomer()"
+            redirect:
+                route: sylius_frontend_product_show
+                parameters: { slug: resource.subject.slug }

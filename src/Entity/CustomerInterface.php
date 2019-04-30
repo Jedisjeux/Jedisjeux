@@ -15,7 +15,7 @@ use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 use Sylius\Component\User\Model\UserAwareInterface;
 use Sylius\Component\User\Model\UserInterface;
 
-interface CustomerInterface extends BaseCustomerInterface, UserAwareInterface
+interface CustomerInterface extends BaseCustomerInterface, UserAwareInterface, SubscriberInterface
 {
     /**
      * @return User|Userinterface|null
