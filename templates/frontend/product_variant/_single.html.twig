@@ -1,0 +1,48 @@
+{% import 'macro/image.html.twig' as images %}
+{% from 'macro/product.html.twig' import releasedAt, duration, playerCount %}
+{% from 'macro/rating.html.twig' import rating %}
+
+{% import _self as self %}
+
+{% macro show_people(people) %}
+    {% for person in people %}{% spaceless %}
+        {% if not loop.first %}, {% endif %}<a href="{{ path('sylius_frontend_product_index_by_person', { 'slug': person.slug } ) }}">{{ person }}</a>
+    {% endspaceless %}{% endfor %}
+{% endmacro %}
+
+{% macro show_taxons(taxons) %}
+    {% for taxon in taxons %}{% spaceless %}
+        {% if not loop.first %}, {% endif %}<a href="{{ path('sylius_frontend_product_index_by_taxon', { 'slug': taxon.slug } ) }}">{{ taxon }}</a>
+    {% endspaceless %}{% endfor %}
+{% endmacro %}
+
+<div class="image-box style-2 mb-20 bordered light-gray-bg">
+    <div class="overlay-container overlay-visible">
+        {% if product_variant.mainImage is not null %}
+            {{ images.render(product_variant.mainImage.webPath, 'magazine_item', product.name) }}
+        {% elseif product.mainImage is not null %}
+                {{ images.render(product.mainImage.webPath, 'magazine_item', product.name) }}
+        {% endif %}
+        <div class="overlay-bottom text-left">
+            <p class="lead margin-clear">{{ product_variant.name }}</p>
+        </div>
+    </div>
+    <div class="body">
+        <ul class="list-icons small">
+            <li><i class="fa fa-calendar-o"></i> Sortie : {{ releasedAt(product.firstVariant) }}</li>
+        </ul>
+
+        {% if product_variant.designers|length > 0 %}
+            <dt class="col-sm-3 text-sm-right">Auteur(s)</dt>
+            <dd id="product-designers" class="col-sm-9">{{ self.show_people(product_variant.designers) }}</dd>
+        {% endif %}
+        {% if product_variant.artists|length > 0 %}
+            <dt class="col-sm-3 text-sm-right">Illustrateur(s)</dt>
+            <dd id="product-artists" class="col-sm-9">{{ self.show_people(product_variant.artists) }}</dd>
+        {% endif %}
+        {% if product_variant.publishers|length > 0 %}
+            <dt class="col-sm-3 text-sm-right">Editeur(s)</dt>
+            <dd id="product-publishers" class="col-sm-9">{{ self.show_people(product_variant.publishers) }}</dd>
+        {% endif %}
+    </div>
+</div>

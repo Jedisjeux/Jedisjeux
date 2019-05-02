@@ -11,6 +11,8 @@
 
 namespace App\Behat\Page\Frontend\Product;
 
+use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
 /**
@@ -29,7 +31,7 @@ class ShowPage extends SymfonyPage
     /**
      * @return string
      *
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws ElementNotFoundException
      */
     public function getName(): string
     {
@@ -39,7 +41,7 @@ class ShowPage extends SymfonyPage
     /**
      * @return string
      *
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws ElementNotFoundException
      */
     public function getBoxContent(): string
     {
@@ -47,9 +49,9 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * @return \Behat\Mink\Element\NodeElement[]
+     * @return NodeElement[]
      *
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws ElementNotFoundException
      */
     public function getMechanisms(): array
     {
@@ -61,7 +63,7 @@ class ShowPage extends SymfonyPage
     /**
      * @return array
      *
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws ElementNotFoundException
      */
     public function getThemes(): array
     {
@@ -73,7 +75,7 @@ class ShowPage extends SymfonyPage
     /**
      * @return array
      *
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws ElementNotFoundException
      */
     public function getDesigners(): array
     {
@@ -85,7 +87,7 @@ class ShowPage extends SymfonyPage
     /**
      * @return array
      *
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws ElementNotFoundException
      */
     public function getArtists(): array
     {
@@ -97,7 +99,7 @@ class ShowPage extends SymfonyPage
     /**
      * @return array
      *
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws ElementNotFoundException
      */
     public function getPublishers(): array
     {
@@ -109,7 +111,7 @@ class ShowPage extends SymfonyPage
     /**
      * @return array
      *
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws ElementNotFoundException
      */
     public function getAwards(): array
     {
@@ -148,7 +150,7 @@ class ShowPage extends SymfonyPage
      *
      * @return bool
      *
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws ElementNotFoundException
      */
     public function hasReviewTitled(string $title): bool
     {
@@ -160,7 +162,7 @@ class ShowPage extends SymfonyPage
      *
      * @return bool
      *
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws ElementNotFoundException
      */
     public function hasArticleTitled(string $title): bool
     {
@@ -168,11 +170,23 @@ class ShowPage extends SymfonyPage
     }
 
     /**
+     * @param string $name
+     *
+     * @return bool
+     *
+     * @throws ElementNotFoundException
+     */
+    public function hasVariantNamed(string $name): bool
+    {
+        return null !== $this->getElement('variants')->find('css', sprintf('.image-box .lead:contains("%s")', $name));
+    }
+
+    /**
      * @param string $email
      *
      * @return bool
      *
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws ElementNotFoundException
      */
     public function hasGamePlayAddedByCustomerEmail(string $email): bool
     {
@@ -184,7 +198,7 @@ class ShowPage extends SymfonyPage
      *
      * @return bool
      *
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws ElementNotFoundException
      */
     public function hasFileTitled(string $title): bool
     {
@@ -196,7 +210,7 @@ class ShowPage extends SymfonyPage
      *
      * @return bool
      *
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws ElementNotFoundException
      */
     public function hasVideoTitled(string $title): bool
     {
@@ -221,6 +235,7 @@ class ShowPage extends SymfonyPage
             'publishers' => '#product-publishers',
             'reviews' => '#reviews .comments',
             'themes' => '#product-themes',
+            'variants' => '#product-variants',
             'videos' => '#videos',
         ]);
     }
