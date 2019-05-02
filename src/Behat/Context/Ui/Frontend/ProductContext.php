@@ -92,6 +92,7 @@ class ProductContext implements Context
 
     /**
      * @When /^I check (this product)'s details$/
+     * @When I view product :product
      */
     public function iOpenProductPage(ProductInterface $product)
     {
@@ -517,6 +518,39 @@ class ProductContext implements Context
                 sprintf('Product should have file titled "%s" but it does not.', $file)
             );
         }
+    }
+
+    /**
+     * @Then /^I should(?:| also) see the product association "([^"]+)" with (products "[^"]+" and "[^"]+")$/
+     */
+    public function iShouldSeeTheProductAssociationWithProducts($productAssociationName, array $products)
+    {
+        Assert::true(
+            $this->showPage->hasAssociation($productAssociationName),
+            sprintf('There should be an association named "%s" but it does not.', $productAssociationName)
+        );
+
+        foreach ($products as $product) {
+            $this->assertProductIsInAssociation($product->getName(), $productAssociationName);
+        }
+    }
+
+    /**
+     * @param string $productName
+     * @param string $productAssociationName
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function assertProductIsInAssociation($productName, $productAssociationName)
+    {
+        Assert::true(
+            $this->showPage->hasProductInAssociation($productName, $productAssociationName),
+            sprintf(
+                'There should be an associated product "%s" under association "%s" but it does not.',
+                $productName,
+                $productAssociationName
+            )
+        );
     }
 
     /**

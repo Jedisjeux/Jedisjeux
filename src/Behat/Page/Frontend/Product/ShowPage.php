@@ -14,6 +14,7 @@ namespace App\Behat\Page\Frontend\Product;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -217,12 +218,27 @@ class ShowPage extends SymfonyPage
         return null !== $this->getElement('videos')->find('css', sprintf('.lead:contains("%s")', $title));
     }
 
+    public function hasAssociation(string $productAssociationName): bool
+    {
+        return $this->hasElement('association', ['%association-name%' => $productAssociationName]);
+    }
+
+    public function hasProductInAssociation($productName, $productAssociationName)
+    {
+        $products = $this->getElement('association', ['%association-name%' => $productAssociationName]);
+
+        Assert::notNull($products);
+
+        return null !== $products->find('css', sprintf('.lead:contains("%s")', $productName));
+    }
+
     /**
      * {@inheritdoc}
      */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
+            'association' => '#sylius-product-association-%association-name%',
             'articles' => '#articles',
             'artists' => '#product-artists',
             'awards' => '#product-awards',
