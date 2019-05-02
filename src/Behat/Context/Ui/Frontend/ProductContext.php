@@ -265,6 +265,14 @@ class ProductContext implements Context
     }
 
     /**
+     * @Then I should see the variant name :name
+     */
+    public function iShouldSeeVariantName($name)
+    {
+        Assert::true($this->showPage->hasVariantNamed($name));
+    }
+
+    /**
      * @Then /^I should be able to see (this product)'s details$/
      */
     public function iShouldBeAbleToSeeProductDetails(ProductInterface $product)

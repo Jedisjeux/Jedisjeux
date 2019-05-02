@@ -4,7 +4,9 @@
             <div class="row">
                 <h3 class="title">{{ association.type }}</h3>
                 <div class="separator-2"></div>
-                {% include 'frontend/product/_list.html.twig' with {'products': association.associatedProducts} %}
+                <div class="col-md-12">
+                    {% include 'frontend/product/_list.html.twig' with {'products': association.associatedProducts} %}
+                </div>
             </div>
         {% endfor %}
     </div>
