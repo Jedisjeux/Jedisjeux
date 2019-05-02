@@ -103,6 +103,30 @@ class ProductContext implements Context
     }
 
     /**
+     * @Given there are( also) :firstProductName and :secondProductName products
+     * @Given there are( also) :firstProductName, :secondProductName and :thirdProductName products
+     * @Given there are( also) :firstProductName, :secondProductName, :thirdProductName and :fourthProductName products
+     */
+    public function thereAreProducts(...$productsNames)
+    {
+        foreach ($productsNames as $productName) {
+            $this->createProduct([
+                'name' => $productName,
+                'created_at' => 'now',
+                'status' => Product::PUBLISHED,
+                'mechanisms' => [],
+                'themes' => [],
+                'designers' => [],
+                'artists' => [],
+                'publishers' => [],
+                'min_duration' => null,
+                'max_duration' => null,
+                'box_content' => null,
+            ]);
+        }
+    }
+
+    /**
      * @Given there is a product :name, released :date
      * @Given there is also a product :name, released :date
      *
@@ -110,8 +134,7 @@ class ProductContext implements Context
      */
     public function productHasNameAndReleaseDate($name, $date = 'now')
     {
-        /** @var Product $product */
-        $product = $this->productFactory->create([
+        $this->createProduct([
             'name' => $name,
             'released_at' => $date,
             'status' => Product::PUBLISHED,
@@ -123,20 +146,14 @@ class ProductContext implements Context
             'min_duration' => null,
             'max_duration' => null,
         ]);
-
-        $this->productRepository->add($product);
-        $this->sharedStorage->set('product', $product);
     }
 
     /**
      * @Given there is a product :name with :status status
-     *
-     * @param string $name
      */
-    public function productHasNameWithStatus($name, $status)
+    public function productHasNameWithStatus(string $name, string $status)
     {
-        /** @var Product $product */
-        $product = $this->productFactory->create([
+        $this->createProduct([
             'name' => $name,
             'status' => str_replace(' ', '_', $status),
             'mechanisms' => [],
@@ -145,16 +162,13 @@ class ProductContext implements Context
             'artists' => [],
             'publishers' => [],
         ]);
-
-        $this->productRepository->add($product);
-        $this->sharedStorage->set('product', $product);
     }
 
     /**
      * @Given /^(this product) has "([^"]+)" in its box$/
      * @Given /^(this product) also has "([^"]+)" in its box$/
      */
-    public function productHasContent(Product $product, $boxContent)
+    public function productHasContent(Product $product, string $boxContent)
     {
         $boxContentItems = null !== $product->getBoxContent() ? explode("\n", $product->getBoxContent()) : [];
 
@@ -266,6 +280,15 @@ class ProductContext implements Context
                 StringInflector::nameToUppercaseCode($name)
             );
         }
+    }
+
+    private function createProduct(array $options)
+    {
+        /** @var Product $product */
+        $product = $this->productFactory->create($options);
+
+        $this->productRepository->add($product);
+        $this->sharedStorage->set('product', $product);
     }
 
     /**

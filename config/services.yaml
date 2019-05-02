@@ -38,6 +38,7 @@ services:
             - { name: twig.extension }
 
     Sylius\Component\Mailer\Sender\SenderInterface: '@sylius.email_sender'
+    Sylius\Component\Product\Repository\ProductAssociationTypeRepositoryInterface: '@sylius.repository.product_association_type'
     Sylius\Component\User\Canonicalizer\CanonicalizerInterface: '@sylius.canonicalizer'
     Sylius\Component\User\Security\Generator\GeneratorInterface: '@sylius.app_user.token_generator.email_verification'
 

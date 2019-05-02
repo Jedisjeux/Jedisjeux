@@ -17,7 +17,7 @@ class ProductAssociationTypes
     {
     }
 
-    const COLLECTION = 'collection';
+    public const COLLECTION = 'collection';
 
-    const EXPANSION = 'expansion';
+    public const EXPANSION = 'expansion';
 }

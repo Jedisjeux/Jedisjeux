@@ -3,9 +3,11 @@
         {% for association in product.associations %}
             <div class="row">
                 <h3 class="title">{{ association.type }}</h3>
-                <div class="separator-2"></div>
-                <div class="col-md-12">
-                    {% include 'frontend/product/_list.html.twig' with {'products': association.associatedProducts} %}
+                <div id="sylius-product-association-{{ association.type.name }}">
+                    <div class="separator-2"></div>
+                    <div class="col-md-12">
+                        {% include 'frontend/product/_list.html.twig' with {'products': association.associatedProducts} %}
+                    </div>
                 </div>
             </div>
         {% endfor %}

@@ -10,12 +10,14 @@ default:
                 - App\Behat\Context\Transform\CustomerContext
                 - App\Behat\Context\Transform\GameAwardContext
                 - App\Behat\Context\Transform\PersonContext
+                - App\Behat\Context\Transform\ProductAssociationTypeContext
                 - App\Behat\Context\Transform\ProductContext
                 - App\Behat\Context\Transform\SharedStorageContext
                 - App\Behat\Context\Transform\TaxonContext
 
                 - App\Behat\Context\Setup\GameAwardContext
                 - App\Behat\Context\Setup\PersonContext
+                - App\Behat\Context\Setup\ProductAssociationContext
                 - App\Behat\Context\Setup\ProductContext
                 - App\Behat\Context\Setup\ProductReviewContext
                 - App\Behat\Context\Setup\SecurityContext
