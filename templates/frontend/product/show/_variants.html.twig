@@ -1,11 +1,13 @@
-<section class="pv-30" id="product-variants">
-    <div class="container">
-        <div class="row">
-            <h3 class="title">{{ 'sylius.ui.product_variants'|trans }}</h3>
-            <div class="separator-2"></div>
-            <div class="col-md-12">
-                {% include 'frontend/product_variant/_list.html.twig' with {'product_variants': product.variants} %}
+{% if product.variants|length > 1 %}
+    <section class="pv-30" id="product-variants">
+        <div class="container">
+            <div class="row">
+                <h3 class="title">{{ 'sylius.ui.product_variants'|trans }}</h3>
+                <div class="separator-2"></div>
+                <div class="col-md-12">
+                    {% include 'frontend/product_variant/_list.html.twig' with {'product_variants': product.variants} %}
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+{% endif %}
