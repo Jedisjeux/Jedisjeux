@@ -1,0 +1,12 @@
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\Provider\:
+        resource: '../../src/Provider'
+
+    App\Provider\TranslationLocaleProvider:
+        arguments:
+            $defaultLocaleCode: '%locale%'

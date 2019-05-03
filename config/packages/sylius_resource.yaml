@@ -171,3 +171,5 @@ sylius_resource:
             classes:
                 model: App\Entity\YearAward
                 repository: App\Repository\YearAwardRepository
+    translation:
+        locale_provider: App\Provider\TranslationLocaleProvider

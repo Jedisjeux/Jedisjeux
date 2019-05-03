@@ -1,19 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 07/04/2016
- * Time: 17:42.
- */
 
 namespace App\Command\Installer;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class InstallDataCommand extends AbstractInstallCommand
 {
     /**

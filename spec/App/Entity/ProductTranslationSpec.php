@@ -28,4 +28,15 @@ class ProductTranslationSpec extends ObjectBehavior
         $this->setShortDescription("Winter is coming...");
         $this->getShortDescription()->shouldReturn("Winter is coming...");
     }
+
+    function it_has_no_box_content_by_default()
+    {
+        $this->getBoxContent()->shouldReturn(null);
+    }
+
+    function its_box_content_is_mutable()
+    {
+        $this->setBoxContent("rulebook, meeples");
+        $this->getBoxContent()->shouldReturn("rulebook, meeples");
+    }
 }
