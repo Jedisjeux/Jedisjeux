@@ -13,8 +13,8 @@ final class SetupCommand extends AbstractInstallCommand
     protected function configure()
     {
         $this
-            ->setName('sylius:install:setup')
-            ->setDescription('Sylius configuration setup.')
+            ->setName('app:install:setup')
+            ->setDescription('Jedisjeux configuration setup.')
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command allows user to configure basic Sylius data.
 EOT

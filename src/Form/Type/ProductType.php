@@ -88,10 +88,6 @@ class ProductType extends AbstractType
                 'entry_type' => ProductTranslationType::class,
                 'label' => 'sylius.form.product.translations',
             ])
-            ->add('boxContent', TextareaType::class, [
-                'required' => false,
-                'label' => 'app.ui.box_content',
-            ])
             ->add('minAge', null, [
                 'label' => 'app.ui.age',
             ])
