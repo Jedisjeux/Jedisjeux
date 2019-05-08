@@ -5,7 +5,8 @@ Feature: Editing a mechanism
     I want to be able to edit the mechanism
 
     Background:
-        Given there are default taxonomies for products
+        Given the website has locale "en_US"
+        And there are default taxonomies for products
         And there is a mechanism "Auction"
         And I am a logged in administrator
 

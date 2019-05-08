@@ -1,12 +1,10 @@
-{% set locale =  app.request.locale %}
+{% from 'backend/macro/translationForm.html.twig' import translationFormWithSlug %}
 
-<div class="content" data-locale="{{ locale }}">
+<div class="ui segment">
     {{ form_row(form.code) }}
     {{ form_row(form.parent) }}
-    {{ form_row(form.translations[locale].name) }}
-    {{ form_row(form.translations[locale].slug, {'attr': {'data-url': path('sylius_admin_ajax_generate_taxon_slug'), 'data-parent': app.request.attributes.get('id')}}) }}
-    {{ form_row(form.translations[locale].description) }}
     {{ form_row(form.public) }}
     {{ form_row(form.iconClass) }}
     {{ form_row(form.color) }}
 </div>
+{{ translationFormWithSlug(form.translations, 'backend/taxon/_slugField.html.twig', taxon) }}

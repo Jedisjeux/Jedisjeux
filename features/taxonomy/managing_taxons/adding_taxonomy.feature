@@ -4,6 +4,9 @@ Feature: Adding a new taxonomy
     As an Administrator
     I want to add a new taxonomy to the website
 
+    Background:
+        Given the website has locale "en_US"
+
     @ui
     Scenario: Adding a new taxonomy with name and slug
         Given I am a logged in administrator
