@@ -3,6 +3,9 @@ Feature: Adding a new product
     In order to extend products database
     As an Administrator or a Redactor
     I want to add a new product to the website
+    
+    Background: 
+        Given the website has locale "en_US"
 
     @ui
     Scenario: Adding a new product with name and slug as an administrator
