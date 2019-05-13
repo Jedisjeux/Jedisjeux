@@ -15,9 +15,6 @@ use App\Entity\ProductVariantImage;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class ProductVariantImageType extends AbstractImageType
 {
     /**
@@ -31,7 +28,7 @@ class ProductVariantImageType extends AbstractImageType
         $builder
             ->add('description', null, [
                 'required' => false,
-                'label' => 'label.description',
+                'label' => 'sylius.ui.description',
             ])
             ->add('main', null, [
                 'required' => false,

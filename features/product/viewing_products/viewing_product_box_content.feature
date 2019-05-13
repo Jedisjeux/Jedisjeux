@@ -4,6 +4,9 @@ Feature: Viewing a product details
     As a Visitor
     I want to view box content on product details page
 
+    Background:
+        Given the website has locale "en_US"
+
     @ui
     Scenario: Viewing box content
         Given there is a product "Puerto Rico"

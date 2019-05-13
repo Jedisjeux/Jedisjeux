@@ -8,9 +8,10 @@ default:
                 - App\Behat\Context\Transform\ProductContext
                 - App\Behat\Context\Transform\SharedStorageContext
 
-                - App\Behat\Context\Setup\SecurityContext
                 - App\Behat\Context\Setup\CustomerContext
+                - App\Behat\Context\Setup\LocaleContext
                 - App\Behat\Context\Setup\ProductContext
+                - App\Behat\Context\Setup\SecurityContext
 
                 - App\Behat\Context\Ui\Backend\ManagingProductVariantsContext
                 - App\Behat\Context\Ui\Backend\NotificationContext

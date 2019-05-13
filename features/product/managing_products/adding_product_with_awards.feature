@@ -5,7 +5,8 @@ Feature: Adding a new product with awards
     I want to add a new product with awards to the website
 
     Background:
-        Given I am a logged in administrator
+        Given the website has locale "en_US"
+        And I am a logged in administrator
         And there is a game award "Spiel des Jahres"
 
     @ui @javascript

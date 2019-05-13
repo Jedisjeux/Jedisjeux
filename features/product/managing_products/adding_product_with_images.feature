@@ -5,7 +5,8 @@ Feature: Adding a new product with images
     I want to add a new product with images to the website
 
     Background:
-        Given I am a logged in administrator
+        Given the website has locale "en_US"
+        And I am a logged in administrator
 
     @ui @javascript
     Scenario: Adding a new product with a single image
