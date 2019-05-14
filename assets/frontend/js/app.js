@@ -14,14 +14,9 @@ import './template';
 import './topic-filters';
 import './year-award-filters';
 
-(function($) {
-    $(document).ready(function () {
-        $('.sylius-autocomplete').autoComplete();
+$(document).ready(() => {
+    $('.sylius-autocomplete').autoComplete();
 
-        // $('[data-form-type="collection"]').CollectionForm();
-        $('.app-notifications').notifications();
-    });
+    // $('[data-form-type="collection"]').CollectionForm();
+    $('.app-notifications').notifications();
 });
-
-window.$ = $;
-window.jQuery = $;

@@ -1,21 +1,11 @@
 (function ($) {
     'use strict';
 
-    var title = document.title;
-    var $element;
-    var $notificationBlock = $('.notificationBlock');
+    const title = document.title;
+    const $notificationBlock = $('.notificationBlock');
+    let $element;
 
-    $.fn.extend({
-        notifications: function () {
-            $element = $(this);
-
-            if ($notificationBlock.length > 0) {
-                refresh();
-            }
-        }
-    });
-
-    function refresh() {
+    const refresh = function refresh() {
         $('.notificationItem', $element).remove();
 
         $.get($element.data('url'), function(response) {
@@ -39,10 +29,10 @@
         );
 
         setTimeout(refresh, 10000);
-    }
+    };
 
-    function renderNotification(notification) {
-        var prototype = $element.data('prototype');
+    const renderNotification = function renderNotification(notification) {
+        let prototype = $element.data('prototype');
 
         prototype = prototype.replace(
             /__id__/g,
@@ -59,7 +49,7 @@
             notification.message
         );
 
-        var imagePath;
+        let imagePath;
 
         if (notification.authors.length > 0 && typeof notification.authors[0].avatar !== 'undefined') {
             imagePath = notification.authors[0].avatar.thumbnail;
@@ -73,13 +63,13 @@
         );
 
         $element.append(prototype);
-    }
+    };
 
-    function readNotification(event) {
+    const readNotification = function readNotification(event) {
         event.preventDefault();
 
-        var id = $(event.currentTarget).data('id');
-        var target = $(event.currentTarget).data('target');
+        const id = $(event.currentTarget).data('id');
+        const target = $(event.currentTarget).data('target');
 
         $.ajax({
             url: Routing.generate('app_api_notification_read', {'id': id}),
@@ -88,9 +78,9 @@
                 window.location.replace(target);
             }
         });
-    }
+    };
 
-    function updateTitleWithNotificationCount(title, notificationCount) {
+    const updateTitleWithNotificationCount = function updateTitleWithNotificationCount(title, notificationCount) {
         if (notificationCount === 0) {
             document.title = title;
             return;
@@ -101,7 +91,7 @@
             // we will split the title after the first bracket
             title = title.split(') ');
             // get the first part of the splitted string and save it - this will be the count of the unseen notifications in our document string
-            var notifications = title[0].substring(1);
+            const notifications = title[0].substring(1);
 
             // only proceed when the notification count is difference to our ajax request
             if (notifications === 0) {
@@ -115,6 +105,18 @@
         else {
             document.title = '(' + notificationCount + ') ' + title;
         }
-    }
+    };
+
+    $.fn.extend({
+        notifications: function () {
+            $(this).each(function () {
+                $element = $(this);
+
+                if ($notificationBlock.length > 0) {
+                    refresh();
+                }
+            });
+        }
+    });
 
 })(jQuery);
