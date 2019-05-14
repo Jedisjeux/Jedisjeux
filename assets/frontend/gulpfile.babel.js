@@ -69,7 +69,7 @@ const paths = {
       upath.joinSafe(appPath, 'plugins/countdown/jquery.countdown.js'),
       upath.joinSafe(appPath, 'plugins/countTo/jquery.countTo.js'),
       upath.joinSafe(appPath, 'plugins/slick/slick.min.js'),
-      upath.joinSafe(appPath, 'js/**'),
+      upath.joinSafe(appPath, 'js/**.js'),
     ],
     sass: [
       upath.joinSafe(appPath, 'sass/style.scss'),
