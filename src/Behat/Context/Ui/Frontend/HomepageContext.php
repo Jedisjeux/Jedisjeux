@@ -42,6 +42,15 @@ class HomepageContext implements Context
     }
 
     /**
+     * @When I check my notifications
+     */
+    public function iWantToBrowseMyNotifications()
+    {
+        $this->homePage->open();
+        $this->homePage->getNotificationsButton()->click();
+    }
+
+    /**
      * @Then I should see :numberOfArticles articles in the latest articles list
      */
     public function iShouldSeeArticlesInTheLatestArticlesList($numberOfArticles)
@@ -143,5 +152,12 @@ class HomepageContext implements Context
     public function iShouldSeeUserCountValue($userCountValue)
     {
         Assert::same($this->homePage->getUserCount(), (int) $userCountValue);
+    }
+
+    /**
+     * @Then /^there should be (\d+) notifications in the list$/
+     */
+    public function iShouldSeeNotificationsInTheList()
+    {
     }
 }
