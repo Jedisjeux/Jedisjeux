@@ -52,6 +52,6 @@ class NotifyModeratorsForNewBoxSubscriber implements EventSubscriberInterface
 
         Assert::isInstanceOf($box, ProductBox::class);
 
-        $this->productBoxNotificationManager->notifyReviewers($box);
+        $this->productBoxNotificationManager->notifyModerators($box);
     }
 }
