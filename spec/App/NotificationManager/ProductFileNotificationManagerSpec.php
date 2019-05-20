@@ -57,7 +57,7 @@ class ProductFileNotificationManagerSpec extends ObjectBehavior
         $manager->persist($notification)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
 
-        $this->notifyReviewers($productFile);
+        $this->notifyModerators($productFile);
     }
 
     function it_create_notifications_for_author_when_boxes_are_accepted(

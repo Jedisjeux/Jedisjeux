@@ -72,10 +72,10 @@ class ProductFileNotificationManager
     /**
      * @param ProductFile $productFile
      */
-    public function notifyReviewers(ProductFile $productFile)
+    public function notifyModerators(ProductFile $productFile)
     {
         /** @var UserInterface[] $users */
-        $users = $this->userRepository->findByRole('ROLE_REVIEWER');
+        $users = $this->userRepository->findByRole('ROLE_MODERATOR');
 
         $target = $this->router->generate('app_backend_product_file_update', [
             'id' => $productFile->getId(),

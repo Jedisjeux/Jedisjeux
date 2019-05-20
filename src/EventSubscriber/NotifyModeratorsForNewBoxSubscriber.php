@@ -20,7 +20,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
-class NotifyReviewersForNewBoxSubscriber implements EventSubscriberInterface
+class NotifyModeratorsForNewBoxSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ProductBoxNotificationManager
@@ -41,11 +41,11 @@ class NotifyReviewersForNewBoxSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            ProductBoxEvents::POST_CREATE => 'notifyReviewers',
+            ProductBoxEvents::POST_CREATE => 'notifyModerators',
         ];
     }
 
-    public function notifyReviewers(GenericEvent $event): void
+    public function notifyModerators(GenericEvent $event): void
     {
         /** @var ProductBox $box */
         $box = $event->getSubject();

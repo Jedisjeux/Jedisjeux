@@ -41,4 +41,12 @@ class AbstractImageType extends AbstractType
             'file_label' => 'sylius.ui.image',
         ]);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'app_image';
+    }
 }

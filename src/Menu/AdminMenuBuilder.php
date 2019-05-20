@@ -55,8 +55,7 @@ final class AdminMenuBuilder
             $this->addContentSubMenu($menu);
         }
 
-        // TODO add moderator role
-        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+        if ($this->authorizationChecker->isGranted('ROLE_MODERATOR')) {
             $this->addModerationMenu($menu);
         }
 

@@ -6,7 +6,7 @@ Feature: Adding product file as a customer
 
     Background:
         Given there is a product "Puerto Rico"
-        And there is a reviewer "reviewer@example.com"
+        And there is a moderator "moderator@example.com"
         And I am a logged in customer
 
     @ui
@@ -16,4 +16,4 @@ Feature: Adding product file as a customer
         And I specify its title as "French Rules"
         And I add it
         Then I should be notified that my file is waiting for the acceptation
-        And there is a notification sent to "reviewer@example.com"
+        And there is a notification sent to "moderator@example.com"
