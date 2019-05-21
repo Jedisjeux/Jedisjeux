@@ -26,7 +26,7 @@ class ProductBoxNotificationManagerSpec extends ObjectBehavior
         $this->beConstructedWith($userRepository, $notificationFactory, $router, $translator, $manager);
     }
 
-    function it_create_notifications_for_reviewers(
+    function it_create_notifications_for_moderators(
         NotificationFactory $notificationFactory,
         ObjectManager $manager,
         UserRepository $userRepository,
@@ -38,7 +38,7 @@ class ProductBoxNotificationManagerSpec extends ObjectBehavior
         TranslatorInterface $translator,
         RouterInterface $router
     ) {
-        $userRepository->findByRole('ROLE_REVIEWER')->willReturn([$user]);
+        $userRepository->findByRole('ROLE_MODERATOR')->willReturn([$user]);
         $user->getCustomer()->willReturn($customer);
         $productBox->getId()->willReturn(42);
         $productBox->getProduct()->willReturn($product);
@@ -59,7 +59,7 @@ class ProductBoxNotificationManagerSpec extends ObjectBehavior
         $manager->persist($notification)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
 
-        $this->notifyReviewers($productBox);
+        $this->notifyModerators($productBox);
     }
 
     function it_create_notifications_for_author_when_boxes_are_accepted(

@@ -1,13 +1,13 @@
 @managing_product_files
 Feature: Editing a product file
     In order to change information about a product file
-    As a reviewer
+    As a moderator
     I want to be able to edit the product file
 
     Background:
         Given there is a product "Puerto Rico"
         And this product has a file titled "French Rules" added by customer "kevin@example.com"
-        And I am a logged in reviewer
+        And I am a logged in moderator
 
     @ui
     Scenario: Changing title of an existing product file

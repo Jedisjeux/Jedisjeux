@@ -73,10 +73,10 @@ class ProductBoxNotificationManager
     /**
      * @param ProductBox $productBox
      */
-    public function notifyReviewers(ProductBox $productBox)
+    public function notifyModerators(ProductBox $productBox)
     {
         /** @var UserInterface[] $users */
-        $users = $this->userRepository->findByRole('ROLE_REVIEWER');
+        $users = $this->userRepository->findByRole('ROLE_MODERATOR');
 
         $target = $this->router->generate('app_backend_product_box_update', [
             'id' => $productBox->getId(),

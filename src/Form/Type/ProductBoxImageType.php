@@ -30,12 +30,4 @@ class ProductBoxImageType extends AbstractImageType
             'data_class' => ProductBoxImage::class,
         ]);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'app_product_box_image';
-    }
 }

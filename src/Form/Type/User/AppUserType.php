@@ -40,6 +40,7 @@ class AppUserType extends UserType
                         'app.ui.article_manager' => 'ROLE_ARTICLE_MANAGER',
                     ],
                     'app.ui.staff' => [
+                        'app.ui.moderator' => 'ROLE_MODERATOR',
                         'app.ui.redactor' => 'ROLE_REDACTOR',
                         'app.ui.translator' => 'ROLE_TRANSLATOR',
                         'app.ui.reviewer' => 'ROLE_REVIEWER',

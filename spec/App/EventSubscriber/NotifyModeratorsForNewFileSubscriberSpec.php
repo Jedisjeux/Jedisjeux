@@ -4,13 +4,13 @@ namespace spec\App\EventSubscriber;
 
 use App\Entity\ProductFile;
 use App\Event\ProductFileEvents;
-use App\EventSubscriber\NotifyReviewersForNewFileSubscriber;
+use App\EventSubscriber\NotifyModeratorsForNewFileSubscriber;
 use App\NotificationManager\ProductFileNotificationManager;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-class NotifyReviewersForNewFileSubscriberSpec extends ObjectBehavior
+class NotifyModeratorsForNewFileSubscriberSpec extends ObjectBehavior
 {
     function let(ProductFileNotificationManager $productFileNotificationManager)
     {
@@ -19,7 +19,7 @@ class NotifyReviewersForNewFileSubscriberSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(NotifyReviewersForNewFileSubscriber::class);
+        $this->shouldHaveType(NotifyModeratorsForNewFileSubscriber::class);
     }
 
     function it_implements_subscriber_interface()
@@ -30,7 +30,7 @@ class NotifyReviewersForNewFileSubscriberSpec extends ObjectBehavior
     function it_subscribes_to_events()
     {
         $this::getSubscribedEvents()->shouldReturn([
-            ProductFileEvents::POST_CREATE => 'notifyReviewers',
+            ProductFileEvents::POST_CREATE => 'notifyModerators',
         ]);
     }
 
@@ -40,18 +40,18 @@ class NotifyReviewersForNewFileSubscriberSpec extends ObjectBehavior
     ): void {
             $event->getSubject()->willReturn($file);
 
-            $this->shouldThrow(\InvalidArgumentException::class)->during('notifyReviewers', [$event]);
+            $this->shouldThrow(\InvalidArgumentException::class)->during('notifyModerators', [$event]);
     }
 
-    function it_notify_reviewers(
+    function it_notify_moderators(
         GenericEvent $event,
         ProductFile $file,
         ProductFileNotificationManager $productFileNotificationManager
     ): void {
         $event->getSubject()->willReturn($file);
 
-        $productFileNotificationManager->notifyReviewers($file)->shouldBeCalled();
+        $productFileNotificationManager->notifyModerators($file)->shouldBeCalled();
 
-        $this->notifyReviewers($event);
+        $this->notifyModerators($event);
     }
 }

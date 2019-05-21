@@ -37,7 +37,7 @@ class ProductFileNotificationManagerSpec extends ObjectBehavior
         TranslatorInterface $translator,
         RouterInterface $router
     ) {
-        $userRepository->findByRole('ROLE_REVIEWER')->willReturn([$user]);
+        $userRepository->findByRole('ROLE_MODERATOR')->willReturn([$user]);
         $user->getCustomer()->willReturn($customer);
         $productFile->getId()->willReturn(42);
         $productFile->getTitle()->willReturn('Awesome file');
@@ -57,7 +57,7 @@ class ProductFileNotificationManagerSpec extends ObjectBehavior
         $manager->persist($notification)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
 
-        $this->notifyReviewers($productFile);
+        $this->notifyModerators($productFile);
     }
 
     function it_create_notifications_for_author_when_boxes_are_accepted(

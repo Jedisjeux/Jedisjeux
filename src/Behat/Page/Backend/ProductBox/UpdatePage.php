@@ -13,7 +13,9 @@ namespace App\Behat\Page\Backend\ProductBox;
 
 use App\Behat\Behaviour\WorkflowActions;
 use App\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Webmozart\Assert\Assert;
 
 class UpdatePage extends BaseUpdatePage
 {
@@ -43,7 +45,13 @@ class UpdatePage extends BaseUpdatePage
         $this->getElement('height')->setValue($height);
     }
 
+    public function getImageFileError(): string
+    {
+        $element = $this->getDocument()->find('css', '#app_product_box_image .sylius-validation-error');
+        Assert::notNull($element);
 
+        return $element->getText();
+    }
 
     /**
      * {@inheritdoc}

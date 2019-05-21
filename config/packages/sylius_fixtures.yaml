@@ -50,6 +50,11 @@ sylius_fixtures:
                                 password: "password"
                                 enabled: true
                                 roles: ["ROLE_ARTICLE_MANAGER"]
+                            -
+                                email: "moderator@example.com"
+                                password: "password"
+                                enabled: true
+                                roles: ["ROLE_MODERATOR"]
                 taxon:
                     options:
                         custom:

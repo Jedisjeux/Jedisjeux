@@ -91,7 +91,7 @@ final class UserContext implements Context
     }
 
     /**
-     * @Given /^there is a (reviewer|translator|publisher) "([^"]*)"$/
+     * @Given /^there is a (reviewer|translator|publisher|moderator) "([^"]*)"$/
      */
     public function thereIsAReviewer($role, $email, $password = 'sylius')
     {
@@ -108,6 +108,8 @@ final class UserContext implements Context
             $user->addRole('ROLE_TRANSLATOR');
         } elseif ('publisher' === $role) {
             $user->addRole('ROLE_PUBLISHER');
+        } elseif ('moderator' === $role) {
+            $user->addRole('ROLE_MODERATOR');
         }
 
         $this->sharedStorage->set('user', $user);

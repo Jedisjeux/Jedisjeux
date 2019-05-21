@@ -1,13 +1,13 @@
 @managing_product_boxes
 Feature: Editing a product box
     In order to change information about a product box
-    As a reviewer
+    As a moderator
     I want to be able to edit the product box
 
     Background:
         Given there is a product "Puerto Rico"
         And this product has a box
-        And I am a logged in reviewer
+        And I am a logged in moderator
 
     @ui
     Scenario: Changing height of an existing product box

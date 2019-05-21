@@ -20,7 +20,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
-class NotifyReviewersForNewFileSubscriber implements EventSubscriberInterface
+class NotifyModeratorsForNewFileSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ProductFileNotificationManager
@@ -41,17 +41,17 @@ class NotifyReviewersForNewFileSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            ProductFileEvents::POST_CREATE => 'notifyReviewers',
+            ProductFileEvents::POST_CREATE => 'notifyModerators',
         ];
     }
 
-    public function notifyReviewers(GenericEvent $event): void
+    public function notifyModerators(GenericEvent $event): void
     {
         /** @var ProductFile $file */
         $file = $event->getSubject();
 
         Assert::isInstanceOf($file, ProductFile::class);
 
-        $this->productFileNotificationManager->notifyReviewers($file);
+        $this->productFileNotificationManager->notifyModerators($file);
     }
 }

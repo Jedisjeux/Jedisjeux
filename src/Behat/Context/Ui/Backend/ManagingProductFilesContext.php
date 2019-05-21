@@ -143,7 +143,7 @@ class ManagingProductFilesContext implements Context
      */
     public function iShouldBeNotifiedThatFileIsNotAValidFile()
     {
-        Assert::contains($this->updatePage->getValidationMessage('file'), 'The mime type of the file is invalid');
+        Assert::contains($this->updatePage->getFileError(), 'The mime type of the file is invalid');
     }
 
     /**

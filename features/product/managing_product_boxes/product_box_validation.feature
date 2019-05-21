@@ -1,11 +1,11 @@
 @managing_product_boxes
 Feature: Product boxes validation
     In order to avoid making mistakes when managing product boxes
-    As an Administrator
+    As a moderator
     I want to be prevented from adding it without specifying required fields
 
     Background:
-        Given I am a logged in administrator
+        Given I am a logged in moderator
         And there is a product "Puerto Rico"
         And this product has a box 220 high
 
