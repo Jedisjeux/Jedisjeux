@@ -1,13 +1,13 @@
 @managing_product_boxes
 Feature: Deleting a product box
     In order to get rid of deprecated game plays
-    As a reviewer
+    As a moderator
     I want to be able to delete game plays
 
     Background:
         Given there is a product "Puerto Rico"
         And this product has a box
-        And I am a logged in reviewer
+        And I am a logged in moderator
 
     @ui
     Scenario: Deleting a product box

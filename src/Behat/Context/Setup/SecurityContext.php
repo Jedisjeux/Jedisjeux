@@ -203,4 +203,19 @@ final class SecurityContext implements Context
         $this->sharedStorage->set('customer', $user->getCustomer());
         $this->sharedStorage->set('article_manager', $user);
     }
+
+    /**
+     * @Given I am a logged in moderator
+     */
+    public function iAmLoggedInAsAModerator()
+    {
+        /** @var User $user */
+        $user = $this->appUserFactory->create(['email' => 'moderator@example.com', 'password' => 'password123', 'roles' => ['ROLE_MODERATOR']]);
+        $this->appUserRepository->add($user);
+
+        $this->securityService->logIn($user);
+
+        $this->sharedStorage->set('customer', $user->getCustomer());
+        $this->sharedStorage->set('moderator', $user);
+    }
 }

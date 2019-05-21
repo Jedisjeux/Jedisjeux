@@ -304,7 +304,7 @@
 
     {% set file = form.vars.value %}
 
-    <div id="app_product_box_image">
+    <div id="app_product_file">
         {% if file and file.path %}
             <a target="_blank"
                href="{{ vich_uploader_asset(file, 'file') }}"
