@@ -1,5 +1,13 @@
 ## Change Log
 
+### v2.5.3 (2019/05/21)
+- [#474](https://github.com/Jedisjeux/Jedisjeux/pull/474) Access to file on managing product files (@loic425)
+- [#472](https://github.com/Jedisjeux/Jedisjeux/pull/472) Revert changes on app notifications (@loic425)
+- [#470](https://github.com/Jedisjeux/Jedisjeux/pull/470) fix viewing notifications (@loic425)
+- [#468](https://github.com/Jedisjeux/Jedisjeux/pull/468) [Behat] Viewing product associations (@loic425)
+- [#467](https://github.com/Jedisjeux/Jedisjeux/pull/467) do not show variants title when product has no variants (@loic425)
+- [#466](https://github.com/Jedisjeux/Jedisjeux/pull/466) fix capistrano (@loic425)
+
 ### v2.5.2 (2019/05/02)
 - [#463](https://github.com/Jedisjeux/Jedisjeux/pull/463) [ProductFiles] show file extension rather than filename (@loic425)
 - [#464](https://github.com/Jedisjeux/Jedisjeux/pull/464) fix viewing product variants names (@loic425)
