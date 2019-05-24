@@ -16,27 +16,25 @@ import './sylius-move-product-variant';
 import './sylius-product-slug';
 import './sylius-taxon-slug';
 
-(function ($) {
-    $(document).ready(function () {
-        $('.sylius-autocomplete').autoComplete();
-        $('.sylius-tabular-form').addTabErrors();
-        $('.ui.accordion').addAccordionErrors();
-        $('.product-select.ui.fluid.multiple.search.selection.dropdown').productAutoComplete();
-        $('.sylius-update-product-variants').moveProductVariant($('.sylius-product-variant-position'));
-        $(document).productSlugGenerator();
-        $(document).taxonSlugGenerator();
+$(document).ready(function () {
+    $('.sylius-autocomplete').autoComplete();
+    $('.sylius-tabular-form').addTabErrors();
+    $('.ui.accordion').addAccordionErrors();
+    $('.product-select.ui.fluid.multiple.search.selection.dropdown').productAutoComplete();
+    $('.sylius-update-product-variants').moveProductVariant($('.sylius-product-variant-position'));
+    $(document).productSlugGenerator();
+    $(document).taxonSlugGenerator();
 
-        $(document).moveBlocks();
+    $(document).moveBlocks();
 
-        $(document).on('dom-node-inserted', function(addedElement) {
-            $('.ui.checkbox').checkbox();
-        });
-
-        $('.person-autocomplete').personAutoComplete();
-        $('.app-date-picker').datePicker();
-        $('.app-date-time-picker').dateTimePicker();
+    $(document).on('dom-node-inserted', function(addedElement) {
+        $('.ui.checkbox').checkbox();
     });
-})(jQuery);
+
+    $('.person-autocomplete').personAutoComplete();
+    $('.app-date-picker').datePicker();
+    $('.app-date-time-picker').dateTimePicker();
+});
 
 window.$ = $;
 window.jQuery = $;
