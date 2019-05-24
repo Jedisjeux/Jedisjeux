@@ -40,7 +40,7 @@
     "sylius-labs/association-hydrator": "^1.1",
     "sylius/customer-bundle": "^1.4",
     "sylius/fixtures-bundle": "^1.4",
-    "sylius/grid-bundle": "^1.4",
+    "sylius/grid-bundle": "^1.5",
     "sylius/locale-bundle": "^1.4",
     "sylius/mailer-bundle": "^1.4",
     "sylius/money-bundle": "^1.4",
