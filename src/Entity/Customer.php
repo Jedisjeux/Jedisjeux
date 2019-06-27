@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Customer extends BaseCustomer implements CustomerInterface, ReviewerInterface
 {
     /**
-     * @Recaptcha\IsTrue(groups={"sylius"})
+     * @Recaptcha\IsTrue(groups={"sylius_user_registration"})
      */
     public $recaptcha;
 
