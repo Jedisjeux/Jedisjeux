@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94efb591470856d16dbc1be89e168e87",
+    "content-hash": "d9d28644390a08d7457942c772eb9fb3",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -5408,94 +5408,37 @@
             "time": "2019-02-26T15:27:03+00:00"
         },
         {
-            "name": "sylius/grid",
-            "version": "v1.4.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sylius/Grid.git",
-                "reference": "a175871969cd1af79ddf7d72b9a04dab1edfa122"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/Grid/zipball/a175871969cd1af79ddf7d72b9a04dab1edfa122",
-                "reference": "a175871969cd1af79ddf7d72b9a04dab1edfa122",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2",
-                "sylius/registry": "^1.2",
-                "webmozart/assert": "^1.1"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "^5.0",
-                "symfony/property-access": "^3.4|^4.1.1"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sylius\\Component\\Grid\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Community contributions",
-                    "homepage": "http://github.com/Sylius/Sylius/contributors"
-                },
-                {
-                    "name": "Paweł Jędrzejewski",
-                    "homepage": "http://pjedrzejewski.com"
-                },
-                {
-                    "name": "Sylius project",
-                    "homepage": "http://sylius.com"
-                }
-            ],
-            "description": "PHP library to handle building grid of objects with fields and filters support.",
-            "homepage": "http://sylius.com",
-            "keywords": [
-                "admin",
-                "api",
-                "doctrine",
-                "ecommerce",
-                "grid",
-                "resource",
-                "shop",
-                "sylius"
-            ],
-            "time": "2019-02-01T13:10:57+00:00"
-        },
-        {
             "name": "sylius/grid-bundle",
-            "version": "v1.4.3",
+            "version": "v1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/SyliusGridBundle.git",
-                "reference": "9f4bf8e9bbcee2f3364fe4ad0a6d285622dfdb8f"
+                "reference": "1cbdbfa56a538b0fe8da53c0d0aef9885bd7120e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/SyliusGridBundle/zipball/9f4bf8e9bbcee2f3364fe4ad0a6d285622dfdb8f",
-                "reference": "9f4bf8e9bbcee2f3364fe4ad0a6d285622dfdb8f",
+                "url": "https://api.github.com/repos/Sylius/SyliusGridBundle/zipball/1cbdbfa56a538b0fe8da53c0d0aef9885bd7120e",
+                "reference": "1cbdbfa56a538b0fe8da53c0d0aef9885bd7120e",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2",
-                "sylius/grid": "^1.2",
+                "sylius/registry": "^1.1",
+                "symfony/config": "^3.4|^4.1.1",
+                "symfony/dependency-injection": "^3.4|^4.1.1",
+                "symfony/event-dispatcher": "^3.4|^4.1.1",
                 "symfony/form": "^3.4|^4.1.1",
                 "symfony/framework-bundle": "^3.4|^4.1.1",
+                "symfony/http-kernel": "^3.4|^4.1.1",
+                "symfony/options-resolver": "^3.4|^4.1.1",
+                "symfony/property-access": "^3.4|^4.1.1",
                 "symfony/templating": "^3.4|^4.1.1"
             },
             "conflict": {
                 "twig/twig": "^1.0"
+            },
+            "replace": {
+                "sylius/grid": "self.version"
             },
             "require-dev": {
                 "akeneo/phpspec-skip-example-extension": "^4.0",
@@ -5505,28 +5448,28 @@
                 "jackalope/jackalope-doctrine-dbal": "^1.2",
                 "matthiasnoback/symfony-config-test": "^4.0",
                 "matthiasnoback/symfony-dependency-injection-test": "^3.0",
-                "ocramius/proxy-manager": "^2.1",
                 "pagerfanta/pagerfanta": "^1.0|^2.0",
                 "phpspec/phpspec": "^5.0",
+                "phpstan/phpstan-phpunit": "^0.11",
+                "phpstan/phpstan-shim": "^0.11",
+                "phpstan/phpstan-webmozart-assert": "^0.11",
                 "phpunit/phpunit": "^7.0",
-                "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-                "symfony/browser-kit": "^3.4|^4.1.1",
-                "symfony/dependency-injection": "^3.4|^4.1.1",
-                "symfony/proxy-manager-bridge": "^3.4|^4.1.1",
-                "symfony/security-csrf": "^3.4|^4.1.1",
+                "sylius-labs/coding-standard": "^3.0",
+                "sylius/currency-bundle": "^1.1",
+                "symfony/console": "^3.4|^4.1.1",
                 "symfony/twig-bundle": "^3.4|^4.1.1",
-                "symfony/validator": "^3.4|^4.1.1",
                 "twig/twig": "^2.0"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.5-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Sylius\\Bundle\\GridBundle\\": ""
+                    "Sylius\\Bundle\\GridBundle\\": "src/Bundle/",
+                    "Sylius\\Component\\Grid\\": "src/Component/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -5559,7 +5502,7 @@
                 "sylius",
                 "webshop"
             ],
-            "time": "2019-03-17T18:33:35+00:00"
+            "time": "2019-05-21T14:01:07+00:00"
         },
         {
             "name": "sylius/locale",

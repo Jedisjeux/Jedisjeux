@@ -13,7 +13,6 @@ use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
 use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Customer\Model\Customer as BaseCustomer;
-use Sylius\Component\User\Model\UserAwareInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -28,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Customer extends BaseCustomer implements CustomerInterface, ReviewerInterface
 {
     /**
-     * @Recaptcha\IsTrue
+     * @Recaptcha\IsTrue(groups={"sylius_user_registration"})
      */
     public $recaptcha;
 
@@ -37,7 +36,7 @@ class Customer extends BaseCustomer implements CustomerInterface, ReviewerInterf
      *
      * @ORM\OneToOne(targetEntity="Sylius\Component\User\Model\UserInterface", mappedBy="customer", cascade={"persist"})
      *
-     * @Assert\Valid()
+     * @Assert\Valid(groups={"sylius"})
      */
     private $user;
 
