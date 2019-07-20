@@ -11,6 +11,7 @@
 
 namespace App\Command;
 
+use App\Command\Helper\ProgressBarCreator;
 use App\Entity\Product;
 use App\Entity\Dealer;
 use App\Entity\DealerPrice;
@@ -29,61 +30,41 @@ class ImportDealerPricesCommand extends Command
 {
     private const BATCH_SIZE = 1;
 
-    /**
-     * @var FactoryInterface
-     */
+    /** @var FactoryInterface */
     private $dealerPriceFactory;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $dealerRepository;
 
-    /**
-     * @var RepositoryInterface
-     */
+    /** @var RepositoryInterface */
     private $dealerPriceRepository;
 
-    /**
-     * @var RepositoryInterface|ProductRepository
-     */
+    /** @var RepositoryInterface|ProductRepository */
     private $productRepository;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $manager;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $locale;
 
-    /**
-     * @var InputInterface
-     */
+    /** @var InputInterface */
     private $input;
 
-    /**
-     * @var OutputInterface
-     */
+    /** @var OutputInterface */
     private $output;
 
-    /**
-     * @param FactoryInterface    $dealerPriceFactory
-     * @param RepositoryInterface $dealerRepository
-     * @param RepositoryInterface $dealerPriceRepository
-     * @param RepositoryInterface $productRepository
-     * @param ObjectManager       $manager
-     * @param string              $locale
-     */
+    /** @var ProgressBarCreator */
+    private $progressBarCreator;
+
     public function __construct(
         FactoryInterface $dealerPriceFactory,
         RepositoryInterface $dealerRepository,
         RepositoryInterface $dealerPriceRepository,
         RepositoryInterface $productRepository,
         ObjectManager $manager,
-        string $locale
+        string $locale,
+        ProgressBarCreator $progressBarCreator
     ) {
         $this->dealerPriceFactory = $dealerPriceFactory;
         $this->dealerRepository = $dealerRepository;
@@ -91,6 +72,7 @@ class ImportDealerPricesCommand extends Command
         $this->productRepository = $productRepository;
         $this->manager = $manager;
         $this->locale = $locale;
+        $this->progressBarCreator = $progressBarCreator;
 
         parent::__construct();
     }
@@ -168,15 +150,19 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
-
         $dealer = $this->ensureDealerAlreadyExists();
         $i = 0;
 
-        foreach ($this->getCsvData() as $data) {
-            $output->writeln(sprintf('Import of <comment>%s</comment> product', $data['product_name']));
+        $csvData = $this->getCsvData();
+        $progress = $this->progressBarCreator->create($output, count($csvData));
+        $matchingCount = 0;
 
+        foreach ($csvData as $data) {
             $dealerPrice = $this->createOrReplaceDealerPrice($data, $dealer);
+
+            if (null !== $dealerPrice->getProduct()) {
+                ++ $matchingCount;
+            }
 
             if (!$this->manager->contains($dealerPrice)) {
                 $this->manager->persist($dealerPrice);
@@ -190,12 +176,19 @@ EOT
                 $dealer = $this->ensureDealerAlreadyExists();
             }
 
+            $progress->advance();
             ++$i;
         }
 
         $this->manager->flush();
         $this->removeOutOfCatalogDealerPrices($dealer);
         $this->manager->clear();
+        $progress->finish();
+
+        $output->writeln('');
+
+        $matchingCountPercentage = $matchingCount * 100 / count($csvData);
+        $output->writeLn('Prices matching a product: <info>'.$matchingCountPercentage.'%</info>');
     }
 
     /**

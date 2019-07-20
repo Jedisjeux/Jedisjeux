@@ -101,8 +101,6 @@ EOT
         $dealers = $this->dealerRepository->findAll();
 
         foreach ($dealers as $step => $dealer) {
-            $output->writeln(sprintf('<comment>Step %d of %d.</comment> <info>%s</info>', $step + 1, count($dealers), $dealer->getCode()));
-
             if ($dealer->hasPriceList() and $dealer->getPriceList()->isActive()) {
                 $output->writeln(sprintf('Import prices for <info>%s</info>.', $dealer->getName()));
 
