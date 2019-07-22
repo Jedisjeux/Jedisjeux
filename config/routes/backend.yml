@@ -4,7 +4,7 @@
 app_backend_dashboard:
     path: /
     defaults:
-        _controller:  FrameworkBundle:Template:template
+        _controller:  App\Controller\StatisticsController::indexAction
         template:     'backend/index.html.twig'
 
 app_backend_partial:

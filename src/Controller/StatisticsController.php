@@ -13,12 +13,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/counter")
- */
-class CounterController extends AbstractController
+class StatisticsController extends AbstractController
 {
     /** @var StatisticsProvider */
     private $statisticProvider;
@@ -28,13 +24,8 @@ class CounterController extends AbstractController
         $this->statisticProvider = $statisticProvider;
     }
 
-    /**
-     * @Route("/", name="app_counter_index")
-     *
-     * @return Response
-     */
     public function indexAction(): Response
     {
-        return $this->render('frontend/homepage/index/_counters.html.twig', $this->statisticProvider->getStatistics());
+        return $this->render('backend/index.html.twig', $this->statisticProvider->getStatistics());
     }
 }

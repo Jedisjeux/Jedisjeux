@@ -1,8 +1,10 @@
 <div class="ui tab" data-tab="media">
-    <h3 class="ui dividing header">{{ 'sylius.ui.media'|trans }}</h3>
-    <h4 class="ui dividing header">{{ 'sylius.ui.images'|trans }}</h4>
-    {{ form_row(form.firstVariant.images) }}
+    <h3 class="ui top attached header">{{ 'sylius.ui.media'|trans }}</h3>
+    <div class="ui attached segment">
+        <h4 class="ui dividing header">{{ 'sylius.ui.images'|trans }}</h4>
+        {{ form_row(form.firstVariant.images) }}
 
-    <h4 class="ui dividing header">{{ 'app.ui.videos'|trans }}</h4>
-    {{ form_row(form.videos) }}
+        <h4 class="ui dividing header">{{ 'app.ui.videos'|trans }}</h4>
+        {{ form_row(form.videos) }}
+    </div>
 </div>
