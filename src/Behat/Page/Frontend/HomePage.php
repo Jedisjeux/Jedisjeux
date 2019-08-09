@@ -143,6 +143,16 @@ class HomePage extends SymfonyPage
     }
 
     /**
+     * @return NodeElement
+     *
+     * @throws ElementNotFoundException
+     */
+    public function getNotificationsButton(): NodeElement
+    {
+        return $this->getElement('notifications_button');
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements(): array
@@ -153,6 +163,8 @@ class HomePage extends SymfonyPage
             'latest_articles' => '#latest-articles',
             'logout_button' => '.app-logout-button',
             'most_popular_articles' => '#most-popular-articles',
+            'notifications' => '.fixed-desktop .notificationBlock button',
+            'notifications_button' => '.fixed-desktop .notificationBlock',
             'product_count' => '#product-count',
             'rating_count' => '#rating-count',
             'user_count' => '#user-count',
