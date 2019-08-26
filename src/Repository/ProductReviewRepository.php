@@ -90,6 +90,14 @@ class ProductReviewRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+    public function countProductReviews(): int
+    {
+        return (int) $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     /**
      * @param string                 $locale
      * @param string                 $productSlug

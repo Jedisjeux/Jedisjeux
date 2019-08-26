@@ -24,8 +24,8 @@ class ReviewCountCalculator
         $this->productReviewRepository = $productReviewRepository;
     }
 
-    public function calculate(): float
+    public function calculate(): int
     {
-        return $this->productReviewRepository->count([]);
+        return $this->productReviewRepository->countProductReviews();
     }
 }
