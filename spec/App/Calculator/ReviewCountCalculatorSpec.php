@@ -18,4 +18,11 @@ class ReviewCountCalculatorSpec extends ObjectBehavior
     {
         $this->shouldHaveType(ReviewCountCalculator::class);
     }
+
+    function it_returns_total_number_of_reviews(ProductReviewRepository $productReviewRepository): void
+    {
+        $productReviewRepository->countProductReviews()->willReturn(70);
+
+        $this->calculate()->shouldReturn(70);
+    }
 }
