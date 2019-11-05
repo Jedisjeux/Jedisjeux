@@ -5,7 +5,8 @@ Feature: Products validation
     I want to be prevented from adding it without specifying required fields
 
     Background:
-        Given I am a logged in administrator
+        Given the website has locale "en_US"
+        And I am a logged in administrator
 
     @ui
     Scenario: Trying to add a new product without name

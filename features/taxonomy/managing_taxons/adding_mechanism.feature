@@ -5,7 +5,8 @@ Feature: Adding a new mechanism
     I want to add a new mechanism to the website
 
     Background:
-        Given there are default taxonomies for products
+        Given the website has locale "en_US"
+        And there are default taxonomies for products
 
     @ui
     Scenario: Adding a new mechanism with name and slug

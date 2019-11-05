@@ -25,11 +25,18 @@ use Sylius\Component\Product\Model\ProductTranslation as BaseProductTranslation;
 class ProductTranslation extends BaseProductTranslation
 {
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    protected $shortDescription;
+    private $shortDescription;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $boxContent;
 
     /**
      * @return string|null
@@ -45,5 +52,21 @@ class ProductTranslation extends BaseProductTranslation
     public function setShortDescription(?string $shortDescription): void
     {
         $this->shortDescription = $shortDescription;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBoxContent(): ?string
+    {
+        return $this->boxContent;
+    }
+
+    /**
+     * @param string|null $boxContent
+     */
+    public function setBoxContent(?string $boxContent): void
+    {
+        $this->boxContent = $boxContent;
     }
 }

@@ -5,7 +5,8 @@ Feature: Editing a product
     I want to be able to edit the product
 
     Background:
-        Given there is a product "Puerto Rico"
+        Given the website has locale "en_US"
+        And there is a product "Puerto Rico"
         And I am a logged in administrator
 
     @ui

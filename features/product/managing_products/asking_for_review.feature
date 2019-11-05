@@ -5,7 +5,8 @@ Feature: Asking for review
     I need to be able to ask for a review
 
     Background:
-        Given there is a reviewer "obiwan@example.com"
+        Given the website has locale "en_US"
+        And there is a reviewer "obiwan@example.com"
         And there is a reviewer "luke@example.com"
         And I am a logged in redactor
         And there is a product "Puerto Rico" with "new" status

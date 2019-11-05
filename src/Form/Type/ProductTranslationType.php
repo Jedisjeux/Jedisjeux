@@ -14,6 +14,7 @@ namespace App\Form\Type;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType as BaseProductTranslationType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -29,6 +30,7 @@ class ProductTranslationType extends AbstractType
         parent::buildForm($builder, $options);
 
         $builder
+            ->remove('description')
             ->add('shortDescription', CKEditorType::class, [
                'required' => false,
                 'label' => 'app.ui.short_description',
@@ -36,7 +38,13 @@ class ProductTranslationType extends AbstractType
             ->add('description', CKEditorType::class, [
                 'required' => false,
                 'label' => 'sylius.ui.description',
-            ]);
+            ])
+            ->add('boxContent', TextareaType::class, [
+                'required' => false,
+                'label' => 'app.ui.box_content',
+            ])
+            ->remove('metaKeywords')
+            ->remove('metaDescription');
     }
 
     /**

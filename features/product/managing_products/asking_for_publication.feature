@@ -4,8 +4,9 @@ Feature: Asking for publication
     As a reviewer
     I need to be able to ask for a publication
 
-    Background:l
-        Given there is a publisher "yoda@example.com"
+    Background:
+        Given the website has locale "en_US"
+        And there is a publisher "yoda@example.com"
         And there is a publisher "god@example.com"
         And there is a product "Puerto Rico" with "pending_review" status
         And I am a logged in reviewer

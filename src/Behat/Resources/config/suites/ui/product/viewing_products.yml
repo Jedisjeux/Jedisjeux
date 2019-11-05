@@ -16,6 +16,7 @@ default:
                 - App\Behat\Context\Transform\TaxonContext
 
                 - App\Behat\Context\Setup\GameAwardContext
+                - App\Behat\Context\Setup\LocaleContext
                 - App\Behat\Context\Setup\PersonContext
                 - App\Behat\Context\Setup\ProductAssociationContext
                 - App\Behat\Context\Setup\ProductContext

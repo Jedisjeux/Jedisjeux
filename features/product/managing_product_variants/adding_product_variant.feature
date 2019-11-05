@@ -5,7 +5,8 @@ Feature: Adding a new product variant
     I want to add a new product variant to the website
 
     Background:
-        Given there is a product "Puerto Rico standard"
+        Given the website has locale "en_US"
+        And there is a product "Puerto Rico standard"
         And I am a logged in administrator
 
     @ui

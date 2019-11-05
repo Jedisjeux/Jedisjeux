@@ -50,7 +50,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableInterfa
      *
      * @ORM\Column(name="status", type="string")
      */
-    protected $status;
+    private $status;
 
     /**
      * @var ArrayCollection|TaxonInterface[]
@@ -60,14 +60,14 @@ class Product extends BaseProduct implements ProductInterface, ReviewableInterfa
      *      inverseJoinColumns={@ORM\JoinColumn(name="taxoninterface_id", referencedColumnName="id")}
      * )
      */
-    protected $taxons;
+    private $taxons;
 
     /**
      * @var TaxonInterface
      *
      * @ORM\ManyToOne(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
      */
-    protected $mainTaxon;
+    private $mainTaxon;
 
     /**
      * @var int
@@ -83,7 +83,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableInterfa
      *      groups={"sylius"}
      * )
      */
-    protected $minAge;
+    private $minAge;
 
     /**
      * @var int
@@ -99,7 +99,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableInterfa
      *      groups={"sylius"}
      * )
      */
-    protected $minPlayerCount;
+    private $minPlayerCount;
 
     /**
      * @var int
@@ -115,7 +115,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableInterfa
      *      groups={"sylius"}
      * )
      */
-    protected $maxPlayerCount;
+    private $maxPlayerCount;
 
     /**
      * @var int
@@ -131,7 +131,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableInterfa
      *      groups={"sylius"}
      * )
      */
-    protected $minDuration;
+    private $minDuration;
 
     /**
      * @var int
@@ -147,54 +147,47 @@ class Product extends BaseProduct implements ProductInterface, ReviewableInterfa
      *      groups={"sylius"}
      * )
      */
-    protected $maxDuration;
+    private $maxDuration;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean")
      */
-    protected $durationByPlayer;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
-     */
-    protected $boxContent;
+    private $durationByPlayer;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    protected $viewCount = 0;
+    private $viewCount = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    protected $reviewCount = 0;
+    private $reviewCount = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
      */
-    protected $commentedReviewCount = 0;
+    private $commentedReviewCount = 0;
 
     /**
      * @var ArrayCollection
      */
-    protected $reviews;
+    private $reviews;
 
     /**
      * @var ArrayCollection|ProductBarcode[]
      *
      * @ORM\OneToMany(targetEntity="ProductBarcode", mappedBy="product", cascade={"persist", "merge", "remove"}, orphanRemoval=true)
      */
-    protected $barcodes;
+    private $barcodes;
 
     /**
      * @var float
@@ -204,35 +197,35 @@ class Product extends BaseProduct implements ProductInterface, ReviewableInterfa
      * @JMS\Expose
      * @JMS\Groups({"Default", "Detailed"})
      */
-    protected $averageRating = 0;
+    private $averageRating = 0;
 
     /**
      * @var Collection|Article[]
      *
      * @ORM\OneToMany(targetEntity="Article", mappedBy="product")
      */
-    protected $articles;
+    private $articles;
 
     /**
      * @var Collection|GamePlay[]
      *
      * @ORM\OneToMany(targetEntity="GamePlay", mappedBy="product")
      */
-    protected $gamePlays;
+    private $gamePlays;
 
     /**
      * @var Collection|ProductList[]
      *
      * @ORM\OneToMany(targetEntity="ProductListItem", mappedBy="product")
      */
-    protected $listItems;
+    private $listItems;
 
     /**
      * @var Collection|Notification[]
      *
      * @ORM\OneToMany(targetEntity="Notification", mappedBy="product", cascade={"remove"})
      */
-    protected $notifications;
+    private $notifications;
 
     /**
      * @var Collection|ProductVideo[]
@@ -593,7 +586,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableInterfa
      */
     public function getBoxContent(): ?string
     {
-        return $this->boxContent;
+        return $this->getTranslation()->getBoxContent();
     }
 
     /**
@@ -601,7 +594,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableInterfa
      */
     public function setBoxContent(?string $boxContent): void
     {
-        $this->boxContent = $boxContent;
+        $this->getTranslation()->setBoxContent($boxContent);
     }
 
     /**

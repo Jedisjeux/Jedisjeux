@@ -8,6 +8,7 @@ default:
                 - App\Behat\Context\Transform\SharedStorageContext
                 - App\Behat\Context\Transform\TaxonContext
 
+                - App\Behat\Context\Setup\LocaleContext
                 - App\Behat\Context\Setup\SecurityContext
                 - App\Behat\Context\Setup\CustomerContext
                 - App\Behat\Context\Setup\TaxonContext

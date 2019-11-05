@@ -175,7 +175,7 @@ class ProductContext implements Context
         $boxContentItems[] = $boxContent;
 
         $product->setBoxContent(implode("\n", $boxContentItems));
-        $this->manager->flush($product);
+        $this->manager->flush($product->getTranslation());
     }
 
     /**

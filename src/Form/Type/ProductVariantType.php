@@ -20,9 +20,6 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class ProductVariantType extends AbstractType
 {
     /**
@@ -34,11 +31,6 @@ class ProductVariantType extends AbstractType
         parent::buildForm($builder, $options);
 
         $builder
-            ->remove('translations')
-            ->add('name', TextType::class, [
-                'label' => 'sylius.ui.name',
-                'required' => false,
-            ])
             ->add('releasedAt', DateType::class, [
                 'label' => 'app.ui.release_date',
                 'required' => false,

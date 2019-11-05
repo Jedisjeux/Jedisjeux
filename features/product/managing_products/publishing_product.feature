@@ -5,7 +5,8 @@ Feature: Publishing product
     I need to be able to publish a product
 
     Background:
-        Given there is a product "Puerto Rico" with "pending_publication" status
+        Given the website has locale "en_US"
+        And there is a product "Puerto Rico" with "pending_publication" status
         And I am a logged in publisher
 
     @ui
