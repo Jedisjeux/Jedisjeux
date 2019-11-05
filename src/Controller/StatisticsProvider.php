@@ -50,7 +50,7 @@ class StatisticsProvider
             'productCount' => $this->productRepository->findNbResults(),
             'personCount' => $this->personRepository->findNbResults(),
             'userCount' => $this->appUserRepository->findNbResults(),
-            'ratingCount' => $this->productRepository->findNbResults(),
+            'ratingCount' => $this->productReviewRepository->findNbResults(),
         ];
     }
 }
