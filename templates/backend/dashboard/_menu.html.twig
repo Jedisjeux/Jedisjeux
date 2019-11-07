@@ -1,14 +1,28 @@
-<div class="ui fluid labeled three icon item menu">
-    <a href="{{ path('sylius_admin_product_index') }}" class="item">
-        <i class="cubes icon"></i>
-        {{ 'sylius.ui.products'|trans }}
-    </a>
-    <a href="{{ path('app_backend_article_index') }}" class="item">
-        <i class="newspaper icon"></i>
-        {{ 'app.ui.articles'|trans }}
-    </a>
-    <a href="{{ path('sylius_backend_customer_index') }}" class="item">
-        <i class="users icon"></i>
-        {{ 'sylius.ui.customers'|trans }}
-    </a>
+<div class="ui grid">
+    <div class="center aligned doubling four column row">
+        <div class="column">
+            <a href="{{ path('sylius_admin_product_index') }}" class="ui basic big fluid button">
+                <i class="cubes icon"></i>
+                {{ 'sylius.ui.products'|trans }}
+            </a>
+        </div>
+        <div class="column">
+            <a href="{{ path('app_backend_article_index') }}" class="ui basic big fluid button">
+                <i class="newspaper icon"></i>
+                {{ 'app.ui.articles'|trans }}
+            </a>
+        </div>
+        <div class="column">
+            <a href="{{ path('sylius_backend_customer_index') }}" class="ui basic big fluid button">
+                <i class="users icon"></i>
+                {{ 'sylius.ui.customers'|trans }}
+            </a>
+        </div>
+        <div class="column">
+            <a href="{{ path('app_backend_topic_index') }}" class="ui basic big fluid button">
+                <i class="comments icon"></i>
+                {{ 'app.ui.topics'|trans }}
+            </a>
+        </div>
+    </div>
 </div>

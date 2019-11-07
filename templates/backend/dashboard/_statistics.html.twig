@@ -1,0 +1,52 @@
+<div class="ui grid">
+    <div class="center aligned doubling four column row">
+        <div class="column">
+            <div class="ui red segment">
+                <div class="ui small statistic">
+                    <div id="total-articles" class="value" style="padding-bottom: 10px;">
+                        {{ articleCount }}
+                    </div>
+                    <div class="label">
+                        {{ 'app.ui.articles'|trans }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui yellow segment">
+                <div class="ui small statistic">
+                    <div id="total-products" class="value" style="padding-bottom: 10px;">
+                        {{ productCount }}
+                    </div>
+                    <div class="label">
+                        {{ 'app.ui.games'|trans }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui blue segment">
+                <div class="ui small statistic">
+                    <div id="new-customers" class="value" style="padding-bottom: 10px;">
+                        {{ userCount }}
+                    </div>
+                    <div class="label">
+                        {{ 'sylius.ui.customers'|trans }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui green segment">
+                <div class="ui small statistic">
+                    <div id="average-order-value" class="value" style="padding-bottom: 10px;">
+                        {{ ratingCount }}
+                    </div>
+                    <div class="label">
+                        {{ 'app.ui.ratings'|trans }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

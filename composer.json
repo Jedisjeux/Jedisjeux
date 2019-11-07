@@ -48,13 +48,13 @@
     "sylius/resource-bundle": "^1.4",
     "sylius/review-bundle": "^1.4",
     "sylius/taxonomy-bundle": "^1.4",
-    "sylius/ui-bundle": "^1.4",
+    "sylius/ui-bundle": "^1.6",
     "sylius/user-bundle": "^1.4",
     "symfony/dotenv": "^4.2",
-    "symfony/flex": "^1.2",
-    "symfony/monolog-bundle": "^3.3",
+    "symfony/flex": "^1.4",
+    "symfony/monolog-bundle": "^3.4",
     "symfony/swiftmailer-bundle": "^3.0",
-    "symfony/twig-bundle": "^4.1",
+    "symfony/twig-bundle": "^4.2",
     "twig/extensions": "^1.5",
     "twig/twig": "^2.7",
     "vich/uploader-bundle": "^1.8",
@@ -83,9 +83,9 @@
     "phpstan/phpstan-webmozart-assert": "^0.10",
     "phpunit/phpunit": "^7.4",
     "se/selenium-server-standalone": " ^2.52",
-    "symfony/var-dumper": "^4.1",
-    "symfony/web-profiler-bundle": "^4.1",
-    "symfony/web-server-bundle": "^4.1"
+    "symfony/var-dumper": "^4.3",
+    "symfony/web-profiler-bundle": "^4.2",
+    "symfony/web-server-bundle": "^4.3"
   },
   "conflict": {
     "symfony/symfony": "*"

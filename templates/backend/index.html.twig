@@ -7,6 +7,8 @@
 {% block content %}
     {{ headers.default('sylius.ui.dashboard'|trans, 'home', 'app.ui.overview_of_your_website'|trans) }}
 
+    {% include 'backend/dashboard/_statistics.html.twig' %}
+
     {% if is_granted('ROLE_ADMIN') %}
         {% include 'backend/dashboard/_menu.html.twig' %}
 

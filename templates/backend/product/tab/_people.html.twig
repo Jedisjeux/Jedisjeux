@@ -1,63 +1,64 @@
 <div class="ui tab" data-tab="people">
-    <h3 class="ui dividing header">{{ 'app.ui.people'|trans }}</h3>
-
-    <div class="field">
-        {{- form_label(form.firstVariant.designers) -}}
-        <div class="sylius-autocomplete person-autocomplete ui fluid multiple search selection dropdown"
-             data-url="{{ path('app_admin_ajax_person_by_name_phrase') }}"
-             data-create-url="{{ path('app_admin_ajax_person_create') }}"
-             data-choice-name="full_name"
-             data-choice-value="id"
-             data-criteria-name="phrase">
-            {{ form_widget(form.firstVariant.designers, {'attr': {'class' : 'autocomplete'}}) }}
-            <i class="dropdown icon"></i>
-            <div class="default text">{{'app.ui.select_people'|trans}}</div>
-            <div class="menu">
-                {% for person in product.designers %}
-                     <div class="item" data-value="{{ person.id }}">{{ person }}</div>
-                {% endfor %}
+    <h3 class="ui top attached header">{{ 'app.ui.people'|trans }}</h3>
+    <div class="ui attached segment">
+        <div class="field">
+            {{- form_label(form.firstVariant.designers) -}}
+            <div class="sylius-autocomplete person-autocomplete ui fluid multiple search selection dropdown"
+                 data-url="{{ path('app_admin_ajax_person_by_name_phrase') }}"
+                 data-create-url="{{ path('app_admin_ajax_person_create') }}"
+                 data-choice-name="full_name"
+                 data-choice-value="id"
+                 data-criteria-name="phrase">
+                {{ form_widget(form.firstVariant.designers, {'attr': {'class' : 'autocomplete'}}) }}
+                <i class="dropdown icon"></i>
+                <div class="default text">{{'app.ui.select_people'|trans}}</div>
+                <div class="menu">
+                    {% for person in product.designers %}
+                        <div class="item" data-value="{{ person.id }}">{{ person }}</div>
+                    {% endfor %}
+                </div>
             </div>
+            {{ form_errors(form.firstVariant.designers) }}
         </div>
-        {{ form_errors(form.firstVariant.designers) }}
-    </div>
 
-    <div class="field">
-        {{- form_label(form.firstVariant.artists) -}}
-        <div class="sylius-autocomplete person-autocomplete ui fluid multiple search selection dropdown"
-             data-url="{{ path('app_admin_ajax_person_by_name_phrase') }}"
-             data-create-url="{{ path('app_admin_ajax_person_create') }}"
-             data-choice-name="full_name"
-             data-choice-value="id"
-             data-criteria-name="phrase">
-            {{ form_widget(form.firstVariant.artists, {'attr': {'class' : 'autocomplete'}}) }}
-            <i class="dropdown icon"></i>
-            <div class="default text">{{'app.ui.select_people'|trans}}</div>
-            <div class="menu">
-                {% for person in product.artists %}
-                    <div class="item" data-value="{{ person.id }}">{{ person }}</div>
-                {% endfor %}
+        <div class="field">
+            {{- form_label(form.firstVariant.artists) -}}
+            <div class="sylius-autocomplete person-autocomplete ui fluid multiple search selection dropdown"
+                 data-url="{{ path('app_admin_ajax_person_by_name_phrase') }}"
+                 data-create-url="{{ path('app_admin_ajax_person_create') }}"
+                 data-choice-name="full_name"
+                 data-choice-value="id"
+                 data-criteria-name="phrase">
+                {{ form_widget(form.firstVariant.artists, {'attr': {'class' : 'autocomplete'}}) }}
+                <i class="dropdown icon"></i>
+                <div class="default text">{{'app.ui.select_people'|trans}}</div>
+                <div class="menu">
+                    {% for person in product.artists %}
+                        <div class="item" data-value="{{ person.id }}">{{ person }}</div>
+                    {% endfor %}
+                </div>
             </div>
+            {{ form_errors(form.firstVariant.artists) }}
         </div>
-        {{ form_errors(form.firstVariant.artists) }}
-    </div>
 
-    <div class="field">
-        {{- form_label(form.firstVariant.publishers) -}}
-        <div class="sylius-autocomplete person-autocomplete ui fluid multiple search selection dropdown"
-             data-url="{{ path('app_admin_ajax_person_by_name_phrase') }}"
-             data-create-url="{{ path('app_admin_ajax_person_create') }}"
-             data-choice-name="full_name"
-             data-choice-value="id"
-             data-criteria-name="phrase">
-            {{ form_widget(form.firstVariant.publishers, {'attr': {'class' : 'autocomplete'}}) }}
-            <i class="dropdown icon"></i>
-            <div class="default text">{{'app.ui.select_people'|trans}}</div>
-            <div class="menu">
-                {% for person in product.publishers %}
-                    <div class="item" data-value="{{ person.id }}">{{ person }}</div>
-                {% endfor %}
+        <div class="field">
+            {{- form_label(form.firstVariant.publishers) -}}
+            <div class="sylius-autocomplete person-autocomplete ui fluid multiple search selection dropdown"
+                 data-url="{{ path('app_admin_ajax_person_by_name_phrase') }}"
+                 data-create-url="{{ path('app_admin_ajax_person_create') }}"
+                 data-choice-name="full_name"
+                 data-choice-value="id"
+                 data-criteria-name="phrase">
+                {{ form_widget(form.firstVariant.publishers, {'attr': {'class' : 'autocomplete'}}) }}
+                <i class="dropdown icon"></i>
+                <div class="default text">{{'app.ui.select_people'|trans}}</div>
+                <div class="menu">
+                    {% for person in product.publishers %}
+                        <div class="item" data-value="{{ person.id }}">{{ person }}</div>
+                    {% endfor %}
+                </div>
             </div>
+            {{ form_errors(form.firstVariant.publishers) }}
         </div>
-        {{ form_errors(form.firstVariant.publishers) }}
     </div>
 </div>
