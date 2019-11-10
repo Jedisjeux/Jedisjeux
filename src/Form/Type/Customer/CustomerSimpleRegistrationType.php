@@ -58,7 +58,7 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
                 'constraints' => [new Valid()],
             ])
             ->add('captcha', Recaptcha3Type::class, [
-                'constraints' => new Recaptcha3(),
+                'constraints' => new Recaptcha3(['groups' => ['sylius_user_registration']]),
                 'action_name' => 'register',
             ])
             ->addEventSubscriber(new CustomerRegistrationFormSubscriber($this->customerRepository))
