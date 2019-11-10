@@ -1,15 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 14/03/2016
- * Time: 13:07.
+
+/*
+ * This file is part of Jedisjeux.
+ *
+ * (c) Loïc Frémont
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
 use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Customer\Model\Customer as BaseCustomer;
@@ -26,11 +28,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Customer extends BaseCustomer implements CustomerInterface, ReviewerInterface
 {
-    /**
-     * @Recaptcha\IsTrue(groups={"sylius_user_registration"})
-     */
-    public $recaptcha;
-
     /**
      * @var UserInterface
      *
