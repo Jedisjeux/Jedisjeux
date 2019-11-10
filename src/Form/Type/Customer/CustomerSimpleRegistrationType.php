@@ -13,7 +13,8 @@ namespace App\Form\Type\Customer;
 
 use App\Form\EventSubscriber\CustomerRegistrationFormSubscriber;
 use App\Form\Type\User\AppUserRegistrationType;
-use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -56,12 +57,13 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
                 'label' => false,
                 'constraints' => [new Valid()],
             ])
-            ->add('recaptcha', EWZRecaptchaType::class, [
-                'label' => false,
+            ->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recaptcha3(['groups' => ['sylius_user_registration']]),
+                'action_name' => 'register',
             ])
             ->addEventSubscriber(new CustomerRegistrationFormSubscriber($this->customerRepository))
             ->setDataLocked(false)
-        ;
+            ;
     }
 
     /**
