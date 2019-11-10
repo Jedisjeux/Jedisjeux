@@ -11,7 +11,8 @@
 
 namespace App\Form\Type;
 
-use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -46,8 +47,9 @@ class ContactRequestType extends AbstractType
                     'rows' => 6,
                 ],
             ])
-            ->add('recaptcha', EWZRecaptchaType::class, [
-                'label' => false,
+            ->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recaptcha3(),
+                'action_name' => 'contact',
             ]);
     }
 
