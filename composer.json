@@ -112,13 +112,10 @@
     "sort-packages": true
   },
   "extra": {
-    "symfony-app-dir": "app",
-    "symfony-bin-dir": "bin",
-    "symfony-var-dir": "var",
-    "symfony-web-dir": "web",
-    "symfony-tests-dir": "tests",
-    "symfony-assets-install": "relative",
-    "branch-alias": null
+      "symfony": {
+          "allow-contrib": false,
+          "require": "4.3.*"
+      }
   },
   "minimum-stability": "dev",
   "prefer-stable": true
