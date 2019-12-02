@@ -13,6 +13,8 @@ namespace App\Form\Type;
 
 use App\Entity\Taxon;
 use Doctrine\ORM\EntityRepository;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -77,6 +79,10 @@ class TopicType extends AbstractType
                 'multiple' => false,
                 'placeholder' => 'Choisissez une catégorie',
                 'required' => false,
+            ])
+            ->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recaptcha3(),
+                'action_name' => 'topic',
             ]);
     }
 
