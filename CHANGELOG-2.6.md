@@ -1,5 +1,9 @@
 ## Change Log
 
+### 2.6.1 (2019/12/08 14:58 +00:00)
+- [#493](https://github.com/Jedisjeux/Jedisjeux/pull/493) Add captcha on topic form (@loic425)
+- [#492](https://github.com/Jedisjeux/Jedisjeux/pull/492) Upgrade Symfony (@loic425)
+
 ### 2.6.0 (2019/11/10 14:46 +00:00)
 - [#491](https://github.com/Jedisjeux/Jedisjeux/pull/491) Upgrade to Recaptcha 3 (@loic425)
 - [#482](https://github.com/Jedisjeux/Jedisjeux/pull/482) New fresh admin panel (@loic425)
