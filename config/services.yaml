@@ -1,81 +1,24 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
-
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-parameters:
-    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
-    email_contact: jedisjeux@jedisjeux.net
-    email_name: Contact Jedisjeux
-    email_sender: no-reply@jedisjeux.net
-
-services:
-    # default configuration for services in *this* file
-    _defaults:
-        autowire: false     # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        public: false       # Allows optimizing the container by removing unused services; this also means
-                            # fetching services directly from the container via $container->get() won't work.
-                            # The best practice is to be explicit about your dependencies anyway.
-
-    app.factory.bgg_product:
-        class: App\Factory\BggProductFactory
-        arguments:
-            - 'App\Entity\BggProduct'
-            - 'https://www.boardgamegeek.com/xmlapi/boardgame'
-
-    app.templating.helper.currency:
-        class: App\Templating\Helper\CurrencyHelper
-        lazy: true
-        tags:
-            - { name: templating.helper, alias: "sylius_currency" }
-
-    app.twig.extension.currency:
-        class: App\Twig\CurrencyExtension
-        arguments:
-            - "@app.templating.helper.currency"
-        tags:
-            - { name: twig.extension }
-
-    App\Controller\CounterController:
-        autowire: true
-        autoconfigure: true
-
-    App\Controller\StatisticsController:
-        autowire: true
-        autoconfigure: true
-
-    App\Controller\StatisticsProvider:
-        autowire: true
-        autoconfigure: true
-
-    Sylius\Component\Mailer\Sender\SenderInterface: '@sylius.email_sender'
-    Sylius\Component\Product\Repository\ProductAssociationTypeRepositoryInterface: '@sylius.repository.product_association_type'
-    Sylius\Component\User\Canonicalizer\CanonicalizerInterface: '@sylius.canonicalizer'
-    Sylius\Component\User\Security\Generator\GeneratorInterface: '@sylius.app_user.token_generator.email_verification'
-
 imports:
-    - { resource: services/analytic.yml }
-    - { resource: services/block.yml }
-    - { resource: services/calculator.yml }
-    - { resource: services/command.yml }
-    - { resource: services/context.yml }
-    - { resource: services/factory.yml }
-    - { resource: services/feed.yml }
-    - { resource: services/filter.yml }
-    - { resource: services/fixtures.yml }
-    - { resource: services/fixtures_factories.yml }
-    - { resource: services/form.yml }
-    - { resource: services/guard.yml }
-    - { resource: services/installer.yml }
-    - { resource: services/listener.yml }
-    - { resource: services/menu.yml }
-    - { resource: services/notification.yml }
-    - { resource: services/publication.yml }
-    - { resource: services/security.yml }
-    - { resource: services/serializer.yml }
-    - { resource: services/subscriber.yml }
-    - { resource: services/text_filter.yml }
-    - { resource: services/updater.yml }
-    - { resource: services/validator.yml }
-    - { resource: services/view.yml }
+    - { resource: services/_main.yaml }
+    - { resource: services/analytic.yaml }
+    - { resource: services/command.yaml }
+    - { resource: services/context.yaml }
+    - { resource: services/factory.yaml }
+    - { resource: services/feed.yaml }
+    - { resource: services/filter.yaml }
+    - { resource: services/fixtures.yaml }
+    - { resource: services/fixtures_factories.yaml }
+    - { resource: services/form.yaml }
+    - { resource: services/guard.yaml }
+    - { resource: services/installer.yaml }
+    - { resource: services/listener.yaml }
+    - { resource: services/menu.yaml }
+    - { resource: services/notification.yaml }
+    - { resource: services/publication.yaml }
+    - { resource: services/security.yaml }
+    - { resource: services/serializer.yaml }
+    - { resource: services/subscriber.yaml }
+    - { resource: services/text_filter.yaml }
+    - { resource: services/updater.yaml }
+    - { resource: services/validator.yaml }
+    - { resource: services/view.yaml }
