@@ -1,5 +1,9 @@
 ## Change Log
 
+### 2.6.2 (2019/12/14 15:21 +00:00)
+- [#496](https://github.com/Jedisjeux/Jedisjeux/pull/496) Improve services configuration (@loic425)
+- [#495](https://github.com/Jedisjeux/Jedisjeux/pull/495) Monofony admin panel (@loic425)
+
 ### 2.6.1 (2019/12/08 14:58 +00:00)
 - [#493](https://github.com/Jedisjeux/Jedisjeux/pull/493) Add captcha on topic form (@loic425)
 - [#492](https://github.com/Jedisjeux/Jedisjeux/pull/492) Upgrade Symfony (@loic425)
