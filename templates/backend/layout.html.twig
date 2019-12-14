@@ -38,15 +38,15 @@
 
 {% block sidebar %}
     <a class="item" href="{{ path('app_backend_dashboard') }}" style="padding: 13px 0;">
-        <div style="max-width: 90px; margin: 0 auto;">
+        <div class="sidebar-logo">
             <img src="{{ asset('assets/backend/img/admin-logo.svg') }}" class="ui fluid image">
         </div>
     </a>
-    {{ knp_menu_render('app.admin.main', {'template': 'SyliusUiBundle:Menu:sidebar.html.twig'}) }}
+    {{ knp_menu_render('app.admin.main', {'template': 'SyliusUiBundle:Menu:sidebar.html.twig', 'currentClass': 'active'}) }}
 {% endblock %}
 
 {% block footer %}
-    {{ 'sylius.ui.powered_by'|trans }} <a href="http://sylius.org" target="_blank">Sylius</a>.
+    {{ 'sylius.ui.powered_by'|trans }} <a href="https://github.com/Monofony/SymfonyStarter" target="_blank">Monofony</a>.
 {% endblock %}
 
 {% block javascripts %}
