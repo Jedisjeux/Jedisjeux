@@ -19,14 +19,17 @@ sylius_grid:
                     type: string
                     sortable: ~
                 averageRating:
-                    type: string
+                    type: number
                     sortable: ~
                 releasedAt:
                     path: variant.releasedAt
                     type: string
                     sortable: variant.releasedAt
                 commentedReviewCount:
-                    type: string
+                    type: number
+                    sortable: ~
+                viewCount:
+                    type: number
                     sortable: ~
             filters:
                 search:
@@ -62,3 +65,15 @@ sylius_grid:
                     form_options:
                         label: 'app.ui.max_duration'
                         placeholder: 'app.ui.duration_in_minute'
+                reviewCount:
+                    type: frontend_greater_than_or_equal
+                    form_options:
+                        label: 'app.ui.min_rating_count'
+                        placeholder: 'app.ui.min_rating_count'
+                averageRatingMin:
+                    type: frontend_greater_than_or_equal
+                    options:
+                        field: o.averageRating
+                    form_options:
+                        label: 'app.ui.min_average_rating'
+                        placeholder: 'app.ui.min_average_rating'
