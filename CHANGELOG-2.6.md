@@ -1,5 +1,8 @@
 ## Change Log
 
+### 2.6.3 (2019/12/15 13:25 +00:00)
+- [#497](https://github.com/Jedisjeux/Jedisjeux/pull/497) Adding product criteria and sorting (@loic425)
+
 ### 2.6.2 (2019/12/14 15:21 +00:00)
 - [#496](https://github.com/Jedisjeux/Jedisjeux/pull/496) Improve services configuration (@loic425)
 - [#495](https://github.com/Jedisjeux/Jedisjeux/pull/495) Monofony admin panel (@loic425)
