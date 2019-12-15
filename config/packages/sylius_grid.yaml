@@ -1,33 +1,33 @@
 imports:
-    - { resource: 'grids/api/product.yml' }
+    - { resource: 'grids/api/product.yaml' }
 
-    - { resource: 'grids/backend/article.yml' }
-    - { resource: 'grids/backend/article_for_product.yml' }
-    - { resource: 'grids/backend/article_review.yml' }
-    - { resource: 'grids/backend/contact_request.yml' }
-    - { resource: 'grids/backend/customer.yml' }
-    - { resource: 'grids/backend/customer_group.yml' }
-    - { resource: 'grids/backend/dealer.yml' }
-    - { resource: 'grids/backend/dealer_price.yml' }
-    - { resource: 'grids/backend/festival_list.yml' }
-    - { resource: 'grids/backend/festival_list_item.yml' }
-    - { resource: 'grids/backend/game_award.yml' }
-    - { resource: 'grids/backend/game_play.yml' }
-    - { resource: 'grids/backend/not_found_page.yml' }
-    - { resource: 'grids/backend/person.yml' }
-    - { resource: 'grids/backend/post.yml' }
-    - { resource: 'grids/backend/product.yml' }
-    - { resource: 'grids/backend/product_association_type.yml' }
-    - { resource: 'grids/backend/product_list.yml' }
-    - { resource: 'grids/backend/product_box.yml' }
-    - { resource: 'grids/backend/product_file.yml' }
-    - { resource: 'grids/backend/product_review.yml' }
-    - { resource: 'grids/backend/product_variant.yml' }
-    - { resource: 'grids/backend/redirection.yml' }
-    - { resource: 'grids/backend/root_taxon.yml' }
-    - { resource: 'grids/backend/taxon_from_root.yml' }
-    - { resource: 'grids/backend/topic.yml' }
-    - { resource: 'grids/backend/year_award.yml' }
+    - { resource: 'grids/backend/article.yaml' }
+    - { resource: 'grids/backend/article_for_product.yaml' }
+    - { resource: 'grids/backend/article_review.yaml' }
+    - { resource: 'grids/backend/contact_request.yaml' }
+    - { resource: 'grids/backend/customer.yaml' }
+    - { resource: 'grids/backend/customer_group.yaml' }
+    - { resource: 'grids/backend/dealer.yaml' }
+    - { resource: 'grids/backend/dealer_price.yaml' }
+    - { resource: 'grids/backend/festival_list.yaml' }
+    - { resource: 'grids/backend/festival_list_item.yaml' }
+    - { resource: 'grids/backend/game_award.yaml' }
+    - { resource: 'grids/backend/game_play.yaml' }
+    - { resource: 'grids/backend/not_found_page.yaml' }
+    - { resource: 'grids/backend/person.yaml' }
+    - { resource: 'grids/backend/post.yaml' }
+    - { resource: 'grids/backend/product.yaml' }
+    - { resource: 'grids/backend/product_association_type.yaml' }
+    - { resource: 'grids/backend/product_list.yaml' }
+    - { resource: 'grids/backend/product_box.yaml' }
+    - { resource: 'grids/backend/product_file.yaml' }
+    - { resource: 'grids/backend/product_review.yaml' }
+    - { resource: 'grids/backend/product_variant.yaml' }
+    - { resource: 'grids/backend/redirection.yaml' }
+    - { resource: 'grids/backend/root_taxon.yaml' }
+    - { resource: 'grids/backend/taxon_from_root.yaml' }
+    - { resource: 'grids/backend/topic.yaml' }
+    - { resource: 'grids/backend/year_award.yaml' }
 
     - { resource: 'grids/frontend/article.yml' }
     - { resource: 'grids/frontend/festival_list_item.yml' }

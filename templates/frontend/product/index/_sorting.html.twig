@@ -11,6 +11,7 @@
     {% set oldest_first_path = path(route, route_parameters|merge({'sorting': {'createdAt': 'asc'}, 'criteria': criteria})) %}
     {% set newest_first_path = path(route, route_parameters|merge({'sorting': {'createdAt': 'desc'}, 'criteria': criteria})) %}
     {% set top_rated_first_path = path(route, route_parameters|merge({'sorting': {'averageRating': 'desc'}, 'criteria': criteria})) %}
+    {% set most_viewed_first_path = path(route, route_parameters|merge({'sorting': {'viewCount': 'desc'}, 'criteria': criteria})) %}
     {% set top_commented_first_path = path(route, route_parameters|merge({'sorting': {'commentedReviewCount': 'desc'}, 'criteria': criteria})) %}
     {% set newest_release_first_path = path(route, route_parameters|merge({'sorting': {'releasedAt': 'desc'}, 'criteria': criteria})) %}
     {% set oldest_release_first_path = path(route, route_parameters|merge({'sorting': {'releasedAt': 'asc'}, 'criteria': criteria})) %}
@@ -23,6 +24,8 @@
         {% set current_sorting_label = 'sylius.ui.oldest_first'|trans|lower %}
     {% elseif app.request.query.get('sorting').averageRating is defined and app.request.query.get('sorting').averageRating == 'desc'%}
         {% set current_sorting_label = 'app.ui.top_rated_first'|trans|lower %}
+    {% elseif app.request.query.get('sorting').viewCount is defined and app.request.query.get('sorting').viewCount == 'desc'%}
+        {% set current_sorting_label = 'app.ui.most_viewed_first'|trans|lower %}
     {% elseif app.request.query.get('sorting').commentedReviewCount is defined and app.request.query.get('sorting').commentedReviewCount == 'desc'%}
         {% set current_sorting_label = 'app.ui.top_commented_first'|trans|lower %}
     {% elseif app.request.query.get('sorting').releasedAt is defined and app.request.query.get('sorting').releasedAt == 'desc'%}
@@ -39,6 +42,7 @@
             <a class="dropdown-item" href="{{ newest_first_path }}">{{ 'sylius.ui.newest_first'|trans }}</a>
             <a class="dropdown-item" href="{{ oldest_first_path }}">{{ 'sylius.ui.oldest_first'|trans }}</a>
             <a class="dropdown-item" href="{{ top_rated_first_path }}">{{ 'app.ui.top_rated_first'|trans }}</a>
+            <a class="dropdown-item" href="{{ most_viewed_first_path }}">{{ 'app.ui.most_viewed_first'|trans }}</a>
             <a class="dropdown-item" href="{{ top_commented_first_path }}">{{ 'app.ui.top_commented_first'|trans }}</a>
             <a class="dropdown-item" href="{{ newest_release_first_path }}">{{ 'app.ui.newest_release_first'|trans }}</a>
             <a class="dropdown-item" href="{{ oldest_release_first_path }}">{{ 'app.ui.oldest_release_first'|trans }}</a>
