@@ -148,10 +148,14 @@ app:
         max_duration: Max duration
         mechanisms: Mechanisms
         min: Min
+        min_average_rating: Min average rating
         min_duration: Min duration
+        min_rating_count: Min rating count
         moderation: Moderation
         more: More
         most_commented_first: Most commented first
+        most_viewed: Most viewed
+        most_viewed_first: Most viewed first
         move_up: Move up
         move_down: Move down
         my_game_library: My game library

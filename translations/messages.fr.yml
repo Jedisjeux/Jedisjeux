@@ -146,10 +146,14 @@ app:
         material_rating: Note du matériel
         max_duration: Durée max
         mechanisms: Mécanismes
+        min_average_rating: Moyenne des notes min
         min_duration: Durée min
+        min_rating_count: Nombre de notes min
         moderation: Modération
         more: Plus
         most_commented_first: Plus commentés en premier
+        most_viewed: Plus vus
+        most_viewed_first: Plus vus en premier
         move_up: Monter
         move_down: Descendre
         my_game_library: Ma ludothèque

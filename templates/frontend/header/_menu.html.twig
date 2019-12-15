@@ -43,7 +43,8 @@
                             <div class="col-lg-6">
                                 <div class="divider"></div>
                                 <ul class="menu">
-                                    <li><a href="{{ path('sylius_frontend_product_index', {'sorting': {'averageRating': 'desc'}}) }}"><i class="fa fa-star pr-2"></i>{{ 'app.ui.top_rated'|trans }}</a></li>
+                                    <li><a href="{{ path('sylius_frontend_product_index', {'criteria': {'reviewCount': {value: 5}}, 'sorting': {'averageRating': 'desc'}}) }}"><i class="fa fa-star pr-2"></i>{{ 'app.ui.top_rated'|trans }}</a></li>
+                                    <li><a href="{{ path('sylius_frontend_product_index', {'sorting': {'viewCount': 'desc'}}) }}"><i class="fa fa-eye pr-2"></i>{{ 'app.ui.most_viewed'|trans }}</a></li>
                                     <li><a href="{{ path('sylius_frontend_product_index', {'sorting': {'commentedReviewCount': 'desc'}}) }}"><i class="fa fa-comments pr-2"></i>{{ 'app.ui.top_commented'|trans }}</a></li>
                                     <li><a href="{{ path('app_frontend_year_award_index') }}"><i class="fa fa-trophy pr-2"></i>{{ 'app.ui.award_winning_games'|trans }}</a></li>
                                 </ul>
