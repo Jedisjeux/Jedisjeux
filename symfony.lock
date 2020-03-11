@@ -434,9 +434,6 @@
     "psr/log": {
         "version": "1.0.2"
     },
-    "psr/simple-cache": {
-        "version": "1.0.1"
-    },
     "ralouphie/getallheaders": {
         "version": "2.0.5"
     },
@@ -542,6 +539,9 @@
     "sylius-labs/association-hydrator": {
         "version": "v1.1.0"
     },
+    "sylius-labs/polyfill-symfony-event-dispatcher": {
+        "version": "v1.0.0"
+    },
     "sylius/attribute": {
         "version": "v1.2.7"
     },
@@ -566,9 +566,6 @@
     "sylius/locale-bundle": {
         "version": "v1.2.7"
     },
-    "sylius/mailer": {
-        "version": "v1.2.7"
-    },
     "sylius/mailer-bundle": {
         "version": "v1.2.7"
     },
@@ -585,9 +582,6 @@
         "version": "v1.2.7"
     },
     "sylius/resource": {
-        "version": "v1.2.7"
-    },
-    "sylius/resource-bundle": {
         "version": "v1.2.7"
     },
     "sylius/review": {
@@ -623,9 +617,6 @@
     "symfony/cache-contracts": {
         "version": "v1.1.7"
     },
-    "symfony/class-loader": {
-        "version": "v3.4.17"
-    },
     "symfony/config": {
         "version": "v4.1.6"
     },
@@ -655,6 +646,9 @@
     },
     "symfony/dotenv": {
         "version": "v4.1.6"
+    },
+    "symfony/error-handler": {
+        "version": "v4.4.5"
     },
     "symfony/event-dispatcher": {
         "version": "v4.1.6"
