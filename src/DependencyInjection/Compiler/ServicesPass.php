@@ -11,6 +11,7 @@
 
 namespace App\DependencyInjection\Compiler;
 
+use App\Doctrine\ORM\Driver;
 use App\EventListener\PasswordUpdaterListener;
 use App\Factory\ProductFactory;
 use App\Security\Authorization\AuthorizationChecker;
@@ -36,6 +37,9 @@ class ServicesPass implements CompilerPassInterface
 
         $authorizationCheckerDefinition = $container->getDefinition('security.authorization_checker');
         $authorizationCheckerDefinition->setClass(AuthorizationChecker::class);
+
+        $doctrineDriver = $container->getDefinition('sylius.grid_driver.doctrine.orm');
+        $doctrineDriver->setClass(Driver::class);
     }
 
     /**
