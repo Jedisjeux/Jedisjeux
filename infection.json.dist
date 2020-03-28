@@ -9,6 +9,7 @@
             "Command",
             "Controller",
             "DependencyInjection",
+            "Doctrine",
             "Formatter",
             "Menu",
             "Migrations",
