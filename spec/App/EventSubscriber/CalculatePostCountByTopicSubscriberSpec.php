@@ -7,15 +7,16 @@ use App\Entity\Post;
 use App\Entity\Topic;
 use App\EventSubscriber\CalculatePostCountByTopicSubscriber;
 use App\Updater\PostCountByTopicUpdater;
+use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class CalculatePostCountByTopicSubscriberSpec extends ObjectBehavior
 {
-    function let(PostCountByTopicUpdater $updater)
+    function let(PostCountByTopicUpdater $updater, EntityManagerInterface $entityManager)
     {
-        $this->beConstructedWith($updater);
+        $this->beConstructedWith($updater, $entityManager);
     }
 
     function it_is_initializable()
@@ -26,7 +27,7 @@ class CalculatePostCountByTopicSubscriberSpec extends ObjectBehavior
     function it_subscribes_to_post_create_event()
     {
         $this::getSubscribedEvents()->shouldReturn([
-            AppEvents::POST_PRE_CREATE => 'onPostCreate',
+            AppEvents::POST_POST_CREATE => 'onPostCreate',
         ]);
     }
 
@@ -34,12 +35,14 @@ class CalculatePostCountByTopicSubscriberSpec extends ObjectBehavior
         GenericEvent $event,
         PostCountByTopicUpdater $updater,
         Post $post,
-        Topic $topic
+        Topic $topic,
+        EntityManagerInterface $entityManager
     ): void {
         $event->getSubject()->willReturn($post);
         $post->getTopic()->willReturn($topic);
 
         $updater->update($topic)->shouldBeCalled();
+        $entityManager->flush()->shouldBeCalled();
 
         $this->onPostCreate($event);
     }
