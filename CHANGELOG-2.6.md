@@ -1,6 +1,10 @@
 ## Change Log
 
-### 2.6.4 (2020/04/25 14:19 +00:00)
+### v2.6.5 (2020/04/25 22:31 +00:00)
+- [#503](https://github.com/Jedisjeux/Jedisjeux/pull/503) Fix post count by topic (@loic425)
+
+### v2.6.4 (2020/04/25 14:24 +00:00)
+- [#502](https://github.com/Jedisjeux/Jedisjeux/pull/502) Fix/review count subscriber (@loic425)
 - [#501](https://github.com/Jedisjeux/Jedisjeux/pull/501) Fix security (@loic425)
 - [#500](https://github.com/Jedisjeux/Jedisjeux/pull/500) Remove vagrant (@loic425)
 - [#494](https://github.com/Jedisjeux/Jedisjeux/pull/494) Improve frontend breadcrumbs (@loic425)
