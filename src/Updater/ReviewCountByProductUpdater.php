@@ -13,6 +13,7 @@ namespace App\Updater;
 
 use App\Calculator\ReviewCountByProductCalculator;
 use App\Entity\Product;
+use App\Entity\ProductInterface;
 
 class ReviewCountByProductUpdater
 {
@@ -30,9 +31,9 @@ class ReviewCountByProductUpdater
     }
 
     /**
-     * @param Product $product
+     * @param ProductInterface $product
      */
-    public function update(Product $product)
+    public function update(ProductInterface $product)
     {
         $ratingCount = $this->calculator->calculate($product);
         $product->setReviewCount($ratingCount);

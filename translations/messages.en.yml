@@ -209,6 +209,7 @@ app:
         publish: Publish
         publisher: Publisher
         published_at: Published at
+        rate: Rate
         ratings: Ratings
         react_on_this_article: React on this article
         react_on_this_game_play: React on this game play

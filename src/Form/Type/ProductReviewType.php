@@ -30,7 +30,7 @@ class ProductReviewType extends ReviewType
     {
         $builder
             ->add('rating', HiddenType::class, [
-                'label' => 'label.rate',
+                'label' => 'app.ui.rate',
             ])
             ->add('title', TextType::class, [
                 'label' => 'sylius.ui.title',
