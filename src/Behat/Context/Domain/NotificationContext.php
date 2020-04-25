@@ -17,7 +17,7 @@ use App\Entity\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
-class NotificationContext implements Context
+final class NotificationContext implements Context
 {
     /**
      * @var RepositoryInterface

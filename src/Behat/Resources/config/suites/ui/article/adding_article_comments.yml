@@ -18,5 +18,7 @@ default:
 
                 - App\Behat\Context\Ui\Frontend\NotificationContext
                 - App\Behat\Context\Ui\Frontend\ArticlePostContext
+
+                - App\Behat\Context\Domain\ArticleContext
             filters:
                 tags: "@adding_article_comments && @ui"
