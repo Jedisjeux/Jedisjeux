@@ -11,8 +11,6 @@
 
 namespace App\Repository;
 
-use App\Entity\Customer;
-use App\Entity\ProductBox;
 use App\Entity\ProductList;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
@@ -24,13 +22,7 @@ use Sylius\Component\Customer\Model\CustomerInterface;
  */
 class ProductListItemRepository extends EntityRepository
 {
-    /**
-     * @param string $productListSlug
-     * @param string $locale
-     *
-     * @return QueryBuilder
-     */
-    public function createQueryBuilderByProductList($productListSlug, $locale)
+    public function createQueryBuilderByProductList(string $productListSlug, string $locale): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
@@ -54,8 +46,7 @@ class ProductListItemRepository extends EntityRepository
     }
 
     /**
-     * @param CustomerInterface $customer
-     * @param string            $locale
+     * @param string $locale
      *
      * @return QueryBuilder
      */
@@ -64,6 +55,7 @@ class ProductListItemRepository extends EntityRepository
         $queryBuilder = $this->createQueryBuilder('o');
 
         $queryBuilder
+            ->distinct()
             ->addSelect('product')
             ->addSelect('translation')
             ->addSelect('variant')
@@ -78,7 +70,6 @@ class ProductListItemRepository extends EntityRepository
             ->andWhere('translation.locale = :locale')
             ->andWhere('list.owner = :owner')
             ->andWhere('list.code = :code')
-            ->groupBy('product.id')
             ->setParameter('enabled', true)
             ->setParameter('locale', $locale)
             ->setParameter('owner', $customer)
