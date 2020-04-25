@@ -11,16 +11,11 @@
 
 namespace App\Calculator;
 
-use App\Entity\Product;
+use App\Entity\ProductInterface;
 
 class ReviewCountByProductCalculator
 {
-    /**
-     * @param Product $product
-     *
-     * @return int
-     */
-    public function calculate(Product $product): int
+    public function calculate(ProductInterface $product): int
     {
         return $product->getReviews()->count();
     }

@@ -12,8 +12,9 @@
 namespace App\Entity;
 
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
+use Sylius\Component\Review\Model\ReviewableInterface;
 
-interface ProductInterface extends BaseProductInterface
+interface ProductInterface extends BaseProductInterface, ReviewableInterface
 {
     /**
      * @return ProductVariantInterface|ProductVariant|null
@@ -24,4 +25,8 @@ interface ProductInterface extends BaseProductInterface
      * @param ProductVariantInterface $variant
      */
     public function setFirstVariant(ProductVariantInterface $variant): void;
+
+    public function getReviewCount(): int;
+
+    public function setReviewCount(int $reviewCount): void;
 }

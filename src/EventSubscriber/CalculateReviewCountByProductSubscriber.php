@@ -11,25 +11,25 @@
 
 namespace App\EventSubscriber;
 
-use App\Entity\Product;
-use App\Event\ProductEvents;
+use App\Entity\ProductInterface;
+use App\Entity\ProductReview;
 use App\Updater\ReviewCountByProductUpdater;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class CalculateReviewCountByProductSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var ReviewCountByProductUpdater
-     */
-    protected $updater;
+    /** @var ReviewCountByProductUpdater */
+    private $updater;
 
-    /**
-     * @param ReviewCountByProductUpdater $updater
-     */
-    public function __construct(ReviewCountByProductUpdater $updater)
+    /** @var EntityManagerInterface */
+    private $entityManager;
+
+    public function __construct(ReviewCountByProductUpdater $updater, EntityManagerInterface $entityManager)
     {
         $this->updater = $updater;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -38,8 +38,8 @@ class CalculateReviewCountByProductSubscriber implements EventSubscriberInterfac
     public static function getSubscribedEvents()
     {
         return [
-            ProductEvents::PRE_CREATE => 'onProductCreate',
-            ProductEvents::PRE_UPDATE => 'onProductUpdate',
+            'sylius.product_review.post_create' => 'onProductCreate',
+            'sylius.product_review.post_update' => 'onProductUpdate',
         ];
     }
 
@@ -48,10 +48,14 @@ class CalculateReviewCountByProductSubscriber implements EventSubscriberInterfac
      */
     public function onProductCreate(GenericEvent $event)
     {
-        /** @var Product $product */
-        $product = $event->getSubject();
+        /** @var ProductReview $productReview */
+        $productReview = $event->getSubject();
+        /** @var ProductInterface $product */
+        $product = $productReview->getReviewSubject();
 
         $this->updater->update($product);
+
+        $this->entityManager->flush();
     }
 
     /**

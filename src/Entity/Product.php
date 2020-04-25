@@ -34,7 +34,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @JMS\ExclusionPolicy("all")
  */
-class Product extends BaseProduct implements ProductInterface, ReviewableInterface
+class Product extends BaseProduct implements ProductInterface
 {
     /**
      * status constants.
@@ -621,7 +621,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableInterfa
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getReviewCount(): int
     {
@@ -629,7 +629,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableInterfa
     }
 
     /**
-     * @param int $reviewCount
+     * {@inheritdoc}
      */
     public function setReviewCount(int $reviewCount): void
     {

@@ -207,6 +207,7 @@ app:
         publish: Publier
         publisher: Publieur
         published_at: Publié le
+        rate: Note
         ratings: Notes
         react_on_this_article: Réagir à cet article
         react_on_this_game_play: Réagir à cette partie de jeu
@@ -442,7 +443,6 @@ label:
   published_at: Publié le
   publishers: Editeurs
   pub_banners: Bannières de pub
-  rate: Note
   release: Sortie
   released_at: Sortie le
   release_date: Date de sortie

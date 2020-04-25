@@ -11,6 +11,8 @@
 
 namespace App\Behat\Page\Frontend\ProductReview;
 
+use App\Behat\Service\JQueryHelper;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Webmozart\Assert\Assert;
@@ -54,15 +56,14 @@ class CreatePage extends SymfonyPage
     /**
      * @param int $rate
      *
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws ElementNotFoundException
      */
     public function rateReview(int $rate)
     {
-        try {
-            $this->getElement('rate', ['%rate%' => $rate])->click();
-        } catch (\Exception $e) {
-        }
+        JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
 
+        $this->getElement('rate', ['%rate%' => $rate])->mouseOver();
+        $this->getElement('rate_hover', ['%rate%' => $rate])->click();
     }
 
     /**
@@ -82,6 +83,7 @@ class CreatePage extends SymfonyPage
             'title' => '#sylius_product_review_title',
             'comment' => '#sylius_product_review_comment',
             'rate' => '.rate-base-layer span:nth-child(%rate%) .fa-star',
+            'rate_hover' => '.rate-hover-layer span:nth-child(%rate%) .fa-star',
         ]);
     }
 }

@@ -13,5 +13,7 @@ default:
 
                 - App\Behat\Context\Ui\Frontend\NotificationContext
                 - App\Behat\Context\Ui\Frontend\ProductReviewContext
+
+                - App\Behat\Context\Domain\ProductContext
             filters:
                 tags: "@adding_product_reviews && @ui"
