@@ -14,27 +14,22 @@ namespace App\EventSubscriber;
 use App\AppEvents;
 use App\Entity\Post;
 use App\Updater\PostCountByTopicUpdater;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class CalculatePostCountByTopicSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var PostCountByTopicUpdater
-     */
-    protected $updater;
+    /** @var PostCountByTopicUpdater */
+    private $updater;
 
-    /**
-     * CalculatePostCountByTopicSubscriber constructor.
-     *
-     * @param PostCountByTopicUpdater $updater
-     */
-    public function __construct(PostCountByTopicUpdater $updater)
+    /** @var EntityManagerInterface */
+    private $entityManager;
+
+    public function __construct(PostCountByTopicUpdater $updater, EntityManagerInterface $entityManager)
     {
         $this->updater = $updater;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -43,7 +38,7 @@ class CalculatePostCountByTopicSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            AppEvents::POST_PRE_CREATE => 'onPostCreate',
+            AppEvents::POST_POST_CREATE => 'onPostCreate',
         ];
     }
 
@@ -60,5 +55,6 @@ class CalculatePostCountByTopicSubscriber implements EventSubscriberInterface
         }
 
         $this->updater->update($post->getTopic());
+        $this->entityManager->flush();
     }
 }

@@ -1,5 +1,11 @@
 ## Change Log
 
+### 2.6.4 (2020/04/25 14:19 +00:00)
+- [#501](https://github.com/Jedisjeux/Jedisjeux/pull/501) Fix security (@loic425)
+- [#500](https://github.com/Jedisjeux/Jedisjeux/pull/500) Remove vagrant (@loic425)
+- [#494](https://github.com/Jedisjeux/Jedisjeux/pull/494) Improve frontend breadcrumbs (@loic425)
+- [#499](https://github.com/Jedisjeux/Jedisjeux/pull/499) Bump Symfony from 4.3 to 4.4 version (@loic425)
+
 ### 2.6.3 (2019/12/15 13:25 +00:00)
 - [#497](https://github.com/Jedisjeux/Jedisjeux/pull/497) Adding product criteria and sorting (@loic425)
 

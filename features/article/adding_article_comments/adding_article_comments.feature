@@ -15,3 +15,4 @@ Feature: Adding article comments
         When I leave a comment "Great article for every boardgame players."
         And I add it
         Then I should be notified that it has been successfully created
+        And this article should have one comment

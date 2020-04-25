@@ -15,3 +15,5 @@ Feature: Adding product review as a customer
         And I rate it with 8 points
         And I add it
         Then I should be notified that it has been successfully created
+        And this product should have one review
+        And this product should have an average rating of 8 points

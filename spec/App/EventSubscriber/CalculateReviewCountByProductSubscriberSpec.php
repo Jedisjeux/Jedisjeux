@@ -3,34 +3,41 @@
 namespace spec\App\EventSubscriber;
 
 use App\Entity\Product;
+use App\Entity\ProductInterface;
+use App\Entity\ProductReview;
 use App\Event\ProductEvents;
 use App\Updater\ReviewCountByProductUpdater;
+use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class CalculateReviewCountByProductSubscriberSpec extends ObjectBehavior
 {
-    function let(ReviewCountByProductUpdater $updater)
+    function let(ReviewCountByProductUpdater $updater, EntityManagerInterface $entityManager)
     {
-        $this->beConstructedWith($updater);
+        $this->beConstructedWith($updater, $entityManager);
     }
 
     function it_subscribes_to_product_events()
     {
         $this::getSubscribedEvents()->shouldReturn([
-            ProductEvents::PRE_CREATE => 'onProductCreate',
-            ProductEvents::PRE_UPDATE => 'onProductUpdate',
+            'sylius.product_review.post_create' => 'onProductCreate',
+            'sylius.product_review.post_update' => 'onProductUpdate',
         ]);
     }
 
     function it_updates_review_count_on_product_create_event(
         GenericEvent $event,
         ReviewCountByProductUpdater $updater,
-        Product $product
+        ProductReview $productReview,
+        ProductInterface $product,
+        EntityManagerInterface $entityManager
     ): void {
-        $event->getSubject()->willReturn($product);
+        $event->getSubject()->willReturn($productReview);
+        $productReview->getReviewSubject()->willReturn($product);
 
         $updater->update($product)->shouldBeCalled();
+        $entityManager->flush()->shouldBeCalled();
 
         $this->onProductCreate($event);
     }
@@ -38,11 +45,15 @@ class CalculateReviewCountByProductSubscriberSpec extends ObjectBehavior
     function it_updates_review_count_on_product_update_event(
         GenericEvent $event,
         ReviewCountByProductUpdater $updater,
-        Product $product
+        ProductReview $productReview,
+        Product $product,
+        EntityManagerInterface $entityManager
     ): void {
-        $event->getSubject()->willReturn($product);
+        $event->getSubject()->willReturn($productReview);
+        $productReview->getReviewSubject()->willReturn($product);
 
         $updater->update($product)->shouldBeCalled();
+        $entityManager->flush()->shouldBeCalled();
 
         $this->onProductUpdate($event);
     }
