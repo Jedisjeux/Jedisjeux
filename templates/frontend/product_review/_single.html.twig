@@ -4,14 +4,14 @@
 {% set avatarPath = product_review.author.avatar is not null ? product_review.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png'  %}
 
 <!-- comment start -->
-<div class="comment clearfix">
+<div class="comment clearfix" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
     <div class="comment-avatar">
         {{ images.render(avatarPath, 'thumbnail', "avatar", 'rounded-circle') }}
     </div>
     <header>
         <h3>{{ product_review.title }}</h3>
         <div class="comment-meta">
-            {{ rating(product_review.rating) }} |
+            <span itemprop="ratingValue" content="{{ product_review.rating }}">{{ rating(product_review.rating) }}</span> |
             {{ product_review.createdAt|localizeddate('medium', 'none') }} |
             {{ product_review.author }}
         </div>

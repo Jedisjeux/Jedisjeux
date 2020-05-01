@@ -16,7 +16,9 @@
 
 <dl class="row">
     <dt class="col-sm-3 text-sm-right">{{ 'app.ui.player_count'|trans }}</dt>
-    <dd class="col-sm-9">{{ playerCount(product) }}</dd>
+    <dd class="col-sm-9" itemprop="numberOfPlayers" itemscope itemtype="http://schema.org/QuantitativeValue">
+        {{ playerCount(product) }}
+    </dd>
     <dt class="col-sm-3 text-sm-right">{{ 'app.ui.age'|trans }}</dt>
     <dd class="col-sm-9">{{ 'app.ui.from_years'|trans({ '%count%': product.minAge })|lower }}</dd>
     <dt class="col-sm-3 text-sm-right">{{ 'app.ui.duration'|trans|trans }}</dt>

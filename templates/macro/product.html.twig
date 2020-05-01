@@ -1,10 +1,10 @@
 {% macro playerCount(product) %}
     {% if product.minPlayerCount == product.maxPlayerCount %}
-        à {{ product.minPlayerCount }} joueur{% if product.minPlayerCount>1 %}s{% endif %} exclusivement
+        à <span itemprop="minValue">{{ product.minPlayerCount }}</span> joueur{% if product.minPlayerCount>1 %}s{% endif %} exclusivement
     {% elseif not product.maxPlayerCount %}
-        à partir de {{ product.minPlayerCount }} joueur{% if product.minPlayerCount>1 %}s{% endif %}
+        à partir de <span itemprop="minValue">{{ product.minPlayerCount }}</span> joueur{% if product.minPlayerCount>1 %}s{% endif %}
     {% else %}
-        {{ product.minPlayerCount }} à {{ product.maxPlayerCount }} joueurs
+        <span itemprop="minValue">{{ product.minPlayerCount }}</span> à <span itemprop="maxValue">{{ product.maxPlayerCount }}</span> joueurs
     {% endif %}
 {% endmacro %}
 
