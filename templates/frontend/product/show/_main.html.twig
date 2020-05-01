@@ -14,16 +14,21 @@
 
                 <!-- page-title start -->
                 <!-- ================ -->
-                <h1 class="page-title text-center">{{ product.name }}</h1>
+                <h1 class="page-title text-center" itemprop="name">{{ product.name }}</h1>
                 {% if product.averageRating > 0 %}
-                <div class="text-center">
-                    <big> {{ rating(product.averageRating) }} {{ product.averageRating|round(1) }}</big> <small>/10</small> <small>({{ product.reviews | length }} {{ 'app.ui.ratings'|trans|lower }})</small>
+                <div class="text-center" itemprop="agregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                    <span style="font-size: larger"> {{ rating(product.averageRating) }} {{ product.averageRating|round(1) }}</span> <small>/10</small> <small>({{ product.reviewCount }} {{ 'app.ui.ratings'|trans|lower }})</small>
+                    <meta itemprop="ratingValue" content="{{ product.averageRating|round(1) }}">
+                    <meta itemprop="bestRating" content="10">
+                    <meta itemprop="worstRating" content="1">
+                    <meta itemprop="ratingCount" content="{{ product.reviewCount }}">
+                    <meta itemprop="reviewCount" content="{{ product.commentedReviewCount }}">
                 </div>
                 {% endif %}
                 <div class="text-center">
-                    <big>
+                    <div style="font-size: larger" itemprop="description">
                         {{ product.shortDescription|raw }}
-                    </big>
+                    </div>
                 </div>
                 <div class="separator with-icon">
                     <i class="fa fa-shopping-bag bordered"></i>
