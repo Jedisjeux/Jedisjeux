@@ -1,5 +1,10 @@
 ## Change Log
 
+### v2.6.6 (2020/05/01 14:41 +00:00)
+- [#505](https://github.com/Jedisjeux/Jedisjeux/pull/505) [SEO] Game and reviews schema (@loic425)
+- [#498](https://github.com/Jedisjeux/Jedisjeux/pull/498) Bump rake from 12.3.2 to 13.0.1 (@dependabot[bot])
+- [#504](https://github.com/Jedisjeux/Jedisjeux/pull/504) Bump jquery from 3.4.0 to 3.5.0 (@dependabot[bot], @loic425)
+
 ### v2.6.5 (2020/04/25 22:31 +00:00)
 - [#503](https://github.com/Jedisjeux/Jedisjeux/pull/503) Fix post count by topic (@loic425)
 
