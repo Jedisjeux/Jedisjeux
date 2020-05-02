@@ -16,7 +16,7 @@
                 <!-- ================ -->
                 <h1 class="page-title text-center" itemprop="name">{{ product.name }}</h1>
                 {% if product.averageRating > 0 %}
-                <div class="text-center" itemprop="agregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                <div class="text-center" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
                     <span style="font-size: larger"> {{ rating(product.averageRating) }} {{ product.averageRating|round(1) }}</span> <small>/10</small> <small>({{ product.reviewCount }} {{ 'app.ui.ratings'|trans|lower }})</small>
                     <meta itemprop="ratingValue" content="{{ product.averageRating|round(1) }}">
                     <meta itemprop="bestRating" content="10">
