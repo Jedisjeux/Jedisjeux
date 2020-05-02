@@ -1,5 +1,9 @@
 ## Change Log
 
+### v2.6.7 (2020/05/02 13:50 +00:00)
+- [#507](https://github.com/Jedisjeux/Jedisjeux/pull/507) [SEO] Fix breadcrumb and google structured data (@loic425)
+- [#506](https://github.com/Jedisjeux/Jedisjeux/pull/506) Revert "Bump jquery from 3.4.0 to 3.5.0" (@loic425)
+
 ### v2.6.6 (2020/05/01 14:41 +00:00)
 - [#505](https://github.com/Jedisjeux/Jedisjeux/pull/505) [SEO] Game and reviews schema (@loic425)
 - [#498](https://github.com/Jedisjeux/Jedisjeux/pull/498) Bump rake from 12.3.2 to 13.0.1 (@dependabot[bot])
