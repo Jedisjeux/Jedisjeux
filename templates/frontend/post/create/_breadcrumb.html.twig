@@ -2,13 +2,32 @@
 <!-- ================ -->
 <div class="breadcrumb-container">
     <div class="container">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a class="link-dark" href="{{ path('app_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
-            <li class="breadcrumb-item"><a class="link-dark" href="{{ path('app_frontend_topic_index') }}">{{ 'app.ui.topics'|trans }}</a></li>
+        <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <i class="fa fa-home pr-2"></i>
+                <a class="link-dark" href="{{ path('app_homepage') }}" itemprop="item">
+                    <span itemprop="name">{{ 'sylius.ui.home'|trans }}</span>
+                    <meta itemprop="position" content="1">
+                </a>
+            </li>
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <a class="link-dark" href="{{ path('app_frontend_topic_index') }}" itemprop="item">
+                    <span itemprop="name">{{ 'app.ui.topics'|trans }}</span>
+                    <meta itemprop="position" content="2">
+                </a>
+            </li>
             {% if post.topic is not null %}
-                <li class="breadcrumb-item active"><a class="link-dark" href="{{ path('app_frontend_post_index_by_topic', { 'topicId': post.topic.id } ) }}">{{ post.topic }}</a></li>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a class="link-dark" href="{{ path('app_frontend_post_index_by_topic', { 'topicId': post.topic.id } ) }}" itemprop="item">
+                        <span itemprop="name">{{ post.topic }}</span>
+                        <meta itemprop="position" content="3">
+                    </a>
+                </li>
             {% endif %}
-            <li class="breadcrumb-item active">{{ 'app.ui.new_post'|trans }}</li>
+            <li class="breadcrumb-item active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <span itemprop="name">{{ 'app.ui.new_post'|trans }}</span>
+                <meta itemprop="position" content="{{ post.topic is not null ? 4 : 3 }}">
+            </li>
         </ol>
     </div>
 </div>

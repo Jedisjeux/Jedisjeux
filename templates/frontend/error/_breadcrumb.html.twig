@@ -2,9 +2,18 @@
 <!-- ================ -->
 <div class="breadcrumb-container">
     <div class="container">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a class="link-dark" href="{{ path('app_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
-            <li class="breadcrumb-item active">{{ 'app.ui.error'|trans }}</li>
+        <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+            <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <i class="fa fa-home pr-2"></i>
+                <a class="link-dark" href="{{ path('app_homepage') }}">
+                    <span itemprop="name">{{ 'sylius.ui.home'|trans }}</span>
+                    <meta itemprop="position" content="1">
+                </a>
+            </li>
+            <li class="breadcrumb-item active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <span itemprop="name">{{ 'app.ui.error'|trans }}</span>
+                <meta itemprop="position" content="2">
+            </li>
         </ol>
     </div>
 </div>
