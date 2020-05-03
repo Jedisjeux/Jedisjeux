@@ -5,13 +5,13 @@
         <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
             <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
                 <i class="fa fa-home pr-2"></i>
-                <a class="link-dark" href="{{ path('app_homepage') }}">
+                <a class="link-dark" href="{{ path('app_homepage') }}" itemprop="item">
                     <span itemprop="name">{{ 'sylius.ui.home'|trans }}</span>
                     <meta itemprop="position" content="1">
                 </a>
             </li>
             <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                <a class="link-dark" itemprop="item" href="{{ path('sylius_frontend_product_index' ) }}">
+                <a class="link-dark" href="{{ path('sylius_frontend_product_index' ) }}" itemprop="item" >
                     <span itemprop="name">{{ 'app.ui.boardgames' | trans }}</span>
                     <meta itemprop="position" content="2">
                 </a>
