@@ -8,6 +8,8 @@ parameters:
     email_contact: jedisjeux@jedisjeux.net
     email_name: Contact Jedisjeux
     email_sender: no-reply@jedisjeux.net
+    router.request_context.host: '%env(APP_HOST)%'
+    router.request_context.scheme: '%env(APP_SCHEME)%'
 
 services:
     # default configuration for services in *this* file
