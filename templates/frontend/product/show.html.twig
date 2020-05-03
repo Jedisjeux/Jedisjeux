@@ -5,12 +5,12 @@
 {% endset %}
 
 {% block content %}
+    {% include 'frontend/product/show/_breadcrumb.html.twig' %}
     <div itemscope itemtype="http://schema.org/Game">
-        {% include 'frontend/product/show/_breadcrumb.html.twig' %}
         {% include 'frontend/product/show/_main.html.twig' %}
         {% include 'frontend/product/show/_content.html.twig' %}
-        {% include 'frontend/product/show/_variants.html.twig' %}
-        {% include 'frontend/product/show/_associations.html.twig' %}
-        {% include 'frontend/product/show/_footerTop.html.twig' %}
     </div>
+    {% include 'frontend/product/show/_variants.html.twig' %}
+    {% include 'frontend/product/show/_associations.html.twig' %}
+    {% include 'frontend/product/show/_footerTop.html.twig' %}
 {% endblock content %}
