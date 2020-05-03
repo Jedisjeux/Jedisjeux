@@ -9,7 +9,7 @@
 /public/uploads/img/*
 !/public/uploads/img/.gitkeep
 /public/media/*
-/public/jedisjeux.xml
+/public/*.xml
 
 **/node_modules/*
 

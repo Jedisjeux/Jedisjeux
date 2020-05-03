@@ -34,6 +34,7 @@
     "knplabs/doctrine-behaviors": "~1.1",
     "liip/imagine-bundle": "^2.1",
     "nelmio/cors-bundle": "^1.5",
+    "presta/sitemap-bundle": "^2.1",
     "ramsey/uuid": "^3.8",
     "sensio/framework-extra-bundle": "^5.1",
     "sensiolabs/security-checker": "^5.0",
