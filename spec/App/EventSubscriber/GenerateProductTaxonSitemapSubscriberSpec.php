@@ -2,7 +2,6 @@
 
 namespace spec\App\EventSubscriber;
 
-use App\Entity\ProductInterface;
 use App\EventSubscriber\GenerateProductTaxonSitemapSubscriber;
 use App\Repository\TaxonRepository;
 use Doctrine\ORM\AbstractQuery;

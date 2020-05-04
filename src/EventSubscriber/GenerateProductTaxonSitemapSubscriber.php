@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use App\Entity\ProductInterface;
+use App\Entity\Taxon;
 use App\Repository\ProductRepository;
 use App\Repository\TaxonRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -62,24 +63,30 @@ class GenerateProductTaxonSitemapSubscriber implements EventSubscriberInterface
 
     private function registerProductTaxonssUrls(UrlContainerInterface $urls): void
     {
-        $queryBuilder = $this->taxonRepository->createQueryBuilder('o');
+        $productTaxonsCodes = [
+            Taxon::CODE_MECHANISM,
+            Taxon::CODE_THEME,
+            Taxon::CODE_TARGET_AUDIENCE,
+        ];
 
-        foreach ($queryBuilder->getQuery()->iterate() as $row) {
-            /** @var TaxonInterface $taxon */
-            $taxon = $row[0];
+        $rootTaxons = $this->taxonRepository->findRootNodes();
+        $productTaxons = array_filter($rootTaxons, function(Taxon $rootTaxon) use ($productTaxonsCodes) {
+            return in_array($rootTaxon->getCode(), $productTaxonsCodes);
+        });
 
-            $urls->addUrl(
-                new UrlConcrete(
-                    $this->urlGenerator->generate(
-                        'sylius_frontend_product_index_by_taxon',
-                        ['slug' => $taxon->getSlug()],
-                        UrlGeneratorInterface::ABSOLUTE_URL
-                    )
-                ),
-                'product_taxon'
-            );
-
-            $this->entityManager->clear(get_class($taxon));
+        foreach ($productTaxons as $rootTaxon) {
+            foreach ($this->taxonRepository->findChildrenAsTree($rootTaxon, false) as $taxon) {
+                $urls->addUrl(
+                    new UrlConcrete(
+                        $this->urlGenerator->generate(
+                            'sylius_frontend_product_index_by_taxon',
+                            ['slug' => $taxon->getSlug()],
+                            UrlGeneratorInterface::ABSOLUTE_URL
+                        )
+                    ),
+                    'product_taxon'
+                );
+            }
         }
     }
 }
