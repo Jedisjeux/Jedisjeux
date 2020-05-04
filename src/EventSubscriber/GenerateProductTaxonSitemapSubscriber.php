@@ -13,11 +13,8 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\Entity\ProductInterface;
 use App\Entity\Taxon;
-use App\Repository\ProductRepository;
 use App\Repository\TaxonRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Presta\SitemapBundle\Event\SitemapPopulateEvent;
 use Presta\SitemapBundle\Service\UrlContainerInterface;
 use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
@@ -33,17 +30,12 @@ class GenerateProductTaxonSitemapSubscriber implements EventSubscriberInterface
     /** @var TaxonRepository */
     private $taxonRepository;
 
-    /** @var EntityManagerInterface */
-    private $entityManager;
-
     public function __construct(
         UrlGeneratorInterface $urlGenerator,
-        TaxonRepository $taxonRepository,
-        EntityManagerInterface $entityManager
+        TaxonRepository $taxonRepository
     ) {
         $this->urlGenerator = $urlGenerator;
         $this->taxonRepository = $taxonRepository;
-        $this->entityManager = $entityManager;
     }
 
     /**
@@ -70,7 +62,7 @@ class GenerateProductTaxonSitemapSubscriber implements EventSubscriberInterface
         ];
 
         $rootTaxons = $this->taxonRepository->findRootNodes();
-        $productTaxons = array_filter($rootTaxons, function(Taxon $rootTaxon) use ($productTaxonsCodes) {
+        $productTaxons = array_filter($rootTaxons, function (TaxonInterface $rootTaxon) use ($productTaxonsCodes) {
             return in_array($rootTaxon->getCode(), $productTaxonsCodes);
         });
 

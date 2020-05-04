@@ -2,11 +2,9 @@
 
 namespace spec\App\EventSubscriber;
 
+use App\Entity\Taxon;
 use App\EventSubscriber\GenerateProductTaxonSitemapSubscriber;
 use App\Repository\TaxonRepository;
-use Doctrine\ORM\AbstractQuery;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Presta\SitemapBundle\Event\SitemapPopulateEvent;
 use Presta\SitemapBundle\Service\UrlContainerInterface;
@@ -19,10 +17,9 @@ class GenerateProductTaxonSitemapSubscriberSpec extends ObjectBehavior
 {
     function let(
         UrlGeneratorInterface $urlGenerator,
-        TaxonRepository $productRepository,
-        EntityManagerInterface $entityManager
+        TaxonRepository $taxonRepository
     ): void {
-        $this->beConstructedWith($urlGenerator, $productRepository, $entityManager);
+        $this->beConstructedWith($urlGenerator, $taxonRepository);
     }
 
     function it_is_initializable(): void
@@ -45,27 +42,30 @@ class GenerateProductTaxonSitemapSubscriberSpec extends ObjectBehavior
     function it_registers_product_taxons_urls(
         SitemapPopulateEvent $event,
         UrlContainerInterface $urls,
-        TaxonRepository $productRepository,
-        QueryBuilder $queryBuilder,
+        TaxonRepository $taxonRepository,
+        TaxonInterface $mechanismTaxon,
+        TaxonInterface $themeTaxon,
         TaxonInterface $firstTaxon,
         TaxonInterface $secondTaxon,
-        UrlGeneratorInterface $urlGenerator,
-        EntityManagerInterface $entityManager
+        UrlGeneratorInterface $urlGenerator
     ): void {
         $event->getUrlContainer()->willReturn($urls);
-        $productRepository->createQueryBuilder('o')->willReturn($queryBuilder);
-
-        $query = \Mockery::mock(AbstractQuery::class);
-        $query->shouldReceive('iterate')->andReturn([
-            [
-                $firstTaxon->getWrappedObject(),
-            ],
-            [
-                $secondTaxon->getWrappedObject(),
-            ],
+        $taxonRepository->findRootNodes()->willReturn([
+            $mechanismTaxon->getWrappedObject(),
+            $themeTaxon->getWrappedObject(),
         ]);
 
-        $queryBuilder->getQuery()->willReturn($query);
+        $mechanismTaxon->getCode()->willReturn(Taxon::CODE_THEME);
+        $themeTaxon->getCode()->willReturn(Taxon::CODE_MECHANISM);
+
+        $taxonRepository->findChildrenAsTree($mechanismTaxon, false)->willReturn([
+            $firstTaxon->getWrappedObject(),
+        ]);
+
+        $taxonRepository->findChildrenAsTree($themeTaxon, false)->willReturn([
+            $secondTaxon->getWrappedObject(),
+        ]);
+
         $firstTaxon->getSlug()->willReturn('mechanisms/draft');
         $secondTaxon->getSlug()->willReturn('themes/western');
 
@@ -92,8 +92,6 @@ class GenerateProductTaxonSitemapSubscriberSpec extends ObjectBehavior
         )->shouldBeCalled();
 
         $urls->addUrl(Argument::cetera())->shouldBeCalled();
-
-        $entityManager->clear(Argument::cetera())->shouldBeCalledTimes(2);
 
         $this->populate($event);
     }
