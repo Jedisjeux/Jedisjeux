@@ -123,9 +123,9 @@ class TaxonContext implements Context
         /** @var TaxonInterface $taxon */
         $taxon = $this->sharedStorage->get(sprintf('taxonomy_%ss', $taxonCode));
 
-        $this->taxonFactory->create(['name' => $taxonName, 'parent' => $taxon, 'public' => true]);
+        $newTaxon = $this->taxonFactory->create(['name' => $taxonName, 'parent' => $taxon, 'public' => true]);
 
-        $this->manager->flush($taxon);
+        $this->taxonRepository->add($newTaxon);
     }
 
     /**
@@ -136,10 +136,11 @@ class TaxonContext implements Context
         /** @var TaxonInterface $taxon */
         $taxon = $this->sharedStorage->get(sprintf('taxonomy_%s', $taxonCode));
 
-        $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon, 'public' => true]);
-        $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon, 'public' => true]);
+        $firstTaxon = $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon, 'public' => true]);
+        $secondTaxon = $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon, 'public' => true]);
 
-        $this->manager->flush($taxon);
+        $this->taxonRepository->add($firstTaxon);
+        $this->taxonRepository->add($secondTaxon);
     }
 
     /**
@@ -165,10 +166,11 @@ class TaxonContext implements Context
         /** @var TaxonInterface $taxon */
         $taxon = $this->sharedStorage->get('taxonomy_forum');
 
-        $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon, 'public' => true]);
-        $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon, 'public' => true]);
+        $firstTaxon = $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon, 'public' => true]);
+        $secondTaxon = $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon, 'public' => true]);
 
-        $this->manager->flush($taxon);
+        $this->taxonRepository->add($firstTaxon);
+        $this->taxonRepository->add($secondTaxon);
     }
 
     /**
@@ -181,9 +183,9 @@ class TaxonContext implements Context
 
         $public = 'public' === $visibility;
 
-        $this->taxonFactory->create(['name' => $name, 'parent' => $taxon, 'public' => $public]);
+        $newTaxon = $this->taxonFactory->create(['name' => $name, 'parent' => $taxon, 'public' => $public]);
 
-        $this->manager->flush($taxon);
+        $this->taxonRepository->add($newTaxon);
     }
 
     /**
