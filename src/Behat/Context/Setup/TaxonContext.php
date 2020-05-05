@@ -123,9 +123,9 @@ class TaxonContext implements Context
         /** @var TaxonInterface $taxon */
         $taxon = $this->sharedStorage->get(sprintf('taxonomy_%ss', $taxonCode));
 
-        $newTaxon = $this->taxonFactory->create(['name' => $taxonName, 'parent' => $taxon, 'public' => true]);
+        $this->taxonFactory->create(['name' => $taxonName, 'parent' => $taxon, 'public' => true]);
 
-        $this->taxonRepository->add($newTaxon);
+        $this->manager->flush();
     }
 
     /**
@@ -136,11 +136,10 @@ class TaxonContext implements Context
         /** @var TaxonInterface $taxon */
         $taxon = $this->sharedStorage->get(sprintf('taxonomy_%s', $taxonCode));
 
-        $firstTaxon = $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon, 'public' => true]);
-        $secondTaxon = $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon, 'public' => true]);
+        $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon, 'public' => true]);
+        $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon, 'public' => true]);
 
-        $this->taxonRepository->add($firstTaxon);
-        $this->taxonRepository->add($secondTaxon);
+        $this->manager->flush();
     }
 
     /**
@@ -151,11 +150,10 @@ class TaxonContext implements Context
         /** @var TaxonInterface $taxon */
         $taxon = $this->sharedStorage->get('taxonomy_articles');
 
-        $firstTaxon = $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon]);
-        $secondTaxon = $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon]);
+        $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon]);
+        $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon]);
 
-        $this->taxonRepository->add($firstTaxon);
-        $this->taxonRepository->add($secondTaxon);
+        $this->manager->flush();
     }
 
     /**
@@ -166,11 +164,10 @@ class TaxonContext implements Context
         /** @var TaxonInterface $taxon */
         $taxon = $this->sharedStorage->get('taxonomy_forum');
 
-        $firstTaxon = $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon, 'public' => true]);
-        $secondTaxon = $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon, 'public' => true]);
+        $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon, 'public' => true]);
+        $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon, 'public' => true]);
 
-        $this->taxonRepository->add($firstTaxon);
-        $this->taxonRepository->add($secondTaxon);
+        $this->manager->flush();
     }
 
     /**
@@ -183,9 +180,9 @@ class TaxonContext implements Context
 
         $public = 'public' === $visibility;
 
-        $newTaxon = $this->taxonFactory->create(['name' => $name, 'parent' => $taxon, 'public' => $public]);
+        $this->taxonFactory->create(['name' => $name, 'parent' => $taxon, 'public' => $public]);
 
-        $this->taxonRepository->add($newTaxon);
+        $this->manager->flush();
     }
 
     /**

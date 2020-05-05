@@ -83,7 +83,9 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
      */
     public function create(array $options = []): Taxon
     {
-        return $this->createTaxon($options);
+        $options = $this->optionsResolver->resolve($options);
+
+        return $this->createTaxon($options, $options['parent']);
     }
 
     public function createTaxon(array $options = [], ?TaxonInterface $parentTaxon = null): Taxon
