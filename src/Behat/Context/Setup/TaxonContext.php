@@ -150,10 +150,11 @@ class TaxonContext implements Context
         /** @var TaxonInterface $taxon */
         $taxon = $this->sharedStorage->get('taxonomy_articles');
 
-        $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon]);
-        $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon]);
+        $firstTaxon = $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon]);
+        $secondTaxon = $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon]);
 
-        $this->manager->flush($taxon);
+        $this->taxonRepository->add($firstTaxon);
+        $this->taxonRepository->add($secondTaxon);
     }
 
     /**
