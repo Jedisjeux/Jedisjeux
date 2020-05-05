@@ -125,7 +125,7 @@ class TaxonContext implements Context
 
         $this->taxonFactory->create(['name' => $taxonName, 'parent' => $taxon, 'public' => true]);
 
-        $this->manager->flush($taxon);
+        $this->manager->flush();
     }
 
     /**
@@ -139,7 +139,7 @@ class TaxonContext implements Context
         $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon, 'public' => true]);
         $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon, 'public' => true]);
 
-        $this->manager->flush($taxon);
+        $this->manager->flush();
     }
 
     /**
@@ -153,7 +153,7 @@ class TaxonContext implements Context
         $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon]);
         $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon]);
 
-        $this->manager->flush($taxon);
+        $this->manager->flush();
     }
 
     /**
@@ -167,7 +167,7 @@ class TaxonContext implements Context
         $this->taxonFactory->create(['name' => $firstTaxonName, 'parent' => $taxon, 'public' => true]);
         $this->taxonFactory->create(['name' => $secondTaxonName, 'parent' => $taxon, 'public' => true]);
 
-        $this->manager->flush($taxon);
+        $this->manager->flush();
     }
 
     /**
@@ -182,7 +182,7 @@ class TaxonContext implements Context
 
         $this->taxonFactory->create(['name' => $name, 'parent' => $taxon, 'public' => $public]);
 
-        $this->manager->flush($taxon);
+        $this->manager->flush();
     }
 
     /**

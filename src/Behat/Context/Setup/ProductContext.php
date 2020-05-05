@@ -32,35 +32,28 @@ class ProductContext implements Context
     /**
      * @var SharedStorageInterface
      */
-    protected $sharedStorage;
+    private $sharedStorage;
 
     /**
      * @var ProductExampleFactory
      */
-    protected $productFactory;
+    private $productFactory;
 
     /**
      * @var FactoryInterface
      */
-    protected $productVariantFactory;
+    private $productVariantFactory;
 
     /**
      * @var RepositoryInterface
      */
-    protected $productRepository;
+    private $productRepository;
 
     /**
      * @var EntityManagerInterface
      */
-    protected $manager;
+    private $manager;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ProductExampleFactory  $productFactory
-     * @param FactoryInterface       $productVariantFactory
-     * @param RepositoryInterface    $productRepository
-     * @param EntityManagerInterface $manager
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ProductExampleFactory $productFactory,
@@ -282,7 +275,7 @@ class ProductContext implements Context
         }
     }
 
-    private function createProduct(array $options)
+    private function createProduct(array $options): void
     {
         /** @var Product $product */
         $product = $this->productFactory->create($options);
@@ -291,23 +284,12 @@ class ProductContext implements Context
         $this->sharedStorage->set('product', $product);
     }
 
-    /**
-     * @param ProductInterface $product
-     * @param string $productVariantName
-     * @param string $code
-     * @param int $position
-     *
-     * @return ProductVariantInterface
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
     private function createProductVariant(
         ProductInterface $product,
         $productVariantName,
         $code,
         $position = null
-    ) {
+    ): ProductVariantInterface {
         /** @var ProductVariantInterface $variant */
         $variant = $this->productVariantFactory->createNew();
 

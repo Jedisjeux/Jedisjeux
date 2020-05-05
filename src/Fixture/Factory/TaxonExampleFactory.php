@@ -81,7 +81,14 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
     /**
      * {@inheritdoc}
      */
-    public function create(array $options = [])
+    public function create(array $options = []): Taxon
+    {
+        $options = $this->optionsResolver->resolve($options);
+
+        return $this->createTaxon($options, $options['parent']);
+    }
+
+    public function createTaxon(array $options = [], ?TaxonInterface $parentTaxon = null): Taxon
     {
         $options = $this->optionsResolver->resolve($options);
 
@@ -96,7 +103,10 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $taxon->setPublic($options['public']);
         $taxon->setIconClass($options['icon_class']);
         $taxon->setColor($options['color']);
-        $taxon->setParent($options['parent']);
+
+        if (null !== $parentTaxon) {
+            $taxon->setParent($parentTaxon);
+        }
 
         // add translation for each defined locales
         foreach ($this->getLocales() as $localeCode) {
@@ -109,7 +119,7 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
         }
 
         foreach ($options['children'] as $childOptions) {
-            $taxon->addChild($this->create($childOptions));
+            $this->createTaxon($childOptions, $taxon);
         }
 
         return $taxon;
