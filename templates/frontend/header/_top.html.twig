@@ -93,7 +93,7 @@
                                             {{ 'app.ui.my_game_lists'|trans }}
                                         </a></li>
                                     <li>
-                                        <a href="{{ path('app_frontend_account_games_library') }}">
+                                        <a href="{{ path('app_frontend_user_games_library', {'username': app.user.usernameCanonical }) }}">
                                             <i class="fa fa-th"></i>
                                             {{ 'app.ui.my_virtual_game_library'|trans }}
                                         </a>
