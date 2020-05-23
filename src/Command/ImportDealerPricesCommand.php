@@ -12,19 +12,21 @@
 namespace App\Command;
 
 use App\Command\Helper\ProgressBarCreator;
-use App\Entity\Product;
 use App\Entity\Dealer;
 use App\Entity\DealerPrice;
+use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Behat\Transliterator\Transliterator;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 class ImportDealerPricesCommand extends Command
 {
@@ -113,32 +115,26 @@ EOT
     protected function interact(InputInterface $input, OutputInterface $output)
     {
         if (!$input->getArgument('dealer')) {
-            $dealer = $this->getHelper('dialog')->askAndValidate(
+            /** @var QuestionHelper $helper */
+            $helper = $this->getHelper('question');
+            $question = new Question('Please enter a dealer code:');
+            $dealer = $helper->ask(
+                $input,
                 $output,
-                'Please enter a dealer code:',
-                function ($dealer) {
-                    if (empty($dealer)) {
-                        throw new \Exception('Dealer can not be empty');
-                    }
-
-                    return $dealer;
-                }
+                $question
             );
 
             $input->setArgument('dealer', $dealer);
         }
 
         if (!$input->getOption('filename')) {
-            $file = $this->getHelper('dialog')->askAndValidate(
+            /** @var QuestionHelper $helper */
+            $helper = $this->getHelper('question');
+            $question = new Question('Please enter a file path:');
+            $file = $helper->ask(
+                $input,
                 $output,
-                'Please enter a file path:',
-                function ($file) {
-                    if (empty($file)) {
-                        throw new \Exception('File can not be empty');
-                    }
-
-                    return $file;
-                }
+                $question
             );
 
             $input->setOption('filename', $file);
@@ -161,7 +157,7 @@ EOT
             $dealerPrice = $this->createOrReplaceDealerPrice($data, $dealer);
 
             if (null !== $dealerPrice->getProduct()) {
-                ++ $matchingCount;
+                ++$matchingCount;
             }
 
             if (!$this->manager->contains($dealerPrice)) {
@@ -210,9 +206,6 @@ EOT
     }
 
     /**
-     * @param array  $data
-     * @param Dealer $dealer
-     *
      * @return DealerPrice
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
@@ -293,9 +286,11 @@ EOT
                 case 'En cours de réappro':
                 case 'Rupture':
                 case 'indisponible':
+                case 'Indisponible':
                     $status = DealerPrice::STATUS_OUT_OF_STOCK;
                     break;
                 case 'Pr?commande':
+                case 'En précommande':
                 case 'prcommande' === preg_replace('/[^a-z]/', '', $rowData[3]):
                     $status = DealerPrice::STATUS_PRE_ORDER;
                     break;
@@ -322,8 +317,6 @@ EOT
     }
 
     /**
-     * @param array $data
-     *
      * @return Product|null
      *
      * @throws \Doctrine\ORM\NonUniqueResultException
