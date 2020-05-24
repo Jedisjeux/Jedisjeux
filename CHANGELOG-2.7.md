@@ -1,5 +1,9 @@
 ## Change Log
 
+### v2.7.3 (2020/05/23 12:46 +00:00)
+- [#515](https://github.com/Jedisjeux/Jedisjeux/pull/515) Fix/import dealer prices command dialog helpers (@loic425)
+- [#514](https://github.com/Jedisjeux/Jedisjeux/pull/514) Feature/use public link for user games library (@loic425)
+
 ### v2.7.2 (2020/05/17 13:34 +00:00)
 - [#513](https://github.com/Jedisjeux/Jedisjeux/pull/513) Fix game play images on xs screen (@loic425)
 

@@ -144,8 +144,10 @@ app:
         manage_topics: Gérer les sujets
         manage_year_awards: Gérer les récompenses annuelles
         material_rating: Note du matériel
+        max: Max
         max_duration: Durée max
         mechanisms: Mécanismes
+        min: Min
         min_average_rating: Moyenne des notes min
         min_duration: Durée min
         min_rating_count: Nombre de notes min
