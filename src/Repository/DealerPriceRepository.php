@@ -12,6 +12,7 @@
 namespace App\Repository;
 
 use App\Entity\Dealer;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
@@ -20,6 +21,20 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class DealerPriceRepository extends EntityRepository
 {
+    public function createListQueryBuilder(string $localeCode): QueryBuilder
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->leftjoin('o.product', 'product')
+            ->leftJoin('product.translations', 'translation', Join::WITH, 'translation.locale = :localeCode')
+            ->leftJoin('product.variants', 'variant', Join::WITH, 'variant.position = 0')
+            ->leftJoin('variant.images', 'image', Join::WITH, 'image.main = :main')
+            ->setParameter('localeCode', $localeCode)
+            ->setParameter('main', true);
+
+        return $queryBuilder;
+    }
+
     /**
      * @param Dealer $dealer
      */

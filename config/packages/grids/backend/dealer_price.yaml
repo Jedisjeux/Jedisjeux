@@ -5,21 +5,36 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%app.model.dealer_price.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: ["%locale%"]
             sorting:
                 url: desc
             fields:
+                image:
+                    type: twig
+                    label: sylius.ui.image
+                    path: product
+                    options:
+                        template: "backend/dealer_price/grid/field/image.html.twig"
+                product:
+                    type: twig
+                    label: sylius.ui.product
+                    options:
+                        template: "backend/dealer_price/grid/field/product.html.twig"
                 name:
                     type: string
                     label: sylius.ui.name
                     sortable: name
                 url:
-                    type: string
+                    type: twig
                     label: app.ui.path
                     sortable: ~
+                    options:
+                        template: "backend/dealer_price/grid/field/url.html.twig"
                 dealer:
                     type: string
                     label: app.ui.dealer
-
                 status:
                     type: twig
                     label: sylius.ui.status
@@ -33,6 +48,19 @@ sylius_grid:
                     label: sylius.ui.search
                     options:
                         fields: [name, barcode]
+                dealer:
+                    type: entity
+                    label: app.ui.dealer
+                    form_options:
+                        class: '%app.model.dealer.class%'
+                status:
+                    type: status
+                    form_options:
+                        label: sylius.ui.status
+                        statuses:
+                            sylius.ui.available: available
+                            sylius.ui.pre_order: pre_order
+                            sylius.ui.out_of_stock: out_of_stock
             actions:
                 item:
                     update:

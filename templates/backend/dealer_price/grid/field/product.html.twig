@@ -1,0 +1,3 @@
+{% if data.translation.name is defined %}
+    <a title="Voir la fiche" target="_blank" href="{{ path('sylius_frontend_product_show', { 'slug': data.slug }) }}">{{ data.translation.name }}</a>
+{% endif %}

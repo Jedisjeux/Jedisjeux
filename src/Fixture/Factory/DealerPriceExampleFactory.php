@@ -100,7 +100,7 @@ class DealerPriceExampleFactory extends AbstractExampleFactory implements Exampl
                 ]);
             })
 
-            ->setDefault('product', LazyOption::randomOne($this->productRepository))
+            ->setDefault('product', LazyOption::randomOneOrNull($this->productRepository, 50))
             ->setAllowedTypes('product', ['null', 'string', ProductInterface::class])
             ->setNormalizer('product', LazyOption::findOneBy($this->productRepository, 'code'))
 
