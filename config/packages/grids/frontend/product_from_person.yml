@@ -14,3 +14,5 @@ sylius_grid:
                             taxon: null
                             person: "expr:service('app.repository.person').findOneBySlug($slug)"
             limits: ~
+            sorting:
+                createdAt: desc

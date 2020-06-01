@@ -13,3 +13,5 @@ sylius_grid:
                             criteria: "expr:service('request_stack').getCurrentRequest().get('criteria', [])"
                             taxon: "expr:service('sylius.repository.taxon').findOneBySlug($slug, '%locale%')"
             limits: ~
+            sorting:
+                createdAt: desc
