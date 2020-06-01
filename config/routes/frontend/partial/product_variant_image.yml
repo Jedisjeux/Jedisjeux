@@ -12,7 +12,7 @@ app_frontend_partial_product_variant_image_latest:
         count: 3
 
 app_frontend_partial_product_variant_image_latest_by_person:
-    path: /latest/{count}
+    path: /latest-by-person/{count}
     methods: [GET]
     defaults:
         _controller: app.controller.product_variant_image:indexAction
@@ -22,5 +22,19 @@ app_frontend_partial_product_variant_image_latest_by_person:
                 method: findLatestByPersonId
                 arguments:
                     - '!!int $personId'
+                    - '!!int $count'
+        count: 3
+
+app_frontend_partial_product_variant_image_latest_by_taxon:
+    path: /latest-by-taxon/{count}
+    methods: [GET]
+    defaults:
+        _controller: app.controller.product_variant_image:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findLatestByTaxonId
+                arguments:
+                    - '!!int $taxonId'
                     - '!!int $count'
         count: 3

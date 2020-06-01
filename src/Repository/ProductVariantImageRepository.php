@@ -24,7 +24,7 @@ final class ProductVariantImageRepository extends EntityRepository
         $queryBuilder
             ->join('o.variant', 'variant')
             ->where('o.main = :main')
-            ->orderBy('variant.releasedAt', 'desc')
+            ->orderBy('variant.createdAt', 'desc')
             ->setMaxResults($count)
             ->setParameter('main', true)
         ;
@@ -46,7 +46,7 @@ final class ProductVariantImageRepository extends EntityRepository
                 'artist.id is not null',
                 'publisher.id is not null'
             ))
-            ->orderBy('variant.releasedAt', 'desc')
+            ->orderBy('variant.createdAt', 'desc')
             ->setMaxResults($count)
             ->setParameter('main', true)
             ->setParameter('person', $personId)
@@ -61,10 +61,10 @@ final class ProductVariantImageRepository extends EntityRepository
         $queryBuilder
             ->join('o.variant', 'variant')
             ->join('variant.product', 'product')
-            ->join('variant.taxon', 'taxon')
+            ->join('product.taxons', 'taxon')
             ->where('o.main = :main')
             ->andWhere('taxon = :taxon')
-            ->orderBy('variant.releasedAt', 'desc')
+            ->orderBy('variant.createdAt', 'desc')
             ->setMaxResults($count)
             ->setParameter('main', true)
             ->setParameter('taxon', $taxonId)
