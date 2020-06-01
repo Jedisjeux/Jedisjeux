@@ -1,5 +1,11 @@
 ## Change Log
 
+### v2.7.5 (2020/06/01 13:45 +00:00)
+- [#520](https://github.com/Jedisjeux/Jedisjeux/pull/520) Fix products list sorting (@loic425)
+- [#519](https://github.com/Jedisjeux/Jedisjeux/pull/519) Fix dynamic product banner (@loic425)
+- [#518](https://github.com/Jedisjeux/Jedisjeux/pull/518) Product association type fixture (@loic425)
+- [#517](https://github.com/Jedisjeux/Jedisjeux/pull/517) Dynamic product banner (@loic425)
+
 ### v2.7.4 (2020/05/24 12:54 +00:00)
 - [#516](https://github.com/Jedisjeux/Jedisjeux/pull/516) Feature/improve dealer prices grid (@loic425)
 
