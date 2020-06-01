@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace App\Fixture;
 
 use App\Fixture\Factory\ExampleFactoryInterface;
@@ -19,30 +10,17 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
- */
 abstract class AbstractResourceFixture implements FixtureInterface
 {
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
-    /**
-     * @var ExampleFactoryInterface
-     */
+    /** @var ExampleFactoryInterface */
     private $exampleFactory;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
-    /**
-     * @param ObjectManager           $objectManager
-     * @param ExampleFactoryInterface $exampleFactory
-     */
     public function __construct(ObjectManager $objectManager, ExampleFactoryInterface $exampleFactory)
     {
         $this->objectManager = $objectManager;
@@ -66,9 +44,6 @@ abstract class AbstractResourceFixture implements FixtureInterface
         ;
     }
 
-    /**
-     * @param array $options
-     */
     final public function load(array $options): void
     {
         $options = $this->optionsResolver->resolve($options);
@@ -111,9 +86,6 @@ abstract class AbstractResourceFixture implements FixtureInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $resourceNode
-     */
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode)
     {
         // empty
