@@ -30,6 +30,10 @@ sylius_frontend_partial_product_review:
     resource: "partial/product_review.yml"
     prefix: /products/{productId}/reviews
 
+app_frontend_partial_product_variant_image:
+    resource: "partial/product_variant_image.yml"
+    prefix: /product-variant-images
+
 app_partial_pub_banner:
     resource: 'partial/pub_banner.yml'
     prefix: /pub-banners

@@ -1,7 +1,12 @@
 <!-- header-container end -->
 <!-- banner start -->
 <!-- ================ -->
-<div class="banner border-clear light-translucent-bg" style="background-image:url('/assets/frontend/images/shop-banner-2.jpg');background-position: 50% 32%;">
+<div class="banner border-clear light-translucent-bg" style="background-image:url('{{ render(url('app_frontend_partial_product_variant_image_latest_by_person', {
+    'personId': person.id,
+    'template': 'frontend/product_variant_image/_background.html.twig',
+    'count': 1
+} ))
+}}');background-position: 50% 32%;">
     {% include 'frontend/product/indexByPerson/_breadcrumb.html.twig' %}
     <div class="container">
         <div class="row justify-content-lg-center">

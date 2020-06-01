@@ -1,0 +1,26 @@
+app_frontend_partial_product_variant_image_latest:
+    path: /latest/{count}
+    methods: [GET]
+    defaults:
+        _controller: app.controller.product_variant_image:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findLatest
+                arguments:
+                    - '!!int $count'
+        count: 3
+
+app_frontend_partial_product_variant_image_latest_by_person:
+    path: /latest/{count}
+    methods: [GET]
+    defaults:
+        _controller: app.controller.product_variant_image:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findLatestByPersonId
+                arguments:
+                    - '!!int $personId'
+                    - '!!int $count'
+        count: 3

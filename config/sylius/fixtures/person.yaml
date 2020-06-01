@@ -1,0 +1,31 @@
+sylius_fixtures:
+    suites:
+        default:
+            fixtures:
+                person:
+                    options:
+                        random: 100
+                        custom:
+                            -   first_name: "Reiner"
+                                last_name: "Knizia"
+                                website: "http://www.knizia.de"
+                                images:
+                                    - "tests/Resources/fixtures/people/reiner-knizia.jpg"
+                                    - "tests/Resources/fixtures/people/reiner-knizia-2.jpg"
+                                    - "tests/Resources/fixtures/people/reiner-knizia-5.jpg"
+                                description: |
+                                    Reiner Knizia est l'auteur le plus prolifique de jeux de société.
+                                    Il sort chaque année de nombreux jeux dont beaucoup de rééditions avec souvent quelques changements de thèmes.
+                                    Il est l'auteur de nombreux succés tels que Euphrat &amp; Tigris, Modern Art, Râ, Camelot.
+                                    Malgré son succès, Knizia n'a été consacré que très tard dans sa carrière : pour Keltis en 2008, une évolution d'un autre de ses succès, les citées perdues.
+                                    Sa spécialité est le mécanisme de "l'enchère". Certains diront même que tout ses jeux comportent au moins un soupçon d'enchère.
+                            -   first_name: "Wolfgang"
+                                last_name: "Kramer"
+                                images:
+                                    - "tests/Resources/fixtures/people/wolfgang-kramer.jpg"
+                            -   first_name: null
+                                last_name: "Hans im Glück"
+                            -   first_name: "Doris"
+                                last_name: "Matthäus"
+                            -   first_name: "Alan"
+                                last_name: "R. Moon"

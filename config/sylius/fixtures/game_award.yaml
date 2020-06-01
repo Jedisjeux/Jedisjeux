@@ -1,0 +1,10 @@
+sylius_fixtures:
+    suites:
+        default:
+            fixtures:
+                game_award:
+                    options:
+                        custom:
+                            - { name: "Spiel des Jahres", image: "tests/Resources/fixtures/awards/spiel-des-jahres.png" }
+                            - { name: "As d'or", image: "tests/Resources/fixtures/awards/as-or.jpeg" }
+                            - { name: "Deutscher Spiele Preis", image: null }

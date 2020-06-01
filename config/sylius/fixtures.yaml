@@ -1,0 +1,7 @@
+imports:
+    - { resource: 'fixtures/basic_configuration.yaml' }
+    - { resource: 'fixtures/user.yaml' }
+    - { resource: 'fixtures/person.yaml' }
+    - { resource: 'fixtures/product.yaml' }
+    - { resource: 'fixtures/game_award.yaml' }
+    - { resource: 'fixtures/other_configuration.yaml' }

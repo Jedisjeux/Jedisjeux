@@ -64,6 +64,7 @@ class GamePlayRepository extends EntityRepository
     public function createListQueryBuilder($locale, $authorId = null)
     {
         $queryBuilder = $this->createQueryBuilder('o')
+            ->distinct()
             ->addSelect('product')
             ->addSelect('variant')
             ->addSelect('productTranslation')
@@ -81,7 +82,6 @@ class GamePlayRepository extends EntityRepository
             ->leftJoin('topic.article', 'article')
             ->leftJoin('o.players', 'players')
             ->andWhere('productTranslation.locale = :locale')
-            ->groupBy('o.id')
             ->setParameter('locale', $locale)
             ->setParameter('main', true);
 
@@ -103,6 +103,7 @@ class GamePlayRepository extends EntityRepository
     public function createFrontendListQueryBuilder($locale, array $criteria = [], string $productSlug = null)
     {
         $queryBuilder = $this->createQueryBuilder('o')
+            ->distinct()
             ->addSelect('product')
             ->addSelect('variant')
             ->addSelect('productTranslation')
@@ -116,7 +117,6 @@ class GamePlayRepository extends EntityRepository
             ->leftJoin('o.topic', 'topic')
             ->leftJoin('topic.article', 'article')
             ->andWhere('productTranslation.locale = :locale')
-            ->groupBy('o.id')
             ->setParameter('locale', $locale)
             ->setParameter('main', true);
 

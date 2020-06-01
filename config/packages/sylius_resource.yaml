@@ -166,6 +166,7 @@ sylius_resource:
         app.product_variant_image:
             classes:
                 model: App\Entity\ProductVariantImage
+                repository: App\Repository\ProductVariantImageRepository
                 form: App\Form\Type\ProductVariantImageType
         app.year_award:
             classes:
