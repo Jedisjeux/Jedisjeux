@@ -1,0 +1,34 @@
+{% from 'macro/rating.html.twig' import rating %}
+
+<!-- header-container end -->
+<!-- banner start -->
+<!-- ================ -->
+<div class="banner border-clear light-translucent-bg" style="background-image:url('{% include 'frontend/product_variant_image/_background.html.twig' with {'resources': product.images } only %}');background-position: 50% 32%;">
+    {% include 'frontend/product/show/_breadcrumb.html.twig' %}
+    <div class="container">
+        <div class="row justify-content-lg-center">
+            <div class="col-lg-8 text-center pv-20">
+                <h2 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100" itemprop="name">{{ product.name }}</strong></h2>
+                {% if product.averageRating > 0 %}
+                    <div class="text-center" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                        <span style="font-size: 26px"> {{ rating(product.averageRating) }} {{ product.averageRating|round(1) }}</span> <small>/10</small> <small>({{ product.reviewCount }} {{ 'app.ui.ratings'|trans|lower }})</small>
+                        <meta itemprop="ratingValue" content="{{ product.averageRating|round(1) }}">
+                        <meta itemprop="bestRating" content="10">
+                        <meta itemprop="worstRating" content="1">
+                        <meta itemprop="ratingCount" content="{{ product.reviewCount }}">
+                        <meta itemprop="reviewCount" content="{{ product.commentedReviewCount }}">
+                    </div>
+                {% endif %}
+                <div class="separator object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
+                <div class="text-center object-non-visible"
+                     data-animation-effect="fadeIn"
+                     data-effect-delay="100"
+                     style="font-size: larger"
+                     itemprop="description">
+                    {{ product.shortDescription|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- banner end -->

@@ -5,8 +5,8 @@
 {% endset %}
 
 {% block content %}
-    {% include 'frontend/product/show/_breadcrumb.html.twig' %}
     <div itemscope itemtype="http://schema.org/Game">
+        {% include 'frontend/product/show/_banner.html.twig' %}
         {% include 'frontend/product/show/_main.html.twig' %}
         {% include 'frontend/product/show/_content.html.twig' %}
     </div>

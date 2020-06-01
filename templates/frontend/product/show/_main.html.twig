@@ -11,30 +11,6 @@
             <!-- main start -->
             <!-- ================ -->
             <div class="main col-12">
-
-                <!-- page-title start -->
-                <!-- ================ -->
-                <h1 class="page-title text-center" itemprop="name">{{ product.name }}</h1>
-                {% if product.averageRating > 0 %}
-                <div class="text-center" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-                    <span style="font-size: larger"> {{ rating(product.averageRating) }} {{ product.averageRating|round(1) }}</span> <small>/10</small> <small>({{ product.reviewCount }} {{ 'app.ui.ratings'|trans|lower }})</small>
-                    <meta itemprop="ratingValue" content="{{ product.averageRating|round(1) }}">
-                    <meta itemprop="bestRating" content="10">
-                    <meta itemprop="worstRating" content="1">
-                    <meta itemprop="ratingCount" content="{{ product.reviewCount }}">
-                    <meta itemprop="reviewCount" content="{{ product.commentedReviewCount }}">
-                </div>
-                {% endif %}
-                <div class="text-center">
-                    <div style="font-size: larger" itemprop="description">
-                        {{ product.shortDescription|raw }}
-                    </div>
-                </div>
-                <div class="separator with-icon">
-                    <i class="fa fa-shopping-bag bordered"></i>
-                </div>
-                <!-- page-title end -->
-
                 <div class="row">
                     <div class="col-lg-4 col-xl-5">
                         <!-- pills start -->
