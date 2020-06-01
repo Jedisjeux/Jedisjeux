@@ -1,0 +1,87 @@
+sylius_fixtures:
+    suites:
+        default:
+            fixtures:
+                year_award:
+                    options:
+                        random: 20
+                news_article:
+                    options:
+                        amount: 10
+                review_article:
+                    options:
+                        amount: 10
+                in_the_box_article:
+                    options:
+                        amount: 5
+                block:
+                    options:
+                        random: 40
+                product_box:
+                    options:
+                        random: 40
+                        custom:
+                            -
+                                product_variant: "Tigre_&_Euphrate"
+                                image: "tests/Resources/fixtures/boxes/box-euphrat-tigris.jpg"
+                            -
+                                product_variant: "Puerto_Rico"
+                                image: "tests/Resources/fixtures/boxes/box-puerto-rico.jpg"
+                            -
+                                product_variant: "Shogun"
+                                image: "tests/Resources/fixtures/boxes/box-shogun.jpg"
+                product_list:
+                    options:
+                        custom:
+                            -
+                                code: "game_library"
+                                owner: "loic_425@example.com"
+
+                            -
+                                code: "game_library"
+                                owner: "blue@example.com"
+                        random: 20
+                product_review:
+                    options:
+                        random: 200
+                product_video:
+                    options:
+                        custom:
+                            -
+                                path: "https://www.youtube-nocookie.com/embed/oyefFfCHIGs?rel=0"
+                game_play:
+                    options:
+                        random: 20
+                game_play_image:
+                    options:
+                        random: 40
+                player:
+                    options:
+                        random: 40
+                forum_topic:
+                    options:
+                        amount: 10
+                post:
+                    options:
+                        random: 20
+                notification:
+                    options:
+                        random: 40
+                dealer:
+                    options:
+                        random: 10
+                dealer_price:
+                    options:
+                        random: 20
+                redirection:
+                    options:
+                        random: 10
+                festival_list:
+                    options:
+                        random: 5
+                        custom:
+                            -
+                                name: Essen 2017
+                festival_list_item:
+                    options:
+                        random: 40

@@ -1,0 +1,96 @@
+sylius_fixtures:
+    suites:
+        default:
+            fixtures:
+                product:
+                    options:
+                        custom:
+                            -
+                                name: "Puerto Rico"
+                                status: "published"
+                                min_player_count: 2
+                                max_player_count: 5
+                                min_duration: 90
+                                max_duration: 90
+                                min_age: 12
+                                images:
+                                    - "tests/Resources/fixtures/products/covers/puerto-rico.jpg"
+                                short_description: |
+                                    <p>Le gouverneur de l'île de Puerto Rico reste à choisir.</p>
+                                    <p>Celui des joueurs qui aura démontré les richesses de son quartier deviendra Gouverneur de Puerto Rico.</p>
+                                created_at: "now"
+                            -
+                                name: "Râ"
+                                status: "published"
+                                min_player_count: 2
+                                max_player_count: 5
+                                min_duration: 90
+                                max_duration: 90
+                                min_age: 12
+                                designers:
+                                    - "reiner-knizia"
+                                images:
+                                    - "tests/Resources/fixtures/products/covers/ra.jpg"
+                                created_at: "now"
+                            -
+                                name: "Tigre & Euphrate"
+                                status: "published"
+                                min_player_count: 2
+                                max_player_count: 4
+                                min_age: 12
+                                min_duration: 90
+                                max_duration: 90
+                                designers:
+                                    - "reiner-knizia"
+                                artists:
+                                    - "doris-matthaus"
+                                publishers:
+                                    - "hans-im-gluck"
+                                images:
+                                    - "tests/Resources/fixtures/products/covers/tigre-euphrate.jpg"
+                                short_description: |
+                                    <p>Faites prospérer des villes, des fermes, des temples. Érigez, en l'honneur des dieux, des monuments imprenables. Mais sur la route du pouvoir suprême, bien des conflits armés vous opposeront à vos voisins !</p>
+                                created_at: "now"
+                            -
+                                name: "Shogun"
+                                status: "published"
+                                min_player_count: 3
+                                max_player_count: 5
+                                min_age: 12
+                                images:
+                                    - "tests/Resources/fixtures/products/covers/shogun.jpg"
+                                short_description: |
+                                    <p>Shogun est une version légèrement modifiée du jeu Wallenstein, sorti en 2002 chez le même éditeur. Le thème a changé mais les mécanismes sont quasi similaires à quelques points de règles près.</p>
+                                created_at: "now"
+                            -
+                                name: "Yamataï"
+                                status: "published"
+                                min_player_count: 2
+                                max_player_count: 4
+                                min_duration: 40
+                                max_duration: 40
+                                min_age: 13
+                                released_at: "first day of March 2017"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/products/covers/yamatai.jpg"
+                                short_description: |
+                                    <p>La reine Himiko a confié une mission prestigieuse à tous ses bâtisseurs : faire de la capitale de Yamataï la perle du royaume.</p>
+                                created_at: "now"
+                            -
+                                name: "Les aventuriers du rail : France"
+                                status: "published"
+                                min_player_count: 2
+                                max_player_count: 6
+                                min_duration: 60
+                                max_duration: 90
+                                min_age: 8
+                                released_at: "first day of January 2017"
+                                released_at_precision: "on-year"
+                                designers:
+                                    - "alan-r-moon"
+                                images:
+                                    - "tests/Resources/fixtures/products/covers/pic3707326.jpg"
+                game_product:
+                    options:
+                        amount: 80

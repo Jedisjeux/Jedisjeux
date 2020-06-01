@@ -1,0 +1,14 @@
+sylius_fixtures:
+    suites:
+        default:
+            listeners:
+                orm_purger: ~
+                logger: ~
+
+            fixtures:
+                taxon:
+                    options:
+                        custom:
+                            -
+                                code: "zones"
+                                name: "Zones"
