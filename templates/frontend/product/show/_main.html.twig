@@ -126,6 +126,17 @@
                             <hr>
                             {% include 'frontend/product/show/_awards.html.twig' %}
                         {% endif %}
+                        {% if product.boxContent is not null %}
+                            <h4 class="space-top">{{ 'app.ui.box_content'|trans }}</h4>
+                            <hr>
+                            <ul id="box-content" class="nav flex-column list-style-icons">
+                                {% for row in product.boxContent|split("\n") %}
+                                    <li class="nav-item">
+                                        <i class="fa fa-caret-right pr-10"></i>{{ row }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                         <hr>
                     </div>
                 </div>

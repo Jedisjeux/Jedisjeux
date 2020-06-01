@@ -247,7 +247,7 @@ class ShowPage extends SymfonyPage
             'files' => '#files',
             'game_plays' => '#game-plays',
             'mechanisms' => '#product-mechanisms',
-            'name' => 'h1.page-title',
+            'name' => 'h2.title',
             'publishers' => '#product-publishers',
             'reviews' => '#reviews .comments',
             'themes' => '#product-themes',
