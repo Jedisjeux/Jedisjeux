@@ -13,3 +13,5 @@ sylius_grid:
                             sorting: "expr:service('request_stack').getCurrentRequest().get('sorting', [])"
                             taxon: "expr:service('sylius.repository.taxon').findOneBySlug($slug, '%locale%')"
             limits: ~
+            sorting:
+                productCount: desc
