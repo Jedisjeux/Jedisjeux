@@ -12,3 +12,12 @@ sylius_fixtures:
                             -
                                 code: "zones"
                                 name: "Zones"
+                product_association_type:
+                    options:
+                        custom:
+                            -
+                                code: collection
+                                name: Collection
+                            -
+                                code: expansion
+                                name: Expansion
