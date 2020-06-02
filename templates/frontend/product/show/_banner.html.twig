@@ -1,9 +1,10 @@
 {% from 'macro/rating.html.twig' import rating %}
+{% set images = product.images.first ? [product.images.first] : [] %}
 
 <!-- header-container end -->
 <!-- banner start -->
 <!-- ================ -->
-<div class="banner border-clear light-translucent-bg" style="background-image:url('{% include 'frontend/product_variant_image/_background.html.twig' with {'resources': product.images } only %}');background-position: 50% 32%;">
+<div class="banner border-clear light-translucent-bg" style="background-image:url('{% include 'frontend/product_variant_image/_background.html.twig' with {'resources': images } only %}');background-position: 50% 32%;">
     {% include 'frontend/product/show/_breadcrumb.html.twig' %}
     <div class="container">
         <div class="row justify-content-lg-center">

@@ -239,7 +239,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             })
 
             ->setDefault('images', LazyOption::randomOnesImage(
-                __DIR__.'/../../../tests/Resources/fixtures/products/covers', 1
+                __DIR__.'/../../../tests/Resources/fixtures/products/covers', 2
             ))
 
             ->setDefault('main_taxon', null)
