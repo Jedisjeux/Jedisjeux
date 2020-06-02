@@ -72,7 +72,10 @@ sylius_fixtures:
                         random: 10
                 dealer_price:
                     options:
-                        random: 20
+                        random: 400
+                pub_banner:
+                    options:
+                        random: 2
                 redirection:
                     options:
                         random: 10

@@ -11,30 +11,6 @@
             <!-- main start -->
             <!-- ================ -->
             <div class="main col-12">
-
-                <!-- page-title start -->
-                <!-- ================ -->
-                <h1 class="page-title text-center" itemprop="name">{{ product.name }}</h1>
-                {% if product.averageRating > 0 %}
-                <div class="text-center" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-                    <span style="font-size: larger"> {{ rating(product.averageRating) }} {{ product.averageRating|round(1) }}</span> <small>/10</small> <small>({{ product.reviewCount }} {{ 'app.ui.ratings'|trans|lower }})</small>
-                    <meta itemprop="ratingValue" content="{{ product.averageRating|round(1) }}">
-                    <meta itemprop="bestRating" content="10">
-                    <meta itemprop="worstRating" content="1">
-                    <meta itemprop="ratingCount" content="{{ product.reviewCount }}">
-                    <meta itemprop="reviewCount" content="{{ product.commentedReviewCount }}">
-                </div>
-                {% endif %}
-                <div class="text-center">
-                    <div style="font-size: larger" itemprop="description">
-                        {{ product.shortDescription|raw }}
-                    </div>
-                </div>
-                <div class="separator with-icon">
-                    <i class="fa fa-shopping-bag bordered"></i>
-                </div>
-                <!-- page-title end -->
-
                 <div class="row">
                     <div class="col-lg-4 col-xl-5">
                         <!-- pills start -->
@@ -142,14 +118,31 @@
                     <div class="col-lg-8 col-xl-7 pv-30">
                         <h2 class="mt-4">{{ 'sylius.ui.description'|trans }}</h2>
                         {{ product.description|raw }}
-                        <h4 class="space-top">{{ 'app.ui.specifications'|trans }}</h4>
-                        <hr>
-                        {% include 'frontend/product/show/_specifications.html.twig' %}
-                        {% if product.hasYearAwards %}
-                            <h4 class="space-top">{{ 'app.ui.game_awards'|trans }}</h4>
-                            <hr>
-                            {% include 'frontend/product/show/_awards.html.twig' %}
-                        {% endif %}
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h4 class="space-top">{{ 'app.ui.specifications'|trans }}</h4>
+                                <hr>
+                                {% include 'frontend/product/show/_specifications.html.twig' %}
+                                {% if product.hasYearAwards %}
+                                    <h4 class="space-top">{{ 'app.ui.game_awards'|trans }}</h4>
+                                    <hr>
+                                    {% include 'frontend/product/show/_awards.html.twig' %}
+                                {% endif %}
+                            </div>
+                            <div class="col-md-4">
+                                {% if product.boxContent is not null %}
+                                    <h4 class="space-top">{{ 'app.ui.box_content'|trans }}</h4>
+                                    <hr>
+                                    <ul id="box-content" class="nav flex-column list-style-icons">
+                                        {% for row in product.boxContent|split("\n") %}
+                                            <li class="nav-item">
+                                                <i class="fa fa-caret-right pr-10"></i>{{ row }}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        </div>
                         <hr>
                     </div>
                 </div>

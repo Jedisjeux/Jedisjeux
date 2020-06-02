@@ -50,13 +50,6 @@ class DealerPriceExampleFactory extends AbstractExampleFactory implements Exampl
      */
     private $optionsResolver;
 
-    /**
-     * DealerPriceExampleFactory constructor.
-     *
-     * @param FactoryInterface    $dealerPriceFactory
-     * @param RepositoryInterface $productRepository
-     * @param RepositoryInterface $dealerRepository
-     */
     public function __construct(
         FactoryInterface $dealerPriceFactory,
         RepositoryInterface $productRepository,
@@ -66,7 +59,7 @@ class DealerPriceExampleFactory extends AbstractExampleFactory implements Exampl
         $this->productRepository = $productRepository;
         $this->dealerRepository = $dealerRepository;
 
-        $this->faker = \Faker\Factory::create('fr_FR');
+        $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -83,7 +76,7 @@ class DealerPriceExampleFactory extends AbstractExampleFactory implements Exampl
             })
 
             ->setDefault('price', function (Options $options) {
-                return $this->faker->randomNumber(3);
+                return $this->faker->randomNumber(4);
             })
 
             ->setDefault('url', function (Options $options) {

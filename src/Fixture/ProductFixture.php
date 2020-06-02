@@ -33,6 +33,7 @@ class ProductFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
+                ->scalarNode('code')->cannotBeEmpty()->end()
                 ->scalarNode('name')->cannotBeEmpty()->end()
                 ->scalarNode('short_description')->cannotBeEmpty()->end()
                 ->scalarNode('min_player_count')->cannotBeEmpty()->end()
@@ -44,6 +45,7 @@ class ProductFixture extends AbstractResourceFixture
                 ->scalarNode('released_at_precision')->cannotBeEmpty()->end()
                 ->scalarNode('created_at')->cannotBeEmpty()->end()
                 ->scalarNode('main_taxon')->cannotBeEmpty()->end()
+                ->scalarNode('box_content')->end()
                 ->arrayNode('images')->prototype('scalar')->end()->end()
                 ->arrayNode('designers')->prototype('scalar')->end()->end()
                 ->arrayNode('artists')->prototype('scalar')->end()->end()
