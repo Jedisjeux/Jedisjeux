@@ -14,7 +14,7 @@ sylius_fixtures:
                                 max_duration: 90
                                 min_age: 12
                                 images:
-                                    - "tests/Resources/fixtures/products/covers/puerto-rico.jpg"
+                                    - "tests/Resources/fixtures/products/covers/pic158548.jpg"
                                 short_description: |
                                     <p>Le gouverneur de l'île de Puerto Rico reste à choisir.</p>
                                     <p>Celui des joueurs qui aura démontré les richesses de son quartier deviendra Gouverneur de Puerto Rico.</p>
@@ -33,6 +33,7 @@ sylius_fixtures:
                                     - "tests/Resources/fixtures/products/covers/ra.jpg"
                                 created_at: "now"
                             -
+                                code: "Tigre_Euphrate"
                                 name: "Tigre & Euphrate"
                                 status: "published"
                                 min_player_count: 2
@@ -40,6 +41,22 @@ sylius_fixtures:
                                 min_age: 12
                                 min_duration: 90
                                 max_duration: 90
+                                box_content: |
+                                    1 plateau de jeu
+                                    153 tuiles de civilisation
+                                    8 tuiles de catastrophe
+                                    4 tuiles d'unification
+                                    4 tuiles de dynastie
+                                    6 monuments
+                                    16 dirigeants
+                                    140 marqueurs points de victoire
+                                    80 petits cubes en bois
+                                    60 grands cubes en bois
+                                    10 trésors
+                                    4 paravents
+                                    1 sac
+                                    1 aperçu du jeu
+                                    1 livret de règles
                                 designers:
                                     - "reiner-knizia"
                                 artists:
@@ -47,7 +64,7 @@ sylius_fixtures:
                                 publishers:
                                     - "hans-im-gluck"
                                 images:
-                                    - "tests/Resources/fixtures/products/covers/tigre-euphrate.jpg"
+                                    - "tests/Resources/fixtures/products/covers/pic130680.gif"
                                 short_description: |
                                     <p>Faites prospérer des villes, des fermes, des temples. Érigez, en l'honneur des dieux, des monuments imprenables. Mais sur la route du pouvoir suprême, bien des conflits armés vous opposeront à vos voisins !</p>
                                 created_at: "now"

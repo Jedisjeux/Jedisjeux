@@ -110,7 +110,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $product->setMinAge($options['min_age']);
         $product->setShortDescription($options['short_description']);
         $product->setDescription($options['description']);
-        $product->setBoxContent($options['box_content']);
+        $product->setBoxContent(null !== $options['box_content'] ? trim($options['box_content']) : null);
         $product->setStatus($options['status']);
         $product->setReleasedAt($options['released_at']);
         $product->setCreatedAt($options['created_at']);
