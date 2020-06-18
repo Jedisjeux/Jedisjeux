@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_editing_topic_posts:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\CustomerContext
+                - App\Tests\Behat\Context\Transform\TopicContext
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+
+                - App\Tests\Behat\Context\Setup\SecurityContext
+                - App\Tests\Behat\Context\Setup\CustomerContext
+                - App\Tests\Behat\Context\Setup\PostContext
+                - App\Tests\Behat\Context\Setup\TaxonContext
+                - App\Tests\Behat\Context\Setup\TopicContext
+
+                - App\Tests\Behat\Context\Ui\Frontend\NotificationContext
+                - App\Tests\Behat\Context\Ui\Frontend\PostContext
+            filters:
+                tags: "@editing_topic_posts && @ui"

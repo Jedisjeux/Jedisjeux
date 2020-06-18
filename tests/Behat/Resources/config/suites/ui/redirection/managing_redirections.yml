@@ -1,0 +1,16 @@
+default:
+    suites:
+        ui_managing_redirections:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\RedirectionContext
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+
+                - App\Tests\Behat\Context\Setup\SecurityContext
+                - App\Tests\Behat\Context\Setup\RedirectionContext
+
+                - App\Tests\Behat\Context\Ui\Backend\ManagingRedirectionsContext
+                - App\Tests\Behat\Context\Ui\Backend\NotificationContext
+            filters:
+                tags: "@managing_redirections && @ui"

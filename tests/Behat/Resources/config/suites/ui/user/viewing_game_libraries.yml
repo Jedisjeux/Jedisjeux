@@ -1,0 +1,16 @@
+default:
+    suites:
+        ui_viewing_game_libraries:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Setup\CustomerContext
+                - App\Tests\Behat\Context\Setup\ProductListContext
+                - App\Tests\Behat\Context\Setup\UserContext
+
+                - App\Tests\Behat\Context\Transform\CustomerContext
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+
+                - App\Tests\Behat\Context\Ui\Frontend\UserContext
+            filters:
+                tags: "@viewing_game_libraries && @ui"

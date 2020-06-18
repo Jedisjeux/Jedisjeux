@@ -1,0 +1,16 @@
+default:
+    suites:
+        ui_managing_festival_lists:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\FestivalListContext
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+
+                - App\Tests\Behat\Context\Setup\SecurityContext
+                - App\Tests\Behat\Context\Setup\FestivalListContext
+
+                - App\Tests\Behat\Context\Ui\Backend\ManagingFestivalListsContext
+                - App\Tests\Behat\Context\Ui\Backend\NotificationContext
+            filters:
+                tags: "@managing_festival_lists && @ui"

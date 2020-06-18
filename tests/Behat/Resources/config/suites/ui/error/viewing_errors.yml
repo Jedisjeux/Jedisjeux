@@ -1,0 +1,9 @@
+default:
+    suites:
+        ui_viewing_errors:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Ui\Frontend\ErrorContext
+            filters:
+                tags: "@viewing_errors && @ui"

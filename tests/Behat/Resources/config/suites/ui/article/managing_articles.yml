@@ -1,0 +1,22 @@
+default:
+    suites:
+        ui_managing_articles:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\ArticleContext
+                - App\Tests\Behat\Context\Transform\CustomerContext
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+
+                - App\Tests\Behat\Context\Setup\ArticleContext
+                - App\Tests\Behat\Context\Setup\CustomerContext
+                - App\Tests\Behat\Context\Setup\SecurityContext
+                - App\Tests\Behat\Context\Setup\TaxonContext
+                - App\Tests\Behat\Context\Setup\UserContext
+
+                - App\Tests\Behat\Context\Domain\NotificationContext
+
+                - App\Tests\Behat\Context\Ui\Backend\ManagingArticlesContext
+                - App\Tests\Behat\Context\Ui\Backend\NotificationContext
+            filters:
+                tags: "@managing_articles && @ui"

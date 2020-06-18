@@ -1,0 +1,13 @@
+default:
+    suites:
+        ui_customer_requesting_contact:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+
+                - App\Tests\Behat\Context\Setup\SecurityContext
+
+                - App\Tests\Behat\Context\Ui\Frontend\ContactContext
+            filters:
+                tags: "@requesting_contact && @ui"

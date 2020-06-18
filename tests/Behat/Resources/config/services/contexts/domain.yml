@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    App\Tests\Behat\Context\Domain\:
+        resource: '../../../../Context/Domain/*'
+        autowire: true
+        public: true

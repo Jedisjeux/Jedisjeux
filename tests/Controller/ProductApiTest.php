@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace tests\Controller;
+namespace App\Tests\Controller;
 
 use Lakion\ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Product\Model\ProductInterface;

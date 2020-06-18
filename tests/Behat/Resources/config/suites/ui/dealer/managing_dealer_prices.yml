@@ -1,0 +1,20 @@
+default:
+    suites:
+        ui_managing_dealer_prices:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\DealerContext
+                - App\Tests\Behat\Context\Transform\DealerPriceContext
+                - App\Tests\Behat\Context\Transform\ProductContext
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+
+                - App\Tests\Behat\Context\Setup\SecurityContext
+                - App\Tests\Behat\Context\Setup\DealerContext
+                - App\Tests\Behat\Context\Setup\DealerPriceContext
+                - App\Tests\Behat\Context\Setup\ProductContext
+
+                - App\Tests\Behat\Context\Ui\Backend\ManagingDealerPricesContext
+                - App\Tests\Behat\Context\Ui\Backend\NotificationContext
+            filters:
+                tags: "@managing_dealer_prices && @ui"

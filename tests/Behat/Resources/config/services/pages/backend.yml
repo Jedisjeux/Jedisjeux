@@ -1,0 +1,52 @@
+imports:
+    - { resource: backend/article.yml }
+    - { resource: backend/contact_request.yml }
+    - { resource: backend/customer.yml }
+    - { resource: backend/dashboard.yml }
+    - { resource: backend/dealer.yml }
+    - { resource: backend/dealer_price.yml }
+    - { resource: backend/festival_list.yml }
+    - { resource: backend/game_award.yml }
+    - { resource: backend/game_play.yml }
+    - { resource: backend/person.yml }
+    - { resource: backend/post.yml }
+    - { resource: backend/product.yml }
+    - { resource: backend/product_box.yml }
+    - { resource: backend/product_file.yml }
+    - { resource: backend/product_list.yml }
+    - { resource: backend/product_review.yml }
+    - { resource: backend/product_variant.yml }
+    - { resource: backend/redirection.yml }
+    - { resource: backend/taxon.yml }
+    - { resource: backend/topic.yml }
+    - { resource: backend/year_award.yml }
+
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: App\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+      app.behat.page.backend.crud.index:
+          class: App\Tests\Behat\Page\Backend\Crud\IndexPage
+          parent: app.behat.symfony_page
+          abstract: true
+          public: false
+          arguments:
+              - "@app.behat.table_accessor"
+
+      app.behat.page.backend.crud.create:
+          class: App\Tests\Behat\Page\Backend\Crud\CreatePage
+          parent: app.behat.symfony_page
+          abstract: true
+          public: false
+
+      app.behat.page.backend.crud.update:
+          class: App\Tests\Behat\Page\Backend\Crud\UpdatePage
+          parent: app.behat.symfony_page
+          abstract: true
+          public: false
