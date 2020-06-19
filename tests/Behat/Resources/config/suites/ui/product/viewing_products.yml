@@ -1,0 +1,29 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_viewing_products:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\CustomerContext
+                - App\Tests\Behat\Context\Transform\GameAwardContext
+                - App\Tests\Behat\Context\Transform\PersonContext
+                - App\Tests\Behat\Context\Transform\ProductAssociationTypeContext
+                - App\Tests\Behat\Context\Transform\ProductContext
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+                - App\Tests\Behat\Context\Transform\TaxonContext
+
+                - App\Tests\Behat\Context\Setup\GameAwardContext
+                - App\Tests\Behat\Context\Setup\PersonContext
+                - App\Tests\Behat\Context\Setup\ProductAssociationContext
+                - App\Tests\Behat\Context\Setup\ProductContext
+                - App\Tests\Behat\Context\Setup\ProductReviewContext
+                - App\Tests\Behat\Context\Setup\SecurityContext
+                - App\Tests\Behat\Context\Setup\TaxonContext
+                - App\Tests\Behat\Context\Setup\YearAwardContext
+
+                - App\Tests\Behat\Context\Ui\Frontend\ProductContext
+            filters:
+                tags: "@viewing_products && @ui"

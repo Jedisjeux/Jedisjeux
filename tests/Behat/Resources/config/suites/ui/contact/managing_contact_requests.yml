@@ -1,0 +1,15 @@
+default:
+    suites:
+        ui_managing_contact_requests:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+
+                - App\Tests\Behat\Context\Setup\ContactRequestContext
+                - App\Tests\Behat\Context\Setup\SecurityContext
+
+                - App\Tests\Behat\Context\Ui\Backend\ManagingContactRequestsContext
+                - App\Tests\Behat\Context\Ui\Backend\NotificationContext
+            filters:
+                tags: "@managing_contact_requests && @ui"

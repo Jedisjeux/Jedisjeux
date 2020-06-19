@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_viewing_people:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\PersonContext
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+
+                - App\Tests\Behat\Context\Setup\SecurityContext
+                - App\Tests\Behat\Context\Setup\PersonContext
+                - App\Tests\Behat\Context\Setup\TaxonContext
+
+                - App\Tests\Behat\Context\Ui\Frontend\PersonContext
+            filters:
+                tags: "@viewing_people && @ui"

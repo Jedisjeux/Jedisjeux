@@ -1,0 +1,19 @@
+default:
+    suites:
+        ui_viewing_product_videos:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\CustomerContext
+                - App\Tests\Behat\Context\Transform\ProductContext
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+
+                - App\Tests\Behat\Context\Setup\SecurityContext
+                - App\Tests\Behat\Context\Setup\CustomerContext
+                - App\Tests\Behat\Context\Setup\ProductContext
+                - App\Tests\Behat\Context\Setup\ProductVideoContext
+
+                - App\Tests\Behat\Context\Ui\Frontend\NotificationContext
+                - App\Tests\Behat\Context\Ui\Frontend\ProductContext
+            filters:
+                tags: "@viewing_product_videos && @ui"

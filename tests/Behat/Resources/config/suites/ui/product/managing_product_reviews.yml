@@ -1,0 +1,20 @@
+default:
+    suites:
+        ui_managing_product_reviews:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\CustomerContext
+                - App\Tests\Behat\Context\Transform\ProductContext
+                - App\Tests\Behat\Context\Transform\ProductReviewContext
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+
+                - App\Tests\Behat\Context\Setup\SecurityContext
+                - App\Tests\Behat\Context\Setup\CustomerContext
+                - App\Tests\Behat\Context\Setup\ProductContext
+                - App\Tests\Behat\Context\Setup\ProductReviewContext
+
+                - App\Tests\Behat\Context\Ui\Backend\ManagingProductReviewsContext
+                - App\Tests\Behat\Context\Ui\Backend\NotificationContext
+            filters:
+                tags: "@managing_product_reviews && @ui"

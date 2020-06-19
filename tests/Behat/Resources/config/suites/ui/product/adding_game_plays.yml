@@ -1,0 +1,16 @@
+default:
+    suites:
+        ui_adding_game_plays:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\ProductContext
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+
+                - App\Tests\Behat\Context\Setup\SecurityContext
+                - App\Tests\Behat\Context\Setup\ProductContext
+
+                - App\Tests\Behat\Context\Ui\Frontend\GamePlayContext
+                - App\Tests\Behat\Context\Ui\Frontend\NotificationContext
+            filters:
+                tags: "@adding_game_plays && @ui"

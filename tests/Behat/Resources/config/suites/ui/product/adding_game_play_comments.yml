@@ -1,0 +1,19 @@
+default:
+    suites:
+        ui_adding_game_play_comments:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\CustomerContext
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+
+                - App\Tests\Behat\Context\Setup\SecurityContext
+                - App\Tests\Behat\Context\Setup\CustomerContext
+                - App\Tests\Behat\Context\Setup\GamePlayContext
+                - App\Tests\Behat\Context\Setup\ProductContext
+                - App\Tests\Behat\Context\Setup\TaxonContext
+
+                - App\Tests\Behat\Context\Ui\Frontend\GamePlayPostContext
+                - App\Tests\Behat\Context\Ui\Frontend\NotificationContext
+            filters:
+                tags: "@adding_game_play_comments && @ui"

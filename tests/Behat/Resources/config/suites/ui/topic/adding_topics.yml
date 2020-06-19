@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_adding_topics:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\TaxonContext
+                - App\Tests\Behat\Context\Transform\TopicContext
+                - App\Tests\Behat\Context\Transform\CustomerContext
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+
+                - App\Tests\Behat\Context\Setup\SecurityContext
+                - App\Tests\Behat\Context\Setup\TopicContext
+                - App\Tests\Behat\Context\Setup\CustomerContext
+                - App\Tests\Behat\Context\Setup\TaxonContext
+
+                - App\Tests\Behat\Context\Ui\Frontend\TopicContext
+                - App\Tests\Behat\Context\Ui\Frontend\NotificationContext
+            filters:
+                tags: "@adding_topics && @ui"

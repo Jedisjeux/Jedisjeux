@@ -1,0 +1,18 @@
+default:
+    suites:
+        ui_managing_taxons:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\CustomerContext
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+                - App\Tests\Behat\Context\Transform\TaxonContext
+
+                - App\Tests\Behat\Context\Setup\SecurityContext
+                - App\Tests\Behat\Context\Setup\CustomerContext
+                - App\Tests\Behat\Context\Setup\TaxonContext
+
+                - App\Tests\Behat\Context\Ui\Backend\ManagingTaxonsContext
+                - App\Tests\Behat\Context\Ui\Backend\NotificationContext
+            filters:
+                tags: "@managing_taxons && @ui"

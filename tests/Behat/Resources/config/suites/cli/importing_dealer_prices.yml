@@ -1,0 +1,18 @@
+default:
+    suites:
+        cli_importing_dealer_prices:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\ProductContext
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+
+                - App\Tests\Behat\Context\Setup\DealerContext
+                - App\Tests\Behat\Context\Setup\DealerPriceContext
+                - App\Tests\Behat\Context\Setup\PriceListContext
+                - App\Tests\Behat\Context\Setup\ProductContext
+
+                - App\Tests\Behat\Context\Cli\CommandContext
+                - App\Tests\Behat\Context\Cli\DealerPriceContext
+            filters:
+                tags: "@importing_dealer_prices && @cli"

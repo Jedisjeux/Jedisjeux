@@ -1,0 +1,13 @@
+default:
+    suites:
+        ui_viewing_products_on_homepage:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+
+                - App\Tests\Behat\Context\Setup\ProductContext
+
+                - App\Tests\Behat\Context\Ui\Frontend\HomepageContext
+            filters:
+                tags: "@viewing_products_on_homepage && @ui"

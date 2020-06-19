@@ -1,0 +1,19 @@
+default:
+    suites:
+        ui_managing_topics:
+            contexts:
+                - App\Tests\Behat\Context\Hook\DoctrineORMContext
+
+                - App\Tests\Behat\Context\Transform\CustomerContext
+                - App\Tests\Behat\Context\Transform\SharedStorageContext
+                - App\Tests\Behat\Context\Transform\TopicContext
+
+                - App\Tests\Behat\Context\Setup\SecurityContext
+                - App\Tests\Behat\Context\Setup\CustomerContext
+                - App\Tests\Behat\Context\Setup\TopicContext
+                - App\Tests\Behat\Context\Setup\PostContext
+
+                - App\Tests\Behat\Context\Ui\Backend\ManagingTopicsContext
+                - App\Tests\Behat\Context\Ui\Backend\NotificationContext
+            filters:
+                tags: "@managing_topics && @ui"
