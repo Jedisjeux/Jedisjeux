@@ -1,2 +1,5 @@
+parameters:
+    locale: 'en_US'
+
 imports:
     - { resource: "../tests/Behat/Resources/config/services.yml" }

@@ -1,0 +1,18 @@
+app:
+    address:
+        create: L'adresse a bien été créée.
+        update: L'adresse a bien été mise à jour.
+        delete: L'adresse a bien été supprimée.
+sylius:
+    admin_user:
+        create: L'administrateur a bien été créé.
+        update: L'administrateur a bien été mis à jour.
+        delete: L'administrateur a bien été supprimé.
+    user:
+        change_password: Votre mot de passe a été mis à jour avec succès !
+    customer:
+        create: Le client a bien été créé.
+        update: Le client a bien été mis à jour.
+        delete: Le client a bien été supprimé.
+        update_profile: Votre profil a bien été mis à jour.
+        register: 'Merci pour votre inscription, vous allez recevoir un mail pour vérifier votre compte.'
