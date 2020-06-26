@@ -1,3 +1,9 @@
+parameters:
+    locale: 'fr_FR'
+    email_contact: 'contact@example.com'
+    email_name: 'Contact AppName'
+    email_sender: 'no-reply@example.com'
+
 imports:
     - { resource: services/_main.yaml }
     - { resource: services/analytic.yaml }
