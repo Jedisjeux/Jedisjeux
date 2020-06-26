@@ -1,5 +1,16 @@
+imports:
+    - { resource: "../tests/Behat/Resources/config/services.yml" }
+    - { resource: "../vendor/monofony/core-bundle/Resources/config/services_test.yaml" }
+
 parameters:
     locale: 'en_US'
 
-imports:
-    - { resource: "../tests/Behat/Resources/config/services.yml" }
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            $minkParameters: '@behat.mink.parameters'
+
+#    App\Tests\Behat\:
+#        resource: '../tests/Behat/*'
