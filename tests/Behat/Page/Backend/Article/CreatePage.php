@@ -11,14 +11,16 @@
 
 namespace App\Tests\Behat\Page\Backend\Article;
 
-use App\Tests\Behat\Page\Backend\Crud\CreatePage as BaseCreatePage;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractCreatePage;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class CreatePage extends BaseCreatePage
+class CreatePage extends AbstractCreatePage
 {
+    public function getRouteName(): string
+    {
+        return 'app_backend_article_create';
+    }
+
     /**
      * @param string $title
      *

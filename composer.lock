@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9350d46f668487e23ab32a2ef15aa1fe",
+    "content-hash": "0c78d12339202dadf92b895cef27421b",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -3585,6 +3585,45 @@
                 "transformation"
             ],
             "time": "2020-01-07T13:29:56+00:00"
+        },
+        {
+            "name": "monofony/admin-bundle",
+            "version": "v0.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Monofony/AdminBundle.git",
+                "reference": "73bcc702b2ca7ef5b797dce456908411e5a112f8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Monofony/AdminBundle/zipball/73bcc702b2ca7ef5b797dce456908411e5a112f8",
+                "reference": "73bcc702b2ca7ef5b797dce456908411e5a112f8",
+                "shasum": ""
+            },
+            "require": {
+                "monofony/core-bundle": "^0.2",
+                "php": "^7.2"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Monofony\\Bundle\\AdminBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "Recipe/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Monofony admin bundle.",
+            "time": "2020-05-07T08:55:17+00:00"
         },
         {
             "name": "monofony/core",

@@ -12,9 +12,14 @@
 namespace App\Tests\Behat\Page\Backend\ProductVariant;
 
 use App\Tests\Behat\Behaviour\NamesIt;
-use App\Tests\Behat\Page\Backend\Crud\CreatePage as BaseCreatePage;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractCreatePage;
 
-class CreatePage extends BaseCreatePage
+class CreatePage extends AbstractCreatePage
 {
     use NamesIt;
+
+    public function getRouteName(): string
+    {
+        return 'sylius_backend_product_variant_create';
+    }
 }

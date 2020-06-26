@@ -12,15 +12,20 @@
 namespace App\Tests\Behat\Page\Backend\Dealer;
 
 use App\Tests\Behat\Behaviour\NamesIt;
-use App\Tests\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractUpdatePage;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class UpdatePage extends BaseUpdatePage
+class UpdatePage extends AbstractUpdatePage
 {
     use NamesIt;
+
+    public function getRouteName(): string
+    {
+        return 'app_backend_dealer_update';
+    }
 
     /**
      * @param string $path

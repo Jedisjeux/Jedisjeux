@@ -17,4 +17,8 @@ use Behat\Mink\Exception\ElementNotFoundException;
 
 class CreatePageFromBgg extends CreatePage
 {
+    public function getRouteName(): string
+    {
+        return 'sylius_admin_product_from_bgg_new';
+    }
 }

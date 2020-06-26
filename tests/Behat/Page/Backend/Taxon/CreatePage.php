@@ -13,17 +13,20 @@ namespace App\Tests\Behat\Page\Backend\Taxon;
 
 use App\Tests\Behat\Behaviour\NamesIt;
 use App\Tests\Behat\Behaviour\SpecifiesItsCode;
-use App\Tests\Behat\Page\Backend\Crud\CreatePage as BaseCreatePage;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractCreatePage;
 
-class CreatePage extends BaseCreatePage
+class CreatePage extends AbstractCreatePage
 {
-    use NamesIt,
-        SpecifiesItsCode;
+    use NamesIt;
+    use SpecifiesItsCode;
+
+    public function getRouteName(): string
+    {
+        return 'sylius_backend_taxon_create';
+    }
 
     /**
-     * @param string|null $slug
-     *
      * @throws ElementNotFoundException
      */
     public function specifySlug(?string $slug): void

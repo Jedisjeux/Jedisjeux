@@ -11,13 +11,15 @@
 
 namespace App\Tests\Behat\Page\Backend\Person;
 
-use App\Tests\Behat\Page\Backend\Crud\CreatePage as BaseCreatePage;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractCreatePage;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class CreatePage extends BaseCreatePage
+class CreatePage extends AbstractCreatePage
 {
+    public function getRouteName(): string
+    {
+        return 'app_backend_person_create';
+    }
+
     /**
      * @param string $firstName
      */

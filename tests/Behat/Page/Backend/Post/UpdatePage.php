@@ -11,13 +11,18 @@
 
 namespace App\Tests\Behat\Page\Backend\Post;
 
-use App\Tests\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractUpdatePage;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class UpdatePage extends BaseUpdatePage
+class UpdatePage extends AbstractUpdatePage
 {
+    public function getRouteName(): string
+    {
+        return 'app_backend_post_update';
+    }
+
     /**
      * @param string $body
      */

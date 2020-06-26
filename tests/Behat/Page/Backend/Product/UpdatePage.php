@@ -13,22 +13,22 @@ namespace App\Tests\Behat\Page\Backend\Product;
 
 use App\Tests\Behat\Behaviour\NamesIt;
 use App\Tests\Behat\Behaviour\WorkflowActions;
-use App\Tests\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractUpdatePage;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class UpdatePage extends BaseUpdatePage
+class UpdatePage extends AbstractUpdatePage
 {
-    use NamesIt,
-        WorkflowActions;
+    use NamesIt;
+    use WorkflowActions;
+
+    public function getRouteName(): string
+    {
+        return 'sylius_admin_product_update';
+    }
 
     /**
-     * @param string $path
-     *
      * @throws ElementNotFoundException
      */
     public function attachImage(string $path): void
@@ -41,12 +41,10 @@ class UpdatePage extends BaseUpdatePage
 
         $imageForm = $this->getLastImageElement();
 
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
     }
 
     /**
-     * @return int
-     *
      * @throws ElementNotFoundException
      */
     public function countImages(): int
@@ -81,8 +79,6 @@ class UpdatePage extends BaseUpdatePage
     }
 
     /**
-     * @return NodeElement
-     *
      * @throws ElementNotFoundException
      */
     private function getLastImageElement(): NodeElement

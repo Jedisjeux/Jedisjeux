@@ -12,14 +12,18 @@
 namespace App\Tests\Behat\Page\Backend\ProductBox;
 
 use App\Tests\Behat\Behaviour\WorkflowActions;
-use App\Tests\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
-use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractUpdatePage;
 use Webmozart\Assert\Assert;
 
-class UpdatePage extends BaseUpdatePage
+class UpdatePage extends AbstractUpdatePage
 {
     use WorkflowActions;
+
+    public function getRouteName(): string
+    {
+        return 'app_backend_product_box_update';
+    }
 
     /**
      * @param string $path

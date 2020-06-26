@@ -12,9 +12,14 @@
 namespace App\Tests\Behat\Page\Backend\GameAward;
 
 use App\Tests\Behat\Behaviour\NamesIt;
-use App\Tests\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractUpdatePage;
 
-class UpdatePage extends BaseUpdatePage
+class UpdatePage extends AbstractUpdatePage
 {
     use NamesIt;
+
+    public function getRouteName(): string
+    {
+        return 'app_backend_game_award_update';
+    }
 }

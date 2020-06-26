@@ -13,9 +13,6 @@ namespace App\Tests\Behat\Page\Backend;
 
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class DashboardPage extends SymfonyPage
 {
     /**

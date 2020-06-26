@@ -13,4 +13,8 @@ namespace App\Tests\Behat\Page\Backend\Taxon;
 
 class IndexByParentPage extends IndexPage
 {
+    public function getRouteName(): string
+    {
+        return 'sylius_backend_taxon_index_by_parent';
+    }
 }

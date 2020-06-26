@@ -14,11 +14,16 @@ declare(strict_types=1);
 namespace App\Tests\Behat\Page\Backend\Customer;
 
 use App\Tests\Behat\Behaviour\Toggles;
-use App\Tests\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractUpdatePage;
 
-class UpdatePage extends BaseUpdatePage
+class UpdatePage extends AbstractUpdatePage
 {
     use Toggles;
+
+    public function getRouteName(): string
+    {
+        return 'sylius_backend_customer_update';
+    }
 
     /**
      * @param null|string $email

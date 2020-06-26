@@ -51,7 +51,6 @@ return [
     Karser\Recaptcha3Bundle\KarserRecaptcha3Bundle::class => ['all' => true],
     Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
     Presta\SitemapBundle\PrestaSitemapBundle::class => ['all' => true],
-    // Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
-    // FOS\OAuthServerBundle\FOSOAuthServerBundle::class => ['all' => true],
     Monofony\Bundle\CoreBundle\MonofonyCoreBundle::class => ['all' => true],
+    Monofony\Bundle\AdminBundle\MonofonyAdminBundle::class => ['all' => true],
 ];

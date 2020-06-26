@@ -14,3 +14,6 @@ services:
 
 #    App\Tests\Behat\:
 #        resource: '../tests/Behat/*'
+
+    App\Tests\Behat\Page\Backend\:
+        resource: '../tests/Behat/Page/Backend/*'

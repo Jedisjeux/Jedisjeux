@@ -13,20 +13,20 @@ namespace App\Tests\Behat\Page\Backend\FestivalList;
 
 use App\Tests\Behat\Behaviour\DescribesIt;
 use App\Tests\Behat\Behaviour\NamesIt;
-use App\Tests\Behat\Page\Backend\Crud\CreatePage as BaseCreatePage;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractCreatePage;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class CreatePage extends BaseCreatePage
+class CreatePage extends AbstractCreatePage
 {
-    use NamesIt,
-        DescribesIt;
+    use NamesIt;
+    use DescribesIt;
+
+    public function getRouteName(): string
+    {
+        return 'app_backend_festival_list_create';
+    }
 
     /**
-     * @param string|null $startAt
-     *
      * @throws ElementNotFoundException
      */
     public function specifyStartAt(?string $startAt)
@@ -35,8 +35,6 @@ class CreatePage extends BaseCreatePage
     }
 
     /**
-     * @param string|null $endAt
-     *
      * @throws ElementNotFoundException
      */
     public function specifyEndAt(?string $endAt)
