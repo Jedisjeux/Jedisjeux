@@ -11,10 +11,18 @@
 
 namespace App\Fixture;
 
+use App\Fixture\Factory\ArticleReviewExampleFactory;
+use App\Fixture\Factory\ExampleFactoryInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class ArticleReviewFixture extends AbstractResourceFixture
 {
+    public function __construct(ObjectManager $objectManager, ArticleReviewExampleFactory $exampleFactory)
+    {
+        parent::__construct($objectManager, $exampleFactory);
+    }
+
     /**
      * {@inheritdoc}
      */

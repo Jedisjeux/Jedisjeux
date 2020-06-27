@@ -36,7 +36,7 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
     /**
      * @var NotificationFactory
      */
-    protected $factory;
+    protected $notificationFactory;
 
     /**
      * @var ObjectManager
@@ -46,33 +46,24 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
     /**
      * @var EntityRepository
      */
-    protected $repository;
+    protected $notificationRepository;
 
     /**
      * @var TranslatorInterface
      */
     protected $translator;
 
-    /**
-     * CreateTopicNotificationSubscriber constructor.
-     *
-     * @param CustomerContextInterface $customerContext
-     * @param NotificationFactory      $factory
-     * @param ObjectManager            $manager
-     * @param EntityRepository         $repository
-     * @param TranslatorInterface      $translator
-     */
     public function __construct(
         CustomerContextInterface $customerContext,
-        NotificationFactory $factory,
+        NotificationFactory $notificationFactory,
         ObjectManager $manager,
-        EntityRepository $repository,
+        EntityRepository $notificationRepository,
         TranslatorInterface $translator
     ) {
         $this->customerContext = $customerContext;
-        $this->factory = $factory;
+        $this->notificationFactory = $notificationFactory;
         $this->manager = $manager;
-        $this->repository = $repository;
+        $this->notificationRepository = $notificationRepository;
         $this->translator = $translator;
     }
 
@@ -107,14 +98,14 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
             }
 
             /** @var Notification $notification */
-            $notification = $this->repository->findOneBy([
+            $notification = $this->notificationRepository->findOneBy([
                 'recipient' => $follower,
                 'topic' => $topic,
                 'read' => 0,
             ]);
 
             if (null === $notification) {
-                $notification = $this->factory->createForPost($post, $follower);
+                $notification = $this->notificationFactory->createForPost($post, $follower);
                 $this->manager->persist($notification);
             }
 

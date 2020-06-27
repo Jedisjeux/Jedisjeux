@@ -14,6 +14,9 @@ namespace App\DependencyInjection\Compiler;
 use App\Doctrine\ORM\Driver;
 use App\EventListener\PasswordUpdaterListener;
 use App\Factory\ProductFactory;
+use App\Form\Type\ArticleType;
+use App\Form\Type\GamePlayType;
+use App\Form\Type\TopicType;
 use App\Security\Authorization\AuthorizationChecker;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -96,15 +99,15 @@ class ServicesPass implements CompilerPassInterface
      */
     protected function processFormTypes(ContainerBuilder $container)
     {
-        $articleFormTypeDefinition = $container->getDefinition('app.form.type.article');
+        $articleFormTypeDefinition = $container->getDefinition(ArticleType::class);
         $articleFormTypeDefinition
             ->addMethodCall('setManager', [new Reference('doctrine.orm.entity_manager')]);
 
-        $gamePlayFormTypeDefinition = $container->getDefinition('app.form.type.game_play');
+        $gamePlayFormTypeDefinition = $container->getDefinition(GamePlayType::class);
         $gamePlayFormTypeDefinition
             ->addMethodCall('setManager', [new Reference('doctrine.orm.entity_manager')]);
 
-        $topicFormTypeDefinition = $container->getDefinition('app.form.type.topic');
+        $topicFormTypeDefinition = $container->getDefinition(TopicType::class);
         $topicFormTypeDefinition
             ->addMethodCall('setAuthorizationChecker', [new Reference('security.authorization_checker')]);
     }

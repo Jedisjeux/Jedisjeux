@@ -11,10 +11,17 @@
 
 namespace App\Fixture;
 
+use App\Fixture\Factory\ContactRequestExampleFactory;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class ContactRequestFixture extends AbstractResourceFixture
 {
+    public function __construct(ObjectManager $objectManager, ContactRequestExampleFactory $exampleFactory)
+    {
+        parent::__construct($objectManager, $exampleFactory);
+    }
+
     /**
      * {@inheritdoc}
      */

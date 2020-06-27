@@ -11,10 +11,17 @@
 
 namespace App\Fixture;
 
+use App\Fixture\Factory\GameAwardExampleFactory;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class GameAwardFixture extends AbstractResourceFixture
 {
+    public function __construct(ObjectManager $objectManager, GameAwardExampleFactory $exampleFactory)
+    {
+        parent::__construct($objectManager, $exampleFactory);
+    }
+
     /**
      * {@inheritdoc}
      */
