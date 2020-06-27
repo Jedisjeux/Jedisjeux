@@ -13,10 +13,17 @@ declare(strict_types=1);
 
 namespace App\Fixture;
 
+use App\Fixture\Factory\TaxonExampleFactory;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class TaxonFixture extends AbstractResourceFixture
 {
+    public function __construct(ObjectManager $objectManager, TaxonExampleFactory $exampleFactory)
+    {
+        parent::__construct($objectManager, $exampleFactory);
+    }
+
     /**
      * {@inheritdoc}
      */
