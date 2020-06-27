@@ -11,12 +11,12 @@
 
 namespace App\Tests\Behat\Context\Setup;
 
-use App\Tests\Behat\Service\SharedStorageInterface;
 use App\Entity\Dealer;
 use App\Entity\PriceList;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use FriendsOfBehat\SymfonyExtension\Mink\MinkParameters;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 

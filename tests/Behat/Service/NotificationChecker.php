@@ -14,11 +14,8 @@ namespace App\Tests\Behat\Service;
 use App\Tests\Behat\Exception\NotificationExpectationMismatchException;
 use App\Tests\Behat\NotificationType;
 use App\Tests\Behat\Service\Accessor\NotificationAccessorInterface;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
 
-/**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class NotificationChecker implements NotificationCheckerInterface
 {
     /**
@@ -26,9 +23,6 @@ final class NotificationChecker implements NotificationCheckerInterface
      */
     private $notificationAccessor;
 
-    /**
-     * @param NotificationAccessorInterface $notificationAccessor
-     */
     public function __construct(NotificationAccessorInterface $notificationAccessor)
     {
         $this->notificationAccessor = $notificationAccessor;
@@ -51,22 +45,12 @@ final class NotificationChecker implements NotificationCheckerInterface
         );
     }
 
-    /**
-     * @param NotificationType $type
-     *
-     * @return bool
-     */
-    private function hasType(NotificationType $type)
+    private function hasType(NotificationType $type): bool
     {
         return $type === $this->notificationAccessor->getType();
     }
 
-    /**
-     * @param string $message
-     *
-     * @return bool
-     */
-    private function hasMessage($message)
+    private function hasMessage(string $message): bool
     {
         return false !== strpos($this->notificationAccessor->getMessage(), $message);
     }

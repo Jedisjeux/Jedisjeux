@@ -11,22 +11,19 @@
 
 namespace App\Tests\Behat\Context\Setup;
 
-use App\Tests\Behat\Service\SharedStorageInterface;
 use App\Entity\Person;
 use App\Entity\Product;
 use App\Fixture\Factory\ProductExampleFactory;
 use App\Formatter\StringInflector;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class ProductContext implements Context
 {
     /**

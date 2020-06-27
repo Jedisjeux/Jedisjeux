@@ -11,11 +11,10 @@
 
 namespace App\Tests\Behat\Context\Setup;
 
-use App\Tests\Behat\Service\SharedStorageInterface;
 use App\Entity\ContactRequest;
 use App\Fixture\Factory\ContactRequestExampleFactory;
-use App\Fixture\Factory\ExampleFactoryInterface;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class ContactRequestContext implements Context
@@ -35,11 +34,6 @@ class ContactRequestContext implements Context
      */
     private $contactRequestRepository;
 
-    /**
-     * @param SharedStorageInterface       $sharedStorage
-     * @param ContactRequestExampleFactory $contactRequestFactory
-     * @param RepositoryInterface          $contactRequestRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ContactRequestExampleFactory $contactRequestFactory,

@@ -14,10 +14,10 @@ namespace App\Tests\Behat\Context\Ui\Frontend;
 use App\Tests\Behat\Page\Frontend\Post\CreatePage;
 use App\Tests\Behat\Page\Frontend\Post\IndexPage;
 use App\Tests\Behat\Page\Frontend\Post\UpdatePage;
-use App\Tests\Behat\Service\SharedStorageInterface;
 use App\Entity\Post;
 use App\Entity\Topic;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 class PostContext implements Context
@@ -42,12 +42,6 @@ class PostContext implements Context
      */
     private $updatePage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param IndexPage              $indexPage
-     * @param CreatePage             $createPage
-     * @param UpdatePage             $updatePage
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         IndexPage $indexPage,

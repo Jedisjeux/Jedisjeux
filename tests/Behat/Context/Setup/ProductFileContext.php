@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Behat\Context\Setup;
 
-use App\Tests\Behat\Service\SharedStorageInterface;
 use App\Entity\ProductFile;
 use App\Fixture\Factory\ProductFileExampleFixture;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;

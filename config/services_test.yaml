@@ -1,5 +1,4 @@
 imports:
-    - { resource: "../tests/Behat/Resources/config/services.yml" }
     - { resource: "../vendor/monofony/core-bundle/Resources/config/services_test.yaml" }
 
 parameters:
@@ -11,9 +10,9 @@ services:
         autoconfigure: true
         bind:
             $minkParameters: '@behat.mink.parameters'
+            $spoolDirectory: '%kernel.cache_dir%/spool'
 
-#    App\Tests\Behat\:
-#        resource: '../tests/Behat/*'
+    App\Tests\Behat\:
+        resource: '../tests/Behat/*'
 
-    App\Tests\Behat\Page\Backend\:
-        resource: '../tests/Behat/Page/Backend/*'
+    Monofony\Bundle\CoreBundle\Tests\Behat\Service\SecurityServiceInterface: '@App\Tests\Behat\Service\SecurityService'

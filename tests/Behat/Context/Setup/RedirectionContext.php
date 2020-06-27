@@ -16,9 +16,6 @@ use App\Fixture\Factory\RedirectionExampleFactory;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class RedirectionContext implements Context
 {
     /**

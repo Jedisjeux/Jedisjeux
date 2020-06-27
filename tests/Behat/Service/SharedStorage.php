@@ -11,19 +11,14 @@
 
 namespace App\Tests\Behat\Service;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
+
 class SharedStorage implements SharedStorageInterface
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     private $clipboard = [];
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     private $latestKey;
 
     /**
@@ -41,7 +36,7 @@ class SharedStorage implements SharedStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function has($key)
+    public function has($key): bool
     {
         return isset($this->clipboard[$key]);
     }
@@ -49,7 +44,7 @@ class SharedStorage implements SharedStorageInterface
     /**
      * {@inheritdoc}
      */
-    public function set($key, $resource)
+    public function set($key, $resource): void
     {
         $this->clipboard[$key] = $resource;
         $this->latestKey = $key;

@@ -11,12 +11,12 @@
 
 namespace App\Tests\Behat\Context\Setup;
 
-use App\Tests\Behat\Service\SharedStorageInterface;
 use App\Entity\GameAward;
 use App\Entity\Product;
 use App\Entity\YearAward;
 use App\Fixture\Factory\YearAwardExampleFactory;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class YearAwardContext implements Context
@@ -36,11 +36,6 @@ class YearAwardContext implements Context
      */
     private $yearAwardRepository;
 
-    /**
-     * @param SharedStorageInterface  $sharedStorage
-     * @param YearAwardExampleFactory $yearAwardFactory
-     * @param RepositoryInterface     $yearAwardRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         YearAwardExampleFactory $yearAwardFactory,

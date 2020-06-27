@@ -11,7 +11,6 @@
 
 namespace App\Tests\Behat\Context\Setup;
 
-use App\Tests\Behat\Service\SharedStorageInterface;
 use App\Entity\Article;
 use App\Entity\GamePlay;
 use App\Entity\Post;
@@ -19,7 +18,7 @@ use App\Entity\Topic;
 use App\Fixture\Factory\PostExampleFactory;
 use App\Fixture\Factory\TopicExampleFactory;
 use Behat\Behat\Context\Context;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -53,13 +52,6 @@ class PostContext implements Context
      */
     protected $topicRepository;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param PostExampleFactory     $postFactory
-     * @param TopicExampleFactory    $topicFactory
-     * @param RepositoryInterface    $postRepository
-     * @param RepositoryInterface    $topicRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         PostExampleFactory $postFactory,

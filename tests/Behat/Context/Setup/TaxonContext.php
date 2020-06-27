@@ -11,16 +11,13 @@
 
 namespace App\Tests\Behat\Context\Setup;
 
-use App\Tests\Behat\Service\SharedStorageInterface;
 use App\Entity\Taxon;
-use App\Fixture\Factory\ExampleFactoryInterface;
 use App\Fixture\Factory\TaxonExampleFactory;
 use Behat\Behat\Context\Context;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Symfony\Component\Translation\PluralizationRules;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

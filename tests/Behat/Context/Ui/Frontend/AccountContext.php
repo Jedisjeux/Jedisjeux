@@ -19,8 +19,8 @@ use App\Tests\Behat\Page\Frontend\Account\ChangePasswordPage;
 use App\Tests\Behat\Page\Frontend\Account\DashboardPage;
 use App\Tests\Behat\Page\Frontend\Account\LoginPage;
 use App\Tests\Behat\Page\Frontend\Account\ProfileUpdatePage;
-use App\Tests\Behat\Service\NotificationCheckerInterface;
 use App\Formatter\StringInflector;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
 use Webmozart\Assert\Assert;
 
 final class AccountContext implements Context
@@ -50,13 +50,6 @@ final class AccountContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param DashboardPage                $dashboardPage
-     * @param ProfileUpdatePage            $profileUpdatePage
-     * @param ChangePasswordPage           $changePasswordPage
-     * @param LoginPage                    $loginPage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         DashboardPage $dashboardPage,
         ProfileUpdatePage $profileUpdatePage,

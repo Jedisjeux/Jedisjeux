@@ -12,12 +12,9 @@
 namespace App\Tests\Behat\Context\Ui\Backend;
 
 use App\Tests\Behat\NotificationType;
-use App\Tests\Behat\Service\NotificationCheckerInterface;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
 
-/**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- */
 final class NotificationContext implements Context
 {
     /**
@@ -25,9 +22,6 @@ final class NotificationContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(NotificationCheckerInterface $notificationChecker)
     {
         $this->notificationChecker = $notificationChecker;

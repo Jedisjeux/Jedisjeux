@@ -14,9 +14,9 @@ namespace App\Tests\Behat\Context\Ui\Backend;
 use App\Tests\Behat\NotificationType;
 use App\Tests\Behat\Page\Backend\ProductBox\IndexPage;
 use App\Tests\Behat\Page\Backend\ProductBox\UpdatePage;
-use App\Tests\Behat\Service\NotificationCheckerInterface;
 use App\Entity\ProductBox;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
@@ -37,11 +37,6 @@ class ManagingProductBoxesContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param IndexPage                    $indexPage
-     * @param UpdatePage                   $updatePage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         IndexPage $indexPage,
         UpdatePage $updatePage,
