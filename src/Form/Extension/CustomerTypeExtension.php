@@ -24,7 +24,7 @@ final class CustomerTypeExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addEventSubscriber(new AddUserFormSubscriber(AppUserType::class));
+        $builder->addEventSubscriber(new AddUserFormSubscriber());
     }
 
     /**

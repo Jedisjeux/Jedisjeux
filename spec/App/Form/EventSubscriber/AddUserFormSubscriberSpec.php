@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\App\Form\EventSubscriber;
 
+use App\Form\Type\User\AppUserType;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\User\Model\UserAwareInterface;
@@ -23,11 +24,6 @@ use Symfony\Component\Form\FormEvent;
 
 final class AddUserFormSubscriberSpec extends ObjectBehavior
 {
-    function let(): void
-    {
-        $this->beConstructedWith('\Fully\Qualified\ClassName');
-    }
-
     function it_is_event_subscriber_instance(): void
     {
         $this->shouldImplement(EventSubscriberInterface::class);
@@ -39,7 +35,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
     ): void {
         $event->getForm()->willReturn($form);
 
-        $form->add('user', '\Fully\Qualified\ClassName', Argument::type('array'))->shouldBeCalled();
+        $form->add('user', AppUserType::class, Argument::type('array'))->shouldBeCalled();
         $form->add('createUser', Argument::type('string'), Argument::type('array'))->shouldBeCalled();
 
         $this->preSetData($event);
@@ -65,7 +61,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         $event->setData($customer)->shouldBeCalled();
 
         $form->remove('user')->shouldBeCalled();
-        $form->add('user', '\Fully\Qualified\ClassName', Argument::type('array'))->shouldBeCalled();
+        $form->add('user', AppUserType::class, Argument::type('array'))->shouldBeCalled();
 
         $this->submit($event);
     }
