@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Behat\Service;
 
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\EmailCheckerInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Webmozart\Assert\Assert;

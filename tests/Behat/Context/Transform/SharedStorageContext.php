@@ -11,13 +11,10 @@
 
 namespace App\Tests\Behat\Context\Transform;
 
-use App\Tests\Behat\Service\SharedStorageInterface;
 use App\Formatter\StringInflector;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 
-/**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- */
 final class SharedStorageContext implements Context
 {
     /**
@@ -25,9 +22,6 @@ final class SharedStorageContext implements Context
      */
     private $sharedStorage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     */
     public function __construct(SharedStorageInterface $sharedStorage)
     {
         $this->sharedStorage = $sharedStorage;

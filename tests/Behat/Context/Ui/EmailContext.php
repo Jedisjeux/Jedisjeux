@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Tests\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use App\Tests\Behat\Service\SharedStorageInterface;
-use App\Tests\Behat\Service\EmailCheckerInterface;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\EmailCheckerInterface;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 final class EmailContext implements Context
@@ -30,10 +30,6 @@ final class EmailContext implements Context
      */
     private $emailChecker;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param EmailCheckerInterface  $emailChecker
-     */
     public function __construct(SharedStorageInterface $sharedStorage, EmailCheckerInterface $emailChecker)
     {
         $this->sharedStorage = $sharedStorage;

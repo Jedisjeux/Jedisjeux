@@ -10,11 +10,11 @@
 
 namespace App\Tests\Behat\Context\Setup;
 
-use App\Tests\Behat\Service\SharedStorageInterface;
 use App\Entity\ProductBox;
 use App\Entity\ProductInterface;
 use App\Fixture\Factory\ProductBoxExampleFactory;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -35,11 +35,6 @@ class ProductBoxContext implements Context
      */
     private $sharedStorage;
 
-    /**
-     * @param ProductBoxExampleFactory $productBoxFactory
-     * @param RepositoryInterface      $productBoxRepository
-     * @param SharedStorageInterface   $sharedStorage
-     */
     public function __construct(
         ProductBoxExampleFactory $productBoxFactory,
         RepositoryInterface $productBoxRepository,

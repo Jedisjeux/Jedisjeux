@@ -11,10 +11,10 @@
 
 namespace App\Tests\Behat\Context\Setup;
 
-use App\Tests\Behat\Service\SharedStorageInterface;
 use App\Entity\ProductVideo;
 use App\Fixture\Factory\ProductVideoExampleFixture;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -35,11 +35,6 @@ class ProductVideoContext implements Context
      */
     private $productVideoRepository;
 
-    /**
-     * @param SharedStorageInterface     $sharedStorage
-     * @param ProductVideoExampleFixture $productVideoFactory
-     * @param RepositoryInterface        $productVideoRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ProductVideoExampleFixture $productVideoFactory,

@@ -15,9 +15,9 @@ namespace App\Tests\Behat\Context\Ui\Frontend;
 
 use App\Tests\Behat\NotificationType;
 use App\Tests\Behat\Page\Frontend\Contact\ContactPage;
-use App\Tests\Behat\Service\NotificationCheckerInterface;
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
 use Webmozart\Assert\Assert;
 
 class ContactContext implements Context
@@ -32,10 +32,6 @@ class ContactContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param ContactPage                  $contactPage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         ContactPage $contactPage,
         NotificationCheckerInterface $notificationChecker

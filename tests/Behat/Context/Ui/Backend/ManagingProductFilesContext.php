@@ -14,9 +14,9 @@ namespace App\Tests\Behat\Context\Ui\Backend;
 use App\Tests\Behat\NotificationType;
 use App\Tests\Behat\Page\Backend\ProductFile\IndexPage;
 use App\Tests\Behat\Page\Backend\ProductFile\UpdatePage;
-use App\Tests\Behat\Service\NotificationCheckerInterface;
 use App\Entity\ProductFile;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
 use Webmozart\Assert\Assert;
 
 class ManagingProductFilesContext implements Context

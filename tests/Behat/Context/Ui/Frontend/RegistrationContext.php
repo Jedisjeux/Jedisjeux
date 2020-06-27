@@ -21,8 +21,8 @@ use App\Tests\Behat\Page\Frontend\Account\ProfileUpdatePage;
 use App\Tests\Behat\Page\Frontend\Account\RegisterPage;
 use App\Tests\Behat\Page\Frontend\Account\VerificationPage;
 use App\Tests\Behat\Page\Frontend\HomePage;
-use App\Tests\Behat\Service\NotificationCheckerInterface;
-use App\Tests\Behat\Service\SharedStorageInterface;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Webmozart\Assert\Assert;
@@ -69,16 +69,6 @@ class RegistrationContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param SharedStorageInterface       $sharedStorage
-     * @param DashboardPage                $dashboardPage
-     * @param HomePage                     $homePage
-     * @param LoginPage                    $loginPage
-     * @param RegisterPage                 $registerPage
-     * @param VerificationPage             $verificationPage
-     * @param ProfileUpdatePage            $profileUpdatePage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         DashboardPage $dashboardPage,

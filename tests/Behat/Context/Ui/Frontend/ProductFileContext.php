@@ -16,8 +16,8 @@ namespace App\Tests\Behat\Context\Ui\Frontend;
 use App\Tests\Behat\NotificationType;
 use App\Tests\Behat\Page\Frontend\ProductFile\CreatePage;
 use App\Tests\Behat\Page\Frontend\ProductFile\IndexPage;
-use App\Tests\Behat\Service\NotificationCheckerInterface;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
@@ -38,11 +38,6 @@ class ProductFileContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param IndexPage                    $indexPage
-     * @param CreatePage                   $createPage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         IndexPage $indexPage,
         CreatePage $createPage,

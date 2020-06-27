@@ -13,26 +13,18 @@ declare(strict_types=1);
 
 namespace App\Tests\Behat\Context\Hook;
 
-use App\Tests\Behat\Service\EmailCheckerInterface;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\EmailCheckerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 final class EmailSpoolContext implements Context
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $spoolDirectory;
 
-    /**
-     * @var Filesystem
-     */
+    /** @var Filesystem */
     private $filesystem;
 
-    /**
-     * @param EmailCheckerInterface $emailChecker
-     * @param Filesystem $filesystem
-     */
     public function __construct(EmailCheckerInterface $emailChecker, Filesystem $filesystem)
     {
         $this->spoolDirectory = $emailChecker->getSpoolDirectory();

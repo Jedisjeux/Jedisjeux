@@ -11,10 +11,10 @@
 
 namespace App\Tests\Behat\Context\Setup;
 
-use App\Tests\Behat\Service\SharedStorageInterface;
 use App\Entity\FestivalList;
 use App\Fixture\Factory\FestivalListExampleFactory;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -37,11 +37,6 @@ class FestivalListContext implements Context
      */
     private $festivalListRepository;
 
-    /**
-     * @param SharedStorageInterface     $sharedStorage
-     * @param FestivalListExampleFactory $festivalListFactory
-     * @param RepositoryInterface        $festivalListRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FestivalListExampleFactory $festivalListFactory,

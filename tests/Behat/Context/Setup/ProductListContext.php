@@ -11,7 +11,6 @@
 
 namespace App\Tests\Behat\Context\Setup;
 
-use App\Tests\Behat\Service\SharedStorageInterface;
 use App\Entity\Customer;
 use App\Entity\ProductList;
 use App\Entity\ProductListItem;
@@ -20,14 +19,10 @@ use App\Fixture\Factory\ProductExampleFactory;
 use App\Fixture\Factory\ProductListExampleFactory;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\User\Model\UserInterface;
-use Symfony\Component\ExpressionLanguage\Tests\Node\Obj;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class ProductListContext implements Context
 {
     /**

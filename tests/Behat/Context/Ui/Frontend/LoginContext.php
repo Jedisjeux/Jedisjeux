@@ -21,7 +21,7 @@ use App\Tests\Behat\Page\Frontend\Account\LoginPage;
 use App\Tests\Behat\Page\Frontend\Account\RegisterPage;
 use App\Tests\Behat\Page\Frontend\Account\RequestPasswordResetPage;
 use App\Tests\Behat\Page\Frontend\HomePage;
-use App\Tests\Behat\Service\NotificationCheckerInterface;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Webmozart\Assert\Assert;
 

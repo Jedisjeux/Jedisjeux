@@ -16,8 +16,8 @@ use App\Tests\Behat\Page\Backend\Taxon\CreatePage;
 use App\Tests\Behat\Page\Backend\Taxon\IndexByParentPage;
 use App\Tests\Behat\Page\Backend\Taxon\IndexPage;
 use App\Tests\Behat\Page\Backend\Taxon\UpdatePage;
-use App\Tests\Behat\Service\SharedStorageInterface;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -53,14 +53,6 @@ class ManagingTaxonsContext implements Context
      */
     private $sharedStorage;
 
-    /**
-     * @param IndexPage $indexPage
-     * @param IndexByParentPage $indexByParentPage
-     * @param CreatePage $createPage
-     * @param CreateForParentPage $createForParentPage
-     * @param UpdatePage $updatePage
-     * @param SharedStorageInterface $sharedStorage
-     */
     public function __construct(
         IndexPage $indexPage,
         IndexByParentPage $indexByParentPage,

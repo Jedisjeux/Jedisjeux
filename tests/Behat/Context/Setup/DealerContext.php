@@ -11,10 +11,10 @@
 
 namespace App\Tests\Behat\Context\Setup;
 
-use App\Tests\Behat\Service\SharedStorageInterface;
 use App\Entity\Dealer;
 use App\Fixture\Factory\DealerExampleFactory;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class DealerContext implements Context
@@ -34,11 +34,6 @@ class DealerContext implements Context
      */
     private $dealerRepository;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param DealerExampleFactory   $dealerFactory
-     * @param RepositoryInterface    $dealerRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         DealerExampleFactory $dealerFactory,

@@ -11,17 +11,14 @@
 
 namespace App\Tests\Behat\Context\Setup;
 
-use App\Tests\Behat\Service\SharedStorageInterface;
 use App\Fixture\Factory\ProductReviewExampleFactory;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class ProductReviewContext implements Context
 {
     /**
@@ -39,11 +36,6 @@ class ProductReviewContext implements Context
      */
     protected $productReviewRepository;
 
-    /**
-     * @param SharedStorageInterface      $sharedStorage
-     * @param ProductReviewExampleFactory $productReviewFactory
-     * @param RepositoryInterface         $productReviewRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ProductReviewExampleFactory $productReviewFactory,
