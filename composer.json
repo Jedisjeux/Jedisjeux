@@ -32,6 +32,7 @@
     "karser/karser-recaptcha3-bundle": "^0.1.3",
     "knplabs/doctrine-behaviors": "~1.1",
     "liip/imagine-bundle": "^2.1",
+    "monofony/admin-bundle": "^0.2.3",
     "monofony/core-bundle": "^0.2",
     "nelmio/cors-bundle": "^1.5",
     "presta/sitemap-bundle": "^2.1",

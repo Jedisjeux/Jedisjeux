@@ -11,8 +11,12 @@
 
 namespace App\Tests\Behat\Page\Backend\YearAward;
 
-use App\Tests\Behat\Page\Backend\Crud\IndexPage as BaseIndexPage;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractIndexPage;
 
-class IndexPage extends BaseIndexPage
+class IndexPage extends AbstractIndexPage
 {
+    public function getRouteName(): string
+    {
+        return 'app_backend_year_award_index';
+    }
 }

@@ -1,5 +1,4 @@
 imports:
-    - { resource: pages/backend.yml }
     - { resource: pages/frontend.yml }
 
 # Learn more about services, parameters and containers at

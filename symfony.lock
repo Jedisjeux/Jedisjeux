@@ -308,6 +308,9 @@
     "mockery/mockery": {
         "version": "1.2.0"
     },
+    "monofony/admin-bundle": {
+        "version": "v0.2.3"
+    },
     "monofony/core": {
         "version": "v0.2.3"
     },

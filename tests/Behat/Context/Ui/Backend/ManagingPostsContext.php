@@ -94,8 +94,8 @@ class ManagingPostsContext implements Context
     public function iDeletePost(Post $post)
     {
         $this->indexPage->deleteResourceOnPage([
-            'topic' => $post->getTopic(),
-            'author' => $post->getAuthor(),
+            'topic' => $post->getTopic()->getTitle(),
+            'author' => $post->getAuthor()->getEmail(),
         ]);
     }
 
@@ -115,7 +115,7 @@ class ManagingPostsContext implements Context
         $this->indexPage->open();
 
         Assert::true($this->indexPage->isSingleResourceOnPage([
-            'author' => $customer,
+            'author' => $customer->getEmail(),
             'topic' => $topic->getTitle(),
         ]));
     }
@@ -144,8 +144,8 @@ class ManagingPostsContext implements Context
     public function thereShouldBeNoPostAnymore(CustomerInterface $customer, Topic $topic)
     {
         Assert::false($this->indexPage->isSingleResourceOnPage([
-            'author' => $customer,
-            'topic' => $topic,
+            'author' => $customer->getEmail(),
+            'topic' => $topic->getTitle(),
         ]));
     }
 

@@ -13,20 +13,20 @@ namespace App\Tests\Behat\Page\Backend\Dealer;
 
 use App\Tests\Behat\Behaviour\NamesIt;
 use App\Tests\Behat\Behaviour\SpecifiesItsCode;
-use App\Tests\Behat\Page\Backend\Crud\CreatePage as BaseCreatePage;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractCreatePage;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class CreatePage extends BaseCreatePage
+class CreatePage extends AbstractCreatePage
 {
-    use SpecifiesItsCode,
-        NamesIt;
+    use SpecifiesItsCode;
+    use NamesIt;
+
+    public function getRouteName(): string
+    {
+        return 'app_backend_dealer_create';
+    }
 
     /**
-     * @param string $path
-     *
      * @throws ElementNotFoundException
      */
     public function attachImage(string $path): void

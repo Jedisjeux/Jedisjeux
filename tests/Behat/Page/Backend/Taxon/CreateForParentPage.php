@@ -13,4 +13,8 @@ namespace App\Tests\Behat\Page\Backend\Taxon;
 
 class CreateForParentPage extends CreatePage
 {
+    public function getRouteName(): string
+    {
+        return 'sylius_backend_taxon_create_for_parent';
+    }
 }

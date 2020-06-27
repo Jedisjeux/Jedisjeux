@@ -12,12 +12,17 @@
 namespace App\Tests\Behat\Page\Backend\Article;
 
 use App\Tests\Behat\Behaviour\WorkflowActions;
-use App\Tests\Behat\Page\Backend\Crud\UpdatePage as BaseUpdatePage;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractUpdatePage;
 
-class UpdatePage extends BaseUpdatePage
+class UpdatePage extends AbstractUpdatePage
 {
     use WorkflowActions;
+
+    public function getRouteName(): string
+    {
+        return 'app_backend_article_update';
+    }
 
     /**
      * @param string $title

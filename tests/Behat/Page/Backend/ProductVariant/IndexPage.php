@@ -11,8 +11,12 @@
 
 namespace App\Tests\Behat\Page\Backend\ProductVariant;
 
-use App\Tests\Behat\Page\Backend\Crud\IndexPage as BaseIndexPage;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractIndexPage;
 
-class IndexPage extends BaseIndexPage
+class IndexPage extends AbstractIndexPage
 {
+    public function getRouteName(): string
+    {
+        return 'sylius_backend_product_variant_index';
+    }
 }

@@ -11,19 +11,21 @@
 
 namespace App\Tests\Behat\Page\Backend\Product;
 
-use App\Tests\Behat\Behaviour\NamesIt;
-use App\Tests\Behat\Page\Backend\Crud\CreatePage as BaseCreatePage;
 use App\Entity\GameAward;
+use App\Tests\Behat\Behaviour\NamesIt;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractCreatePage;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class CreatePage extends BaseCreatePage
+class CreatePage extends AbstractCreatePage
 {
     use NamesIt;
+
+    public function getRouteName(): string
+    {
+        return 'sylius_admin_product_create';
+    }
 
     /**
      * @param string $slug
@@ -36,8 +38,6 @@ class CreatePage extends BaseCreatePage
     }
 
     /**
-     * @param string $path
-     *
      * @throws ElementNotFoundException
      */
     public function attachImage(string $path): void
@@ -50,13 +50,10 @@ class CreatePage extends BaseCreatePage
 
         $imageForm = $this->getLastImageElement();
 
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath . $path);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
     }
 
     /**
-     * @param string $path
-     * @param string $title
-     *
      * @throws ElementNotFoundException
      */
     public function addVideo(string $path, string $title)
@@ -70,9 +67,6 @@ class CreatePage extends BaseCreatePage
     }
 
     /**
-     * @param GameAward $gameAward
-     * @param string $year
-     *
      * @throws ElementNotFoundException
      */
     public function addAward(GameAward $gameAward, string $year)
@@ -134,8 +128,6 @@ class CreatePage extends BaseCreatePage
     }
 
     /**
-     * @return NodeElement
-     *
      * @throws ElementNotFoundException
      */
     private function getLastImageElement(): NodeElement

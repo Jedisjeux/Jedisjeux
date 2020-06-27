@@ -11,11 +11,15 @@
 
 namespace App\Tests\Behat\Page\Backend\FestivalList;
 
-use App\Tests\Behat\Page\Backend\Crud\IndexPage as BaseIndexPage;
+use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractIndexPage;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class IndexPage extends BaseIndexPage
+class IndexPage extends AbstractIndexPage
 {
+    public function getRouteName(): string
+    {
+        return 'app_backend_festival_list_index';
+    }
 }
