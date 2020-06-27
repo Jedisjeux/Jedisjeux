@@ -11,13 +11,17 @@
 
 namespace App\Fixture;
 
+use App\Fixture\Factory\FestivalListItemExampleFactory;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class FestivalListItemFixture extends AbstractResourceFixture
 {
+    public function __construct(ObjectManager $objectManager, FestivalListItemExampleFactory $exampleFactory)
+    {
+        parent::__construct($objectManager, $exampleFactory);
+    }
+
     /**
      * {@inheritdoc}
      */

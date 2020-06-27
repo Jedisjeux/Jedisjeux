@@ -11,13 +11,17 @@
 
 namespace App\Fixture;
 
+use App\Fixture\Factory\PersonExampleFactory;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Loïc Frémont <lc.fremont@gmail.com>
- */
 class PersonFixture extends AbstractResourceFixture
 {
+    public function __construct(ObjectManager $objectManager, PersonExampleFactory $exampleFactory)
+    {
+        parent::__construct($objectManager, $exampleFactory);
+    }
+
     /**
      * {@inheritdoc}
      */

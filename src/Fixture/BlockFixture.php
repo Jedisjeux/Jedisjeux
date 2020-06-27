@@ -11,13 +11,17 @@
 
 namespace App\Fixture;
 
+use App\Fixture\Factory\BlockExampleFactory;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Loïc Frémont <lc.fremont@gmail.com>
- */
 class BlockFixture extends AbstractResourceFixture
 {
+    public function __construct(ObjectManager $objectManager, BlockExampleFactory $exampleFactory)
+    {
+        parent::__construct($objectManager, $exampleFactory);
+    }
+
     /**
      * {@inheritdoc}
      */

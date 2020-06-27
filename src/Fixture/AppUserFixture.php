@@ -11,6 +11,8 @@
 
 namespace App\Fixture;
 
+use App\Fixture\Factory\AppUserExampleFactory;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
@@ -18,6 +20,11 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
  */
 class AppUserFixture extends AbstractResourceFixture
 {
+    public function __construct(ObjectManager $objectManager, AppUserExampleFactory $exampleFactory)
+    {
+        parent::__construct($objectManager, $exampleFactory);
+    }
+
     /**
      * {@inheritdoc}
      */

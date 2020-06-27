@@ -11,13 +11,17 @@
 
 namespace App\Fixture;
 
+use App\Fixture\Factory\DealerExampleFactory;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Loïc Frémont <lc.fremont@gmail.com>
- */
 class DealerFixture extends AbstractResourceFixture
 {
+    public function __construct(ObjectManager $objectManager, DealerExampleFactory $exampleFactory)
+    {
+        parent::__construct($objectManager, $exampleFactory);
+    }
+
     /**
      * {@inheritdoc}
      */

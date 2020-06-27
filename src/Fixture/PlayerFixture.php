@@ -11,13 +11,17 @@
 
 namespace App\Fixture;
 
+use App\Fixture\Factory\PlayerExampleFactory;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
 class PlayerFixture extends AbstractResourceFixture
 {
+    public function __construct(ObjectManager $objectManager, PlayerExampleFactory $exampleFactory)
+    {
+        parent::__construct($objectManager, $exampleFactory);
+    }
+
     /**
      * {@inheritdoc}
      */
