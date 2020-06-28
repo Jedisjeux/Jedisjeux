@@ -20,9 +20,11 @@ services:
         autowire: true      # Automatically injects dependencies in your services
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
+            $articleReviewFactory: '@sylius.factory.article_review'
             $cacheDir: '%kernel.cache_dir%'
             $environment: '%kernel.environment%'
             $locale: '%locale%'
+            $productReviewFactory: '@sylius.factory.product_review'
             $publicDir: '%kernel.project_dir%/public'
             $testsDir: '%kernel.project_dir%/tests'
 
@@ -58,69 +60,6 @@ services:
         arguments:
             - '@App\Fixture\TaxonFixture'
             - '@App\Fixture\TopicFixture'
-
-    App\Fixture\PostFixture:
-        arguments:
-            $exampleFactory: '@App\Fixture\Factory\PostExampleFactory'
-
-    App\Fixture\ProductFixture:
-        arguments:
-            $exampleFactory: '@App\Fixture\Factory\ProductExampleFactory'
-
-    App\Fixture\ProductBoxFixture:
-        arguments:
-            $exampleFactory: '@App\Fixture\Factory\ProductBoxExampleFactory'
-
-    App\Fixture\ProductListFixture:
-        arguments:
-            $exampleFactory: '@App\Fixture\Factory\ProductListExampleFactory'
-
-    App\Fixture\ProductReviewFixture:
-        arguments:
-            $exampleFactory: '@App\Fixture\Factory\ProductReviewExampleFactory'
-
-    App\Fixture\ProductVideoFixture:
-        arguments:
-            $exampleFactory: '@App\Fixture\Factory\ProductVideoExampleFixture'
-
-    App\Fixture\RedirectionFixture:
-        arguments:
-            $exampleFactory: '@App\Fixture\Factory\RedirectionExampleFactory'
-
-    App\Fixture\TaxonFixture:
-        arguments:
-            $exampleFactory: '@App\Fixture\Factory\TaxonExampleFactory'
-
-    App\Fixture\TopicFixture:
-        arguments:
-            $exampleFactory: '@App\Fixture\Factory\TopicExampleFactory'
-
-    App\Fixture\YearAwardFixture:
-        arguments:
-            $exampleFactory: '@App\Fixture\Factory\YearAwardExampleFactory'
-
-    App\Fixture\Factory\ArticleReviewExampleFactory:
-        arguments:
-            $articleReviewFactory: "@sylius.factory.article_review"
-
-    App\Fixture\Factory\ProductExampleFactory:
-        arguments:
-            $productFactory: "@sylius.factory.product"
-            $slugGenerator: "@sylius.generator.slug"
-
-    App\Fixture\Factory\ProductReviewExampleFactory:
-        arguments:
-            $productReviewFactory: "@sylius.factory.product_review"
-
-    App\Fixture\Factory\TaxonExampleFactory:
-        arguments:
-            $taxonRepository: "@sylius.repository.taxon"
-            $taxonSlugGenerator: "@sylius.generator.taxon_slug"
-            $localeCode: "%locale%"
-
-    App\Fixture\Factory\TopicExampleFactory:
-        arguments:
-            $topicFactory: "@app.factory.topic"
 
     # <!-- Forms filters -->
     App\Form\Filter\QueryFilterType:

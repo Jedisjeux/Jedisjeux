@@ -11,10 +11,17 @@
 
 namespace App\Fixture;
 
+use App\Fixture\Factory\ProductBoxExampleFactory;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class ProductBoxFixture extends AbstractResourceFixture
 {
+    public function __construct(ObjectManager $objectManager, ProductBoxExampleFactory $exampleFactory)
+    {
+        parent::__construct($objectManager, $exampleFactory);
+    }
+
     /**
      * {@inheritdoc}
      */

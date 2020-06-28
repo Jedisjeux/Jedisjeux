@@ -50,27 +50,14 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
      */
     private $optionsResolver;
 
-    /**
-     * @var string
-     */
-    private $localeCode;
-
-    /**
-     * @param FactoryInterface            $taxonFactory
-     * @param TaxonRepositoryInterface    $taxonRepository
-     * @param TaxonSlugGeneratorInterface $taxonSlugGenerator
-     * @param string                      $localeCode
-     */
     public function __construct(
         FactoryInterface $taxonFactory,
         TaxonRepositoryInterface $taxonRepository,
-        TaxonSlugGeneratorInterface $taxonSlugGenerator,
-        $localeCode
+        TaxonSlugGeneratorInterface $taxonSlugGenerator
     ) {
         $this->taxonFactory = $taxonFactory;
         $this->taxonRepository = $taxonRepository;
         $this->taxonSlugGenerator = $taxonSlugGenerator;
-        $this->localeCode = $localeCode;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
