@@ -14,15 +14,12 @@ namespace App\Tests\Behat\Context\Ui\Backend;
 use App\Tests\Behat\Page\Backend\Person\IndexPage;
 use App\Tests\Behat\Page\Backend\Person\UpdatePage;
 use App\Tests\Behat\Page\Backend\Person\CreatePage;
-use App\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use App\Entity\Person;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class ManagingPeopleContext implements Context
+final class ManagingPeopleContext implements Context
 {
     /**
      * @var IndexPage
@@ -44,20 +41,12 @@ class ManagingPeopleContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * ManagingPeopleContext constructor.
-     *
-     * @param IndexPage                    $indexPage
-     * @param CreatePage                   $createPage
-     * @param UpdatePage                   $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         IndexPage $indexPage,
         CreatePage $createPage,
         UpdatePage $updatePage,
-        CurrentPageResolverInterface $currentPageResolver)
-    {
+        CurrentPageResolverInterface $currentPageResolver
+    ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;

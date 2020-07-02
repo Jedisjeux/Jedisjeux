@@ -16,21 +16,13 @@ use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class DashboardContext implements Context
+final class DashboardContext implements Context
 {
     /**
      * @var DashboardPage
      */
     private $dashboardPage;
 
-    /**
-     * DashboardContext constructor.
-     *
-     * @param DashboardPage $dashboardPage
-     */
     public function __construct(DashboardPage $dashboardPage)
     {
         $this->dashboardPage = $dashboardPage;

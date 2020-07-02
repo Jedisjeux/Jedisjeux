@@ -17,7 +17,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
-class ManagingProductVariantsContext implements Context
+final class ManagingProductVariantsContext implements Context
 {
     /**
      * @var IndexPage
@@ -29,10 +29,6 @@ class ManagingProductVariantsContext implements Context
      */
     private $createPage;
 
-    /**
-     * @param IndexPage $indexPage
-     * @param CreatePage $createPage
-     */
     public function __construct(IndexPage $indexPage, CreatePage $createPage)
     {
         $this->indexPage = $indexPage;

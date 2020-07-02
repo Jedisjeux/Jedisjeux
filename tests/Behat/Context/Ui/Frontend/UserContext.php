@@ -17,7 +17,7 @@ use App\Entity\Customer;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
-class UserContext implements Context
+final class UserContext implements Context
 {
     /**
      * @var ShowPage

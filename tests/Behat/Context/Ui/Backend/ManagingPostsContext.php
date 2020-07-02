@@ -13,18 +13,14 @@ namespace App\Tests\Behat\Context\Ui\Backend;
 
 use App\Tests\Behat\Page\Backend\Post\IndexPage;
 use App\Tests\Behat\Page\Backend\Post\UpdatePage;
-use App\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
-use App\Entity\Customer;
 use App\Entity\Post;
 use App\Entity\Topic;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class ManagingPostsContext implements Context
+final class ManagingPostsContext implements Context
 {
     /**
      * @var IndexPage
@@ -41,16 +37,11 @@ class ManagingPostsContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * @param IndexPage                    $indexPage
-     * @param UpdatePage                   $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         IndexPage $indexPage,
         UpdatePage $updatePage,
-        CurrentPageResolverInterface $currentPageResolver)
-    {
+        CurrentPageResolverInterface $currentPageResolver
+    ) {
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;

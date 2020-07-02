@@ -21,7 +21,7 @@ use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
-class ProductFileContext implements Context
+final class ProductFileContext implements Context
 {
     /**
      * @var IndexPage

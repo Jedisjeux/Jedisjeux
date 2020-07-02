@@ -13,15 +13,15 @@ declare(strict_types=1);
 
 namespace App\Tests\Behat\Context\Ui\Frontend;
 
-use App\Tests\Behat\Page\Frontend\Account\ResetPasswordPage;
-use App\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Behat\Behat\Context\Context;
 use App\Tests\Behat\NotificationType;
 use App\Tests\Behat\Page\Frontend\Account\LoginPage;
 use App\Tests\Behat\Page\Frontend\Account\RegisterPage;
 use App\Tests\Behat\Page\Frontend\Account\RequestPasswordResetPage;
+use App\Tests\Behat\Page\Frontend\Account\ResetPasswordPage;
 use App\Tests\Behat\Page\Frontend\HomePage;
+use Behat\Behat\Context\Context;
 use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Webmozart\Assert\Assert;
 
@@ -62,15 +62,6 @@ final class LoginContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * @param HomePage                     $homePage
-     * @param LoginPage                    $loginPage
-     * @param RegisterPage                 $registerPage
-     * @param RequestPasswordResetPage     $requestPasswordResetPage
-     * @param ResetPasswordPage            $resetPasswordPage
-     * @param NotificationCheckerInterface $notificationChecker
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         HomePage $homePage,
         LoginPage $loginPage,

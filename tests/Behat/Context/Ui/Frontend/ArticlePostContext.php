@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of Jedisjeux.
  *
@@ -18,7 +19,7 @@ use App\Entity\Post;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
-class ArticlePostContext implements Context
+final class ArticlePostContext implements Context
 {
     /**
      * @var CreateForArticlePage
@@ -35,11 +36,6 @@ class ArticlePostContext implements Context
      */
     private $articleShowPage;
 
-    /**
-     * @param CreateForArticlePage $createPage
-     * @param UpdateForArticlePage $updatePage
-     * @param ArticlePage\ShowPage $articleShowPage
-     */
     public function __construct(
         CreateForArticlePage $createPage,
         UpdateForArticlePage $updatePage,

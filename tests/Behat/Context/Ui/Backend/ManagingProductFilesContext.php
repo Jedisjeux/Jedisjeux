@@ -19,7 +19,7 @@ use Behat\Behat\Context\Context;
 use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
 use Webmozart\Assert\Assert;
 
-class ManagingProductFilesContext implements Context
+final class ManagingProductFilesContext implements Context
 {
     /**
      * @var IndexPage
@@ -36,11 +36,6 @@ class ManagingProductFilesContext implements Context
      */
     private $notificationChecker;
 
-    /**
-     * @param IndexPage                    $indexPage
-     * @param UpdatePage                   $updatePage
-     * @param NotificationCheckerInterface $notificationChecker
-     */
     public function __construct(
         IndexPage $indexPage,
         UpdatePage $updatePage,

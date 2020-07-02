@@ -13,15 +13,12 @@ namespace App\Tests\Behat\Context\Ui\Backend;
 
 use App\Tests\Behat\Page\Backend\ProductList\IndexPage;
 use App\Tests\Behat\Page\Backend\ProductList\UpdatePage;
-use App\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use App\Entity\ProductList;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class ManagingProductListsContext implements Context
+final class ManagingProductListsContext implements Context
 {
     /**
      * @var IndexPage
@@ -38,18 +35,11 @@ class ManagingProductListsContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * ManagingPeopleContext constructor.
-     *
-     * @param IndexPage                    $indexPage
-     * @param UpdatePage                   $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         IndexPage $indexPage,
         UpdatePage $updatePage,
-        CurrentPageResolverInterface $currentPageResolver)
-    {
+        CurrentPageResolverInterface $currentPageResolver
+    ) {
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;

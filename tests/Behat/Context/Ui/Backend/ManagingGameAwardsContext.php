@@ -18,7 +18,7 @@ use App\Entity\GameAward;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
-class ManagingGameAwardsContext implements Context
+final class ManagingGameAwardsContext implements Context
 {
     /**
      * @var CreatePage
@@ -35,11 +35,6 @@ class ManagingGameAwardsContext implements Context
      */
     private $updatePage;
 
-    /**
-     * @param CreatePage $createPage
-     * @param IndexPage  $indexPage
-     * @param UpdatePage $updatePage
-     */
     public function __construct(CreatePage $createPage, IndexPage $indexPage, UpdatePage $updatePage)
     {
         $this->createPage = $createPage;

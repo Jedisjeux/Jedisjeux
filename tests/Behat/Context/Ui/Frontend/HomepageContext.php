@@ -15,7 +15,7 @@ use App\Tests\Behat\Page\Frontend\HomePage;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
-class HomepageContext implements Context
+final class HomepageContext implements Context
 {
     /**
      * @var HomePage

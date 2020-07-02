@@ -14,16 +14,13 @@ namespace App\Tests\Behat\Context\Ui\Backend;
 use App\Tests\Behat\Page\Backend\Dealer\IndexPage;
 use App\Tests\Behat\Page\Backend\Dealer\UpdatePage;
 use App\Tests\Behat\Page\Backend\Dealer\CreatePage;
-use App\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use App\Entity\Dealer;
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class ManagingDealersContext implements Context
+final class ManagingDealersContext implements Context
 {
     /**
      * @var IndexPage
@@ -45,14 +42,6 @@ class ManagingDealersContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * ManagingPeopleContext constructor.
-     *
-     * @param IndexPage                    $indexPage
-     * @param CreatePage                   $createPage
-     * @param UpdatePage                   $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         IndexPage $indexPage,
         CreatePage $createPage,

@@ -15,7 +15,7 @@ use App\Tests\Behat\Page\Backend\YearAward\IndexPage;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
-class ManagingYearAwardsContext implements Context
+final class ManagingYearAwardsContext implements Context
 {
     /**
      * @var IndexPage

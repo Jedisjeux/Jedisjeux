@@ -17,7 +17,7 @@ use App\Entity\ContactRequest;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
-class ManagingContactRequestsContext implements Context
+final class ManagingContactRequestsContext implements Context
 {
     /**
      * @var IndexPage
@@ -29,10 +29,6 @@ class ManagingContactRequestsContext implements Context
      */
     private $showPage;
 
-    /**
-     * @param IndexPage $indexPage
-     * @param ShowPage $showPage
-     */
     public function __construct(IndexPage $indexPage, ShowPage $showPage)
     {
         $this->indexPage = $indexPage;

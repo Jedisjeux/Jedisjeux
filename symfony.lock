@@ -605,9 +605,6 @@
     "sylius/registry": {
         "version": "v1.2.7"
     },
-    "sylius/resource": {
-        "version": "v1.2.7"
-    },
     "sylius/review": {
         "version": "v1.2.7"
     },

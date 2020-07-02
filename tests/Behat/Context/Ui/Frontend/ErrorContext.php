@@ -17,7 +17,7 @@ use Behat\Behat\Context\Context;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
-class ErrorContext implements Context
+final class ErrorContext implements Context
 {
     /**
      * @var ErrorPage
@@ -29,10 +29,6 @@ class ErrorContext implements Context
      */
     private $homePage;
 
-    /**
-     * @param ErrorPage $errorPage
-     * @param HomePage  $homePage
-     */
     public function __construct(ErrorPage $errorPage, HomePage $homePage)
     {
         $this->errorPage = $errorPage;
