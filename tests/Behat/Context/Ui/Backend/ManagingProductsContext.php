@@ -18,15 +18,12 @@ use App\Tests\Behat\Page\Backend\Product\CreatePage;
 use App\Entity\GameAward;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
-use App\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class ManagingProductsContext implements Context
+final class ManagingProductsContext implements Context
 {
     /**
      * @var IndexPage
@@ -53,22 +50,13 @@ class ManagingProductsContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * ManagingPeopleContext constructor.
-     *
-     * @param IndexPage                    $indexPage
-     * @param CreatePage                   $createPage
-     * @param CreatePageFromBgg            $createFromBggPage
-     * @param UpdatePage                   $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         IndexPage $indexPage,
         CreatePage $createPage,
         CreatePageFromBgg $createFromBggPage,
         UpdatePage $updatePage,
-        CurrentPageResolverInterface $currentPageResolver)
-    {
+        CurrentPageResolverInterface $currentPageResolver
+    ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->createFromBggPage = $createFromBggPage;

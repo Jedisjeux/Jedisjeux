@@ -16,17 +16,14 @@ use App\Tests\Behat\Page\Frontend\Article\IndexByTaxonPage;
 use App\Tests\Behat\Page\Frontend\Article\IndexPage;
 use App\Tests\Behat\Page\Frontend\Article\ShowPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
-use App\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use App\Entity\Article;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class ArticleContext implements Context
+final class ArticleContext implements Context
 {
     /**
      * @var ShowPage
@@ -53,13 +50,6 @@ class ArticleContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * @param ShowPage                     $showPage
-     * @param IndexPage                    $indexPage
-     * @param IndexByTaxonPage             $indexByTaxonPage
-     * @param IndexByProductPage           $indexByProductPage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         ShowPage $showPage,
         IndexPage $indexPage,

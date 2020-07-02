@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Behat\Context\Ui\Backend;
 
-use Behat\Behat\Context\Context;
 use App\Tests\Behat\Page\Backend\Customer\IndexPage;
 use App\Tests\Behat\Page\Backend\Customer\UpdatePage;
-use App\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
@@ -37,11 +37,6 @@ final class ManagingCustomersContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * @param IndexPage                    $indexPage
-     * @param UpdatePage                   $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         IndexPage $indexPage,
         UpdatePage $updatePage,

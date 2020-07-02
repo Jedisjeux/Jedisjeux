@@ -20,7 +20,7 @@ use Behat\Behat\Context\Context;
 use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
-class PostContext implements Context
+final class PostContext implements Context
 {
     /**
      * @var SharedStorageInterface

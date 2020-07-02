@@ -16,7 +16,7 @@ use App\Entity\GameAward;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
-class YearAwardContext implements Context
+final class YearAwardContext implements Context
 {
     /**
      * @var IndexPage

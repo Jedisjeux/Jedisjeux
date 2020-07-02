@@ -14,15 +14,12 @@ namespace App\Tests\Behat\Context\Ui\Backend;
 use App\Tests\Behat\Page\Backend\Redirection\IndexPage;
 use App\Tests\Behat\Page\Backend\Redirection\UpdatePage;
 use App\Tests\Behat\Page\Backend\Redirection\CreatePage;
-use App\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use App\Entity\Redirection;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class ManagingRedirectionsContext implements Context
+final class ManagingRedirectionsContext implements Context
 {
     /**
      * @var IndexPage
@@ -44,14 +41,6 @@ class ManagingRedirectionsContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * ManagingPeopleContext constructor.
-     *
-     * @param IndexPage                    $indexPage
-     * @param CreatePage                   $createPage
-     * @param UpdatePage                   $updatePage
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         IndexPage $indexPage,
         CreatePage $createPage,

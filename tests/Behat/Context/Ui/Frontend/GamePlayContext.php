@@ -20,7 +20,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
-class GamePlayContext implements Context
+final class GamePlayContext implements Context
 {
     /**
      * @var IndexPage
@@ -42,12 +42,6 @@ class GamePlayContext implements Context
      */
     private $updatePage;
 
-    /**
-     * @param IndexPage          $indexPage
-     * @param IndexByProductPage $indexByProductPage
-     * @param CreatePage         $createPage
-     * @param UpdatePage         $updatePage
-     */
     public function __construct(
         IndexPage $indexPage,
         IndexByProductPage $indexByProductPage,

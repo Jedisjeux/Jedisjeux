@@ -21,7 +21,7 @@ use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
-class ManagingTaxonsContext implements Context
+final class ManagingTaxonsContext implements Context
 {
     /**
      * @var IndexPage

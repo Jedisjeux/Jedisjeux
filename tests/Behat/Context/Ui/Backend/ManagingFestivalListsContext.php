@@ -11,16 +11,13 @@
 
 namespace App\Tests\Behat\Context\Ui\Backend;
 
+use App\Entity\FestivalList;
 use App\Tests\Behat\Page\Backend\FestivalList\CreatePage;
 use App\Tests\Behat\Page\Backend\FestivalList\IndexPage;
-use App\Entity\FestivalList;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class ManagingFestivalListsContext implements Context
+final class ManagingFestivalListsContext implements Context
 {
     /**
      * @var IndexPage
@@ -32,10 +29,6 @@ class ManagingFestivalListsContext implements Context
      */
     private $createPage;
 
-    /**
-     * @param IndexPage  $indexPage
-     * @param CreatePage $createPage
-     */
     public function __construct(IndexPage $indexPage, CreatePage $createPage)
     {
         $this->indexPage = $indexPage;

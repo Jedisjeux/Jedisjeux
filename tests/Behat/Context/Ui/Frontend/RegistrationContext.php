@@ -27,7 +27,7 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Webmozart\Assert\Assert;
 
-class RegistrationContext implements Context
+final class RegistrationContext implements Context
 {
     /**
      * @var SharedStorageInterface

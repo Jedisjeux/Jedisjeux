@@ -10,7 +10,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
-class ProductReviewContext implements Context
+final class ProductReviewContext implements Context
 {
     /**
      * @var IndexPage

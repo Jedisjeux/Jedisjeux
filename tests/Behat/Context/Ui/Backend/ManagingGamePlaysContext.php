@@ -13,18 +13,15 @@ namespace App\Tests\Behat\Context\Ui\Backend;
 
 use App\Tests\Behat\Page\Backend\GamePlay\IndexPage;
 use App\Tests\Behat\Page\Backend\GamePlay\UpdatePage;
-use App\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use App\Entity\Customer;
 use Behat\Behat\Context\Context;
+use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class ManagingGamePlaysContext implements Context
+final class ManagingGamePlaysContext implements Context
 {
     /**
      * @var IndexPage
@@ -46,20 +43,12 @@ class ManagingGamePlaysContext implements Context
      */
     private $currentPageResolver;
 
-    /**
-     * ManagingPeopleContext constructor.
-     *
-     * @param IndexPage                    $indexPage
-     * @param UpdatePage                   $updatePage
-     * @param RepositoryInterface          $gamePlayRepository
-     * @param CurrentPageResolverInterface $currentPageResolver
-     */
     public function __construct(
         IndexPage $indexPage,
         UpdatePage $updatePage,
         RepositoryInterface $gamePlayRepository,
-        CurrentPageResolverInterface $currentPageResolver)
-    {
+        CurrentPageResolverInterface $currentPageResolver
+    ) {
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
         $this->gamePlayRepository = $gamePlayRepository;

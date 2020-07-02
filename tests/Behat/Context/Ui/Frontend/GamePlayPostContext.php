@@ -18,7 +18,7 @@ use App\Entity\Post;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
-class GamePlayPostContext implements Context
+final class GamePlayPostContext implements Context
 {
     /**
      * @var CreateForGamePlayPage

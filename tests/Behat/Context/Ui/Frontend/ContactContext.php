@@ -20,7 +20,7 @@ use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
 use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
 use Webmozart\Assert\Assert;
 
-class ContactContext implements Context
+final class ContactContext implements Context
 {
     /**
      * @var ContactPage
