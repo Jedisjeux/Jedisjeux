@@ -3,10 +3,8 @@
 namespace spec\App\EventSubscriber;
 
 use App\Entity\Article;
-use App\Entity\ProductInterface;
 use App\EventSubscriber\GenerateArticleSitemapSubscriber;
 use App\Repository\ArticleRepository;
-use App\Repository\ProductRepository;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
@@ -49,6 +47,7 @@ class GenerateArticleSitemapSubscriberSpec extends ObjectBehavior
         UrlContainerInterface $urls,
         ArticleRepository $articleRepository,
         QueryBuilder $queryBuilder,
+        AbstractQuery $query,
         Article $firstArticle,
         Article $secondArticle,
         UrlGeneratorInterface $urlGenerator,
@@ -57,8 +56,7 @@ class GenerateArticleSitemapSubscriberSpec extends ObjectBehavior
         $event->getUrlContainer()->willReturn($urls);
         $articleRepository->createQueryBuilder('o')->willReturn($queryBuilder);
 
-        $query = \Mockery::mock(AbstractQuery::class);
-        $query->shouldReceive('iterate')->andReturn([
+        $query->iterate()->willReturn([
             [
                 $firstArticle->getWrappedObject(),
             ],
