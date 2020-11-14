@@ -11,7 +11,7 @@
 
 namespace App\Tests\Behat\Exception;
 
-use App\Tests\Behat\NotificationType;
+use Monofony\Bridge\Behat\NotificationType;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

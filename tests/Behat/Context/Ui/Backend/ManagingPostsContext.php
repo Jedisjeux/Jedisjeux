@@ -16,7 +16,7 @@ use App\Tests\Behat\Page\Backend\Post\UpdatePage;
 use App\Entity\Post;
 use App\Entity\Topic;
 use Behat\Behat\Context\Context;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Monofony\Bridge\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 

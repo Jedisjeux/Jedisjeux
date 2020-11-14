@@ -11,12 +11,12 @@
 
 namespace App\Tests\Behat\Context\Ui\Backend;
 
-use App\Tests\Behat\NotificationType;
+use Monofony\Bridge\Behat\NotificationType;
 use App\Tests\Behat\Page\Backend\ProductBox\IndexPage;
 use App\Tests\Behat\Page\Backend\ProductBox\UpdatePage;
 use App\Entity\ProductBox;
 use Behat\Behat\Context\Context;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
+use Monofony\Bridge\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 

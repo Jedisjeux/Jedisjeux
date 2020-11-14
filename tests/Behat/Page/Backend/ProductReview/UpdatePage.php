@@ -11,7 +11,7 @@
 
 namespace App\Tests\Behat\Page\Backend\ProductReview;
 
-use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractUpdatePage;
+use Monofony\Bridge\Behat\Crud\AbstractUpdatePage;
 
 class UpdatePage extends AbstractUpdatePage
 {

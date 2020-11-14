@@ -15,7 +15,7 @@ use App\Entity\GameAward;
 use App\Tests\Behat\Behaviour\NamesIt;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractCreatePage;
+use Monofony\Bridge\Behat\Crud\AbstractCreatePage;
 use Webmozart\Assert\Assert;
 
 class CreatePage extends AbstractCreatePage

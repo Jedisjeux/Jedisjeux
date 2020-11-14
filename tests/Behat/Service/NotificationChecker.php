@@ -12,9 +12,9 @@
 namespace App\Tests\Behat\Service;
 
 use App\Tests\Behat\Exception\NotificationExpectationMismatchException;
-use App\Tests\Behat\NotificationType;
+use Monofony\Bridge\Behat\NotificationType;
 use App\Tests\Behat\Service\Accessor\NotificationAccessorInterface;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
+use Monofony\Bridge\Behat\Service\NotificationCheckerInterface;
 
 final class NotificationChecker implements NotificationCheckerInterface
 {

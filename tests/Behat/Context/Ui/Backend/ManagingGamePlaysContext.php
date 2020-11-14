@@ -15,7 +15,7 @@ use App\Tests\Behat\Page\Backend\GamePlay\IndexPage;
 use App\Tests\Behat\Page\Backend\GamePlay\UpdatePage;
 use App\Entity\Customer;
 use Behat\Behat\Context\Context;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Monofony\Bridge\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;

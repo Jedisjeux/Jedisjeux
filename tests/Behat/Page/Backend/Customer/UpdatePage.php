@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Behat\Page\Backend\Customer;
 
 use App\Tests\Behat\Behaviour\Toggles;
-use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractUpdatePage;
+use Monofony\Bridge\Behat\Crud\AbstractUpdatePage;
 
 class UpdatePage extends AbstractUpdatePage
 {

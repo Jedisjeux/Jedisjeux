@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Behat\Context\Ui\Frontend;
 
-use App\Tests\Behat\NotificationType;
+use Monofony\Bridge\Behat\NotificationType;
 use App\Tests\Behat\Page\Frontend\Contact\ContactPage;
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\PageInterface;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
+use Monofony\Bridge\Behat\Service\NotificationCheckerInterface;
 use Webmozart\Assert\Assert;
 
 final class ContactContext implements Context

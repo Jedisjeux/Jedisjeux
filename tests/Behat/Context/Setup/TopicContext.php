@@ -15,7 +15,7 @@ use App\Entity\Topic;
 use App\Fixture\Factory\TopicExampleFactory;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
+use Monofony\Bridge\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;

@@ -11,8 +11,8 @@
 
 namespace App\Tests\Behat\Service;
 
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\AbstractSecurityService;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Setter\CookieSetterInterface;
+use Monofony\Bridge\Behat\Service\AbstractSecurityService;
+use Monofony\Bridge\Behat\Service\Setter\CookieSetterInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class SecurityService extends AbstractSecurityService

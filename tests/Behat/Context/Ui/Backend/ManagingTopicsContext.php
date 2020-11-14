@@ -15,7 +15,7 @@ use App\Tests\Behat\Page\Backend\Topic\IndexPage;
 use App\Tests\Behat\Page\Backend\Topic\UpdatePage;
 use App\Entity\Topic;
 use Behat\Behat\Context\Context;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Monofony\Bridge\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingTopicsContext implements Context

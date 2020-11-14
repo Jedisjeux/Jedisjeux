@@ -14,7 +14,7 @@ matrix:
     include:
         -
             sudo: required
-            php: 7.2
+            php: 7.3
             env:
                 - JEDISJEUX_SUITE="application"
             services:
@@ -29,7 +29,7 @@ matrix:
                         - oracle-java9-set-default
         -
             sudo: false
-            php: 7.2
+            php: 7.3
             env: JEDISJEUX_SUITE="docs packages"
             addons:
                 apt:

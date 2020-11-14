@@ -17,7 +17,7 @@ use App\Tests\Behat\Page\Backend\Dealer\CreatePage;
 use App\Entity\Dealer;
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Monofony\Bridge\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingDealersContext implements Context

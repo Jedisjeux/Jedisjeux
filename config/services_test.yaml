@@ -1,5 +1,5 @@
 imports:
-    - { resource: "../vendor/monofony/core-bundle/Resources/config/services_test.yaml" }
+    - { resource: "../vendor\/monofony\/behat-bridge\/services_test.yaml" }
 
 parameters:
     locale: 'en_US'

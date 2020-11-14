@@ -15,7 +15,7 @@ use App\Tests\Behat\Page\Backend\DealerPrice\IndexPage;
 use App\Tests\Behat\Page\Backend\DealerPrice\UpdatePage;
 use App\Entity\DealerPrice;
 use Behat\Behat\Context\Context;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Monofony\Bridge\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingDealerPricesContext implements Context
