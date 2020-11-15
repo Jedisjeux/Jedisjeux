@@ -1,3 +1,46 @@
 imports:
-    - tests/Behat/Resources/config/profiles.yml
-    - tests/Behat/Resources/config/suites.yml
+    - config/suites.yaml
+
+default:
+    formatters:
+        pretty:
+            verbose:  true
+            paths:    false
+            snippets: false
+
+    extensions:
+        Lakion\Behat\MinkDebugExtension:
+            directory: etc/build
+            clean_start: false
+            screenshot: true
+
+        Behat\MinkExtension:
+            files_path: "%paths.base%/tests/Resources/fixtures/"
+            base_url: "https://localhost:8080/"
+            default_session: symfony
+            javascript_session: chrome
+            sessions:
+                symfony:
+                    symfony: ~
+                chrome:
+                    selenium2:
+                        browser: chrome
+                        capabilities:
+                            browserName: chrome
+                            browser: chrome
+                            version: ""
+                            chrome:
+                                switches:
+                                    - "start-fullscreen"
+                                    - "start-maximized"
+                                    - "no-sandbox"
+                            extra_capabilities:
+                                unexpectedAlertBehaviour: accept
+
+        FriendsOfBehat\SymfonyExtension: ~
+
+        FriendsOfBehat\VariadicExtension: ~
+
+    gherkin:
+        filters:
+            tags: "~@todo"
