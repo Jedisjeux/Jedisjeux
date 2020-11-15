@@ -4,13 +4,12 @@ Production settings
 PHP settings
 ------------
 
-Jedisjeux requires php 7.1.
-
-For available list of packages you can read `php71_packages`_.
+Jedisjeux requires php 7.3.
 
 .. code-block:: bash
 
-    $ sudo yum install mod_php71w php71w-cli php71w-intl php71w-pdo php71w-xml php71w-gd php71w-mysql
+    $ sudo yum-config-manager --enable remi-php73
+    $ sudo yum install php mod_php php-cli php-intl phpw-pdo phpw-xml php-gd php-mysql
 
 
 In order to know pathname of php.ini, you can use this following command.
@@ -94,4 +93,4 @@ Ensure access
 
 
 .. _virtualHostsTutorial: https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-centos-7
-.. _php71_packages: https://webtatic.com/packages/php71/
+.. _php73_packages: https://webtatic.com/packages/php73/
