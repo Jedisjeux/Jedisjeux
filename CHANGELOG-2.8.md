@@ -1,0 +1,17 @@
+## Change Log
+
+### v2.8.0 (2020/11/15 13:20 +00:00)
+- [#535](https://github.com/Jedisjeux/Jedisjeux/pull/535) Bump Monofony version to 0.4 (@loic425)
+- [#533](https://github.com/Jedisjeux/Jedisjeux/pull/533) Bump lodash from 4.17.15 to 4.17.19 (@dependabot[bot])
+- [#525](https://github.com/Jedisjeux/Jedisjeux/pull/525) Bump websocket-extensions from 0.1.3 to 0.1.4 (@dependabot[bot])
+- [#532](https://github.com/Jedisjeux/Jedisjeux/pull/532) Remove some test services (@loic425)
+- [#531](https://github.com/Jedisjeux/Jedisjeux/pull/531) Improve fixtures' dependency injection (@loic425)
+- [#530](https://github.com/Jedisjeux/Jedisjeux/pull/530) Improve services (@loic425)
+- [#529](https://github.com/Jedisjeux/Jedisjeux/pull/529) Improve services tests (@loic425)
+- [#528](https://github.com/Jedisjeux/Jedisjeux/pull/528) Update abstract crud pages on Behat (@loic425)
+- [#527](https://github.com/Jedisjeux/Jedisjeux/pull/527) Install Monofony core (@loic425)
+- [#526](https://github.com/Jedisjeux/Jedisjeux/pull/526) Move Behat into tests directory (@loic425)
+- [#524](https://github.com/Jedisjeux/Jedisjeux/pull/524) Dark banner on gamesheet (@loic425)
+- [#523](https://github.com/Jedisjeux/Jedisjeux/pull/523) Fix first image for banner on gamesheet (@loic425)
+- [#522](https://github.com/Jedisjeux/Jedisjeux/pull/522) Banners of published products (@loic425)
+- [#521](https://github.com/Jedisjeux/Jedisjeux/pull/521) Improve game sheet (@loic425)
