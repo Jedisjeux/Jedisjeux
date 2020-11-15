@@ -11,7 +11,7 @@
 
 namespace App\Tests\Controller;
 
-use Lakion\ApiTestCase\JsonApiTestCase;
+use ApiTestCase\JsonApiTestCase;
 use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\HttpFoundation\Response;
 

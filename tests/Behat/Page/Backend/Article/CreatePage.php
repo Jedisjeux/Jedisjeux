@@ -12,7 +12,7 @@
 namespace App\Tests\Behat\Page\Backend\Article;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractCreatePage;
+use Monofony\Bridge\Behat\Crud\AbstractCreatePage;
 
 class CreatePage extends AbstractCreatePage
 {

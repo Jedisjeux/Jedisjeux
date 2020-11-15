@@ -14,7 +14,7 @@ namespace App\Tests\Behat\Page\Backend\FestivalList;
 use App\Tests\Behat\Behaviour\DescribesIt;
 use App\Tests\Behat\Behaviour\NamesIt;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractCreatePage;
+use Monofony\Bridge\Behat\Crud\AbstractCreatePage;
 
 class CreatePage extends AbstractCreatePage
 {

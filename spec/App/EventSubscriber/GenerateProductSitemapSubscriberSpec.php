@@ -47,6 +47,7 @@ class GenerateProductSitemapSubscriberSpec extends ObjectBehavior
         UrlContainerInterface $urls,
         ProductRepository $productRepository,
         QueryBuilder $queryBuilder,
+        AbstractQuery $query,
         ProductInterface $firstProduct,
         ProductInterface $secondProduct,
         UrlGeneratorInterface $urlGenerator,
@@ -55,8 +56,7 @@ class GenerateProductSitemapSubscriberSpec extends ObjectBehavior
         $event->getUrlContainer()->willReturn($urls);
         $productRepository->createQueryBuilder('o')->willReturn($queryBuilder);
 
-        $query = \Mockery::mock(AbstractQuery::class);
-        $query->shouldReceive('iterate')->andReturn([
+        $query->iterate()->willReturn([
             [
                 $firstProduct->getWrappedObject(),
             ],

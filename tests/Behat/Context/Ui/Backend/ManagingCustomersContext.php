@@ -16,7 +16,7 @@ namespace App\Tests\Behat\Context\Ui\Backend;
 use App\Tests\Behat\Page\Backend\Customer\IndexPage;
 use App\Tests\Behat\Page\Backend\Customer\UpdatePage;
 use Behat\Behat\Context\Context;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Monofony\Bridge\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 

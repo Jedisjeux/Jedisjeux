@@ -16,7 +16,7 @@ use App\Tests\Behat\Page\Backend\Redirection\UpdatePage;
 use App\Tests\Behat\Page\Backend\Redirection\CreatePage;
 use App\Entity\Redirection;
 use Behat\Behat\Context\Context;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Monofony\Bridge\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingRedirectionsContext implements Context

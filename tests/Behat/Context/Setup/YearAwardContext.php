@@ -16,7 +16,7 @@ use App\Entity\Product;
 use App\Entity\YearAward;
 use App\Fixture\Factory\YearAwardExampleFactory;
 use Behat\Behat\Context\Context;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
+use Monofony\Bridge\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class YearAwardContext implements Context

@@ -15,7 +15,7 @@ use App\Tests\Behat\Page\Backend\ProductList\IndexPage;
 use App\Tests\Behat\Page\Backend\ProductList\UpdatePage;
 use App\Entity\ProductList;
 use Behat\Behat\Context\Context;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Monofony\Bridge\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductListsContext implements Context

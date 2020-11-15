@@ -14,7 +14,7 @@ namespace App\Tests\Behat\Page\Backend\Dealer;
 use App\Tests\Behat\Behaviour\NamesIt;
 use App\Tests\Behat\Behaviour\SpecifiesItsCode;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractCreatePage;
+use Monofony\Bridge\Behat\Crud\AbstractCreatePage;
 
 class CreatePage extends AbstractCreatePage
 {

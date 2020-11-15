@@ -13,44 +13,23 @@ namespace App\Tests\Behat\Context\Setup;
 
 use App\Entity\User;
 use App\Fixture\Factory\AppUserExampleFactory;
+use App\Tests\Behat\Service\SecurityService;
 use Behat\Behat\Context\Context;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SecurityServiceInterface;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
+use Monofony\Bridge\Behat\Service\SharedStorageInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 final class SecurityContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
     private $sharedStorage;
-
-    /**
-     * @var SecurityServiceInterface
-     */
     private $securityService;
-
-    /**
-     * @var AppUserExampleFactory
-     */
     private $appUserFactory;
-
-    /**
-     * @var UserRepositoryInterface
-     */
     private $appUserRepository;
 
-    /**
-     * @param SharedStorageInterface   $sharedStorage
-     * @param SecurityServiceInterface $securityService
-     * @param AppUserExampleFactory    $appUserFactory
-     * @param UserRepositoryInterface  $appUserRepository
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        SecurityServiceInterface $securityService,
+        SecurityService $securityService,
         AppUserExampleFactory $appUserFactory,
         UserRepositoryInterface $appUserRepository
     ) {

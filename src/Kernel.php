@@ -3,7 +3,6 @@
 namespace App;
 
 use App\DependencyInjection\Compiler\ServicesPass;
-use PSS\SymfonyMockerContainer\DependencyInjection\MockerContainer;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -44,18 +43,6 @@ class Kernel extends BaseKernel
                 yield new $class();
             }
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getContainerBaseClass()
-    {
-        if (in_array($this->getEnvironment(), ['test', 'test_cached'], true)) {
-            return MockerContainer::class;
-        }
-
-        return parent::getContainerBaseClass();
     }
 
     /**

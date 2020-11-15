@@ -14,15 +14,15 @@ declare(strict_types=1);
 namespace App\Tests\Behat\Context\Ui\Frontend;
 
 use Behat\Behat\Context\Context;
-use App\Tests\Behat\NotificationType;
+use Monofony\Bridge\Behat\NotificationType;
 use App\Tests\Behat\Page\Frontend\Account\DashboardPage;
 use App\Tests\Behat\Page\Frontend\Account\LoginPage;
 use App\Tests\Behat\Page\Frontend\Account\ProfileUpdatePage;
 use App\Tests\Behat\Page\Frontend\Account\RegisterPage;
 use App\Tests\Behat\Page\Frontend\Account\VerificationPage;
 use App\Tests\Behat\Page\Frontend\HomePage;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\NotificationCheckerInterface;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\SharedStorageInterface;
+use Monofony\Bridge\Behat\Service\NotificationCheckerInterface;
+use Monofony\Bridge\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Webmozart\Assert\Assert;

@@ -16,7 +16,7 @@ use App\Tests\Behat\Page\Backend\Person\UpdatePage;
 use App\Tests\Behat\Page\Backend\Person\CreatePage;
 use App\Entity\Person;
 use Behat\Behat\Context\Context;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Monofony\Bridge\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingPeopleContext implements Context

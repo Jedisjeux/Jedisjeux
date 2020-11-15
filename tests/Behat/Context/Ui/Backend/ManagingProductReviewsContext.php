@@ -15,7 +15,7 @@ use App\Tests\Behat\Page\Backend\ProductReview\IndexPage;
 use App\Tests\Behat\Page\Backend\ProductReview\UpdatePage;
 use App\Entity\ProductReview;
 use Behat\Behat\Context\Context;
-use Monofony\Bundle\CoreBundle\Tests\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Monofony\Bridge\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingProductReviewsContext implements Context

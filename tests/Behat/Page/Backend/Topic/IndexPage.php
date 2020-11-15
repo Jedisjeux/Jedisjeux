@@ -11,7 +11,7 @@
 
 namespace App\Tests\Behat\Page\Backend\Topic;
 
-use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractIndexPage;
+use Monofony\Bridge\Behat\Crud\AbstractIndexPage;
 
 class IndexPage extends AbstractIndexPage
 {

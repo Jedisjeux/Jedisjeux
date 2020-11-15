@@ -11,7 +11,7 @@
 
 namespace App\Tests\Behat\Page\Backend\Post;
 
-use Monofony\Bundle\AdminBundle\Tests\Behat\Crud\AbstractUpdatePage;
+use Monofony\Bridge\Behat\Crud\AbstractUpdatePage;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
