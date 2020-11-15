@@ -6,8 +6,6 @@ PHP settings
 
 Jedisjeux requires php 7.3.
 
-For available list of packages you can read `php73_packages`_.
-
 .. code-block:: bash
 
     $ sudo yum-config-manager --enable remi-php73
