@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -52,10 +52,6 @@ class GamePlayExampleFactory extends AbstractExampleFactory implements ExampleFa
 
     /**
      * GamePlayExampleFactory constructor.
-     *
-     * @param FactoryInterface    $gamePlayFactory
-     * @param RepositoryInterface $customerRepository
-     * @param RepositoryInterface $productRepository
      */
     public function __construct(FactoryInterface $gamePlayFactory, RepositoryInterface $customerRepository, RepositoryInterface $productRepository)
     {

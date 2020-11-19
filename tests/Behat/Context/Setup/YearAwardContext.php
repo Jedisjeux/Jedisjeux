@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -49,7 +49,6 @@ class YearAwardContext implements Context
     /**
      * @Given /^(this game award) has(?:| also) been celebrated in "([^"]+)"$/
      *
-     * @param string $name
      */
     public function thereIsYearAward(GameAward $gameAward, $year)
     {
@@ -66,7 +65,6 @@ class YearAwardContext implements Context
     /**
      * @Given /^(game award "[^"]+") has been attributed to (this product) in "([^"]+)"$/
      *
-     * @param string $name
      */
     public function productHasAYearAward(GameAward $gameAward, Product $product, $year)
     {

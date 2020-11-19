@@ -1,0 +1,16 @@
+services:
+    PhpCsFixer\Fixer\Comment\HeaderCommentFixer:
+        header: |
+            This file is part of the Jedisjeux project.
+
+            (c) Jedisjeux
+
+            For the full copyright and license information, please view the LICENSE
+            file that was distributed with this source code.
+        location: 'after_open'
+
+    PhpCsFixer\Fixer\Phpdoc\NoSuperfluousPhpdocTagsFixer:
+        allow_mixed: true
+
+parameters:
+    exclude_files: ~

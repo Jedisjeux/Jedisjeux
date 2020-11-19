@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -19,19 +19,11 @@ use Sylius\Component\Product\Model\ProductInterface;
  */
 class AddProductAssociationOwnerToProductUpdater extends AbstractProductAssociationUpdater
 {
-    /**
-     * @param ProductAssociationInterface $association
-     * @param ProductInterface            $product
-     */
     public function update(ProductAssociationInterface $association, ProductInterface $product)
     {
         $this->addProductAssociationOwnerToProduct($association, $product);
     }
 
-    /**
-     * @param ProductAssociationInterface $productAssociation
-     * @param ProductInterface            $product
-     */
     protected function addProductAssociationOwnerToProduct(ProductAssociationInterface $productAssociation, ProductInterface $product)
     {
         $associationType = $productAssociation->getType();

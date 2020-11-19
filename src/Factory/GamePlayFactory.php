@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -13,13 +13,10 @@ namespace App\Factory;
 
 use App\Context\CustomerContext;
 use App\Entity\GamePlay;
-use App\Repository\ProductRepository;
-use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -41,11 +38,6 @@ class GamePlayFactory implements FactoryInterface
      */
     protected $customerContext;
 
-    /**
-     * @param string $className
-     * @param ProductRepositoryInterface $productRepository
-     * @param CustomerContext $customerContext
-     */
     public function __construct(
         string $className,
         ProductRepositoryInterface $productRepository,
@@ -72,8 +64,6 @@ class GamePlayFactory implements FactoryInterface
     /**
      * Create new game-play for a product.
      *
-     * @param string $locale
-     * @param string $productSlug
      *
      * @return GamePlay
      */

@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -64,13 +64,6 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface         $articleFactory
-     * @param FactoryInterface         $articleImageFactory
-     * @param RepositoryInterface      $customerRepository
-     * @param TaxonRepositoryInterface $taxonRepository
-     * @param RepositoryInterface      $productRepository
-     */
     public function __construct(
         FactoryInterface $articleFactory,
         FactoryInterface $articleImageFactory,
@@ -118,10 +111,6 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
         return $article;
     }
 
-    /**
-     * @param Article $article
-     * @param array   $options
-     */
     private function createImage(Article $article, array $options)
     {
         $imagePath = $options['main_image'];

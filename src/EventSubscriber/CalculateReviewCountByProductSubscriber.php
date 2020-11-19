@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -43,9 +43,6 @@ class CalculateReviewCountByProductSubscriber implements EventSubscriberInterfac
         ];
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function onProductCreate(GenericEvent $event)
     {
         /** @var ProductReview $productReview */
@@ -58,9 +55,6 @@ class CalculateReviewCountByProductSubscriber implements EventSubscriberInterfac
         $this->entityManager->flush();
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function onProductUpdate(GenericEvent $event)
     {
         $this->onProductCreate($event);

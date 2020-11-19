@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -48,24 +48,18 @@ class GameAward implements ResourceInterface
      */
     private $description;
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
     /**
-     * @var GameAwardImage|null $image
+     * @var GameAwardImage|null
      *
      * @ORM\OneToOne(targetEntity="App\Entity\GameAwardImage", cascade={"persist"})
      *
@@ -73,49 +67,31 @@ class GameAward implements ResourceInterface
      */
     private $image;
 
-    /**
-     * @return string|null
-     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    /**
-     * @param string|null $slug
-     */
     public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string|null $description
-     */
     public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
 
-    /**
-     * @return GameAwardImage|null
-     */
     public function getImage(): ?GameAwardImage
     {
         return $this->image;
     }
 
-    /**
-     * @param GameAwardImage|null $image
-     */
     public function setImage(?GameAwardImage $image): void
     {
         $this->image = $image;

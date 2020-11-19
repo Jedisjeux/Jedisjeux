@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -11,9 +11,7 @@
 
 namespace App\Form\Type;
 
-use App\Entity\ProductVariantImage;
 use App\Entity\ProductVideoImage;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductVideoImageType extends AbstractImageType

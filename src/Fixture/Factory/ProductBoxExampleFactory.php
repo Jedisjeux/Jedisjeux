@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,7 +21,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Webmozart\Assert\Assert;
 
 class ProductBoxExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
@@ -62,12 +61,6 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
 
     /**
      * PostExampleFactory constructor.
-     *
-     * @param FactoryInterface    $productBoxFactory
-     * @param FactoryInterface    $productBoxImageFactory
-     * @param RepositoryInterface $productRepository
-     * @param RepositoryInterface $productVariantRepository
-     * @param RepositoryInterface $customerRepository
      */
     public function __construct(
         FactoryInterface $productBoxFactory,
@@ -159,10 +152,6 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
         return $productBox;
     }
 
-    /**
-     * @param ProductBox $productBox
-     * @param array      $options
-     */
     private function createImage(ProductBox $productBox, array $options)
     {
         $imagePath = $options['image'];

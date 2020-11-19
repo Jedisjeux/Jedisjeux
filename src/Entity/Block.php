@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jdj project.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -95,25 +95,16 @@ class Block implements ResourceInterface
      */
     protected $slideShowBlock;
 
-    /**
-     * @return string|null
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * @param string|null $code
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
@@ -127,113 +118,71 @@ class Block implements ResourceInterface
         $this->title = $title;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBody(): ?string
     {
         return $this->body;
     }
 
-    /**
-     * @param string|null $body
-     */
     public function setBody(?string $body): void
     {
         $this->body = $body;
     }
 
-    /**
-     * @return string|null
-     */
     public function getImagePosition(): ?string
     {
         return $this->imagePosition;
     }
 
-    /**
-     * @param string|null $imagePosition
-     */
     public function setImagePosition(?string $imagePosition): void
     {
         $this->imagePosition = $imagePosition;
     }
 
-    /**
-     * @return string|null
-     */
     public function getClass(): ?string
     {
         return $this->class;
     }
 
-    /**
-     * @param string|null $class
-     */
     public function setClass(?string $class): void
     {
         $this->class = $class;
     }
 
-    /**
-     * @return int|null
-     */
     public function getPosition(): ?int
     {
         return $this->position;
     }
 
-    /**
-     * @param int|null $position
-     */
     public function setPosition(?int $position): void
     {
         $this->position = $position;
     }
 
-    /**
-     * @return BlockImage|null
-     */
     public function getImage(): ?BlockImage
     {
         return $this->image;
     }
 
-    /**
-     * @param BlockImage|null $image
-     */
     public function setImage(?BlockImage $image): void
     {
         $this->image = $image;
     }
 
-    /**
-     * @return Article|null
-     */
     public function getArticle(): ?Article
     {
         return $this->article;
     }
 
-    /**
-     * @param Article|null $article
-     */
     public function setArticle(?Article $article): void
     {
         $this->article = $article;
     }
 
-    /**
-     * @return SlideShowBlock|null
-     */
     public function getSlideShowBlock(): ?SlideShowBlock
     {
         return $this->slideShowBlock;
     }
 
-    /**
-     * @param SlideShowBlock|null $slideShowBlock
-     */
     public function setSlideShowBlock(?SlideShowBlock $slideShowBlock): void
     {
         $this->slideShowBlock = $slideShowBlock;

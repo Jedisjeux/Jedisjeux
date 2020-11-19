@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -32,7 +32,6 @@ class ResetPasswordPage extends SymfonyPage
     }
 
     /**
-     * @param string|null $password
      */
     public function specifyNewPassword(?string $password)
     {
@@ -40,7 +39,6 @@ class ResetPasswordPage extends SymfonyPage
     }
 
     /**
-     * @param string|null $password
      */
     public function specifyConfirmPassword(?string $password)
     {
@@ -48,10 +46,7 @@ class ResetPasswordPage extends SymfonyPage
     }
 
     /**
-     * @param string $element
-     * @param string $message
      *
-     * @return bool
      *
      * @throws ElementNotFoundException
      */

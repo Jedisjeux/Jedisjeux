@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -51,10 +51,6 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
 
     /**
      * AppUserExampleFactory constructor.
-     *
-     * @param FactoryInterface $appUserFactory
-     * @param FactoryInterface $customerFactory
-     * @param FactoryInterface $avatarFactory
      */
     public function __construct(
         FactoryInterface $appUserFactory,
@@ -105,10 +101,6 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
         return $user;
     }
 
-    /**
-     * @param Customer $customer
-     * @param array    $options
-     */
     private function createAvatar(Customer $customer, array $options)
     {
         $imagePath = $options['avatar'];

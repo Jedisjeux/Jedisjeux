@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Mobizel
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -16,7 +16,6 @@ use App\Factory\NotificationFactory;
 use App\Repository\UserRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -49,13 +48,6 @@ class ProductBoxNotificationManager
      */
     private $manager;
 
-    /**
-     * @param UserRepositoryInterface $appUserRepository
-     * @param FactoryInterface        $notificationFactory
-     * @param RouterInterface         $router
-     * @param ObjectManager           $manager
-     * @param TranslatorInterface     $translator
-     */
     public function __construct(
         UserRepositoryInterface $appUserRepository,
         FactoryInterface $notificationFactory,
@@ -70,9 +62,6 @@ class ProductBoxNotificationManager
         $this->manager = $manager;
     }
 
-    /**
-     * @param ProductBox $productBox
-     */
     public function notifyModerators(ProductBox $productBox)
     {
         /** @var UserInterface[] $users */
@@ -92,9 +81,6 @@ class ProductBoxNotificationManager
         );
     }
 
-    /**
-     * @param ProductBox $productBox
-     */
     public function notifyAuthor(ProductBox $productBox)
     {
         $target = $this->router->generate('app_frontend_account_games_library');
@@ -118,9 +104,7 @@ class ProductBoxNotificationManager
     }
 
     /**
-     * @param string     $message
-     * @param ProductBox $productBox
-     * @param array      $users
+     * @param string $message
      */
     private function notifyUsers($message, ProductBox $productBox, string $target, array $users)
     {

@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -119,9 +119,6 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
         $this->code = uniqid('variant_');
     }
 
-    /**
-     * @return ProductVariantImage|null
-     */
     public function getMainImage(): ?ProductVariantImage
     {
         foreach ($this->images as $image) {
@@ -133,9 +130,6 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
         return null;
     }
 
-    /**
-     * @return ProductVariantImage|null
-     */
     public function getMaterialImage(): ?ProductVariantImage
     {
         foreach ($this->images as $image) {
@@ -147,19 +141,11 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
         return null;
     }
 
-    /**
-     * @param ProductVariantImage $image
-     *
-     * @return bool
-     */
     public function hasImage(ProductVariantImage $image): bool
     {
         return $this->images->contains($image);
     }
 
-    /**
-     * @param ProductVariantImage $image
-     */
     public function addImage(ProductVariantImage $image): void
     {
         if (!$this->hasImage($image)) {
@@ -168,9 +154,6 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
         }
     }
 
-    /**
-     * @param ProductVariantImage $image
-     */
     public function removeImage(ProductVariantImage $image): void
     {
         $this->images->removeElement($image);
@@ -184,49 +167,31 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
         return $this->images;
     }
 
-    /**
-     * @return \DateTime|null
-     */
     public function getReleasedAt(): ?\DateTime
     {
         return $this->releasedAt;
     }
 
-    /**
-     * @param \DateTime|null $releasedAt
-     */
     public function setReleasedAt(?\DateTime $releasedAt): void
     {
         $this->releasedAt = $releasedAt;
     }
 
-    /**
-     * @return string|null
-     */
     public function getReleasedAtPrecision(): ?string
     {
         return $this->releasedAtPrecision;
     }
 
-    /**
-     * @param string|null $releasedAtPrecision
-     */
     public function setReleasedAtPrecision(?string $releasedAtPrecision): void
     {
         $this->releasedAtPrecision = $releasedAtPrecision;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOldHref(): ?string
     {
         return $this->oldHref;
     }
 
-    /**
-     * @param string|null $oldHref
-     */
     public function setOldHref(?string $oldHref): void
     {
         $this->oldHref = $oldHref;
@@ -286,19 +251,11 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
         return $this->designers;
     }
 
-    /**
-     * @param Person $designer
-     *
-     * @return bool
-     */
     public function hasDesigner(Person $designer): bool
     {
         return $this->designers->contains($designer);
     }
 
-    /**
-     * @param Person $designer
-     */
     public function addDesigner(Person $designer): void
     {
         if (!$this->hasDesigner($designer)) {
@@ -306,9 +263,6 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
         }
     }
 
-    /**
-     * @param Person $designer
-     */
     public function removeDesigner(Person $designer): void
     {
         $this->designers->removeElement($designer);
@@ -322,19 +276,11 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
         return $this->artists;
     }
 
-    /**
-     * @param Person $artist
-     *
-     * @return bool
-     */
     public function hasArtist(Person $artist): bool
     {
         return $this->artists->contains($artist);
     }
 
-    /**
-     * @param Person $artist
-     */
     public function addArtist(Person $artist): void
     {
         if (!$this->hasArtist($artist)) {
@@ -342,9 +288,6 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
         }
     }
 
-    /**
-     * @param Person $artist
-     */
     public function removeArtist(Person $artist): void
     {
         $this->artists->removeElement($artist);
@@ -358,19 +301,11 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
         return $this->publishers;
     }
 
-    /**
-     * @param Person $publisher
-     *
-     * @return bool
-     */
     public function hasPublisher(Person $publisher): bool
     {
         return $this->publishers->contains($publisher);
     }
 
-    /**
-     * @param Person $publisher
-     */
     public function addPublisher(Person $publisher): void
     {
         if (!$this->publishers->contains($publisher)) {
@@ -378,9 +313,6 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
         }
     }
 
-    /**
-     * @param Person $publisher
-     */
     public function removePublisher(Person $publisher): void
     {
         $this->publishers->removeElement($publisher);

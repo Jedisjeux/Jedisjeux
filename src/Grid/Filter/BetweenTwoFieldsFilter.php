@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -33,12 +33,6 @@ class BetweenTwoFieldsFilter implements FilterInterface
         $dataSource->restrict($dataSource->getExpressionBuilder()->greaterThanOrEqual($secondField, $data['value']));
     }
 
-    /**
-     * @param string $name
-     * @param array  $options
-     *
-     * @return string
-     */
     private function getField(string $name, array $options): string
     {
         $fields = $this->getFields($options);
@@ -50,11 +44,6 @@ class BetweenTwoFieldsFilter implements FilterInterface
         return $fields[$name];
     }
 
-    /**
-     * @param array $options
-     *
-     * @return array
-     */
     private function getFields(array $options): array
     {
         if (!isset($options['fields'])) {

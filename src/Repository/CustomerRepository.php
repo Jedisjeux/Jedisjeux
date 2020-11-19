@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -20,11 +20,6 @@ use Sylius\Component\Customer\Model\CustomerInterface;
  */
 class CustomerRepository extends EntityRepository
 {
-    /**
-     * @param string $username
-     *
-     * @return null|CustomerInterface
-     */
     public function findOneByUsername(string $username): ?CustomerInterface
     {
         $queryBuilder = $this->createQueryBuilder('o');

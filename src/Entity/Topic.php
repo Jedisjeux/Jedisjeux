@@ -1,9 +1,9 @@
 <?php
 
-/**
- * This file is part of Jedisjeux.
+/*
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -141,89 +141,56 @@ class Topic implements ResourceInterface
         $this->postCount = 0;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * @param string|null $code
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @param string|null $title
-     */
     public function setTitle(?string $title): void
     {
         $this->title = $title;
     }
 
-    /**
-     * @return int
-     */
     public function getPostCount(): int
     {
         return $this->postCount;
     }
 
-    /**
-     * @param int $postCount
-     */
     public function setPostCount(int $postCount): void
     {
         $this->postCount = $postCount;
     }
 
-    /**
-     * @return int
-     */
     public function getViewCount(): int
     {
         return $this->viewCount;
     }
 
-    /**
-     * @param int $viewCount
-     */
     public function setViewCount(int $viewCount): void
     {
         $this->viewCount = $viewCount;
     }
 
-    /**
-     * @return \DateTime|null
-     */
     public function getLastPostCreatedAt(): ?\DateTime
     {
         return $this->lastPostCreatedAt;
     }
 
-    /**
-     * @param \DateTime|null $lastPostCreatedAt
-     */
     public function setLastPostCreatedAt(?\DateTime $lastPostCreatedAt): void
     {
         $this->lastPostCreatedAt = $lastPostCreatedAt;
     }
 
-    /**
-     * @return Post|null
-     */
     public function getFirstPost(): ?Post
     {
         $firstPost = $this->posts->first();
@@ -231,9 +198,6 @@ class Topic implements ResourceInterface
         return $firstPost ?: null;
     }
 
-    /**
-     * @return Post|null
-     */
     public function getLastPost(): ?Post
     {
         $lastPost = $this->posts->last();
@@ -249,25 +213,16 @@ class Topic implements ResourceInterface
         return $this->author;
     }
 
-    /**
-     * @param CustomerInterface|null $author
-     */
     public function setAuthor(?CustomerInterface $author): void
     {
         $this->author = $author;
     }
 
-    /**
-     * @return Post|null
-     */
     public function getMainPost(): ?Post
     {
         return $this->mainPost;
     }
 
-    /**
-     * @param Post|null $mainPost
-     */
     public function setMainPost(?Post $mainPost): void
     {
         $this->mainPost = $mainPost;
@@ -281,9 +236,6 @@ class Topic implements ResourceInterface
         return $this->posts;
     }
 
-    /**
-     * @param Post $post
-     */
     public function addPost(Post $post): void
     {
         if (!$this->hasPost($post)) {
@@ -292,20 +244,12 @@ class Topic implements ResourceInterface
         }
     }
 
-    /**
-     * @param Post $post
-     */
     public function removePost(Post $post): void
     {
         $this->posts->removeElement($post);
         $post->setTopic(null);
     }
 
-    /**
-     * @param Post $post
-     *
-     * @return bool
-     */
     public function hasPost(Post $post): bool
     {
         return $this->posts->contains($post);
@@ -319,41 +263,26 @@ class Topic implements ResourceInterface
         return $this->mainTaxon;
     }
 
-    /**
-     * @param TaxonInterface|null $mainTaxon
-     */
     public function setMainTaxon(?TaxonInterface $mainTaxon): void
     {
         $this->mainTaxon = $mainTaxon;
     }
 
-    /**
-     * @return GamePlay|null
-     */
     public function getGamePlay(): ?GamePlay
     {
         return $this->gamePlay;
     }
 
-    /**
-     * @param GamePlay|null $gamePlay
-     */
     public function setGamePlay(?GamePlay $gamePlay): void
     {
         $this->gamePlay = $gamePlay;
     }
 
-    /**
-     * @return Article|null
-     */
     public function getArticle(): ?Article
     {
         return $this->article;
     }
 
-    /**
-     * @param Article|null $article
-     */
     public function setArticle(?Article $article): void
     {
         $this->article = $article;
@@ -367,9 +296,6 @@ class Topic implements ResourceInterface
         return $this->followers;
     }
 
-    /**
-     * @param CustomerInterface $follower
-     */
     public function addFollower(CustomerInterface $follower): void
     {
         if (!$this->hasFollower($follower)) {
@@ -377,19 +303,11 @@ class Topic implements ResourceInterface
         }
     }
 
-    /**
-     * @param CustomerInterface $follower
-     */
     public function removeFollower(CustomerInterface $follower): void
     {
         $this->followers->removeElement($follower);
     }
 
-    /**
-     * @param CustomerInterface $follower
-     *
-     * @return bool
-     */
     public function hasFollower(CustomerInterface $follower): bool
     {
         return $this->followers->contains($follower);
@@ -397,8 +315,6 @@ class Topic implements ResourceInterface
 
     /**
      * @param bool $nullForFirstPage
-     *
-     * @return int|null
      */
     public function getLastPageNumber($nullForFirstPage = true): ?int
     {
@@ -411,9 +327,6 @@ class Topic implements ResourceInterface
         return $pageNumber;
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return $this->getTitle();

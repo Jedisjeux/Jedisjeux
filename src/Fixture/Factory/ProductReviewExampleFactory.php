@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -48,11 +48,6 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
      */
     private $optionsResolver;
 
-    /**
-     * @param ReviewFactoryInterface $productReviewFactory
-     * @param RepositoryInterface    $productRepository
-     * @param RepositoryInterface    $customerRepository
-     */
     public function __construct(
         ReviewFactoryInterface $productReviewFactory,
         RepositoryInterface $productRepository,

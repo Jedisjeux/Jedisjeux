@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -24,9 +24,6 @@ class ProductReviewRepository extends EntityRepository
 {
     /**
      * @param $productId
-     * @param int $count
-     *
-     * @return array
      */
     public function findLatestByProductId($productId, int $count): array
     {
@@ -47,9 +44,6 @@ class ProductReviewRepository extends EntityRepository
 
     /**
      * @param $personId
-     * @param int $count
-     *
-     * @return array
      */
     public function findLatestByPersonId($personId, int $count): array
     {
@@ -79,12 +73,6 @@ class ProductReviewRepository extends EntityRepository
     }
 
     /**
-     * @param string                 $locale
-     * @param string                 $productSlug
-     * @param null|CustomerInterface $author
-     *
-     * @return null|ReviewInterface
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function findOneByProductSlugAndAuthor(
@@ -105,12 +93,6 @@ class ProductReviewRepository extends EntityRepository
             ;
     }
 
-    /**
-     * @param string $localeCode
-     * @param string $productSlug
-     *
-     * @return QueryBuilder
-     */
     public function createListForProductSlugQueryBuilder(string $localeCode, string $productSlug): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');

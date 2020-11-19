@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -39,9 +39,6 @@ class ProductFileContext implements Context
     private $productFileRepository;
 
     /**
-     * @param SharedStorageInterface    $sharedStorage
-     * @param ProductFileExampleFixture $productFileFactory
-     * @param RepositoryInterface       $productFileRepository
      */
     public function __construct(SharedStorageInterface $sharedStorage, ProductFileExampleFixture $productFileFactory, RepositoryInterface $productFileRepository)
     {
@@ -86,7 +83,6 @@ class ProductFileContext implements Context
     }
 
     /**
-     * @param array $options
      */
     public function createProductFile(array $options): void
     {

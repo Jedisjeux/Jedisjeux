@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -38,10 +38,6 @@ class GameProductFixture extends AbstractFixture
      */
     private $faker;
 
-    /**
-     * @param TaxonFixture   $taxonFixture
-     * @param ProductFixture $productFixture
-     */
     public function __construct(TaxonFixture $taxonFixture, ProductFixture $productFixture)
     {
         $this->taxonFixture = $taxonFixture;

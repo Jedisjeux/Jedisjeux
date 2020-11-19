@@ -1,9 +1,9 @@
 <?php
 
-/**
- * This file is part of Jedisjeux.
+/*
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -32,10 +32,6 @@ class TaxonFilter implements FilterInterface
      */
     private $locale;
 
-    /**
-     * @param TaxonRepositoryInterface $taxonRepository
-     * @param string                   $locale
-     */
     public function __construct(TaxonRepositoryInterface $taxonRepository, string $locale)
     {
         $this->taxonRepository = $taxonRepository;
@@ -70,9 +66,7 @@ class TaxonFilter implements FilterInterface
     }
 
     /**
-     * @param array  $options
-     * @param string $name
-     * @param mixed  $default
+     * @param mixed $default
      *
      * @return mixed
      */

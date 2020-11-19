@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -29,8 +29,6 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 class ArticleController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showWithTaxonsAction(Request $request)
@@ -62,8 +60,6 @@ class ArticleController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexWithTaxonsAction(Request $request)
@@ -92,8 +88,7 @@ class ArticleController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param string  $slug
+     * @param string $slug
      *
      * @return Response
      */
@@ -129,8 +124,6 @@ class ArticleController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function showStatusAction(Request $request)
@@ -163,8 +156,6 @@ class ArticleController extends ResourceController
     }
 
     /**
-     * @param Article $article
-     *
      * @return \SM\StateMachine\StateMachineInterface
      *
      * @throws \SM\SMException

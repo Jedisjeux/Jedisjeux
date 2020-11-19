@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -44,10 +44,6 @@ class NotificationExampleFactory extends AbstractExampleFactory implements Examp
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface    $notificationFactory
-     * @param RepositoryInterface $customerRepository
-     */
     public function __construct(
         FactoryInterface $notificationFactory,
         RepositoryInterface $customerRepository

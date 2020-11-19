@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\EventSubscriber;
 
 use Doctrine\Common\EventSubscriber;
@@ -26,9 +35,6 @@ final class DefaultUsernameORMSubscriber implements EventSubscriber
         ];
     }
 
-    /**
-     * @param OnFlushEventArgs $onFlushEventArgs
-     */
     public function onFlush(OnFlushEventArgs $onFlushEventArgs): void
     {
         $entityManager = $onFlushEventArgs->getEntityManager();
@@ -39,8 +45,7 @@ final class DefaultUsernameORMSubscriber implements EventSubscriber
     }
 
     /**
-     * @param array                  $entities
-     * @param EntityManagerInterface $entityManager
+     * @param array $entities
      */
     private function processEntities($entities, EntityManagerInterface $entityManager, UnitOfWork $unitOfWork): void
     {

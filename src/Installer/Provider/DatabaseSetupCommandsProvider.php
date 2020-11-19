@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -25,9 +25,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
      */
     private $doctrineRegistry;
 
-    /**
-     * @param Registry $doctrineRegistry
-     */
     public function __construct(Registry $doctrineRegistry)
     {
         $this->doctrineRegistry = $doctrineRegistry;
@@ -82,10 +79,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     }
 
     /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     * @param QuestionHelper  $questionHelper
-     *
      * @return array
      */
     private function getRequiredCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper)
@@ -98,10 +91,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     }
 
     /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     * @param QuestionHelper  $questionHelper
-     *
      * @return array
      */
     private function setupDatabase(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper)

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -46,9 +46,6 @@ class TopicFactory implements FactoryInterface
      */
     protected $postFactory;
 
-    /**
-     * @param string $className
-     */
     public function __construct(
         string $className,
         CustomerContextInterface $customerContext,
@@ -78,8 +75,6 @@ class TopicFactory implements FactoryInterface
     }
 
     /**
-     * @param GamePlay $gamePlay
-     *
      * @return Topic
      */
     public function createForGamePlay(GamePlay $gamePlay)
@@ -98,8 +93,6 @@ class TopicFactory implements FactoryInterface
     }
 
     /**
-     * @param Article $article
-     *
      * @return Topic
      */
     public function createForArticle(Article $article)

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -57,9 +57,6 @@ class LoadTaxonsOfArticlesCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param array          $data
-     * @param TaxonInterface $rootTaxon
-     *
      * @return TaxonInterface
      */
     protected function createOrReplaceTaxon(array $data, TaxonInterface $rootTaxon)

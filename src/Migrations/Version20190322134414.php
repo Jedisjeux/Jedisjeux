@@ -1,4 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+
+/*
+ * This file is part of the Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
@@ -10,10 +21,10 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20190322134414 extends AbstractMigration
 {
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE jdj_product_box ADD product_variant_id INT DEFAULT NULL, ADD enabled TINYINT(1) NOT NULL');
         $this->addSql('ALTER TABLE jdj_product_box ADD CONSTRAINT FK_9ED1EFECA80EF684 FOREIGN KEY (product_variant_id) REFERENCES sylius_product_variant (id)');
@@ -32,10 +43,10 @@ EOM
         $this->addSql('UPDATE jdj_product_box set enabled=1');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE sylius_product_variant ADD box_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE jdj_product_box DROP FOREIGN KEY FK_9ED1EFECA80EF684');

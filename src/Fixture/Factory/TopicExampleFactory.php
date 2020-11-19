@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -63,13 +63,6 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
      */
     private $optionsResolver;
 
-    /**
-     * @param TopicFactory        $topicFactory
-     * @param RepositoryInterface $customerRepository
-     * @param RepositoryInterface $articleRepository
-     * @param RepositoryInterface $gamePlayRepository
-     * @param RepositoryInterface $taxonRepository
-     */
     public function __construct(
         TopicFactory $topicFactory,
         RepositoryInterface $customerRepository,

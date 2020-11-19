@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -32,9 +32,6 @@ final class CommandDirectoryChecker
      */
     private $filesystem;
 
-    /**
-     * @param Filesystem $filesystem
-     */
     public function __construct(Filesystem $filesystem)
     {
         $this->filesystem = $filesystem;
@@ -64,8 +61,7 @@ final class CommandDirectoryChecker
     }
 
     /**
-     * @param string          $directory
-     * @param OutputInterface $output
+     * @param string $directory
      */
     private function createDirectory($directory, OutputInterface $output)
     {
@@ -81,8 +77,7 @@ final class CommandDirectoryChecker
     }
 
     /**
-     * @param string          $directory
-     * @param OutputInterface $output
+     * @param string $directory
      */
     private function changePermissionsRecursively($directory, OutputInterface $output)
     {
@@ -104,8 +99,7 @@ final class CommandDirectoryChecker
     }
 
     /**
-     * @param string          $directory
-     * @param OutputInterface $output
+     * @param string $directory
      *
      * @throws AccessDeniedException if directory/file permissions cannot be changed
      */

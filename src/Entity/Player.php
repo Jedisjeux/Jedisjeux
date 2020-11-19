@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 08/04/16
- * Time: 00:04.
+
+/*
+ * This file is part of the Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace App\Entity;
@@ -51,25 +54,16 @@ class Player implements ResourceInterface
      */
     protected $gamePlay;
 
-    /**
-     * @return float|null
-     */
     public function getScore(): ?float
     {
         return $this->score;
     }
 
-    /**
-     * @param float|null $score
-     */
     public function setScore(?float $score): void
     {
         $this->score = $score;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         if ($this->getCustomer()) {
@@ -79,9 +73,6 @@ class Player implements ResourceInterface
         return $this->name;
     }
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void
     {
         $this->name = $name;
@@ -95,25 +86,16 @@ class Player implements ResourceInterface
         return $this->customer;
     }
 
-    /**
-     * @param CustomerInterface|null $customer
-     */
     public function setCustomer(?CustomerInterface $customer): void
     {
         $this->customer = $customer;
     }
 
-    /**
-     * @return GamePlay|null
-     */
     public function getGamePlay(): ?GamePlay
     {
         return $this->gamePlay;
     }
 
-    /**
-     * @param GamePlay|null $gamePlay
-     */
     public function setGamePlay(?GamePlay $gamePlay): void
     {
         $this->gamePlay = $gamePlay;

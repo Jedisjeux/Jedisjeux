@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 29/03/2016
- * Time: 17:04.
+
+/*
+ * This file is part of the Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace App\Entity;
@@ -39,49 +42,31 @@ class PersonImage extends AbstractImage
      */
     protected $main = false;
 
-    /**
-     * @return Person|null
-     */
     public function getPerson(): ?Person
     {
         return $this->person;
     }
 
-    /**
-     * @param Person|null $person
-     */
     public function setPerson(?Person $person): void
     {
         $this->person = $person;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string|null $description
-     */
     public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
 
-    /**
-     * @return bool
-     */
     public function isMain(): bool
     {
         return $this->main;
     }
 
-    /**
-     * @param bool $main
-     */
     public function setMain(bool $main): void
     {
         $this->main = $main;

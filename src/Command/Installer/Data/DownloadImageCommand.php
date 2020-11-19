@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Command\Installer\Data;
 
 use App\Entity\AbstractImage;
@@ -90,18 +99,12 @@ class DownloadImageCommand extends ContainerAwareCommand
         return [$entityOption => $repositories[$entityOption]];
     }
 
-    /**
-     * @param EntityRepository $repository
-     */
     protected function downloadImagesFromRepository(EntityRepository $repository): void
     {
         $queryBuilder = $repository->createQueryBuilder('o');
         $this->downloadImages($queryBuilder);
     }
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     */
     protected function downloadImages(QueryBuilder $queryBuilder): void
     {
         foreach ($queryBuilder->getQuery()->iterate() as $row) {
@@ -128,8 +131,6 @@ class DownloadImageCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param AbstractImage $image
-     *
      * @return string
      */
     protected function getImageOriginalPath(AbstractImage $image)
@@ -137,9 +138,6 @@ class DownloadImageCommand extends ContainerAwareCommand
         return $this->input->getOption('image-original-path').$image->getPath();
     }
 
-    /**
-     * @param AbstractImage $image
-     */
     protected function downloadImage(AbstractImage $image)
     {
         $copyFrom = $this->getImageOriginalPath($image);

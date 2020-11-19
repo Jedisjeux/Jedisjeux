@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -54,15 +54,6 @@ class LoadProductFilesCommand extends Command
     /** @var string */
     private $uploadDestination;
 
-    /**
-     * @param ObjectManager       $objectManager
-     * @param Connection          $connection
-     * @param FactoryInterface    $productFileFactory
-     * @param RepositoryInterface $productFileRepository
-     * @param RepositoryInterface $productVariantRepository
-     * @param RepositoryInterface $customerRepository
-     * @param string              $uploadDestination
-     */
     public function __construct(
         ObjectManager $objectManager,
         Connection $connection,
@@ -120,9 +111,6 @@ class LoadProductFilesCommand extends Command
         $this->objectManager->clear();
     }
 
-    /**
-     * @return array
-     */
     private function getFiles(): array
     {
         return $this->connection->fetchAll(<<<EOM
@@ -144,12 +132,6 @@ EOM
 );
     }
 
-    /**
-     * @param array           $data
-     * @param OutputInterface $output
-     *
-     * @return ProductFile|null
-     */
     private function createProductFile(array $data, OutputInterface $output): ?ProductFile
     {
         /** @var ProductFile $productFile */

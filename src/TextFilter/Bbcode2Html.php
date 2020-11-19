@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic_425
- * Date: 22/02/2016
- * Time: 12:46.
+
+/*
+ * This file is part of the Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace App\TextFilter;
@@ -34,9 +37,6 @@ class Bbcode2Html
 
     /**
      * Bbcode2Html constructor.
-     *
-     * @param Connection       $databaseConnection
-     * @param EntityRepository $productVariantRepository
      */
     public function __construct(Connection $databaseConnection, EntityRepository $productVariantRepository)
     {

@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -46,9 +46,6 @@ class GamePlayImageExampleFactory extends AbstractExampleFactory implements Exam
 
     /**
      * GamePlayExampleFactory constructor.
-     *
-     * @param FactoryInterface    $gamePlayImageFactory
-     * @param RepositoryInterface $gamePlayRepository
      */
     public function __construct(
         FactoryInterface $gamePlayImageFactory,
@@ -100,10 +97,6 @@ class GamePlayImageExampleFactory extends AbstractExampleFactory implements Exam
         return $gamePlayImage;
     }
 
-    /**
-     * @param GamePlayImage $gamePlayImage
-     * @param array         $options
-     */
     private function createImage(GamePlayImage $gamePlayImage, array $options)
     {
         $imagePath = $options['image'];

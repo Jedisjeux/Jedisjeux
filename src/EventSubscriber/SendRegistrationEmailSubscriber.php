@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -27,9 +27,6 @@ class SendRegistrationEmailSubscriber implements EventSubscriberInterface
      */
     protected $sender;
 
-    /**
-     * @param SenderInterface $sender
-     */
     public function __construct(SenderInterface $sender)
     {
         $this->sender = $sender;

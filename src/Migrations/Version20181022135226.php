@@ -1,4 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+
+/*
+ * This file is part of the Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
@@ -10,10 +21,10 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20181022135226 extends AbstractMigration
 {
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE jdj_product_box ADD product_id INT DEFAULT NULL');
         $this->addSql('UPDATE jdj_product_box box INNER JOIN sylius_product_variant v ON box.id = v.box_id SET box.product_id = v.product_id');
@@ -21,10 +32,10 @@ final class Version20181022135226 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_9ED1EFEC4584665A ON jdj_product_box (product_id)');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE jdj_product_box DROP FOREIGN KEY FK_9ED1EFEC4584665A');
         $this->addSql('DROP INDEX IDX_9ED1EFEC4584665A ON jdj_product_box');

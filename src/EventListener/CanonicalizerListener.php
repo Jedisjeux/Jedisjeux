@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -23,17 +23,11 @@ final class CanonicalizerListener
      */
     private $canonicalizer;
 
-    /**
-     * @param CanonicalizerInterface $canonicalizer
-     */
     public function __construct(CanonicalizerInterface $canonicalizer)
     {
         $this->canonicalizer = $canonicalizer;
     }
 
-    /**
-     * @param LifecycleEventArgs $event
-     */
     public function canonicalize(LifecycleEventArgs $event)
     {
         $item = $event->getEntity();
@@ -46,17 +40,11 @@ final class CanonicalizerListener
         }
     }
 
-    /**
-     * @param LifecycleEventArgs $event
-     */
     public function prePersist(LifecycleEventArgs $event)
     {
         $this->canonicalize($event);
     }
 
-    /**
-     * @param LifecycleEventArgs $event
-     */
     public function preUpdate(LifecycleEventArgs $event)
     {
         $this->canonicalize($event);

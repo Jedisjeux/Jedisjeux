@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -41,10 +41,6 @@ class ProductVideoExampleFixture extends AbstractExampleFactory
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $productVideoFactory
-     * @param RepositoryInterface $productRepository
-     */
     public function __construct(FactoryInterface $productVideoFactory, RepositoryInterface $productRepository)
     {
         $this->productVideoFactory = $productVideoFactory;

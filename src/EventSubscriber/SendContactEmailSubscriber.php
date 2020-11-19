@@ -1,9 +1,9 @@
 <?php
 
-/**
- * This file is part of Jedisjeux.
+/*
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -36,9 +36,6 @@ class SendContactEmailSubscriber implements EventSubscriberInterface
 
     /**
      * SendContactEmailSubscriber constructor.
-     *
-     * @param SenderInterface $sender
-     * @param string          $contactEmail
      */
     public function __construct(SenderInterface $sender, string $contactEmail)
     {
@@ -56,9 +53,6 @@ class SendContactEmailSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function onPostCreate(GenericEvent $event)
     {
         /** @var ContactRequest $contactRequest */

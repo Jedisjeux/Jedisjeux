@@ -1,8 +1,9 @@
 <?php
+
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -25,7 +26,6 @@ final class NotificationContext implements Context
     private $notificationRepository;
 
     /**
-     * @param RepositoryInterface $notificationRepository
      */
     public function __construct(RepositoryInterface $notificationRepository)
     {
@@ -63,7 +63,6 @@ final class NotificationContext implements Context
     }
 
     /**
-     * @param array $criteria
      */
     private function assertNotificationExists(array $criteria): void
     {

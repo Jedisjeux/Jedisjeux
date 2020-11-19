@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 03/09/2015
- * Time: 10:58.
+
+/*
+ * This file is part of the Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace App\Utils;
@@ -23,40 +26,52 @@ class DateCalculator
         switch ($string) {
             case 'today':
                 $date = new \DateTime();
+
                 break;
             case 'yesterday':
                 $date = new \DateTime();
                 $date->sub(new \DateInterval('P1D'));
+
                 break;
             case 'first_day_of_the_week':
                 $date = $this->getFirstDayOfTheWeek();
+
                 break;
             case 'last_day_of_the_week':
                 $date = $this->getLastDayOfTheWeek();
+
                 break;
             case 'first_day_of_next_week':
                 $date = $this->getFirstDayOfNextWeek();
+
                 break;
             case 'first_day_of_the_month':
                 $date = $this->getFirstDayOfTheMonth();
+
                 break;
             case 'last_day_of_the_month':
                 $date = $this->getLastDayOfTheMonth();
+
                 break;
             case 'first_day_of_next_month':
                 $date = $this->getFirstDayOfNextMonth();
+
                 break;
             case 'first_day_of_previous_month':
                 $date = $this->getFirstDayOfPreviousMonth();
+
                 break;
             case 'last_day_of_previous_month':
                 $date = $this->getLastDayOfPreviousMonth();
+
                 break;
             case 'first_day_of_the_year':
                 $date = $this->getFirstDayOfTheYear();
+
                 break;
             default:
                 $date = \DateTime::createFromFormat('Y-m-d', $string);
+
                 break;
         }
 

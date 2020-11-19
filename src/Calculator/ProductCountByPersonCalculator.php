@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -19,8 +19,6 @@ use App\Entity\Person;
 class ProductCountByPersonCalculator
 {
     /**
-     * @param Person $person
-     *
      * @return int
      */
     public function calculateAsDesigner(Person $person)
@@ -31,8 +29,6 @@ class ProductCountByPersonCalculator
     }
 
     /**
-     * @param Person $person
-     *
      * @return int
      */
     public function calculateAsArtist(Person $person)
@@ -43,8 +39,6 @@ class ProductCountByPersonCalculator
     }
 
     /**
-     * @param Person $person
-     *
      * @return int
      */
     public function calculateAsPublisher(Person $person)

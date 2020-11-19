@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -26,8 +26,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class TopicController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function indexWithTaxonsAction(Request $request)
@@ -60,8 +58,7 @@ class TopicController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param string  $slug
+     * @param string $slug
      *
      * @return Response
      */
@@ -104,8 +101,6 @@ class TopicController extends ResourceController
     }
 
     /**
-     * @param Taxon $taxon
-     *
      * @throws AccessDeniedException
      */
     protected function taxonIsGrantedOr403(Taxon $taxon)

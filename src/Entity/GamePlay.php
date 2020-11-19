@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 18/03/2016
- * Time: 13:25.
+
+/*
+ * This file is part of the Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace App\Entity;
@@ -113,17 +116,11 @@ class GamePlay implements ResourceInterface
         $this->playedAt = new \DateTime();
     }
 
-    /**
-     * @return string|null
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * @param string|null $code
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
@@ -137,89 +134,56 @@ class GamePlay implements ResourceInterface
         return $this->duration;
     }
 
-    /**
-     * @param int|null $duration
-     */
     public function setDuration(?int $duration): void
     {
         $this->duration = $duration;
     }
 
-    /**
-     * @return int|null
-     */
     public function getPlayerCount(): ?int
     {
         return $this->playerCount;
     }
 
-    /**
-     * @param int|null $playerCount
-     */
     public function setPlayerCount(?int $playerCount): void
     {
         $this->playerCount = $playerCount;
     }
 
-    /**
-     * @return \DateTime|null
-     */
     public function getPlayedAt(): ?\DateTime
     {
         return $this->playedAt;
     }
 
-    /**
-     * @param \DateTime|null $playedAt
-     */
     public function setPlayedAt(?\DateTime $playedAt): void
     {
         $this->playedAt = $playedAt;
     }
 
-    /**
-     * @return ProductInterface|null
-     */
     public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
-    /**
-     * @param ProductInterface|null $product
-     */
     public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
     }
 
-    /**
-     * @return CustomerInterface|null
-     */
     public function getAuthor(): ?CustomerInterface
     {
         return $this->author;
     }
 
-    /**
-     * @param CustomerInterface|null $author
-     */
     public function setAuthor(?CustomerInterface $author): void
     {
         $this->author = $author;
     }
 
-    /**
-     * @return Topic|null
-     */
     public function getTopic(): ?Topic
     {
         return $this->topic;
     }
 
-    /**
-     * @param Topic|null $topic
-     */
     public function setTopic(?Topic $topic): void
     {
         $this->topic = $topic;
@@ -237,19 +201,11 @@ class GamePlay implements ResourceInterface
         return $this->images;
     }
 
-    /**
-     * @param GamePlayImage $image
-     *
-     * @return bool
-     */
     public function hasImage(GamePlayImage $image): bool
     {
         return $this->images->contains($image);
     }
 
-    /**
-     * @param GamePlayImage $image
-     */
     public function addImage(GamePlayImage $image): void
     {
         if (!$this->hasImage($image)) {
@@ -258,25 +214,16 @@ class GamePlay implements ResourceInterface
         }
     }
 
-    /**
-     * @param GamePlayImage $image
-     */
     public function removeImage(GamePlayImage $image): void
     {
         $this->images->removeElement($image);
     }
 
-    /**
-     * @return int
-     */
     public function getImageCount(): int
     {
         return $this->imageCount;
     }
 
-    /**
-     * @param int $imageCount
-     */
     public function setImageCount(int $imageCount): void
     {
         $this->imageCount = $imageCount;
@@ -290,19 +237,11 @@ class GamePlay implements ResourceInterface
         return $this->players;
     }
 
-    /**
-     * @param Player $player
-     *
-     * @return bool
-     */
     public function hasPlayer(Player $player): bool
     {
         return $this->players->contains($player);
     }
 
-    /**
-     * @param Player $player
-     */
     public function addPlayer(Player $player): void
     {
         if (!$this->hasPlayer($player)) {
@@ -311,9 +250,6 @@ class GamePlay implements ResourceInterface
         }
     }
 
-    /**
-     * @param Player $player
-     */
     public function removePlayer(Player $player): void
     {
         $this->players->removeElement($player);

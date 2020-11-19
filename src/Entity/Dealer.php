@@ -1,9 +1,9 @@
 <?php
 
-/**
- * This file is part of Jedisjeux project.
+/*
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -86,41 +86,26 @@ class Dealer implements ResourceInterface
         $this->pubBanners = new ArrayCollection();
     }
 
-    /**
-     * @return string|null
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * @param string|null $code
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return DealerImage|null
-     */
     public function getImage(): ?DealerImage
     {
         return $this->image;
@@ -134,25 +119,16 @@ class Dealer implements ResourceInterface
         $this->image = $image;
     }
 
-    /**
-     * @return bool
-     */
     public function hasPriceList(): bool
     {
         return null !== $this->priceList;
     }
 
-    /**
-     * @return PriceList|null
-     */
     public function getPriceList(): ?PriceList
     {
         return $this->priceList;
     }
 
-    /**
-     * @param PriceList|null $priceList
-     */
     public function setPriceList(?PriceList $priceList): void
     {
         $priceList->setDealer($this);
@@ -167,19 +143,11 @@ class Dealer implements ResourceInterface
         return $this->pubBanners;
     }
 
-    /**
-     * @param PubBanner $pubBanner
-     *
-     * @return bool
-     */
     public function hasPubBanner(PubBanner $pubBanner): bool
     {
         return $this->pubBanners->contains($pubBanner);
     }
 
-    /**
-     * @param PubBanner $pubBanner
-     */
     public function addPubBanner(PubBanner $pubBanner): void
     {
         if (!$this->hasPubBanner($pubBanner)) {
@@ -188,9 +156,6 @@ class Dealer implements ResourceInterface
         }
     }
 
-    /**
-     * @param PubBanner $pubBanner
-     */
     public function removePubBanner(PubBanner $pubBanner): void
     {
         $this->pubBanners->removeElement($pubBanner);
@@ -205,19 +170,11 @@ class Dealer implements ResourceInterface
         return $this->contacts;
     }
 
-    /**
-     * @param DealerContact $contact
-     *
-     * @return bool
-     */
     public function hasContact(DealerContact $contact): bool
     {
         return $this->contacts->contains($contact);
     }
 
-    /**
-     * @param DealerContact $contact
-     */
     public function addContact(DealerContact $contact): void
     {
         if (!$this->hasContact($contact)) {
@@ -226,9 +183,6 @@ class Dealer implements ResourceInterface
         }
     }
 
-    /**
-     * @param DealerContact $contact
-     */
     public function removeContact(DealerContact $contact): void
     {
         $this->contacts->removeElement($contact);

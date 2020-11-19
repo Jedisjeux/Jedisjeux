@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -33,9 +33,7 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
     private $customerRepository;
 
     /**
-     * @param string              $dataClass
-     * @param array               $validationGroups
-     * @param RepositoryInterface $customerRepository
+     * @param string $dataClass
      */
     public function __construct($dataClass, array $validationGroups, RepositoryInterface $customerRepository)
     {

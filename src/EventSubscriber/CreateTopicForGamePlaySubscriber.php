@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -41,10 +41,6 @@ class CreateTopicForGamePlaySubscriber implements EventSubscriberInterface
 
     /**
      * CreateTopicForGamePlaySubscriber constructor.
-     *
-     * @param ObjectManager   $manager
-     * @param TopicRepository $topicRepository
-     * @param TopicFactory    $topicFactory
      */
     public function __construct(ObjectManager $manager, TopicRepository $topicRepository, TopicFactory $topicFactory)
     {
@@ -63,9 +59,6 @@ class CreateTopicForGamePlaySubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function onCreate(GenericEvent $event)
     {
         /** @var Post $post */

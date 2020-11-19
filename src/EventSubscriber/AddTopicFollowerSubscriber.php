@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -31,8 +31,6 @@ class AddTopicFollowerSubscriber implements EventSubscriberInterface
 
     /**
      * AddTopicFollowerSubscriber constructor.
-     *
-     * @param CustomerContextInterface $customerContext
      */
     public function __construct(CustomerContextInterface $customerContext)
     {
@@ -50,9 +48,6 @@ class AddTopicFollowerSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function onTopicCreate(GenericEvent $event)
     {
         /** @var Topic $topic */
@@ -61,9 +56,6 @@ class AddTopicFollowerSubscriber implements EventSubscriberInterface
         $topic->addFollower($this->getCustomer());
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function onPostCreate(GenericEvent $event)
     {
         /** @var Post $post */

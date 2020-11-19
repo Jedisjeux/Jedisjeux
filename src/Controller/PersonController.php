@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -22,8 +22,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PersonController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexWithTaxonsAction(Request $request)
@@ -54,8 +52,7 @@ class PersonController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param string  $slug
+     * @param string $slug
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

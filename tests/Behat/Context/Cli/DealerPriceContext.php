@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Mobizel
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -33,9 +33,6 @@ class DealerPriceContext extends DefaultContext
     private $importDealersPricesCommand;
 
     /**
-     * @param KernelInterface            $kernel
-     * @param RepositoryInterface        $dealerPriceRepository
-     * @param ImportDealersPricesCommand $importDealersPricesCommand
      */
     public function __construct(
         KernelInterface $kernel,
@@ -96,7 +93,6 @@ class DealerPriceContext extends DefaultContext
     }
 
     /**
-     * @param string $name
      */
     private function iExecuteCommand(string $name)
     {

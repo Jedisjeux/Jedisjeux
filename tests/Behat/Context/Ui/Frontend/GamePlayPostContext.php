@@ -1,8 +1,9 @@
 <?php
+
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -36,9 +37,6 @@ final class GamePlayPostContext implements Context
     private $gamePlayShowPage;
 
     /**
-     * @param CreateForGamePlayPage $createPage
-     * @param UpdateForGamePlayPage $updatePage
-     * @param GamePlayPage\ShowPage $gamePlayShowPage
      */
     public function __construct(
         CreateForGamePlayPage $createPage,

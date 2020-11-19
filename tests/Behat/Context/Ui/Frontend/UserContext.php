@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Mobizel
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -30,8 +30,6 @@ final class UserContext implements Context
     private $gameLibraryPage;
 
     /**
-     * @param ShowPage        $showPage
-     * @param GameLibraryPage $gameLibraryPage
      */
     public function __construct(ShowPage $showPage, GameLibraryPage $gameLibraryPage)
     {

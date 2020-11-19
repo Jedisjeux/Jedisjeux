@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -35,10 +35,6 @@ class ProductRepository extends BaseProductRepository
      */
     private $associationHydrator;
 
-    /**
-     * @param EntityManager         $entityManager
-     * @param Mapping\ClassMetadata $class
-     */
     public function __construct(EntityManager $entityManager, Mapping\ClassMetadata $class)
     {
         parent::__construct($entityManager, $class);
@@ -49,10 +45,6 @@ class ProductRepository extends BaseProductRepository
     /**
      * @param $localeCode
      * @param bool $onlyPublished
-     * @param array $criteria
-     * @param TaxonInterface|null $taxon
-     * @param Person|null $person
-     * @param YearAward|null $yearAward
      *
      * @return QueryBuilder
      */
@@ -191,9 +183,7 @@ class ProductRepository extends BaseProductRepository
     }
 
     /**
-     * @param string $locale
-     * @param string $slug
-     * @param bool   $showUnpublished
+     * @param bool $showUnpublished
      *
      * @return ProductInterface|null
      *
@@ -269,10 +259,6 @@ class ProductRepository extends BaseProductRepository
 
     /**
      * Count products categorized under given taxon.
-     *
-     * @param TaxonInterface $taxon
-     *
-     * @return int
      */
     public function countByTaxon(TaxonInterface $taxon): int
     {

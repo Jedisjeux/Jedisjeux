@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Mobizel
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,11 +21,6 @@ interface ProductVariantInterface extends BaseProductVariantInterface
      */
     public function getBoxes(): Collection;
 
-    /**
-     * @param ProductBox $box
-     *
-     * @return bool
-     */
     public function hasBox(ProductBox $box): bool;
 
     /**
@@ -38,8 +33,5 @@ interface ProductVariantInterface extends BaseProductVariantInterface
      */
     public function removeBox(ProductBox $box): void;
 
-    /**
-     * @return ProductBox|null
-     */
     public function getEnabledBox(): ?ProductBox;
 }

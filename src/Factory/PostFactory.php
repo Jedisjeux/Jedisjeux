@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -35,7 +35,6 @@ class PostFactory implements FactoryInterface
 
     /**
      * @param string $className
-     * @param CustomerContextInterface $customerContext
      */
     public function __construct($className, CustomerContextInterface $customerContext)
     {
@@ -72,8 +71,6 @@ class PostFactory implements FactoryInterface
     }
 
     /**
-     * @param GamePlay $gamePlay
-     *
      * @return Post
      */
     public function createForGamePlay(GamePlay $gamePlay)
@@ -88,8 +85,6 @@ class PostFactory implements FactoryInterface
     }
 
     /**
-     * @param Article $article
-     *
      * @return Post
      */
     public function createForArticle(Article $article)

@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -25,8 +25,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ProductController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function indexWithTaxonsAction(Request $request)
@@ -54,8 +52,7 @@ class ProductController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param string  $slug
+     * @param string $slug
      *
      * @return Response
      */
@@ -90,8 +87,7 @@ class ProductController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param string  $slug
+     * @param string $slug
      *
      * @return Response
      */
@@ -126,8 +122,6 @@ class ProductController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function showStatusAction(Request $request)
@@ -160,8 +154,6 @@ class ProductController extends ResourceController
     }
 
     /**
-     * @param ProductInterface $product
-     *
      * @return \SM\StateMachine\StateMachineInterface
      */
     protected function getStateMachine(ProductInterface $product)
