@@ -54,10 +54,11 @@ col-sm-9
     {% import _self as self %}
     {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
 
-    {% spaceless %}
+    {% apply spaceless %}
         <div data-form-type="collection" {{ block('widget_container_attributes') }}
                 {% if prototype is defined and allow_add %}
-                    data-prototype='{{ self.collection_item(prototype, allow_delete, button_delete_label, '__name__')|e }}'
+                    data-prototype='{{ self.collection_item(prototype, allow_delete, button_delete_label, prototype.vars.name)|e }}'
+                    data-prototype-name='{{ prototype.vars.name }}'
                 {%- endif -%}
         >
             {{ error(form.vars.errors) }}
@@ -81,11 +82,11 @@ col-sm-9
                 </a>
             {% endif %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {%- endblock collection_widget %}
 
 {% macro collection_item(form, allow_delete, button_delete_label, index) %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div data-form-collection="item" data-form-collection-index="{{ index }}">
             {{ form_widget(form) }}
             {% if allow_delete %}
@@ -95,7 +96,7 @@ col-sm-9
                 </a>
             {% endif %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endmacro %}
 
 {% block _app_game_play_duration_row %}
