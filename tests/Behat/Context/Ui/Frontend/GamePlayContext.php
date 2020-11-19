@@ -22,24 +22,9 @@ use Webmozart\Assert\Assert;
 
 final class GamePlayContext implements Context
 {
-    /**
-     * @var IndexPage
-     */
     private $indexPage;
-
-    /**
-     * @var IndexByProductPage
-     */
     private $indexByProductPage;
-
-    /**
-     * @var CreatePage
-     */
     private $createPage;
-
-    /**
-     * @var UpdatePage
-     */
     private $updatePage;
 
     public function __construct(
@@ -114,6 +99,14 @@ final class GamePlayContext implements Context
     public function iSpecifyItsPlayerCountAs(int $playerCount = null)
     {
         $this->createPage->setPlayerCount($playerCount);
+    }
+
+    /**
+     * @Given I attach the :path image
+     */
+    public function iAttachTheImage(string $path): void
+    {
+        $this->createPage->attachImage($path);
     }
 
     /**
