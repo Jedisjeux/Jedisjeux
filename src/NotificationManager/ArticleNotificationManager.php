@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -51,12 +51,6 @@ class ArticleNotificationManager
 
     /**
      * ProductNotificationManager constructor.
-     *
-     * @param NotificationFactory $factory
-     * @param ObjectManager       $manager
-     * @param UserRepository      $userRepository
-     * @param RouterInterface     $router
-     * @param TranslatorInterface $translator
      */
     public function __construct(
         NotificationFactory $factory,
@@ -72,9 +66,6 @@ class ArticleNotificationManager
         $this->translator = $translator;
     }
 
-    /**
-     * @param Article $article
-     */
     public function notifyReviewers(Article $article)
     {
         /** @var UserInterface[] $users */
@@ -85,9 +76,6 @@ class ArticleNotificationManager
         ]), $article, $users);
     }
 
-    /**
-     * @param Article $article
-     */
     public function notifyPublishers(Article $article)
     {
         /** @var UserInterface[] $users */
@@ -99,9 +87,7 @@ class ArticleNotificationManager
     }
 
     /**
-     * @param string  $message
-     * @param Article $article
-     * @param array   $users
+     * @param string $message
      */
     protected function notifyUsers($message, Article $article, array $users)
     {

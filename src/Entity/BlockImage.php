@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jdj project.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -35,33 +35,21 @@ class BlockImage extends AbstractImage
      */
     protected $linkUrl;
 
-    /**
-     * @return string|null
-     */
     public function getLabel(): ?string
     {
         return $this->label;
     }
 
-    /**
-     * @param string|null $label
-     */
     public function setLabel(?string $label): void
     {
         $this->label = $label;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLinkUrl(): ?string
     {
         return $this->linkUrl;
     }
 
-    /**
-     * @param string|null $linkUrl
-     */
     public function setLinkUrl(?string $linkUrl): void
     {
         $this->linkUrl = $linkUrl;

@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -23,8 +23,6 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class PersonRepository extends EntityRepository
 {
     /**
-     * @param TaxonInterface|null $taxon
-     *
      * @return QueryBuilder
      */
     public function createListQueryBuilder(TaxonInterface $taxon = null)
@@ -50,10 +48,6 @@ class PersonRepository extends EntityRepository
     }
 
     /**
-     * @param array               $criteria
-     * @param array               $sorting
-     * @param TaxonInterface|null $taxon
-     *
      * @return QueryBuilder
      */
     public function createFrontendListQueryBuilder(array $criteria = [], array $sorting = [], TaxonInterface $taxon = null)
@@ -147,9 +141,6 @@ class PersonRepository extends EntityRepository
     /**
      * Create paginator for products categorized under given taxon.
      *
-     * @param TaxonInterface $taxon
-     * @param array          $criteria
-     * @param array          $sorting
      *
      * @return Pagerfanta
      */
@@ -188,11 +179,6 @@ class PersonRepository extends EntityRepository
         return $queryBuilder->getQuery()->getSingleScalarResult();
     }
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     * @param array        $criteria
-     * @param array        $sorting
-     */
     private function sortingOnProductCountIfNecessary(QueryBuilder $queryBuilder, array $criteria, array $sorting)
     {
         $role = $criteria['role'] ?? null;
@@ -212,11 +198,6 @@ class PersonRepository extends EntityRepository
         }
     }
 
-    /**
-     * @param string $role
-     *
-     * @return null|string
-     */
     private function getProductCountPropertyNameByRole(string $role): ?string
     {
         switch ($role) {

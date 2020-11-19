@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -28,8 +28,6 @@ class AbstractProductAssociationUpdater
 
     /**
      * AbstractProductAssociationUpdater constructor.
-     *
-     * @param FactoryInterface $factory
      */
     public function __construct(FactoryInterface $factory)
     {
@@ -37,9 +35,6 @@ class AbstractProductAssociationUpdater
     }
 
     /**
-     * @param ProductInterface                $product
-     * @param ProductAssociationTypeInterface $associationType
-     *
      * @return ProductAssociationInterface
      */
     protected function getProductAssociationByType(ProductInterface $product, ProductAssociationTypeInterface $associationType)

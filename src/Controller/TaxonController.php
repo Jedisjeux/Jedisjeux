@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -27,8 +27,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class TaxonController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function indexByCodeAction(Request $request)
@@ -58,8 +56,6 @@ class TaxonController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     *
      * @return null|TaxonInterface
      */
     protected function getCurrent(Request $request)

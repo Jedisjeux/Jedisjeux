@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -31,7 +31,6 @@ class LoginPage extends SymfonyPage
     }
 
     /**
-     * @param string|null $password
      *
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
@@ -41,7 +40,6 @@ class LoginPage extends SymfonyPage
     }
 
     /**
-     * @param string $username
      *
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      */

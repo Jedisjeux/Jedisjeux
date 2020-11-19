@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -49,10 +49,6 @@ class ProductContext implements Context
     private $indexByPersonPage;
 
     /**
-     * @param ShowPage          $showPage
-     * @param IndexPage         $indexPage
-     * @param IndexByTaxonPage  $indexByTaxonPage
-     * @param IndexByPersonPage $indexByPersonPage
      */
     public function __construct(
         ShowPage $showPage,

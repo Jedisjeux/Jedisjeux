@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux projet.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -29,8 +29,6 @@ class CalculateTopicCountByTaxonSubscriber implements EventSubscriberInterface
 
     /**
      * TopicCountByTaxonSubscriber constructor.
-     *
-     * @param TopicCountByTaxonUpdater $updater
      */
     public function __construct(TopicCountByTaxonUpdater $updater)
     {
@@ -47,9 +45,6 @@ class CalculateTopicCountByTaxonSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function onTopicCreate(GenericEvent $event)
     {
         /** @var Topic $topic */

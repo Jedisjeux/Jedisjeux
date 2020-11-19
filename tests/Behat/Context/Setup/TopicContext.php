@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -43,10 +43,6 @@ class TopicContext implements Context
     protected $manager;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param TopicExampleFactory    $topicFactory
-     * @param RepositoryInterface    $topicRepository
-     * @param ObjectManager          $manager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -67,7 +63,6 @@ class TopicContext implements Context
      * @Given I wrote a topic with title :title
      *
      * @param string                 $title
-     * @param CustomerInterface|null $customer
      */
     public function thereIsTopicWithTitleWrittenByCustomer($title, CustomerInterface $customer = null, $date = 'now')
     {
@@ -89,7 +84,6 @@ class TopicContext implements Context
     /**
      * @Given this topic belongs to :taxon category
      *
-     * @param TaxonInterface $taxon
      */
     public function thisTopicBelongsToCategory(TaxonInterface $taxon)
     {

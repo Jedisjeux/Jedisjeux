@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -110,7 +110,6 @@ class PostContext implements Context
      * @Given /^(this article) has(?:| also) a comment added by (customer "[^"]+")$/
      * @Given /^I leaved a comment on (this article)$/
      *
-     * @param Article           $article
      * @param CustomerInterface $customer
      */
     public function articleHasACommentAddedByCustomer(Article $article, CustomerInterface $customer = null)
@@ -143,7 +142,6 @@ class PostContext implements Context
      * @Given /^(this game play) has(?:| also) a comment added by (customer "[^"]+")$/
      * @Given /^I leaved a comment on (this game play)$/
      *
-     * @param GamePlay          $gamePlay
      * @param CustomerInterface $customer
      */
     public function gamePlayHasACommentAddedByCustomer(GamePlay $gamePlay, CustomerInterface $customer = null)

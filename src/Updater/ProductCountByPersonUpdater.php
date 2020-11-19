@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -26,17 +26,12 @@ class ProductCountByPersonUpdater
 
     /**
      * ProductCountByTaxonUpdater constructor.
-     *
-     * @param ProductCountByPersonCalculator $calculator
      */
     public function __construct(ProductCountByPersonCalculator $calculator)
     {
         $this->calculator = $calculator;
     }
 
-    /**
-     * @param Person $person
-     */
     public function update(Person $person)
     {
         $productCountAsDesigner = $this->calculator->calculateAsDesigner($person);

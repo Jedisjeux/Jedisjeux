@@ -1,4 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+
+/*
+ * This file is part of the Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
 
 namespace DoctrineMigrations;
 
@@ -10,10 +21,10 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20181029134345 extends AbstractMigration
 {
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE jdj_product_video_image (id INT AUTO_INCREMENT NOT NULL, path VARCHAR(255) DEFAULT NULL, created_at DATETIME DEFAULT NULL, updated_at DATETIME DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE jdj_product_video ADD image_id INT DEFAULT NULL');
@@ -21,10 +32,10 @@ final class Version20181029134345 extends AbstractMigration
         $this->addSql('CREATE UNIQUE INDEX UNIQ_E31718863DA5256D ON jdj_product_video (image_id)');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE jdj_product_video DROP FOREIGN KEY FK_E31718863DA5256D');
         $this->addSql('DROP TABLE jdj_product_video_image');

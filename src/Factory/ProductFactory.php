@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -15,7 +15,6 @@ use App\Entity\Person;
 use App\Entity\Product;
 use App\Entity\ProductVariant;
 use App\Entity\ProductVariantImage;
-use App\Entity\BggProduct;
 use Gedmo\Sluggable\Util\Urlizer;
 use Sylius\Component\Product\Factory\ProductFactory as BaseProductFactory;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
@@ -47,14 +46,6 @@ class ProductFactory extends BaseProductFactory
      */
     private $slugGenerator;
 
-    /**
-     * @param FactoryInterface $factory
-     * @param FactoryInterface $variantFactory
-     * @param FactoryInterface $productVariantImageFactory
-     * @param BggProductFactory $bggProductFactory,
-     * @param SlugGeneratorInterface $slugGenerator
-     * @param RepositoryInterface $personRepository
-     */
     public function __construct(
         FactoryInterface $factory,
         FactoryInterface $variantFactory,

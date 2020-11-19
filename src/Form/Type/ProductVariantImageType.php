@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -20,10 +20,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ProductVariantImageType extends AbstractImageType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);

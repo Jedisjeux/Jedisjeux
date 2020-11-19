@@ -1,9 +1,9 @@
 <?php
 
-/**
- * This file is part of Jedisjeux.
+/*
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -24,7 +24,6 @@ class UpdatePage extends SymfonyPage
     }
 
     /**
-     * @param string|null $title
      *
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
@@ -34,7 +33,6 @@ class UpdatePage extends SymfonyPage
     }
 
     /**
-     * @param string|null $comment
      *
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      */
@@ -44,7 +42,6 @@ class UpdatePage extends SymfonyPage
     }
 
     /**
-     * @param int $rate
      *
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      */

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -25,10 +25,6 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class ProductVariantType extends AbstractType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);

@@ -1,9 +1,9 @@
 <?php
 
-/**
- * This file is part of Jedisjeux.
+/*
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -35,33 +35,21 @@ class PubBanner extends AbstractImage
      */
     protected $dealer;
 
-    /**
-     * @return string|null
-     */
     public function getTargetUrl(): ?string
     {
         return $this->targetUrl;
     }
 
-    /**
-     * @param string|null $targetUrl
-     */
     public function setTargetUrl(?string $targetUrl): void
     {
         $this->targetUrl = $targetUrl;
     }
 
-    /**
-     * @return Dealer|null
-     */
     public function getDealer(): ?Dealer
     {
         return $this->dealer;
     }
 
-    /**
-     * @param Dealer|null $dealer
-     */
     public function setDealer(?Dealer $dealer): void
     {
         $this->dealer = $dealer;

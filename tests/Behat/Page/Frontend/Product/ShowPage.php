@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -30,7 +30,6 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * @return string
      *
      * @throws ElementNotFoundException
      */
@@ -40,7 +39,6 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * @return string
      *
      * @throws ElementNotFoundException
      */
@@ -62,7 +60,6 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * @return array
      *
      * @throws ElementNotFoundException
      */
@@ -74,7 +71,6 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * @return array
      *
      * @throws ElementNotFoundException
      */
@@ -86,7 +82,6 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * @return array
      *
      * @throws ElementNotFoundException
      */
@@ -98,7 +93,6 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * @return array
      *
      * @throws ElementNotFoundException
      */
@@ -110,7 +104,6 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * @return array
      *
      * @throws ElementNotFoundException
      */
@@ -147,9 +140,7 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * @param string $title
      *
-     * @return bool
      *
      * @throws ElementNotFoundException
      */
@@ -159,9 +150,7 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * @param string $title
      *
-     * @return bool
      *
      * @throws ElementNotFoundException
      */
@@ -171,9 +160,7 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * @param string $name
      *
-     * @return bool
      *
      * @throws ElementNotFoundException
      */
@@ -183,9 +170,7 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * @param string $email
      *
-     * @return bool
      *
      * @throws ElementNotFoundException
      */
@@ -195,9 +180,7 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * @param string $title
      *
-     * @return bool
      *
      * @throws ElementNotFoundException
      */
@@ -207,9 +190,7 @@ class ShowPage extends SymfonyPage
     }
 
     /**
-     * @param string $title
      *
-     * @return bool
      *
      * @throws ElementNotFoundException
      */

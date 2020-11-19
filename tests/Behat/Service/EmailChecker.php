@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -26,7 +26,6 @@ final class EmailChecker implements EmailCheckerInterface
     private $spoolDirectory;
 
     /**
-     * @param string $spoolDirectory
      */
     public function __construct(string $spoolDirectory)
     {
@@ -97,10 +96,7 @@ final class EmailChecker implements EmailCheckerInterface
     }
 
     /**
-     * @param \Swift_Message $message
-     * @param string         $recipient
      *
-     * @return bool
      */
     private function isMessageTo(\Swift_Message $message, string $recipient): bool
     {
@@ -108,7 +104,6 @@ final class EmailChecker implements EmailCheckerInterface
     }
 
     /**
-     * @param string $recipient
      *
      * @throws \InvalidArgumentException
      */
@@ -124,7 +119,6 @@ final class EmailChecker implements EmailCheckerInterface
     }
 
     /**
-     * @param string $directory
      *
      * @return array|\Swift_Message[]
      */

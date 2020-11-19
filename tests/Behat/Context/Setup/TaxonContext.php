@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -45,10 +45,6 @@ class TaxonContext implements Context
     protected $manager;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param TaxonExampleFactory    $taxonFactory
-     * @param RepositoryInterface    $taxonRepository
-     * @param EntityManagerInterface $manager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -183,7 +179,6 @@ class TaxonContext implements Context
     }
 
     /**
-     * @param array $codes
      */
     protected function createDefaultTaxonomies(array $codes)
     {

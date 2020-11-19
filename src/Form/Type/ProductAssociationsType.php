@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -33,10 +33,6 @@ final class ProductAssociationsType extends AbstractType
      */
     protected $productsToProductAssociationsTransformer;
 
-    /**
-     * @param RepositoryInterface      $productAssociationTypeRepository
-     * @param DataTransformerInterface $productsToProductAssociationsTransformer
-     */
     public function __construct(
         RepositoryInterface $productAssociationTypeRepository,
         DataTransformerInterface $productsToProductAssociationsTransformer

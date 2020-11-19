@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jdj.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Mobizel
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -41,33 +41,21 @@ class ProductListItem implements ResourceInterface
      */
     protected $product;
 
-    /**
-     * @return ProductList|null
-     */
     public function getList(): ?ProductList
     {
         return $this->list;
     }
 
-    /**
-     * @param ProductList|null $list
-     */
     public function setList(?ProductList $list): void
     {
         $this->list = $list;
     }
 
-    /**
-     * @return ProductInterface|null
-     */
     public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
-    /**
-     * @param ProductInterface|null $product
-     */
     public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;

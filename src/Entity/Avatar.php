@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic_425
- * Date: 14/03/16
- * Time: 13:09.
+
+/*
+ * This file is part of the Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace App\Entity;
@@ -23,8 +26,6 @@ class Avatar extends AbstractImage
 {
     /**
      * The path to the  path files.
-     *
-     * @return string
      */
     protected function getUploadDir(): string
     {

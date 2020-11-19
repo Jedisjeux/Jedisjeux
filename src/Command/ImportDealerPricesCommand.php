@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -282,17 +282,20 @@ EOT
                 case 'Disponible':
                 case 'disponible':
                     $status = DealerPrice::STATUS_AVAILABLE;
+
                     break;
                 case 'En cours de réappro':
                 case 'Rupture':
                 case 'indisponible':
                 case 'Indisponible':
                     $status = DealerPrice::STATUS_OUT_OF_STOCK;
+
                     break;
                 case 'Pr?commande':
                 case 'En précommande':
                 case 'prcommande' === preg_replace('/[^a-z]/', '', $rowData[3]):
                     $status = DealerPrice::STATUS_PRE_ORDER;
+
                     break;
                 default:
                     $this->output->writeln(sprintf('<error>Status with code %s does not exist on %s</error>', $rowData[3], $rowData[0]));

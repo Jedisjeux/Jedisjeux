@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jdj.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Mobizel
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -34,9 +34,6 @@ class UpdateLastTopicPostCreatedAtSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function onTopicCreate(GenericEvent $event)
     {
         /** @var Topic $topic */
@@ -46,9 +43,6 @@ class UpdateLastTopicPostCreatedAtSubscriber implements EventSubscriberInterface
         $topic->setLastPostCreatedAt(new \DateTime());
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function onPostCreate(GenericEvent $event)
     {
         /** @var Post $post */

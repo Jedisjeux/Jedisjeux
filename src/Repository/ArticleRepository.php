@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -25,9 +25,6 @@ class ArticleRepository extends EntityRepository
 {
     /**
      * @param $productId
-     * @param int $count
-     *
-     * @return array
      */
     public function findLatestByProductId($productId, int $count): array
     {
@@ -81,10 +78,7 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
-     * @param string   $localeCode
      * @param null|int $productId
-     *
-     * @return QueryBuilder
      */
     public function createListQueryBuilder(string $localeCode, $productId): QueryBuilder
     {
@@ -106,14 +100,6 @@ class ArticleRepository extends EntityRepository
         return $queryBuilder;
     }
 
-    /**
-     * @param string      $localeCode
-     * @param string|null $taxonSlug
-     * @param string|null $productSlug
-     * @param array       $criteria
-     *
-     * @return QueryBuilder
-     */
     public function createFrontendListQueryBuilder(string $localeCode, string $taxonSlug = null, string $productSlug = null, array $criteria = []): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');
@@ -190,8 +176,6 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
-     * @param array|null  $criteria
-     * @param array|null  $sorting
      * @param string|null $status
      *
      * @return Pagerfanta
@@ -249,10 +233,7 @@ class ArticleRepository extends EntityRepository
     /**
      * Create paginator for products categorized under given taxon.
      *
-     * @param TaxonInterface $taxon
-     * @param array|null     $criteria
-     * @param array|null     $sorting
-     * @param string         $status
+     * @param string $status
      *
      * @return Pagerfanta
      */

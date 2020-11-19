@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Mobizel
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -48,13 +48,6 @@ class ProductFileNotificationManager
      */
     private $manager;
 
-    /**
-     * @param UserRepositoryInterface $appUserRepository
-     * @param FactoryInterface        $notificationFactory
-     * @param RouterInterface         $router
-     * @param ObjectManager           $manager
-     * @param TranslatorInterface     $translator
-     */
     public function __construct(
         UserRepositoryInterface $appUserRepository,
         FactoryInterface $notificationFactory,
@@ -69,9 +62,6 @@ class ProductFileNotificationManager
         $this->manager = $manager;
     }
 
-    /**
-     * @param ProductFile $productFile
-     */
     public function notifyModerators(ProductFile $productFile)
     {
         /** @var UserInterface[] $users */
@@ -91,9 +81,6 @@ class ProductFileNotificationManager
         );
     }
 
-    /**
-     * @param ProductFile $productFile
-     */
     public function notifyAuthor(ProductFile $productFile)
     {
         $target = $this->router->generate('app_frontend_account_games_library');
@@ -117,9 +104,7 @@ class ProductFileNotificationManager
     }
 
     /**
-     * @param string      $message
-     * @param ProductFile $productFile
-     * @param array       $users
+     * @param string $message
      */
     private function notifyUsers($message, ProductFile $productFile, string $target, array $users)
     {

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -18,9 +18,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 trait LogMemoryUsageTrait
 {
-    /**
-     * @param OutputInterface $output
-     */
     public function logMemoryUsage(OutputInterface $output)
     {
         $output->writeln(sprintf('Memory usage (currently) %dKB/ (max) %dKB', round(memory_get_usage(true) / 1024), memory_get_peak_usage(true) / 1024));

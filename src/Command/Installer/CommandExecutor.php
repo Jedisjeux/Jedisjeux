@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -39,11 +39,6 @@ final class CommandExecutor
      */
     private $application;
 
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     * @param Application     $application
-     */
     public function __construct(InputInterface $input, OutputInterface $output, Application $application)
     {
         $this->input = $input;

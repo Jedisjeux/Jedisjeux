@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -32,10 +32,6 @@ class ProductFileFactory implements FactoryInterface
      */
     private $customerContext;
 
-    /**
-     * @param FactoryInterface         $factory
-     * @param CustomerContextInterface $customerContext
-     */
     public function __construct(FactoryInterface $factory, CustomerContextInterface $customerContext)
     {
         $this->factory = $factory;
@@ -59,11 +55,6 @@ class ProductFileFactory implements FactoryInterface
         return $productFile;
     }
 
-    /**
-     * @param ProductInterface $product
-     *
-     * @return ProductFile
-     */
     public function createForProduct(ProductInterface $product): ProductFile
     {
         $productFile = $this->createNew();

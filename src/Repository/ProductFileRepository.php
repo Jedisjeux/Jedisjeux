@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,21 +11,13 @@
 
 namespace App\Repository;
 
-use App\Entity\Article;
 use App\Entity\ProductFile;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 class ProductFileRepository extends EntityRepository
 {
-    /**
-     * @param string $localeCode
-     *
-     * @return QueryBuilder
-     */
     public function createListQueryBuilder(string $localeCode): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');
@@ -49,9 +41,6 @@ class ProductFileRepository extends EntityRepository
 
     /**
      * @param $productId
-     * @param int $count
-     *
-     * @return array
      */
     public function findLatestByProductId($productId, int $count): array
     {
@@ -67,12 +56,6 @@ class ProductFileRepository extends EntityRepository
             ;
     }
 
-    /**
-     * @param string $localeCode
-     * @param string $productSlug
-     *
-     * @return QueryBuilder
-     */
     public function createListForProductSlugQueryBuilder(string $localeCode, string $productSlug): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');

@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -154,11 +154,6 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
             ->setAllowedTypes('children', ['array']);
     }
 
-    /**
-     * @param Taxon  $taxon
-     * @param string $localeCode
-     * @param array  $options
-     */
     private function createTranslation(Taxon $taxon, string $localeCode, array $options = []): void
     {
         $options = $this->optionsResolver->resolve($options);
@@ -171,9 +166,6 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $taxon->setSlug($options['slug'] ?: $this->taxonSlugGenerator->generate($taxon, $localeCode));
     }
 
-    /**
-     * @return iterable
-     */
     private function getLocales(): iterable
     {
         yield 'fr_FR';

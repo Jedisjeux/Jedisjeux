@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jdj.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Mobizel
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -43,10 +43,8 @@ class ArticleFeedDump
     /**
      * ArticleFeedDump constructor.
      *
-     * @param FeedDumpService  $feedDump
-     * @param EntityRepository $repository
-     * @param string           $rootDir
-     * @param string           $fileName
+     * @param string $rootDir
+     * @param string $fileName
      */
     public function __construct(FeedDumpService $feedDump, EntityRepository $repository, $rootDir, $fileName)
     {
@@ -56,17 +54,11 @@ class ArticleFeedDump
         $this->fileName = $fileName;
     }
 
-    /**
-     * @return string
-     */
     public function getRootDir(): string
     {
         return $this->rootDir;
     }
 
-    /**
-     * @return string
-     */
     public function getFileName(): string
     {
         return $this->fileName;

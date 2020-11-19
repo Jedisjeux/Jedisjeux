@@ -1,9 +1,9 @@
 <?php
 
-/**
- * This file is part of Jedisjeux.
+/*
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -28,8 +28,6 @@ class LiipSerializeHandler implements SubscribingHandlerInterface
 
     /**
      * LiipSerializeHandler constructor.
-     *
-     * @param CacheManager $manager
      */
     public function __construct(CacheManager $manager)
     {
@@ -52,10 +50,6 @@ class LiipSerializeHandler implements SubscribingHandlerInterface
     }
 
     /**
-     * @param VisitorInterface $visitor
-     * @param array            $imageData
-     * @param array            $type
-     *
      * @return string
      */
     public function serializeLiipSerializerTojson(VisitorInterface $visitor, array $imageData, array $type)

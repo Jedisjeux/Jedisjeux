@@ -1,9 +1,9 @@
 <?php
 
-/**
- * This file is part of Jedisjeux.
+/*
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -66,97 +66,61 @@ class PriceList implements ResourceInterface
      */
     protected $active = false;
 
-    /**
-     * @return Dealer|null
-     */
     public function getDealer(): ?Dealer
     {
         return $this->dealer;
     }
 
-    /**
-     * @param Dealer|null $dealer
-     */
     public function setDealer(?Dealer $dealer): void
     {
         $this->dealer = $dealer;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPath(): ?string
     {
         return $this->path;
     }
 
-    /**
-     * @param string|null $path
-     */
     public function setPath(?string $path): void
     {
         $this->path = $path;
     }
 
-    /**
-     * @return bool
-     */
     public function hasHeaders(): bool
     {
         return $this->headers;
     }
 
-    /**
-     * @param bool $headers
-     */
     public function setHeaders(bool $headers): void
     {
         $this->headers = $headers;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDelimiter(): ?string
     {
         return $this->delimiter;
     }
 
-    /**
-     * @param string|null $delimiter
-     */
     public function setDelimiter(?string $delimiter): void
     {
         $this->delimiter = $delimiter;
     }
 
-    /**
-     * @return bool
-     */
     public function isUtf8(): bool
     {
         return $this->utf8;
     }
 
-    /**
-     * @param bool $utf8
-     */
     public function setUtf8(bool $utf8): void
     {
         $this->utf8 = $utf8;
     }
 
-    /**
-     * @return bool
-     */
     public function isActive(): bool
     {
         return $this->active;
     }
 
-    /**
-     * @param bool $active
-     */
     public function setActive(bool $active): void
     {
         $this->active = $active;

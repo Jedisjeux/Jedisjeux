@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -13,7 +13,6 @@ namespace App\Factory;
 
 use App\Entity\Article;
 use App\Entity\Block;
-use Doctrine\ORM\EntityRepository;
 use Faker\Factory;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -45,12 +44,6 @@ class ArticleFactory implements FactoryInterface
      */
     protected $blockFactory;
 
-    /**
-     * @param string $className
-     * @param RepositoryInterface $productRepository
-     * @param CustomerContextInterface $customerContext
-     * @param FactoryInterface $blockFactory
-     */
     public function __construct(
         string $className,
         RepositoryInterface $productRepository,
@@ -76,8 +69,6 @@ class ArticleFactory implements FactoryInterface
     }
 
     /**
-     * @param ProductInterface $product
-     *
      * @return Article
      */
     public function createForProduct(ProductInterface $product)
@@ -89,8 +80,6 @@ class ArticleFactory implements FactoryInterface
     }
 
     /**
-     * @param ProductInterface $product
-     *
      * @return Article
      */
     public function createReviewArticleForProduct(ProductInterface $product)

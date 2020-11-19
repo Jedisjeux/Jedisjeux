@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -82,81 +82,51 @@ class ProductFile extends File implements ResourceInterface
         $this->status = static::STATUS_NEW;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * @param string|null $code
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @param string|null $title
-     */
     public function setTitle(?string $title): void
     {
         $this->title = $title;
     }
 
-    /**
-     * @return string
-     */
     public function getStatus(): string
     {
         return $this->status;
     }
 
-    /**
-     * @param string $status
-     */
     public function setStatus(string $status): void
     {
         $this->status = $status;
     }
 
-    /**
-     * @return ProductInterface|null
-     */
     public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
-    /**
-     * @param ProductInterface|null $product
-     */
     public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
     }
 
-    /**
-     * @return CustomerInterface|null
-     */
     public function getAuthor(): ?CustomerInterface
     {
         return $this->author;
     }
 
-    /**
-     * @param CustomerInterface|null $author
-     */
     public function setAuthor(?CustomerInterface $author): void
     {
         $this->author = $author;

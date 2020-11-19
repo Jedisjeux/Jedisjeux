@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -26,8 +26,6 @@ class TopicCountByTaxonUpdater
 
     /**
      * TopicCountByTaxonSubscriber constructor.
-     *
-     * @param TopicCountByTaxonCalculator $calculator
      */
     public function __construct(TopicCountByTaxonCalculator $calculator)
     {

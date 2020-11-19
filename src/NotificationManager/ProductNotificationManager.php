@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -51,12 +51,6 @@ class ProductNotificationManager
 
     /**
      * ProductNotificationManager constructor.
-     *
-     * @param NotificationFactory $factory
-     * @param ObjectManager       $manager
-     * @param UserRepository      $userRepository
-     * @param RouterInterface     $router
-     * @param TranslatorInterface $translator
      */
     public function __construct(NotificationFactory $factory, ObjectManager $manager, UserRepository $userRepository, RouterInterface $router, TranslatorInterface $translator)
     {
@@ -67,9 +61,6 @@ class ProductNotificationManager
         $this->translator = $translator;
     }
 
-    /**
-     * @param ProductInterface $product
-     */
     public function notifyTranslators(ProductInterface $product)
     {
         /** @var UserInterface[] $users */
@@ -80,9 +71,6 @@ class ProductNotificationManager
         ]), $product, $users);
     }
 
-    /**
-     * @param ProductInterface $product
-     */
     public function notifyReviewers(ProductInterface $product)
     {
         /** @var UserInterface[] $users */
@@ -93,9 +81,6 @@ class ProductNotificationManager
         ]), $product, $users);
     }
 
-    /**
-     * @param ProductInterface $product
-     */
     public function notifyPublishers(ProductInterface $product)
     {
         /** @var UserInterface[] $users */
@@ -107,9 +92,7 @@ class ProductNotificationManager
     }
 
     /**
-     * @param string           $message
-     * @param ProductInterface $product
-     * @param array            $users
+     * @param string $message
      */
     protected function notifyUsers($message, ProductInterface $product, array $users)
     {

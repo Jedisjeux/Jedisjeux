@@ -1,9 +1,9 @@
 <?php
 
-/**
- * This file is part of Jedisjeux.
+/*
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -117,81 +117,51 @@ class Taxon extends BaseTaxon
         return parent::getName();
     }
 
-    /**
-     * @return string|null
-     */
     public function getIconClass(): ?string
     {
         return $this->iconClass;
     }
 
-    /**
-     * @param string|null $iconClass
-     */
     public function setIconClass(?string $iconClass): void
     {
         $this->iconClass = $iconClass;
     }
 
-    /**
-     * @return string|null
-     */
     public function getColor(): ?string
     {
         return $this->color;
     }
 
-    /**
-     * @param string|null $color
-     */
     public function setColor(?string $color): void
     {
         $this->color = $color;
     }
 
-    /**
-     * @return bool
-     */
     public function isPublic(): bool
     {
         return $this->public;
     }
 
-    /**
-     * @param bool $public
-     */
     public function setPublic(bool $public): void
     {
         $this->public = $public;
     }
 
-    /**
-     * @return int
-     */
     public function getTopicCount(): int
     {
         return $this->topicCount;
     }
 
-    /**
-     * @param int $topicCount
-     */
     public function setTopicCount(int $topicCount): void
     {
         $this->topicCount = $topicCount;
     }
 
-    /**
-     * @return int
-     */
     public function getProductCount(): int
     {
         return $this->productCount;
     }
 
-    /**
-     * @param int $productCount
-     */
     public function setProductCount(int $productCount): void
     {
         $this->productCount = $productCount;

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -45,9 +45,6 @@ class ServicesPass implements CompilerPassInterface
         $doctrineDriver->setClass(Driver::class);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     */
     protected function processFactories(ContainerBuilder $container)
     {
         $topicFactoryDefinition = $container->getDefinition('app.factory.topic');
@@ -94,9 +91,6 @@ class ServicesPass implements CompilerPassInterface
             ->addArgument(new Reference('translator.default'));
     }
 
-    /**
-     * @param ContainerBuilder $container
-     */
     protected function processFormTypes(ContainerBuilder $container)
     {
         $articleFormTypeDefinition = $container->getDefinition(ArticleType::class);
@@ -112,9 +106,6 @@ class ServicesPass implements CompilerPassInterface
             ->addMethodCall('setAuthorizationChecker', [new Reference('security.authorization_checker')]);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     */
     private function processListeners(ContainerBuilder $container)
     {
         $listenerPasswordUpdaterDefinition = $container->getDefinition('sylius.listener.password_updater');

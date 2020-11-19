@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -21,17 +21,11 @@ class CommentedReviewCountByProductUpdater
      */
     private $calculator;
 
-    /**
-     * @param CommentedReviewCountByProductCalculator $calculator
-     */
     public function __construct(CommentedReviewCountByProductCalculator $calculator)
     {
         $this->calculator = $calculator;
     }
 
-    /**
-     * @param Product $product
-     */
     public function update(Product $product)
     {
         $ratingCount = $this->calculator->calculate($product);

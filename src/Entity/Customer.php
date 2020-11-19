@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -52,9 +52,6 @@ class Customer extends BaseCustomer implements CustomerInterface, ReviewerInterf
      */
     private $code;
 
-    /**
-     * @return Avatar|null
-     */
     public function getAvatar(): ?Avatar
     {
         return $this->avatar;
@@ -68,33 +65,21 @@ class Customer extends BaseCustomer implements CustomerInterface, ReviewerInterf
         $this->avatar = $avatar;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * @param string|null $code
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * @return UserInterface|null
-     */
     public function getUser(): ?UserInterface
     {
         return $this->user;
     }
 
-    /**
-     * @param UserInterface|null $user
-     */
     public function setUser(?UserInterface $user): void
     {
         if ($this->user === $user) {
@@ -115,9 +100,6 @@ class Customer extends BaseCustomer implements CustomerInterface, ReviewerInterf
         }
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         if (null === $user = $this->user) {

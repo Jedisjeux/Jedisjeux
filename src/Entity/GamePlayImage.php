@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic
- * Date: 24/03/16
- * Time: 08:31.
+
+/*
+ * This file is part of the Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace App\Entity;
@@ -32,33 +35,21 @@ class GamePlayImage extends AbstractImage
      */
     protected $description;
 
-    /**
-     * @return GamePlay|null
-     */
     public function getGamePlay(): ?GamePlay
     {
         return $this->gamePlay;
     }
 
-    /**
-     * @param GamePlay|null $gamePlay
-     */
     public function setGamePlay(?GamePlay $gamePlay): void
     {
         $this->gamePlay = $gamePlay;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string|null $description
-     */
     public function setDescription(?string $description): void
     {
         $this->description = $description;

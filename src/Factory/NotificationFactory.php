@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -43,9 +43,6 @@ class NotificationFactory implements FactoryInterface
      */
     protected $translator;
 
-    /**
-     * @param string $className
-     */
     public function __construct(string $className)
     {
         $this->className = $className;
@@ -63,8 +60,6 @@ class NotificationFactory implements FactoryInterface
     }
 
     /**
-     * @param CustomerInterface $customer
-     *
      * @return Notification
      */
     public function createForCustomer(CustomerInterface $customer)
@@ -76,9 +71,6 @@ class NotificationFactory implements FactoryInterface
     }
 
     /**
-     * @param Post              $post
-     * @param CustomerInterface $customer
-     *
      * @return Notification
      */
     public function createForPost(Post $post, CustomerInterface $customer)
@@ -107,8 +99,6 @@ class NotificationFactory implements FactoryInterface
     }
 
     /**
-     * @param Topic $topic
-     *
      * @return int
      */
     protected function calculateTopicNbPages(Topic $topic)
@@ -117,9 +107,6 @@ class NotificationFactory implements FactoryInterface
     }
 
     /**
-     * @param ProductInterface  $product
-     * @param CustomerInterface $customer
-     *
      * @return Notification
      */
     public function createForProduct(ProductInterface $product, CustomerInterface $customer)
@@ -132,9 +119,6 @@ class NotificationFactory implements FactoryInterface
     }
 
     /**
-     * @param Article           $article
-     * @param CustomerInterface $customer
-     *
      * @return Notification
      */
     public function createForArticle(Article $article, CustomerInterface $customer)
@@ -147,9 +131,6 @@ class NotificationFactory implements FactoryInterface
     }
 
     /**
-     * @param ProductBox        $productBox
-     * @param CustomerInterface $customer
-     *
      * @return Notification
      */
     public function createForProductBox(ProductBox $productBox, CustomerInterface $customer)
@@ -162,9 +143,6 @@ class NotificationFactory implements FactoryInterface
     }
 
     /**
-     * @param ProductFile       $productFile
-     * @param CustomerInterface $customer
-     *
      * @return Notification
      */
     public function createForProductFile(ProductFile $productFile, CustomerInterface $customer)

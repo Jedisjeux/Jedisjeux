@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Paweł Jędrzejewski
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -39,9 +39,7 @@ final class LocaleSetup
     private $locale;
 
     /**
-     * @param RepositoryInterface $localeRepository
-     * @param FactoryInterface    $localeFactory
-     * @param string              $locale
+     * @param string $locale
      */
     public function __construct(RepositoryInterface $localeRepository, FactoryInterface $localeFactory, $locale)
     {

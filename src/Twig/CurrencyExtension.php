@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace App\Twig;
@@ -13,9 +22,6 @@ final class CurrencyExtension extends \Twig_Extension
      */
     private $helper;
 
-    /**
-     * @param CurrencyHelperInterface $helper
-     */
     public function __construct(CurrencyHelperInterface $helper)
     {
         $this->helper = $helper;

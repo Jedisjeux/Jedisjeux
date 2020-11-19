@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jdj.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Mobizel
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -46,19 +46,11 @@ class SlideShowBlock implements ResourceInterface
         return $this->blocks;
     }
 
-    /**
-     * @param Block $block
-     *
-     * @return bool
-     */
     public function hasBlock(Block $block): bool
     {
         return $this->blocks->contains($block);
     }
 
-    /**
-     * @param Block $block
-     */
     public function addBlock(Block $block): void
     {
         if (!$this->hasBlock($block)) {
@@ -67,9 +59,6 @@ class SlideShowBlock implements ResourceInterface
         }
     }
 
-    /**
-     * @param Block $block
-     */
     public function removeBlock(Block $block): void
     {
         $this->blocks->removeElement($block);

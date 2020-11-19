@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Mobizel
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -48,11 +48,6 @@ class PriceListContext implements Context
     private $minkParameters;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param FactoryInterface       $priceListFactory
-     * @param RepositoryInterface    $priceListRepository
-     * @param ObjectManager          $priceListManager
-     * @param MinkParameters         $minkParameters
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -101,9 +96,7 @@ class PriceListContext implements Context
     }
 
     /**
-     * @param string $name
      *
-     * @return string|null
      */
     private function getParameter(string $name): ?string
     {

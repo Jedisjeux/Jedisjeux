@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -31,8 +31,6 @@ class ProductCountByTaxonCalculator
     }
 
     /**
-     * @param TaxonInterface $taxon
-     *
      * @return int
      */
     public function calculate(TaxonInterface $taxon)

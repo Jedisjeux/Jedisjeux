@@ -1,8 +1,9 @@
 <?php
+
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -32,9 +33,6 @@ class ContactRequestExampleFactory extends AbstractExampleFactory implements Exa
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $contactRequestFactory
-     */
     public function __construct(FactoryInterface $contactRequestFactory)
     {
         $this->contactRequestFactory = $contactRequestFactory;
@@ -51,15 +49,15 @@ class ContactRequestExampleFactory extends AbstractExampleFactory implements Exa
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('first_name', function(Options $options) {
+            ->setDefault('first_name', function (Options $options) {
                 return $this->faker->firstName;
             })
 
-            ->setDefault('last_name', function(Options $options) {
+            ->setDefault('last_name', function (Options $options) {
                 return $this->faker->lastName;
             })
 
-            ->setDefault('email', function(Options $options) {
+            ->setDefault('email', function (Options $options) {
                 return $this->faker->email;
             })
 

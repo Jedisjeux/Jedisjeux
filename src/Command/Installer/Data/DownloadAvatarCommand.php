@@ -1,9 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: loic_425
- * Date: 03/03/15
- * Time: 19:34.
+
+/*
+ * This file is part of the Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 namespace App\Command\Installer\Data;
@@ -58,19 +61,11 @@ class DownloadAvatarCommand extends ContainerAwareCommand
         return $this->getContainer()->get('app.repository.avatar');
     }
 
-    /**
-     * @param Avatar $avatar
-     */
     public function downloadAvatar(Avatar $avatar)
     {
         file_put_contents($avatar->getAbsolutePath(), file_get_contents($this->getAvatarOriginalPath($avatar)));
     }
 
-    /**
-     * @param Avatar $avatar
-     *
-     * @return string
-     */
     public function getAvatarOriginalPath(Avatar $avatar): string
     {
         return 'http://www.jedisjeux.net/media/cache/resolve/full/'.$avatar->getWebPath();

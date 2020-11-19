@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -44,49 +44,31 @@ class YearAward implements ResourceInterface
      */
     private $product;
 
-    /**
-     * @return string|null
-     */
     public function getYear(): ?string
     {
         return $this->year;
     }
 
-    /**
-     * @param string|null $year
-     */
     public function setYear(?string $year): void
     {
         $this->year = $year;
     }
 
-    /**
-     * @return GameAward|null
-     */
     public function getAward(): ?GameAward
     {
         return $this->award;
     }
 
-    /**
-     * @param GameAward|null $award
-     */
     public function setAward(?GameAward $award): void
     {
         $this->award = $award;
     }
 
-    /**
-     * @return ProductInterface|null
-     */
     public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
-    /**
-     * @param ProductInterface|null $product
-     */
     public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;

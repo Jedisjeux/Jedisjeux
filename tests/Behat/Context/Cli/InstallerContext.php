@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Tests\Behat\Context\Cli;
 
 use App\Command\Installer\SetupCommand;
@@ -24,8 +33,6 @@ class InstallerContext extends DefaultContext
     ];
 
     /**
-     * @param KernelInterface $kernel
-     * @param SetupCommand    $setupCommand
      */
     public function __construct(KernelInterface $kernel, SetupCommand $setupCommand)
     {

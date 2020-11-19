@@ -1,9 +1,9 @@
 <?php
 
-/**
- * This file is part of Jedisjeux.
+/*
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -104,65 +104,41 @@ class Post implements ResourceInterface
         $this->replies = new ArrayCollection();
     }
 
-    /**
-     * @return string|null
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * @param string|null $code
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBody(): ? string
     {
         return $this->body;
     }
 
-    /**
-     * @param string|null $body
-     */
     public function setBody(?string $body): void
     {
         $this->body = $body;
     }
 
-    /**
-     * @return Topic|null
-     */
     public function getParent(): ?Topic
     {
         return $this->parent;
     }
 
-    /**
-     * @param Topic|null $parent
-     */
     public function setParent(?Topic $parent): void
     {
         $this->parent = $parent;
     }
 
-    /**
-     * @return Topic|null
-     */
     public function getTopic(): ?Topic
     {
         return $this->topic;
     }
 
-    /**
-     * @param Topic|null $topic
-     */
     public function setTopic(?Topic $topic): void
     {
         $this->topic = $topic;
@@ -172,49 +148,31 @@ class Post implements ResourceInterface
         }
     }
 
-    /**
-     * @return GamePlay|null
-     */
     public function getGamePlay(): ?GamePlay
     {
         return $this->gamePlay;
     }
 
-    /**
-     * @param GamePlay|null $gamePlay
-     */
     public function setGamePlay(?GamePlay $gamePlay): void
     {
         $this->gamePlay = $gamePlay;
     }
 
-    /**
-     * @return Article|null
-     */
     public function getArticle(): ?Article
     {
         return $this->article;
     }
 
-    /**
-     * @param Article|null $article
-     */
     public function setArticle(?Article $article): void
     {
         $this->article = $article;
     }
 
-    /**
-     * @return CustomerInterface|null
-     */
     public function getAuthor(): ?CustomerInterface
     {
         return $this->author;
     }
 
-    /**
-     * @param CustomerInterface|null $author
-     */
     public function setAuthor(?CustomerInterface $author): void
     {
         $this->author = $author;

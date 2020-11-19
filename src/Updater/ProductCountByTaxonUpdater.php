@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -26,8 +26,6 @@ class ProductCountByTaxonUpdater
 
     /**
      * ProductCountByTaxonUpdater constructor.
-     *
-     * @param ProductCountByTaxonCalculator $calculator
      */
     public function __construct(ProductCountByTaxonCalculator $calculator)
     {

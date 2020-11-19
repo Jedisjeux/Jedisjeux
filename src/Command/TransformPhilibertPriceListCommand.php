@@ -1,8 +1,9 @@
 <?php
+
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -62,9 +63,6 @@ EOT
         $this->fileSystem->remove(static::TMP_FILENAME);
     }
 
-    /**
-     * @param InputInterface $input
-     */
     private function transformData(InputInterface $input)
     {
         $filename = $input->getArgument('filename');

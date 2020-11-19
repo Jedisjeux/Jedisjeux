@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Jedisjeux project.
+ * This file is part of the Jedisjeux project.
  *
  * (c) Jedisjeux
  *
@@ -29,8 +29,6 @@ class CalculateImageCountByGamePlaySubscriber implements EventSubscriber
 
     /**
      * CalculatePostCountByTopicSubscriber constructor.
-     *
-     * @param ImageCountByGamePlayUpdater $updater
      */
     public function __construct(ImageCountByGamePlayUpdater $updater)
     {
@@ -64,9 +62,6 @@ class CalculateImageCountByGamePlaySubscriber implements EventSubscriber
         $this->updateImageCount($args);
     }
 
-    /**
-     * @param LifecycleEventArgs $args
-     */
     public function updateImageCount(LifecycleEventArgs $args)
     {
         $gamePlay = $args->getObject();

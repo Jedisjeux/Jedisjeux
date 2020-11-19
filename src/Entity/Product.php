@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is part of Jedisjeux.
+ * This file is part of the Jedisjeux project.
  *
- * (c) Loïc Frémont
+ * (c) Jedisjeux
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -19,7 +19,6 @@ use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Product\Model\ProductTranslationInterface;
-use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -294,25 +293,17 @@ class Product extends BaseProduct implements ProductInterface
         }
     }
 
-    /**
-     * @return string|null
-     */
     public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    /**
-     * @param string|null $status
-     */
     public function setStatus(?string $status): void
     {
         $this->status = $status;
     }
 
     /**
-     * @return string|null
-     *
      * @JMS\VirtualProperty
      * @JMS\Groups({"Detailed"})
      */
@@ -321,9 +312,6 @@ class Product extends BaseProduct implements ProductInterface
         return $this->getTranslation()->getShortDescription();
     }
 
-    /**
-     * @param string|null $shortDescription
-     */
     public function setShortDescription(?string $shortDescription): void
     {
         $this->getTranslation()->setShortDescription($shortDescription);
@@ -377,9 +365,6 @@ class Product extends BaseProduct implements ProductInterface
         return $this->variants->first();
     }
 
-    /**
-     * @param ProductVariantInterface $variant
-     */
     public function setFirstVariant(ProductVariantInterface $variant): void
     {
         $firstVariant = $this->getFirstVariant();
@@ -416,17 +401,11 @@ class Product extends BaseProduct implements ProductInterface
         return $collection;
     }
 
-    /**
-     * @return \DateTime|null
-     */
     public function getReleasedAt(): ?\DateTime
     {
         return $this->getFirstVariant()->getReleasedAt();
     }
 
-    /**
-     * @param \DateTime|null $releasedAt
-     */
     public function setReleasedAt(?\DateTime $releasedAt): void
     {
         $this->getFirstVariant()->setReleasedAt($releasedAt);
@@ -448,19 +427,11 @@ class Product extends BaseProduct implements ProductInterface
         });
     }
 
-    /**
-     * @param TaxonInterface $taxon
-     *
-     * @return bool
-     */
     public function hasTaxon(TaxonInterface $taxon): bool
     {
         return $this->taxons->contains($taxon);
     }
 
-    /**
-     * @param TaxonInterface $taxon
-     */
     public function addTaxon(TaxonInterface $taxon): void
     {
         if (!$this->hasTaxon($taxon)) {
@@ -468,9 +439,6 @@ class Product extends BaseProduct implements ProductInterface
         }
     }
 
-    /**
-     * @param TaxonInterface $taxon
-     */
     public function removeTaxon(TaxonInterface $taxon): void
     {
         $this->taxons->removeElement($taxon);
@@ -484,137 +452,86 @@ class Product extends BaseProduct implements ProductInterface
         return $this->mainTaxon;
     }
 
-    /**
-     * @param TaxonInterface|null $mainTaxon
-     */
     public function setMainTaxon(?TaxonInterface $mainTaxon): void
     {
         $this->mainTaxon = $mainTaxon;
     }
 
-    /**
-     * @return int|null
-     */
     public function getMinAge(): ?int
     {
         return $this->minAge;
     }
 
-    /**
-     * @param int|null $minAge
-     */
     public function setMinAge(?int $minAge): void
     {
         $this->minAge = $minAge;
     }
 
-    /**
-     * @return int|null
-     */
     public function getMinPlayerCount(): ?int
     {
         return $this->minPlayerCount;
     }
 
-    /**
-     * @param int|null $minPlayerCount
-     */
     public function setMinPlayerCount(?int $minPlayerCount): void
     {
         $this->minPlayerCount = $minPlayerCount;
     }
 
-    /**
-     * @return int|null
-     */
     public function getMaxPlayerCount(): ?int
     {
         return $this->maxPlayerCount;
     }
 
-    /**
-     * @param int|null $maxPlayerCount
-     */
     public function setMaxPlayerCount(?int $maxPlayerCount): void
     {
         $this->maxPlayerCount = $maxPlayerCount;
     }
 
-    /**
-     * @return int|null
-     */
     public function getMinDuration(): ?int
     {
         return $this->minDuration;
     }
 
-    /**
-     * @param int|null $minDuration
-     */
     public function setMinDuration(?int $minDuration): void
     {
         $this->minDuration = $minDuration;
     }
 
-    /**
-     * @return int|null
-     */
     public function getMaxDuration(): ?int
     {
         return $this->maxDuration;
     }
 
-    /**
-     * @param int|null $maxDuration
-     */
     public function setMaxDuration(?int $maxDuration): void
     {
         $this->maxDuration = $maxDuration;
     }
 
-    /**
-     * @return bool
-     */
     public function isDurationByPlayer(): bool
     {
         return $this->durationByPlayer;
     }
 
-    /**
-     * @param bool $durationByPlayer
-     */
     public function setDurationByPlayer(bool $durationByPlayer): void
     {
         $this->durationByPlayer = $durationByPlayer;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBoxContent(): ?string
     {
         return $this->boxContent;
     }
 
-    /**
-     * @param string|null $boxContent
-     */
     public function setBoxContent(?string $boxContent): void
     {
         $this->boxContent = $boxContent;
     }
 
-    /**
-     * @return int
-     */
     public function getViewCount(): int
     {
         return $this->viewCount;
     }
 
-    /**
-     * @param int $viewCount
-     */
     public function setViewCount(int $viewCount): void
     {
         $this->viewCount = $viewCount;
@@ -636,17 +553,11 @@ class Product extends BaseProduct implements ProductInterface
         $this->reviewCount = $reviewCount;
     }
 
-    /**
-     * @return int
-     */
     public function getCommentedReviewCount(): int
     {
         return $this->commentedReviewCount;
     }
 
-    /**
-     * @param int $commentedReviewCount
-     */
     public function setCommentedReviewCount(int $commentedReviewCount): void
     {
         $this->commentedReviewCount = $commentedReviewCount;
@@ -688,25 +599,17 @@ class Product extends BaseProduct implements ProductInterface
         return $this->getTaxons('mechanisms');
     }
 
-    /**
-     * @param TaxonInterface $mechanism
-     */
     public function addMechanism(TaxonInterface $mechanism): void
     {
         $this->addTaxon($mechanism);
     }
 
-    /**
-     * @param TaxonInterface $mechanism
-     */
     public function removeMechanism(TaxonInterface $mechanism): void
     {
         $this->removeTaxon($mechanism);
     }
 
     /**
-     * @return Collection
-     *
      * @JMS\VirtualProperty
      * @JMS\Groups({"Detailed"})
      * @JMS\Type("ArrayCollection<App\Entity\Taxon>")
@@ -716,43 +619,26 @@ class Product extends BaseProduct implements ProductInterface
         return $this->getTaxons('themes');
     }
 
-    /**
-     * @param TaxonInterface $theme
-     */
     public function addTheme(TaxonInterface $theme): void
     {
         $this->addTaxon($theme);
     }
 
-    /**
-     * @param TaxonInterface $theme
-     */
     public function removeTheme(TaxonInterface $theme): void
     {
         $this->removeTaxon($theme);
     }
 
-    /**
-     * @return Collection
-     */
     public function getReviews(): Collection
     {
         return $this->reviews;
     }
 
-    /**
-     * @param ReviewInterface $review
-     *
-     * @return bool
-     */
     public function hasReview(ReviewInterface $review): bool
     {
         return $this->reviews->contains($review);
     }
 
-    /**
-     * @param ReviewInterface $review
-     */
     public function addReview(ReviewInterface $review): void
     {
         if (!$this->hasReview($review)) {
@@ -760,9 +646,6 @@ class Product extends BaseProduct implements ProductInterface
         }
     }
 
-    /**
-     * @param ReviewInterface $review
-     */
     public function removeReview(ReviewInterface $review): void
     {
         $this->reviews->removeElement($review);
@@ -796,9 +679,6 @@ class Product extends BaseProduct implements ProductInterface
         return $this->averageRating;
     }
 
-    /**
-     * @param float $averageRating
-     */
     public function setAverageRating(float $averageRating): void
     {
         $this->averageRating = $averageRating;
@@ -812,19 +692,11 @@ class Product extends BaseProduct implements ProductInterface
         return $this->barcodes;
     }
 
-    /**
-     * @param ProductBarcode $barcode
-     *
-     * @return bool
-     */
     public function hasBarcode(ProductBarcode $barcode): bool
     {
         return $this->barcodes->contains($barcode);
     }
 
-    /**
-     * @param ProductBarcode $barcode
-     */
     public function addBarcode(ProductBarcode $barcode): void
     {
         if (!$this->hasBarcode($barcode)) {
@@ -833,9 +705,6 @@ class Product extends BaseProduct implements ProductInterface
         }
     }
 
-    /**
-     * @param ProductBarcode $barcode
-     */
     public function removeBarcode(ProductBarcode $barcode): void
     {
         $this->barcodes->removeElement($barcode);
@@ -896,19 +765,11 @@ class Product extends BaseProduct implements ProductInterface
         return $this->videos;
     }
 
-    /**
-     * @param ProductVideo $video
-     *
-     * @return bool
-     */
     public function hasVideo(ProductVideo $video): bool
     {
         return $this->videos->contains($video);
     }
 
-    /**
-     * @param ProductVideo $video
-     */
     public function addVideo(ProductVideo $video): void
     {
         if (!$this->hasVideo($video)) {
@@ -917,9 +778,6 @@ class Product extends BaseProduct implements ProductInterface
         }
     }
 
-    /**
-     * @param ProductVideo $video
-     */
     public function removeVideo(ProductVideo $video): void
     {
         $this->videos->removeElement($video);
@@ -934,19 +792,11 @@ class Product extends BaseProduct implements ProductInterface
         return $this->files;
     }
 
-    /**
-     * @param ProductFile $file
-     *
-     * @return bool
-     */
     public function hasFile(ProductFile $file): bool
     {
         return $this->files->contains($file);
     }
 
-    /**
-     * @param ProductFile $file
-     */
     public function addFile(ProductFile $file): void
     {
         if (!$this->hasFile($file)) {
@@ -955,9 +805,6 @@ class Product extends BaseProduct implements ProductInterface
         }
     }
 
-    /**
-     * @param ProductFile $file
-     */
     public function removeFile(ProductFile $file): void
     {
         $this->files->removeElement($file);
@@ -972,27 +819,16 @@ class Product extends BaseProduct implements ProductInterface
         return $this->yearAwards;
     }
 
-    /**
-     * @return bool
-     */
     public function hasYearAwards(): bool
     {
         return !$this->yearAwards->isEmpty();
     }
 
-    /**
-     * @param YearAward $yearAward
-     *
-     * @return bool
-     */
     public function hasYearAward(YearAward $yearAward): bool
     {
         return $this->yearAwards->contains($yearAward);
     }
 
-    /**
-     * @param YearAward $yearAward
-     */
     public function addYearAward(YearAward $yearAward): void
     {
         if (!$this->hasYearAward($yearAward)) {
@@ -1001,9 +837,6 @@ class Product extends BaseProduct implements ProductInterface
         }
     }
 
-    /**
-     * @param YearAward $yearAward
-     */
     public function removeYearAward(YearAward $yearAward): void
     {
         $this->yearAwards->removeElement($yearAward);

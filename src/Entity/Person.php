@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Jedisjeux project.
+ *
+ * (c) Jedisjeux
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -168,17 +177,11 @@ class Person implements ResourceInterface
         $this->code = uniqid('person_');
     }
 
-    /**
-     * @return string|null
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * @param string|null $code
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
@@ -208,17 +211,11 @@ class Person implements ResourceInterface
         return false !== $firstImage ? $firstImage : null;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
-    /**
-     * @param string|null $lastName
-     */
     public function setLastName(?string $lastName): void
     {
         $this->lastName = $lastName;
@@ -232,33 +229,21 @@ class Person implements ResourceInterface
         return $this->publisherProducts;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
-    /**
-     * @param string|null $firstName
-     */
     public function setFirstName(?string $firstName): void
     {
         $this->firstName = $firstName;
     }
 
-    /**
-     * @return string|null
-     */
     public function getWebsite(): ?string
     {
         return $this->website;
     }
 
-    /**
-     * @param string|null $website
-     */
     public function setWebsite(?string $website): void
     {
         $this->website = $website;
@@ -280,97 +265,61 @@ class Person implements ResourceInterface
         return $this->artistProducts;
     }
 
-    /**
-     * @param string|null $description
-     */
     public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string|null $slug
-     */
     public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    /**
-     * @return int
-     */
     public function getProductCount(): int
     {
         return $this->productCount;
     }
 
-    /**
-     * @param int $productCount
-     */
     public function setProductCount(int $productCount): void
     {
         $this->productCount = $productCount;
     }
 
-    /**
-     * @return int
-     */
     public function getProductCountAsDesigner(): int
     {
         return $this->productCountAsDesigner;
     }
 
-    /**
-     * @param int $productCountAsDesigner
-     */
     public function setProductCountAsDesigner(int $productCountAsDesigner): void
     {
         $this->productCountAsDesigner = $productCountAsDesigner;
     }
 
-    /**
-     * @return int
-     */
     public function getProductCountAsArtist(): int
     {
         return $this->productCountAsArtist;
     }
 
-    /**
-     * @param int $productCountAsArtist
-     */
     public function setProductCountAsArtist(int $productCountAsArtist): void
     {
         $this->productCountAsArtist = $productCountAsArtist;
     }
 
-    /**
-     * @return int
-     */
     public function getProductCountAsPublisher(): int
     {
         return $this->productCountAsPublisher;
     }
 
-    /**
-     * @param int $productCountAsPublisher
-     */
     public function setProductCountAsPublisher(int $productCountAsPublisher): void
     {
         $this->productCountAsPublisher = $productCountAsPublisher;
@@ -384,19 +333,11 @@ class Person implements ResourceInterface
         return $this->images;
     }
 
-    /**
-     * @param PersonImage $image
-     *
-     * @return bool
-     */
     public function hasImage(PersonImage $image): bool
     {
         return $this->images->contains($image);
     }
 
-    /**
-     * @param PersonImage $image
-     */
     public function addImage(PersonImage $image): void
     {
         if (!$this->hasImage($image)) {
@@ -405,9 +346,6 @@ class Person implements ResourceInterface
         }
     }
 
-    /**
-     * @param PersonImage $image
-     */
     public function removeImage(PersonImage $image): void
     {
         $this->images->removeElement($image);
@@ -429,9 +367,6 @@ class Person implements ResourceInterface
         return $this->taxons;
     }
 
-    /**
-     * @return TaxonInterface|null
-     */
     public function getZone(): ?TaxonInterface
     {
         $zones = $this->getTaxons('zones');
@@ -439,9 +374,6 @@ class Person implements ResourceInterface
         return $zones->count() > 0 ? $zones->first() : null;
     }
 
-    /**
-     * @param TaxonInterface $zone
-     */
     public function setZone(TaxonInterface $zone): void
     {
         if ($this->getZone()) {
@@ -451,19 +383,11 @@ class Person implements ResourceInterface
         $this->addTaxon($zone);
     }
 
-    /**
-     * @param TaxonInterface $taxon
-     *
-     * @return bool
-     */
     public function hasTaxon(TaxonInterface $taxon): bool
     {
         return $this->taxons->contains($taxon);
     }
 
-    /**
-     * @param TaxonInterface $taxon
-     */
     public function addTaxon(TaxonInterface $taxon): void
     {
         if (!$this->hasTaxon($taxon)) {
@@ -471,17 +395,12 @@ class Person implements ResourceInterface
         }
     }
 
-    /**
-     * @param TaxonInterface $taxon
-     */
     public function removeTaxon(TaxonInterface $taxon): void
     {
         $this->taxons->removeElement($taxon);
     }
 
     /**
-     * @return string
-     *
      * @JMS\VirtualProperty
      * @JMS\SerializedName("full_name")
      * @JMS\Groups({"Default", "Detailed", "Autocomplete"})
@@ -497,8 +416,6 @@ class Person implements ResourceInterface
 
     /**
      * Convert Entity To String.
-     *
-     * @return string
      */
     public function __toString(): string
     {
