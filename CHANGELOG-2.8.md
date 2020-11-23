@@ -1,5 +1,10 @@
 ## Change Log
 
+### v2.8.1 (2020/11/19 21:04 +00:00)
+- [#538](https://github.com/Jedisjeux/Jedisjeux/pull/538) Add coding standard (@loic425)
+- [#537](https://github.com/Jedisjeux/Jedisjeux/pull/537) Fix adding images on game play (@loic425)
+- [#536](https://github.com/Jedisjeux/Jedisjeux/pull/536) [docs] Upgrade server conf (@loic425)
+
 ### v2.8.0 (2020/11/15 13:20 +00:00)
 - [#535](https://github.com/Jedisjeux/Jedisjeux/pull/535) Bump Monofony version to 0.4 (@loic425)
 - [#533](https://github.com/Jedisjeux/Jedisjeux/pull/533) Bump lodash from 4.17.15 to 4.17.19 (@dependabot[bot])
