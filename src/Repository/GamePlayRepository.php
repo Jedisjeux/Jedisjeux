@@ -68,7 +68,6 @@ class GamePlayRepository extends EntityRepository
             ->addSelect('image')
             ->addSelect('topic')
             ->addSelect('article')
-            ->addSelect('players')
             ->addSelect('author')
             ->join('o.product', 'product')
             ->join('o.author', 'author')
