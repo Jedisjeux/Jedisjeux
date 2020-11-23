@@ -1,5 +1,9 @@
 ## Change Log
 
+### v2.8.2 (2020/11/23 08:23 +00:00)
+- [#540](https://github.com/Jedisjeux/Jedisjeux/pull/540) Fix my game plays (@loic425)
+- [#539](https://github.com/Jedisjeux/Jedisjeux/pull/539) Feature/light bg (@loic425)
+
 ### v2.8.1 (2020/11/19 21:04 +00:00)
 - [#538](https://github.com/Jedisjeux/Jedisjeux/pull/538) Add coding standard (@loic425)
 - [#537](https://github.com/Jedisjeux/Jedisjeux/pull/537) Fix adding images on game play (@loic425)
