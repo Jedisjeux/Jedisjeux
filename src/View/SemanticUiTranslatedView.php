@@ -11,7 +11,7 @@
 
 namespace App\View;
 
-use WhiteOctober\PagerfantaBundle\View\TranslatedView;
+use BabDev\PagerfantaBundle\View\TranslatedView;
 
 /**
  * SemanticUiTranslatedView.

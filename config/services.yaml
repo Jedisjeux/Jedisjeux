@@ -1,3 +1,6 @@
+parameters:
+    locale: 'en'
+
 imports:
     - { resource: services/_main.yaml }
     - { resource: services/analytic.yaml }
