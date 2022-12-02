@@ -232,11 +232,11 @@ jobs:
         run: make validate-doctrine-schema
         if: always() && steps.end-of-setup.outcome == 'success'
 
-      -
-        name: Test provided migrations
-        run: |
-          bin/console doctrine:migrations:migrate first --no-interaction
-          bin/console doctrine:migrations:migrate latest --no-interaction
+#      -
+#        name: Test provided migrations
+#        run: |
+#          bin/console doctrine:migrations:migrate first --no-interaction
+#          bin/console doctrine:migrations:migrate latest --no-interaction
 
       -
         name: Test installer
