@@ -63,10 +63,10 @@ jobs:
         run: symfony security:check
         if: always() && steps.end-of-setup.outcome == 'success'
 
-      -
-        name: Validate coding standard
-        run: make validate-coding-standard
-        if: always() && steps.end-of-setup.outcome == 'success'
+#      -
+#        name: Validate coding standard
+#        run: make validate-coding-standard
+#        if: always() && steps.end-of-setup.outcome == 'success'
 
       -
         name: Validate Twig templates
@@ -78,10 +78,10 @@ jobs:
         run: bin/console lint:yaml config --parse-tags
         if: always() && steps.end-of-setup.outcome == 'success'
 
-      -
-        name: Run Psalm
-        run: vendor/bin/psalm --show-info=false
-        if: always() && steps.end-of-setup.outcome == 'success'
+#      -
+#        name: Run Psalm
+#        run: vendor/bin/psalm --show-info=false
+#        if: always() && steps.end-of-setup.outcome == 'success'
 
       -
         name: Run PHPStan
