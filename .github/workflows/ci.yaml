@@ -100,7 +100,7 @@ jobs:
       matrix:
         php: ["7.3"]
         node: ["14.x"]
-        msql: ["5.7"]
+        mysql: ["5.7"]
 
     env:
       APP_ENV: test
