@@ -105,6 +105,8 @@ jobs:
     env:
       APP_ENV: test
       DATABASE_URL: "mysql://root:root@127.0.0.1/jedisjeux?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+      APP_HOST: localhost:8080
+      APP_SCHEME: http
 
     steps:
       -
