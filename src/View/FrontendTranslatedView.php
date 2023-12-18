@@ -11,7 +11,7 @@
 
 namespace App\View;
 
-use WhiteOctober\PagerfantaBundle\View\TwitterBootstrap4TranslatedView;
+use BabDev\PagerfantaBundle\View\TwitterBootstrap4TranslatedView;
 
 /**
  * SemanticUiTranslatedView.
