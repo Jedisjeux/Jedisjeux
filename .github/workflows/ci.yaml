@@ -89,7 +89,7 @@ jobs:
         if: always() && steps.end-of-setup.outcome == 'success'
 
   test-application:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     name: "Test application (PHP ${{ matrix.php }}, Behat driver ${{ matrix.behat_driver }}), MySQL ${{ matrix.mysql }})"
 
