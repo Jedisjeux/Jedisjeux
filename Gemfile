@@ -1,6 +1,6 @@
 source 'https://rubygems.org' 
-gem 'capistrano'
-gem 'capistrano-symfony'
+gem 'capistrano',  '~> 3.11'
+gem 'capistrano-symfony', '~> 2.0.0'
 gem 'capistrano-file-permissions'
 gem 'ed25519'
 gem 'bcrypt_pbkdf'
