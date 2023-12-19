@@ -78,8 +78,7 @@
     "auto-scripts": {
       "cache:clear": "symfony-cmd",
       "ckeditor:install --clear=drop": "symfony-cmd",
-      "assets:install %PUBLIC_DIR%": "symfony-cmd",
-      "security-checker security:check": "script"
+      "assets:install %PUBLIC_DIR%": "symfony-cmd"
     },
     "post-install-cmd": [
       "@auto-scripts"
@@ -92,7 +91,10 @@
     "preferred-install": {
       "*": "dist"
     },
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "symfony/flex": true
+    }
   },
   "extra": {
       "symfony": {
