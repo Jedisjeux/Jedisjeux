@@ -17,6 +17,7 @@ use App\Repository\TaxonRepository;
 use FOS\RestBundle\View\View;
 use SM\Factory\Factory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,23 +43,17 @@ class ArticleController extends ResourceController
 
         $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
 
-        $view = View::create($resource);
-
         if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW.'.html'))
-                ->setTemplateVar($this->metadata->getName())
-                ->setData([
-                    'rootTaxons' => $this->getRootTaxons(),
-                    'configuration' => $configuration,
-                    'metadata' => $this->metadata,
-                    'resource' => $resource,
-                    $this->metadata->getName() => $resource,
-                ])
-            ;
+            return $this->render($configuration->getTemplate(ResourceActions::SHOW.'.html'), [
+                'rootTaxons' => $this->getRootTaxons(),
+                'configuration' => $configuration,
+                'metadata' => $this->metadata,
+                'resource' => $resource,
+                $this->metadata->getName() => $resource,
+            ]);
         }
 
-        return $this->viewHandler->handle($configuration, $view);
+        return $this->createRestView($configuration, $resource);
     }
 
     /**
@@ -154,7 +149,7 @@ class ArticleController extends ResourceController
                     'metadata' => $this->metadata,
                     'resource' => $resource,
                     $this->metadata->getName() => $resource,
-                    'state_machine' => $this->getStateMachine($resource),
+                    'state_machine' => $this->getStateMachineArticle($resource),
                 ])
             ;
         }
@@ -169,7 +164,7 @@ class ArticleController extends ResourceController
      *
      * @throws \SM\SMException
      */
-    protected function getStateMachine(Article $article)
+    protected function getStateMachineArticle(Article $article): StateMachineInterface
     {
         /** @var Factory $factory */
         $factory = $this->get('sm.factory');

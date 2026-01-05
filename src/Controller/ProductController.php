@@ -15,6 +15,7 @@ use App\Entity\Taxon;
 use App\Repository\TaxonRepository;
 use FOS\RestBundle\View\View;
 use SM\Factory\Factory;
+use SM\StateMachine\StateMachineInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\ResourceActions;
@@ -36,21 +37,16 @@ class ProductController extends ResourceController
 
         $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
-        $view = View::create($resources);
-
         if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::INDEX))
-                ->setTemplateVar($this->metadata->getPluralName())
-                ->setData([
-                    'rootTaxons' => $this->getRootTaxons(),
-                    'metadata' => $this->metadata,
-                    'resources' => $resources,
-                    $this->metadata->getPluralName() => $resources,
-                ]);
+            return $this->render($configuration->getTemplate(ResourceActions::INDEX . '.html'), [
+                'rootTaxons' => $this->getRootTaxons(),
+                'metadata' => $this->metadata,
+                'resources' => $resources,
+                $this->metadata->getPluralName() => $resources,
+            ]);
         }
 
-        return $this->viewHandler->handle($configuration, $view);
+        return $this->createRestView($configuration, $resources);
     }
 
     /**
@@ -71,22 +67,17 @@ class ProductController extends ResourceController
 
         $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
-        $view = View::create($resources);
-
         if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate('indexByTaxon.html'))
-                ->setTemplateVar($this->metadata->getPluralName())
-                ->setData([
-                    'metadata' => $this->metadata,
-                    'taxon' => $taxon,
-                    'rootTaxons' => $this->getRootTaxons(),
-                    'resources' => $resources,
-                    $this->metadata->getPluralName() => $resources,
-                ]);
+            return $this->render($configuration->getTemplate('indexByTaxon.html'), [
+                'metadata' => $this->metadata,
+                'taxon' => $taxon,
+                'rootTaxons' => $this->getRootTaxons(),
+                'resources' => $resources,
+                $this->metadata->getPluralName() => $resources,
+            ]);
         }
 
-        return $this->viewHandler->handle($configuration, $view);
+        return $this->createRestView($configuration, $resources);
     }
 
     /**
@@ -107,22 +98,17 @@ class ProductController extends ResourceController
 
         $resources = $this->resourcesCollectionProvider->get($configuration, $this->repository);
 
-        $view = View::create($resources);
-
         if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate('indexByPerson.html'))
-                ->setTemplateVar($this->metadata->getPluralName())
-                ->setData([
-                    'metadata' => $this->metadata,
-                    'rootTaxons' => $this->getRootTaxons(),
-                    'person' => $person,
-                    'resources' => $resources,
-                    $this->metadata->getPluralName() => $resources,
-                ]);
+            return $this->render($configuration->getTemplate('indexByPerson.html'), [
+                'metadata' => $this->metadata,
+                'rootTaxons' => $this->getRootTaxons(),
+                'person' => $person,
+                'resources' => $resources,
+                $this->metadata->getPluralName() => $resources,
+            ]);
         }
 
-        return $this->viewHandler->handle($configuration, $view);
+        return $this->createRestView($configuration, $resources);
     }
 
     /**
@@ -140,23 +126,17 @@ class ProductController extends ResourceController
 
         $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
 
-        $view = View::create($resource);
-
         if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW.'.html'))
-                ->setTemplateVar($this->metadata->getName())
-                ->setData([
-                    'configuration' => $configuration,
-                    'metadata' => $this->metadata,
-                    'resource' => $resource,
-                    $this->metadata->getName() => $resource,
-                    'state_machine' => $this->getStateMachine($resource),
-                ])
-            ;
+            return $this->render($configuration->getTemplate(ResourceActions::SHOW . '.html'), [
+                'configuration' => $configuration,
+                'metadata' => $this->metadata,
+                'resource' => $resource,
+                $this->metadata->getName() => $resource,
+                'state_machine' => $this->getStateMachineProduct($resource),
+            ]);
         }
 
-        return $this->viewHandler->handle($configuration, $view);
+        return $this->createRestView($configuration, $resource);
     }
 
     /**
@@ -164,7 +144,7 @@ class ProductController extends ResourceController
      *
      * @return \SM\StateMachine\StateMachineInterface
      */
-    protected function getStateMachine(ProductInterface $product)
+    protected function getStateMachineProduct(ProductInterface $product): StateMachineInterface
     {
         /** @var Factory $factory */
         $factory = $this->get('sm.factory');

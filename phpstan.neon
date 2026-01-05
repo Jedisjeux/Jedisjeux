@@ -21,6 +21,9 @@ parameters:
         - '**MongoDB**'
         - '**ODM**'
 
+        - 'src/EventListener/PasswordUpdaterListener.php'
+        - 'src/Factory/ProductFactory.php'
+
     ignoreErrors:
         # Magic calls
         - '/Call to an undefined static method Webmozart\\Assert\\Assert::all/'

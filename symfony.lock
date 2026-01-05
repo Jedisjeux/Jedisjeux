@@ -1,4 +1,7 @@
 {
+    "babdev/pagerfanta-bundle": {
+        "version": "v2.11.0"
+    },
     "beberlei/assert": {
         "version": "v2.9.6"
     },
@@ -326,9 +329,6 @@
             "ref": "f0436fc35fca88eada758311f8de43bfb61f1980"
         }
     },
-    "ocramius/proxy-manager": {
-        "version": "2.1.1"
-    },
     "openlss/lib-array2xml": {
         "version": "0.0.10"
     },
@@ -527,6 +527,18 @@
     "sonata-project/doctrine-extensions": {
         "version": "1.2.0"
     },
+    "sonata-project/form-extensions": {
+        "version": "1.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.4",
+            "ref": "9c8a1e8ce2b1f215015ed16652c4ed18eb5867fd"
+        },
+        "files": [
+            "config/packages/sonata_form.yaml"
+        ]
+    },
     "sonata-project/intl-bundle": {
         "version": "2.5.0"
     },
@@ -589,6 +601,18 @@
     },
     "sylius/resource": {
         "version": "v1.2.7"
+    },
+    "sylius/resource-bundle": {
+        "version": "1.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.6",
+            "ref": "bfd4306c8e26b4aed0790ebde89a2c949e1398a2"
+        },
+        "files": [
+            "config/packages/sylius_resource.yaml"
+        ]
     },
     "sylius/review": {
         "version": "v1.2.7"
