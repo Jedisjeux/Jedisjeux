@@ -78,6 +78,26 @@ class ProductReviewRepository extends EntityRepository
             ;
     }
 
+    public function findOverallAverage(): float
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->select($queryBuilder->expr()->avg('o.rating'));
+
+        return (float) $queryBuilder
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function countProductReviews(): int
+    {
+        return (int) $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     /**
      * @param string                 $locale
      * @param string                 $productSlug
