@@ -1,9 +1,7 @@
 {% for child in taxons %}
     <li>
         <a href="{{ path('app_frontend_article_index_by_taxon', { 'slug': child.slug }) }}">
-            {% if child.iconClass is not null %}
-                <i class="{{ child.iconClass }} pr-2"></i>
-            {% endif %}
+            <i class="{{ child.iconClass ?: 'fa fa-file-text-o' }}" aria-hidden="true"></i>
             {{ child.name }}
         </a>
     </li>
