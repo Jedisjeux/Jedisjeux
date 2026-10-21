@@ -1,54 +1,122 @@
-<!-- main-container start -->
-<!-- ================ -->
-<section class="main-container">
-    <div class="container">
-        <div class="row">
+{% import "macro/image.html.twig" as images %}
+{% from "macro/product.html.twig" import duration, playerCount %}
 
-            <!-- main start -->
-            <!-- ================ -->
-            <div id="game-library-list" class="main col-md-12">
-                <div class="games-library bg-black">
-                    <div class="content">
-                        {% spaceless %}
-                            {% for product_list_item in product_list_items.data %}
-                                {% set product = product_list_item.product %}
-                                {% set box = product.firstVariant.enabledBox %}
-                                <div class="game-library-item dropdown show" style="display: inline-block">
-                                    <a class=""
-                                       href="#"
-                                       role="button"
-                                       id="dropdownMenuLink{{ loop.index }}"
-                                       data-toggle="dropdown"
-                                       aria-haspopup="true"
-                                       aria-expanded="false">
-                                        {% if box %}
-                                            {% set runtimeConfig = {'relative_resize': {'heighten': box.height} } %}
-                                            <img src="{{ box.image.webPath | imagine_filter('product_box', runtimeConfig) }}"
-                                                 alt="{{ product_list_item.product }}"/>
-                                        {% else %}
-                                            <img src="{{ asset('assets/frontend/images/placeholder.png'| imagine_filter('thumbnail')) }}"
-                                                 alt="{{ product_list_item.product }}"/>
-                                        {% endif %}
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink{{ loop.index }}">
-                                        <h6 class="dropdown-header">{{ product.name }}</h6>
-                                        <a class="dropdown-item"
-                                           href="{{ path('sylius_frontend_product_show', { 'slug': product.slug } ) }}">
-                                            <i class="fa fa-link pr-20"></i> {{ 'sylius.ui.view_more'|trans }}
-                                        </a>
-                                        <a class="dropdown-item"
-                                           href="{{ path('app_frontend_product_box_create', {'slug': product.slug } ) }}">
-                                            <i class="fa fa-picture-o pr-20"></i> {{ 'app.ui.propose_an_image'|trans }}
-                                        </a>
-                                    </div>
+<section class="main-container editorial-catalog-results editorial-shelf-results">
+    <div class="container">
+        <div id="game-library-list">
+            {% if product_list_items.data.nbResults > 0 %}
+                <div class="editorial-shelf-layout">
+                <div class="editorial-shelf">
+                    {% for product_list_item in product_list_items.data %}
+                        {% set product = product_list_item.product %}
+                        {% set box = product.firstVariant.enabledBox %}
+                        <div class="editorial-shelf__item dropdown">
+                            <a href="#" role="button" id="dropdownMenuLink{{ loop.index }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ product.name }}">
+                                {% if box %}
+                                    {% set runtimeConfig = {'relative_resize': {'heighten': box.height} } %}
+                                    <img class="editorial-shelf__box" src="{{ box.image.webPath|imagine_filter('product_box', runtimeConfig) }}" alt="{{ product.name }}">
+                                {% else %}
+                                    <span class="editorial-shelf__spine editorial-shelf__spine--{{ loop.index0 % 5 }}"><span>{{ product.name }}</span></span>
+                                {% endif %}
+                            </a>
+                            <div class="dropdown-menu editorial-shelf__preview" aria-labelledby="dropdownMenuLink{{ loop.index }}">
+                                {% if product.mainImage %}<a class="editorial-shelf__preview-image" href="{{ path('sylius_frontend_product_show', {'slug': product.slug}) }}" tabindex="-1">{{ images.render(product.mainImage.webPath, 'magazine_item', product.name) }}</a>{% endif %}
+                                <div class="editorial-shelf__preview-body">
+                                    {% if product.mainTaxon %}<span class="editorial-catalog-card__category">{{ product.mainTaxon.name }}</span>{% endif %}
+                                    <strong>{{ product.name }}</strong>
+                                    {% if product.averageRating > 0 %}<span class="editorial-shelf__preview-rating"><i class="fa fa-star"></i> {{ product.averageRating|round(1) }}<small>/10</small></span>{% endif %}
+                                    <ul>
+                                        <li><i class="fa fa-user"></i>{{ playerCount(product) }}</li>
+                                        {% if product.minDuration %}<li><i class="fa fa-clock-o"></i>{{ duration(product) }}</li>{% endif %}
+                                    </ul>
                                 </div>
-                            {% endfor %}
-                        {% endspaceless %}
-                    </div>
+                                <div class="editorial-shelf__preview-actions">
+                                    <a class="dropdown-item" href="{{ path('sylius_frontend_product_show', {'slug': product.slug}) }}"><i class="fa fa-link"></i>{{ 'sylius.ui.view_more'|trans }}</a>
+                                    <a class="dropdown-item" href="{{ path('app_frontend_product_box_create', {'slug': product.slug}) }}"><i class="fa fa-picture-o"></i>{{ 'app.ui.propose_an_image'|trans }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
-            </div>
-            <!-- main end -->
+                <aside class="editorial-shelf-aside" aria-live="polite">
+                    <div class="editorial-shelf-aside__head">
+                        <span class="editorial-eyebrow">Aperçu</span>
+                        <div class="editorial-shelf-aside__nav">
+                            <button type="button" data-shelf-nav="-1" aria-label="Jeu précédent"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+                            <span class="editorial-shelf-aside__count"></span>
+                            <button type="button" data-shelf-nav="1" aria-label="Jeu suivant"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                    <div class="editorial-shelf-aside__card editorial-shelf__preview"></div>
+                </aside>
+                </div>
+            {% else %}
+                <div class="editorial-list-empty">
+                    <i class="fa fa-th" aria-hidden="true"></i>
+                    <p>L’étagère est vide pour le moment.</p>
+                </div>
+            {% endif %}
         </div>
     </div>
 </section>
-<!-- main-container end -->
+
+<script>
+    (function () {
+        var aside = document.querySelector('.editorial-shelf-aside');
+        if (!aside) {
+            return;
+        }
+        var card = aside.querySelector('.editorial-shelf-aside__card');
+        var count = aside.querySelector('.editorial-shelf-aside__count');
+        var items = Array.prototype.slice.call(document.querySelectorAll('.editorial-shelf__item'));
+        var current = 0;
+        var desktop = window.matchMedia('(min-width: 768px)');
+
+        function select(item) {
+            var preview = item.querySelector('.editorial-shelf__preview');
+            document.querySelectorAll('.editorial-shelf__item.is-selected').forEach(function (selected) {
+                selected.classList.remove('is-selected');
+            });
+            item.classList.add('is-selected');
+            card.innerHTML = preview.innerHTML;
+            current = items.indexOf(item);
+            count.textContent = (current + 1) + ' / ' + items.length;
+        }
+
+        document.querySelectorAll('.editorial-shelf__item > a').forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                if (!desktop.matches) {
+                    return;
+                }
+                event.preventDefault();
+                event.stopPropagation();
+                select(link.parentElement);
+            }, true);
+        });
+
+        function move(step) {
+            select(items[(current + step + items.length) % items.length]);
+        }
+
+        aside.querySelectorAll('[data-shelf-nav]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                move(parseInt(button.getAttribute('data-shelf-nav'), 10));
+            });
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (!desktop.matches || /INPUT|TEXTAREA|SELECT/.test(event.target.tagName)) {
+                return;
+            }
+            if (event.key === 'ArrowLeft') {
+                move(-1);
+            } else if (event.key === 'ArrowRight') {
+                move(1);
+            }
+        });
+
+        if (items.length) {
+            select(items[0]);
+        }
+    })();
+</script>
