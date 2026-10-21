@@ -1,97 +1,70 @@
 {% extends "frontend/layout.html.twig" %}
 
 {% import 'macro/avatar.html.twig' as avatar %}
-{% import 'macro/buttons.html.twig' as buttons %}
 
-{% set pageTitle %}
-    {{ 'sylius.ui.my_account'|trans }}
-{% endset %}
-
-{% block breadcrumb_content %}
-    {{ parent() }}
-    {{ 'sylius.ui.my_account'|trans }}
-{% endblock %}
+{% set pageTitle = 'sylius.ui.my_account'|trans %}
 
 {% block content -%}
-    <!-- main-container start -->
-    <!-- ================ -->
-    <section class="main-container">
-
+    <div class="breadcrumb-container">
         <div class="container">
-            <div class="row">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a class="link-dark" href="{{ path('app_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
+                <li class="breadcrumb-item active">{{ pageTitle }}</li>
+            </ol>
+        </div>
+    </div>
 
-                <!-- main start -->
-                <!-- ================ -->
-                <div class="main col-md-12">
+    <div class="editorial-catalog editorial-account">
+        <section class="editorial-catalog__intro">
+            <div class="container">
+                <span class="editorial-eyebrow">Mon espace · Jedisjeux</span>
+                <h1>{{ pageTitle }}</h1>
+                <p>Retrouvez votre profil, vos listes de jeux et vos parties en un coup d’œil.</p>
+            </div>
+        </section>
+    </div>
 
-                    <!-- page-title start -->
-                    <!-- ================ -->
-                    <h1 class="page-title">{{ pageTitle }}</h1>
-                    <div class="separator-2"></div>
-                    <!-- page-title end -->
-
-                    <div id="customer-information" class="row">
-                        <div class="col-md-9 col-sm-8 col-md-push-3 col-sm-push-4">
-                            <div class="row">
-                                <div class="col-md-2 col-sm-3 col-xs-4">
-                                    <!-- Image -->
-                                    {{ avatar.render(customer, 'thumbnail_XL', customer.user, 'rounded-circle') }}
-                                </div>
-                                <div class="col-md-10 col-sm-9 col-xs-8">
-                                    <!-- Your Name / Heading -->
-                                    <h4>{{ customer.user }}</h4>
-                                    <!-- Email Address -->
-                                    <span><i class="fa fa-envelope color"></i>&nbsp; {{ customer.email }}</span>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="btn-group">
-                                        {{ buttons.btn(path('sylius_frontend_account_profile_update'), 'sylius.ui.edit', null, 'pencil') }}
-                                        {{ buttons.btn(path('sylius_frontend_account_change_password'), 'sylius.ui.change_password', null, 'lock') }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-
-                                    <div class="icon-box-1 text-center">
-                                        <!-- Container -->
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col-md-3 col-sm-6">
-                                                    <!-- Icon Box One Item -->
-                                                    <div class="icon-box-1-item">
-                                                        <!-- Icon Box One Icon -->
-                                                        <a href="{{ path('app_frontend_account_product_list_index') }}"><i class="fa fa-list black"></i></a>
-                                                        <!-- Icon Box One Headeing -->
-                                                        <h4><a href="{{ path('app_frontend_account_product_list_index') }}">{{ 'app.ui.my_game_lists'|trans }}</a></h4>
-                                                        <!-- Icon Box One Paragraph -->
-                                                        <p>Gérer votre ludothèque, vos envies et autres listes.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 col-sm-6">
-                                                    <!-- Icon Box One Item -->
-                                                    <div class="icon-box-1-item">
-                                                        <a href="{{ path('app_frontend_account_game_play_index') }}"><i class="fa fa-play lblue"></i></a>
-                                                        <h4><a href="{{ path('app_frontend_account_game_play_index') }}">{{ 'app.ui.my_game_plays'|trans }}</a></h4>
-                                                        <p>Gérer vos parties de jeu.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 col-sm-4 col-md-pull-9 col-sm-pull-8">
-                            {% include 'frontend/account/_sidebar.html.twig' %}
-                        </div>
+    <section class="editorial-account-main">
+        <div class="container">
+            <div id="customer-information" class="editorial-account__layout">
+                <aside class="editorial-account__profile">
+                    <div class="editorial-account__avatar">
+                        {{ avatar.render(customer, 'thumbnail_XL', customer.user, 'rounded-circle') }}
                     </div>
+                    <h2>{{ customer.user }}</h2>
+                    <p class="editorial-account__email"><i class="fa fa-envelope-o" aria-hidden="true"></i><span>{{ customer.email }}</span></p>
+                    <nav class="editorial-account__actions" aria-label="{{ 'sylius.ui.personal_information'|trans }}">
+                        <a href="{{ path('sylius_frontend_account_profile_update') }}"><i class="fa fa-pencil" aria-hidden="true"></i>{{ 'sylius.ui.personal_information'|trans }}</a>
+                        <a href="{{ path('sylius_frontend_account_change_password') }}"><i class="fa fa-lock" aria-hidden="true"></i>{{ 'sylius.ui.change_password'|trans }}</a>
+                        <a class="app-logout-button" href="{{ path('app_frontend_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>{{ 'sylius.ui.logout'|trans }}</a>
+                    </nav>
+                </aside>
 
-
+                <div class="editorial-account__shortcuts">
+                    <a class="editorial-account-card" href="{{ path('app_frontend_account_product_list_index') }}">
+                        <span class="editorial-account-card__icon" aria-hidden="true"><i class="fa fa-list"></i></span>
+                        <span class="editorial-account-card__body">
+                            <strong>{{ 'app.ui.my_game_lists'|trans }}</strong>
+                            <span>Gérez votre ludothèque, vos envies et vos autres listes.</span>
+                        </span>
+                        <i class="fa fa-arrow-right editorial-account-card__arrow" aria-hidden="true"></i>
+                    </a>
+                    <a class="editorial-account-card" href="{{ path('app_frontend_user_games_library', {'username': customer.user.usernameCanonical}) }}">
+                        <span class="editorial-account-card__icon" aria-hidden="true"><i class="fa fa-th"></i></span>
+                        <span class="editorial-account-card__body">
+                            <strong>{{ 'app.ui.my_virtual_game_library'|trans }}</strong>
+                            <span>Affichez vos jeux comme sur une étagère et partagez-la.</span>
+                        </span>
+                        <i class="fa fa-arrow-right editorial-account-card__arrow" aria-hidden="true"></i>
+                    </a>
+                    <a class="editorial-account-card" href="{{ path('app_frontend_account_game_play_index') }}">
+                        <span class="editorial-account-card__icon" aria-hidden="true"><i class="fa fa-play"></i></span>
+                        <span class="editorial-account-card__body">
+                            <strong>{{ 'app.ui.my_game_plays'|trans }}</strong>
+                            <span>Retrouvez et gérez les parties que vous avez partagées.</span>
+                        </span>
+                        <i class="fa fa-arrow-right editorial-account-card__arrow" aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
         </div>

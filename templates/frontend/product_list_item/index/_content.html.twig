@@ -1,39 +1,39 @@
-{% from 'macros/sorting.html.twig' import sorting %}
 {% from 'macro/pagination.html.twig' import simple as pagination %}
 
-<div class="col-md-12">
+{% set route = indexPath|default('app_frontend_product_list_item_index') %}
+{% set routeParameters = {'productListSlug': app.request.get('productListSlug'), 'criteria': app.request.query.get('criteria', {})} %}
+{% set sorting = app.request.query.get('sorting') %}
+{% set oldestFirst = sorting.createdAt is defined and sorting.createdAt == 'asc' %}
+
+<section class="main-container editorial-catalog-results">
     <div class="container">
-        <div class="pull-right sorting">
-            {% set sorting = app.request.get('sorting') %}
-
-            {% set icon = false %}
-            {% set currentOrder = null %}
-
-            {% if null == sorting %}
-                {% set icon = true %}
-                {% set currentOrder = 'desc' %}
-            {% endif %}
-
-            Trier
-            par {{ sorting(indexPath|default('app_frontend_product_list_item_index'), 'app.ui.added_at'|trans, 'createdAt', 'desc', icon, currentOrder, {'productListSlug': app.request.get('productListSlug')}) }}
-        </div>
-
-        <div class="clearfix"></div>
-
-        <div class="img-box-4 text-center jeu-list">
-            <div class="row">
-                {% for product_list_item in product_list_items.data %}
-                {% if loop.index0 != 0 and loop.index0%4 == 0 %}
-            </div>
-            <div class="row">
-                {% endif %}
-                <div class="col-md-3 col-sm-6">
-                    {% include "frontend/product/_single.html.twig" with {'product': product_list_item.product} %}
+        <div id="product-list">
+            {% if product_list_items.data.nbResults > 0 %}
+                <div class="dropdown text-right">
+                    <button type="button" class="btn btn-default-transparent dropdown-toggle" data-toggle="dropdown">
+                        {{ 'sylius.ui.sort'|trans }} {{ (oldestFirst ? 'sylius.ui.oldest_first' : 'sylius.ui.newest_first')|trans|lower }}
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="{{ path(route, routeParameters|merge({'sorting': {'createdAt': 'desc'}})) }}">{{ 'sylius.ui.newest_first'|trans }}</a>
+                        <a class="dropdown-item" href="{{ path(route, routeParameters|merge({'sorting': {'createdAt': 'asc'}})) }}">{{ 'sylius.ui.oldest_first'|trans }}</a>
+                    </div>
                 </div>
-                {% endfor %}
-            </div>
-        </div>
 
-        {{ pagination(product_list_items.data) }}
+                <div class="row grid-space-10">
+                    {% for product_list_item in product_list_items.data %}
+                        <div class="col-6 col-md-6 col-lg-3">
+                            {% include 'frontend/product/_catalogCard.html.twig' with {'product': product_list_item.product} %}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {{ pagination(product_list_items.data) }}
+            {% else %}
+                <div class="editorial-list-empty">
+                    <i class="fa fa-cubes" aria-hidden="true"></i>
+                    <p>Aucun jeu dans cette liste pour le moment.</p>
+                </div>
+            {% endif %}
+        </div>
     </div>
-</div>
+</section>
