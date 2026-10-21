@@ -62,21 +62,23 @@
                                 <!-- header dropdown buttons -->
                                 <div class="header-dropdown-buttons hidden-lg-up p-0 ml-auto mr-3">
                                     <div class="btn-group">
-                                        <button type="button" class="btn dropdown-toggle dropdown-toggle--no-caret" id="header-drop-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search"></i></button>
-                                        <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-drop-3">
-                                            <li>
-                                                <form role="search" class="search-box margin-clear" action="{{ path('sylius_frontend_product_index') }}">
-                                                    <div class="form-group has-feedback">
-                                                        <input type="text"
-                                                               {% if criteria['search'] is defined %}value="{{ criteria['search']['value'] }}"{% endif %}
-                                                               name="criteria[search][value]"
-                                                               class="form-control"
-                                                               placeholder="{{ 'sylius.ui.search'|trans }}">
-                                                        <i class="fa fa-search form-control-feedback"></i>
-                                                    </div>
-                                                </form>
-                                            </li>
-                                        </ul>
+                                        <button type="button" class="btn dropdown-toggle dropdown-toggle--no-caret" id="header-drop-3" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search"></i></button>
+                                        <div class="dropdown-menu dropdown-menu-right editorial-search" aria-labelledby="header-drop-3">
+                                            <form role="search" class="editorial-search__form" action="{{ path('sylius_frontend_product_index') }}">
+                                                <label class="editorial-eyebrow" for="mobile-search-input">Rechercher un jeu</label>
+                                                <div class="editorial-search__field">
+                                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                                    <input type="search"
+                                                           id="mobile-search-input"
+                                                           {% if criteria['search'] is defined %}value="{{ criteria['search']['value'] }}"{% endif %}
+                                                           name="criteria[search][value]"
+                                                           autocomplete="off"
+                                                           placeholder="Nom du jeu, par exemple Carcassonne">
+                                                    <button type="submit" aria-label="{{ 'sylius.ui.search'|trans }}"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                                                </div>
+                                            </form>
+                                            {% include 'frontend/header/_searchShortcuts.html.twig' %}
+                                        </div>
                                     </div>
                                     {% if app.user %}
                                         {% include 'frontend/header/_accountMenu.html.twig' with { 'id': 'mobile-account-menu' } %}
@@ -108,20 +110,22 @@
                     <div class="header-dropdown-buttons">
                         <div class="btn-group">
                             <button type="button" class="btn dropdown-toggle dropdown-toggle--no-caret" id="header-drop-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search"></i></button>
-                            <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-drop-1">
-                                <li>
-                                    <form role="search" class="search-box margin-clear" action="{{ path('sylius_frontend_product_index') }}">
-                                        <div class="form-group has-feedback">
-                                            <input type="text"
-                                                   {% if criteria['search'] is defined %}value="{{ criteria['search']['value'] }}"{% endif %}
-                                                   name="criteria[search][value]"
-                                                   class="form-control"
-                                                   placeholder="{{ 'sylius.ui.search'|trans }}">
-                                            <i class="fa fa-search form-control-feedback"></i>
-                                        </div>
-                                    </form>
-                                </li>
-                            </ul>
+                            <div class="dropdown-menu dropdown-menu-right editorial-search" aria-labelledby="header-drop-1">
+                                <form role="search" class="editorial-search__form" action="{{ path('sylius_frontend_product_index') }}">
+                                    <label class="editorial-eyebrow" for="header-search-input">Rechercher un jeu</label>
+                                    <div class="editorial-search__field">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                        <input type="search"
+                                               id="header-search-input"
+                                               {% if criteria['search'] is defined %}value="{{ criteria['search']['value'] }}"{% endif %}
+                                               name="criteria[search][value]"
+                                               autocomplete="off"
+                                               placeholder="Nom du jeu, par exemple Carcassonne">
+                                        <button type="submit" aria-label="{{ 'sylius.ui.search'|trans }}"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                                    </div>
+                                </form>
+                                {% include 'frontend/header/_searchShortcuts.html.twig' %}
+                            </div>
                         </div>
                     {% if app.user %}
                         {% include 'frontend/header/_accountMenu.html.twig' with { 'id': 'desktop-account-menu' } %}
