@@ -1,23 +1,23 @@
-{% from 'macro/rating.html.twig' import rating %}
-
 {% if article.averageRating > 0 %}
-    <div class="feature-box text-center object-non-visible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
-        <span class="icon default-bg circle"><i class="fa fa-star"></i></span>
-        <h3>{{ article.averageRating|round(1) }}/10</h3>
-        <div class="separator clearfix"></div>
-        <div class="text-left">
-            {% if article.materialRating > 0 %}
-                <span class="pull-right">{{ rating(article.materialRating*2) }}</span>
-                <h4 class="media-heading">Matériel</h4>
-            {% endif %}
-            {% if article.rulesRating > 0 %}
-                <span class="pull-right">{{ rating(article.rulesRating*2) }}</span>
-                <h4 class="media-heading">Règles</h4>
-            {% endif %}
-            {% if article.lifetimeRating > 0 %}
-                <span class="pull-right">{{ rating(article.lifetimeRating*2) }}</span>
-                <h4 class="media-heading">Durée de vie</h4>
-            {% endif %}
+    {% set criteria = [
+        {'label': 'Matériel', 'value': article.materialRating},
+        {'label': 'Règles', 'value': article.rulesRating},
+        {'label': 'Durée de vie', 'value': article.lifetimeRating}
+    ] %}
+
+    <section class="editorial-sidebar-card editorial-article-score">
+        <span class="editorial-eyebrow">La note de la rédaction</span>
+        <div class="editorial-article-score__value">
+            <strong>{{ article.averageRating|round(1) }}</strong><small>/10</small>
         </div>
-    </div>
+        <ul>
+            {% for criterion in criteria if criterion.value > 0 %}
+                <li>
+                    <span>{{ criterion.label }}</span>
+                    <span class="editorial-article-score__bar" aria-hidden="true"><span style="width: {{ criterion.value * 20 }}%"></span></span>
+                    <strong>{{ criterion.value }}/5</strong>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
 {% endif %}

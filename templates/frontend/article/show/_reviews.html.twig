@@ -1,32 +1,21 @@
 {% import 'macro/image.html.twig' as images %}
-{% from 'macro/rating.html.twig' import rating %}
 
 {% if article.reviews|length > 0 %}
-
-    <h3>Avis de la rédaction</h3>
-    <div class="separator-2"></div>
-
-    <div class="blog-comments">
+    <section class="editorial-article-reviews">
+        <span class="editorial-eyebrow">Avis de la rédaction</span>
+        <h2>Ce qu’en pense l’équipe</h2>
         {% for review in article.reviews %}
-            {% set avatarPath = review.author.avatar is not null ? review.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png'  %}
-
-            <!-- comment start -->
-            <div class="comment clearfix">
-                <div class="comment-avatar">
-                    {{ images.render(avatarPath, 'thumbnail', "avatar", 'rounded-circle') }}
-                </div>
-                <header>
-                    <div class="comment-meta">
-                        {{ rating(review.rating) }}
-                    </div>
-                </header>
-                <div class="comment-content">
-                    <div class="comment-body clearfix">
-                        {{ review.comment|raw }}
-                    </div>
+            {% set avatarPath = review.author.avatar is not null ? review.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png' %}
+            <div class="editorial-article-review">
+                <div class="editorial-article-review__avatar">{{ images.render(avatarPath, 'thumbnail', review.author, 'rounded-circle') }}</div>
+                <div class="editorial-article-review__body">
+                    <header>
+                        <strong>{{ review.author }}</strong>
+                        <span class="editorial-article-review__score"><i class="fa fa-star" aria-hidden="true"></i>{{ review.rating }}<small>/10</small></span>
+                    </header>
+                    <div class="editorial-article-review__text">{{ review.comment|raw }}</div>
                 </div>
             </div>
-            <!-- comment end -->
         {% endfor %}
-    </div>
+    </section>
 {% endif %}
