@@ -13,24 +13,23 @@ Adding ssh authorized keys for server on your local computer
 and enter the correct password for username "jedisjeux" on server
 
 
-Install dependencies
---------------------
+Deploy
+------
 
-.. code-block:: bash
-
-    $ gem install bundler
-    $ bundle install
+Capistrano runs inside a Docker container (no Ruby needed on your machine).
+Your SSH agent is forwarded to the container, so make sure your key is loaded (``ssh-add``).
+The current git branch is deployed.
 
 Deploy the staging environment
-------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
-    $ bundle exec "cap staging deploy"
+    $ castor app:deploy staging
 
 Deploy the production environment
----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
-    $ bundle exec "cap production deploy"
+    $ castor app:deploy production

@@ -33,7 +33,7 @@ set :application, 'Jedisjeux'
 set :repo_url, 'https://github.com/Jedisjeux/Jedisjeux.git'
 
 # Default branch is :master
-ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+set :branch, ENV.fetch('BRANCH') { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 set :deploy_to, '/home/jedisjeux/'
 
