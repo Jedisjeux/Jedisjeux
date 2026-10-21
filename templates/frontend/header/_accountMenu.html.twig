@@ -1,0 +1,15 @@
+<div class="btn-group editorial-accountBlock">
+    <button type="button" class="btn dropdown-toggle dropdown-toggle--no-caret editorial-header-user" id="{{ id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="{{ 'sylius.ui.my_account'|trans }}" title="{{ 'sylius.ui.my_account'|trans }}">
+        <i class="fa fa-user" aria-hidden="true"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-right dropdown-animation editorial-account-menu" aria-labelledby="{{ id }}">
+        {% if is_granted('ROLE_DASHBOARD') %}
+            <li><a href="{{ path('app_backend_dashboard') }}"><i class="fa fa-cog"></i>{{ 'sylius.ui.administration'|trans }}</a></li>
+        {% endif %}
+        <li><a href="{{ path('sylius_frontend_account_dashboard') }}"><i class="fa fa-user"></i>{{ 'sylius.ui.my_account'|trans }}</a></li>
+        <li><a href="{{ path('app_frontend_account_product_list_index') }}"><i class="fa fa-list"></i>{{ 'app.ui.my_game_lists'|trans }}</a></li>
+        <li><a href="{{ path('app_frontend_user_games_library', {'username': app.user.usernameCanonical}) }}"><i class="fa fa-th"></i>{{ 'app.ui.my_virtual_game_library'|trans }}</a></li>
+        <li><a href="{{ path('app_frontend_account_game_play_index') }}"><i class="fa fa-play"></i>{{ 'app.ui.my_game_plays'|trans }}</a></li>
+        <li><a class="app-logout-button" href="{{ path('app_frontend_logout') }}"><i class="fa fa-sign-out"></i>{{ 'sylius.ui.logout'|trans }}</a></li>
+    </ul>
+</div>

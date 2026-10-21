@@ -1,9 +1,8 @@
 {% import 'macro/image.html.twig' as images %}
-{% from 'macro/rating.html.twig' import rating %}
 
 <!-- main-container start -->
 <!-- ================ -->
-<section class="main-container">
+<section class="main-container editorial-game-main">
 
     <div class="container">
         <div class="row">
@@ -11,12 +10,12 @@
             <!-- main start -->
             <!-- ================ -->
             <div class="main col-12">
-                <div class="row">
-                    <div class="col-lg-4 col-xl-5">
+                <div class="row editorial-game-layout">
+                    <div class="editorial-game-gallery col-lg-4 col-xl-5">
                         <!-- pills start -->
                         <!-- ================ -->
                         <!-- Nav tabs -->
-                        <ul class="nav nav-pills">
+                        <ul class="nav nav-pills editorial-game-media-tabs">
                             <li class="nav-item"><a class="nav-link active" href="#pill-1" data-toggle="tab"
                                                     title="images"><i
                                             class="fa fa-camera pr-1"></i> Photo</a></li>
@@ -26,7 +25,7 @@
                         <!-- Tab panes -->
                         <div class="tab-content clear-style">
                             <div class="tab-pane active" id="pill-1">
-                                <div class="slick-carousel content-slider-with-thumbs mb-20">
+                                <div class="slick-carousel content-slider-with-thumbs editorial-game-cover mb-20">
                                     {% for image in product.getImagesOfAllVariants %}
                                         <div class="overlay-container overlay-visible">
                                             {{ images.render(image.webPath, 'full', product.name) }}
@@ -64,86 +63,68 @@
                             </div>
                         </div>
                         <!-- pills end -->
-                        <div class="clearfix mb-20">
-                            <strong>{{ 'app.ui.your_rating'|trans }}</strong>
-                            {{ render(url('sylius_partial_product_rating_show', { 'productId': product.id })) }}
-
-                            <hr class="mb-10">
-                            <a href="#"
-                               class="wishlist"
-                               data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false" ><i class="fa fa-plus pl-10 pr-1"></i>Ajouter à</a>
-                            <ul class="dropdown-menu"
-                                style="white-space: nowrap; padding: 10px">
-                                <li>
-                                    <form id="productListForm">
-                                        <input type="hidden" name="productId"
-                                               value="{{ product.id }}"/>
-                                        <div class="list">
-                                            <input id="game_library" type="checkbox" data-code="game_library"/>
-                                            <label for="game_library">{{ 'app.ui.game_library'|trans }}</label>
-                                        </div>
-                                        <div class="list">
-                                            <input id="wishes" type="checkbox" data-code="wishes"/>
-                                            <label for="wishes">{{ 'app.ui.wishes'|trans }}</label>
-                                        </div>
-                                        <div class="list">
-                                            <input id="see_later" type="checkbox" data-code="see_later"/>
-                                            <label for="see_later">{{ 'app.ui.see_later'|trans }}</label>
-                                        </div>
-                                    </form>
-                                </li>
-                                <li>
-                                    <hr/>
-                                    <form method="post" class="form-inline" id="newProductListForm">
-                                        <div class="form-group">
-                                            <input type="text"
-                                                   id="list_name"
-                                                   name="name"
-                                                   class="form-control"
-                                                   placeholder="{{ 'app.ui.new_list'|trans }}"/>
-                                        </div>
-                                        <button type="submit"
-                                                class="btn btn-default"><span
-                                                    class="fa fa-check"></span> {{ 'sylius.ui.create'|trans }}
-                                        </button>
-                                    </form>
-                                </li>
-                            </ul>
-                            {{ render(url('sylius_partial_product_review_show_create_or_update_link', {'productSlug': product.slug})) }}
-                            <a href="{{ path('app_frontend_game_play_create', { 'productSlug': product.slug } ) }}" class="wishlist"><i class="fa fa-table pl-10 pr-1"></i>Enregistrer une
-                                partie</a>
-                        </div>
                     </div>
-                    <div class="col-lg-8 col-xl-7 pv-30">
-                        <h2 class="mt-4">{{ 'sylius.ui.description'|trans }}</h2>
-                        {{ product.description|raw }}
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h4 class="space-top">{{ 'app.ui.specifications'|trans }}</h4>
-                                <hr>
-                                {% include 'frontend/product/show/_specifications.html.twig' %}
-                                {% if product.hasYearAwards %}
-                                    <h4 class="space-top">{{ 'app.ui.game_awards'|trans }}</h4>
-                                    <hr>
-                                    {% include 'frontend/product/show/_awards.html.twig' %}
-                                {% endif %}
+                    <div class="editorial-game-details col-lg-8 col-xl-7">
+                        <span class="editorial-game-category">Jeu de société</span>
+                        <h1 itemprop="name">{{ product.name }}</h1>
+                        {% if product.averageRating > 0 %}
+                            <div class="editorial-game-rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                                <span class="editorial-game-rating__stars" aria-hidden="true"><i class="fa fa-star"></i></span>
+                                <strong>{{ product.averageRating|round(1) }}<small>/10</small></strong>
+                                <a href="#reviews">({{ product.reviewCount }} {{ 'app.ui.ratings'|trans|lower }})</a>
+                                <meta itemprop="ratingValue" content="{{ product.averageRating|round(1) }}">
+                                <meta itemprop="bestRating" content="10">
+                                <meta itemprop="worstRating" content="1">
+                                <meta itemprop="ratingCount" content="{{ product.reviewCount }}">
+                                <meta itemprop="reviewCount" content="{{ product.commentedReviewCount }}">
                             </div>
-                            <div class="col-md-4">
-                                {% if product.boxContent is not null %}
-                                    <h4 class="space-top">{{ 'app.ui.box_content'|trans }}</h4>
-                                    <hr>
-                                    <ul id="box-content" class="nav flex-column list-style-icons">
-                                        {% for row in product.boxContent|split("\n") %}
-                                            <li class="nav-item">
-                                                <i class="fa fa-caret-right pr-10"></i>{{ row }}
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                {% endif %}
+                        {% endif %}
+                        <div class="editorial-game-facts" aria-label="Informations principales">
+                            <div>
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                                <strong><span itemprop="minValue">{{ product.minPlayerCount }}</span>{% if product.maxPlayerCount %}{% if product.maxPlayerCount != product.minPlayerCount %}–<span itemprop="maxValue">{{ product.maxPlayerCount }}</span>{% endif %}{% else %}+{% endif %}</strong>
+                                <small>{{ 'app.ui.players'|trans|lower }}</small>
                             </div>
+                            <div><i class="fa fa-child" aria-hidden="true"></i><strong>{{ product.minAge }}+</strong><small>{{ 'app.ui.age'|trans|lower }}</small></div>
+                            <div>
+                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                <strong>{% if product.minDuration %}{{ product.minDuration }}{% if product.minDuration != product.maxDuration %}–{{ product.maxDuration }}{% endif %} min{% else %}—{% endif %}</strong>
+                                <small>{% if product.durationByPlayer %}{{ 'label.per_player'|trans|lower }}{% else %}{{ 'app.ui.duration'|trans|lower }}{% endif %}</small>
+                            </div>
+                            <div><i class="fa fa-calendar" aria-hidden="true"></i><strong>{% if product.firstVariant.releasedAt %}{{ product.firstVariant.releasedAt|date('Y') }}{% else %}—{% endif %}</strong><small>{{ 'app.ui.release_date'|trans|lower }}</small></div>
                         </div>
-                        <hr>
+                        {% if product.shortDescription is not null %}
+                            <p class="editorial-game-intro-copy">{{ product.shortDescription|raw }}</p>
+                        {% endif %}
+                        <a class="editorial-game-intro-link" href="#presentation">Découvrir la présentation <i class="fa fa-arrow-down" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div class="editorial-game-actions editorial-game-actions--intro">
+                    <div class="editorial-game-actions__rating">
+                        <strong>{{ 'app.ui.your_rating'|trans }}</strong>
+                        {{ render(url('sylius_partial_product_rating_show', { 'productId': product.id })) }}
+                    </div>
+                    <div class="editorial-game-actions__links">
+                        <a href="#" class="wishlist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus pr-1"></i>Ajouter à</a>
+                        <ul class="dropdown-menu" style="white-space: nowrap; padding: 10px">
+                            <li>
+                                <form id="productListForm">
+                                    <input type="hidden" name="productId" value="{{ product.id }}"/>
+                                    <div class="list"><input id="game_library" type="checkbox" data-code="game_library"/><label for="game_library">{{ 'app.ui.game_library'|trans }}</label></div>
+                                    <div class="list"><input id="wishes" type="checkbox" data-code="wishes"/><label for="wishes">{{ 'app.ui.wishes'|trans }}</label></div>
+                                    <div class="list"><input id="see_later" type="checkbox" data-code="see_later"/><label for="see_later">{{ 'app.ui.see_later'|trans }}</label></div>
+                                </form>
+                            </li>
+                            <li>
+                                <hr/>
+                                <form method="post" class="form-inline" id="newProductListForm">
+                                    <div class="form-group"><input type="text" id="list_name" name="name" class="form-control" placeholder="{{ 'app.ui.new_list'|trans }}"/></div>
+                                    <button type="submit" class="btn btn-default"><span class="fa fa-check"></span> {{ 'sylius.ui.create'|trans }}</button>
+                                </form>
+                            </li>
+                        </ul>
+                        {{ render(url('sylius_partial_product_review_show_create_or_update_link', {'productSlug': product.slug})) }}
+                        <a href="{{ path('app_frontend_game_play_create', { 'productSlug': product.slug } ) }}" class="wishlist"><i class="fa fa-table pr-1"></i>Enregistrer une partie</a>
                     </div>
                 </div>
             </div>

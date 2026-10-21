@@ -9,7 +9,7 @@
 
     <!-- main-container start -->
     <!-- ================ -->
-    <section class="main-container">
+    <section class="main-container editorial-catalog-results">
 
         <div class="container">
             <div class="row">
@@ -18,7 +18,7 @@
                 <!-- ================ -->
                 <div id="product-list" class="main col-12">
                     {% include 'frontend/product/index/_sorting.html.twig' %}
-                    {% include 'frontend/product/grid/_fourColumns.html.twig' %}
+                    {% include 'frontend/product/grid/_fourColumns.html.twig' with {'editorial_catalog': true} %}
 
                     <!-- pagination start -->
                     {{ pagination(products.data) }}

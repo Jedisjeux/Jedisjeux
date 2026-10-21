@@ -1,26 +1,27 @@
 {% from 'macro/topic.html.twig' import render_comments %}
 {% import 'macro/buttons.html.twig' as buttons %}
 
-<!-- section start -->
-<!-- ================ -->
-<section class="pv-30 light-gray-bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                {{ buttons.btn(path('app_frontend_game_play_post_create', {'gamePlayId' : game_play.id}), 'app.ui.react_on_this_game_play', null, 'reply', 'btn-default btn-lg') }}
+{% set postCount = game_play.topic ? max(0, game_play.topic.posts|length - 1) : 0 %}
 
-                <!-- comments start -->
-                <!-- ================ -->
-                <div id="comments" class="comments">
-                    {% set postCount = game_play.topic ? game_play.topic.postCount : 0 %}
-                    <h2 class="title">{% transchoice postCount %}app.ui.comment.choice{% endtranschoice %}</h2>
-                    {% if game_play.topic is not null %}
-                        {{ render_comments(game_play.topic, game_play.topic.posts) }}
-                    {% endif %}
-                </div>
-                <!-- comments end -->
+<section class="editorial-play-section editorial-play-comments">
+    <div class="container">
+        <div class="editorial-play-section__inner">
+            <header class="editorial-play-section__heading">
+                <span class="editorial-eyebrow">La conversation continue</span>
+                <h2>Réactions à cette partie</h2>
+                <p>Échangez autour de cette session de jeu.</p>
+            </header>
+
+            <div class="editorial-play-reply">
+                {{ buttons.btn(path('app_frontend_game_play_post_create', {'gamePlayId': game_play.id}), 'app.ui.react_on_this_game_play', null, 'reply', 'btn-default btn-lg') }}
+            </div>
+
+            <div id="comments" class="comments editorial-play-comments__list">
+                {% if postCount > 0 %}<h3 class="editorial-play-comments__count">{% transchoice postCount %}app.ui.comment.choice{% endtranschoice %}</h3>{% endif %}
+                {% if game_play.topic is not null %}
+                    {{ render_comments(game_play.topic, game_play.topic.posts|slice(1)) }}
+                {% endif %}
             </div>
         </div>
     </div>
 </section>
-<!-- section end -->

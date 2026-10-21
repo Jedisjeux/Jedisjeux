@@ -1,10 +1,3 @@
-{% import 'macro/image.html.twig' as images %}
 {% from 'macro/topic.html.twig' import render_comments %}
 
-<!-- comments start -->
-<!-- ================ -->
-<div id="comments" class="comments">
-    <h2 class="title">{% transchoice topic.postCount %}app.ui.comment.choice{% endtranschoice %}</h2>
-    {{ render_comments(topic, posts) }}
-</div>
-<!-- comments end -->
+{{ render_comments(topic, posts) }}

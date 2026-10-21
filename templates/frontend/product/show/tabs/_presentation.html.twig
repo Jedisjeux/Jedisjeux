@@ -1,0 +1,33 @@
+<div class="editorial-game-presentation" role="tabpanel" aria-labelledby="presentation-tab">
+    <div class="row">
+        <div class="col-md-8 editorial-game-presentation__copy" itemprop="description">
+            {{ product.description|raw }}
+        </div>
+        <aside class="col-md-4">
+            <div class="editorial-game-keyfacts">
+                <h3>Infos clés</h3>
+                {% include 'frontend/product/show/_specifications.html.twig' %}
+                {% if product.hasYearAwards %}
+                    <h3 class="editorial-game-keyfacts__subheading">{{ 'app.ui.game_awards'|trans }}</h3>
+                    {% include 'frontend/product/show/_awards.html.twig' %}
+                {% endif %}
+                {% if product.boxContent is not null and product.boxContent is not empty %}
+                    {% set boxItems = product.boxContent|split("\n") %}
+                    <details class="editorial-game-box-content">
+                        <summary>Contenu de la boîte <span>{{ boxItems|length }} élément{{ boxItems|length > 1 ? 's' : '' }}</span></summary>
+                        <ul class="nav flex-column list-style-icons">
+                            {% for row in boxItems %}
+                                <li class="nav-item"><i class="fa fa-check pr-10" aria-hidden="true"></i>{{ row }}</li>
+                            {% endfor %}
+                        </ul>
+                    </details>
+                {% endif %}
+            </div>
+            {{ render(url('sylius_frontend_partial_product_review_latest', {
+                productId: product.id,
+                count: 1,
+                template: 'frontend/product_review/_featured.html.twig'
+            })) }}
+        </aside>
+    </div>
+</div>

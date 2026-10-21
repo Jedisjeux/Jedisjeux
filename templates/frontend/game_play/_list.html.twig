@@ -1,15 +1,9 @@
 {% import 'macro/messages.html.twig' as messages %}
 
 {% if game_plays|length > 0 %}
-    <div class="row">
+    <div class="editorial-game-play-list">
     {% for game_play in game_plays %}
-        {% if loop.index0 > 0 and loop.index0%3 == 0 %}
-            </div>
-            <div class="row">
-        {% endif %}
-        <div class="col-sm-4">
-            {% include 'frontend/game_play/_single.html.twig' %}
-        </div>
+        {% include 'frontend/game_play/_single.html.twig' %}
     {% endfor %}
     </div>
 {% else %}

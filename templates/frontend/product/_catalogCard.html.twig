@@ -1,0 +1,43 @@
+{% import 'macro/image.html.twig' as images %}
+{% from 'macro/product.html.twig' import releasedAt, duration, playerCount %}
+
+{% set productPath = path('sylius_frontend_product_show', { 'slug': product.slug }) %}
+
+<article class="editorial-catalog-card" itemscope itemtype="https://schema.org/Game">
+    <a class="editorial-catalog-card__image" href="{{ productPath }}" aria-label="{{ product.name }}">
+        {% if product.mainImage is not null %}
+            {{ images.render(product.mainImage.webPath, 'magazine_item', product.name) }}
+        {% else %}
+            <span class="editorial-catalog-card__placeholder"><i class="fa fa-cubes" aria-hidden="true"></i></span>
+        {% endif %}
+    </a>
+    <div class="editorial-catalog-card__body">
+        {% if product.mainTaxon is not null %}<span class="editorial-catalog-card__category">{{ product.mainTaxon.name }}</span>{% endif %}
+        <h2 itemprop="name"><a href="{{ productPath }}">{{ product.name }}</a></h2>
+
+        {% if product.averageRating > 0 %}
+            <div class="editorial-catalog-card__rating" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <strong>{{ product.averageRating|round(1) }}<small>/10</small></strong>
+                <span>({{ product.reviewCount }} avis)</span>
+                <meta itemprop="ratingValue" content="{{ product.averageRating|round(1) }}">
+                <meta itemprop="bestRating" content="10">
+                <meta itemprop="worstRating" content="1">
+                <meta itemprop="ratingCount" content="{{ product.reviewCount }}">
+            </div>
+        {% else %}
+            <div class="editorial-catalog-card__rating editorial-catalog-card__rating--empty">Pas encore noté</div>
+        {% endif %}
+
+        {% if product.shortDescription is not null %}
+            <p class="editorial-catalog-card__description">{{ product.shortDescription|truncate(120, true)|striptags|raw }}</p>
+        {% endif %}
+
+        <ul class="editorial-catalog-card__facts">
+            <li><i class="fa fa-user" aria-hidden="true"></i>{{ playerCount(product) }}</li>
+            {% if product.minAge is not null %}<li><i class="fa fa-child" aria-hidden="true"></i>{{ product.minAge }}+</li>{% endif %}
+            {% if product.minDuration is not null %}<li><i class="fa fa-clock-o" aria-hidden="true"></i>{{ duration(product) }}</li>{% endif %}
+        </ul>
+        <div class="editorial-catalog-card__release">Sortie : {{ releasedAt(product.firstVariant) }}</div>
+    </div>
+</article>

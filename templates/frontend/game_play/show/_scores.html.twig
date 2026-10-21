@@ -3,13 +3,16 @@
 {% if game_play.players|length > 0 %}
     <!-- scores section start -->
     <!-- ================ -->
-    <section class="pv-30">
+    <section class="editorial-play-section editorial-play-scores">
         <div class="container">
-            <div class="col-lg-8">
-                <h3>Scores</h3>
-                <div class="separator-2"></div>
+            <div class="editorial-play-section__inner">
+                <header class="editorial-play-section__heading">
+                    <span class="editorial-eyebrow">À la table</span>
+                    <h2>Scores</h2>
+                    <p>Les résultats des joueurs pour cette partie.</p>
+                </header>
                 <div class="table-responsive">
-                    <table class="table">
+                    <table class="table editorial-play-score-table">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -22,7 +25,7 @@
                             {% set customer = player.customer %}
                             {% set avatarPath = customer is not null and customer.avatar is not null ? customer.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png'  %}
                             <tr>
-                                <td>{{ loop.index }}</td>
+                                <td><span class="editorial-play-score-table__rank">{{ loop.index }}</span></td>
                                 <td>{{ player.name }}</td>
                                 <td>{{ player.score }}</td>
                             </tr>

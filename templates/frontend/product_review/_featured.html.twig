@@ -1,0 +1,19 @@
+{% if product_reviews|length > 0 %}
+    {% set player_review = product_reviews|first %}
+    {% set player_review_comment = player_review.comment|striptags|trim %}
+    <figure class="editorial-player-review" itemprop="review" itemscope itemtype="http://schema.org/Review">
+        <div class="editorial-player-review__heading">
+            <span><i class="fa fa-quote-left" aria-hidden="true"></i> Avis d'un joueur</span>
+            <strong itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating"><i class="fa fa-star" aria-hidden="true"></i> {{ player_review.rating|round(1) }}/10<meta itemprop="ratingValue" content="{{ player_review.rating }}"><meta itemprop="bestRating" content="10"><meta itemprop="worstRating" content="1"></strong>
+        </div>
+        {% if player_review.title %}
+            <h3>{{ player_review.title }}</h3>
+        {% endif %}
+        <blockquote itemprop="reviewBody">{{ player_review_comment|length > 280 ? player_review_comment|slice(0, 277) ~ '…' : player_review_comment }}</blockquote>
+        <figcaption>
+            <span itemprop="author">{{ player_review.author }}</span>
+            <time datetime="{{ player_review.createdAt|date('c') }}">{{ player_review.createdAt|localizeddate('medium', 'none') }}</time>
+        </figcaption>
+        <a class="editorial-player-review__link" href="#reviews" data-toggle="tab">Lire les avis <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+    </figure>
+{% endif %}

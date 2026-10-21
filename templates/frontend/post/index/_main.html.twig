@@ -1,67 +1,58 @@
 {% import 'macro/buttons.html.twig' as buttons %}
 {% from 'macro/pagination.html.twig' import simple as pagination %}
 
-<!-- main start -->
-<!-- ================ -->
-<div class="main col-lg-8">
-    {% if app.user and topic.author.id == app.user.customer.id %}
-        <div class="float-right mb-10">
-            <div class="btn-group">
-                <a class="btn btn-default" href="{{ path('app_frontend_topic_update', { 'id': topic.id }) }}"><i class="fa fa-pencil"></i></a>
-            </div>
+{% set replyCount = topic.posts|length %}
 
-            <div class="btn-group">
-                <form class="form-inline" action="{{ path('app_frontend_topic_delete', { 'id': topic.id }) }}" name="form" method="post">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button class="btn btn-danger btn-confirm" type="submit" title="{{ 'label.delete'|trans }}">
-                        <i class="fa fa-remove"></i>
-                    </button>
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token(topic.id) }}" />
-                </form>
-            </div>
+<main class="main col-lg-8 editorial-thread-main">
+    {% if app.user and topic.author.id == app.user.customer.id %}
+        <div class="editorial-thread-controls">
+            <a class="editorial-thread-controls__edit" title="Modifier le sujet" href="{{ path('app_frontend_topic_update', {'id': topic.id}) }}"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</a>
+            <form action="{{ path('app_frontend_topic_delete', {'id': topic.id}) }}" method="post">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token(topic.id) }}">
+                <button class="editorial-thread-controls__delete btn-confirm" type="submit" title="{{ 'label.delete'|trans }}"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            </form>
         </div>
     {% endif %}
 
-    <!-- page-title start -->
-    <!-- ================ -->
-    <h1 class="page-title">{{ topic.title }}</h1>
-    <!-- page-title end -->
-
-    <!-- blogpost start -->
-    <!-- ================ -->
-    <article class="blogpost full">
-        <header>
-            <div class="post-info mb-4">
-                    <span class="post-date">
-                        <i class="fa fa-calendar-o pr-1"></i>
-                        {{ topic.createdAt|localizeddate('medium', 'none') }}
-                    </span>
-                <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">{{ topic.author }}</a></span>
-                <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">{{ topic.postCount }} comments</a></span>
-            </div>
-        </header>
-        <div class="blogpost-content">
-            {{ topic.mainPost.body|raw }}
+    <header class="editorial-thread-heading">
+        <span class="editorial-eyebrow">Le forum{% if topic.mainTaxon is not null %} · {{ topic.mainTaxon }}{% endif %}</span>
+        <h1>{{ topic.title }}</h1>
+        <div class="editorial-thread-meta">
+            <span><i class="fa fa-user-o" aria-hidden="true"></i> {{ topic.author }}</span>
+            <span><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ topic.createdAt|localizeddate('medium', 'none') }}</span>
+            <span><i class="fa fa-comments-o" aria-hidden="true"></i> {{ replyCount }} réponse{% if replyCount != 1 %}s{% endif %}</span>
         </div>
-        <footer class="clearfix">
-            <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">{{ topic.mainTaxon }}</a></div>
-            <div class="link pull-right">
-                <ul class="social-links circle small colored clearfix margin-clear text-right animated-effect-1">
-                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                </ul>
-            </div>
-        </footer>
+    </header>
+
+    <article class="editorial-thread-opening">
+        <div class="editorial-thread-opening__body">
+            {% if topic.mainPost is not null %}
+                {{ topic.mainPost.body|raw }}
+            {% else %}
+                <p class="editorial-thread-opening__empty">Le sujet n’a pas de message d’ouverture. Vous pouvez poursuivre la discussion ci-dessous.</p>
+            {% endif %}
+        </div>
+        {% if topic.mainTaxon is not null %}
+            <footer><span class="editorial-thread-tag"><i class="fa fa-tag" aria-hidden="true"></i> {{ topic.mainTaxon }}</span></footer>
+        {% endif %}
     </article>
-    <!-- blogpost end -->
 
-    {{ buttons.btn(path('app_frontend_post_create_by_topic', {'topicId' : topic.id}), 'Répondre au sujet', null, 'reply', 'btn-default btn-lg') }}
-    {% include 'frontend/post/index/_comments.html.twig' %}
+    <div class="editorial-thread-reply">
+        {{ buttons.btn(path('app_frontend_post_create_by_topic', {'topicId': topic.id}), 'Répondre au sujet', null, 'reply', 'btn-default btn-lg') }}
+    </div>
 
-    <!-- pagination start -->
-    {{ pagination(posts) }}
-    <!-- pagination end -->
-
-</div>
-<!-- main end -->
+    <section class="editorial-thread-replies">
+        <header class="editorial-thread-replies__heading">
+            <div>
+                <span class="editorial-eyebrow">La discussion</span>
+                <h2>Réponses</h2>
+            </div>
+            <span class="editorial-thread-replies__count">{{ replyCount }}</span>
+        </header>
+        <div id="comments" class="comments editorial-thread-comments">
+            {% include 'frontend/post/index/_comments.html.twig' %}
+        </div>
+        {{ pagination(posts) }}
+    </section>
+</main>

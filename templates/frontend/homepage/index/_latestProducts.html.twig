@@ -1,9 +1,11 @@
 <!-- section start -->
 <!-- ================ -->
-<section class="section">
+<section class="section editorial-products">
     <div class="container">
-        <h3 class="title">{{ 'app.ui.latest_added_games'|trans }}</h3>
-        <div class="separator-2"></div>
+        <div class="editorial-section-heading">
+            <div><span class="editorial-eyebrow">La ludothèque</span><h2>Jeux à découvrir</h2></div>
+            <a href="{{ path('sylius_frontend_product_index') }}">Tous les jeux <i class="fa fa-arrow-right"></i></a>
+        </div>
         {{ render(url('sylius_partial_product_index', {
             'paginate': 4,
             'template': 'frontend/product/grid/_fourColumns.html.twig',

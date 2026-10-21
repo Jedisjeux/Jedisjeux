@@ -104,8 +104,10 @@ class TopicRepository extends EntityRepository
 
         if (!$showPrivate) {
             $queryBuilder
-                ->andWhere('o.mainTaxon is null or mainTaxon.public = :public')
-                ->setParameter('public', true);
+                ->andWhere('(o.mainTaxon is null or mainTaxon.public = :public)')
+                ->setParameter('public', true)
+                ->andWhere('(article.id is null or article.status = :published)')
+                ->setParameter('published', Article::STATUS_PUBLISHED);
         }
 
         if (null !== $taxon) {
@@ -139,8 +141,10 @@ class TopicRepository extends EntityRepository
 
         if (!$showPrivate) {
             $queryBuilder
-                ->andWhere('o.mainTaxon is null or mainTaxon.public = :public')
-                ->setParameter('public', true);
+                ->andWhere('(o.mainTaxon is null or mainTaxon.public = :public)')
+                ->setParameter('public', true)
+                ->andWhere('(article.id is null or article.status = :published)')
+                ->setParameter('published', Article::STATUS_PUBLISHED);
         }
 
         if (!empty($criteria['query'])) {
@@ -195,8 +199,10 @@ class TopicRepository extends EntityRepository
 
         if (!$showPrivate) {
             $queryBuilder
-                ->andWhere('mainTaxon is null or mainTaxon.public = :public')
-                ->setParameter('public', true);
+                ->andWhere('(mainTaxon is null or mainTaxon.public = :public)')
+                ->setParameter('public', true)
+                ->andWhere('(article.id is null or article.status = :published)')
+                ->setParameter('published', Article::STATUS_PUBLISHED);
         }
 
         $queryBuilder

@@ -3,11 +3,14 @@
 {% if game_play.images|length > 0 %}
     <!-- photos section start -->
     <!-- ================ -->
-    <section class="pv-30">
+    <section class="editorial-play-section editorial-play-photos">
         <div class="container">
-            <div class="col-lg-8">
-                <h3>Photos</h3>
-                <div class="separator-2"></div>
+            <div class="editorial-play-section__inner">
+                <header class="editorial-play-section__heading">
+                    <span class="editorial-eyebrow">Souvenirs de table</span>
+                    <h2>Photos de la partie</h2>
+                    <p>{{ game_play.images|length }} photo{% if game_play.images|length != 1 %}s{% endif %} partagée{% if game_play.images|length != 1 %}s{% endif %} par la communauté.</p>
+                </header>
                 <div class="slick-carousel content-slider-with-thumbs mb-20">
                     {% for image in game_play.images %}
                         <div class="overlay-container overlay-visible">

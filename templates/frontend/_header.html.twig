@@ -2,8 +2,6 @@
 
 <!-- header-container start -->
 <div class="header-container">
-    {% include 'frontend/header/_top.html.twig' %}
-
     <!-- header start -->
     <!-- classes:  -->
     <!-- "fixed": enables fixed navigation mode (sticky menu) e.g. class="header fixed clearfix" -->
@@ -81,6 +79,11 @@
                                         </ul>
                                     </div>
                                     {% if app.user %}
+                                        {% include 'frontend/header/_accountMenu.html.twig' with { 'id': 'mobile-account-menu' } %}
+                                    {% else %}
+                                        <a class="editorial-header-user" href="{{ path('sylius_frontend_login') }}" aria-label="{{ 'sylius.ui.login'|trans }}" title="{{ 'sylius.ui.login'|trans }}"><i class="fa fa-user" aria-hidden="true"></i></a>
+                                    {% endif %}
+                                    {% if app.user %}
                                         {% include 'frontend/header/_notifications.html.twig' with { 'id': 'header-drop-4' } %}
                                     {% endif %}
                                 </div>
@@ -120,6 +123,11 @@
                                 </li>
                             </ul>
                         </div>
+                    {% if app.user %}
+                        {% include 'frontend/header/_accountMenu.html.twig' with { 'id': 'desktop-account-menu' } %}
+                    {% else %}
+                        <a class="editorial-header-user" href="{{ path('sylius_frontend_login') }}" aria-label="{{ 'sylius.ui.login'|trans }}" title="{{ 'sylius.ui.login'|trans }}"><i class="fa fa-user" aria-hidden="true"></i></a>
+                    {% endif %}
                         {% if app.user %}
                             {% include 'frontend/header/_notifications.html.twig' with { 'id': 'header-drop-2' } %}
                         {% endif %}

@@ -9,7 +9,7 @@
 
     <!-- main-container start -->
     <!-- ================ -->
-    <section class="main-container">
+    <section class="main-container editorial-catalog-results">
 
         <div class="container">
             <div class="row">
@@ -20,9 +20,8 @@
 
                     <!-- Articles start -->
                     <!-- ============================================================================== -->
-                    <br>
                     {% include 'frontend/article/index/_sorting.html.twig' %}
-                    {% include 'frontend/article/_list.html.twig' with { 'articles' : articles.data } %}
+                    {% include 'frontend/article/_magazineList.html.twig' %}
 
                     <!-- pagination start -->
                     {{ pagination(articles.data) }}
