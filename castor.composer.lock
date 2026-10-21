@@ -1,0 +1,83 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "a539aabe11ef9db599848594315cbf19",
+    "packages": [
+        {
+            "name": "castor-php/docker",
+            "version": "v0.10.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/castor-php/docker.git",
+                "reference": "8c3999501b5a5d1480d7161a26380150db9e290d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/castor-php/docker/zipball/8c3999501b5a5d1480d7161a26380150db9e290d",
+                "reference": "8c3999501b5a5d1480d7161a26380150db9e290d",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^5.3",
+                "php": ">=8.3"
+            },
+            "require-dev": {
+                "jolicode/castor": "^1.7",
+                "phpunit/phpunit": "^13.2",
+                "twig/twig": "^3.28"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php",
+                    "src/router.php",
+                    "src/tasks.php",
+                    "src/tunnel.php",
+                    "src/worktree.php",
+                    "src/database.php"
+                ],
+                "psr-4": {
+                    "Castor\\Docker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joel Wurtz",
+                    "email": "jwurtz@jolicode.com"
+                }
+            ],
+            "description": "Castor plugin for docker",
+            "support": {
+                "issues": "https://github.com/castor-php/docker/issues",
+                "source": "https://github.com/castor-php/docker/tree/v0.10.1"
+            },
+            "time": "2026-10-07T09:42:31+00:00"
+        },
+        {
+            "name": "nikic/php-parser",
+            "version": "v5.9.0",
+            "type": "metapackage",
+            "extra": {
+                "castor": {
+                    "bundled": true
+                }
+            }
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {},
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
+}
