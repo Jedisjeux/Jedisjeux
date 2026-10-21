@@ -11,11 +11,14 @@ import livereload from 'gulp-livereload';
 import merge from 'merge-stream';
 import order from 'gulp-order';
 import resolve from 'rollup-plugin-node-resolve';
-import sass from 'gulp-sass';
+import gulpSass from 'gulp-sass';
+import dartSass from 'sass';
 import sourcemaps from 'gulp-sourcemaps';
 import uglifycss from 'gulp-uglifycss';
 import upath from 'upath';
 import yargs from 'yargs';
+
+const sass = gulpSass(dartSass);
 
 const { argv } = yargs
   .options({
