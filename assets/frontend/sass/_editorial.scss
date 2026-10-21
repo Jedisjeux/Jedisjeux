@@ -47,10 +47,28 @@ body { color: #315668; background: var(--editorial-page); font-family: 'Roboto',
 .header .main-navigation .navbar-nav > li.active > a { box-shadow: inset 0 -2px #167d88; }
 .header .main-navigation .navbar-nav.ml-xl-auto { margin-left: 0 !important; }
 .header-dropdown-buttons > .btn-group > #header-drop-1 { display: inline-flex; width: 158px; height: 34px; align-items: center; gap: 8px; padding: 0 11px; border: 1px solid var(--editorial-border-soft); border-radius: 20px; background: #f7f9fc; color: #52717d; text-align: left; }
-.header-dropdown-buttons > .btn-group > #header-drop-1:after { border: 0; color: #71868b; content: 'Rechercher un jeu, un article…'; font-size: 9px; font-weight: 400; }
+.header-dropdown-buttons > .btn-group > #header-drop-1:after { border: 0; color: #71868b; content: 'Rechercher un jeu…'; font-size: 9px; font-weight: 400; }
 .header-dropdown-buttons .dropdown-menu { min-width: 250px; margin-top: 8px; border: 1px solid var(--editorial-border); border-radius: 9px; box-shadow: 0 8px 24px rgba(18,61,83,.12); }
 .header .navbar-toggler { border-color: var(--editorial-border); border-radius: 7px; }
 .header-dropdown-buttons .dropdown-menu { z-index: 1055; }
+/* Header search */
+.header-dropdown-buttons .editorial-search.dropdown-menu { width: min(400px, calc(100vw - 24px)); margin-top: 11px; padding: 16px; border: 1px solid var(--editorial-border); border-radius: 12px; background: #fff; box-shadow: 0 12px 30px rgba(18,61,83,.14); }
+.editorial-search__form { margin: 0; }
+.editorial-search__form .editorial-eyebrow { display: block; margin-bottom: 8px; font-size: 9px; }
+.editorial-search__field { display: flex; align-items: center; gap: 8px; padding: 4px 4px 4px 14px; border: 1px solid var(--editorial-border); border-radius: 24px; background: #f7f9fc; transition: border-color .15s ease, box-shadow .15s ease, background .15s ease; }
+.editorial-search__field:focus-within { border-color: #7ab2b5; background: #fff; box-shadow: 0 0 0 3px rgba(22,125,136,.1); }
+.editorial-search__field > i { color: #71868b; font-size: 13px; }
+.editorial-search__field input { min-width: 0; height: 34px; flex: 1; padding: 0; border: 0; background: transparent; box-shadow: none; color: #123d53; font-size: 13px; outline: 0; }
+.editorial-search__field input::placeholder { color: #8299a1; }
+.editorial-search__field input::-webkit-search-cancel-button { -webkit-appearance: none; }
+.editorial-search__field button { display: grid; width: 34px; height: 34px; flex: 0 0 34px; place-items: center; padding: 0; border: 0; border-radius: 50%; background: #167d88; color: #fff; font-size: 12px; cursor: pointer; transition: background .15s ease; }
+.editorial-search__field button:hover, .editorial-search__field button:focus { background: #123d53; outline: 0; }
+.editorial-search__shortcuts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--editorial-border-soft); }
+.editorial-search__label { width: 100%; margin-bottom: 2px; color: #71868b; font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.editorial-search__shortcuts a { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border: 1px solid var(--editorial-border-soft); border-radius: 16px; background: #fff; color: #315668; font-size: 11px; transition: border-color .15s ease, color .15s ease, background .15s ease; }
+.editorial-search__shortcuts a:hover, .editorial-search__shortcuts a:focus { border-color: #a8c5d0; background: #edf4f7; color: #167d88; text-decoration: none; }
+.editorial-search__shortcuts a i { color: #167d88; font-size: 11px; }
+@media (max-width: 991px) { .header .navbar { position: relative; } .header .header-dropdown-buttons.hidden-lg-up > .btn-group { position: static; } .header .header-dropdown-buttons .editorial-search.dropdown-menu { position: absolute; top: calc(100% + 8px); right: 0; left: 0; width: auto; } }
 .editorial-header-user { display: inline-flex; width: 34px; height: 34px; flex: 0 0 34px; align-items: center; justify-content: center; border: 1px solid var(--editorial-border-soft); border-radius: 50%; background: #fff; color: #315668; font-size: 14px; transition: border-color .15s ease, color .15s ease, background .15s ease; }
 .editorial-header-user:hover, .editorial-header-user:focus { border-color: #a8c5d0; background: #edf4f7; color: #167d88; }
 .editorial-account-menu { min-width: 220px; margin-top: 9px; padding: 6px; border: 1px solid var(--editorial-border); border-radius: 9px; background: #fff; box-shadow: 0 9px 24px rgba(18,61,83,.12); }
