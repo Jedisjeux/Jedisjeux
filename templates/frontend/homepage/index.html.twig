@@ -3,33 +3,26 @@
 {% block content %}
     <div id="page-start"></div>
 
-    <!-- section start -->
-    <!-- ================ -->
-    <section class="section light-gray-bg clearfix">
+    <section class="editorial-hero">
         <div class="container">
-            <div class="row">
-                <!-- main start -->
-                <!-- ================ -->
-                <div class="col-lg-8">
-                    <div class="row grid-space-10">
-                        <div class="col-lg-6" id="latest-articles">
-                            {% include 'frontend/homepage/index/_latestArticles.html.twig' %}
-                        </div>
-                        <div class="col-lg-6" id="most-popular-articles">
-                            {% include 'frontend/homepage/index/_topestArticles.html.twig' %}
-                        </div>
-                    </div>
-                    <div class="row grid-space-10">
-                        <div class="col-lg-12">
-                            {% include 'frontend/homepage/index/_latestGamePlays.html.twig' %}
-                        </div>
-                    </div>
-                </div>
-                {% include 'frontend/homepage/index/_sidebar.html.twig' %}
+            <div class="editorial-hero__copy">
+                <span class="editorial-eyebrow">Jedisjeux · et les autres jours aussi</span>
+                <h1>Le jeu,<br>tous les jours.</h1>
+                <p>Des jeux à découvrir, des histoires à lire et une communauté de passionnés avec qui partager.</p>
+                <a class="btn btn-default" href="{{ path('app_frontend_article_index') }}">Explorer le magazine <i class="fa fa-arrow-right pl-2"></i></a>
             </div>
         </div>
     </section>
-    <!-- section end -->
+
+    <section class="section editorial-home">
+        <div class="container">
+            <div class="editorial-section-heading">
+                <div><span class="editorial-eyebrow">Le magazine</span><h2>Derniers articles</h2></div>
+                <a href="{{ path('app_frontend_article_index') }}">Tous les articles <i class="fa fa-arrow-right"></i></a>
+            </div>
+            <div id="latest-articles">{% include 'frontend/homepage/index/_latestArticles.html.twig' %}</div>
+        </div>
+    </section>
     {% include 'frontend/homepage/index/_latestProducts.html.twig' %}
     {{ render(url('app_counter_index')) }}
 {% endblock content %}

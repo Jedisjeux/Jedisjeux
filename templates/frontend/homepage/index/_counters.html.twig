@@ -1,38 +1,39 @@
-<!-- section start -->
-<!-- ================ -->
-<section class="pv-40 stats padding-bottom-clear dark-translucent-bg hovered background-img-7" style="background-position: 50% 50%; background-image:url('/assets/frontend/images/shop-banner-2.jpg');">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3 col-6 text-center">
-                <div class="feature-box object-non-visible" data-animation-effect="fadeIn" data-effect-delay="300">
-                    <span class="icon dark-bg large circle"><i class="fa fa-puzzle-piece"></i></span>
-                    <h3><strong>{{ 'app.ui.boardgames'|trans }}</strong></h3>
-                    <span class="counter" id="product-count">{{ productCount }}</span>
+<section class="editorial-community" aria-labelledby="community-title">
+    <div class="container">
+        <div class="editorial-community__panel">
+            <div class="editorial-community__intro">
+                <span class="editorial-eyebrow">Ensemble, autour du jeu</span>
+                <h2 id="community-title">La communauté</h2>
+            </div>
+
+            <div class="editorial-community__stats" aria-label="Jedisjeux en chiffres">
+                <div class="editorial-community__stat">
+                    <span class="editorial-community__icon" aria-hidden="true"><i class="fa fa-users"></i></span>
+                    <span class="editorial-community__value counter" id="user-count">{{ userCount|number_format(0, ',', ' ') }}</span>
+                    <span class="editorial-community__label">membres</span>
+                </div>
+                <div class="editorial-community__stat">
+                    <span class="editorial-community__icon" aria-hidden="true"><i class="fa fa-puzzle-piece"></i></span>
+                    <span class="editorial-community__value counter" id="product-count">{{ productCount|number_format(0, ',', ' ') }}</span>
+                    <span class="editorial-community__label">jeux référencés</span>
+                </div>
+                <div class="editorial-community__stat">
+                    <span class="editorial-community__icon" aria-hidden="true"><i class="fa fa-star-o"></i></span>
+                    <span class="editorial-community__value counter" id="rating-count">{{ ratingCount|number_format(0, ',', ' ') }}</span>
+                    <span class="editorial-community__label">avis de joueurs</span>
+                </div>
+                <div class="editorial-community__stat">
+                    <span class="editorial-community__icon" aria-hidden="true"><i class="fa fa-newspaper-o"></i></span>
+                    <span class="editorial-community__value counter" id="article-count">{{ articleCount|number_format(0, ',', ' ') }}</span>
+                    <span class="editorial-community__label">articles</span>
                 </div>
             </div>
-            <div class="col-lg-3 col-6 text-center">
-                <div class="feature-box object-non-visible" data-animation-effect="fadeIn" data-effect-delay="300">
-                    <span class="icon dark-bg large circle"><i class="fa fa-newspaper-o"></i></span>
-                    <h3><strong>{{ 'app.ui.articles'|trans }}</strong></h3>
-                    <span class="counter" id="article-count">{{ articleCount }}</span>
-                </div>
-            </div>
-            <div class="col-lg-3 col-6 text-center">
-                <div class="feature-box object-non-visible" data-animation-effect="fadeIn" data-effect-delay="300">
-                    <span class="icon dark-bg large circle"><i class="fa fa-users"></i></span>
-                    <h3><strong>{{ 'app.ui.users'|trans }}</strong></h3>
-                    <span class="counter" id="user-count">{{ userCount }}</span>
-                </div>
-            </div>
-            <div class="col-lg-3 col-6 text-center">
-                <div class="feature-box object-non-visible" data-animation-effect="fadeIn" data-effect-delay="300">
-                    <span class="icon dark-bg large circle"><i class="fa fa-star"></i></span>
-                    <h3><strong>Notes</strong></h3>
-                    <span class="counter" id="rating-count">{{ ratingCount }}</span>
-                </div>
-            </div>
+
+            <blockquote class="editorial-community__quote">
+                <span aria-hidden="true">“</span>
+                <p>Une vraie mine d’or pour tous les passionnés de jeux de société.</p>
+                <cite>La communauté Jedisjeux</cite>
+            </blockquote>
         </div>
     </div>
-    {% include 'frontend/homepage/index/_footerTop.html.twig' %}
 </section>
-<!-- section end -->

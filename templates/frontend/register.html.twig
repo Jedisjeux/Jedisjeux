@@ -5,43 +5,54 @@
 {% block content %}
     {% include 'frontend/register/_breadcrumb.html.twig' %}
 
-    <!-- main-container start -->
-    <!-- ================ -->
-    <div class="main-container dark-translucent-bg" style="background-image:url('/assets/frontend/images/shop-banner-2.jpg');">
+    <div class="editorial-catalog editorial-register">
+        <section class="editorial-catalog__intro">
+            <div class="container">
+                <span class="editorial-eyebrow">La communauté · Rejoignez-nous</span>
+                <h1>{{ pageTitle }}</h1>
+                <p>Créez votre compte pour participer à la vie de Jedisjeux.</p>
+            </div>
+        </section>
+    </div>
+
+    <section class="editorial-register-main">
         <div class="container">
-            <div class="row justify-content-center">
-                <!-- main start -->
-                <!-- ================ -->
-                <div class="main object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
-                    <div class="form-block p-30 light-gray-bg border-clear">
-                        <h2 class="title">{{ pageTitle }}</h2>
+            <div class="editorial-register__layout">
+                <aside class="editorial-register__welcome">
+                    <span class="editorial-eyebrow">Un compte, plein de possibilités</span>
+                    <h2>Faites partie de la table.</h2>
+                    <p>Retrouvez les joueurs, partagez vos parties et échangez autour de vos jeux préférés.</p>
+                    <ul>
+                        <li><i class="fa fa-comments-o" aria-hidden="true"></i> Participer aux discussions</li>
+                        <li><i class="fa fa-camera" aria-hidden="true"></i> Partager vos parties</li>
+                        <li><i class="fa fa-user" aria-hidden="true"></i> Créer votre profil joueur</li>
+                    </ul>
+                </aside>
+                <div class="editorial-register__panel">
+                    <h2>{{ 'sylius.ui.create_an_account'|trans }}</h2>
+                    <p class="editorial-register__hint">Quelques informations suffisent pour commencer.</p>
 
-                        {% form_theme form 'frontend/form/horizontal.html.twig' %}
+                    {% form_theme form 'frontend/form/horizontal.html.twig' %}
+                    {{ form_errors(form) }}
 
-                        {{ form_errors(form) }}
+                    <form action="{{ path('app_frontend_register') }}?" method="post" class="form-horizontal">
+                        {{ form_row(form.email, {attr: {'placeholder': 'sylius.ui.email'|trans}}) }}
+                        {{ form_row(form.user.username, {attr: {'placeholder': 'sylius.ui.username'|trans}}) }}
+                        {{ form_row(form.user.plainPassword.first, {attr: {'placeholder': 'sylius.ui.password'|trans}}) }}
+                        {{ form_row(form.user.plainPassword.second, {attr: {'placeholder': 'sylius.ui.repeat_new_password'|trans}}) }}
+                        {{ form_row(form.captcha) }}
 
-                        <form action="{{ path('app_frontend_register') }}?" method="post" class="form-horizontal">
-                            {{ form_row(form.email, {attr: {'placeholder': 'sylius.ui.email'|trans}}) }}
-                            {{ form_row(form.user.username, {attr: {'placeholder': 'sylius.ui.username'|trans}}) }}
-                            {{ form_row(form.user.plainPassword.first, {attr: {'placeholder': 'sylius.ui.password'|trans}}) }}
-                            {{ form_row(form.user.plainPassword.second, {attr: {'placeholder': 'sylius.ui.repeat_new_password'|trans}}) }}
-                            {{ form_row(form.captcha) }}
+                        {{ form_rest(form) }}
 
-                            {{ form_rest(form) }}
-
-                            <div class="form-group row">
-                                <div class="ml-md-auto col-md-9">
-                                    <button type="submit" class="btn btn-group btn-default btn-animated">{{ 'sylius.ui.create_an_account'|trans }} <i class="fa fa-check"></i></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="editorial-register__submit">
+                            <button type="submit" class="btn btn-default">{{ 'sylius.ui.create_an_account'|trans }} <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                        </div>
+                    </form>
+                    <p class="editorial-register__login">Vous avez déjà un compte ? <a href="{{ path('sylius_frontend_login') }}">Se connecter</a></p>
                 </div>
-                <!-- main end -->
             </div>
         </div>
-    </div>
-    <!-- main-container end -->
+    </section>
 
     {% include 'frontend/register/_footerTop.html.twig' %}
 {% endblock content %}

@@ -10,42 +10,13 @@
         <div class="container">
             <div class="footer-inner">
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-md-7">
                         <div class="footer-content">
                             <div class="logo-footer"><span id="logo-footer" class="logo-font text-default">Jedisjeux</span></div>
                             <p>{{ jedisjeux_description }}</p>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="footer-content">
-                            <h2 class="title">{{ 'app.ui.latest_articles'|trans }}</h2>
-                            <div class="separator-2"></div>
-                            {{ render(url('app_frontend_partial_article_index', {
-                                'template': 'frontend/article/_simpleList.html.twig',
-                                'paginate': 4,
-                                'sorting': {
-                                    'publishStartDate': 'desc'
-                                }} ))
-                            }}
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="footer-content">
-                            <h2 class="title">{{ 'app.ui.game_play_images'|trans }}</h2>
-                            <div class="separator-2"></div>
-                            {{ render(url('app_frontend_partial_game_play_image_index', {
-                                'template': 'frontend/game_play_image/_simpleList.html.twig',
-                                'paginate': 6,
-                                'sorting': {
-                                    'createdAt': 'desc'
-                                }} ))
-                            }}
-                            <div class="text-right space-top">
-                                <a href="{{ path('app_frontend_game_play_image_index') }}" class="link-dark"><i class="fa fa-plus-circle pl-1 pr-1"></i>More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
+                    <div class="col-md-5">
                         <div class="footer-content">
                             <h2 class="title">{{ 'sylius.ui.contact_us'|trans }}</h2>
                             <div class="separator-2"></div>
@@ -54,7 +25,7 @@
                             </ul>
                             <div class="separator-2"></div>
                             <ul class="list-icons">
-                                <li><i class="fa fa-map-marker pr-2 text-default"></i> {{ head_office }}</li>
+                                {% if head_office is not empty %}<li><i class="fa fa-map-marker pr-2 text-default"></i> {{ head_office }}</li>{% endif %}
                                 <li><a href="{{ path('app_frontend_contact_request_create') }}"><i class="fa fa-envelope-o pr-2"></i>{{ 'sylius.ui.contact_us'|trans }}</a></li>
                             </ul>
                         </div>

@@ -1,19 +1,13 @@
-<!-- banner start -->
-<!-- ================ -->
-<div class="banner border-clear light-translucent-bg" style="background-image:url('/assets/frontend/images/shop-banner-2.jpg');background-position: 50% 32%;">
+<div class="editorial-catalog editorial-forum">
     {% include 'frontend/topic/index/_breadcrumb.html.twig' %}
-    <div class="container">
-        <div class="row justify-content-lg-center">
-            <div class="col-lg-8 text-center pv-20">
-                <h2 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">Topics
-                    <strong>La Taverne du joueur</strong></h2>
-                <div class="separator object-non-visible mt-10" data-animation-effect="fadeIn"
-                     data-effect-delay="100"></div>
-                <p class="text-center object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
-                    Discussions de jeux, parties, acquisitions...</p>
-            </div>
+    <section class="editorial-catalog__intro">
+        <div class="container">
+            <span class="editorial-eyebrow">La communauté · Forum</span>
+            <h1>La Taverne du joueur</h1>
+            <p>Discussions de jeux, parties, acquisitions et tout ce qui anime la communauté.</p>
         </div>
+    </section>
+    <div class="editorial-catalog__filters">
+        {% include 'frontend/topic/index/_filters.html.twig' %}
     </div>
-    {% include 'frontend/topic/index/_filters.html.twig' %}
 </div>
-<!-- banner end -->

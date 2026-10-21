@@ -10,7 +10,7 @@
 
     <!-- main-container start -->
     <!-- ================ -->
-    <section class="main-container">
+    <section class="main-container editorial-catalog-results editorial-forum-results">
 
         <div class="container">
             <div class="row">
@@ -18,14 +18,15 @@
                 <!-- main start -->
                 <!-- ================ -->
                 <div id="topic-list" class="main col-md-12">
-                    {% include 'frontend/topic/button/_newTopic.html.twig' %}
-                    {% include 'frontend/topic/index/_sorting.html.twig' %}
-                    <!-- Image Boxes start -->
-                    <!-- ============================================================================== -->
-                    <br>
-                    {% for topic in topics.data %}
-                        {% include 'frontend/topic/_single.html.twig' %}
-                    {% endfor %}
+                    <div class="editorial-forum-toolbar">
+                        {% include 'frontend/topic/button/_newTopic.html.twig' %}
+                        {% include 'frontend/topic/index/_sorting.html.twig' %}
+                    </div>
+                    <div class="editorial-forum-list">
+                        {% for topic in topics.data %}
+                            {% include 'frontend/topic/_single.html.twig' %}
+                        {% endfor %}
+                    </div>
 
                     <!-- pagination start -->
                     {{ pagination(topics.data) }}

@@ -11,10 +11,21 @@
                     <meta itemprop="position" content="1">
                 </a>
             </li>
-            <li class="breadcrumb-item active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                <span itemprop="name">Articles</span>
-                <meta itemprop="position" content="2">
-            </li>
+            {% if taxon is defined %}
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a class="link-dark" href="{{ path('app_frontend_article_index') }}" itemprop="item"><span itemprop="name">{{ 'app.ui.articles'|trans }}</span></a>
+                    <meta itemprop="position" content="2">
+                </li>
+                <li class="breadcrumb-item active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <span itemprop="name">{{ taxon.name }}</span>
+                    <meta itemprop="position" content="3">
+                </li>
+            {% else %}
+                <li class="breadcrumb-item active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <span itemprop="name">{{ 'app.ui.articles'|trans }}</span>
+                    <meta itemprop="position" content="2">
+                </li>
+            {% endif %}
         </ol>
     </div>
 </div>

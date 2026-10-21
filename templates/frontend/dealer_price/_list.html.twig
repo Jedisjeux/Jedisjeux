@@ -2,20 +2,34 @@
 {% import 'macro/image.html.twig' as images %}
 
 {% if (dealer_prices.currentPageResults|length > 0) %}
-    <h3 class="title mt-4">{{ 'app.ui.in_stores'|trans }}</h3>
-    <div class="separator-2"></div>
-
-    {% for dealer_price in dealer_prices %}
-        {% set dealer = dealer_price.dealer %}
-            <div class="overlay-container mb-10">
-                {% if dealer.image %}
-                    {{ images.render(dealer.image.webPath, 'small_height_fixed', dealer.name) }}
-                {% endif %}
-                <a href="{{ dealer_price.url }}" class="overlay-link small">
-                    <i class="fa fa-link"></i>
-                </a>
+    <section class="editorial-store-offers">
+        <div class="editorial-store-offers__heading">
+            <div>
+                <span class="editorial-store-offers__eyebrow">Comparer les prix</span>
+                <h3>{{ 'app.ui.in_stores'|trans }}</h3>
             </div>
-            <h6 class="media-heading"><a href="{{ dealer_price.url }}">{{ (dealer_price.price/100)|localizedcurrency('EUR') }}</a></h6>
-            <p>{{ status(dealer_price) }}</p>
-    {% endfor %}
+            <span class="editorial-store-offers__count">{{ dealer_prices.currentPageResults|length }} boutique{{ dealer_prices.currentPageResults|length > 1 ? 's' : '' }}</span>
+        </div>
+
+        <div class="editorial-store-offers__grid">
+            {% for dealer_price in dealer_prices %}
+                {% set dealer = dealer_price.dealer %}
+                <a href="{{ dealer_price.url }}" class="editorial-store-offer">
+                    <span class="editorial-store-offer__logo">
+                        {% if dealer.image %}
+                            {{ images.render(dealer.image.webPath, 'small_height_fixed', dealer.name) }}
+                        {% else %}
+                            <span>{{ dealer.name|first }}</span>
+                        {% endif %}
+                    </span>
+                    <span class="editorial-store-offer__details">
+                        <strong>{{ dealer.name }}</strong>
+                        {{ status(dealer_price) }}
+                    </span>
+                    <strong class="editorial-store-offer__price">{{ (dealer_price.price/100)|localizedcurrency('EUR') }}</strong>
+                    <span class="editorial-store-offer__arrow" aria-hidden="true">→</span>
+                </a>
+            {% endfor %}
+            </div>
+    </section>
 {% endif %}

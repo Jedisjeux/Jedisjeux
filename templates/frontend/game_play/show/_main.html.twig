@@ -1,62 +1,67 @@
 {% import 'macro/image.html.twig' as images %}
+{% from 'macro/game_play.html.twig' import duration %}
 
-{% set productPath = path('sylius_frontend_product_show', { 'slug': game_play.product.slug } ) %}
+{% set product = game_play.product %}
+{% set productPath = path('sylius_frontend_product_show', { 'slug': product.slug }) %}
 
-<!-- main-container start -->
-<!-- ================ -->
-<section class="main-container">
-
+<section class="editorial-play-main">
     <div class="container">
-        <div class="row">
+        {% if app.user and app.user.customer.id == game_play.author.id %}
+            <div class="editorial-play-edit">
+                <a title="{{ 'app.ui.edit_game_play'|trans }}" class="btn btn-default" href="{{ path('app_frontend_game_play_update', {'id': game_play.id, 'productSlug': product.slug}) }}">
+                    <i class="fa fa-pencil" aria-hidden="true"></i> Modifier cette partie
+                </a>
+            </div>
+        {% endif %}
 
-            <!-- main start -->
-            <!-- ================ -->
-            <div class="main col-12">
+        <header class="editorial-play-heading">
+            <span class="editorial-eyebrow">Partie jouée · <a href="{{ productPath }}">{{ product.name }}</a></span>
+            <h1>Une partie de {{ product.name }}</h1>
+            <p><span>Par <strong>{{ game_play.author }}</strong></span><span><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ game_play.playedAt|localizeddate('medium', 'none') }}</span></p>
+        </header>
 
-                {% if app.user and app.user.customer.id == game_play.author.id %}
-                    <div class="text-right">
-                        <a title="{{ 'app.ui.edit_game_play'|trans }}" class="btn btn-default"
-                           href="{{ path('app_frontend_game_play_update', {'id' : game_play.id, 'productSlug': game_play.product.slug}) }}">
-                            <span class="fa fa-pencil"></span>
-                        </a>
+        <div class="editorial-play-overview">
+            {% if product.mainImage is not null %}
+                <a class="editorial-play-cover" href="{{ productPath }}" aria-label="Voir {{ product.name }}">
+                    {{ images.render(product.mainImage.webPath, 'full', product.name) }}
+                </a>
+            {% else %}
+                <a class="editorial-play-cover editorial-play-cover--empty" href="{{ productPath }}" aria-label="Voir {{ product.name }}"><i class="fa fa-cubes" aria-hidden="true"></i></a>
+            {% endif %}
+            <div class="editorial-play-overview__content">
+                <div class="editorial-play-facts">
+                    <div><i class="fa fa-users" aria-hidden="true"></i><strong>{{ game_play.playerCount ?: '—' }}</strong><small>{{ 'app.ui.player_count'|trans }}</small></div>
+                    <div><i class="fa fa-calendar-o" aria-hidden="true"></i><strong>{{ game_play.playedAt|localizeddate('medium', 'none') }}</strong><small>{{ 'sylius.ui.date'|trans }}</small></div>
+                    {% if game_play.duration is not null %}
+                        <div><i class="fa fa-clock-o" aria-hidden="true"></i><strong>{{ duration(game_play) }}</strong><small>{{ 'app.ui.duration'|trans }}</small></div>
+                    {% endif %}
+                </div>
+
+                <div class="editorial-play-game-info">
+                    <div>
+                        <span class="editorial-eyebrow">Le jeu</span>
+                        <h2><a href="{{ productPath }}">{{ product.name }}</a></h2>
+                        <p>Retrouvez la fiche complète, les avis et toutes les informations sur ce jeu.</p>
                     </div>
-                {% endif %}
+                    <a class="editorial-play-game-info__link" href="{{ productPath }}">Voir la fiche du jeu <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                </div>
 
-                <!-- page-title start -->
-                <!-- ================ -->
-                <h1 class="clearfix page-title text-center">{{ game_play.product }}</h1>
-                <p class="large text-center">{{ game_play.createdAt|localizeddate('medium', 'none') }} | par {{ game_play.author }}
-                <div class="separator with-icon"><i class="fa fa-play-circle bordered"></i></div>
-                <!-- page-title end -->
-
-                <div class="row">
-                    <div class="col-lg-4 col-xl-5 pv-20">
-                        <div class="overlay-container">
-                            {{ images.render(game_play.product.mainImage.webPath, 'full', game_play.product.name) }}
-                            <a class="overlay-link" href="{{ productPath }}"><i class="fa fa-link"></i></a>
-                            <div class="overlay-to-top links">
-                                <span class="small">
-                                  <a href="{{ productPath }}" class="btn-sm-link">
-                                      <i class="fa fa-link pr-1"></i>{{ 'sylius.ui.view_product_details'|trans({'%product%': game_play.product.name|lower})}}
-                                  </a>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="clearfix mb-20">
-                        </div>
-                    </div>
-                    <div class="col-lg-8 col-xl-7">
-                        <h4 class="space-top">{{ 'app.ui.game_play_specifications'|trans }}</h4>
-                        <hr>
-                        {% include 'frontend/game_play/show/_specifications.html.twig' %}
-                        <h4 class="space-top">{{ 'app.ui.game_specifications'|trans }}</h4>
-                        <hr>
-                        {% include 'frontend/product/show/_specifications.html.twig' with { 'product' : game_play.product } %}
-                    </div>
+                <div class="editorial-play-product-specs editorial-game-keyfacts">
+                    <h2>Infos sur le jeu</h2>
+                    {% include 'frontend/product/show/_specifications.html.twig' with { 'product': product } %}
                 </div>
             </div>
-            <!-- main end -->
         </div>
+
+        {% if game_play.topic is not null and game_play.topic.firstPost is not null %}
+            <article class="editorial-play-story">
+                <header>
+                    <span class="editorial-eyebrow">Le récit</span>
+                    <h2>Autour de la table</h2>
+                    <p>Partagé par <strong>{{ game_play.topic.firstPost.author }}</strong> · {{ game_play.topic.firstPost.createdAt|localizeddate('medium', 'none') }}</p>
+                </header>
+                <div class="editorial-play-story__body">{{ game_play.topic.firstPost.body|raw }}</div>
+            </article>
+        {% endif %}
     </div>
 </section>
-<!-- main-container end -->

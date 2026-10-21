@@ -3,26 +3,35 @@
 {% set product = game_play.product %}
 {% set topic = game_play.topic %}
 {% set gamePlayPath = path('app_frontend_game_play_show', { 'id': game_play.id, 'productSlug': product.slug }) %}
+{% set playImage = game_play.images|length > 0 ? game_play.images|first : null %}
 
-<div class="image-box style-2 mb-20 bordered light-gray-bg">
-    <div class="overlay-container overlay-visible">
-        {% if product.mainImage is not null %}
+<article class="editorial-game-play-card">
+    <a class="editorial-game-play-card__image" href="{{ gamePlayPath }}" aria-label="{{ product.name }}">
+        {% if playImage is not null %}
+            {{ images.render(playImage.webPath, 'magazine_item_wide', product.name) }}
+        {% elseif product.mainImage is not null %}
             {{ images.render(product.mainImage.webPath, 'magazine_item_wide', product.name) }}
+        {% else %}
+            <span class="editorial-game-play-card__placeholder"><i class="fa fa-dice" aria-hidden="true"></i></span>
         {% endif %}
-        <a class="overlay-link" href="{{ gamePlayPath }}"><i class="fa fa-link"></i></a>
-        <div class="overlay-bottom text-left">
-            <p class="lead margin-clear">{{ product.name }}</p>
+        {% if game_play.imageCount > 0 %}<span class="editorial-game-play-card__photo-count"><i class="fa fa-camera" aria-hidden="true"></i> {{ game_play.imageCount }}</span>{% endif %}
+    </a>
+    <div class="editorial-game-play-card__body">
+        <div class="editorial-game-play-card__meta">
+            <span class="editorial-game-play-card__game">{{ product.name }}</span>
+            <span><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ game_play.createdAt|localizeddate('medium', 'none') }}</span>
+        </div>
+        <h2><a href="{{ gamePlayPath }}">Une partie de {{ product.name }}</a></h2>
+        <p class="editorial-game-play-card__author">Jouée par <strong>{{ game_play.author }}</strong></p>
+        {% if topic is not null and topic.firstPost is not null %}
+            <p class="editorial-game-play-card__excerpt">{{ topic.firstPost.body|striptags|truncate(230, true) }}</p>
+        {% else %}
+            <p class="editorial-game-play-card__excerpt editorial-game-play-card__excerpt--empty">Aucun récit n’accompagne encore cette partie.</p>
+        {% endif %}
+        <div class="editorial-game-play-card__footer">
+            {% if game_play.playerCount %}<span><i class="fa fa-users" aria-hidden="true"></i> {{ game_play.playerCount }} joueur{% if game_play.playerCount != 1 %}s{% endif %}</span>{% endif %}
+            {% if topic is not null and topic.postCount > 0 %}<span><i class="fa fa-comments-o" aria-hidden="true"></i> {{ topic.postCount }} commentaire{% if topic.postCount != 1 %}s{% endif %}</span>{% endif %}
+            <a href="{{ gamePlayPath }}">En savoir plus <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
         </div>
     </div>
-    <div class="body">
-        <p class="small mb-10 text-muted">
-            <i class="fa fa-calendar-o pr-1"></i> {{ game_play.createdAt|localizeddate('medium', 'none') }}
-            <i class="pl-10 pr-1 fa fa-user"></i> <span class="author">{{ game_play.author }}</span>
-        </p>
-
-        {% if topic is not null and topic.firstPost is not null %}
-            <p>{{ topic.firstPost.body|truncate(150, true)|striptags|raw }}</p>
-        {% endif %}
-        <a href="{{ gamePlayPath }}" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
-    </div>
-</div>
+</article>

@@ -1,28 +1,10 @@
 {% from 'macro/pagination.html.twig' import simple as pagination %}
 
-<!-- main-container start -->
-<!-- ================ -->
-<section class="main-container">
-
+<section class="main-container editorial-catalog-results editorial-photo-gallery-results">
     <div class="container">
-        <div class="row">
-
-            <!-- main start -->
-            <!-- ================ -->
-            <div id="game-play-list" class="main col-md-12">
-
-                <!-- Parties de jeu start -->
-                <!-- ============================================================================== -->
-                <br>
-                {% include 'frontend/game_play_image/_list.html.twig' with { 'game_play_images': game_play_images.data } %}
-
-                <!-- pagination start -->
-                {{ pagination(game_play_images.data) }}
-                <!-- pagination end -->
-            </div>
-            <!-- main end -->
-
+        <div id="game-play-list" class="editorial-photo-gallery__grid">
+            {% include 'frontend/game_play_image/_list.html.twig' with { 'game_play_images': game_play_images.data } %}
         </div>
+        {{ pagination(game_play_images.data) }}
     </div>
 </section>
-<!-- main-container end -->

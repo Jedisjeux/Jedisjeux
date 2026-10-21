@@ -1,16 +1,13 @@
-<!-- header-container end -->
-<!-- banner start -->
-<!-- ================ -->
-<div class="banner border-clear light-translucent-bg" style="background-image:url('/assets/frontend/images/shop-banner-2.jpg');background-position: 50% 32%;">
+<div class="editorial-catalog editorial-people">
     {% include 'frontend/person/index/_breadcrumb.html.twig' %}
-    <div class="container">
-        <div class="row justify-content-lg-center">
-            <div class="col-lg-8 text-center pv-20">
-                <h2 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">Ludographie</h2>
-                <div class="separator object-non-visible mt-10" data-animation-effect="fadeIn" data-effect-delay="100"></div>
-            </div>
+    <section class="editorial-catalog__intro">
+        <div class="container">
+            <span class="editorial-eyebrow">La ludothèque · Créateurs</span>
+            <h1>{{ 'app.ui.ludographies'|trans }}</h1>
+            <p>Découvrez les auteurs, illustrateurs et éditeurs qui donnent vie aux jeux.</p>
         </div>
+    </section>
+    <div class="editorial-catalog__filters">
+        {% include 'frontend/person/index/_filters.html.twig' %}
     </div>
-    {% include 'frontend/person/index/_filters.html.twig' %}
 </div>
-<!-- banner end -->

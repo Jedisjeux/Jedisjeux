@@ -14,38 +14,54 @@
     {% endspaceless %}{% endfor %}
 {% endmacro %}
 
-<dl class="row">
-    <dt class="col-sm-3 text-sm-right">{{ 'app.ui.player_count'|trans }}</dt>
-    <dd class="col-sm-9" itemprop="numberOfPlayers" itemscope itemtype="http://schema.org/QuantitativeValue">
-        {{ playerCount(product) }}
-    </dd>
-    <dt class="col-sm-3 text-sm-right">{{ 'app.ui.age'|trans }}</dt>
-    <dd class="col-sm-9" itemprop="audience" itemscope itemtype="http://schema.org/PeopleAudience">
-        {{ 'app.ui.from_years'|trans({ '%count%': product.minAge })|lower }}
-        <meta itemprop="suggestedMinAge" content="{{ product.minAge }}">
-    </dd>
-    <dt class="col-sm-3 text-sm-right">{{ 'app.ui.duration'|trans|trans }}</dt>
-    <dd class="col-sm-9">{{ duration(product) }}</dd>
+<dl class="editorial-game-spec-list">
+    <div class="editorial-game-spec">
+        <dt><i class="fa fa-users" aria-hidden="true"></i>{{ 'app.ui.player_count'|trans }}</dt>
+        <dd itemprop="numberOfPlayers" itemscope itemtype="http://schema.org/QuantitativeValue">{{ playerCount(product) }}</dd>
+    </div>
+    <div class="editorial-game-spec">
+        <dt><i class="fa fa-child" aria-hidden="true"></i>{{ 'app.ui.age'|trans }}</dt>
+        <dd itemprop="audience" itemscope itemtype="http://schema.org/PeopleAudience">
+            {{ 'app.ui.from_years'|trans({ '%count%': product.minAge })|lower }}
+            <meta itemprop="suggestedMinAge" content="{{ product.minAge }}">
+        </dd>
+    </div>
+    <div class="editorial-game-spec">
+        <dt><i class="fa fa-clock-o" aria-hidden="true"></i>{{ 'app.ui.duration'|trans }}</dt>
+        <dd>{{ duration(product) }}</dd>
+    </div>
     {% if product.mechanisms|length > 0 %}
-        <dt class="col-sm-3 text-sm-right">{{ 'app.ui.mechanisms'|trans }}</dt>
-        <dd id="product-mechanisms" class="col-sm-9">{{ self.show_taxons(product.mechanisms) }}</dd>
+        <div class="editorial-game-spec">
+            <dt><i class="fa fa-cogs" aria-hidden="true"></i>{{ 'app.ui.mechanisms'|trans }}</dt>
+            <dd id="product-mechanisms">{{ self.show_taxons(product.mechanisms) }}</dd>
+        </div>
     {% endif %}
     {% if product.themes|length > 0 %}
-        <dt class="col-sm-3 text-sm-right">{{ 'app.ui.themes'|trans }}</dt>
-        <dd id="product-themes" class="col-sm-9">{{ self.show_taxons(product.themes) }}</dd>
+        <div class="editorial-game-spec">
+            <dt><i class="fa fa-tags" aria-hidden="true"></i>{{ 'app.ui.themes'|trans }}</dt>
+            <dd id="product-themes">{{ self.show_taxons(product.themes) }}</dd>
+        </div>
     {% endif %}
-    <dt class="col-sm-3 text-sm-right">{{ 'app.ui.release_date'|trans }}</dt>
-    <dd class="col-sm-9">{{ releasedAt(product.firstVariant) }}</dd>
+    <div class="editorial-game-spec">
+        <dt><i class="fa fa-calendar" aria-hidden="true"></i>{{ 'app.ui.release_date'|trans }}</dt>
+        <dd>{{ releasedAt(product.firstVariant) }}</dd>
+    </div>
     {% if product.designers|length > 0 %}
-        <dt class="col-sm-3 text-sm-right">Auteur(s)</dt>
-        <dd id="product-designers" class="col-sm-9">{{ self.show_people(product.designers) }}</dd>
+        <div class="editorial-game-spec">
+            <dt><i class="fa fa-pencil" aria-hidden="true"></i>Auteur(s)</dt>
+            <dd id="product-designers">{{ self.show_people(product.designers) }}</dd>
+        </div>
     {% endif %}
     {% if product.artists|length > 0 %}
-        <dt class="col-sm-3 text-sm-right">Illustrateur(s)</dt>
-        <dd id="product-artists" class="col-sm-9">{{ self.show_people(product.artists) }}</dd>
+        <div class="editorial-game-spec">
+            <dt><i class="fa fa-paint-brush" aria-hidden="true"></i>Illustrateur(s)</dt>
+            <dd id="product-artists">{{ self.show_people(product.artists) }}</dd>
+        </div>
     {% endif %}
     {% if product.publishers|length > 0 %}
-        <dt class="col-sm-3 text-sm-right">Editeur(s)</dt>
-        <dd id="product-publishers" class="col-sm-9">{{ self.show_people(product.publishers) }}</dd>
+        <div class="editorial-game-spec">
+            <dt><i class="fa fa-building" aria-hidden="true"></i>Editeur(s)</dt>
+            <dd id="product-publishers">{{ self.show_people(product.publishers) }}</dd>
+        </div>
     {% endif %}
 </dl>

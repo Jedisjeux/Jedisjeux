@@ -11,7 +11,7 @@
 
     <!-- main-container start -->
     <!-- ================ -->
-    <section class="main-container">
+    <section class="main-container editorial-catalog-results editorial-people-results">
         <div class="container">
             <div class="row">
                 <!-- main start -->
@@ -19,7 +19,7 @@
                 <div id="people-list" class="main col-12">
                     <div class="row grid-space-10">
                         {% for person in people.data %}
-                            <div class="col-md-6 col-lg-3">
+                            <div class="col-6 col-md-6 col-lg-3">
                                 {% include 'frontend/person/_single.html.twig' %}
                             </div>
                         {% endfor %}

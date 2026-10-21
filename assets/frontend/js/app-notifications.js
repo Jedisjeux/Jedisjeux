@@ -27,6 +27,12 @@
                 $('.badge-count').hide();
             }
 
+            $('.editorial-notifications').each(function () {
+                var $list = $(this);
+                $list.find('.editorial-notifications__status').text(response.length > 0 ? response.length + ' à lire' : 'À jour');
+                $list.find('.editorial-notifications__empty').toggle(response.length === 0);
+            });
+
             $.each(response, function(index, notification) {
                 renderNotification(notification);
             });

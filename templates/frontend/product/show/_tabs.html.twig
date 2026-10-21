@@ -1,18 +1,18 @@
-<div class="col-lg-8 pv-20">
+<div class="col-12 pv-20 editorial-game-tabs">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs style-4" role="tablist">
-        <li class="nav-item"><a class="nav-link active" href="#reviews" role="tab" data-toggle="tab"><i
-                        class="fa fa-star pr-1"></i>({{ product.commentedReviews|length }}) {{ 'sylius.ui.reviews'|trans }}</a></li>
-        <li class="nav-item"><a class="nav-link" href="#articles" role="tab" data-toggle="tab"><i
-                        class="fa fa-star pr-1"></i>({{ product.publishedArticles|length }}) {{ 'app.ui.articles'|trans }}</a></li>
-        <li class="nav-item"><a class="nav-link" href="#game-plays" role="tab" data-toggle="tab"><i
-                        class="fa fa-star pr-1"></i>({{ product.gamePlaysWithTopic|length }}) {{ 'app.ui.game_plays'|trans }}</a></li>
-        <li class="nav-item"><a class="nav-link" href="#files" role="tab" data-toggle="tab"><i
-                        class="fa fa-star pr-1"></i>({{ product.files|length }}) {{ 'app.ui.files'|trans }}</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#presentation" role="tab" id="presentation-tab" aria-controls="presentation" aria-selected="true" data-toggle="tab"><i class="fa fa-book pr-1"></i>Présentation</a></li>
+        <li class="nav-item"><a class="nav-link" href="#reviews" role="tab" data-toggle="tab"><i class="fa fa-star-o pr-1"></i>({{ product.commentedReviews|length }}) {{ 'sylius.ui.reviews'|trans }}</a></li>
+        <li class="nav-item"><a class="nav-link" href="#articles" role="tab" data-toggle="tab"><i class="fa fa-newspaper-o pr-1"></i>({{ product.publishedArticles|length }}) {{ 'app.ui.articles'|trans }}</a></li>
+        <li class="nav-item"><a class="nav-link" href="#game-plays" role="tab" data-toggle="tab"><i class="fa fa-table pr-1"></i>({{ product.gamePlaysWithTopic|length }}) {{ 'app.ui.game_plays'|trans }}</a></li>
+        <li class="nav-item"><a class="nav-link" href="#files" role="tab" data-toggle="tab"><i class="fa fa-paperclip pr-1"></i>({{ product.files|length }}) {{ 'app.ui.files'|trans }}</a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content padding-top-clear padding-bottom-clear">
-        <div class="tab-pane active" id="reviews">
+        <div class="tab-pane active" id="presentation" role="tabpanel" aria-labelledby="presentation-tab">
+            {% include 'frontend/product/show/tabs/_presentation.html.twig' %}
+        </div>
+        <div class="tab-pane" id="reviews">
             {% include 'frontend/product/show/tabs/_reviews.html.twig' %}
         </div>
         <div class="tab-pane" id="articles">

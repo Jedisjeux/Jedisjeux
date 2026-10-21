@@ -1,11 +1,15 @@
 <!-- sidebar start -->
 <!-- ================ -->
-<aside class="col-lg-4 col-xl-3 ml-xl-auto">
+<aside class="col-lg-4 col-xl-3 ml-xl-auto editorial-thread-sidebar">
     <div class="sidebar">
-        <div class="block clearfix">
+        <div class="block clearfix editorial-thread-widgets">
+            <div class="editorial-thread-widget">
             {% include 'frontend/post/index/sidebar/_categories.html.twig' %}
+            </div>
             {% include 'frontend/pub_banner/_sidebar.html.twig' %}
+            <div class="editorial-thread-widget editorial-thread-widget--latest">
             {% include 'frontend/post/index/sidebar/_latestTopics.html.twig' %}
+            </div>
         </div>
     </div>
 </aside>
