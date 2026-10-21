@@ -1,12 +1,27 @@
 {% from 'macro/topic.html.twig' import render_comments %}
+{% import 'macro/buttons.html.twig' as buttons %}
 
-<!-- comments start -->
-<!-- ================ -->
-<div id="comments" class="comments">
-    {% set postCount = article.topic is not null ? article.topic.postCount : 0 %}
-    <h2 class="title">{% transchoice postCount %}app.ui.comment.choice{% endtranschoice %}</h2>
-    {% if article.topic is not null %}
-        {{ render_comments(article.topic, article.topic.posts) }}
-    {% endif %}
-</div>
-<!-- comments end -->
+{% set postCount = article.topic is not null ? article.topic.postCount : 0 %}
+
+<section class="editorial-play-section editorial-play-comments">
+    <div class="container">
+        <div class="editorial-play-section__inner">
+            <header class="editorial-play-section__heading">
+                <span class="editorial-eyebrow">La conversation continue</span>
+                <h2>Réactions à cet article</h2>
+                <p>Donnez votre avis et échangez avec la communauté.</p>
+            </header>
+
+            <div class="editorial-play-reply">
+                {{ buttons.btn(path('app_frontend_article_post_create', {'articleSlug': article.slug}), 'app.ui.react_on_this_article', null, 'reply', 'btn-default btn-lg') }}
+            </div>
+
+            <div id="comments" class="comments editorial-play-comments__list">
+                {% if postCount > 0 %}<h3 class="editorial-play-comments__count">{% transchoice postCount %}app.ui.comment.choice{% endtranschoice %}</h3>{% endif %}
+                {% if article.topic is not null %}
+                    {{ render_comments(article.topic, article.topic.posts) }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,26 @@
+{% import 'macro/image.html.twig' as images %}
+
+{% set commentCount = article.topic is not null ? article.topic.postCount : 0 %}
+
+<header class="editorial-article-header">
+    <div class="container">
+        <div class="editorial-article-header__intro">
+            {% if article.mainTaxon is not null %}
+                <a class="editorial-eyebrow" href="{{ path('app_frontend_article_index_by_taxon', {'slug': article.mainTaxon.slug}) }}">{{ article.mainTaxon.name }}</a>
+            {% else %}
+                <span class="editorial-eyebrow">Le magazine</span>
+            {% endif %}
+            <h1>{{ article.title }}</h1>
+            <ul class="editorial-article-meta">
+                <li><i class="fa fa-user-circle-o" aria-hidden="true"></i>Par <strong>{{ article.author }}</strong></li>
+                <li><i class="fa fa-calendar-o" aria-hidden="true"></i>{{ article.publishStartDate|localizeddate('long', 'none') }}</li>
+                <li><a href="#comments"><i class="fa fa-comments-o" aria-hidden="true"></i>{{ commentCount }} {{ commentCount > 1 ? 'réactions' : 'réaction' }}</a></li>
+            </ul>
+        </div>
+        {% if article.mainImage is not null %}
+            <figure class="editorial-article-header__image">
+                {{ images.render(article.mainImage.webPath, 'full', article.title) }}
+            </figure>
+        {% endif %}
+    </div>
+</header>

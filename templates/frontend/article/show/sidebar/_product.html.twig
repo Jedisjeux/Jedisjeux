@@ -1,8 +1,9 @@
 {% if article.product is not null %}
-    <h3 class="title mt-4">{{ 'app.ui.boardgame'|trans }}</h3>
-    <div class="separator-2"></div>
-    {{ render(url('sylius_frontend_partial_product_show_by_slug', {
-        'slug': article.product.slug,
-        'template': 'frontend/product/_box.html.twig'
-    } )) }}
+    <section class="editorial-sidebar-card editorial-sidebar-card--flush">
+        <span class="editorial-eyebrow">Le jeu</span>
+        {{ render(url('sylius_frontend_partial_product_show_by_slug', {
+            'slug': article.product.slug,
+            'template': 'frontend/product/_catalogCard.html.twig'
+        })) }}
+    </section>
 {% endif %}

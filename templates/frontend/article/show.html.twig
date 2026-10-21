@@ -1,19 +1,13 @@
 {% extends 'frontend/layout.html.twig' %}
 {% import 'macro/page_views.html.twig' as page_views %}
-{% import 'macro/image.html.twig' as images %}
 
-{% set pageTitle %}
-    {{ article.title }}
-{% endset %}
+{% set pageTitle = article.title %}
 
 {% block content %}
     {% include 'frontend/article/show/_breadcrumb.html.twig' %}
-    {% if article.mainImage is not null %}
-        <div class="editorial-article-hero">
-            {{ images.render(article.mainImage.webPath, 'full', article.title) }}
-        </div>
-    {% endif %}
+    {% include 'frontend/article/show/_header.html.twig' %}
     {% include 'frontend/article/show/_main.html.twig' %}
+    {% include 'frontend/article/show/_comments.html.twig' %}
     {% include 'frontend/article/show/_footerTop.html.twig' %}
     {{ page_views.render(article.id, 'article', path('app_frontend_article_show', {'slug' : article.slug})) }}
 {% endblock content %}

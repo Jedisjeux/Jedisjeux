@@ -1,11 +1,10 @@
-<h3 class="title mt-4">{{ 'app.ui.categories'|trans }}</h3>
-<div class="separator-2"></div>
-<nav>
-    <ul class="nav flex-column">
-        {{  render(url('sylius_partial_taxon_index_by_code', {
+<section class="editorial-sidebar-card">
+    <span class="editorial-eyebrow">{{ 'app.ui.categories'|trans }}</span>
+    <ul class="editorial-article-categories">
+        {{ render(url('sylius_partial_taxon_index_by_code', {
             'code': constant('App\\Entity\\Taxon::CODE_ARTICLE'),
             'currentSlug': currentTaxon is not null ? currentTaxon.slug : null,
             'template': 'frontend/taxon/_navListForArticles.html.twig'
         })) }}
     </ul>
-</nav>
+</section>
