@@ -4,7 +4,7 @@ sylius_backend_article_review:
         section: backend
         redirect: index
         only: [delete]
-        templates: :backend/article_review
+        templates: backend/article_review
     type: sylius.resource
 
 sylius_backend_article_review_index:

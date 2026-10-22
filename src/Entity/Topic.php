@@ -15,7 +15,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
-use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
@@ -32,7 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Topic implements ResourceInterface
 {
     use IdentifiableTrait,
-        Timestampable;
+        TimestampableTrait;
 
     /**
      * @var string

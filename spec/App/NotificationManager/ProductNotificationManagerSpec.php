@@ -7,7 +7,7 @@ use App\Entity\Notification;
 use App\Entity\User;
 use App\Factory\NotificationFactory;
 use App\Repository\UserRepository;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\Routing\RouterInterface;

@@ -17,7 +17,7 @@ use App\Entity\CustomerInterface;
 use App\Entity\ProductFile;
 use App\Entity\ProductInterface;
 use App\Entity\ProductVariantInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\DBAL\Connection;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;

@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
  * @ORM\MappedSuperclass
@@ -21,7 +20,7 @@ use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 abstract class File
 {
     use IdentifiableTrait,
-        Timestampable;
+        TimestampableTrait;
 
     /**
      * @var \SplFileInfo|null

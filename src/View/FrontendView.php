@@ -8,14 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace App\View;
 
 use Pagerfanta\View\TwitterBootstrap4View;
 
 class FrontendView extends TwitterBootstrap4View
 {
-    protected function getDefaultProximity()
+    protected function getDefaultProximity(): int
     {
         return 1;
     }

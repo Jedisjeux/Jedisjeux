@@ -231,7 +231,7 @@ services:
     app.feed.dump.article:
         class: App\Feed\ArticleFeedDump
         arguments:
-            - "@eko_feed.feed.dump"
+            - '@Eko\FeedBundle\Service\FeedDumpService'
             - "@app.repository.article"
             - "%kernel.project_dir%/public/"
             - "jedisjeux.xml"

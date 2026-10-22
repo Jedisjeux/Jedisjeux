@@ -44,16 +44,12 @@ class TopicController extends ResourceController
         $view = View::create($resources);
 
         if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::INDEX))
-                ->setTemplateVar($this->metadata->getPluralName())
-                ->setData([
-                    'metadata' => $this->metadata,
-                    'resources' => $resources,
-                    'taxons' => $rootTaxon->getChildren(),
-                    $this->metadata->getPluralName() => $resources,
-                ])
-            ;
+            return $this->render($configuration->getTemplate(ResourceActions::INDEX), [
+                'metadata' => $this->metadata,
+                'resources' => $resources,
+                'taxons' => $rootTaxon->getChildren(),
+                $this->metadata->getPluralName() => $resources,
+            ]);
         }
 
         return $this->viewHandler->handle($configuration, $view);
@@ -87,17 +83,13 @@ class TopicController extends ResourceController
         $view = View::create($resources);
 
         if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::INDEX))
-                ->setTemplateVar($this->metadata->getPluralName())
-                ->setData([
-                    'metadata' => $this->metadata,
-                    'resources' => $resources,
-                    'taxon' => $taxon,
-                    'taxons' => $rootTaxon->getChildren(),
-                    $this->metadata->getPluralName() => $resources,
-                ])
-            ;
+            return $this->render($configuration->getTemplate(ResourceActions::INDEX), [
+                'metadata' => $this->metadata,
+                'resources' => $resources,
+                'taxon' => $taxon,
+                'taxons' => $rootTaxon->getChildren(),
+                $this->metadata->getPluralName() => $resources,
+            ]);
         }
 
         return $this->viewHandler->handle($configuration, $view);

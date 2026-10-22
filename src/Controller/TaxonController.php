@@ -41,17 +41,13 @@ class TaxonController extends ResourceController
         $view = View::create($resources);
 
         if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::INDEX.'.html'))
-                ->setTemplateVar($this->metadata->getPluralName())
-                ->setData([
-                    'configuration' => $configuration,
-                    'metadata' => $this->metadata,
-                    'resources' => $resources,
-                    $this->metadata->getPluralName() => $resources,
-                    'current' => $this->getCurrent($request),
-                ])
-            ;
+            return $this->render($configuration->getTemplate(ResourceActions::INDEX.'.html'), [
+                'configuration' => $configuration,
+                'metadata' => $this->metadata,
+                'resources' => $resources,
+                $this->metadata->getPluralName() => $resources,
+                'current' => $this->getCurrent($request),
+            ]);
         }
 
         return $this->viewHandler->handle($configuration, $view);

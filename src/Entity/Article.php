@@ -16,7 +16,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Eko\FeedBundle\Item\Writer\RoutedItemInterface;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
@@ -36,7 +35,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Article implements ResourceInterface, ReviewableInterface, RoutedItemInterface
 {
     use IdentifiableTrait;
-    use Timestampable;
+    use TimestampableTrait;
 
     /**
      * status constants.

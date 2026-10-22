@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Fixture;
 
 use App\Fixture\Factory\ProductAssociationTypeExampleFactory;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 final class ProductAssociationTypeFixture extends AbstractResourceFixture

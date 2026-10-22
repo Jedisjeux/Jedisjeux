@@ -8,10 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace App\View;
-
-use WhiteOctober\PagerfantaBundle\View\TranslatedView;
 
 /**
  * SemanticUiTranslatedView.
@@ -20,30 +17,17 @@ use WhiteOctober\PagerfantaBundle\View\TranslatedView;
  */
 class SemanticUiTranslatedView extends TranslatedView
 {
-    protected function previousMessageOption()
-    {
-        return 'prev_message';
-    }
-
-    protected function nextMessageOption()
-    {
-        return 'next_message';
-    }
-
-    protected function buildPreviousMessage($text)
+    protected function buildPreviousMessage(string $text): string
     {
         return sprintf('&larr; %s', $text);
     }
 
-    protected function buildNextMessage($text)
+    protected function buildNextMessage(string $text): string
     {
         return sprintf('%s &rarr;', $text);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'semantic_ui_translated';
     }

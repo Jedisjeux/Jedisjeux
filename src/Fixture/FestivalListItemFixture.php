@@ -12,7 +12,7 @@
 namespace App\Fixture;
 
 use App\Fixture\Factory\FestivalListItemExampleFactory;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class FestivalListItemFixture extends AbstractResourceFixture

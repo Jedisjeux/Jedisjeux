@@ -38,16 +38,12 @@ class PersonController extends ResourceController
         $view = View::create($resources);
 
         if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::INDEX))
-                ->setTemplateVar($this->metadata->getPluralName())
-                ->setData([
-                    'rootTaxon' => $rootTaxon,
-                    'metadata' => $this->metadata,
-                    'resources' => $resources,
-                    $this->metadata->getPluralName() => $resources,
-                ])
-            ;
+            return $this->render($configuration->getTemplate(ResourceActions::INDEX), [
+                'rootTaxon' => $rootTaxon,
+                'metadata' => $this->metadata,
+                'resources' => $resources,
+                $this->metadata->getPluralName() => $resources,
+            ]);
         }
 
         return $this->viewHandler->handle($configuration, $view);
@@ -79,16 +75,13 @@ class PersonController extends ResourceController
         $view = View::create($resources);
 
         if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate('indexByTaxon.html'))
-                ->setTemplateVar($this->metadata->getPluralName())
-                ->setData([
-                    'metadata' => $this->metadata,
-                    'taxon' => $taxon,
-                    'rootTaxon' => $rootTaxon,
-                    'resources' => $resources,
-                    $this->metadata->getPluralName() => $resources,
-                ]);
+            return $this->render($configuration->getTemplate('indexByTaxon.html'), [
+                'metadata' => $this->metadata,
+                'taxon' => $taxon,
+                'rootTaxon' => $rootTaxon,
+                'resources' => $resources,
+                $this->metadata->getPluralName() => $resources,
+            ]);
         }
 
         return $this->viewHandler->handle($configuration, $view);

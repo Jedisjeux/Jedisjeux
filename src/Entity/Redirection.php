@@ -47,4 +47,22 @@ class Redirection extends BaseRedirect implements ResourceInterface
     {
         return $this->id;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSource($source)
+    {
+        // Base model trims the source, which is deprecated with null since PHP 8.1
+        parent::setSource((string) $source);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDestination($destination)
+    {
+        // Base model trims the destination, which is deprecated with null since PHP 8.1
+        parent::setDestination((string) $destination);
+    }
 }

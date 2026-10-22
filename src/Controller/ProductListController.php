@@ -66,16 +66,12 @@ class ProductListController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($list, Response::HTTP_CREATED));
         }
 
-        $view = View::create()
-            ->setData([
-                'configuration' => $configuration,
-                'metadata' => $this->metadata,
-                'resource' => $list,
-                $this->metadata->getName() => $list,
-            ])
-            ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE.'.html'));
-
-        return $this->viewHandler->handle($configuration, $view);
+        return $this->render($configuration->getTemplate(ResourceActions::UPDATE.'.html'), [
+            'configuration' => $configuration,
+            'metadata' => $this->metadata,
+            'resource' => $list,
+            $this->metadata->getName() => $list,
+        ]);
     }
 
     /**
@@ -115,15 +111,11 @@ class ProductListController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
         }
 
-        $view = View::create()
-            ->setData([
-                'configuration' => $configuration,
-                'metadata' => $this->metadata,
-                'resource' => $list,
-                $this->metadata->getName() => $list,
-            ])
-            ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE.'.html'));
-
-        return $this->viewHandler->handle($configuration, $view);
+        return $this->render($configuration->getTemplate(ResourceActions::UPDATE.'.html'), [
+            'configuration' => $configuration,
+            'metadata' => $this->metadata,
+            'resource' => $list,
+            $this->metadata->getName() => $list,
+        ]);
     }
 }

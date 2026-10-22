@@ -38,15 +38,11 @@ class ProductReviewController extends ResourceController
         $view = View::create($resource);
 
         if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW))
-                ->setTemplateVar($this->metadata->getName())
-                ->setData([
-                    'metadata' => $this->metadata,
-                    'resource' => $resource,
-                    $this->metadata->getName() => $resource,
-                ])
-            ;
+            return $this->render($configuration->getTemplate(ResourceActions::SHOW), [
+                'metadata' => $this->metadata,
+                'resource' => $resource,
+                $this->metadata->getName() => $resource,
+            ]);
         }
 
         return $this->viewHandler->handle($configuration, $view);

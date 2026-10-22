@@ -24,7 +24,7 @@ services:
             target: frontend
             args:
                 BUILDKIT_SYNTAX: 'ghcr.io/castor-php/twig-dockerfile:0.1'
-                php_version: '7.3'
+                php_version: '8.2'
                 php_extensions: '["apcu","bcmath","curl","iconv","intl","mbstring","pgsql","uuid","xml","zip","mysql","gd"]'
                 pie_version: 1.0.0
             cache_from:
@@ -56,7 +56,7 @@ services:
             target: builder
             args:
                 BUILDKIT_SYNTAX: 'ghcr.io/castor-php/twig-dockerfile:0.1'
-                php_version: '7.3'
+                php_version: '8.2'
                 php_extensions: '["apcu","bcmath","curl","iconv","intl","mbstring","pgsql","uuid","xml","zip","mysql","gd"]'
                 pie_version: 1.0.0
                 node_version: 24.x

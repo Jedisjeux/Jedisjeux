@@ -12,7 +12,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -24,7 +23,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 class DealerPrice implements ResourceInterface
 {
     use IdentifiableTrait,
-        Timestampable;
+        TimestampableTrait;
 
     const STATUS_PRE_ORDER = 'pre_order';
     const STATUS_AVAILABLE = 'available';

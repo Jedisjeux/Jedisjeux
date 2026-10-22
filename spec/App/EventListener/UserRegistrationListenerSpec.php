@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\App\EventListener;
 
 use App\Entity\Customer;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\UserBundle\Security\UserLoginInterface;

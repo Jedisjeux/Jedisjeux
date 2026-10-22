@@ -13,7 +13,7 @@ namespace App\NotificationManager;
 
 use App\Factory\NotificationFactory;
 use App\Repository\UserRepository;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Routing\RouterInterface;

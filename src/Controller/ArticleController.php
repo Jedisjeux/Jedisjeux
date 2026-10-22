@@ -45,17 +45,13 @@ class ArticleController extends ResourceController
         $view = View::create($resource);
 
         if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW.'.html'))
-                ->setTemplateVar($this->metadata->getName())
-                ->setData([
-                    'rootTaxons' => $this->getRootTaxons(),
-                    'configuration' => $configuration,
-                    'metadata' => $this->metadata,
-                    'resource' => $resource,
-                    $this->metadata->getName() => $resource,
-                ])
-            ;
+            return $this->render($configuration->getTemplate(ResourceActions::SHOW.'.html'), [
+                'rootTaxons' => $this->getRootTaxons(),
+                'configuration' => $configuration,
+                'metadata' => $this->metadata,
+                'resource' => $resource,
+                $this->metadata->getName() => $resource,
+            ]);
         }
 
         return $this->viewHandler->handle($configuration, $view);
@@ -76,16 +72,12 @@ class ArticleController extends ResourceController
         $view = View::create($resources);
 
         if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::INDEX))
-                ->setTemplateVar($this->metadata->getPluralName())
-                ->setData([
-                    'rootTaxons' => $this->getRootTaxons(),
-                    'metadata' => $this->metadata,
-                    'resources' => $resources,
-                    $this->metadata->getPluralName() => $resources,
-                ])
-            ;
+            return $this->render($configuration->getTemplate(ResourceActions::INDEX), [
+                'rootTaxons' => $this->getRootTaxons(),
+                'metadata' => $this->metadata,
+                'resources' => $resources,
+                $this->metadata->getPluralName() => $resources,
+            ]);
         }
 
         return $this->viewHandler->handle($configuration, $view);
@@ -112,17 +104,13 @@ class ArticleController extends ResourceController
         $view = View::create($resources);
 
         if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::INDEX))
-                ->setTemplateVar($this->metadata->getPluralName())
-                ->setData([
-                    'taxon' => $taxon,
-                    'rootTaxons' => $this->getRootTaxons(),
-                    'metadata' => $this->metadata,
-                    'resources' => $resources,
-                    $this->metadata->getPluralName() => $resources,
-                ])
-            ;
+            return $this->render($configuration->getTemplate(ResourceActions::INDEX), [
+                'taxon' => $taxon,
+                'rootTaxons' => $this->getRootTaxons(),
+                'metadata' => $this->metadata,
+                'resources' => $resources,
+                $this->metadata->getPluralName() => $resources,
+            ]);
         }
 
         return $this->viewHandler->handle($configuration, $view);
@@ -146,17 +134,13 @@ class ArticleController extends ResourceController
         $view = View::create($resource);
 
         if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::SHOW.'.html'))
-                ->setTemplateVar($this->metadata->getName())
-                ->setData([
-                    'configuration' => $configuration,
-                    'metadata' => $this->metadata,
-                    'resource' => $resource,
-                    $this->metadata->getName() => $resource,
-                    'state_machine' => $this->getStateMachine($resource),
-                ])
-            ;
+            return $this->render($configuration->getTemplate(ResourceActions::SHOW.'.html'), [
+                'configuration' => $configuration,
+                'metadata' => $this->metadata,
+                'resource' => $resource,
+                $this->metadata->getName() => $resource,
+                'state_machine' => $this->getResourceStateMachine($resource),
+            ]);
         }
 
         return $this->viewHandler->handle($configuration, $view);
@@ -169,7 +153,7 @@ class ArticleController extends ResourceController
      *
      * @throws \SM\SMException
      */
-    protected function getStateMachine(Article $article)
+    protected function getResourceStateMachine(Article $article)
     {
         /** @var Factory $factory */
         $factory = $this->get('sm.factory');

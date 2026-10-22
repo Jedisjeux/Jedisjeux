@@ -8,37 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace App\View;
 
 use App\View\Template\SemanticUiTemplate;
-use Pagerfanta\View\DefaultView;
+use Pagerfanta\View\Template\TemplateInterface;
+use Pagerfanta\View\SemanticUiView as BaseSemanticUiView;
 
-/**
- * SemanticUiView.
- *
- * View that can be used with the pagination module
- * from the Semantic UI CSS Toolkit
- * http://semantic-ui.com/
- *
- * @author Loïc Frémont <loic@mobizel.com>
- */
-class SemanticUiView extends DefaultView
+class SemanticUiView extends BaseSemanticUiView
 {
-    protected function createDefaultTemplate()
+    protected function createDefaultTemplate(): TemplateInterface
     {
         return new SemanticUiTemplate();
     }
 
-    protected function getDefaultProximity()
+    protected function getDefaultProximity(): int
     {
         return 3;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'semantic_ui';
     }

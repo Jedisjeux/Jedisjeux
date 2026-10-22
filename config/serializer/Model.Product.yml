@@ -13,19 +13,19 @@ Sylius\Component\Product\Model\Product:
             groups: [Default, Detailed, Autocomplete]
         options:
             expose: true
-            type: array
+            type: ArrayCollection
             groups: [Default, Detailed]
         attributes:
             expose: true
-            type: array
+            type: ArrayCollection
             groups: [Detailed]
         associations:
             expose: true
-            type: array
+            type: ArrayCollection
             groups: [Detailed]
         translations:
             expose: true
-            type: array
+            type: ArrayCollection
             groups: [Detailed]
     virtual_properties:
         getName:
