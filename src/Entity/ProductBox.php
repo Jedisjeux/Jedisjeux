@@ -12,7 +12,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -26,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class ProductBox implements ResourceInterface
 {
     use IdentifiableTrait,
-        Timestampable,
+        TimestampableTrait,
         ToggleableTrait;
 
     const RATIO = 0.645;

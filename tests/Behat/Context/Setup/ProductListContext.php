@@ -18,7 +18,7 @@ use App\Entity\User;
 use App\Fixture\Factory\ProductExampleFactory;
 use App\Fixture\Factory\ProductListExampleFactory;
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Monofony\Bridge\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;

@@ -42,17 +42,13 @@ class ProductListItemController extends ResourceController
         $view = View::create($resources);
 
         if ($configuration->isHtmlRequest()) {
-            $view
-                ->setTemplate($configuration->getTemplate(ResourceActions::INDEX.'.html'))
-                ->setTemplateVar($this->metadata->getPluralName())
-                ->setData([
-                    'configuration' => $configuration,
-                    'metadata' => $this->metadata,
-                    'product_list' => $productList,
-                    'resources' => $resources,
-                    $this->metadata->getPluralName() => $resources,
-                ])
-            ;
+            return $this->render($configuration->getTemplate(ResourceActions::INDEX.'.html'), [
+                'configuration' => $configuration,
+                'metadata' => $this->metadata,
+                'product_list' => $productList,
+                'resources' => $resources,
+                $this->metadata->getPluralName() => $resources,
+            ]);
         }
 
         return $this->viewHandler->handle($configuration, $view);

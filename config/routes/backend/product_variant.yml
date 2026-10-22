@@ -4,7 +4,7 @@ sylius_backend_product_variant:
         section: backend
         redirect: index
         only: [delete]
-        templates: :backend/product_variant
+        templates: backend/product_variant
     type: sylius.resource
 
 sylius_backend_product_variant_index:

@@ -8,5 +8,5 @@ Sylius\Component\Product\Model\ProductOptionValue:
             groups: [Default, Detailed, DetailedCart]
         translations:
             expose: true
-            type: array
+            type: ArrayCollection
             groups: [Default, Detailed, DetailedCart]

@@ -17,7 +17,7 @@ use App\Entity\DealerPrice;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Behat\Transliterator\Transliterator;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Console\Command\Command;

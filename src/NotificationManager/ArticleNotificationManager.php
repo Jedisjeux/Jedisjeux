@@ -14,7 +14,7 @@ namespace App\NotificationManager;
 use App\Entity\Article;
 use App\Factory\NotificationFactory;
 use App\Repository\UserRepository;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;

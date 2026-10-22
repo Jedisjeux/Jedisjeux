@@ -15,7 +15,7 @@ use App\AppEvents;
 use App\Entity\Notification;
 use App\Entity\Post;
 use App\Factory\NotificationFactory;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;

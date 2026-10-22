@@ -12,7 +12,7 @@
 namespace App\Fixture;
 
 use App\Fixture\Factory\YearAwardExampleFactory;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class YearAwardFixture extends AbstractResourceFixture

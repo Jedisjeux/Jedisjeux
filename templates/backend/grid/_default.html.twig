@@ -39,9 +39,7 @@
             </thead>
             <tbody>
             {% for row in data %}
-                <tr>
-                    {{ table.row(grid, definition, row) }}
-                </tr>
+                {{ table.row(grid, definition, row) }}
             {% endfor %}
             </tbody>
         </table>

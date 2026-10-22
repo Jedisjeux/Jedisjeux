@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Fixture;
 
 use App\Fixture\Factory\PubBannerExampleFactory;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 final class PubBannerFixture extends AbstractResourceFixture
 {

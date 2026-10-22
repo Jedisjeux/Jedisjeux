@@ -8,32 +8,26 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace App\View;
 
-use WhiteOctober\PagerfantaBundle\View\TwitterBootstrap4TranslatedView;
-
 /**
- * SemanticUiTranslatedView.
+ * FrontendTranslatedView.
  *
- * This view renders the semantic ui view with the text translated.
+ * This view renders the frontend view with the text translated.
  */
-class FrontendTranslatedView extends TwitterBootstrap4TranslatedView
+class FrontendTranslatedView extends TranslatedView
 {
-    protected function buildPreviousMessage($text)
+    protected function buildPreviousMessage(string $text): string
     {
         return sprintf('<i class="fa fa-angle-left"><span class="sr-only">%s</span></i>', $text);
     }
 
-    protected function buildNextMessage($text)
+    protected function buildNextMessage(string $text): string
     {
         return sprintf('<i class="fa fa-angle-right"><span class="sr-only">%s</span></i>', $text);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'frontend_translated';
     }

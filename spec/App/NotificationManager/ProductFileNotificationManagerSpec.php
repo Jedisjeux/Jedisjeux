@@ -9,7 +9,7 @@ use App\Entity\ProductInterface;
 use App\Entity\User;
 use App\Factory\NotificationFactory;
 use App\Repository\UserRepository;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;

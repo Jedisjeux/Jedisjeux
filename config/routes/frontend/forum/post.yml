@@ -3,7 +3,7 @@ app_frontend_post:
         alias: app.post
         section: frontend
         only: ['index', 'create']
-        templates: :frontend/post
+        templates: frontend/post
     type: sylius.resource
 
 app_frontend_post_update:

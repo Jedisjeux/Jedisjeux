@@ -32,7 +32,7 @@ function register_services(RegisterServiceEvent $event): void
     $event->addService($database);
     $app = (new SymfonyService('app'))
         ->withDirectory(__DIR__)
-        ->withVersion('7.3')
+        ->withVersion('8.2')
         ->withMode(PhpMode::Fpm)
         ->addExtension('mysql')
         ->addExtension('gd')

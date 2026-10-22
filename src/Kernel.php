@@ -3,6 +3,14 @@
 namespace App;
 
 use App\DependencyInjection\Compiler\ServicesPass;
+use Doctrine\Inflector\InflectorFactory;
+use Doctrine\Inflector\Rules\Patterns;
+use Doctrine\Inflector\Rules\Ruleset;
+use Doctrine\Inflector\Rules\Substitution;
+use Doctrine\Inflector\Rules\Substitutions;
+use Doctrine\Inflector\Rules\Transformations;
+use Doctrine\Inflector\Rules\Word;
+use Sylius\Component\Resource\Metadata\Metadata;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -15,6 +23,23 @@ class Kernel extends BaseKernel
     use MicroKernelTrait;
 
     const CONFIG_EXTS = '.{php,xml,yaml,yml}';
+
+    /**
+     * {@inheritdoc}
+     */
+    public function boot()
+    {
+        // Keep "taxons" as plural name of the taxon resource, doctrine/inflector 2 pluralizes it as "taxa"
+        Metadata::setInflector(InflectorFactory::create()
+            ->withPluralRules(new Ruleset(
+                new Transformations(),
+                new Patterns(),
+                new Substitutions(new Substitution(new Word('taxon'), new Word('taxons')))
+            ))
+            ->build());
+
+        parent::boot();
+    }
 
     /**
      * {@inheritdoc}

@@ -14,7 +14,7 @@ namespace App\EventSubscriber;
 use App\Entity\GamePlay;
 use App\Updater\ImageCountByGamePlayUpdater;
 use Doctrine\Common\EventSubscriber;
-use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 
 /**

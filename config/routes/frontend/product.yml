@@ -2,7 +2,7 @@ sylius_product:
     resource: |
         alias: sylius.product
         path: /jeux
-        templates: :frontend/game
+        templates: frontend/game
         redirect: index
     type: sylius.resource
 

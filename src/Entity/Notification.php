@@ -13,7 +13,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
-use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
@@ -29,7 +28,7 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 class Notification implements ResourceInterface
 {
     use IdentifiableTrait,
-        Timestampable;
+        TimestampableTrait;
 
     /**
      * @var CustomerInterface[]|Collection

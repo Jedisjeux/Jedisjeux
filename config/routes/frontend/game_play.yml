@@ -69,6 +69,6 @@ app_frontend_game_play:
         section: frontend
         redirect: index
         only: [delete]
-        templates: :frontend/game_play
+        templates: frontend/game_play
     type: sylius.resource
 

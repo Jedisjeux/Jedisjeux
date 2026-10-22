@@ -2,6 +2,10 @@ imports:
     - config/suites.yaml
 
 default:
+    calls:
+        # E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED: some abandoned dependencies (swiftmailer) trigger PHP 8 deprecations
+        error_reporting: 8191
+
     formatters:
         pretty:
             verbose:  true
@@ -9,7 +13,7 @@ default:
             snippets: false
 
     extensions:
-        Lakion\Behat\MinkDebugExtension:
+        FriendsOfBehat\MinkDebugExtension:
             directory: etc/build
             clean_start: false
             screenshot: true

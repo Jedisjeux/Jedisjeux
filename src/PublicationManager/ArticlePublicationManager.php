@@ -12,7 +12,7 @@
 namespace App\PublicationManager;
 
 use App\Entity\Article;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

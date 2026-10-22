@@ -9,7 +9,7 @@ use App\Entity\Topic;
 use App\EventSubscriber\CreateTopicForArticleSubscriber;
 use App\Factory\TopicFactory;
 use App\Repository\TopicRepository;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;

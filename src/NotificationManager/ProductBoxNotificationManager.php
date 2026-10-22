@@ -14,7 +14,7 @@ namespace App\NotificationManager;
 use App\Entity\ProductBox;
 use App\Factory\NotificationFactory;
 use App\Repository\UserRepository;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;

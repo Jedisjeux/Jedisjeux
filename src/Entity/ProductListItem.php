@@ -12,7 +12,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -25,7 +24,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 class ProductListItem implements ResourceInterface
 {
     use IdentifiableTrait,
-        Timestampable;
+        TimestampableTrait;
 
     /**
      * @var ProductList

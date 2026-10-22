@@ -29,6 +29,7 @@ security:
         api:
             pattern: ^/api/
             provider: sylius_user_provider
+            user_checker: App\Security\UserChecker
             anonymous: true
             entry_point: app.security.api_entry_point
             context: user
@@ -37,6 +38,7 @@ security:
             anonymous: true
             pattern: /.*
             provider: sylius_user_provider
+            user_checker: App\Security\UserChecker
             form_login:
                 success_handler: sylius.authentication.success_handler
                 failure_handler: sylius.authentication.failure_handler

@@ -12,7 +12,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -32,7 +31,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class FestivalListItem implements ResourceInterface
 {
     use IdentifiableTrait,
-        Timestampable;
+        TimestampableTrait;
 
     /**
      * @var FestivalList

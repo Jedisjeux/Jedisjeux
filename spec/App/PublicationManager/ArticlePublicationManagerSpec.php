@@ -3,7 +3,7 @@
 namespace spec\App\PublicationManager;
 
 use App\Entity\Article;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

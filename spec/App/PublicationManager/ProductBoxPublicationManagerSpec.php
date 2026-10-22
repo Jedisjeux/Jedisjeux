@@ -4,7 +4,7 @@ namespace spec\App\PublicationManager;
 
 use App\Entity\ProductBox;
 use App\Entity\ProductVariantInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 
 class ProductBoxPublicationManagerSpec extends ObjectBehavior

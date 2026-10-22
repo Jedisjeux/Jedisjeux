@@ -10,7 +10,7 @@ use App\Entity\Topic;
 use App\EventSubscriber\CreateTopicNotificationSubscriber;
 use App\Factory\NotificationFactory;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -67,7 +67,7 @@ class CreateTopicNotificationSubscriberSpec extends ObjectBehavior
 
         $factory->createForPost($post, $follower)->shouldBeCalled();
         $notification->addAuthor($currentCustomer)->shouldBeCalled();
-        $notification->getAuthors()->shouldBeCalled();
+        $notification->getAuthors()->willReturn(new ArrayCollection([$currentCustomer->getWrappedObject()]))->shouldBeCalled();
         $notification->setMessage('message')->shouldBeCalled();
 
         $this->onPostCreate($event);
@@ -100,7 +100,7 @@ class CreateTopicNotificationSubscriberSpec extends ObjectBehavior
 
         $factory->createForPost($post, $currentCustomer)->shouldNotBeCalled();
         $notification->addAuthor($currentCustomer)->shouldBeCalled();
-        $notification->getAuthors()->shouldBeCalled();
+        $notification->getAuthors()->willReturn(new ArrayCollection([$currentCustomer->getWrappedObject()]))->shouldBeCalled();
         $notification->setMessage('message')->shouldBeCalled();
 
         $this->onPostCreate($event);
@@ -148,7 +148,7 @@ class CreateTopicNotificationSubscriberSpec extends ObjectBehavior
 
         $factory->createForPost($post, $follower)->shouldNotBeCalled();
         $notification->addAuthor($currentCustomer)->shouldBeCalled();
-        $notification->getAuthors()->shouldBeCalled();
+        $notification->getAuthors()->willReturn(new ArrayCollection([$currentCustomer->getWrappedObject()]))->shouldBeCalled();
         $notification->setMessage('message')->shouldBeCalled();
 
         $this->onPostCreate($event);

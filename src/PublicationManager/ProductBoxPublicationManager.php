@@ -13,7 +13,7 @@ namespace App\PublicationManager;
 
 
 use App\Entity\ProductBox;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Webmozart\Assert\Assert;
 
 class ProductBoxPublicationManager
