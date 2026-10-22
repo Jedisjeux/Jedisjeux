@@ -1,4 +1,4 @@
-{% spaceless %}
+{% apply spaceless %}
     {% if resources|length > 0 %}
         {% for image in resources %}
             {{ image.webPath|imagine_filter('default') }}
@@ -6,4 +6,4 @@
     {% else %}
             /assets/frontend/images/shop-banner-2.jpg
     {% endif %}
-{% endspaceless %}
+{% endapply %}

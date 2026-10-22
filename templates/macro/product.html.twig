@@ -29,7 +29,7 @@
 
 {% endmacro %}
 
-{% macro duration(product) %}{% spaceless %}
+{% macro duration(product) %}{% apply spaceless %}
     {% if product.minDuration %}
         {{ product.minDuration }}
         {% if product.minDuration != product.maxDuration %}
@@ -37,4 +37,4 @@
         {% endif %}
         minute{% if product.minDuration > 1 %}s{% endif %}{% if product.durationByPlayer %} {{ 'label.per_player'|trans|lower }}{% endif %}
     {% endif %}
-{% endspaceless %}{% endmacro %}
+{% endapply %}{% endmacro %}

@@ -11,7 +11,7 @@
     "moment": "^2.22.1",
     "owl.carousel": "^2.3.4",
     "rater-jquery": "^1.0.0",
-    "select2": "^4.0.4",
+    "select2": "~4.0.13",
     "select2-bootstrap-theme": "^0.1.0-beta.10",
     "semantic-ui-calendar": "^0.0.8",
     "semantic-ui-css": "^2.4.1"
@@ -46,7 +46,7 @@
     "rollup-plugin-inject": "^2.0.0",
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-uglify": "^4.0.0",
-    "sass": "^1.83.0",
+    "sass": "~1.99.0",
     "upath": "^1.1.0",
     "yargs": "^6.4.0"
   },
@@ -55,6 +55,9 @@
     "gulp": "gulp build",
     "lint": "yarn lint:js",
     "lint:js": "eslint gulpfile.babel.js src/Sylius/Bundle/AdminBundle/gulpfile.babel.js src/Sylius/Bundle/ShopBundle/gulpfile.babel.js src/Sylius/Bundle/UiBundle/Resources/private/js src/Sylius/Bundle/AdminBundle/Resources/private/js src/Sylius/Bundle/ShopBundle/Resources/private/js"
+  },
+  "engines": {
+    "node": "16.x"
   },
   "repository": {
     "type": "git",

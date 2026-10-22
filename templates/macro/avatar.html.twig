@@ -1,12 +1,12 @@
-{% macro getPath(resource) %}{% spaceless %}
+{% macro getPath(resource) %}{% apply spaceless %}
     {% set imageSrc = resource.avatar ? resource.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png' %}
 
     {{ imageSrc }}
-{% endspaceless %}{% endmacro %}
+{% endapply %}{% endmacro %}
 
-{% macro render(resource, filter, label, class) %}{% spaceless %}
+{% macro render(resource, filter, label, class) %}{% apply spaceless %}
     {% import _self as avatar %}
     {% import 'macro/image.html.twig' as images %}
 
     {{ images.render(avatar.getPath(resource), filter, resource, class) }}
-{% endspaceless %}{% endmacro %}
+{% endapply %}{% endmacro %}

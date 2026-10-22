@@ -42,7 +42,7 @@
     {% endfor %}
 {% endmacro %}
 
-{% macro getPath(topic, page) %}{% spaceless %}
+{% macro getPath(topic, page) %}{% apply spaceless %}
     {% if topic.gamePlay %}
         {% set linkUrl = path('app_frontend_game_play_show', {'productSlug': topic.gamePlay.product.slug, 'id': topic.gamePlay.id }) %}
     {% elseif topic.article %}
@@ -52,9 +52,9 @@
     {% endif %}
 
     {{ linkUrl }}
-{% endspaceless %}{% endmacro %}
+{% endapply %}{% endmacro %}
 
-{% macro getUpdatePath(topic, post) %}{% spaceless %}
+{% macro getUpdatePath(topic, post) %}{% apply spaceless %}
     {% if topic.article is not null %}
         {% set updatePath = path('app_frontend_article_post_update', { 'id': post.id, 'articleSlug': topic.article.slug }) %}
     {% elseif topic.gamePlay is not null %}
@@ -64,4 +64,4 @@
     {% endif %}
 
     {{ updatePath }}
-{% endspaceless %}{% endmacro %}
+{% endapply %}{% endmacro %}

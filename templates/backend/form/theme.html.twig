@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% macro polycollection_item(form, allow_delete, button_delete_label, index) %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div data-form-polycollection="item" data-form-polycollection-index="{{ index }}">
             {{ form_widget(form) }}
             {% if allow_delete %}
@@ -20,7 +20,7 @@
                 </a>
             {% endif %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endmacro %}
 
 {% block infinite_form_polycollection_row -%}
@@ -60,7 +60,7 @@
 {%- endblock %}
 
 {% block app_image_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         {{ form_row(form.type) }}
         <label for="{{ form.file.vars.id }}" class="ui icon labeled button"><i class="cloud upload icon"></i> {{ 'sylius.ui.choose_file'|trans }}</label>
         {% if form.vars.value.path|default(null) is not null %}
@@ -72,29 +72,29 @@
         <div class="ui element">
             {{- form_errors(form.file) -}}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}
 
 {% block app_datetime_picker_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div class="ui calendar app-date-time-picker">
             <div class="ui input left icon">
                 <i class="calendar icon"></i>
                 {{ block('form_widget') }}
             </div>
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}
 
 {% block app_date_picker_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div class="ui calendar app-date-picker">
             <div class="ui input left icon">
                 <i class="calendar icon"></i>
                 {{ block('form_widget') }}
             </div>
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}
 
 {% block time_widget %}

@@ -45,6 +45,7 @@ function register_services(RegisterServiceEvent $event): void
         ->link($database)
         ->withDomain('jedisjeux.test')
         ->withHttpAccess()
+        ->withNodeVersion('16')
     ;
 
     $event->addService($app);
