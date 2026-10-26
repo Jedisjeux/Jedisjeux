@@ -1,6 +1,7 @@
 /.home
 /build/
 /log
+.castor.stub.php
 
 /public/assets
 /public/media
