@@ -1,3 +1,4 @@
+{% from 'macro/icon.html.twig' import icon %}
 {% import _self as self %}
 
 {% macro show_block(block) %}
@@ -49,7 +50,7 @@
                 {% if article.mainTaxon is not null %}
                     <footer class="editorial-article-footer">
                         <span>Publié dans</span>
-                        <a href="{{ path('app_frontend_article_index_by_taxon', {'slug': article.mainTaxon.slug}) }}"><i class="fa fa-tag" aria-hidden="true"></i>{{ article.mainTaxon.name }}</a>
+                        <a href="{{ path('app_frontend_article_index_by_taxon', {'slug': article.mainTaxon.slug}) }}">{{ icon('tag') }}{{ article.mainTaxon.name }}</a>
                     </footer>
                 {% endif %}
 

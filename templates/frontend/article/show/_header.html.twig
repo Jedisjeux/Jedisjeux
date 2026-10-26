@@ -1,3 +1,4 @@
+{% from 'macro/icon.html.twig' import icon %}
 {% import 'macro/image.html.twig' as images %}
 
 {% set commentCount = article.topic is not null ? article.topic.postCount : 0 %}
@@ -12,9 +13,9 @@
             {% endif %}
             <h1>{{ article.title }}</h1>
             <ul class="editorial-article-meta">
-                <li><i class="fa fa-user-circle-o" aria-hidden="true"></i>Par <strong>{{ article.author }}</strong></li>
-                <li><i class="fa fa-calendar-o" aria-hidden="true"></i>{{ article.publishStartDate|localizeddate('long', 'none') }}</li>
-                <li><a href="#comments"><i class="fa fa-comments-o" aria-hidden="true"></i>{{ commentCount }} {{ commentCount > 1 ? 'réactions' : 'réaction' }}</a></li>
+                <li>{{ icon('user') }}Par <strong>{{ article.author }}</strong></li>
+                <li>{{ icon('calendar') }}{{ article.publishStartDate|localizeddate('long', 'none') }}</li>
+                <li><a href="#comments">{{ icon('message') }}{{ commentCount }} {{ commentCount > 1 ? 'réactions' : 'réaction' }}</a></li>
             </ul>
         </div>
         {% if article.mainImage is not null %}

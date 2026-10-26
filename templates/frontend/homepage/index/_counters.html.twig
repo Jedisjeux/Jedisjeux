@@ -1,3 +1,4 @@
+{% from 'macro/icon.html.twig' import icon %}
 <section class="editorial-community" aria-labelledby="community-title">
     <div class="container">
         <div class="editorial-community__panel">
@@ -8,22 +9,22 @@
 
             <div class="editorial-community__stats" aria-label="Jedisjeux en chiffres">
                 <div class="editorial-community__stat">
-                    <span class="editorial-community__icon" aria-hidden="true"><i class="fa fa-users"></i></span>
+                    <span class="editorial-community__icon" aria-hidden="true">{{ icon('users') }}</span>
                     <span class="editorial-community__value counter" id="user-count">{{ userCount|number_format(0, ',', ' ') }}</span>
                     <span class="editorial-community__label">membres</span>
                 </div>
                 <div class="editorial-community__stat">
-                    <span class="editorial-community__icon" aria-hidden="true"><i class="fa fa-puzzle-piece"></i></span>
+                    <span class="editorial-community__icon" aria-hidden="true">{{ icon('dice') }}</span>
                     <span class="editorial-community__value counter" id="product-count">{{ productCount|number_format(0, ',', ' ') }}</span>
                     <span class="editorial-community__label">jeux référencés</span>
                 </div>
                 <div class="editorial-community__stat">
-                    <span class="editorial-community__icon" aria-hidden="true"><i class="fa fa-star-o"></i></span>
+                    <span class="editorial-community__icon" aria-hidden="true">{{ icon('star') }}</span>
                     <span class="editorial-community__value counter" id="rating-count">{{ ratingCount|number_format(0, ',', ' ') }}</span>
                     <span class="editorial-community__label">avis de joueurs</span>
                 </div>
                 <div class="editorial-community__stat">
-                    <span class="editorial-community__icon" aria-hidden="true"><i class="fa fa-newspaper-o"></i></span>
+                    <span class="editorial-community__icon" aria-hidden="true">{{ icon('newspaper') }}</span>
                     <span class="editorial-community__value counter" id="article-count">{{ articleCount|number_format(0, ',', ' ') }}</span>
                     <span class="editorial-community__label">articles</span>
                 </div>

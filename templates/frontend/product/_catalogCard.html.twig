@@ -1,3 +1,4 @@
+{% from 'macro/icon.html.twig' import icon %}
 {% import 'macro/image.html.twig' as images %}
 {% from 'macro/product.html.twig' import releasedAt, duration, playerCount %}
 
@@ -34,9 +35,9 @@
         {% endif %}
 
         <ul class="editorial-catalog-card__facts">
-            <li><i class="fa fa-user" aria-hidden="true"></i>{{ playerCount(product) }}</li>
-            {% if product.minAge is not null %}<li><i class="fa fa-child" aria-hidden="true"></i>{{ product.minAge }}+</li>{% endif %}
-            {% if product.minDuration is not null %}<li><i class="fa fa-clock-o" aria-hidden="true"></i>{{ duration(product) }}</li>{% endif %}
+            <li>{{ icon('user') }}{{ playerCount(product) }}</li>
+            {% if product.minAge is not null %}<li>{{ icon('age') }}{{ product.minAge }}+</li>{% endif %}
+            {% if product.minDuration is not null %}<li>{{ icon('clock') }}{{ duration(product) }}</li>{% endif %}
         </ul>
         <div class="editorial-catalog-card__release">Sortie : {{ releasedAt(product.firstVariant) }}</div>
     </div>

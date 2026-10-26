@@ -1,3 +1,4 @@
+{% from 'macro/icon.html.twig' import icon %}
 {% extends 'frontend/layout.html.twig' %}
 
 {% block content %}
@@ -9,7 +10,7 @@
                 <span class="editorial-eyebrow">Jedisjeux · et les autres jours aussi</span>
                 <h1>Le jeu,<br>tous les jours.</h1>
                 <p>Des jeux à découvrir, des histoires à lire et une communauté de passionnés avec qui partager.</p>
-                <a class="btn btn-default" href="{{ path('app_frontend_article_index') }}">Explorer le magazine <i class="fa fa-arrow-right pl-2"></i></a>
+                <a class="btn btn-default" href="{{ path('app_frontend_article_index') }}">Explorer le magazine {{ icon('arrow-right') }}</a>
             </div>
         </div>
     </section>
@@ -18,7 +19,7 @@
         <div class="container">
             <div class="editorial-section-heading">
                 <div><span class="editorial-eyebrow">Le magazine</span><h2>Derniers articles</h2></div>
-                <a href="{{ path('app_frontend_article_index') }}">Tous les articles <i class="fa fa-arrow-right"></i></a>
+                <a href="{{ path('app_frontend_article_index') }}">Tous les articles {{ icon('arrow-right') }}</a>
             </div>
             <div id="latest-articles">{% include 'frontend/homepage/index/_latestArticles.html.twig' %}</div>
         </div>
