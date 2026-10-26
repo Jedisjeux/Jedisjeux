@@ -29,6 +29,13 @@
 {% endif %}
 
 <div class="ui segment">
+    {% if data|length > 0 and definition.actionGroups.bulk is defined and definition.getEnabledActions('bulk')|length > 0 %}
+        <div class="sylius-grid-nav__bulk">
+            {% for action in definition.getEnabledActions('bulk') %}
+                {{ sylius_grid_render_bulk_action(grid, action, null) }}
+            {% endfor %}
+        </div>
+    {% endif %}
     {{ pagination.render(data) }}
     {% if data|length > 0 %}
         <table class="ui sortable stackable celled table">
