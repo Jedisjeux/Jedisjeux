@@ -46,6 +46,30 @@ class ProductReviewRepository extends EntityRepository
     }
 
     /**
+     * @return array<int, int> number of accepted ratings indexed by rating value
+     */
+    public function countRatingsByProductId($productId): array
+    {
+        $rows = $this->createQueryBuilder('o')
+            ->select('o.rating AS rating, COUNT(o.id) AS total')
+            ->andWhere('o.reviewSubject = :productId')
+            ->andWhere('o.status = :status')
+            ->setParameter('productId', $productId)
+            ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
+            ->groupBy('o.rating')
+            ->getQuery()
+            ->getArrayResult()
+            ;
+
+        $counts = [];
+        foreach ($rows as $row) {
+            $counts[(int) $row['rating']] = (int) $row['total'];
+        }
+
+        return $counts;
+    }
+
+    /**
      * @param $personId
      * @param int $count
      *
