@@ -64,5 +64,8 @@
     "url": "git+https://github.com/Sylius/Sylius.git"
   },
   "author": "Loïc Frémont",
-  "license": "MIT"
+  "license": "MIT",
+  "resolutions": {
+    "jquery": "3.7.1"
+  }
 }
