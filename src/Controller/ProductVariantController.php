@@ -22,8 +22,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class ProductVariantController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return JsonResponse
      *
      * @throws HttpException
@@ -41,10 +39,7 @@ class ProductVariantController extends ResourceController
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && null !== $productVariantsToUpdate) {
             foreach ($productVariantsToUpdate as $productVariantToUpdate) {
                 if (!is_numeric($productVariantToUpdate['position'])) {
-                    throw new HttpException(
-                        Response::HTTP_NOT_ACCEPTABLE,
-                        sprintf('The product variant position "%s" is invalid.', $productVariantToUpdate['position'])
-                    );
+                    throw new HttpException(Response::HTTP_NOT_ACCEPTABLE, sprintf('The product variant position "%s" is invalid.', $productVariantToUpdate['position']));
                 }
 
                 /** @var ProductVariant $productVariant */

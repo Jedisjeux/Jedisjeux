@@ -30,7 +30,7 @@ class GameLibraryPage extends SymfonyPage
     {
         $gameLibrary = $this->getDocument()->find('css', '#game-library-list');
 
-        $games = $gameLibrary->findAll('css', '.game-library-item');
+        $games = $gameLibrary->findAll('css', '.editorial-shelf__item');
 
         return count($games);
     }

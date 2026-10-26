@@ -185,6 +185,8 @@ EOT
 
         $matchingCountPercentage = $matchingCount * 100 / count($csvData);
         $output->writeLn('Prices matching a product: <info>'.$matchingCountPercentage.'%</info>');
+
+        return 0;
     }
 
     /**

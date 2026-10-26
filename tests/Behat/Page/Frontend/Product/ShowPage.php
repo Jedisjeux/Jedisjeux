@@ -179,7 +179,7 @@ class ShowPage extends SymfonyPage
      */
     public function hasVariantNamed(string $name): bool
     {
-        return null !== $this->getElement('variants')->find('css', sprintf('.image-box .lead:contains("%s")', $name));
+        return null !== $this->getElement('variants')->find('css', sprintf('.editorial-catalog-card h2:contains("%s")', $name));
     }
 
     /**
@@ -229,7 +229,7 @@ class ShowPage extends SymfonyPage
 
         Assert::notNull($products);
 
-        return null !== $products->find('css', sprintf('.lead:contains("%s")', $productName));
+        return null !== $products->find('css', sprintf('.editorial-catalog-card h2:contains("%s")', $productName));
     }
 
     /**
@@ -242,12 +242,12 @@ class ShowPage extends SymfonyPage
             'articles' => '#articles',
             'artists' => '#product-artists',
             'awards' => '#product-awards',
-            'box_content' => '#box-content',
+            'box_content' => '.editorial-game-box-content',
             'designers' => '#product-designers',
             'files' => '#files',
             'game_plays' => '#game-plays',
             'mechanisms' => '#product-mechanisms',
-            'name' => 'h2.title',
+            'name' => '.editorial-game-details h1',
             'publishers' => '#product-publishers',
             'reviews' => '#reviews .comments',
             'themes' => '#product-themes',

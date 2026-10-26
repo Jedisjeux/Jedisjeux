@@ -47,6 +47,8 @@ EOT
 
         $output->writeln('<comment>done!</comment>');
         $output->writeln(sprintf('<info>Article feed has been dumped and located in "%s"</info>', $articleFeedDump->getRootDir().$articleFeedDump->getFileName()));
+
+        return 0;
     }
 
     /**

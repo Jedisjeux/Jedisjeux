@@ -26,7 +26,7 @@
     "fakerphp/faker": "^1.14",
     "friendsofsymfony/ckeditor-bundle": "^2.0",
     "friendsofsymfony/jsrouting-bundle": "^2.2",
-    "friendsofsymfony/oauth-server-bundle": "2.0.x-dev",
+    "friendsofsymfony/oauth-server-bundle": "^2.0@dev",
     "google/apiclient": "^2.0",
     "guzzlehttp/guzzle": "^6.2",
     "incenteev/hashed-asset-bundle": "^1.0",
@@ -71,6 +71,7 @@
   "require-dev": {
     "behat/gherkin": "~4.12.0",
     "behat/mink-selenium2-driver": "~1.6.0",
+    "dbrekelmans/bdi": "^1.4",
     "monofony/test-pack": "^0.6.1"
   },
   "conflict": {

@@ -12,8 +12,8 @@
 namespace App\EventSubscriber;
 
 use App\Emails;
-use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -27,9 +27,6 @@ class SendRegistrationEmailSubscriber implements EventSubscriberInterface
      */
     protected $sender;
 
-    /**
-     * @param SenderInterface $sender
-     */
     public function __construct(SenderInterface $sender)
     {
         $this->sender = $sender;

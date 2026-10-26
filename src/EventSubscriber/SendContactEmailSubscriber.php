@@ -36,9 +36,6 @@ class SendContactEmailSubscriber implements EventSubscriberInterface
 
     /**
      * SendContactEmailSubscriber constructor.
-     *
-     * @param SenderInterface $sender
-     * @param string          $contactEmail
      */
     public function __construct(SenderInterface $sender, string $contactEmail)
     {
@@ -56,9 +53,6 @@ class SendContactEmailSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function onPostCreate(GenericEvent $event)
     {
         /** @var ContactRequest $contactRequest */

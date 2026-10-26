@@ -21,11 +21,6 @@ interface ProductVariantInterface extends BaseProductVariantInterface
      */
     public function getBoxes(): Collection;
 
-    /**
-     * @param ProductBox $box
-     *
-     * @return bool
-     */
     public function hasBox(ProductBox $box): bool;
 
     /**
@@ -38,8 +33,5 @@ interface ProductVariantInterface extends BaseProductVariantInterface
      */
     public function removeBox(ProductBox $box): void;
 
-    /**
-     * @return ProductBox|null
-     */
     public function getEnabledBox(): ?ProductBox;
 }

@@ -22,8 +22,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PersonController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexWithTaxonsAction(Request $request)
@@ -50,8 +48,7 @@ class PersonController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param string  $slug
+     * @param string $slug
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

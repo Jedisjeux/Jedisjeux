@@ -27,8 +27,7 @@ class ProductListController extends ResourceController
     /**
      * TODO handle directly productListItemController.
      *
-     * @param Request $request
-     * @param int     $productId
+     * @param int $productId
      *
      * @return Response
      */
@@ -77,7 +76,6 @@ class ProductListController extends ResourceController
     /**
      * TODO handle directly productListItemController.
      *
-     * @param Request $request
      * @param $productId
      *
      * @return Response

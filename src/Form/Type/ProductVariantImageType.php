@@ -20,10 +20,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ProductVariantImageType extends AbstractImageType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);

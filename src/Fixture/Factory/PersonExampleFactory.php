@@ -44,10 +44,6 @@ class PersonExampleFactory extends AbstractExampleFactory implements ExampleFact
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $personFactory
-     * @param FactoryInterface $personImageFactory
-     */
     public function __construct(
         FactoryInterface $personFactory,
         FactoryInterface $personImageFactory
@@ -81,10 +77,6 @@ class PersonExampleFactory extends AbstractExampleFactory implements ExampleFact
         return $person;
     }
 
-    /**
-     * @param Person $person
-     * @param array  $options
-     */
     private function createImages(Person $person, array $options)
     {
         $first = true;

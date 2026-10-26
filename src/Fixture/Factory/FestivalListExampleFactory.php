@@ -39,8 +39,6 @@ class FestivalListExampleFactory extends AbstractExampleFactory implements Examp
 
     /**
      * RedirectionExampleFactory constructor.
-     *
-     * @param FactoryInterface $festivalListFactory
      */
     public function __construct(FactoryInterface $festivalListFactory)
     {

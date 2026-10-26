@@ -48,6 +48,8 @@ class DownloadAvatarCommand extends ContainerAwareCommand
                 }
             }
         }
+
+        return 0;
     }
 
     /**
@@ -58,19 +60,11 @@ class DownloadAvatarCommand extends ContainerAwareCommand
         return $this->getContainer()->get('app.repository.avatar');
     }
 
-    /**
-     * @param Avatar $avatar
-     */
     public function downloadAvatar(Avatar $avatar)
     {
         file_put_contents($avatar->getAbsolutePath(), file_get_contents($this->getAvatarOriginalPath($avatar)));
     }
 
-    /**
-     * @param Avatar $avatar
-     *
-     * @return string
-     */
     public function getAvatarOriginalPath(Avatar $avatar): string
     {
         return 'http://www.jedisjeux.net/media/cache/resolve/full/'.$avatar->getWebPath();

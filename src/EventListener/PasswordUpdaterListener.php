@@ -23,8 +23,6 @@ use Webmozart\Assert\Assert;
 final class PasswordUpdaterListener extends BasePasswordUpdaterListener
 {
     /**
-     * @param GenericEvent $event
-     *
      * @throws \InvalidArgumentException
      */
     public function customerUpdateEvent(GenericEvent $event): void

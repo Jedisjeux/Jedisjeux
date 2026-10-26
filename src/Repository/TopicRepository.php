@@ -68,13 +68,6 @@ class TopicRepository extends EntityRepository
         parent::applyCriteria($queryBuilder, $criteria);
     }
 
-    /**
-     * @param string              $localeCode
-     * @param bool                $showPrivate
-     * @param TaxonInterface|null $taxon
-     *
-     * @return QueryBuilder
-     */
     public function createFrontendListQueryBuilder(
         string $localeCode,
         bool $showPrivate = false,
@@ -186,10 +179,7 @@ class TopicRepository extends EntityRepository
     /**
      * Create paginator for topics categorized under given taxon.
      *
-     * @param TaxonInterface $taxon
-     * @param array          $criteria
-     * @param array          $sorting
-     * @param bool           $showPrivate
+     * @param bool $showPrivate
      *
      * @return Pagerfanta
      */
@@ -223,8 +213,6 @@ class TopicRepository extends EntityRepository
     /**
      * Count topics categorized under given taxon.
      *
-     * @param TaxonInterface $taxon
-     *
      * @return Pagerfanta
      */
     public function countByTaxon(TaxonInterface $taxon)
@@ -245,8 +233,6 @@ class TopicRepository extends EntityRepository
     }
 
     /**
-     * @param GamePlay $gamePlay
-     *
      * @return Topic|null
      */
     public function findOneByGamePlay(GamePlay $gamePlay)
@@ -261,8 +247,6 @@ class TopicRepository extends EntityRepository
     }
 
     /**
-     * @param Article $article
-     *
      * @return Topic|null
      */
     public function findOneByArticle(Article $article)

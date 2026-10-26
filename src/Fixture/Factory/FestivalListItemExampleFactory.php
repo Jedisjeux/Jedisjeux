@@ -50,11 +50,6 @@ class FestivalListItemExampleFactory extends AbstractExampleFactory implements E
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface    $festivalListItemFactory
-     * @param RepositoryInterface $productRepository
-     * @param RepositoryInterface $festivalListRepository
-     */
     public function __construct(
         FactoryInterface $festivalListItemFactory,
         RepositoryInterface $productRepository,

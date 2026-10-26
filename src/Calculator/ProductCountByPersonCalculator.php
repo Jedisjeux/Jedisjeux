@@ -19,8 +19,6 @@ use App\Entity\Person;
 class ProductCountByPersonCalculator
 {
     /**
-     * @param Person $person
-     *
      * @return int
      */
     public function calculateAsDesigner(Person $person)
@@ -31,8 +29,6 @@ class ProductCountByPersonCalculator
     }
 
     /**
-     * @param Person $person
-     *
      * @return int
      */
     public function calculateAsArtist(Person $person)
@@ -43,8 +39,6 @@ class ProductCountByPersonCalculator
     }
 
     /**
-     * @param Person $person
-     *
      * @return int
      */
     public function calculateAsPublisher(Person $person)

@@ -30,8 +30,6 @@ class CalculateProductCountByTaxonSubscriber implements EventSubscriberInterface
 
     /**
      * CalculateProductCountByTaxonSubscriber constructor.
-     *
-     * @param ProductCountByTaxonUpdater $updater
      */
     public function __construct(ProductCountByTaxonUpdater $updater)
     {
@@ -49,9 +47,6 @@ class CalculateProductCountByTaxonSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function onProductCreate(GenericEvent $event)
     {
         /** @var Product $product */
@@ -68,9 +63,6 @@ class CalculateProductCountByTaxonSubscriber implements EventSubscriberInterface
         }
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function onProductUpdate(GenericEvent $event)
     {
         $this->onProductCreate($event);

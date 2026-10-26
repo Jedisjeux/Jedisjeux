@@ -31,7 +31,7 @@ class IndexPage extends SymfonyPage
      */
     public function countItems(): int
     {
-        $topics = $this->getDocument()->findAll('css', '#topic-list .image-box');
+        $topics = $this->getDocument()->findAll('css', '#topic-list .editorial-topic-card');
 
         return count($topics);
     }
@@ -43,7 +43,7 @@ class IndexPage extends SymfonyPage
     {
         $topicsList = $this->getDocument()->find('css', '#topic-list');
 
-        return $topicsList->find('css', '.row:first-child h3')->getText();
+        return $topicsList->find('css', '.editorial-topic-card h2')->getText();
     }
 
     /**
@@ -53,7 +53,7 @@ class IndexPage extends SymfonyPage
      */
     public function isTopicOnList($title)
     {
-        return null !== $this->getDocument()->find('css', sprintf('#topic-list h3:contains("%s")', $title));
+        return null !== $this->getDocument()->find('css', sprintf('#topic-list .editorial-topic-card h2:contains("%s")', $title));
     }
 
     /**

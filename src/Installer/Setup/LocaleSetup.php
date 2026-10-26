@@ -39,9 +39,7 @@ final class LocaleSetup
     private $locale;
 
     /**
-     * @param RepositoryInterface $localeRepository
-     * @param FactoryInterface    $localeFactory
-     * @param string              $locale
+     * @param string $locale
      */
     public function __construct(RepositoryInterface $localeRepository, FactoryInterface $localeFactory, $locale)
     {

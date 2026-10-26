@@ -54,6 +54,8 @@ class SynchronizePostCountByTopicCommand extends Command
         $output->writeln('Synchronizing post count by topic...');
         $this->recalculate();
         $output->writeln('<info>Post count by topic synchronized successfully.</info>');
+
+        return 0;
     }
 
     private function recalculate(): void

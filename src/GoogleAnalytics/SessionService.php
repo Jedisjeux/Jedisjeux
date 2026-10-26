@@ -29,8 +29,7 @@ class SessionService
     /**
      * SessionCountService constructor.
      *
-     * @param \Google_Client $client
-     * @param string         $profileId
+     * @param string $profileId
      */
     public function __construct(\Google_Client $client, $profileId)
     {
@@ -39,9 +38,6 @@ class SessionService
     }
 
     /**
-     * @param \DateTime $startAt
-     * @param \DateTime $endAt
-     *
      * @return array
      */
     public function countSessionsPerDay(\DateTime $startAt, \DateTime $endAt)
@@ -70,9 +66,6 @@ class SessionService
     }
 
     /**
-     * @param \DateTime $startAt
-     * @param \DateTime $endAt
-     *
      * @return array
      */
     public function countSessionsPerMonth(\DateTime $startAt, \DateTime $endAt)

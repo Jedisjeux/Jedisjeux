@@ -30,8 +30,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class FestivalListItem implements ResourceInterface
 {
-    use IdentifiableTrait,
-        TimestampableTrait;
+    use IdentifiableTrait;
+    use TimestampableTrait;
 
     /**
      * @var FestivalList
@@ -47,33 +47,21 @@ class FestivalListItem implements ResourceInterface
      */
     protected $product;
 
-    /**
-     * @return FestivalList|null
-     */
     public function getList(): ?FestivalList
     {
         return $this->list;
     }
 
-    /**
-     * @param FestivalList|null $list
-     */
     public function setList(?FestivalList $list): void
     {
         $this->list = $list;
     }
 
-    /**
-     * @return ProductInterface|null
-     */
     public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
-    /**
-     * @param ProductInterface|null $product
-     */
     public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;

@@ -413,7 +413,7 @@ services:
         class: App\Factory\BggProductFactory
         arguments:
             - 'App\Entity\BggProduct'
-            - 'https://www.boardgamegeek.com/xmlapi/boardgame'
+            - 'https://boardgamegeek.com/xmlapi/boardgame'
 
     App\Factory\ProductBoxFactory:
         decorates: "app.factory.product_box"

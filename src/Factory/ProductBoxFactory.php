@@ -28,10 +28,6 @@ class ProductBoxFactory implements FactoryInterface
      */
     private $customerContext;
 
-    /**
-     * @param FactoryInterface         $factory
-     * @param CustomerContextInterface $customerContext
-     */
     public function __construct(FactoryInterface $factory, CustomerContextInterface $customerContext)
     {
         $this->factory = $factory;
@@ -51,8 +47,6 @@ class ProductBoxFactory implements FactoryInterface
     }
 
     /**
-     * @param ProductInterface $product
-     *
      * @return ProductBox
      */
     public function createForProduct(ProductInterface $product)

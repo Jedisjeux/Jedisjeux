@@ -74,6 +74,8 @@ class ProductFileSpec extends ObjectBehavior
 
     function its_file_is_mutable(\SplFileInfo $file): void
     {
+        $file->beConstructedWith([__FILE__]);
+
         $this->setFile($file);
 
         $this->getFile()->shouldReturn($file);

@@ -50,6 +50,8 @@ EOT
         $this->calculateProductCountByPersons();
 
         $output->writeln(sprintf('<info>%s</info>', 'Product count by taxon have been successfully updated.'));
+
+        return 0;
     }
 
     protected function calculateProductCountByPersons()

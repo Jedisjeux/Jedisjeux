@@ -53,65 +53,41 @@ class DealerContact implements ResourceInterface
      */
     protected $dealer;
 
-    /**
-     * @return null|string
-     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    /**
-     * @param null|string $email
-     */
     public function setEmail(?string $email): void
     {
         $this->email = $email;
     }
 
-    /**
-     * @return null|string
-     */
     public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
-    /**
-     * @param null|string $firstName
-     */
     public function setFirstName(?string $firstName): void
     {
         $this->firstName = $firstName;
     }
 
-    /**
-     * @return null|string
-     */
     public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
-    /**
-     * @param null|string $lastName
-     */
     public function setLastName(?string $lastName): void
     {
         $this->lastName = $lastName;
     }
 
-    /**
-     * @return Dealer|null
-     */
     public function getDealer(): ?Dealer
     {
         return $this->dealer;
     }
 
-    /**
-     * @param Dealer|null $dealer
-     */
     public function setDealer(?Dealer $dealer): void
     {
         $this->dealer = $dealer;

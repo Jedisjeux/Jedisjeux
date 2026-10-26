@@ -50,6 +50,8 @@ EOT
         $this->calculateImageCountByGamePlays();
 
         $output->writeln(sprintf('<info>%s</info>', 'Image count by game play have been successfully updated.'));
+
+        return 0;
     }
 
     protected function calculateImageCountByGamePlays()

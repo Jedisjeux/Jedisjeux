@@ -33,6 +33,6 @@ class IndexPage extends SymfonyPage
      */
     public function isPersonOnList($fullName)
     {
-        return null !== $this->getDocument()->find('css', sprintf('#people-list .lead:contains("%s")', $fullName));
+        return null !== $this->getDocument()->find('css', sprintf('#people-list .editorial-person-card h2:contains("%s")', $fullName));
     }
 }

@@ -51,10 +51,6 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
 
     /**
      * AppUserExampleFactory constructor.
-     *
-     * @param FactoryInterface $appUserFactory
-     * @param FactoryInterface $customerFactory
-     * @param FactoryInterface $avatarFactory
      */
     public function __construct(
         FactoryInterface $appUserFactory,
@@ -105,10 +101,6 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
         return $user;
     }
 
-    /**
-     * @param Customer $customer
-     * @param array    $options
-     */
     private function createAvatar(Customer $customer, array $options)
     {
         $imagePath = $options['avatar'];

@@ -47,11 +47,6 @@ class ProductFileExampleFixture extends AbstractExampleFactory
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface    $productFileFactory
-     * @param RepositoryInterface $productRepository
-     * @param RepositoryInterface $customerRepository
-     */
     public function __construct(
         FactoryInterface $productFileFactory,
         RepositoryInterface $productRepository,

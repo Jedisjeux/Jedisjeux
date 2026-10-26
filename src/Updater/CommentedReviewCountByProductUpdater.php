@@ -21,17 +21,11 @@ class CommentedReviewCountByProductUpdater
      */
     private $calculator;
 
-    /**
-     * @param CommentedReviewCountByProductCalculator $calculator
-     */
     public function __construct(CommentedReviewCountByProductCalculator $calculator)
     {
         $this->calculator = $calculator;
     }
 
-    /**
-     * @param Product $product
-     */
     public function update(Product $product)
     {
         $ratingCount = $this->calculator->calculate($product);

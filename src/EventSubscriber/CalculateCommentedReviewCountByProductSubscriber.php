@@ -24,9 +24,6 @@ class CalculateCommentedReviewCountByProductSubscriber implements EventSubscribe
      */
     protected $updater;
 
-    /**
-     * @param CommentedReviewCountByProductUpdater $updater
-     */
     public function __construct(CommentedReviewCountByProductUpdater $updater)
     {
         $this->updater = $updater;
@@ -43,25 +40,16 @@ class CalculateCommentedReviewCountByProductSubscriber implements EventSubscribe
         ];
     }
 
-    /**
-     * @param LifecycleEventArgs $args
-     */
     public function prePersist(LifecycleEventArgs $args)
     {
         $this->updateReviewCount($args);
     }
 
-    /**
-     * @param LifecycleEventArgs $args
-     */
     public function preUpdate(LifecycleEventArgs $args)
     {
         $this->updateReviewCount($args);
     }
 
-    /**
-     * @param LifecycleEventArgs $args
-     */
     public function updateReviewCount(LifecycleEventArgs $args)
     {
         $product = $args->getObject();

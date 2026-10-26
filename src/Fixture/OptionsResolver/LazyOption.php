@@ -39,8 +39,6 @@ use Webmozart\Assert\Assert;
 final class LazyOption
 {
     /**
-     * @param RepositoryInterface $repository
-     *
      * @return \Closure
      */
     public static function randomOne(RepositoryInterface $repository)
@@ -79,8 +77,7 @@ final class LazyOption
     }
 
     /**
-     * @param RepositoryInterface $repository
-     * @param int                 $chanceOfRandomOne
+     * @param int $chanceOfRandomOne
      *
      * @return \Closure
      */
@@ -102,9 +99,6 @@ final class LazyOption
     }
 
     /**
-     * @param string $directory
-     * @param int    $chanceOfRandomOne
-     *
      * @return \Closure
      */
     public static function randomOneImageOrNull(string $directory, int $chanceOfRandomOne)
@@ -130,8 +124,7 @@ final class LazyOption
     }
 
     /**
-     * @param RepositoryInterface $repository
-     * @param int                 $amount
+     * @param int $amount
      *
      * @return \Closure
      */
@@ -185,8 +178,6 @@ final class LazyOption
     }
 
     /**
-     * @param RepositoryInterface $repository
-     *
      * @return \Closure
      */
     public static function all(RepositoryInterface $repository)
@@ -197,8 +188,7 @@ final class LazyOption
     }
 
     /**
-     * @param RepositoryInterface $repository
-     * @param string              $field
+     * @param string $field
      *
      * @return \Closure
      */
@@ -225,8 +215,7 @@ final class LazyOption
     }
 
     /**
-     * @param RepositoryInterface $repository
-     * @param string              $field
+     * @param string $field
      *
      * @return \Closure
      */

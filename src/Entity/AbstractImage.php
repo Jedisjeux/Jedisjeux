@@ -25,8 +25,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class AbstractImage implements ResourceInterface
 {
-    use IdentifiableTrait,
-        TimestampableTrait;
+    use IdentifiableTrait;
+    use TimestampableTrait;
 
     /**
      * @var string|null
@@ -43,9 +43,6 @@ abstract class AbstractImage implements ResourceInterface
      */
     private $file;
 
-    /**
-     * @return string|null
-     */
     public function getPath(): ?string
     {
         return $this->path;
@@ -59,17 +56,12 @@ abstract class AbstractImage implements ResourceInterface
         $this->path = $path;
     }
 
-    /**
-     * @return UploadedFile|null
-     */
     public function getFile(): ?UploadedFile
     {
         return $this->file;
     }
 
     /**
-     * @param UploadedFile|null $file
-     *
      * @return $this
      */
     public function setFile(?UploadedFile $file): void
@@ -86,7 +78,7 @@ abstract class AbstractImage implements ResourceInterface
     /**
      * return the public url to the path.
      *
-     * @return null|string
+     * @return string|null
      */
     public function getWebPath()
     {
@@ -105,8 +97,6 @@ abstract class AbstractImage implements ResourceInterface
 
     /**
      * The path to the  path files.
-     *
-     * @return string
      */
     protected function getUploadDir(): string
     {

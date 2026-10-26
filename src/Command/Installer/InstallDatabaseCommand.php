@@ -40,5 +40,7 @@ EOT
         $output->writeln('');
 
         $this->commandExecutor->runCommand('app:install:sample-data', [], $output);
+
+        return 0;
     }
 }

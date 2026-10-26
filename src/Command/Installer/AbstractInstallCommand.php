@@ -59,11 +59,6 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         return $this->get('kernel')->isDebug();
     }
 
-    /**
-     * @param array           $headers
-     * @param array           $rows
-     * @param OutputInterface $output
-     */
     protected function renderTable(array $headers, array $rows, OutputInterface $output)
     {
         $table = new Table($output);
@@ -76,8 +71,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param OutputInterface $output
-     * @param int             $length
+     * @param int $length
      *
      * @return ProgressBar
      */
@@ -108,11 +102,6 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         };
     }
 
-    /**
-     * @param array           $commands
-     * @param OutputInterface $output
-     * @param bool            $displayProgress
-     */
     protected function runCommands(array $commands, OutputInterface $output, bool $displayProgress = true): void
     {
         $progress = $this->createProgressBar($displayProgress ? $output : new NullOutput(), count($commands));
@@ -139,8 +128,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param string          $directory
-     * @param OutputInterface $output
+     * @param string $directory
      */
     protected function ensureDirectoryExistsAndIsWritable($directory, OutputInterface $output)
     {

@@ -62,10 +62,7 @@ class HomePage extends SymfonyPage
             function (NodeElement $element) {
                 return $element->getText();
             },
-            array_merge(
-                $this->getElement('latest_articles')->findAll('css', '.lead'),
-                $this->getElement('latest_articles')->findAll('css', 'h6')
-            )
+            $this->getElement('latest_articles')->findAll('css', '.editorial-article-card h3')
         );
     }
 

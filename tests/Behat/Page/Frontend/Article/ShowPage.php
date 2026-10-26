@@ -69,7 +69,7 @@ class ShowPage extends SymfonyPage
      */
     public function isArticleOnList($title)
     {
-        return null !== $this->getDocument()->find('css', sprintf('#latest-articles h6:contains("%s")', $title));
+        return null !== $this->getDocument()->find('css', sprintf('#latest-articles .editorial-mini-articles strong:contains("%s")', $title));
     }
 
     /**
@@ -78,7 +78,7 @@ class ShowPage extends SymfonyPage
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'title' => 'h1.page-title',
+            'title' => '.editorial-article-header h1',
         ]);
     }
 }

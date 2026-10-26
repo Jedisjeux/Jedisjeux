@@ -42,8 +42,6 @@ class FestivalListItemFactory implements FactoryInterface
     }
 
     /**
-     * @param FestivalList $list
-     *
      * @return FestivalListItem
      */
     public function createForList(FestivalList $list)

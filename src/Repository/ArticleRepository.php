@@ -25,9 +25,6 @@ class ArticleRepository extends EntityRepository
 {
     /**
      * @param $productId
-     * @param int $count
-     *
-     * @return array
      */
     public function findLatestByProductId($productId, int $count): array
     {
@@ -47,7 +44,7 @@ class ArticleRepository extends EntityRepository
      * @param string $slug
      * @param bool   $showUnpublished
      *
-     * @return null|Article
+     * @return Article|null
      */
     public function findOneBySlug($slug, $showUnpublished = true)
     {
@@ -81,10 +78,7 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
-     * @param string   $localeCode
-     * @param null|int $productId
-     *
-     * @return QueryBuilder
+     * @param int|null $productId
      */
     public function createListQueryBuilder(string $localeCode, $productId): QueryBuilder
     {
@@ -106,14 +100,6 @@ class ArticleRepository extends EntityRepository
         return $queryBuilder;
     }
 
-    /**
-     * @param string      $localeCode
-     * @param string|null $taxonSlug
-     * @param string|null $productSlug
-     * @param array       $criteria
-     *
-     * @return QueryBuilder
-     */
     public function createFrontendListQueryBuilder(string $localeCode, string $taxonSlug = null, string $productSlug = null, array $criteria = []): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');
@@ -190,8 +176,6 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
-     * @param array|null  $criteria
-     * @param array|null  $sorting
      * @param string|null $status
      *
      * @return Pagerfanta
@@ -249,10 +233,7 @@ class ArticleRepository extends EntityRepository
     /**
      * Create paginator for products categorized under given taxon.
      *
-     * @param TaxonInterface $taxon
-     * @param array|null     $criteria
-     * @param array|null     $sorting
-     * @param string         $status
+     * @param string $status
      *
      * @return Pagerfanta
      */

@@ -21,8 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 class NotificationController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return RedirectResponse
      */
     public function readAction(Request $request)

@@ -13,8 +13,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
-use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Customer\Model\Customer as BaseCustomer;
+use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -52,9 +52,6 @@ class Customer extends BaseCustomer implements CustomerInterface, ReviewerInterf
      */
     private $code;
 
-    /**
-     * @return Avatar|null
-     */
     public function getAvatar(): ?Avatar
     {
         return $this->avatar;
@@ -68,33 +65,21 @@ class Customer extends BaseCustomer implements CustomerInterface, ReviewerInterf
         $this->avatar = $avatar;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * @param string|null $code
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * @return UserInterface|null
-     */
     public function getUser(): ?UserInterface
     {
         return $this->user;
     }
 
-    /**
-     * @param UserInterface|null $user
-     */
     public function setUser(?UserInterface $user): void
     {
         if ($this->user === $user) {
@@ -115,9 +100,6 @@ class Customer extends BaseCustomer implements CustomerInterface, ReviewerInterf
         }
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         if (null === $user = $this->user) {

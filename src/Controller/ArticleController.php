@@ -29,8 +29,6 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 class ArticleController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showWithTaxonsAction(Request $request)
@@ -58,8 +56,6 @@ class ArticleController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexWithTaxonsAction(Request $request)
@@ -84,8 +80,7 @@ class ArticleController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param string  $slug
+     * @param string $slug
      *
      * @return Response
      */
@@ -117,8 +112,6 @@ class ArticleController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function showStatusAction(Request $request)
@@ -147,8 +140,6 @@ class ArticleController extends ResourceController
     }
 
     /**
-     * @param Article $article
-     *
      * @return \SM\StateMachine\StateMachineInterface
      *
      * @throws \SM\SMException

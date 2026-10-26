@@ -12,11 +12,11 @@
 namespace App\Controller;
 
 use App\Entity\Taxon;
+use App\Repository\TaxonRepository;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use App\Repository\TaxonRepository;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Resource\ResourceActions;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -26,8 +26,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class TopicController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function indexWithTaxonsAction(Request $request)
@@ -56,8 +54,7 @@ class TopicController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param string  $slug
+     * @param string $slug
      *
      * @return Response
      */
@@ -96,8 +93,6 @@ class TopicController extends ResourceController
     }
 
     /**
-     * @param Taxon $taxon
-     *
      * @throws AccessDeniedException
      */
     protected function taxonIsGrantedOr403(Taxon $taxon)

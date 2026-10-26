@@ -12,7 +12,6 @@
 namespace App\Updater;
 
 use App\Calculator\ReviewCountByProductCalculator;
-use App\Entity\Product;
 use App\Entity\ProductInterface;
 
 class ReviewCountByProductUpdater
@@ -22,17 +21,11 @@ class ReviewCountByProductUpdater
      */
     private $calculator;
 
-    /**
-     * @param ReviewCountByProductCalculator $calculator
-     */
     public function __construct(ReviewCountByProductCalculator $calculator)
     {
         $this->calculator = $calculator;
     }
 
-    /**
-     * @param ProductInterface $product
-     */
     public function update(ProductInterface $product)
     {
         $ratingCount = $this->calculator->calculate($product);

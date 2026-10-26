@@ -25,8 +25,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ProductController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function indexWithTaxonsAction(Request $request)
@@ -51,8 +49,7 @@ class ProductController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param string  $slug
+     * @param string $slug
      *
      * @return Response
      */
@@ -84,8 +81,7 @@ class ProductController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param string  $slug
+     * @param string $slug
      *
      * @return Response
      */
@@ -117,8 +113,6 @@ class ProductController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function showStatusAction(Request $request)
@@ -147,8 +141,6 @@ class ProductController extends ResourceController
     }
 
     /**
-     * @param ProductInterface $product
-     *
      * @return \SM\StateMachine\StateMachineInterface
      */
     protected function getResourceStateMachine(ProductInterface $product)

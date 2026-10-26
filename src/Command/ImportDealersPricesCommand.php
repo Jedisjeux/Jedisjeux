@@ -16,9 +16,9 @@ use App\Entity\Dealer;
 use App\Repository\DealerPriceRepository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Exception\RuntimeException;
 
 class ImportDealersPricesCommand extends Command
 {
@@ -47,10 +47,6 @@ class ImportDealersPricesCommand extends Command
      */
     private $isErrored = false;
 
-    /**
-     * @param RepositoryInterface $dealerRepository
-     * @param RepositoryInterface $dealerPriceRepository
-     */
     public function __construct(RepositoryInterface $dealerRepository, RepositoryInterface $dealerPriceRepository)
     {
         $this->dealerRepository = $dealerRepository;
@@ -129,5 +125,7 @@ EOT
                 $this->dealerPriceRepository->deleteByDealer($dealer);
             }
         }
+
+        return 0;
     }
 }

@@ -48,11 +48,6 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
      */
     private $optionsResolver;
 
-    /**
-     * @param ReviewFactoryInterface $productReviewFactory
-     * @param RepositoryInterface    $productRepository
-     * @param RepositoryInterface    $customerRepository
-     */
     public function __construct(
         ReviewFactoryInterface $productReviewFactory,
         RepositoryInterface $productRepository,

@@ -34,9 +34,6 @@ class Bbcode2Html
 
     /**
      * Bbcode2Html constructor.
-     *
-     * @param Connection       $databaseConnection
-     * @param EntityRepository $productVariantRepository
      */
     public function __construct(Connection $databaseConnection, EntityRepository $productVariantRepository)
     {

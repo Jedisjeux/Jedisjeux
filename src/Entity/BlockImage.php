@@ -35,33 +35,21 @@ class BlockImage extends AbstractImage
      */
     protected $linkUrl;
 
-    /**
-     * @return string|null
-     */
     public function getLabel(): ?string
     {
         return $this->label;
     }
 
-    /**
-     * @param string|null $label
-     */
     public function setLabel(?string $label): void
     {
         $this->label = $label;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLinkUrl(): ?string
     {
         return $this->linkUrl;
     }
 
-    /**
-     * @param string|null $linkUrl
-     */
     public function setLinkUrl(?string $linkUrl): void
     {
         $this->linkUrl = $linkUrl;

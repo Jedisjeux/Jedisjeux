@@ -26,8 +26,6 @@ class TopicCountByTaxonUpdater
 
     /**
      * TopicCountByTaxonSubscriber constructor.
-     *
-     * @param TopicCountByTaxonCalculator $calculator
      */
     public function __construct(TopicCountByTaxonCalculator $calculator)
     {

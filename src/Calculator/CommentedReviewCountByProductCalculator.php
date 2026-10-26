@@ -15,11 +15,6 @@ use App\Entity\Product;
 
 class CommentedReviewCountByProductCalculator
 {
-    /**
-     * @param Product $product
-     *
-     * @return int
-     */
     public function calculate(Product $product): int
     {
         return $product->getCommentedReviews()->count();

@@ -27,8 +27,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class TaxonController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function indexByCodeAction(Request $request)
@@ -54,9 +52,7 @@ class TaxonController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     *
-     * @return null|TaxonInterface
+     * @return TaxonInterface|null
      */
     protected function getCurrent(Request $request)
     {

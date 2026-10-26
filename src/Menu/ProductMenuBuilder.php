@@ -24,17 +24,12 @@ final class ProductMenuBuilder
      */
     private $factory;
 
-    /**
-     * @param FactoryInterface $factory
-     */
     public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;
     }
 
     /**
-     * @param array $options
-     *
      * @return ItemInterface
      */
     public function createMenu(array $options)

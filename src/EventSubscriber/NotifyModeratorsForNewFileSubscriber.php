@@ -27,9 +27,6 @@ class NotifyModeratorsForNewFileSubscriber implements EventSubscriberInterface
      */
     private $productFileNotificationManager;
 
-    /**
-     * @param ProductFileNotificationManager $productFileNotificationManager
-     */
     public function __construct(ProductFileNotificationManager $productFileNotificationManager)
     {
         $this->productFileNotificationManager = $productFileNotificationManager;

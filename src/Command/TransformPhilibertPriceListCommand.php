@@ -55,6 +55,8 @@ EOT
         $this->removeTmpFile();
         $this->transformData($input);
         $output->writeln('<info>Price list transformed successfully.</info>');
+
+        return 0;
     }
 
     private function removeTmpFile()
@@ -62,9 +64,6 @@ EOT
         $this->fileSystem->remove(static::TMP_FILENAME);
     }
 
-    /**
-     * @param InputInterface $input
-     */
     private function transformData(InputInterface $input)
     {
         $filename = $input->getArgument('filename');

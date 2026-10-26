@@ -57,8 +57,6 @@ class PostController extends ResourceController
     }
 
     /**
-     * @param Topic $topic
-     *
      * @throws AccessDeniedException
      */
     protected function topicIsGrantedOr403(Topic $topic)

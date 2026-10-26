@@ -27,9 +27,6 @@ class NotifyModeratorsForNewBoxSubscriber implements EventSubscriberInterface
      */
     private $productBoxNotificationManager;
 
-    /**
-     * @param ProductBoxNotificationManager $productBoxNotificationManager
-     */
     public function __construct(ProductBoxNotificationManager $productBoxNotificationManager)
     {
         $this->productBoxNotificationManager = $productBoxNotificationManager;

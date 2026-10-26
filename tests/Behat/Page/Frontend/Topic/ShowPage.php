@@ -22,7 +22,7 @@ class ShowPage extends PostPage\IndexPage
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'title' => 'h1.page-title',
+            'title' => '.editorial-thread-heading h1',
         ]);
     }
 }

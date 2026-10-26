@@ -22,9 +22,6 @@ class GamePlayRepository extends EntityRepository
 {
     /**
      * @param $productId
-     * @param int $count
-     *
-     * @return array
      */
     public function findLatestByProductId($productId, int $count): array
     {
@@ -96,7 +93,6 @@ class GamePlayRepository extends EntityRepository
 
     /**
      * @param string $locale
-     * @param array  $criteria
      *
      * @return QueryBuilder
      */
@@ -141,10 +137,6 @@ class GamePlayRepository extends EntityRepository
         return $queryBuilder;
     }
 
-    /**
-     * @param QueryBuilder $queryBuilder
-     * @param array        $criteria
-     */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = []): void
     {
         if (array_key_exists('hasTopic', $criteria)) {

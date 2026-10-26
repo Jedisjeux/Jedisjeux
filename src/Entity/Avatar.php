@@ -23,8 +23,6 @@ class Avatar extends AbstractImage
 {
     /**
      * The path to the  path files.
-     *
-     * @return string
      */
     protected function getUploadDir(): string
     {

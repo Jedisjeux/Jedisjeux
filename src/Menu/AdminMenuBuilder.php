@@ -30,10 +30,6 @@ final class AdminMenuBuilder
      */
     private $authorizationChecker;
 
-    /**
-     * @param FactoryInterface              $factory
-     * @param AuthorizationCheckerInterface $authorizationChecker
-     */
     public function __construct(FactoryInterface $factory, AuthorizationCheckerInterface $authorizationChecker)
     {
         $this->factory = $factory;
@@ -156,8 +152,6 @@ final class AdminMenuBuilder
     }
 
     /**
-     * @param ItemInterface $menu
-     *
      * @return ItemInterface
      */
     private function addContentSubMenu(ItemInterface $menu)
@@ -180,8 +174,6 @@ final class AdminMenuBuilder
     }
 
     /**
-     * @param ItemInterface $menu
-     *
      * @return ItemInterface
      */
     private function addContactSubMenu(ItemInterface $menu)
@@ -199,8 +191,6 @@ final class AdminMenuBuilder
     }
 
     /**
-     * @param ItemInterface $menu
-     *
      * @return ItemInterface
      */
     private function addErrorsSubMenu(ItemInterface $menu)
@@ -218,8 +208,6 @@ final class AdminMenuBuilder
     }
 
     /**
-     * @param ItemInterface $menu
-     *
      * @return ItemInterface
      */
     private function addConfigurationSubMenu(ItemInterface $menu)

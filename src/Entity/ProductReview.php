@@ -40,17 +40,11 @@ class ProductReview extends Review
         $this->code = uniqid('product_review_');
     }
 
-    /**
-     * @return string|null
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * @param string|null $code
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;

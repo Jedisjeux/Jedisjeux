@@ -25,9 +25,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
      */
     private $doctrineRegistry;
 
-    /**
-     * @param Registry $doctrineRegistry
-     */
     public function __construct(Registry $doctrineRegistry)
     {
         $this->doctrineRegistry = $doctrineRegistry;
@@ -82,10 +79,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     }
 
     /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     * @param QuestionHelper  $questionHelper
-     *
      * @return array
      */
     private function getRequiredCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper)
@@ -98,10 +91,6 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     }
 
     /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     * @param QuestionHelper  $questionHelper
-     *
      * @return array
      */
     private function setupDatabase(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper)

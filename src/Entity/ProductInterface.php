@@ -21,9 +21,6 @@ interface ProductInterface extends BaseProductInterface, ReviewableInterface
      */
     public function getFirstVariant(): ?ProductVariantInterface;
 
-    /**
-     * @param ProductVariantInterface $variant
-     */
     public function setFirstVariant(ProductVariantInterface $variant): void;
 
     public function getReviewCount(): int;

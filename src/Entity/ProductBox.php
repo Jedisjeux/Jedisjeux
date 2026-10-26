@@ -24,9 +24,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ProductBox implements ResourceInterface
 {
-    use IdentifiableTrait,
-        TimestampableTrait,
-        ToggleableTrait;
+    use IdentifiableTrait;
+    use TimestampableTrait;
+    use ToggleableTrait;
 
     const RATIO = 0.645;
 
@@ -93,65 +93,41 @@ class ProductBox implements ResourceInterface
         $this->disable();
     }
 
-    /**
-     * @return string
-     */
     public function getStatus(): string
     {
         return $this->status;
     }
 
-    /**
-     * @param string $status
-     */
     public function setStatus(string $status): void
     {
         $this->status = $status;
     }
 
-    /**
-     * @return ProductBoxImage|null
-     */
     public function getImage(): ?ProductBoxImage
     {
         return $this->image;
     }
 
-    /**
-     * @param ProductBoxImage|null $image
-     */
     public function setImage(?ProductBoxImage $image): void
     {
         $this->image = $image;
     }
 
-    /**
-     * @return int|null
-     */
     public function getHeight(): ?int
     {
         return $this->height;
     }
 
-    /**
-     * @param int|null $height
-     */
     public function setHeight(?int $height): void
     {
         $this->height = $height;
     }
 
-    /**
-     * @return int|null
-     */
     public function getRealHeight(): ?int
     {
         return $this->realHeight;
     }
 
-    /**
-     * @param int|null $realHeight
-     */
     public function setRealHeight(?int $realHeight): void
     {
         $this->realHeight = $realHeight;
@@ -164,17 +140,11 @@ class ProductBox implements ResourceInterface
         }
     }
 
-    /**
-     * @return null|ProductInterface
-     */
     public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
-    /**
-     * @param null|ProductInterface $product
-     */
     public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
@@ -188,33 +158,21 @@ class ProductBox implements ResourceInterface
         $this->setProductVariant($product->getFirstVariant());
     }
 
-    /**
-     * @return ProductVariantInterface|null
-     */
     public function getProductVariant(): ?ProductVariantInterface
     {
         return $this->productVariant;
     }
 
-    /**
-     * @param ProductVariantInterface|null $productVariant
-     */
     public function setProductVariant(?ProductVariantInterface $productVariant): void
     {
         $this->productVariant = $productVariant;
     }
 
-    /**
-     * @return CustomerInterface|null
-     */
     public function getAuthor(): ?CustomerInterface
     {
         return $this->author;
     }
 
-    /**
-     * @param CustomerInterface|null $author
-     */
     public function setAuthor(?CustomerInterface $author): void
     {
         $this->author = $author;

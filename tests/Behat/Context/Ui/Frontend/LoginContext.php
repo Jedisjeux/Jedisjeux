@@ -222,7 +222,8 @@ final class LoginContext implements Context
      */
     public function iShouldBeNotifiedAboutDisabledAccount()
     {
-        Assert::true($this->loginPage->hasValidationErrorWith('Account is disabled.'));
+        // Symfony hides account status errors behind bad credentials to prevent user enumeration
+        Assert::true($this->loginPage->hasValidationErrorWith('Invalid credentials.'));
     }
 
     /**
