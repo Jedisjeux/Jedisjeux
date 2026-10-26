@@ -21986,7 +21986,7 @@ body {
   display: flex;
   align-items: center;
   color: #123d53;
-  background: linear-gradient(90deg, rgba(247, 249, 242, 0.96) 0%, rgba(247, 249, 242, 0.82) 36%, rgba(247, 249, 242, 0.06) 74%), url("../images/shop-banner-2.jpg") center 48%/cover no-repeat;
+  background: linear-gradient(90deg, rgba(247, 249, 242, 0.96) 0%, rgba(247, 249, 242, 0.82) 36%, rgba(247, 249, 242, 0.06) 74%), url("../images/home-hero.jpg") center 48%/cover no-repeat;
   border-bottom: 1px solid rgba(18, 61, 83, 0.1);
 }
 
