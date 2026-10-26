@@ -1,27 +1,48 @@
+{% from 'macro/icon.html.twig' import icon %}
 {% import 'macro/image.html.twig' as images %}
-{% from 'macro/rating.html.twig' import rating %}
 
-{% set imagePath = product_review.reviewSubject.mainImage is not null ? product_review.reviewSubject.mainImage.webPath : '/assets/frontend/images/placeholder.png'  %}
-{% set productPath = path('sylius_frontend_product_show', { 'slug': product_review.reviewSubject.slug }) %}
+{% set show_product = show_product ?? true %}
+{% set product = product_review.reviewSubject %}
+{% set productPath = path('sylius_frontend_product_show', { 'slug': product.slug }) %}
+{% set avatarPath = product_review.author.avatar is not null ? product_review.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png' %}
 
-<!-- comment start -->
-<div class="comment clearfix">
-    <div class="comment-avatar">
-        <a href="{{ productPath }}">{{ images.render(imagePath, 'small_width_fixed', product_review.reviewSubject.name) }}</a>
-    </div>
-    <header>
-        <h3><a href="{{ productPath }}">{{ product_review.reviewSubject }}</a></h3>
-        <h4>{{ product_review.title }}</h4>
-        <div class="comment-meta">
-            {{ rating(product_review.rating) }} |
-            {{ product_review.createdAt|localizeddate('medium', 'none') }} |
-            {{ product_review.author }}
-        </div>
-    </header>
-    <div class="comment-content">
-        <div class="comment-body clearfix">
-            {{ product_review.comment|raw }}
-        </div>
-    </div>
-</div>
-<!-- comment end -->
+<article class="editorial-review-card" {% if not show_product %}itemprop="review" {% endif %}itemscope itemtype="https://schema.org/Review">
+    {% if show_product %}
+        <header class="editorial-review-card__game" itemprop="itemReviewed" itemscope itemtype="https://schema.org/Game">
+            <a class="editorial-review-card__cover" href="{{ productPath }}" tabindex="-1" aria-hidden="true">
+                {% if product.mainImage is not null %}
+                    {{ images.render(product.mainImage.webPath, 'small_width_fixed', product.name) }}
+                {% else %}
+                    <i class="fa fa-cubes"></i>
+                {% endif %}
+            </a>
+            <a class="editorial-review-card__name" href="{{ productPath }}" itemprop="name">{{ product.name }}</a>
+    {% else %}
+        <header class="editorial-review-card__game">
+            <span class="editorial-review-card__cover editorial-review-card__cover--avatar">
+                {{ images.render(avatarPath, 'thumbnail', product_review.author, 'rounded-circle') }}
+            </span>
+            <span class="editorial-review-card__name" itemprop="author">{{ product_review.author }}</span>
+    {% endif %}
+            <span class="editorial-review-card__score" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
+                {{ icon('star') }}<strong itemprop="ratingValue">{{ product_review.rating }}</strong><small>/10</small>
+                <meta itemprop="bestRating" content="10">
+                <meta itemprop="worstRating" content="1">
+            </span>
+        </header>
+
+    {% if product_review.title is not empty %}
+        <h3 itemprop="name">{{ product_review.title }}</h3>
+    {% endif %}
+    {% if product_review.comment is not empty %}
+        <blockquote itemprop="reviewBody">{{ product_review.comment|raw }}</blockquote>
+    {% endif %}
+
+    <footer class="editorial-review-card__meta">
+        {% if show_product %}
+            {{ images.render(avatarPath, 'thumbnail', product_review.author, 'rounded-circle') }}
+            <span itemprop="author">{{ product_review.author }}</span>
+        {% endif %}
+        <time datetime="{{ product_review.createdAt|date('Y-m-d') }}" itemprop="datePublished">{{ product_review.createdAt|localizeddate('medium', 'none') }}</time>
+    </footer>
+</article>

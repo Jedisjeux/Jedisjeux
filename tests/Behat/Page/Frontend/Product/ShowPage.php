@@ -123,7 +123,7 @@ class ShowPage extends SymfonyPage
 
     public function countReviews(): int
     {
-        return count($this->getElement('reviews')->findAll('css', '.comment'));
+        return count($this->getElement('reviews')->findAll('css', '.editorial-review-card'));
     }
 
     public function countArticles(): int
@@ -155,7 +155,7 @@ class ShowPage extends SymfonyPage
      */
     public function hasReviewTitled(string $title): bool
     {
-        return null !== $this->getElement('reviews')->find('css', sprintf('.comment:contains("%s")', $title));
+        return null !== $this->getElement('reviews')->find('css', sprintf('.editorial-review-card:contains("%s")', $title));
     }
 
     /**
@@ -249,7 +249,7 @@ class ShowPage extends SymfonyPage
             'mechanisms' => '#product-mechanisms',
             'name' => '.editorial-game-details h1',
             'publishers' => '#product-publishers',
-            'reviews' => '#reviews .comments',
+            'reviews' => '#reviews',
             'themes' => '#product-themes',
             'variants' => '#product-variants',
             'videos' => '#videos',

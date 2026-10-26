@@ -278,6 +278,29 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
 .editorial-player-review figcaption time:before { content: '·'; margin-right: 8px; }
 .editorial-player-review__link { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; color: var(--ed-accent); font-size: 10px; font-weight: 700; }
 .editorial-player-review__link:hover { color: var(--ed-ink); }
+.editorial-review-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.editorial-review-card { display: flex; min-width: 0; flex-direction: column; padding: 16px 18px; border: 1px solid var(--editorial-border); border-radius: 10px; background: var(--ed-surface); box-shadow: 0 4px 14px rgba(var(--ed-shadow-rgb),.035); }
+.editorial-review-card__game { display: grid; grid-template-columns: 44px minmax(0,1fr) auto; align-items: center; gap: 12px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--editorial-border-soft); }
+.editorial-review-card__cover { display: grid; width: 44px; height: 44px; place-items: center; overflow: hidden; border-radius: 7px; background: var(--ed-tint); color: var(--ed-muted); }
+.editorial-review-card__cover img { width: 100%; height: 100%; object-fit: cover; }
+.editorial-review-card__cover--avatar { border-radius: 50%; }
+.editorial-review-card span.editorial-review-card__name { overflow: hidden; color: var(--ed-ink); font-size: 14px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.editorial-review-more { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; color: var(--ed-accent); font-size: 12px; font-weight: 700; }
+.editorial-review-more:hover { color: var(--ed-ink); }
+.editorial-review-card a.editorial-review-card__name { overflow: hidden; color: var(--ed-ink); font: 700 15px/1.3 'PT Serif',Georgia,serif; text-overflow: ellipsis; white-space: nowrap; }
+.editorial-review-card a.editorial-review-card__name:hover { color: var(--ed-accent); }
+.editorial-review-card__score { display: inline-flex; align-items: baseline; gap: 4px; padding: 4px 10px; border-radius: 14px; background: var(--ed-tint); color: var(--ed-ink); font-size: 13px; white-space: nowrap; }
+.editorial-review-card__score .ed-icon { align-self: center; color: var(--ed-star); }
+.editorial-review-card__score small { color: var(--ed-muted); font-size: 10px; }
+.editorial-review-card h3 { margin: 0 0 6px; color: var(--ed-ink); font: 700 17px/1.3 'PT Serif',Georgia,serif; text-transform: none; }
+.editorial-review-card blockquote { margin: 0 0 14px; padding: 0; border: 0; color: var(--ed-text); font: italic 14px/1.6 'PT Serif',Georgia,serif; }
+.editorial-review-card blockquote > :last-child { margin-bottom: 0; }
+.editorial-review-card blockquote:after { content: none; }
+.editorial-review-card__meta { display: flex; align-items: center; gap: 8px; margin-top: auto; color: var(--ed-muted); font-size: 11px; }
+.editorial-review-card__meta img { width: 24px; height: 24px; object-fit: cover; }
+.editorial-review-card__meta > span { color: var(--ed-ink); font-weight: 700; }
+.editorial-review-card__meta span + time:before { content: '·'; margin-right: 8px; }
+@media (max-width: 767px) { .editorial-review-grid { grid-template-columns: minmax(0,1fr); } }
 .editorial-game-box-content { margin-top: 13px; border-top: 1px solid var(--editorial-border-soft); }
 .editorial-game-box-content summary { display: flex; justify-content: space-between; gap: 8px; padding: 12px 0 2px; color: var(--ed-ink); cursor: pointer; font-size: 11px; font-weight: 700; list-style: none; }
 .editorial-game-box-content summary::-webkit-details-marker { display: none; }
