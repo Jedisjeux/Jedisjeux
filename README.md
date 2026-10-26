@@ -34,8 +34,8 @@ Then open `http://localhost:8000/` in your web browser to enjoy Jedisjeux websit
 [Behat](http://behat.org) scenarios
 -----------------------------------
 
-By default Behat uses `http://localhost:8080/` as your application base url. If your one is different,
-you need to create `behat.yml` files that will overwrite it with your custom url:
+With the Docker stack, the `app` container serves the test environment on port 8080 and the `chrome`
+container runs a headless Chrome sharing its network. Create a `behat.yml` file to use them:
 
 ```yaml
 imports: ["behat.yml.dist"]
@@ -43,10 +43,17 @@ imports: ["behat.yml.dist"]
 default:
     extensions:
         Behat\MinkExtension:
-            base_url: http://my.custom.url
+            base_url: "http://localhost:8080/"
+            javascript_session: chrome_headless
 ```
 
-Then run selenium-server-standalone:
+Then run the scenarios inside the `app` container:
+
+```bash
+$ docker compose exec app vendor/bin/behat --tags="@javascript"
+```
+
+Without Docker, run selenium-server-standalone instead:
 
 ```bash
 $ bin/selenium-server-standalone -Dwebdriver.chrome.driver=$PWD/bin/chromedriver
