@@ -1,5 +1,5 @@
 extensions:
-    LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
+    FriendsOfPhpSpec\PhpSpec\CodeCoverage\CodeCoverageExtension:
         blacklist:
             - src/Behat
             - src/Command
