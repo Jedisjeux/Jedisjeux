@@ -40,6 +40,7 @@ class ProductFixture extends AbstractResourceFixture
                 ->scalarNode('code')->cannotBeEmpty()->end()
                 ->scalarNode('name')->cannotBeEmpty()->end()
                 ->scalarNode('short_description')->cannotBeEmpty()->end()
+                ->scalarNode('description')->cannotBeEmpty()->end()
                 ->scalarNode('min_player_count')->cannotBeEmpty()->end()
                 ->scalarNode('max_player_count')->cannotBeEmpty()->end()
                 ->scalarNode('min_duration')->cannotBeEmpty()->end()

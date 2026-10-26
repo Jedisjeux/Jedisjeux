@@ -70,41 +70,47 @@ class GameProductFixture extends AbstractFixture
     {
         $options = $this->optionsResolver->resolve($options);
 
-        $themes = [
-            'theme1' => [
-                'code' => 'theme1',
-                'name' => 'Western',
-            ],
-            'theme2' => [
-                'code' => 'theme2',
-                'translations' => [
-                    'en_US' => [
-                        'name' => 'Medieval',
-                    ],
-                    'fr_FR' => [
-                        'name' => 'Médiéval',
-                    ],
-                ],
-            ],
-        ];
+        $themes = $this->createTaxonChildren([
+            'fantasy' => ['Fantasy', 'Fantasy'],
+            'science-fiction' => ['Science-fiction', 'Science fiction'],
+            'medieval' => ['Médiéval', 'Medieval'],
+            'antiquity' => ['Antiquité', 'Antiquity'],
+            'pirates' => ['Pirates', 'Pirates'],
+            'nature' => ['Nature & animaux', 'Nature & animals'],
+            'horror' => ['Horreur', 'Horror'],
+            'investigation' => ['Enquête', 'Investigation'],
+            'space' => ['Espace', 'Space'],
+            'cooking' => ['Cuisine', 'Cooking'],
+            'steampunk' => ['Steampunk', 'Steampunk'],
+            'mythology' => ['Mythologie', 'Mythology'],
+            'western' => ['Western', 'Western'],
+            'trains' => ['Trains & transports', 'Trains & transport'],
+            'farming' => ['Agriculture', 'Farming'],
+            'war' => ['Guerre', 'War'],
+        ]);
 
-        $mechanisms = [
-            'mechanism1' => [
-                'code' => 'mechanism1',
-                'name' => 'Card Drafting',
-            ],
-            'mechanism2' => [
-                'code' => 'mechanism2',
-                'translations' => [
-                    'en_US' => [
-                        'name' => 'Tile placement',
-                    ],
-                    'fr_FR' => [
-                        'name' => 'Placements de tuiles',
-                    ],
-                ],
-            ],
-        ];
+        $mechanisms = $this->createTaxonChildren([
+            'worker-placement' => ['Placement d\'ouvriers', 'Worker placement'],
+            'deck-building' => ['Deck-building', 'Deck building'],
+            'drafting' => ['Draft', 'Card drafting'],
+            'tile-placement' => ['Placement de tuiles', 'Tile placement'],
+            'cooperative' => ['Coopératif', 'Cooperative'],
+            'hand-management' => ['Gestion de main', 'Hand management'],
+            'auction' => ['Enchères', 'Auction'],
+            'deduction' => ['Déduction', 'Deduction'],
+            'bluff' => ['Bluff', 'Bluffing'],
+            'dice-rolling' => ['Lancer de dés', 'Dice rolling'],
+            'roll-and-write' => ['Roll & write', 'Roll and write'],
+            'dexterity' => ['Adresse', 'Dexterity'],
+            'real-time' => ['Temps réel', 'Real time'],
+            'set-collection' => ['Collection', 'Set collection'],
+            'programming' => ['Programmation', 'Action programming'],
+            'area-control' => ['Contrôle de territoire', 'Area control'],
+            'hidden-roles' => ['Rôles cachés', 'Hidden roles'],
+            'storytelling' => ['Narration', 'Storytelling'],
+            'legacy' => ['Legacy', 'Legacy'],
+            'pattern-building' => ['Construction de motifs', 'Pattern building'],
+        ]);
 
         $targetAudiences = [
             Taxon::CODE_CHILD => [
@@ -211,6 +217,30 @@ class GameProductFixture extends AbstractFixture
         }
 
         $this->productFixture->load(['custom' => $products]);
+    }
+
+    /**
+     * @param array $names french and english names indexed by taxon code
+     */
+    private function createTaxonChildren(array $names): array
+    {
+        $children = [];
+
+        foreach ($names as $code => [$frenchName, $englishName]) {
+            $children[$code] = [
+                'code' => $code,
+                'translations' => [
+                    'en_US' => [
+                        'name' => $englishName,
+                    ],
+                    'fr_FR' => [
+                        'name' => $frenchName,
+                    ],
+                ],
+            ];
+        }
+
+        return $children;
     }
 
     /**

@@ -4,28 +4,74 @@ sylius_fixtures:
             fixtures:
                 person:
                     options:
-                        random: 100
                         custom:
-                            -   first_name: "Reiner"
-                                last_name: "Knizia"
-                                website: "http://www.knizia.de"
+                            -   first_name: "Camille"
+                                last_name: "Vernet"
+                                website: "https://camille-vernet.example.com"
+                                description: "Autrice prolifique de jeux experts, Camille Vernet aime les mécaniques de placement d'ouvriers et les économies tendues."
                                 images:
-                                    - "tests/Resources/fixtures/people/reiner-knizia.jpg"
-                                    - "tests/Resources/fixtures/people/reiner-knizia-2.jpg"
-                                    - "tests/Resources/fixtures/people/reiner-knizia-5.jpg"
-                                description: |
-                                    Reiner Knizia est l'auteur le plus prolifique de jeux de société.
-                                    Il sort chaque année de nombreux jeux dont beaucoup de rééditions avec souvent quelques changements de thèmes.
-                                    Il est l'auteur de nombreux succés tels que Euphrat &amp; Tigris, Modern Art, Râ, Camelot.
-                                    Malgré son succès, Knizia n'a été consacré que très tard dans sa carrière : pour Keltis en 2008, une évolution d'un autre de ses succès, les citées perdues.
-                                    Sa spécialité est le mécanisme de "l'enchère". Certains diront même que tout ses jeux comportent au moins un soupçon d'enchère.
-                            -   first_name: "Wolfgang"
-                                last_name: "Kramer"
+                                    - "tests/Resources/fixtures/games/people/camille-vernet.jpg"
+                            -   first_name: "Hugo"
+                                last_name: "Marchal"
+                                description: "Ancien professeur des écoles, Hugo Marchal conçoit des jeux familiaux et des jeux pour enfants aux règles limpides."
                                 images:
-                                    - "tests/Resources/fixtures/people/wolfgang-kramer.jpg"
+                                    - "tests/Resources/fixtures/games/people/hugo-marchal.jpg"
+                            -   first_name: "Ines"
+                                last_name: "Belkacem"
+                                description: "Spécialiste des jeux d'ambiance et de bluff, Ines Belkacem teste ses prototypes dans les bars à jeux lyonnais."
+                                images:
+                                    - "tests/Resources/fixtures/games/people/ines-belkacem.jpg"
+                            -   first_name: "Theo"
+                                last_name: "Lambert"
+                                description: "Theo Lambert est passionné d'histoire militaire et signe des wargames accessibles."
+                                images:
+                                    - "tests/Resources/fixtures/games/people/theo-lambert.jpg"
+                            -   first_name: "Sofia"
+                                last_name: "Moretti"
+                                website: "https://sofia-moretti.example.com"
+                                description: "Autrice italienne installée à Nantes, Sofia Moretti mélange narration et coopération dans des jeux d'aventure."
+                                images:
+                                    - "tests/Resources/fixtures/games/people/sofia-moretti.jpg"
+                            -   first_name: "Malik"
+                                last_name: "Diallo"
+                                description: "Malik Diallo crée des jeux abstraits élégants et des duels tactiques."
+                                images:
+                                    - "tests/Resources/fixtures/games/people/malik-diallo.jpg"
+                            -   first_name: "Jeanne"
+                                last_name: "Roussel"
+                                description: "Jeanne Roussel est connue pour ses roll & write et ses jeux de cartes malins."
+                                images:
+                                    - "tests/Resources/fixtures/games/people/jeanne-roussel.jpg"
+                            -   first_name: "Lucas"
+                                last_name: "Ferrand"
+                                description: "Illustrateur au trait lumineux, Lucas Ferrand a mis en image de nombreux univers de fantasy."
+                                images:
+                                    - "tests/Resources/fixtures/games/people/lucas-ferrand.jpg"
+                            -   first_name: "Nora"
+                                last_name: "Lindqvist"
+                                description: "Illustratrice suédoise, Nora Lindqvist privilégie les aquarelles et les animaux."
+                                images:
+                                    - "tests/Resources/fixtures/games/people/nora-lindqvist.jpg"
+                            -   first_name: "Yuki"
+                                last_name: "Tanaka"
+                                description: "Yuki Tanaka réalise des illustrations futuristes au style néon."
+                                images:
+                                    - "tests/Resources/fixtures/games/people/yuki-tanaka.jpg"
                             -   first_name: null
-                                last_name: "Hans im Glück"
-                            -   first_name: "Doris"
-                                last_name: "Matthäus"
-                            -   first_name: "Alan"
-                                last_name: "R. Moon"
+                                last_name: "Meeple Volant"
+                                website: "https://meeple-volant.example.com"
+                                description: "Éditeur de jeux familiaux et experts."
+                                images: []
+                            -   first_name: null
+                                last_name: "Editions Kubenbois"
+                                website: "https://kubenbois.example.com"
+                                description: "Éditeur indépendant spécialisé dans les jeux experts."
+                                images: []
+                            -   first_name: null
+                                last_name: "Lutin Ludique"
+                                description: "Éditeur de jeux pour enfants et de jeux d'ambiance."
+                                images: []
+                            -   first_name: null
+                                last_name: "Studio Chimere"
+                                description: "Studio de création de jeux narratifs et coopératifs."
+                                images: []

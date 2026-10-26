@@ -2,112 +2,828 @@ sylius_fixtures:
     suites:
         default:
             fixtures:
+                game_product:
+                    options:
+                        amount: 0
                 product:
                     options:
                         custom:
-                            -
-                                name: "Puerto Rico"
+                            -   code: "les_brumes_d_avalon"
+                                name: "Les Brumes d'Avalon"
                                 status: "published"
-                                min_player_count: 2
-                                max_player_count: 5
-                                min_duration: 90
+                                min_player_count: 1
+                                max_player_count: 4
+                                min_duration: 60
                                 max_duration: 90
                                 min_age: 12
-                                images:
-                                    - "tests/Resources/fixtures/products/covers/pic158548.jpg"
-                                short_description: |
-                                    <p>Le gouverneur de l'île de Puerto Rico reste à choisir.</p>
-                                    <p>Celui des joueurs qui aura démontré les richesses de son quartier deviendra Gouverneur de Puerto Rico.</p>
-                                created_at: "now"
-                            -
-                                name: "Râ"
-                                status: "published"
-                                min_player_count: 2
-                                max_player_count: 5
-                                min_duration: 90
-                                max_duration: 90
-                                min_age: 12
+                                main_taxon: "target-audiences-3"
+                                themes:
+                                    - "fantasy"
+                                    - "medieval"
+                                mechanisms:
+                                    - "deck-building"
+                                    - "cooperative"
                                 designers:
-                                    - "reiner-knizia"
+                                    - "sofia-moretti"
+                                artists:
+                                    - "lucas-ferrand"
+                                publishers:
+                                    - "studio-chimere"
+                                released_at: "first day of September 2025"
+                                released_at_precision: "on-month"
                                 images:
-                                    - "tests/Resources/fixtures/products/covers/ra.jpg"
-                                created_at: "now"
-                            -
-                                code: "Tigre_Euphrate"
-                                name: "Tigre & Euphrate"
+                                    - "tests/Resources/fixtures/games/covers/les_brumes_d_avalon.jpg"
+                                short_description: "<p>Les chevaliers de la Table ronde s'enfoncent dans les brumes pour retrouver le Graal avant que Morgane ne s'en empare.</p>"
+                                description: "<p>Chaque joueur incarne un chevalier qui améliore son paquet de cartes au fil des quêtes. Les brumes avancent à chaque tour : il faudra coopérer, partager ses reliques et choisir quels lieux sacrifier pour espérer atteindre l'île d'Avalon.</p>"
+                                box_content: |
+                                    1 plateau île d'Avalon
+                                    4 plateaux chevalier
+                                    180 cartes
+                                    24 jetons brume
+                                    6 figurines
+                                    1 livret de règles
+                                    1 livret de campagne
+                                created_at: "-2 months"
+                            -   code: "cargo_celeste"
+                                name: "Cargo Céleste"
                                 status: "published"
                                 min_player_count: 2
                                 max_player_count: 4
-                                min_age: 12
                                 min_duration: 90
-                                max_duration: 90
-                                box_content: |
-                                    1 plateau de jeu
-                                    153 tuiles de civilisation
-                                    8 tuiles de catastrophe
-                                    4 tuiles d'unification
-                                    4 tuiles de dynastie
-                                    6 monuments
-                                    16 dirigeants
-                                    140 marqueurs points de victoire
-                                    80 petits cubes en bois
-                                    60 grands cubes en bois
-                                    10 trésors
-                                    4 paravents
-                                    1 sac
-                                    1 aperçu du jeu
-                                    1 livret de règles
+                                max_duration: 120
+                                min_age: 14
+                                main_taxon: "target-audiences-4"
+                                themes:
+                                    - "steampunk"
+                                    - "trains"
+                                mechanisms:
+                                    - "worker-placement"
+                                    - "hand-management"
                                 designers:
-                                    - "reiner-knizia"
+                                    - "camille-vernet"
                                 artists:
-                                    - "doris-matthaus"
+                                    - "lucas-ferrand"
                                 publishers:
-                                    - "hans-im-gluck"
+                                    - "editions-kubenbois"
+                                released_at: "first day of October 2024"
+                                released_at_precision: "on-month"
                                 images:
-                                    - "tests/Resources/fixtures/products/covers/pic130680.gif"
-                                short_description: |
-                                    <p>Faites prospérer des villes, des fermes, des temples. Érigez, en l'honneur des dieux, des monuments imprenables. Mais sur la route du pouvoir suprême, bien des conflits armés vous opposeront à vos voisins !</p>
-                                created_at: "now"
-                            -
-                                name: "Shogun"
+                                    - "tests/Resources/fixtures/games/covers/cargo_celeste.jpg"
+                                short_description: "<p>Dirigez une compagnie de dirigeables et livrez vos marchandises aux quatre coins d'un empire à vapeur.</p>"
+                                description: "<p>Placez vos mécaniciens pour construire des dirigeables, charger le charbon et décrocher des contrats. Chaque livraison modifie les cours du marché et l'ordre du tour. Une économie serrée où chaque action compte.</p>"
+                                box_content: |
+                                    1 plateau principal
+                                    4 plateaux compagnie
+                                    16 dirigeables en bois
+                                    60 cubes marchandise
+                                    48 cartes contrat
+                                    1 livret de règles
+                                created_at: "-11 months"
+                            -   code: "potager_party"
+                                name: "Potager Party"
+                                status: "published"
+                                min_player_count: 2
+                                max_player_count: 5
+                                min_duration: 20
+                                max_duration: 30
+                                min_age: 6
+                                main_taxon: "target-audiences-1"
+                                themes:
+                                    - "nature"
+                                    - "farming"
+                                mechanisms:
+                                    - "set-collection"
+                                    - "dice-rolling"
+                                designers:
+                                    - "hugo-marchal"
+                                artists:
+                                    - "nora-lindqvist"
+                                publishers:
+                                    - "lutin-ludique"
+                                released_at: "first day of March 2025"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/potager_party.jpg"
+                                short_description: "<p>Les lapins ont envahi le jardin ! Récoltez vos légumes avant qu'ils ne grignotent tout.</p>"
+                                description: "<p>Lancez les dés, choisissez vos légumes et complétez votre panier. Mais attention : chaque lapin tiré du sac fait disparaître une rangée du potager. Un jeu de collection rapide pour les plus jeunes.</p>"
+                                box_content: |
+                                    1 plateau potager
+                                    40 tuiles légume
+                                    5 paniers
+                                    1 sac en tissu
+                                    10 lapins en bois
+                                    3 dés
+                                    1 règle illustrée
+                                created_at: "-7 months"
+                            -   code: "le_mot_de_trop"
+                                name: "Le Mot de Trop"
+                                status: "published"
+                                min_player_count: 4
+                                max_player_count: 10
+                                min_duration: 15
+                                max_duration: 30
+                                min_age: 10
+                                main_taxon: "target-audiences-2"
+                                themes:
+                                    - "investigation"
+                                mechanisms:
+                                    - "bluff"
+                                    - "hidden-roles"
+                                designers:
+                                    - "ines-belkacem"
+                                artists:
+                                    - "yuki-tanaka"
+                                publishers:
+                                    - "lutin-ludique"
+                                released_at: "first day of January 2025"
+                                released_at_precision: "on-year"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/le_mot_de_trop.jpg"
+                                short_description: "<p>Tout le monde connaît le mot secret… sauf l'imposteur. À vous de le démasquer sans trop en dire.</p>"
+                                description: "<p>À tour de rôle, chaque joueur donne un indice sur le mot secret. L'imposteur doit improviser pour se fondre dans la masse, tandis que les autres essaient de le repérer sans révéler le mot. Rires garantis.</p>"
+                                box_content: |
+                                    300 cartes mot
+                                    10 cartes rôle
+                                    1 sablier
+                                    1 bloc de score
+                                    1 règle
+                                created_at: "-9 months"
+                            -   code: "hexapolis"
+                                name: "Hexapolis"
+                                status: "published"
+                                min_player_count: 1
+                                max_player_count: 4
+                                min_duration: 30
+                                max_duration: 45
+                                min_age: 8
+                                main_taxon: "target-audiences-2"
+                                themes:
+                                    - "antiquity"
+                                mechanisms:
+                                    - "tile-placement"
+                                    - "pattern-building"
+                                designers:
+                                    - "malik-diallo"
+                                artists:
+                                    - "nora-lindqvist"
+                                publishers:
+                                    - "meeple-volant"
+                                released_at: "first day of May 2024"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/hexapolis.jpg"
+                                short_description: "<p>Bâtissez la plus belle cité grecque en assemblant des tuiles hexagonales.</p>"
+                                description: "<p>Choisissez une tuile parmi l'offre et ajoutez-la à votre cité. Temples, marchés, jardins et ports marquent des points selon leurs voisins. Des objectifs communs changent à chaque partie.</p>"
+                                box_content: |
+                                    96 tuiles hexagonales
+                                    4 plateaux joueur
+                                    12 cartes objectif
+                                    1 bloc de score
+                                    1 règle
+                                created_at: "-1 year"
+                            -   code: "nebula_7"
+                                name: "Nébula 7"
+                                status: "published"
+                                min_player_count: 1
+                                max_player_count: 5
+                                min_duration: 120
+                                max_duration: 180
+                                min_age: 14
+                                main_taxon: "target-audiences-4"
+                                themes:
+                                    - "space"
+                                    - "science-fiction"
+                                mechanisms:
+                                    - "area-control"
+                                    - "programming"
+                                designers:
+                                    - "camille-vernet"
+                                    - "theo-lambert"
+                                artists:
+                                    - "yuki-tanaka"
+                                publishers:
+                                    - "editions-kubenbois"
+                                released_at: "first day of November 2025"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/nebula_7.jpg"
+                                short_description: "<p>Sept factions se disputent le contrôle d'une nébuleuse riche en ressources.</p>"
+                                description: "<p>Programmez secrètement vos ordres, déplacez vos flottes et colonisez les planètes. Diplomatie, trahisons et batailles spatiales rythment une partie épique qui peut durer toute une soirée.</p>"
+                                box_content: |
+                                    1 plateau modulaire
+                                    7 plateaux faction
+                                    140 figurines vaisseau
+                                    200 cartes
+                                    80 jetons
+                                    1 livret de règles
+                                    1 aide de jeu
+                                created_at: "-1 month"
+                            -   code: "la_derniere_bougie"
+                                name: "La Dernière Bougie"
+                                status: "published"
+                                min_player_count: 1
+                                max_player_count: 4
+                                min_duration: 45
+                                max_duration: 60
+                                min_age: 14
+                                main_taxon: "target-audiences-3"
+                                themes:
+                                    - "horror"
+                                    - "investigation"
+                                mechanisms:
+                                    - "cooperative"
+                                    - "storytelling"
+                                designers:
+                                    - "sofia-moretti"
+                                artists:
+                                    - "lucas-ferrand"
+                                publishers:
+                                    - "studio-chimere"
+                                released_at: "first day of October 2025"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/la_derniere_bougie.jpg"
+                                short_description: "<p>Un manoir, une nuit, une seule bougie. Résolvez le mystère avant qu'elle ne s'éteigne.</p>"
+                                description: "<p>Explorez les pièces du manoir Blackwood, fouillez les indices et confrontez les témoignages. La bougie se consume à chaque action et l'obscurité réveille d'étranges présences. Cinq scénarios inclus.</p>"
+                                box_content: |
+                                    30 tuiles pièce
+                                    150 cartes indice
+                                    5 livrets scénario
+                                    1 bougie en bois
+                                    4 figurines
+                                    1 règle
+                                created_at: "-3 weeks"
+                            -   code: "pirates_de_poche"
+                                name: "Pirates de Poche"
+                                status: "published"
+                                min_player_count: 2
+                                max_player_count: 6
+                                min_duration: 15
+                                max_duration: 20
+                                min_age: 8
+                                main_taxon: "target-audiences-2"
+                                themes:
+                                    - "pirates"
+                                mechanisms:
+                                    - "hand-management"
+                                    - "bluff"
+                                designers:
+                                    - "ines-belkacem"
+                                artists:
+                                    - "lucas-ferrand"
+                                publishers:
+                                    - "meeple-volant"
+                                released_at: "first day of June 2024"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/pirates_de_poche.jpg"
+                                short_description: "<p>Un petit jeu de cartes de pirates à glisser dans sa poche pour les soirées entre moussaillons.</p>"
+                                description: "<p>Jouez une carte face cachée pour aborder un navire adverse, annoncez votre butin et bluffez ! Si on vous démasque, direction la planche. Le dernier pirate à bord remporte le trésor.</p>"
+                                box_content: |
+                                    55 cartes
+                                    6 cartes pirate
+                                    20 pièces d'or en carton
+                                    1 règle
+                                created_at: "-1 year"
+                            -   code: "tour_de_babel"
+                                name: "Tour de Babel"
+                                status: "published"
+                                min_player_count: 2
+                                max_player_count: 5
+                                min_duration: 15
+                                max_duration: 20
+                                min_age: 6
+                                main_taxon: "target-audiences-1"
+                                themes:
+                                    - "antiquity"
+                                    - "mythology"
+                                mechanisms:
+                                    - "dexterity"
+                                designers:
+                                    - "hugo-marchal"
+                                artists:
+                                    - "nora-lindqvist"
+                                publishers:
+                                    - "lutin-ludique"
+                                released_at: "first day of February 2024"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/tour_de_babel.jpg"
+                                short_description: "<p>Empilez les blocs de pierre pour construire la tour la plus haute… sans la faire tomber.</p>"
+                                description: "<p>Piochez une carte, prenez le bloc correspondant et posez-le sur la tour commune. Certaines cartes imposent de jouer d'une seule main ou les yeux fermés ! Celui qui fait tomber la tour perd la manche.</p>"
+                                box_content: |
+                                    40 blocs en bois
+                                    60 cartes
+                                    1 socle
+                                    1 règle
+                                created_at: "-1 year"
+                            -   code: "duel_des_mages"
+                                name: "Duel des Mages"
+                                status: "published"
+                                min_player_count: 2
+                                max_player_count: 2
+                                min_duration: 20
+                                max_duration: 30
+                                min_age: 10
+                                main_taxon: "target-audiences-3"
+                                themes:
+                                    - "fantasy"
+                                mechanisms:
+                                    - "drafting"
+                                    - "hand-management"
+                                designers:
+                                    - "malik-diallo"
+                                artists:
+                                    - "lucas-ferrand"
+                                publishers:
+                                    - "meeple-volant"
+                                released_at: "first day of April 2025"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/duel_des_mages.jpg"
+                                short_description: "<p>Deux mages, une arène, et un grimoire à partager. Un duel tactique où chaque sort compte.</p>"
+                                description: "<p>Draftez vos sorts dans un grimoire commun, combinez les éléments et anticipez les réponses de votre adversaire. Trois façons de gagner : épuiser l'adversaire, contrôler l'arène ou compléter un rituel.</p>"
+                                box_content: |
+                                    90 cartes sort
+                                    2 plateaux mage
+                                    30 jetons mana
+                                    1 plateau arène
+                                    1 règle
+                                created_at: "-6 months"
+                            -   code: "fiesta_tacos"
+                                name: "Fiesta Tacos"
                                 status: "published"
                                 min_player_count: 3
-                                max_player_count: 5
-                                min_age: 12
+                                max_player_count: 8
+                                min_duration: 10
+                                max_duration: 15
+                                min_age: 7
+                                main_taxon: "target-audiences-2"
+                                themes:
+                                    - "cooking"
+                                mechanisms:
+                                    - "real-time"
+                                designers:
+                                    - "ines-belkacem"
+                                    - "jeanne-roussel"
+                                artists:
+                                    - "yuki-tanaka"
+                                publishers:
+                                    - "lutin-ludique"
+                                released_at: "first day of July 2025"
+                                released_at_precision: "on-month"
                                 images:
-                                    - "tests/Resources/fixtures/products/covers/shogun.jpg"
-                                short_description: |
-                                    <p>Shogun est une version légèrement modifiée du jeu Wallenstein, sorti en 2002 chez le même éditeur. Le thème a changé mais les mécanismes sont quasi similaires à quelques points de règles près.</p>
-                                created_at: "now"
-                            -
-                                name: "Yamataï"
+                                    - "tests/Resources/fixtures/games/covers/fiesta_tacos.jpg"
+                                short_description: "<p>Le chef hurle les commandes, à vous de composer les tacos le plus vite possible !</p>"
+                                description: "<p>Retournez une carte commande et attrapez les bons ingrédients au centre de la table. Le plus rapide marque des points, le plus lent fait la vaisselle. Un jeu de rapidité survolté.</p>"
+                                box_content: |
+                                    80 cartes ingrédient
+                                    40 cartes commande
+                                    1 cloche
+                                    1 règle
+                                created_at: "-4 months"
+                            -   code: "ruee_vers_l_or"
+                                name: "Ruée vers l'Or"
+                                status: "published"
+                                min_player_count: 2
+                                max_player_count: 5
+                                min_duration: 45
+                                max_duration: 60
+                                min_age: 10
+                                main_taxon: "target-audiences-2"
+                                themes:
+                                    - "western"
+                                mechanisms:
+                                    - "auction"
+                                    - "set-collection"
+                                designers:
+                                    - "theo-lambert"
+                                artists:
+                                    - "lucas-ferrand"
+                                publishers:
+                                    - "meeple-volant"
+                                released_at: "first day of August 2024"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/ruee_vers_l_or.jpg"
+                                short_description: "<p>1849, Californie. Misez sur les bonnes concessions et devenez le prospecteur le plus riche de l'Ouest.</p>"
+                                description: "<p>Chaque manche, des concessions sont mises aux enchères. Les pépites récoltées servent à enchérir à nouveau ou à acheter des outils. Mais gare aux bandits qui rôdent autour des mines.</p>"
+                                box_content: |
+                                    1 plateau
+                                    30 tuiles concession
+                                    100 pépites en plastique
+                                    5 écrans
+                                    24 cartes outil
+                                    1 règle
+                                created_at: "-1 year"
+                            -   code: "carnets_de_voyage"
+                                name: "Carnets de Voyage"
+                                status: "published"
+                                min_player_count: 1
+                                max_player_count: 8
+                                min_duration: 25
+                                max_duration: 35
+                                min_age: 8
+                                main_taxon: "target-audiences-2"
+                                themes:
+                                    - "trains"
+                                mechanisms:
+                                    - "roll-and-write"
+                                designers:
+                                    - "jeanne-roussel"
+                                artists:
+                                    - "nora-lindqvist"
+                                publishers:
+                                    - "meeple-volant"
+                                released_at: "first day of March 2024"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/carnets_de_voyage.jpg"
+                                short_description: "<p>Tracez votre itinéraire à travers l'Europe sur votre carnet, au gré des dés.</p>"
+                                description: "<p>Tous les joueurs utilisent les mêmes dés pour tracer des voies ferrées sur leur carte. Reliez les capitales, visitez les monuments et accomplissez les objectifs secrets pour remporter le prix du plus beau voyage.</p>"
+                                box_content: |
+                                    1 bloc de 100 feuilles
+                                    4 dés personnalisés
+                                    8 crayons
+                                    20 cartes objectif
+                                    1 règle
+                                created_at: "-1 year"
+                            -   code: "les_heritiers_d_olympe"
+                                name: "Les Héritiers d'Olympe"
+                                status: "published"
+                                min_player_count: 2
+                                max_player_count: 4
+                                min_duration: 60
+                                max_duration: 90
+                                min_age: 12
+                                main_taxon: "target-audiences-3"
+                                themes:
+                                    - "mythology"
+                                    - "antiquity"
+                                mechanisms:
+                                    - "worker-placement"
+                                    - "area-control"
+                                designers:
+                                    - "camille-vernet"
+                                artists:
+                                    - "lucas-ferrand"
+                                publishers:
+                                    - "editions-kubenbois"
+                                released_at: "first day of December 2024"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/les_heritiers_d_olympe.jpg"
+                                short_description: "<p>Les dieux ont quitté l'Olympe. Leurs héritiers se disputent les temples et la faveur des mortels.</p>"
+                                description: "<p>Envoyez vos prêtres dans les cités grecques, invoquez les pouvoirs des dieux et étendez votre influence. Chaque dieu offre un pouvoir unique qui change la façon de jouer.</p>"
+                                box_content: |
+                                    1 plateau Grèce
+                                    12 cartes divinité
+                                    40 prêtres en bois
+                                    24 temples
+                                    60 jetons faveur
+                                    1 règle
+                                created_at: "-10 months"
+                            -   code: "foret_murmurante"
+                                name: "Forêt Murmurante"
+                                status: "published"
+                                min_player_count: 1
+                                max_player_count: 4
+                                min_duration: 30
+                                max_duration: 45
+                                min_age: 8
+                                main_taxon: "target-audiences-2"
+                                themes:
+                                    - "nature"
+                                    - "fantasy"
+                                mechanisms:
+                                    - "drafting"
+                                    - "set-collection"
+                                designers:
+                                    - "jeanne-roussel"
+                                artists:
+                                    - "nora-lindqvist"
+                                publishers:
+                                    - "meeple-volant"
+                                released_at: "first day of April 2024"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/foret_murmurante.jpg"
+                                short_description: "<p>Accueillez les créatures de la forêt dans votre clairière et créez un écosystème harmonieux.</p>"
+                                description: "<p>Draftez des cartes arbre, animal et esprit pour composer votre clairière. Les combinaisons entre espèces rapportent des points, et les esprits de la forêt récompensent les écosystèmes équilibrés.</p>"
+                                box_content: |
+                                    160 cartes
+                                    40 jetons esprit
+                                    4 aides de jeu
+                                    1 bloc de score
+                                    1 règle
+                                created_at: "-1 year"
+                            -   code: "chroniques_de_la_station"
+                                name: "Chroniques de la Station"
+                                status: "published"
+                                min_player_count: 1
+                                max_player_count: 4
+                                min_duration: 60
+                                max_duration: 90
+                                min_age: 14
+                                main_taxon: "target-audiences-3"
+                                themes:
+                                    - "science-fiction"
+                                    - "space"
+                                mechanisms:
+                                    - "legacy"
+                                    - "cooperative"
+                                    - "storytelling"
+                                designers:
+                                    - "sofia-moretti"
+                                artists:
+                                    - "yuki-tanaka"
+                                publishers:
+                                    - "studio-chimere"
+                                released_at: "first day of January 2026"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/chroniques_de_la_station.jpg"
+                                short_description: "<p>Une campagne legacy à bord d'une station spatiale à la dérive. Vos décisions changeront le jeu pour toujours.</p>"
+                                description: "<p>Réparez la station, explorez les modules abandonnés et découvrez ce qui est arrivé à l'équipage précédent. Autocollants, enveloppes scellées et cartes à détruire : chaque boîte devient unique.</p>"
+                                box_content: |
+                                    1 plateau station
+                                    12 enveloppes scellées
+                                    1 planche d'autocollants
+                                    250 cartes
+                                    4 figurines
+                                    1 livret de campagne
+                                created_at: "-2 weeks"
+                            -   code: "front_de_l_est_1916"
+                                name: "Front de l'Est 1916"
+                                status: "published"
+                                min_player_count: 2
+                                max_player_count: 2
+                                min_duration: 120
+                                max_duration: 180
+                                min_age: 14
+                                main_taxon: "target-audiences-4"
+                                themes:
+                                    - "war"
+                                mechanisms:
+                                    - "area-control"
+                                    - "hand-management"
+                                    - "dice-rolling"
+                                designers:
+                                    - "theo-lambert"
+                                artists:
+                                    - "lucas-ferrand"
+                                publishers:
+                                    - "editions-kubenbois"
+                                released_at: "first day of June 2025"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/front_de_l_est_1916.jpg"
+                                short_description: "<p>Un wargame à cartes accessible sur l'offensive Broussilov et ses conséquences.</p>"
+                                description: "<p>Chaque carte peut servir à déplacer des troupes, déclencher un événement historique ou renforcer la logistique. Les combats se résolvent aux dés avec un système simple mais tendu.</p>"
+                                box_content: |
+                                    1 carte montée
+                                    110 cartes stratégie
+                                    200 pions
+                                    6 dés
+                                    1 livret de règles
+                                    1 livret historique
+                                created_at: "-5 months"
+                            -   code: "petits_detectives"
+                                name: "Petits Détectives"
+                                status: "published"
+                                min_player_count: 2
+                                max_player_count: 4
+                                min_duration: 15
+                                max_duration: 25
+                                min_age: 5
+                                main_taxon: "target-audiences-1"
+                                themes:
+                                    - "investigation"
+                                mechanisms:
+                                    - "deduction"
+                                    - "cooperative"
+                                designers:
+                                    - "hugo-marchal"
+                                artists:
+                                    - "nora-lindqvist"
+                                publishers:
+                                    - "lutin-ludique"
+                                released_at: "first day of September 2024"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/petits_detectives.jpg"
+                                short_description: "<p>Le gâteau d'anniversaire a disparu ! Menez l'enquête ensemble pour retrouver le coupable.</p>"
+                                description: "<p>Utilisez la loupe magique pour révéler les indices cachés sur les cartes et éliminez les suspects un à un. Un jeu de déduction coopératif pensé pour les enfants dès 5 ans.</p>"
+                                box_content: |
+                                    24 cartes suspect
+                                    36 cartes indice
+                                    1 loupe à filtre rouge
+                                    1 plateau
+                                    1 règle illustrée
+                                created_at: "-1 year"
+                            -   code: "marche_aux_epices"
+                                name: "Marché aux Épices"
                                 status: "published"
                                 min_player_count: 2
                                 max_player_count: 4
                                 min_duration: 40
-                                max_duration: 40
-                                min_age: 13
-                                released_at: "first day of March 2017"
+                                max_duration: 60
+                                min_age: 10
+                                main_taxon: "target-audiences-2"
+                                themes:
+                                    - "antiquity"
+                                    - "cooking"
+                                mechanisms:
+                                    - "deck-building"
+                                    - "set-collection"
+                                designers:
+                                    - "camille-vernet"
+                                    - "jeanne-roussel"
+                                artists:
+                                    - "nora-lindqvist"
+                                publishers:
+                                    - "meeple-volant"
+                                released_at: "first day of February 2025"
                                 released_at_precision: "on-month"
                                 images:
-                                    - "tests/Resources/fixtures/products/covers/yamatai.jpg"
-                                short_description: |
-                                    <p>La reine Himiko a confié une mission prestigieuse à tous ses bâtisseurs : faire de la capitale de Yamataï la perle du royaume.</p>
-                                created_at: "now"
-                            -
-                                name: "Les aventuriers du rail : France"
+                                    - "tests/Resources/fixtures/games/covers/marche_aux_epices.jpg"
+                                short_description: "<p>Marchands de Samarcande, échangez safran, cannelle et cardamome pour devenir le plus riche du bazar.</p>"
+                                description: "<p>Améliorez votre caravane de cartes pour acquérir des épices toujours plus précieuses, puis échangez-les contre des contrats. Un deck-building fluide et accessible.</p>"
+                                box_content: |
+                                    120 cartes
+                                    100 cubes épice
+                                    4 caravanes
+                                    30 cartes contrat
+                                    1 règle
+                                created_at: "-8 months"
+                            -   code: "cache_cache_kraken"
+                                name: "Cache-Cache Kraken"
+                                status: "published"
+                                min_player_count: 3
+                                max_player_count: 6
+                                min_duration: 20
+                                max_duration: 30
+                                min_age: 8
+                                main_taxon: "target-audiences-2"
+                                themes:
+                                    - "pirates"
+                                    - "mythology"
+                                mechanisms:
+                                    - "deduction"
+                                    - "hidden-roles"
+                                designers:
+                                    - "ines-belkacem"
+                                artists:
+                                    - "yuki-tanaka"
+                                publishers:
+                                    - "lutin-ludique"
+                                released_at: "first day of November 2024"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/cache_cache_kraken.jpg"
+                                short_description: "<p>L'un des marins est un Kraken déguisé. Saurez-vous le découvrir avant qu'il ne coule le navire ?</p>"
+                                description: "<p>Chaque nuit, le Kraken sabote une partie du navire. Le jour, l'équipage discute et vote pour jeter un suspect par-dessus bord. Un jeu de rôles cachés rapide sans élimination longue.</p>"
+                                box_content: |
+                                    6 cartes rôle
+                                    40 cartes sabotage
+                                    1 plateau navire
+                                    6 jetons vote
+                                    1 règle
+                                created_at: "-11 months"
+                            -   code: "alchimia"
+                                name: "Alchimia"
+                                status: "published"
+                                min_player_count: 1
+                                max_player_count: 4
+                                min_duration: 60
+                                max_duration: 75
+                                min_age: 12
+                                main_taxon: "target-audiences-3"
+                                themes:
+                                    - "fantasy"
+                                    - "medieval"
+                                mechanisms:
+                                    - "dice-rolling"
+                                    - "worker-placement"
+                                designers:
+                                    - "malik-diallo"
+                                    - "camille-vernet"
+                                artists:
+                                    - "lucas-ferrand"
+                                publishers:
+                                    - "editions-kubenbois"
+                                released_at: "first day of May 2025"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/alchimia.jpg"
+                                short_description: "<p>Transformez le plomb en or dans votre laboratoire d'alchimiste… si les dés le veulent bien.</p>"
+                                description: "<p>Lancez vos dés en début de manche puis placez-les sur les ateliers du laboratoire. Distillez, mélangez et transmutez les ingrédients pour réaliser des formules légendaires.</p>"
+                                box_content: |
+                                    1 plateau laboratoire
+                                    4 plateaux alchimiste
+                                    20 dés
+                                    80 jetons ingrédient
+                                    36 cartes formule
+                                    1 règle
+                                created_at: "-6 months"
+                            -   code: "robots_en_folie"
+                                name: "Robots en Folie"
                                 status: "published"
                                 min_player_count: 2
                                 max_player_count: 6
-                                min_duration: 60
-                                max_duration: 90
-                                min_age: 8
-                                released_at: "first day of January 2017"
-                                released_at_precision: "on-year"
+                                min_duration: 30
+                                max_duration: 45
+                                min_age: 9
+                                main_taxon: "target-audiences-2"
+                                themes:
+                                    - "science-fiction"
+                                mechanisms:
+                                    - "programming"
                                 designers:
-                                    - "alan-r-moon"
+                                    - "hugo-marchal"
+                                artists:
+                                    - "yuki-tanaka"
+                                publishers:
+                                    - "meeple-volant"
+                                released_at: "first day of October 2024"
+                                released_at_precision: "on-month"
                                 images:
-                                    - "tests/Resources/fixtures/products/covers/pic3707326.jpg"
-                game_product:
-                    options:
-                        amount: 80
+                                    - "tests/Resources/fixtures/games/covers/robots_en_folie.jpg"
+                                short_description: "<p>Programmez vos robots pour traverser l'usine… et regardez-les se rentrer dedans.</p>"
+                                description: "<p>Chaque joueur choisit secrètement cinq cartes d'action, puis tous les robots s'activent en même temps. Tapis roulants, lasers et collisions transforment chaque plan en chaos joyeux.</p>"
+                                box_content: |
+                                    1 plateau usine modulaire
+                                    6 robots
+                                    84 cartes programme
+                                    24 jetons dégât
+                                    1 règle
+                                created_at: "-1 year"
+                            -   code: "jardins_zen"
+                                name: "Jardins Zen"
+                                status: "published"
+                                min_player_count: 2
+                                max_player_count: 2
+                                min_duration: 20
+                                max_duration: 30
+                                min_age: 8
+                                main_taxon: "target-audiences-2"
+                                themes:
+                                    - "nature"
+                                mechanisms:
+                                    - "pattern-building"
+                                    - "tile-placement"
+                                designers:
+                                    - "malik-diallo"
+                                artists:
+                                    - "nora-lindqvist"
+                                publishers:
+                                    - "meeple-volant"
+                                released_at: "first day of January 2024"
+                                released_at_precision: "on-year"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/jardins_zen.jpg"
+                                short_description: "<p>Un jeu abstrait pour deux où l'on ratisse le sable et dispose les pierres d'un jardin japonais.</p>"
+                                description: "<p>Placez pierres, mousses et bonsaïs sur le jardin commun pour réaliser des motifs secrets. Chaque placement modifie les lignes de sable et peut contrarier les plans adverses.</p>"
+                                box_content: |
+                                    1 plateau en bois
+                                    30 pierres
+                                    12 bonsaïs
+                                    20 cartes motif
+                                    1 règle
+                                created_at: "-1 year"
+                            -   code: "l_ile_aux_quatre_vents"
+                                name: "L'Île aux Quatre Vents"
+                                status: "published"
+                                min_player_count: 2
+                                max_player_count: 5
+                                min_duration: 45
+                                max_duration: 60
+                                min_age: 10
+                                main_taxon: "target-audiences-2"
+                                themes:
+                                    - "pirates"
+                                    - "nature"
+                                mechanisms:
+                                    - "tile-placement"
+                                    - "area-control"
+                                designers:
+                                    - "jeanne-roussel"
+                                    - "theo-lambert"
+                                artists:
+                                    - "lucas-ferrand"
+                                publishers:
+                                    - "meeple-volant"
+                                released_at: "first day of July 2024"
+                                released_at_precision: "on-month"
+                                images:
+                                    - "tests/Resources/fixtures/games/covers/l_ile_aux_quatre_vents.jpg"
+                                short_description: "<p>Explorez une île au trésor en posant des tuiles de terrain et en installant vos campements.</p>"
+                                description: "<p>Révélez l'île tuile par tuile, plantez vos drapeaux sur les meilleurs territoires et déterrez les trésors. Les vents changent de direction à chaque manche et déplacent les navires.</p>"
+                                box_content: |
+                                    72 tuiles terrain
+                                    40 drapeaux
+                                    5 navires
+                                    30 jetons trésor
+                                    1 rose des vents
+                                    1 règle
+                                created_at: "-1 year"

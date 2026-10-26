@@ -19,17 +19,27 @@ sylius_fixtures:
                         random: 40
                 product_box:
                     options:
-                        random: 40
                         custom:
-                            -
-                                product_variant: "Tigre_&_Euphrate"
-                                image: "tests/Resources/fixtures/boxes/box-euphrat-tigris.jpg"
-                            -
-                                product_variant: "Puerto_Rico"
-                                image: "tests/Resources/fixtures/boxes/box-puerto-rico.jpg"
-                            -
-                                product_variant: "Shogun"
-                                image: "tests/Resources/fixtures/boxes/box-shogun.jpg"
+                            -   product_variant: "les_brumes_d_avalon"
+                                image: "tests/Resources/fixtures/games/boxes/les_brumes_d_avalon.jpg"
+                            -   product_variant: "cargo_celeste"
+                                image: "tests/Resources/fixtures/games/boxes/cargo_celeste.jpg"
+                            -   product_variant: "hexapolis"
+                                image: "tests/Resources/fixtures/games/boxes/hexapolis.jpg"
+                            -   product_variant: "nebula_7"
+                                image: "tests/Resources/fixtures/games/boxes/nebula_7.jpg"
+                            -   product_variant: "la_derniere_bougie"
+                                image: "tests/Resources/fixtures/games/boxes/la_derniere_bougie.jpg"
+                            -   product_variant: "duel_des_mages"
+                                image: "tests/Resources/fixtures/games/boxes/duel_des_mages.jpg"
+                            -   product_variant: "foret_murmurante"
+                                image: "tests/Resources/fixtures/games/boxes/foret_murmurante.jpg"
+                            -   product_variant: "alchimia"
+                                image: "tests/Resources/fixtures/games/boxes/alchimia.jpg"
+                            -   product_variant: "petits_detectives"
+                                image: "tests/Resources/fixtures/games/boxes/petits_detectives.jpg"
+                            -   product_variant: "jardins_zen"
+                                image: "tests/Resources/fixtures/games/boxes/jardins_zen.jpg"
                 product_list:
                     options:
                         custom:
@@ -43,7 +53,428 @@ sylius_fixtures:
                         random: 20
                 product_review:
                     options:
-                        random: 200
+                        random: 120
+                        custom:
+                            -   product: "les_brumes_d_avalon"
+                                author: "meeplefou@example.com"
+                                rating: 9
+                                title: "Une coopération qui fonctionne"
+                                comment: "Le deck-building sert vraiment la coopération : on se passe des cartes, on se sacrifie. Les brumes mettent une pression folle."
+                            -   product: "les_brumes_d_avalon"
+                                author: "damedepique@example.com"
+                                rating: 8
+                                title: "Superbe ambiance"
+                                comment: "Les illustrations de Lucas Ferrand sont magnifiques. Un peu long à quatre, idéal à deux."
+                            -   product: "les_brumes_d_avalon"
+                                author: "lestratege@example.com"
+                                rating: 7
+                                title: "Bon mais répétitif"
+                                comment: "Les premières parties sont excellentes, mais le mode campagne aurait mérité plus de variété."
+                            -   product: "les_brumes_d_avalon"
+                                author: "loic_425@example.com"
+                                rating: 9
+                                title: "Coup de cœur"
+                                comment: "Mon jeu coopératif de l'année, sans hésiter."
+                            -   product: "cargo_celeste"
+                                author: "lestratege@example.com"
+                                rating: 10
+                                title: "Un chef-d'œuvre d'optimisation"
+                                comment: "Chaque tour est un casse-tête délicieux. Camille Vernet signe son meilleur jeu."
+                            -   product: "cargo_celeste"
+                                author: "kubenbois@example.com"
+                                rating: 9
+                                title: "Pour les experts"
+                                comment: "Pas un jeu à sortir en famille, mais quel plaisir pour les amateurs de jeux lourds."
+                            -   product: "cargo_celeste"
+                                author: "blue@example.com"
+                                rating: 8
+                                title: "Exigeant"
+                                comment: "La première partie est longue, mais tout s'éclaire ensuite. Le marché est très bien pensé."
+                            -   product: "cargo_celeste"
+                                author: "ludomaman@example.com"
+                                rating: 4
+                                title: "Trop complexe pour nous"
+                                comment: "Nous avons abandonné en cours de partie, beaucoup trop de règles pour notre groupe."
+                            -   product: "cargo_celeste"
+                                author: "nuitblanche@example.com"
+                                rating: 9
+                                title: "Je relance tout de suite"
+                                comment: "J'y ai joué trois soirs d'affilée. Les contrats renouvellent beaucoup les parties."
+                            -   product: "potager_party"
+                                author: "ludomaman@example.com"
+                                rating: 9
+                                title: "Adopté par nos enfants"
+                                comment: "Ma fille de 6 ans le réclame tous les soirs. Le matériel est adorable."
+                            -   product: "potager_party"
+                                author: "petitpion@example.com"
+                                rating: 8
+                                title: "Simple et efficace"
+                                comment: "On explique la règle en deux minutes, parfait pour initier les petits."
+                            -   product: "potager_party"
+                                author: "customer@example.com"
+                                rating: 6
+                                title: "Sympa mais vite fait le tour"
+                                comment: "Très bien pour les enfants, les adultes s'ennuient un peu."
+                            -   product: "le_mot_de_trop"
+                                author: "damedepique@example.com"
+                                rating: 9
+                                title: "Le roi des soirées"
+                                comment: "Fonctionne avec tout le monde, même les non-joueurs. Énormes fous rires."
+                            -   product: "le_mot_de_trop"
+                                author: "gobelinjoueur@example.com"
+                                rating: 8
+                                title: "Parfait en apéro"
+                                comment: "Les parties s'enchaînent, on ne s'en lasse pas."
+                            -   product: "le_mot_de_trop"
+                                author: "lestratege@example.com"
+                                rating: 5
+                                title: "Pas pour moi"
+                                comment: "Trop léger à mon goût, mais je comprends son succès."
+                            -   product: "le_mot_de_trop"
+                                author: "nuitblanche@example.com"
+                                rating: 8
+                                title: "Excellent à 8 joueurs"
+                                comment: "Plus on est nombreux, plus c'est drôle."
+                            -   product: "le_mot_de_trop"
+                                author: "blue@example.com"
+                                rating: 7
+                                title: "Efficace"
+                                comment: "Un bon jeu d'ambiance, même si le nombre de mots pourrait être plus grand."
+                            -   product: "hexapolis"
+                                author: "tuileuse@example.com"
+                                rating: 10
+                                title: "Mon jeu de chevet"
+                                comment: "Simple à expliquer, profond à maîtriser. Le mode solo est excellent."
+                            -   product: "hexapolis"
+                                author: "petitpion@example.com"
+                                rating: 8
+                                title: "Très joli"
+                                comment: "Un jeu de pose de tuiles relaxant et malin."
+                            -   product: "hexapolis"
+                                author: "loic_425@example.com"
+                                rating: 8
+                                title: "Bonne surprise"
+                                comment: "Les objectifs communs créent une vraie interaction."
+                            -   product: "hexapolis"
+                                author: "ludomaman@example.com"
+                                rating: 7
+                                title: "Familial et réfléchi"
+                                comment: "Mes ados adorent, un peu calculatoire pour les plus jeunes."
+                            -   product: "nebula_7"
+                                author: "lestratege@example.com"
+                                rating: 9
+                                title: "Épique"
+                                comment: "Une vraie expérience de 4X sur table. Les ordres programmés créent des retournements incroyables."
+                            -   product: "nebula_7"
+                                author: "kubenbois@example.com"
+                                rating: 7
+                                title: "Long mais mémorable"
+                                comment: "Prévoir une soirée entière. L'installation est interminable."
+                            -   product: "nebula_7"
+                                author: "gobelinjoueur@example.com"
+                                rating: 10
+                                title: "Le jeu de l'année"
+                                comment: "Les factions sont toutes asymétriques et passionnantes."
+                            -   product: "la_derniere_bougie"
+                                author: "nuitblanche@example.com"
+                                rating: 10
+                                title: "Frissons garantis"
+                                comment: "L'ambiance est incroyable, on y joue lumières éteintes."
+                            -   product: "la_derniere_bougie"
+                                author: "damedepique@example.com"
+                                rating: 8
+                                title: "Très immersif"
+                                comment: "Les scénarios sont bien écrits, dommage qu'ils ne soient pas rejouables."
+                            -   product: "la_derniere_bougie"
+                                author: "meeplefou@example.com"
+                                rating: 8
+                                title: "Enquête réussie"
+                                comment: "La mécanique de la bougie apporte une tension constante."
+                            -   product: "la_derniere_bougie"
+                                author: "customer@example.com"
+                                rating: 6
+                                title: "Un peu dirigiste"
+                                comment: "On suit beaucoup le livret, j'aurais aimé plus de liberté."
+                            -   product: "pirates_de_poche"
+                                author: "gobelinjoueur@example.com"
+                                rating: 7
+                                title: "Petit mais costaud"
+                                comment: "Idéal en voyage, le bluff marche très bien."
+                            -   product: "pirates_de_poche"
+                                author: "petitpion@example.com"
+                                rating: 7
+                                title: "Sympa"
+                                comment: "Rapide et drôle, on fait souvent des revanches."
+                            -   product: "pirates_de_poche"
+                                author: "ludomaman@example.com"
+                                rating: 8
+                                title: "Parfait en vacances"
+                                comment: "On l'a emmené partout cet été."
+                            -   product: "tour_de_babel"
+                                author: "ludomaman@example.com"
+                                rating: 8
+                                title: "Rires en famille"
+                                comment: "Les cartes défi rendent le jeu hilarant, même pour les parents."
+                            -   product: "tour_de_babel"
+                                author: "petitpion@example.com"
+                                rating: 7
+                                title: "Classique mais efficace"
+                                comment: "Un jeu d'adresse bien produit avec de beaux blocs."
+                            -   product: "tour_de_babel"
+                                author: "tuileuse@example.com"
+                                rating: 6
+                                title: "Pour les enfants"
+                                comment: "Agréable, mais les adultes s'en lassent vite."
+                            -   product: "duel_des_mages"
+                                author: "loic_425@example.com"
+                                rating: 9
+                                title: "Le meilleur duel"
+                                comment: "Le draft partagé est génial, on se lit mutuellement en permanence."
+                            -   product: "duel_des_mages"
+                                author: "lestratege@example.com"
+                                rating: 9
+                                title: "Profond"
+                                comment: "Trois conditions de victoire, des choix difficiles à chaque tour."
+                            -   product: "duel_des_mages"
+                                author: "damedepique@example.com"
+                                rating: 8
+                                title: "Très bon à deux"
+                                comment: "Je le sors avec mon conjoint dès qu'on a 30 minutes."
+                            -   product: "duel_des_mages"
+                                author: "blue@example.com"
+                                rating: 7
+                                title: "Un peu chaotique"
+                                comment: "Certains combos sont très puissants, mais ça reste fun."
+                            -   product: "fiesta_tacos"
+                                author: "gobelinjoueur@example.com"
+                                rating: 8
+                                title: "Survolté !"
+                                comment: "On crie, on rit, on renverse les cartes. Parfait pour lancer une soirée."
+                            -   product: "fiesta_tacos"
+                                author: "ludomaman@example.com"
+                                rating: 9
+                                title: "Les enfants adorent"
+                                comment: "Mes enfants battent les adultes à chaque fois."
+                            -   product: "fiesta_tacos"
+                                author: "kubenbois@example.com"
+                                rating: 4
+                                title: "Trop bruyant"
+                                comment: "Pas du tout mon style de jeu, trop de hasard et de cris."
+                            -   product: "ruee_vers_l_or"
+                                author: "customer@example.com"
+                                rating: 8
+                                title: "Des enchères tendues"
+                                comment: "Les enchères sont simples mais terriblement tendues."
+                            -   product: "ruee_vers_l_or"
+                                author: "blue@example.com"
+                                rating: 7
+                                title: "Bon jeu familial plus"
+                                comment: "Une bonne porte d'entrée vers les jeux d'enchères."
+                            -   product: "ruee_vers_l_or"
+                                author: "meeplefou@example.com"
+                                rating: 6
+                                title: "Correct"
+                                comment: "Agréable mais les bandits apportent beaucoup de hasard."
+                            -   product: "carnets_de_voyage"
+                                author: "tuileuse@example.com"
+                                rating: 9
+                                title: "Le roll & write parfait"
+                                comment: "Jouable à 8, rapide, malin. Que demander de plus ?"
+                            -   product: "carnets_de_voyage"
+                                author: "petitpion@example.com"
+                                rating: 8
+                                title: "Excellent en solo"
+                                comment: "Je fais une partie chaque matin avec mon café."
+                            -   product: "carnets_de_voyage"
+                                author: "nuitblanche@example.com"
+                                rating: 7
+                                title: "Agréable"
+                                comment: "Bien fait, même si on a parfois l'impression de jouer chacun dans son coin."
+                            -   product: "carnets_de_voyage"
+                                author: "loic_425@example.com"
+                                rating: 8
+                                title: "Très bon"
+                                comment: "Les objectifs secrets ajoutent juste ce qu'il faut de tension."
+                            -   product: "les_heritiers_d_olympe"
+                                author: "lestratege@example.com"
+                                rating: 8
+                                title: "Solide"
+                                comment: "Un bon mélange de placement et de majorité. Les dieux sont bien équilibrés."
+                            -   product: "les_heritiers_d_olympe"
+                                author: "kubenbois@example.com"
+                                rating: 8
+                                title: "Beau et malin"
+                                comment: "Le matériel est superbe et les tours sont rapides."
+                            -   product: "les_heritiers_d_olympe"
+                                author: "damedepique@example.com"
+                                rating: 7
+                                title: "Plaisant"
+                                comment: "Peut-être un peu classique, mais très bien exécuté."
+                            -   product: "les_heritiers_d_olympe"
+                                author: "gobelinjoueur@example.com"
+                                rating: 9
+                                title: "Les pouvoirs divins !"
+                                comment: "Chaque partie est différente grâce aux combinaisons de dieux."
+                            -   product: "foret_murmurante"
+                                author: "ludomaman@example.com"
+                                rating: 9
+                                title: "Magnifique"
+                                comment: "Les illustrations de Nora Lindqvist sont un régal, et le jeu est simple."
+                            -   product: "foret_murmurante"
+                                author: "tuileuse@example.com"
+                                rating: 8
+                                title: "Relaxant"
+                                comment: "Un jeu de draft doux, parfait en fin de soirée."
+                            -   product: "foret_murmurante"
+                                author: "customer@example.com"
+                                rating: 7
+                                title: "Joli jeu"
+                                comment: "Bonnes sensations, un peu de calcul en fin de partie."
+                            -   product: "chroniques_de_la_station"
+                                author: "meeplefou@example.com"
+                                rating: 10
+                                title: "Inoubliable"
+                                comment: "Douze sessions de bonheur. Les rebondissements de l'histoire sont géniaux."
+                            -   product: "chroniques_de_la_station"
+                                author: "nuitblanche@example.com"
+                                rating: 9
+                                title: "Captivant"
+                                comment: "On a enchaîné les parties chaque week-end pour connaître la suite."
+                            -   product: "chroniques_de_la_station"
+                                author: "blue@example.com"
+                                rating: 8
+                                title: "Très bonne campagne"
+                                comment: "Le milieu de campagne traîne un peu, mais la fin est grandiose."
+                            -   product: "front_de_l_est_1916"
+                                author: "lestratege@example.com"
+                                rating: 9
+                                title: "Le wargame qui convertit"
+                                comment: "Enfin un wargame qu'on peut expliquer en 20 minutes."
+                            -   product: "front_de_l_est_1916"
+                                author: "kubenbois@example.com"
+                                rating: 8
+                                title: "Riche en histoire"
+                                comment: "Les événements sont passionnants et bien documentés."
+                            -   product: "front_de_l_est_1916"
+                                author: "customer@example.com"
+                                rating: 5
+                                title: "Pas mon thème"
+                                comment: "Le jeu est bon mais le thème ne me parle pas du tout."
+                            -   product: "petits_detectives"
+                                author: "ludomaman@example.com"
+                                rating: 10
+                                title: "Génial pour les petits"
+                                comment: "Mon fils de 5 ans se sent un vrai détective. La loupe est géniale."
+                            -   product: "petits_detectives"
+                                author: "petitpion@example.com"
+                                rating: 8
+                                title: "Intelligent"
+                                comment: "Une vraie déduction adaptée aux enfants, chapeau."
+                            -   product: "petits_detectives"
+                                author: "loic_425@example.com"
+                                rating: 7
+                                title: "Bien pensé"
+                                comment: "On y joue avec mes neveux, ils adorent."
+                            -   product: "marche_aux_epices"
+                                author: "damedepique@example.com"
+                                rating: 8
+                                title: "Fluide"
+                                comment: "Un deck-building rapide, idéal pour faire découvrir la mécanique."
+                            -   product: "marche_aux_epices"
+                                author: "tuileuse@example.com"
+                                rating: 7
+                                title: "Agréable"
+                                comment: "Les cubes épice sont magnifiques, le jeu tourne très bien."
+                            -   product: "marche_aux_epices"
+                                author: "meeplefou@example.com"
+                                rating: 7
+                                title: "Bonne entrée en matière"
+                                comment: "Pas révolutionnaire mais très efficace."
+                            -   product: "marche_aux_epices"
+                                author: "gobelinjoueur@example.com"
+                                rating: 6
+                                title: "Un peu sage"
+                                comment: "Manque un peu d'interaction à mon goût."
+                            -   product: "cache_cache_kraken"
+                                author: "gobelinjoueur@example.com"
+                                rating: 8
+                                title: "Loup-garou version pirate"
+                                comment: "Rapide et sans temps mort, mieux que bien des jeux du genre."
+                            -   product: "cache_cache_kraken"
+                                author: "damedepique@example.com"
+                                rating: 7
+                                title: "Fun"
+                                comment: "Fonctionne vraiment bien à 5 ou 6."
+                            -   product: "cache_cache_kraken"
+                                author: "nuitblanche@example.com"
+                                rating: 6
+                                title: "Mitigé à 3"
+                                comment: "À trois joueurs, la déduction est trop facile."
+                            -   product: "alchimia"
+                                author: "lestratege@example.com"
+                                rating: 8
+                                title: "Placement de dés réussi"
+                                comment: "Le hasard est bien maîtrisé, on peut toujours limiter la casse."
+                            -   product: "alchimia"
+                                author: "blue@example.com"
+                                rating: 8
+                                title: "Très bon"
+                                comment: "Les formules donnent un vrai sentiment de progression."
+                            -   product: "alchimia"
+                                author: "kubenbois@example.com"
+                                rating: 9
+                                title: "Excellent"
+                                comment: "Mon jeu expert préféré de l'année avec Cargo Céleste."
+                            -   product: "alchimia"
+                                author: "petitpion@example.com"
+                                rating: 6
+                                title: "Un peu dense"
+                                comment: "La règle est longue à assimiler."
+                            -   product: "robots_en_folie"
+                                author: "gobelinjoueur@example.com"
+                                rating: 8
+                                title: "Chaos jubilatoire"
+                                comment: "Rien ne se passe comme prévu, et c'est ce qui le rend génial."
+                            -   product: "robots_en_folie"
+                                author: "ludomaman@example.com"
+                                rating: 7
+                                title: "Les ados adorent"
+                                comment: "Un bon jeu pour apprendre la logique en s'amusant."
+                            -   product: "robots_en_folie"
+                                author: "lestratege@example.com"
+                                rating: 5
+                                title: "Trop chaotique"
+                                comment: "Impossible de planifier quoi que ce soit au-delà de deux tours."
+                            -   product: "jardins_zen"
+                                author: "tuileuse@example.com"
+                                rating: 9
+                                title: "Élégant"
+                                comment: "Un abstrait d'une grande pureté, et le matériel est superbe."
+                            -   product: "jardins_zen"
+                                author: "loic_425@example.com"
+                                rating: 8
+                                title: "Apaisant"
+                                comment: "Parfait pour une partie calme à deux."
+                            -   product: "jardins_zen"
+                                author: "damedepique@example.com"
+                                rating: 7
+                                title: "Joli duel"
+                                comment: "Simple et profond, mais peut sembler austère."
+                            -   product: "l_ile_aux_quatre_vents"
+                                author: "customer@example.com"
+                                rating: 8
+                                title: "Belle aventure"
+                                comment: "Une excellente évolution du jeu de pose de tuiles classique."
+                            -   product: "l_ile_aux_quatre_vents"
+                                author: "petitpion@example.com"
+                                rating: 7
+                                title: "Familial"
+                                comment: "Accessible et assez interactif."
+                            -   product: "l_ile_aux_quatre_vents"
+                                author: "meeplefou@example.com"
+                                rating: 8
+                                title: "Le vent change tout"
+                                comment: "La mécanique de vent est vraiment originale."
                 product_video:
                     options:
                         custom:
