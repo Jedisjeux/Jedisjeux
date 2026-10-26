@@ -103,6 +103,7 @@ jobs:
         php: ["8.2"]
         node: ["16.x"]
         mysql: ["5.7"]
+        behat_driver: ["chrome_headless"]
 
     env:
       APP_ENV: test
