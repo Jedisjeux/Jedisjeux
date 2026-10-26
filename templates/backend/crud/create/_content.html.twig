@@ -8,6 +8,6 @@
 
     {% include '@SyliusUi/Form/Buttons/_create.html.twig' with {'paths': {'cancel': path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({}))}} %}
 
-    {{ form_row(form._token) }}
+    {% if not form._token.rendered %}{{ form_row(form._token) }}{% endif %}
     {{ form_end(form, {'render_rest': false}) }}
 </div>

@@ -57,7 +57,7 @@ class TopicType extends AbstractType
             ])
             ->add('mainTaxon', EntityType::class, [
                 'label' => 'sylius.ui.category',
-                'class' => 'App:Taxon',
+                'class' => \App\Entity\Taxon::class,
                 'group_by' => 'parent',
                 'query_builder' => function (EntityRepository $er) use ($onlyPublic) {
                     $queryBuilder = $er->createQueryBuilder('o')

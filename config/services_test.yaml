@@ -10,9 +10,19 @@ services:
         autoconfigure: true
         bind:
             $minkParameters: '@behat.mink.parameters'
-            $spoolDirectory: '%kernel.cache_dir%/spool'
+            $mailerPool: '@test.mailer_pool'
 
     App\Tests\Behat\:
         resource: '../tests/Behat/*'
+
+    Monofony\Bridge\Behat\Service\EmailChecker:
+        arguments:
+            $cache: '@test.mailer_pool'
+
+    Monofony\Bridge\Behat\Service\MessageSendCacher:
+        arguments:
+            $cache: '@test.mailer_pool'
+
+    Monofony\Bridge\Behat\Service\EmailCheckerInterface: '@Monofony\Bridge\Behat\Service\EmailChecker'
 
     Monofony\Bundle\CoreBundle\Tests\Behat\Service\SecurityServiceInterface: '@App\Tests\Behat\Service\SecurityService'

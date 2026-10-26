@@ -26,6 +26,7 @@ class DateTimePickerType extends AbstractType
         $resolver->setDefaults([
             'widget' => 'single_text',
             'format' => 'dd/MM/yyyy H:i',
+            'html5' => false,
         ]);
     }
 

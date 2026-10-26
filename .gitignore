@@ -44,8 +44,8 @@ Makefile
 /phpunit.xml
 ###< phpunit/phpunit ###
 ###> friendsofphp/php-cs-fixer ###
-/.php_cs
-/.php_cs.cache
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
 ###< friendsofphp/php-cs-fixer ###
 
 ###> infection/infection ###
@@ -60,3 +60,7 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 /.phpunit.result.cache
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###

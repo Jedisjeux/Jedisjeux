@@ -11,43 +11,33 @@
 
 namespace App\Security\Authorization;
 
-use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
+/**
+ * Denies access instead of throwing when there is no token (e.g. on error pages).
+ */
 class AuthorizationChecker implements AuthorizationCheckerInterface
 {
     private $tokenStorage;
     private $accessDecisionManager;
-    private $authenticationManager;
-    private $alwaysAuthenticate;
 
-    public function __construct(TokenStorageInterface $tokenStorage, AuthenticationManagerInterface $authenticationManager, AccessDecisionManagerInterface $accessDecisionManager, bool $alwaysAuthenticate = false)
+    public function __construct(TokenStorageInterface $tokenStorage, AccessDecisionManagerInterface $accessDecisionManager)
     {
         $this->tokenStorage = $tokenStorage;
-        $this->authenticationManager = $authenticationManager;
         $this->accessDecisionManager = $accessDecisionManager;
-        $this->alwaysAuthenticate = $alwaysAuthenticate;
     }
 
     /**
      * {@inheritdoc}
      */
-    final public function isGranted($attributes, $subject = null)
+    final public function isGranted($attribute, $subject = null): bool
     {
         if (null === ($token = $this->tokenStorage->getToken())) {
             return false;
         }
 
-        if ($this->alwaysAuthenticate || !$token->isAuthenticated()) {
-            $this->tokenStorage->setToken($token = $this->authenticationManager->authenticate($token));
-        }
-
-        if (!\is_array($attributes)) {
-            $attributes = [$attributes];
-        }
-
-        return $this->accessDecisionManager->decide($token, $attributes, $subject);
+        return $this->accessDecisionManager->decide($token, [$attribute], $subject);
     }
 }

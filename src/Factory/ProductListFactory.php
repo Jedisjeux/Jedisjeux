@@ -14,7 +14,7 @@ namespace App\Factory;
 use App\Entity\ProductList;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

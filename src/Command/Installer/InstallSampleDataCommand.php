@@ -62,7 +62,7 @@ EOT
         }
 
         try {
-            $rootDir = $this->getContainer()->getParameter('kernel.root_dir').'/../';
+            $rootDir = $this->getContainer()->getParameter('kernel.project_dir').'/';
             $this->ensureDirectoryExistsAndIsWritable($rootDir.self::WEB_MEDIA_DIRECTORY, $output);
             $this->ensureDirectoryExistsAndIsWritable($rootDir.self::WEB_MEDIA_IMAGE_DIRECTORY, $output);
         } catch (\RuntimeException $exception) {

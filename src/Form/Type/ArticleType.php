@@ -75,7 +75,7 @@ class ArticleType extends AbstractType
             ->add('mainTaxon', EntityType::class, [
                 'label' => 'sylius.ui.category',
                 'placeholder' => '---',
-                'class' => 'App:Taxon',
+                'class' => \App\Entity\Taxon::class,
                 'group_by' => 'parent',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('o')

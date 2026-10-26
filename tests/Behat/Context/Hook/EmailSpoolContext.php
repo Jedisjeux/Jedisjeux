@@ -14,28 +14,19 @@ declare(strict_types=1);
 namespace App\Tests\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
-use Monofony\Bridge\Behat\Service\EmailCheckerInterface;
-use Symfony\Component\Filesystem\Filesystem;
+use Psr\Cache\CacheItemPoolInterface;
 
 final class EmailSpoolContext implements Context
 {
-    /** @var string */
-    private $spoolDirectory;
-
-    /** @var Filesystem */
-    private $filesystem;
-
-    public function __construct(EmailCheckerInterface $emailChecker, Filesystem $filesystem)
+    public function __construct(private CacheItemPoolInterface $mailerPool)
     {
-        $this->spoolDirectory = $emailChecker->getSpoolDirectory();
-        $this->filesystem = $filesystem;
     }
 
     /**
      * @BeforeScenario @email
      */
-    public function purgeSpooledMessages()
+    public function purgeSpooledMessages(): void
     {
-        $this->filesystem->remove($this->spoolDirectory);
+        $this->mailerPool->clear();
     }
 }

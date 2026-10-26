@@ -11,13 +11,13 @@
 
 namespace App\Command\Installer\Data;
 
+use App\Command\ContainerAwareCommand;
 use App\Entity\Taxon;
 use App\Repository\TaxonRepository;
 use Doctrine\ORM\EntityManager;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Parser;
@@ -107,7 +107,7 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
      */
     public function getYAMLFileName()
     {
-        return $this->getContainer()->get('kernel')->getRootDir().'/Resources/initialData/target_audiences.yml';
+        return $this->getContainer()->get('kernel')->getProjectDir().'/src/Resources/initialData/target_audiences.yml';
     }
 
     /**

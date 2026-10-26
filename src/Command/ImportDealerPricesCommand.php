@@ -344,7 +344,7 @@ EOT
      */
     private function removeOutOfCatalogDealerPrices(Dealer $dealer)
     {
-        $query = $this->manager->createQuery('delete from App:DealerPrice o where o.dealer = :dealer and o.updatedAt < :today');
+        $query = $this->manager->createQuery('delete from App\Entity\DealerPrice o where o.dealer = :dealer and o.updatedAt < :today');
 
         return $query->execute([
             'dealer' => $dealer,

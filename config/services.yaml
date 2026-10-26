@@ -14,6 +14,9 @@ services:
     _instanceof:
         Sylius\Bundle\ResourceBundle\Controller\ResourceController:
             autowire: false
+        App\Command\ContainerAwareCommand:
+            calls:
+                - [setContainer, ['@service_container']]
 
     # default configuration for services in *this* file
     _defaults:
@@ -32,7 +35,7 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Updater,Kernel.php}'
+        exclude: '../src/{DependencyInjection,Entity,Factory,Grid/Filter,Migrations,Tests,Updater,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -310,6 +313,7 @@ services:
 
     app.grid.filter.frontend_comment:
         class: App\Grid\Filter\CommentFilter
+        autoconfigure: false
         tags:
             -
                 name: sylius.grid_filter
@@ -318,6 +322,7 @@ services:
 
     app.grid.filter.between_two_fields:
         class: App\Grid\Filter\BetweenTwoFieldsFilter
+        autoconfigure: false
         tags:
             -
                 name: sylius.grid_filter
@@ -326,6 +331,7 @@ services:
 
     app.grid.filter.frontend_between_two_fields:
         class: App\Grid\Filter\BetweenTwoFieldsFilter
+        autoconfigure: false
         tags:
             -
                 name: sylius.grid_filter
@@ -334,6 +340,7 @@ services:
 
     app.grid.filter.frontend_entity:
         class: Sylius\Component\Grid\Filter\EntityFilter
+        autoconfigure: false
         tags:
             -   name: sylius.grid_filter
                 type: frontend_entity
@@ -341,6 +348,7 @@ services:
 
     app.grid.filter.frontend_greater_than_or_equal:
         class: App\Grid\Filter\GreaterThanOrEqualFilter
+        autoconfigure: false
         tags:
             -
                 name: sylius.grid_filter
@@ -349,6 +357,7 @@ services:
 
     app.grid.filter.frontend_image:
         class: App\Grid\Filter\ImageFilter
+        autoconfigure: false
         tags:
             -
                 name: sylius.grid_filter
@@ -357,6 +366,7 @@ services:
 
     app.grid.filter.less_than_or_equal:
         class: App\Grid\Filter\LessThanOrEqualFilter
+        autoconfigure: false
         tags:
             -
                 name: sylius.grid_filter
@@ -365,6 +375,7 @@ services:
 
     app.grid.filter.frontend_less_than_or_equal:
         class: App\Grid\Filter\LessThanOrEqualFilter
+        autoconfigure: false
         tags:
             -
                 name: sylius.grid_filter
@@ -373,6 +384,7 @@ services:
 
     app.grid.filter.frontend_person_role:
         class: App\Grid\Filter\PersonRoleFilter
+        autoconfigure: false
         tags:
             -
                 name: sylius.grid_filter
@@ -381,6 +393,7 @@ services:
 
     app.grid.filter.status:
         class: App\Grid\Filter\StatusFilter
+        autoconfigure: false
         tags:
             -
                 name: sylius.grid_filter
@@ -389,6 +402,7 @@ services:
 
     app.grid.filter.taxon:
         class: App\Grid\Filter\TaxonFilter
+        autoconfigure: false
         arguments:
             - '@sylius.repository.taxon'
             - '%locale%'
@@ -400,6 +414,7 @@ services:
 
     app.grid.filter.frontend_taxon:
         class: App\Grid\Filter\TaxonFilter
+        autoconfigure: false
         arguments:
             - '@sylius.repository.taxon'
             - '%locale%'
@@ -444,6 +459,9 @@ services:
         arguments:
             - "@app.google_analytics.client"
             - '%env(GOOGLE_ANALYTICS_PROFILE_ID)%'
+
+    App\GoogleAnalytics\PageViewsService: '@app.google_analytics.page_views'
+    App\GoogleAnalytics\SessionService: '@app.google_analytics.session'
 
     App\Templating\Helper\CurrencyHelper:
         lazy: true

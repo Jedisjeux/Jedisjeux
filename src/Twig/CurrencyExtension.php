@@ -6,7 +6,7 @@ namespace App\Twig;
 
 use App\Templating\Helper\CurrencyHelperInterface;
 
-final class CurrencyExtension extends \Twig_Extension
+final class CurrencyExtension extends \Twig\Extension\AbstractExtension
 {
     /**
      * @var CurrencyHelperInterface
@@ -24,7 +24,7 @@ final class CurrencyExtension extends \Twig_Extension
     public function getFilters(): array
     {
         return [
-            new \Twig_Filter('sylius_currency_symbol', [$this->helper, 'convertCurrencyCodeToSymbol']),
+            new \Twig\TwigFilter('sylius_currency_symbol', [$this->helper, 'convertCurrencyCodeToSymbol']),
         ];
     }
 }

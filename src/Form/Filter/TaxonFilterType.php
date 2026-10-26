@@ -43,7 +43,7 @@ class TaxonFilterType extends AbstractType
         $builder->add('mainTaxon', EntityType::class, [
             'label' => false,
             'placeholder' => $options['placeholder'],
-            'class' => 'App:Taxon',
+            'class' => \App\Entity\Taxon::class,
             'group_by' => 'parent',
             'choice_value' => 'slug',
             'choice_label' => 'name',

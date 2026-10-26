@@ -7,7 +7,7 @@ namespace App\Twig;
 use App\Repository\ProductReviewRepository;
 use Sylius\Component\Product\Model\ProductInterface;
 
-final class RatingDistributionExtension extends \Twig_Extension
+final class RatingDistributionExtension extends \Twig\Extension\AbstractExtension
 {
     public function __construct(private readonly ProductReviewRepository $productReviewRepository)
     {
@@ -19,7 +19,7 @@ final class RatingDistributionExtension extends \Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new \Twig_Function('product_rating_distribution', [$this, 'getDistribution']),
+            new \Twig\TwigFunction('product_rating_distribution', [$this, 'getDistribution']),
         ];
     }
 

@@ -1,4 +1,4 @@
-{% extends 'SyliusUiBundle:Layout:sidebar.html.twig' %}
+{% extends '@SyliusUi/Layout/sidebar.html.twig' %}
 
 {% block title %}Jedisjeux | {% endblock %}
 
@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block stylesheets %}
-    {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/backend/css/style.css'} %}
+    {% include '@SyliusUi/_stylesheets.html.twig' with {'path': 'assets/backend/css/style.css'} %}
 {% endblock %}
 
 {% block topbar %}
@@ -42,7 +42,7 @@
             <img src="{{ asset('assets/backend/img/admin-logo.svg') }}" class="ui fluid image">
         </div>
     </a>
-    {{ knp_menu_render('app.admin.main', {'template': 'SyliusUiBundle:Menu:sidebar.html.twig', 'currentClass': 'active'}) }}
+    {{ knp_menu_render('app.admin.main', {'template': '@SyliusUi/Menu/sidebar.html.twig', 'currentClass': 'active'}) }}
 {% endblock %}
 
 {% block footer %}
@@ -52,7 +52,7 @@
 {% block javascripts %}
     {% include 'backend/modal/_createFromBoardGameGeek.html.twig' %}
 
-    {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'assets/backend/js/app.js'} %}
+    {% include '@SyliusUi/_javascripts.html.twig' with {'path': 'assets/backend/js/app.js'} %}
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 {% endblock %}

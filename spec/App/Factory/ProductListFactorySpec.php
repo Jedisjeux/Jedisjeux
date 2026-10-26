@@ -7,7 +7,7 @@ use App\Entity\ProductList;
 use App\Factory\ProductListFactory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Customer\Model\CustomerInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProductListFactorySpec extends ObjectBehavior
 {

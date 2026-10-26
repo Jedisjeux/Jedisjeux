@@ -12,11 +12,15 @@
 namespace App\Controller;
 
 use App\GoogleAnalytics\PageViewsService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class PageViewsController extends Controller
+class PageViewsController extends AbstractController
 {
+    public function __construct(private PageViewsService $pageViewsService)
+    {
+    }
+
     /**
      * @param string $pagePath
      *
@@ -24,18 +28,10 @@ class PageViewsController extends Controller
      */
     public function showAction($pagePath)
     {
-        $pageViews = $this->getPageViewsService()->get($pagePath);
+        $pageViews = $this->pageViewsService->get($pagePath);
 
         return new JsonResponse([
             'view_count' => $pageViews,
         ]);
-    }
-
-    /**
-     * @return PageViewsService
-     */
-    protected function getPageViewsService()
-    {
-        return $this->get('app.google_analytics.page_views');
     }
 }

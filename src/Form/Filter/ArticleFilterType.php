@@ -48,7 +48,7 @@ class ArticleFilterType extends AbstractType
             ])
             ->add('mainTaxon', 'entity', [
                 'label' => 'label.category',
-                'class' => 'App:Taxon',
+                'class' => \App\Entity\Taxon::class,
                 'choice_label' => 'name',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('o')

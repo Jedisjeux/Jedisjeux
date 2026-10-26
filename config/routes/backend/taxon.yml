@@ -75,5 +75,5 @@ sylius_backend_taxon_product_index:
     defaults:
         _controller: sylius.controller.product::indexByTaxonIdAction
         _sylius:
-            template: SyliusWebBundle:Backend/Taxon:productIndex.html.twig
+            template: "@SyliusWeb/Backend/Taxon/productIndex.html.twig"
             paginate: 30

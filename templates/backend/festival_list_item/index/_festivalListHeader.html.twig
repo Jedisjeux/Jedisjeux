@@ -1,4 +1,4 @@
-{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+{% import '@SyliusUi/Macro/headers.html.twig' as headers %}
 
 <div class="column">
     {{ headers.default(festival_list.name, configuration.vars.icon|default('list'), configuration.vars.subheader|default('app.ui.manage_festival_lists')|trans) }}
