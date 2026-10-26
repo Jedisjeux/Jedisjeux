@@ -11,11 +11,11 @@
 
 namespace App\Command\Installer\Data;
 
+use App\Command\ContainerAwareCommand;
 use App\Entity\Taxon;
 use App\Repository\TaxonRepository;
 use App\Updater\ProductCountByTaxonUpdater;
 use Doctrine\ORM\EntityManager;
-use App\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

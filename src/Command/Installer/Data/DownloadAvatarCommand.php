@@ -8,9 +8,9 @@
 
 namespace App\Command\Installer\Data;
 
+use App\Command\ContainerAwareCommand;
 use App\Entity\Avatar;
 use Doctrine\ORM\EntityRepository;
-use App\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

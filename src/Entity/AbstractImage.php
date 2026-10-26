@@ -111,7 +111,7 @@ abstract class AbstractImage implements ResourceInterface
      */
     public function upload()
     {
-        //Checks if the path is null
+        // Checks if the path is null
         if (null === $this->file) {
             return;
         }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Templating\Helper;
 
-use Symfony\Component\Intl\Intl;
+use Symfony\Component\Intl\Currencies;
 use Symfony\Component\Templating\Helper\Helper;
 
 class CurrencyHelper extends Helper implements CurrencyHelperInterface
@@ -14,7 +14,7 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
      */
     public function convertCurrencyCodeToSymbol(string $code): string
     {
-        return Intl::getCurrencyBundle()->getCurrencySymbol($code);
+        return Currencies::getSymbol($code);
     }
 
     /**

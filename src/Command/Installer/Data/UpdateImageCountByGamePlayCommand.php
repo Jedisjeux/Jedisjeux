@@ -11,12 +11,12 @@
 
 namespace App\Command\Installer\Data;
 
+use App\Command\ContainerAwareCommand;
 use App\Entity\GamePlay;
 use App\Updater\ImageCountByGamePlayUpdater;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use App\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

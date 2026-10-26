@@ -43,7 +43,7 @@ class ProductRepository extends BaseProductRepository
     }
 
     /**
-     * @param $localeCode
+     * @param      $localeCode
      * @param bool $onlyPublished
      *
      * @return QueryBuilder

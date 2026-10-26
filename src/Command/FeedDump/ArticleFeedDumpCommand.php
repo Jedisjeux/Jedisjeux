@@ -11,8 +11,8 @@
 
 namespace App\Command\FeedDump;
 
-use App\Feed\ArticleFeedDump;
 use App\Command\ContainerAwareCommand;
+use App\Feed\ArticleFeedDump;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

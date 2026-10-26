@@ -47,7 +47,7 @@ final class CommandExecutor
     }
 
     /**
-     * @param $command
+     * @param                 $command
      * @param array           $parameters
      * @param OutputInterface $output
      *

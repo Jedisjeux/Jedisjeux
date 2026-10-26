@@ -30,7 +30,7 @@ class ProductTranslationType extends AbstractType
 
         $builder
             ->add('shortDescription', CKEditorType::class, [
-               'required' => false,
+                'required' => false,
                 'label' => 'app.ui.short_description',
             ])
             ->add('description', CKEditorType::class, [

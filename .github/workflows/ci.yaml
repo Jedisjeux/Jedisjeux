@@ -67,7 +67,7 @@ jobs:
 
       -
         name: Validate coding standard
-        run: PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run --diff --config=.php_cs.dist src
+        run: PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.dist.php src
         if: always() && steps.end-of-setup.outcome == 'success'
 
       -

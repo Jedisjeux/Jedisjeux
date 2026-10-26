@@ -18,19 +18,18 @@ use Symfony\Component\Security\Core\Exception\AccountExpiredException;
 use Symfony\Component\Security\Core\Exception\CredentialsExpiredException;
 use Symfony\Component\Security\Core\Exception\DisabledException;
 use Symfony\Component\Security\Core\Exception\LockedException;
-use Symfony\Component\Security\Core\User\UserChecker as BaseUserChecker;
+use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Sylius users do not implement AdvancedUserInterface anymore, so the Symfony user checker ignores their status.
+ * Other users have no status to check.
  */
-final class UserChecker extends BaseUserChecker
+final class UserChecker implements UserCheckerInterface
 {
     public function checkPreAuth(UserInterface $user)
     {
         if (!$user instanceof SyliusUserInterface) {
-            parent::checkPreAuth($user);
-
             return;
         }
 
@@ -59,8 +58,6 @@ final class UserChecker extends BaseUserChecker
     public function checkPostAuth(UserInterface $user)
     {
         if (!$user instanceof SyliusUserInterface) {
-            parent::checkPostAuth($user);
-
             return;
         }
 
