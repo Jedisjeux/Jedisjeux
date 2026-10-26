@@ -1,0 +1,18 @@
+<section class="section editorial-products" id="ludographie">
+    <div class="container">
+        <div class="editorial-section-heading">
+            <div><span class="editorial-eyebrow">Ludographie</span><h2>Ses jeux</h2></div>
+            <a href="{{ path('sylius_frontend_product_index_by_person', {'slug': person.slug}) }}">Tous ses jeux</a>
+        </div>
+        {{ render(url('sylius_partial_product_index', {
+            'paginate': 8,
+            'criteria': {
+                'person': person.id
+            },
+            'sorting': {
+                'releasedAt': 'desc'
+            },
+            'template': 'frontend/product/_list.html.twig'
+        })) }}
+    </div>
+</section>

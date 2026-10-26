@@ -40,7 +40,7 @@ class ShowPage extends SymfonyPage
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [
-            'name' => 'h1.page-title',
+            'name' => 'h1[itemprop="name"]',
         ]);
     }
 }
