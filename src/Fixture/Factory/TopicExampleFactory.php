@@ -63,13 +63,6 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
      */
     private $optionsResolver;
 
-    /**
-     * @param TopicFactory        $topicFactory
-     * @param RepositoryInterface $customerRepository
-     * @param RepositoryInterface $articleRepository
-     * @param RepositoryInterface $gamePlayRepository
-     * @param RepositoryInterface $taxonRepository
-     */
     public function __construct(
         TopicFactory $topicFactory,
         RepositoryInterface $customerRepository,

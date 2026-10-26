@@ -31,8 +31,6 @@ class ProductCountByTaxonCalculator
     }
 
     /**
-     * @param TaxonInterface $taxon
-     *
      * @return int
      */
     public function calculate(TaxonInterface $taxon)

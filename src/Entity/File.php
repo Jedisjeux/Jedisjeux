@@ -19,8 +19,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 abstract class File
 {
-    use IdentifiableTrait,
-        TimestampableTrait;
+    use IdentifiableTrait;
+    use TimestampableTrait;
 
     /**
      * @var \SplFileInfo|null
@@ -34,17 +34,12 @@ abstract class File
      */
     private $path;
 
-    /**
-     * @return \SplFileInfo|null
-     */
     public function getFile(): ?\SplFileInfo
     {
         return $this->file;
     }
 
     /**
-     * @param \SplFileInfo|null $file
-     *
      * @throws \Exception
      */
     public function setFile(?\SplFileInfo $file): void
@@ -58,17 +53,11 @@ abstract class File
         }
     }
 
-    /**
-     * @return string|null
-     */
     public function getPath(): ?string
     {
         return $this->path;
     }
 
-    /**
-     * @param string|null $path
-     */
     public function setPath(?string $path): void
     {
         $this->path = $path;

@@ -16,12 +16,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Eko\FeedBundle\Item\Writer\RoutedItemInterface;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -227,9 +227,6 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
         return $this->code;
     }
 
-    /**
-     * @param string|null $code
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
@@ -251,9 +248,6 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
         return $this->slug;
     }
 
-    /**
-     * @param string|null $slug
-     */
     public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
@@ -267,25 +261,16 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
         return $this->status;
     }
 
-    /**
-     * @param string|null $status
-     */
     public function setStatus(?string $status): void
     {
         $this->status = $status;
     }
 
-    /**
-     * @return SlideShowBlock|null
-     */
     public function getSlideShowBlock(): ?SlideShowBlock
     {
         return $this->slideShowBlock;
     }
 
-    /**
-     * @param SlideShowBlock|null $slideShowBlock
-     */
     public function setSlideShowBlock(?SlideShowBlock $slideShowBlock): void
     {
         $this->slideShowBlock = $slideShowBlock;
@@ -299,17 +284,11 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
         return $this->product;
     }
 
-    /**
-     * @param ProductInterface|null $product
-     */
     public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;
     }
 
-    /**
-     * @return CustomerInterface|null
-     */
     public function getAuthor(): ?CustomerInterface
     {
         return $this->author;
@@ -323,17 +302,11 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
         $this->author = $author;
     }
 
-    /**
-     * @return Topic|null
-     */
     public function getTopic(): ?Topic
     {
         return $this->topic;
     }
 
-    /**
-     * @param Topic|null $topic
-     */
     public function setTopic(?Topic $topic): void
     {
         $this->topic = $topic;
@@ -351,19 +324,11 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
         return $this->blocks;
     }
 
-    /**
-     * @param Block $block
-     *
-     * @return bool
-     */
     public function hasBlock(Block $block): bool
     {
         return $this->blocks->contains($block);
     }
 
-    /**
-     * @param Block $block
-     */
     public function addBlock(Block $block): void
     {
         if (!$this->hasBlock($block)) {
@@ -372,9 +337,6 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
         }
     }
 
-    /**
-     * @param Block $block
-     */
     public function removeBlock(Block $block): void
     {
         $this->blocks->removeElement($block);
@@ -388,19 +350,11 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
         return $this->reviews;
     }
 
-    /**
-     * @param ReviewInterface $review
-     *
-     * @return bool
-     */
     public function hasReview(ReviewInterface $review): bool
     {
         return $this->reviews->contains($review);
     }
 
-    /**
-     * @param ReviewInterface $review
-     */
     public function addReview(ReviewInterface $review): void
     {
         if (!$this->hasReview($review)) {
@@ -409,9 +363,6 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
         }
     }
 
-    /**
-     * @param ReviewInterface $review
-     */
     public function removeReview(ReviewInterface $review): void
     {
         $this->reviews->removeElement($review);
@@ -433,201 +384,126 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
         $this->averageRating = $averageRating;
     }
 
-    /**
-     * @return float|null
-     */
     public function getMaterialRating(): ?float
     {
         return $this->materialRating;
     }
 
-    /**
-     * @param float $materialRating
-     */
     public function setMaterialRating(float $materialRating): void
     {
         $this->materialRating = $materialRating;
     }
 
-    /**
-     * @return float|null
-     */
     public function getRulesRating(): ?float
     {
         return $this->rulesRating;
     }
 
-    /**
-     * @param float $rulesRating
-     */
     public function setRulesRating(float $rulesRating): void
     {
         $this->rulesRating = $rulesRating;
     }
 
-    /**
-     * @return float|null
-     */
     public function getLifetimeRating(): ?float
     {
         return $this->lifetimeRating;
     }
 
-    /**
-     * @param float $lifetimeRating
-     */
     public function setLifetimeRating(float $lifetimeRating): void
     {
         $this->lifetimeRating = $lifetimeRating;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @param string|null $title
-     */
     public function setTitle(?string $title): void
     {
         $this->title = $title;
     }
 
-    /**
-     * @return \DateTime|null
-     */
     public function getPublishStartDate(): ?\DateTime
     {
         return $this->publishStartDate;
     }
 
-    /**
-     * @param \DateTime|null $publishStartDate
-     */
     public function setPublishStartDate(?\DateTime $publishStartDate): void
     {
         $this->publishStartDate = $publishStartDate;
     }
 
-    /**
-     * @return \DateTime|null
-     */
     public function getPublishEndDate(): ?\DateTime
     {
         return $this->publishEndDate;
     }
 
-    /**
-     * @param \DateTime|null $publishEndDate
-     */
     public function setPublishEndDate(?\DateTime $publishEndDate): void
     {
         $this->publishEndDate = $publishEndDate;
     }
 
-    /**
-     * @return string|null
-     */
     public function getShortDescription(): ?string
     {
         return $this->shortDescription;
     }
 
-    /**
-     * @param string|null $shortDescription
-     */
     public function setShortDescription(?string $shortDescription): void
     {
         $this->shortDescription = $shortDescription;
     }
 
-    /**
-     * @return bool
-     */
     public function isPublishable(): bool
     {
         return $this->publishable;
     }
 
-    /**
-     * @param bool $publishable
-     */
     public function setPublishable(bool $publishable): void
     {
         $this->publishable = $publishable;
     }
 
-    /**
-     * @return string|null
-     */
     public function getImagePath(): ?string
     {
         return $this->imagePath;
     }
 
-    /**
-     * @param string|null $imagePath
-     */
     public function setImagePath(?string $imagePath): void
     {
         $this->imagePath = $imagePath;
     }
 
-    /**
-     * @return int
-     */
     public function getViewCount(): int
     {
         return $this->viewCount;
     }
 
-    /**
-     * @param int $viewCount
-     */
     public function setViewCount(int $viewCount): void
     {
         $this->viewCount = $viewCount;
     }
 
-    /**
-     * @return ArticleImage|null
-     */
     public function getMainImage(): ?ArticleImage
     {
         return $this->mainImage;
     }
 
-    /**
-     * @param ArticleImage|null $mainImage
-     */
     public function setMainImage(?ArticleImage $mainImage): void
     {
         $this->mainImage = $mainImage;
     }
 
-    /**
-     * @return TaxonInterface|null
-     */
     public function getMainTaxon(): ?TaxonInterface
     {
         return $this->mainTaxon;
     }
 
-    /**
-     * @param TaxonInterface|null $mainTaxon
-     */
     public function setMainTaxon(?TaxonInterface $mainTaxon): void
     {
         $this->mainTaxon = $mainTaxon;
     }
 
-    /**
-     * @return bool
-     */
     public function isReviewArticle(): bool
     {
         if (null === $this->getMainTaxon()) {
@@ -637,9 +513,6 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
         return Taxon::CODE_REVIEW_ARTICLE === $this->getMainTaxon()->getCode();
     }
 
-    /**
-     * @return bool
-     */
     public function isReportArticle(): bool
     {
         if (null === $this->getMainTaxon()) {

@@ -23,8 +23,8 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 class ProductListItem implements ResourceInterface
 {
-    use IdentifiableTrait,
-        TimestampableTrait;
+    use IdentifiableTrait;
+    use TimestampableTrait;
 
     /**
      * @var ProductList
@@ -40,33 +40,21 @@ class ProductListItem implements ResourceInterface
      */
     protected $product;
 
-    /**
-     * @return ProductList|null
-     */
     public function getList(): ?ProductList
     {
         return $this->list;
     }
 
-    /**
-     * @param ProductList|null $list
-     */
     public function setList(?ProductList $list): void
     {
         $this->list = $list;
     }
 
-    /**
-     * @return ProductInterface|null
-     */
     public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
-    /**
-     * @param ProductInterface|null $product
-     */
     public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;

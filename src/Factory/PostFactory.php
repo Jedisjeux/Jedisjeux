@@ -15,8 +15,8 @@ use App\Entity\Article;
 use App\Entity\GamePlay;
 use App\Entity\Post;
 use App\Entity\Topic;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -35,7 +35,6 @@ class PostFactory implements FactoryInterface
 
     /**
      * @param string $className
-     * @param CustomerContextInterface $customerContext
      */
     public function __construct($className, CustomerContextInterface $customerContext)
     {
@@ -72,8 +71,6 @@ class PostFactory implements FactoryInterface
     }
 
     /**
-     * @param GamePlay $gamePlay
-     *
      * @return Post
      */
     public function createForGamePlay(GamePlay $gamePlay)
@@ -88,8 +85,6 @@ class PostFactory implements FactoryInterface
     }
 
     /**
-     * @param Article $article
-     *
      * @return Post
      */
     public function createForArticle(Article $article)

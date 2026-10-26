@@ -26,9 +26,6 @@ final class DefaultUsernameORMSubscriber implements EventSubscriber
         ];
     }
 
-    /**
-     * @param OnFlushEventArgs $onFlushEventArgs
-     */
     public function onFlush(OnFlushEventArgs $onFlushEventArgs): void
     {
         $entityManager = $onFlushEventArgs->getEntityManager();
@@ -39,8 +36,7 @@ final class DefaultUsernameORMSubscriber implements EventSubscriber
     }
 
     /**
-     * @param array                  $entities
-     * @param EntityManagerInterface $entityManager
+     * @param array $entities
      */
     private function processEntities($entities, EntityManagerInterface $entityManager, UnitOfWork $unitOfWork): void
     {

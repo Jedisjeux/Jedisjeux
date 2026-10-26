@@ -17,8 +17,8 @@ use App\Entity\CustomerInterface;
 use App\Entity\ProductFile;
 use App\Entity\ProductInterface;
 use App\Entity\ProductVariantInterface;
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\DBAL\Connection;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Console\Command\Command;
@@ -54,15 +54,6 @@ class LoadProductFilesCommand extends Command
     /** @var string */
     private $uploadDestination;
 
-    /**
-     * @param ObjectManager       $objectManager
-     * @param Connection          $connection
-     * @param FactoryInterface    $productFileFactory
-     * @param RepositoryInterface $productFileRepository
-     * @param RepositoryInterface $productVariantRepository
-     * @param RepositoryInterface $customerRepository
-     * @param string              $uploadDestination
-     */
     public function __construct(
         ObjectManager $objectManager,
         Connection $connection,
@@ -118,11 +109,10 @@ class LoadProductFilesCommand extends Command
 
         $this->objectManager->flush();
         $this->objectManager->clear();
+
+        return 0;
     }
 
-    /**
-     * @return array
-     */
     private function getFiles(): array
     {
         return $this->connection->fetchAll(<<<EOM
@@ -144,12 +134,6 @@ EOM
 );
     }
 
-    /**
-     * @param array           $data
-     * @param OutputInterface $output
-     *
-     * @return ProductFile|null
-     */
     private function createProductFile(array $data, OutputInterface $output): ?ProductFile
     {
         /** @var ProductFile $productFile */

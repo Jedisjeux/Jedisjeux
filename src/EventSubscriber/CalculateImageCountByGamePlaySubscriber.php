@@ -14,8 +14,8 @@ namespace App\EventSubscriber;
 use App\Entity\GamePlay;
 use App\Updater\ImageCountByGamePlayUpdater;
 use Doctrine\Common\EventSubscriber;
-use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -29,8 +29,6 @@ class CalculateImageCountByGamePlaySubscriber implements EventSubscriber
 
     /**
      * CalculatePostCountByTopicSubscriber constructor.
-     *
-     * @param ImageCountByGamePlayUpdater $updater
      */
     public function __construct(ImageCountByGamePlayUpdater $updater)
     {
@@ -64,9 +62,6 @@ class CalculateImageCountByGamePlaySubscriber implements EventSubscriber
         $this->updateImageCount($args);
     }
 
-    /**
-     * @param LifecycleEventArgs $args
-     */
     public function updateImageCount(LifecycleEventArgs $args)
     {
         $gamePlay = $args->getObject();

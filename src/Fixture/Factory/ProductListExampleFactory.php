@@ -55,12 +55,6 @@ class ProductListExampleFactory extends AbstractExampleFactory implements Exampl
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface    $productListFactory
-     * @param FactoryInterface    $productListItemFactory
-     * @param RepositoryInterface $customerRepository
-     * @param RepositoryInterface $productRepository
-     */
     public function __construct(
         FactoryInterface $productListFactory,
         FactoryInterface $productListItemFactory,

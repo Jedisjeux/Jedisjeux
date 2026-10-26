@@ -42,11 +42,6 @@ class ReviewArticleFixture extends AbstractFixture
      */
     private $faker;
 
-    /**
-     * @param TaxonFixture         $taxonFixture
-     * @param ArticleReviewFixture $reviewFixture
-     * @param ArticleFixture       $articleFixture
-     */
     public function __construct(
         TaxonFixture $taxonFixture,
         ArticleReviewFixture $reviewFixture,

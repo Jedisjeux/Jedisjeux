@@ -38,8 +38,6 @@ class RedirectionExampleFactory extends AbstractExampleFactory implements Exampl
 
     /**
      * RedirectionExampleFactory constructor.
-     *
-     * @param FactoryInterface $redirectionFactory
      */
     public function __construct(FactoryInterface $redirectionFactory)
     {

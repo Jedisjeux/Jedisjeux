@@ -50,11 +50,6 @@ class BlockExampleFactory extends AbstractExampleFactory implements ExampleFacto
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface    $blockFactory
-     * @param FactoryInterface    $blockImageFactory
-     * @param RepositoryInterface $articleRepository
-     */
     public function __construct(
         FactoryInterface $blockFactory,
         FactoryInterface $blockImageFactory,
@@ -91,10 +86,6 @@ class BlockExampleFactory extends AbstractExampleFactory implements ExampleFacto
         return $block;
     }
 
-    /**
-     * @param Block $block
-     * @param array $options
-     */
     private function createImage(Block $block, array $options)
     {
         $imagePath = $options['image'];

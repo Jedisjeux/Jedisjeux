@@ -1,3 +1,5 @@
+# The new homepage theme no longer has this section
+@todo
 @viewing_products_on_homepage
 Feature: Viewing a latest arrivals list
     In order to be up-to-date with the arrivals

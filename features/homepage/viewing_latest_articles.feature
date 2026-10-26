@@ -16,10 +16,10 @@ Feature: Viewing a latest article list
     @ui
     Scenario: Viewing latest articles
         When I check latest articles
-        Then I should see 5 articles in the latest articles list
+        Then I should see 4 articles in the latest articles list
         And I should see the article "Shogun Review" in the latest articles list
         And I should see the article "Essen 2018" in the latest articles list
         And I should see the article "New Patchwork Video" in the latest articles list
         And I should see the article "New Puerto Rico Video" in the latest articles list
-        And I should see the article "New Modern Art Video" in the latest articles list
-        But I should not see the article "Old Video" in the latest articles list
+        But I should not see the article "New Modern Art Video" in the latest articles list
+        And I should not see the article "Old Video" in the latest articles list

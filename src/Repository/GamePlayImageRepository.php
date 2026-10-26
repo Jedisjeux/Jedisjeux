@@ -16,11 +16,6 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class GamePlayImageRepository extends EntityRepository
 {
-    /**
-     * @param string $localeCode
-     *
-     * @return QueryBuilder
-     */
     public function createListQueryBuilder(string $localeCode): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');

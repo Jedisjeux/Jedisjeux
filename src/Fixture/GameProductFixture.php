@@ -38,10 +38,6 @@ class GameProductFixture extends AbstractFixture
      */
     private $faker;
 
-    /**
-     * @param TaxonFixture   $taxonFixture
-     * @param ProductFixture $productFixture
-     */
     public function __construct(TaxonFixture $taxonFixture, ProductFixture $productFixture)
     {
         $this->taxonFixture = $taxonFixture;

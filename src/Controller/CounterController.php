@@ -30,8 +30,6 @@ class CounterController extends AbstractController
 
     /**
      * @Route("/", name="app_counter_index")
-     *
-     * @return Response
      */
     public function indexAction(): Response
     {

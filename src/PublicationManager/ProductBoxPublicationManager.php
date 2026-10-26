@@ -11,7 +11,6 @@
 
 namespace App\PublicationManager;
 
-
 use App\Entity\ProductBox;
 use Doctrine\Persistence\ObjectManager;
 use Webmozart\Assert\Assert;
@@ -23,9 +22,6 @@ class ProductBoxPublicationManager
      */
     private $objectManager;
 
-    /**
-     * @param ObjectManager $objectManager
-     */
     public function __construct(ObjectManager $objectManager)
     {
         $this->objectManager = $objectManager;

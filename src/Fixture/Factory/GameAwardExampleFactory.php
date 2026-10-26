@@ -40,10 +40,6 @@ class GameAwardExampleFactory extends AbstractExampleFactory
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $gameAwardFactory
-     * @param FactoryInterface $gameAwardImageFactory
-     */
     public function __construct(FactoryInterface $gameAwardFactory, FactoryInterface $gameAwardImageFactory)
     {
         $this->gameAwardFactory = $gameAwardFactory;
@@ -94,10 +90,6 @@ class GameAwardExampleFactory extends AbstractExampleFactory
         return $gameAward;
     }
 
-    /**
-     * @param GameAward $gameAward
-     * @param array  $options
-     */
     private function createImage(GameAward $gameAward, array $options)
     {
         $imagePath = $options['image'];

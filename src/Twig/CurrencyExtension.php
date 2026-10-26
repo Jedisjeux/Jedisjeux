@@ -13,9 +13,6 @@ final class CurrencyExtension extends \Twig_Extension
      */
     private $helper;
 
-    /**
-     * @param CurrencyHelperInterface $helper
-     */
     public function __construct(CurrencyHelperInterface $helper)
     {
         $this->helper = $helper;

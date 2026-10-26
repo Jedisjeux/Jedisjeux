@@ -37,10 +37,6 @@ class NewsArticleFixture extends AbstractFixture
      */
     private $faker;
 
-    /**
-     * @param TaxonFixture   $taxonFixture
-     * @param ArticleFixture $articleFixture
-     */
     public function __construct(TaxonFixture $taxonFixture, ArticleFixture $articleFixture)
     {
         $this->taxonFixture = $taxonFixture;

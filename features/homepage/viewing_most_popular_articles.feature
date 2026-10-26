@@ -1,3 +1,5 @@
+# The new homepage theme no longer has this section
+@todo
 @viewing_articles_on_homepage
 Feature: Viewing a most popular article list
     In order to be up-to-date with the best articles to read

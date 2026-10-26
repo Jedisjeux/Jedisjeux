@@ -27,8 +27,8 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 class FestivalList implements ResourceInterface
 {
-    use IdentifiableTrait,
-        TimestampableTrait;
+    use IdentifiableTrait;
+    use TimestampableTrait;
 
     /**
      * @var string
@@ -104,81 +104,51 @@ class FestivalList implements ResourceInterface
         return $this->code;
     }
 
-    /**
-     * @param string $code
-     */
     public function setCode(string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    /**
-     * @param string|null $slug
-     */
     public function setSlug(?string $slug): void
     {
         $this->slug = $slug;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string|null $description
-     */
     public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
 
-    /**
-     * @return \DateTime|null
-     */
     public function getStartAt(): ?\DateTime
     {
         return $this->startAt;
     }
 
-    /**
-     * @param \DateTime|null $startAt
-     */
     public function setStartAt(?\DateTime $startAt): void
     {
         $this->startAt = $startAt;
     }
 
-    /**
-     * @return \DateTime|null
-     */
     public function getEndAt(): ?\DateTime
     {
         return $this->endAt;
@@ -192,17 +162,11 @@ class FestivalList implements ResourceInterface
         $this->endAt = $endAt;
     }
 
-    /**
-     * @return FestivalListImage|null
-     */
     public function getImage(): ?FestivalListImage
     {
         return $this->image;
     }
 
-    /**
-     * @param FestivalListImage|null $image
-     */
     public function setImage(?FestivalListImage $image): void
     {
         $this->image = $image;
@@ -216,19 +180,11 @@ class FestivalList implements ResourceInterface
         return $this->items;
     }
 
-    /**
-     * @param FestivalListItem $item
-     *
-     * @return bool
-     */
     public function hasItem(FestivalListItem $item): bool
     {
         return $this->items->contains($item);
     }
 
-    /**
-     * @param FestivalListItem $item
-     */
     public function addItem(FestivalListItem $item): void
     {
         if (!$this->hasItem($item)) {
@@ -236,9 +192,6 @@ class FestivalList implements ResourceInterface
         }
     }
 
-    /**
-     * @param FestivalListItem $item
-     */
     public function removeItem(FestivalListItem $item): void
     {
         $this->items->removeElement($item);

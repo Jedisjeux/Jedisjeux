@@ -138,9 +138,6 @@ class ArticleType extends AbstractType
         ];
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function onPostSetData(FormEvent $event)
     {
         /** @var Article $article */
@@ -153,9 +150,6 @@ class ArticleType extends AbstractType
         }
     }
 
-    /**
-     * @param FormEvent $event
-     */
     public function onPostSubmit(FormEvent $event)
     {
         /** @var Article $article */

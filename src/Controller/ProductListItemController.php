@@ -21,8 +21,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ProductListItemController extends ResourceController
 {
     /**
-     * @param Request $request
-     * @param string  $productListSlug
+     * @param string $productListSlug
      *
      * @return Response
      */

@@ -15,8 +15,8 @@ use App\AppEvents;
 use App\Entity\Notification;
 use App\Entity\Post;
 use App\Factory\NotificationFactory;
-use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -77,9 +77,6 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function onPostCreate(GenericEvent $event)
     {
         /** @var Post $post */

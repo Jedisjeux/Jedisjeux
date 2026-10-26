@@ -45,11 +45,6 @@ class ArticleReviewExampleFactory extends AbstractExampleFactory implements Exam
      */
     private $optionsResolver;
 
-    /**
-     * @param ReviewFactoryInterface $articleReviewFactory
-     * @param RepositoryInterface    $articleRepository
-     * @param RepositoryInterface    $customerRepository
-     */
     public function __construct(
         ReviewFactoryInterface $articleReviewFactory,
         RepositoryInterface $articleRepository,

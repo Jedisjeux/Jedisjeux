@@ -24,9 +24,6 @@ class ProductReviewRepository extends EntityRepository
 {
     /**
      * @param $productId
-     * @param int $count
-     *
-     * @return array
      */
     public function findLatestByProductId($productId, int $count): array
     {
@@ -71,9 +68,6 @@ class ProductReviewRepository extends EntityRepository
 
     /**
      * @param $personId
-     * @param int $count
-     *
-     * @return array
      */
     public function findLatestByPersonId($personId, int $count): array
     {
@@ -103,12 +97,6 @@ class ProductReviewRepository extends EntityRepository
     }
 
     /**
-     * @param string                 $locale
-     * @param string                 $productSlug
-     * @param null|CustomerInterface $author
-     *
-     * @return null|ReviewInterface
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function findOneByProductSlugAndAuthor(
@@ -129,12 +117,6 @@ class ProductReviewRepository extends EntityRepository
             ;
     }
 
-    /**
-     * @param string $localeCode
-     * @param string $productSlug
-     *
-     * @return QueryBuilder
-     */
     public function createListForProductSlugQueryBuilder(string $localeCode, string $productSlug): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');

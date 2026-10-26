@@ -46,19 +46,11 @@ class SlideShowBlock implements ResourceInterface
         return $this->blocks;
     }
 
-    /**
-     * @param Block $block
-     *
-     * @return bool
-     */
     public function hasBlock(Block $block): bool
     {
         return $this->blocks->contains($block);
     }
 
-    /**
-     * @param Block $block
-     */
     public function addBlock(Block $block): void
     {
         if (!$this->hasBlock($block)) {
@@ -67,9 +59,6 @@ class SlideShowBlock implements ResourceInterface
         }
     }
 
-    /**
-     * @param Block $block
-     */
     public function removeBlock(Block $block): void
     {
         $this->blocks->removeElement($block);

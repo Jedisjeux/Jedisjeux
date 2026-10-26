@@ -18,7 +18,7 @@ use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 
 /**
- * Work around to use sylius grid bundle 1.5.1 version which works to join multiple times on a same entity
+ * Work around to use sylius grid bundle 1.5.1 version which works to join multiple times on a same entity.
  */
 final class ExpressionBuilder implements ExpressionBuilderInterface
 {
@@ -62,7 +62,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
 
-        return $this->queryBuilder->expr()->eq($this->getFieldName($field), ':' . $parameterName);
+        return $this->queryBuilder->expr()->eq($this->getFieldName($field), ':'.$parameterName);
     }
 
     /**
@@ -73,7 +73,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
 
-        return $this->queryBuilder->expr()->neq($this->getFieldName($field), ':' . $parameterName);
+        return $this->queryBuilder->expr()->neq($this->getFieldName($field), ':'.$parameterName);
     }
 
     /**
@@ -84,7 +84,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
 
-        return $this->queryBuilder->expr()->lt($this->getFieldName($field), ':' . $parameterName);
+        return $this->queryBuilder->expr()->lt($this->getFieldName($field), ':'.$parameterName);
     }
 
     /**
@@ -95,7 +95,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
 
-        return $this->queryBuilder->expr()->lte($this->getFieldName($field), ':' . $parameterName);
+        return $this->queryBuilder->expr()->lte($this->getFieldName($field), ':'.$parameterName);
     }
 
     /**
@@ -106,7 +106,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
 
-        return $this->queryBuilder->expr()->gt($this->getFieldName($field), ':' . $parameterName);
+        return $this->queryBuilder->expr()->gt($this->getFieldName($field), ':'.$parameterName);
     }
 
     /**
@@ -117,7 +117,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
         $parameterName = $this->getParameterName($field);
         $this->queryBuilder->setParameter($parameterName, $value);
 
-        return $this->queryBuilder->expr()->gte($this->getFieldName($field), ':' . $parameterName);
+        return $this->queryBuilder->expr()->gte($this->getFieldName($field), ':'.$parameterName);
     }
 
     /**
@@ -187,7 +187,7 @@ final class ExpressionBuilder implements ExpressionBuilderInterface
     private function getFieldName(string $field): string
     {
         if (false === strpos($field, '.')) {
-            return $this->queryBuilder->getRootAlias() . '.' . $field;
+            return $this->queryBuilder->getRootAlias().'.'.$field;
         }
 
         return $field;

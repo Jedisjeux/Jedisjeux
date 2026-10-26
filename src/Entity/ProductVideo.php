@@ -22,8 +22,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ProductVideo implements ResourceInterface
 {
-    use IdentifiableTrait,
-        TimestampableTrait;
+    use IdentifiableTrait;
+    use TimestampableTrait;
 
     /**
      * @var string|null
@@ -57,65 +57,41 @@ class ProductVideo implements ResourceInterface
      */
     private $image;
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @param string|null $title
-     */
     public function setTitle(?string $title): void
     {
         $this->title = $title;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPath(): ?string
     {
         return $this->path;
     }
 
-    /**
-     * @param string|null $path
-     */
     public function setPath(?string $path): void
     {
         $this->path = $path;
     }
 
-    /**
-     * @return ProductVideoImage|null
-     */
     public function getImage(): ?ProductVideoImage
     {
         return $this->image;
     }
 
-    /**
-     * @param ProductVideoImage|null $image
-     */
     public function setImage(?ProductVideoImage $image): void
     {
         $this->image = $image;
     }
 
-    /**
-     * @return ProductInterface|null
-     */
     public function getProduct(): ?ProductInterface
     {
         return $this->product;
     }
 
-    /**
-     * @param ProductInterface|null $product
-     */
     public function setProduct(?ProductInterface $product): void
     {
         $this->product = $product;

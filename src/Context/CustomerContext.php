@@ -29,10 +29,6 @@ class CustomerContext implements CustomerContextInterface
      */
     private $authorizationChecker;
 
-    /**
-     * @param TokenStorageInterface         $tokenStorage
-     * @param AuthorizationCheckerInterface $authorizationChecker
-     */
     public function __construct(TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $authorizationChecker)
     {
         $this->tokenStorage = $tokenStorage;
@@ -41,8 +37,6 @@ class CustomerContext implements CustomerContextInterface
 
     /**
      * Gets customer based on currently logged user.
-     *
-     * @return CustomerInterface|null
      */
     public function getCustomer(): ?CustomerInterface
     {

@@ -28,8 +28,6 @@ class LiipSerializeHandler implements SubscribingHandlerInterface
 
     /**
      * LiipSerializeHandler constructor.
-     *
-     * @param CacheManager $manager
      */
     public function __construct(CacheManager $manager)
     {
@@ -52,10 +50,6 @@ class LiipSerializeHandler implements SubscribingHandlerInterface
     }
 
     /**
-     * @param VisitorInterface $visitor
-     * @param array            $imageData
-     * @param array            $type
-     *
      * @return string
      */
     public function serializeLiipSerializerTojson(VisitorInterface $visitor, array $imageData, array $type)

@@ -12,9 +12,9 @@
 namespace App\Factory;
 
 use App\Entity\ContactRequest;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -33,7 +33,6 @@ class ContactRequestFactory implements FactoryInterface
 
     /**
      * @param string $className
-     * @param CustomerContextInterface $customerContext
      */
     public function __construct($className, CustomerContextInterface $customerContext)
     {

@@ -35,9 +35,6 @@ class DealerPriceRepository extends EntityRepository
         return $queryBuilder;
     }
 
-    /**
-     * @param Dealer $dealer
-     */
     public function deleteByDealer(Dealer $dealer): void
     {
         $queryBuilder = $this->createQueryBuilder('o');

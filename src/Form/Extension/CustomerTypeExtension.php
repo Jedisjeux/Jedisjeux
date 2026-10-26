@@ -13,7 +13,6 @@ namespace App\Form\Extension;
 
 use App\Form\EventSubscriber\AddUserFormSubscriber;
 use App\Form\Type\Customer\CustomerType;
-use App\Form\Type\User\AppUserType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 

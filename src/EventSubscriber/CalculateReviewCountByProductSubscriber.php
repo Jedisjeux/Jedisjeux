@@ -43,9 +43,6 @@ class CalculateReviewCountByProductSubscriber implements EventSubscriberInterfac
         ];
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function onProductCreate(GenericEvent $event)
     {
         /** @var ProductReview $productReview */
@@ -58,9 +55,6 @@ class CalculateReviewCountByProductSubscriber implements EventSubscriberInterfac
         $this->entityManager->flush();
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function onProductUpdate(GenericEvent $event)
     {
         $this->onProductCreate($event);

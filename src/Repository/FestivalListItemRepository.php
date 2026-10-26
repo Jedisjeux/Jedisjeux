@@ -22,8 +22,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 class FestivalListItemRepository extends EntityRepository
 {
     /**
-     * @param FestivalList $list
-     * @param string       $locale
+     * @param string $locale
      *
      * @return QueryBuilder
      */

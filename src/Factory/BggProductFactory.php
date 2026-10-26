@@ -25,10 +25,6 @@ class BggProductFactory
      */
     private $baseUrl;
 
-    /**
-     * @param string $className
-     * @param string $baseUrl
-     */
     public function __construct(string $className, string $baseUrl)
     {
         $this->className = $className;
@@ -40,11 +36,6 @@ class BggProductFactory
         return new $this->className();
     }
 
-    /**
-     * @param string $path
-     *
-     * @return BggProduct
-     */
     public function createByPath(string $path): BggProduct
     {
         $boardGames = new \SimpleXMLElement(file_get_contents($this->getApiUrl($path)));

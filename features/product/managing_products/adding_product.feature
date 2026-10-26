@@ -24,7 +24,8 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Puerto Rico" should appear in the website
 
-    @ui
+    # The BoardGameGeek XML API now requires an authorization token
+    @ui @todo
     Scenario: Adding a new product from BoardGameGeek as an administrator
         Given I am a logged in administrator
         And I want to create a new product via bgg url "https://boardgamegeek.com/boardgame/3076/puerto-rico"
@@ -33,7 +34,8 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Puerto Rico" should appear in the website
 
-    @ui
+    # The BoardGameGeek XML API now requires an authorization token
+    @ui @todo
     Scenario: Adding a new product from BoardGameGeek as a redactor
         Given I am a logged in redactor
         And I want to create a new product via bgg url "https://boardgamegeek.com/boardgame/3076/puerto-rico"

@@ -61,57 +61,36 @@ class ProductVariantImage extends AbstractImage
         $this->material = false;
     }
 
-    /**
-     * @return ProductVariantInterface|null
-     */
     public function getVariant(): ?ProductVariantInterface
     {
         return $this->variant;
     }
 
-    /**
-     * @param ProductVariantInterface|null $variant
-     */
     public function setVariant(?ProductVariantInterface $variant): void
     {
         $this->variant = $variant;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string|null $description
-     */
     public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
 
-    /**
-     * @return bool
-     */
     public function isMain(): bool
     {
         return $this->main;
     }
 
-    /**
-     * @param bool $main
-     */
     public function setMain(bool $main): void
     {
         $this->main = $main;
     }
 
-    /**
-     * @return bool
-     */
     public function isMaterial(): bool
     {
         return $this->material;

@@ -54,12 +54,11 @@ class LoadTaxonsOfArticlesCommand extends ContainerAwareCommand
         }
 
         $this->getManager()->flush();
+
+        return 0;
     }
 
     /**
-     * @param array          $data
-     * @param TaxonInterface $rootTaxon
-     *
      * @return TaxonInterface
      */
     protected function createOrReplaceTaxon(array $data, TaxonInterface $rootTaxon)

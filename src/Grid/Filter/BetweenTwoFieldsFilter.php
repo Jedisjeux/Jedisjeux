@@ -33,12 +33,6 @@ class BetweenTwoFieldsFilter implements FilterInterface
         $dataSource->restrict($dataSource->getExpressionBuilder()->greaterThanOrEqual($secondField, $data['value']));
     }
 
-    /**
-     * @param string $name
-     * @param array  $options
-     *
-     * @return string
-     */
     private function getField(string $name, array $options): string
     {
         $fields = $this->getFields($options);
@@ -50,11 +44,6 @@ class BetweenTwoFieldsFilter implements FilterInterface
         return $fields[$name];
     }
 
-    /**
-     * @param array $options
-     *
-     * @return array
-     */
     private function getFields(array $options): array
     {
         if (!isset($options['fields'])) {

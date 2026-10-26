@@ -24,9 +24,6 @@ trait ToggleableTrait
      */
     protected $enabled = true;
 
-    /**
-     * @return bool
-     */
     public function isEnabled(): bool
     {
         return $this->enabled;

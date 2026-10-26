@@ -69,6 +69,8 @@ EOT
 
         $output->writeln($this->getProperFinalMessage($errored));
         $output->writeln(sprintf('You can now open your store at the following path under the website root: <info>%s.</info>', $frontControllerPath));
+
+        return 0;
     }
 
     /**

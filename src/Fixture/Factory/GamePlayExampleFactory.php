@@ -52,10 +52,6 @@ class GamePlayExampleFactory extends AbstractExampleFactory implements ExampleFa
 
     /**
      * GamePlayExampleFactory constructor.
-     *
-     * @param FactoryInterface    $gamePlayFactory
-     * @param RepositoryInterface $customerRepository
-     * @param RepositoryInterface $productRepository
      */
     public function __construct(FactoryInterface $gamePlayFactory, RepositoryInterface $customerRepository, RepositoryInterface $productRepository)
     {

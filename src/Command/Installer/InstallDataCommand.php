@@ -88,5 +88,7 @@ EOT
         ];
 
         $this->runCommands($commands, $output);
+
+        return 0;
     }
 }

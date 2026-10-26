@@ -21,10 +21,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PlayerType extends AbstractType
 {
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array                $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder

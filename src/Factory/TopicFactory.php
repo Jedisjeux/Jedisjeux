@@ -16,8 +16,8 @@ use App\Entity\GamePlay;
 use App\Entity\Post;
 use App\Entity\Topic;
 use Doctrine\ORM\EntityRepository;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
@@ -46,9 +46,6 @@ class TopicFactory implements FactoryInterface
      */
     protected $postFactory;
 
-    /**
-     * @param string $className
-     */
     public function __construct(
         string $className,
         CustomerContextInterface $customerContext,
@@ -78,8 +75,6 @@ class TopicFactory implements FactoryInterface
     }
 
     /**
-     * @param GamePlay $gamePlay
-     *
      * @return Topic
      */
     public function createForGamePlay(GamePlay $gamePlay)
@@ -98,8 +93,6 @@ class TopicFactory implements FactoryInterface
     }
 
     /**
-     * @param Article $article
-     *
      * @return Topic
      */
     public function createForArticle(Article $article)

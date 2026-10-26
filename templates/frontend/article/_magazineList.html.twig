@@ -1,5 +1,7 @@
 {% import 'macro/image.html.twig' as images %}
+{% import 'macro/messages.html.twig' as messages %}
 
+{% if articles.data|length > 0 %}
 <div class="editorial-article-grid">
     {% for article in articles.data %}
         {% set articlePath = path('app_frontend_article_show', { 'slug': article.slug }) %}
@@ -27,3 +29,6 @@
         </article>
     {% endfor %}
 </div>
+{% else %}
+    {{ messages.info('app.ui.there_are_no_articles') }}
+{% endif %}

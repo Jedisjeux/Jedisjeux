@@ -20,11 +20,6 @@ use Sylius\Component\Customer\Model\CustomerInterface;
  */
 class CustomerRepository extends EntityRepository
 {
-    /**
-     * @param string $username
-     *
-     * @return null|CustomerInterface
-     */
     public function findOneByUsername(string $username): ?CustomerInterface
     {
         $queryBuilder = $this->createQueryBuilder('o');

@@ -14,9 +14,9 @@ namespace App\Command\Installer\Data;
 use App\Entity\Taxon;
 use App\Repository\TaxonRepository;
 use Doctrine\ORM\EntityManager;
+use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -51,6 +51,8 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
         }
 
         $this->getManager()->flush();
+
+        return 0;
     }
 
     /**
@@ -64,9 +66,6 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param array          $data
-     * @param TaxonInterface $parentTaxon
-     *
      * @return TaxonInterface
      */
     protected function createOrReplaceTaxon(array $data, TaxonInterface $parentTaxon)

@@ -26,8 +26,6 @@ class ProductCountByTaxonUpdater
 
     /**
      * ProductCountByTaxonUpdater constructor.
-     *
-     * @param ProductCountByTaxonCalculator $calculator
      */
     public function __construct(ProductCountByTaxonCalculator $calculator)
     {

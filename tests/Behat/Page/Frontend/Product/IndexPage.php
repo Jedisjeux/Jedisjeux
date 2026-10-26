@@ -33,7 +33,7 @@ class IndexPage extends SymfonyPage
     {
         $productsList = $this->getDocument()->find('css', '#product-list');
 
-        $products = $productsList->findAll('css', '.image-box');
+        $products = $productsList->findAll('css', '.editorial-catalog-card');
 
         return count($products);
     }
@@ -45,7 +45,7 @@ class IndexPage extends SymfonyPage
     {
         $productsList = $this->getDocument()->find('css', '#product-list');
 
-        return $productsList->find('css', '.image-box:first-child .lead')->getText();
+        return $productsList->find('css', '.editorial-catalog-card h2')->getText();
     }
 
     /**
@@ -55,6 +55,6 @@ class IndexPage extends SymfonyPage
      */
     public function isProductOnList($productName)
     {
-        return null !== $this->getDocument()->find('css', sprintf('#product-list .lead:contains("%s")', $productName));
+        return null !== $this->getDocument()->find('css', sprintf('#product-list .editorial-catalog-card h2:contains("%s")', $productName));
     }
 }

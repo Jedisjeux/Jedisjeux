@@ -41,10 +41,6 @@ class ProductVideoExampleFixture extends AbstractExampleFactory
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $productVideoFactory
-     * @param RepositoryInterface $productRepository
-     */
     public function __construct(FactoryInterface $productVideoFactory, RepositoryInterface $productRepository)
     {
         $this->productVideoFactory = $productVideoFactory;

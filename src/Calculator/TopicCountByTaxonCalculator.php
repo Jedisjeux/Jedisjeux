@@ -31,8 +31,6 @@ class TopicCountByTaxonCalculator
     }
 
     /**
-     * @param TaxonInterface $taxon
-     *
      * @return int
      */
     public function calculate(TaxonInterface $taxon)

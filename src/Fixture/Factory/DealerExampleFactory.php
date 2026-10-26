@@ -46,9 +46,6 @@ class DealerExampleFactory extends AbstractExampleFactory implements ExampleFact
 
     /**
      * DealerExampleFactory constructor.
-     *
-     * @param FactoryInterface $dealerFactory
-     * @param FactoryInterface $dealerImageFactory
      */
     public function __construct(FactoryInterface $dealerFactory, FactoryInterface $dealerImageFactory)
     {
@@ -80,10 +77,6 @@ class DealerExampleFactory extends AbstractExampleFactory implements ExampleFact
         return $dealer;
     }
 
-    /**
-     * @param Dealer $dealer
-     * @param array  $options
-     */
     private function createImage(Dealer $dealer, array $options)
     {
         $imagePath = $options['image'];

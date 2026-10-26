@@ -26,8 +26,6 @@ class ArticlePublicationManager
 
     /**
      * ArticlePublicationManager constructor.
-     *
-     * @param ObjectManager $manager
      */
     public function __construct(ObjectManager $manager)
     {
@@ -35,8 +33,6 @@ class ArticlePublicationManager
     }
 
     /**
-     * @param Article $article
-     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

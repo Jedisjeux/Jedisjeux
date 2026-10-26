@@ -166,6 +166,8 @@ class Version20170410184701 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
+        $this->addSql('SET FOREIGN_KEY_CHECKS = 0');
+
         $this->addSql('ALTER TABLE sylius_product_taxon DROP FOREIGN KEY FK_169C6CD94584665A');
         $this->addSql('ALTER TABLE sylius_product_options DROP FOREIGN KEY FK_2B5FF0094584665A');
         $this->addSql('ALTER TABLE sylius_product_translation DROP FOREIGN KEY FK_105A9082C2AC5D3');
@@ -310,5 +312,6 @@ class Version20170410184701 extends AbstractMigration
         $this->addSql('DROP TABLE phpcr_type_nodes');
         $this->addSql('DROP TABLE phpcr_type_props');
         $this->addSql('DROP TABLE phpcr_type_childs');
+        $this->addSql('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

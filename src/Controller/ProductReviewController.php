@@ -20,8 +20,6 @@ use Symfony\Component\HttpFoundation\Response;
 class ProductReviewController extends ResourceController
 {
     /**
-     * @param Request $request
-     *
      * @return Response
      */
     public function showRatingAction(Request $request)

@@ -40,5 +40,7 @@ EOT
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $locale = $this->get('sylius.setup.locale')->setup($input, $output);
+
+        return 0;
     }
 }

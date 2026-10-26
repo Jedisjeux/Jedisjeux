@@ -31,8 +31,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ProductList implements ResourceInterface
 {
-    use IdentifiableTrait,
-        TimestampableTrait;
+    use IdentifiableTrait;
+    use TimestampableTrait;
 
     const CODE_GAME_LIBRARY = 'game_library';
     const CODE_WISHES = 'wishes';
@@ -92,57 +92,36 @@ class ProductList implements ResourceInterface
         $this->items = new ArrayCollection();
     }
 
-    /**
-     * @return string|null
-     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
-    /**
-     * @param string|null $code
-     */
     public function setCode(?string $code): void
     {
         $this->code = $code;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string|null $name
-     */
     public function setName(?string $name): void
     {
         $this->name = $name;
     }
 
-    /**
-     * @return CustomerInterface|null
-     */
     public function getOwner(): ?CustomerInterface
     {
         return $this->owner;
     }
 
-    /**
-     * @param CustomerInterface|null $owner
-     */
     public function setOwner(?CustomerInterface $owner): void
     {
         $this->owner = $owner;
@@ -156,19 +135,11 @@ class ProductList implements ResourceInterface
         return $this->items;
     }
 
-    /**
-     * @param ProductListItem $item
-     *
-     * @return bool
-     */
     public function hasItem(ProductListItem $item): bool
     {
         return $this->items->contains($item);
     }
 
-    /**
-     * @param ProductListItem $item
-     */
     public function addItem(ProductListItem $item): void
     {
         if (!$this->hasItem($item)) {
@@ -177,17 +148,11 @@ class ProductList implements ResourceInterface
         }
     }
 
-    /**
-     * @param ProductListItem $item
-     */
     public function removeItem(ProductListItem $item): void
     {
         $this->items->removeElement($item);
     }
 
-    /**
-     * @return ProductInterface|null
-     */
     public function getLastProduct(): ?ProductInterface
     {
         /** @var ProductListItem $lastItem */

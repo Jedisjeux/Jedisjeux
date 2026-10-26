@@ -33,9 +33,7 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
     private $customerRepository;
 
     /**
-     * @param string              $dataClass
-     * @param array               $validationGroups
-     * @param RepositoryInterface $customerRepository
+     * @param string $dataClass
      */
     public function __construct($dataClass, array $validationGroups, RepositoryInterface $customerRepository)
     {

@@ -77,5 +77,7 @@ EOT
 
         $this->runCommands($commands, $output);
         $outputStyle->newLine(2);
+
+        return 0;
     }
 }

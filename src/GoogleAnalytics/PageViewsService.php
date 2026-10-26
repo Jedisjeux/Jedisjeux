@@ -29,8 +29,7 @@ class PageViewsService
     /**
      * GetPageViews constructor.
      *
-     * @param \Google_Client $client
-     * @param string         $profileId
+     * @param string $profileId
      */
     public function __construct(\Google_Client $client, $profileId)
     {
@@ -56,9 +55,8 @@ class PageViewsService
     }
 
     /**
-     * @param \Google_Service_Analytics $analytics
-     * @param string                    $profileId
-     * @param string                    $pagePath
+     * @param string $profileId
+     * @param string $pagePath
      *
      * @return \Google_Service_Analytics_GaData
      */
@@ -78,9 +76,8 @@ class PageViewsService
     }
 
     /**
-     * @param \Google_Service_Analytics $analytics
-     * @param string                    $profileId
-     * @param string                    $pagePath
+     * @param string $profileId
+     * @param string $pagePath
      *
      * @return \Google_Service_Analytics_RealtimeData
      */

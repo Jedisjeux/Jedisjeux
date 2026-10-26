@@ -52,10 +52,6 @@ class PostExampleFactory extends AbstractExampleFactory implements ExampleFactor
 
     /**
      * PostExampleFactory constructor.
-     *
-     * @param FactoryInterface    $postFactory
-     * @param RepositoryInterface $topicRepository
-     * @param RepositoryInterface $customerRepository
      */
     public function __construct(
         FactoryInterface $postFactory,

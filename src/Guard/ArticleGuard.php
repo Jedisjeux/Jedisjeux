@@ -22,8 +22,6 @@ class ArticleGuard
 
     /**
      * ArticleGuard constructor.
-     *
-     * @param AuthorizationCheckerInterface $authorizationChecker
      */
     public function __construct(AuthorizationCheckerInterface $authorizationChecker)
     {

@@ -47,16 +47,11 @@ class YearAwardExampleFactory extends AbstractExampleFactory
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface $yearAwardFactory
-     * @param RepositoryInterface $gameAwardRepository
-     * @param RepositoryInterface $productRepository
-     */
     public function __construct(
         FactoryInterface $yearAwardFactory,
         RepositoryInterface $gameAwardRepository,
         RepositoryInterface $productRepository
-    ){
+    ) {
         $this->yearAwardFactory = $yearAwardFactory;
         $this->gameAwardRepository = $gameAwardRepository;
         $this->productRepository = $productRepository;

@@ -19,19 +19,11 @@ use Sylius\Component\Product\Model\ProductInterface;
  */
 class AddProductToAssociatedProductsUpdater extends AbstractProductAssociationUpdater
 {
-    /**
-     * @param ProductInterface            $product
-     * @param ProductAssociationInterface $association
-     */
     public function update(ProductInterface $product, ProductAssociationInterface $association)
     {
         $this->addProductToAssociatedProducts($product, $association);
     }
 
-    /**
-     * @param ProductAssociationInterface $association
-     * @param ProductInterface            $product
-     */
     protected function addProductToAssociatedProducts(ProductInterface $product, ProductAssociationInterface $association)
     {
         $associationType = $association->getType();

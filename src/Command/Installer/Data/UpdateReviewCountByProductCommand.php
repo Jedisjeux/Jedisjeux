@@ -47,6 +47,8 @@ EOT
         $this->calculateReviewCountByProduct();
 
         $output->writeln(sprintf('<info>%s</info>', 'Review count by product have been successfully updated.'));
+
+        return 0;
     }
 
     protected function calculateReviewCountByProduct()

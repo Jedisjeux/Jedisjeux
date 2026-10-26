@@ -33,7 +33,7 @@ class IndexPage extends SymfonyPage
      */
     public function isProductOnList($title)
     {
-        return null !== $this->getDocument()->find('css', sprintf('#game-play-list .lead:contains("%s")', $title));
+        return null !== $this->getDocument()->find('css', sprintf('#game-play-list .editorial-game-play-card__game:contains("%1$s"), #game-play-list .lead:contains("%1$s")', $title));
     }
 
     /**
@@ -43,7 +43,7 @@ class IndexPage extends SymfonyPage
      */
     public function countGamePlays(): int
     {
-        $gamePlays = $this->getElement('game_plays')->findAll('css', '.image-box');
+        $gamePlays = $this->getElement('game_plays')->findAll('css', '.editorial-game-play-card, .image-box');
 
         return count($gamePlays);
     }

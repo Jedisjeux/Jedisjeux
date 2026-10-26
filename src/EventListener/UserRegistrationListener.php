@@ -39,11 +39,6 @@ final class UserRegistrationListener
      */
     private $eventDispatcher;
 
-    /**
-     * @param ObjectManager $userManager
-     * @param GeneratorInterface $tokenGenerator
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function __construct(
         ObjectManager $userManager,
         GeneratorInterface $tokenGenerator,
@@ -54,9 +49,6 @@ final class UserRegistrationListener
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    /**
-     * @param GenericEvent $event
-     */
     public function handleUserVerification(GenericEvent $event): void
     {
         $customer = $event->getSubject();
@@ -68,9 +60,6 @@ final class UserRegistrationListener
         $this->sendVerificationEmail($user);
     }
 
-    /**
-     * @param UserInterface $user
-     */
     private function sendVerificationEmail(UserInterface $user): void
     {
         $token = $this->tokenGenerator->generate();

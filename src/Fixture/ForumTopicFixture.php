@@ -37,10 +37,6 @@ class ForumTopicFixture extends AbstractFixture
      */
     private $faker;
 
-    /**
-     * @param AbstractResourceFixture $taxonFixture
-     * @param AbstractResourceFixture $topicFixture
-     */
     public function __construct(
         AbstractResourceFixture $taxonFixture,
         AbstractResourceFixture $topicFixture

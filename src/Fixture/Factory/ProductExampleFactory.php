@@ -65,13 +65,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
      */
     private $optionsResolver;
 
-    /**
-     * @param ProductFactoryInterface $productFactory
-     * @param FactoryInterface        $productVariantImageFactory
-     * @param RepositoryInterface     $personRepository
-     * @param RepositoryInterface     $taxonRepository
-     * @param SlugGeneratorInterface  $slugGenerator
-     */
     public function __construct(
         ProductFactoryInterface $productFactory,
         FactoryInterface $productVariantImageFactory,
@@ -145,10 +138,6 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         return $product;
     }
 
-    /**
-     * @param Product $product
-     * @param array   $options
-     */
     private function createImages(Product $product, array $options)
     {
         $first = true;

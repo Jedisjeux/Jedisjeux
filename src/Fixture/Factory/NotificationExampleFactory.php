@@ -44,10 +44,6 @@ class NotificationExampleFactory extends AbstractExampleFactory implements Examp
      */
     private $optionsResolver;
 
-    /**
-     * @param FactoryInterface    $notificationFactory
-     * @param RepositoryInterface $customerRepository
-     */
     public function __construct(
         FactoryInterface $notificationFactory,
         RepositoryInterface $customerRepository
