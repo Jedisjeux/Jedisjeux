@@ -41,3 +41,48 @@ sylius_fixtures:
                                 password: "password"
                                 enabled: true
                                 roles: ["ROLE_MODERATOR"]
+                            -   email: "meeplefou@example.com"
+                                username: "MeepleFou"
+                                password: "password"
+                                enabled: true
+                                avatar: "tests/Resources/fixtures/games/avatars/meeplefou.jpg"
+                            -   email: "damedepique@example.com"
+                                username: "DameDePique"
+                                password: "password"
+                                enabled: true
+                                avatar: "tests/Resources/fixtures/games/avatars/damedepique.jpg"
+                            -   email: "lestratege@example.com"
+                                username: "LeStratege"
+                                password: "password"
+                                enabled: true
+                                avatar: "tests/Resources/fixtures/games/avatars/lestratege.jpg"
+                            -   email: "ludomaman@example.com"
+                                username: "LudoMaman"
+                                password: "password"
+                                enabled: true
+                                avatar: "tests/Resources/fixtures/games/avatars/ludomaman.jpg"
+                            -   email: "petitpion@example.com"
+                                username: "PetitPion"
+                                password: "password"
+                                enabled: true
+                                avatar: "tests/Resources/fixtures/games/avatars/petitpion.jpg"
+                            -   email: "kubenbois@example.com"
+                                username: "Kubenbois"
+                                password: "password"
+                                enabled: true
+                                avatar: "tests/Resources/fixtures/games/avatars/kubenbois.jpg"
+                            -   email: "nuitblanche@example.com"
+                                username: "NuitBlanche"
+                                password: "password"
+                                enabled: true
+                                avatar: "tests/Resources/fixtures/games/avatars/nuitblanche.jpg"
+                            -   email: "gobelinjoueur@example.com"
+                                username: "GobelinJoueur"
+                                password: "password"
+                                enabled: true
+                                avatar: "tests/Resources/fixtures/games/avatars/gobelinjoueur.jpg"
+                            -   email: "tuileuse@example.com"
+                                username: "Tuileuse"
+                                password: "password"
+                                enabled: true
+                                avatar: "tests/Resources/fixtures/games/avatars/tuileuse.jpg"
