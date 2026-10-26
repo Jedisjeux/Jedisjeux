@@ -1,3 +1,4 @@
+{% from 'macro/icon.html.twig' import icon %}
 <div class="editorial-game-presentation" role="tabpanel" aria-labelledby="presentation-tab">
     <div class="row">
         <div class="col-md-8 editorial-game-presentation__copy" itemprop="description">
@@ -23,6 +24,28 @@
                     </details>
                 {% endif %}
             </div>
+            {% set ratingBands = product_rating_distribution(product) %}
+            {% set ratingTotal = 0 %}
+            {% for band in ratingBands %}{% set ratingTotal = ratingTotal + band.count %}{% endfor %}
+            {% if ratingTotal > 0 %}
+                <div class="editorial-game-score">
+                    <h3>Note des joueurs</h3>
+                    <p class="editorial-game-score__average">
+                        {{ icon('star') }}
+                        <strong>{{ product.averageRating|round(1)|number_format(1, ',') }}<small>/10</small></strong>
+                        <a href="#reviews">{{ ratingTotal }} {{ 'app.ui.ratings'|trans|lower }}</a>
+                    </p>
+                    <ul class="editorial-game-score__bars">
+                        {% for band in ratingBands %}
+                            <li>
+                                <span class="editorial-game-score__label">{{ band.label }}</span>
+                                <span class="editorial-game-score__track" aria-hidden="true"><span style="width: {{ band.percent }}%"></span></span>
+                                <span class="editorial-game-score__percent">{{ band.percent }} %</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
             {{ render(url('sylius_frontend_partial_product_review_latest', {
                 productId: product.id,
                 count: 1,

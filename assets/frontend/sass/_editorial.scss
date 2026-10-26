@@ -1067,3 +1067,17 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { @include ed-dark-legacy; } }
 :root[data-theme="dark"] { @include ed-dark-legacy; }
+
+/* Player score with rating distribution */
+.editorial-game-score { margin-top: 14px; padding: 18px 20px; border: 1px solid var(--ed-line); border-radius: 9px; background: var(--ed-panel); }
+.editorial-game-score h3 { margin: 0 0 10px; color: var(--ed-ink); font: 700 19px 'PT Serif',Georgia,serif; }
+.editorial-game-score__average { display: flex; align-items: center; gap: 8px; margin: 0 0 14px; }
+.editorial-game-score__average .ed-icon { width: 22px; height: 22px; color: var(--ed-star); fill: currentColor; }
+.editorial-game-score__average strong { color: var(--ed-ink); font: 700 24px/1 'PT Serif',Georgia,serif; }
+.editorial-game-score__average strong small { margin-left: 1px; color: var(--ed-muted); font-size: 13px; }
+.editorial-game-score__average a { margin-left: 2px; color: var(--ed-muted); font-size: 11px; }
+.editorial-game-score__bars { display: flex; flex-direction: column; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.editorial-game-score__bars li { display: grid; grid-template-columns: 34px minmax(0,1fr) 36px; align-items: center; gap: 10px; color: var(--ed-text-soft); font-size: 10px; }
+.editorial-game-score__track { height: 6px; overflow: hidden; border-radius: 3px; background: var(--ed-line-soft); }
+.editorial-game-score__track > span { display: block; height: 100%; border-radius: 3px; background: var(--ed-accent); }
+.editorial-game-score__percent { text-align: right; font-variant-numeric: tabular-nums; }
