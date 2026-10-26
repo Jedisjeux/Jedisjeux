@@ -10,3 +10,13 @@ services:
             - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
     app-builder:
         environment: *database-url
+
+    # Headless Chrome for JS Behat scenarios; shares the app network so both reach each other on localhost
+    chrome:
+        image: chromedp/headless-shell:140.0.7339.186
+        network_mode: service:app
+        profiles:
+            - default
+        volumes:
+            # Files attached by scenarios are read by Chrome, so expose them at the same path as in the app
+            - ./tests/Resources/fixtures:/var/www/tests/Resources/fixtures:ro
