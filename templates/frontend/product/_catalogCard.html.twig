@@ -18,7 +18,7 @@
 
         {% if product.averageRating > 0 %}
             <div class="editorial-catalog-card__rating" itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
-                <i class="fa fa-star" aria-hidden="true"></i>
+                {{ icon('star') }}
                 <strong>{{ product.averageRating|round(1) }}<small>/10</small></strong>
                 {% if product.reviewCount > 0 %}<span>({{ product.reviewCount }} note{{ product.reviewCount > 1 ? 's' }})</span>{% endif %}
                 <meta itemprop="ratingValue" content="{{ product.averageRating|round(1) }}">

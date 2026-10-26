@@ -1,7 +1,7 @@
 <div class="row grid-space-10">
     {% for product_variant in product_variants %}
         {% if product.firstVariant.id != product_variant.id  %}
-            <div class="col-lg-3 col-md-6">
+            <div class="col-6 col-md-6 col-lg-3">
                 {% include 'frontend/product_variant/_single.html.twig' %}
             </div>
         {% endif %}

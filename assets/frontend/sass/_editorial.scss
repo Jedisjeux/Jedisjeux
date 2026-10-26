@@ -1081,3 +1081,18 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
 .editorial-game-score__track { height: 6px; overflow: hidden; border-radius: 3px; background: var(--ed-line-soft); }
 .editorial-game-score__track > span { display: block; height: 100%; border-radius: 3px; background: var(--ed-accent); }
 .editorial-game-score__percent { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Variant cards reuse the catalog card */
+.editorial-variant-card__people { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 4px 10px; margin: 0 0 10px; font-size: 11px; }
+.editorial-variant-card__people dt { color: var(--ed-muted); font-weight: 500; }
+.editorial-variant-card__people dd { margin: 0; color: var(--ed-text); }
+.editorial-variant-card__people a { color: var(--ed-accent); }
+.editorial-products + .editorial-products { padding-top: 0; }
+
+/* Game sub-pages (plays, reviews, files) */
+.editorial-game-subpage > .container { max-width: 1140px; }
+
+/* Alerts follow the theme */
+.alert-info { border: 1px solid var(--ed-line); border-radius: 9px; background: var(--ed-tint); color: var(--ed-text); }
+.alert-info h4, .alert-info .alert-heading { color: var(--ed-ink); }
+.alert-info .fa { color: var(--ed-accent); }
