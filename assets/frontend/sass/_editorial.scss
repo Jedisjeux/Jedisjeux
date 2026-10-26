@@ -770,7 +770,7 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
 .editorial-sidebar-card--flush .editorial-catalog-card { margin: 0 -16px; border: 0; border-top: 1px solid var(--editorial-border-soft); border-radius: 0; box-shadow: none; }
 .editorial-sidebar-card__more { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; color: var(--ed-accent); font-size: 11px; font-weight: 700; }
 .editorial-sidebar-card__more:hover { color: var(--ed-ink); text-decoration: none; }
-.editorial-article-score { background: linear-gradient(160deg,#fff 0%,var(--ed-tint) 100%); }
+.editorial-article-score { background: linear-gradient(160deg,var(--ed-surface) 0%,var(--ed-tint) 100%); }
 .editorial-article-score__value { margin-bottom: 14px; color: var(--ed-ink); }
 .editorial-article-score__value strong { font: 700 46px/1 'PT Serif',Georgia,serif; }
 .editorial-article-score__value small { margin-left: 3px; color: var(--ed-muted); font-size: 16px; }
