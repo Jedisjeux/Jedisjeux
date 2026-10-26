@@ -1,15 +1,10 @@
-<section class="pv-30">
-    <div class="container">
-        {% for association in product.associations %}
-            <div class="row">
-                <h3 class="title">{{ association.type }}</h3>
-                <div id="sylius-product-association-{{ association.type.name }}">
-                    <div class="separator-2"></div>
-                    <div class="col-md-12">
-                        {% include 'frontend/product/_list.html.twig' with {'products': association.associatedProducts} %}
-                    </div>
-                </div>
+{% for association in product.associations %}
+    <section class="section editorial-products editorial-game-associations" id="sylius-product-association-{{ association.type.name }}">
+        <div class="container">
+            <div class="editorial-section-heading">
+                <div><span class="editorial-eyebrow">Pour aller plus loin</span><h2>{{ association.type }}</h2></div>
             </div>
-        {% endfor %}
-    </div>
-</section>
+            {% include 'frontend/product/_list.html.twig' with {'products': association.associatedProducts} %}
+        </div>
+    </section>
+{% endfor %}
