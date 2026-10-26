@@ -1,11 +1,9 @@
-<!-- comments start -->
-<div class="comments margin-clear space-top">
+{% from 'macro/icon.html.twig' import icon %}
+
+<div class="space-top">
     {{ render(url('sylius_frontend_partial_product_review_latest', {'productId': product.id, 'template': 'frontend/product_review/_list.html.twig'})) }}
 
-    <a href="{{ path('sylius_frontend_product_review_index', {'slug': product.slug}) }}"
-       class="btn btn-gray btn-sm margin-clear">
-        <i class="fa fa-list pr-10"></i>
-        {{ 'app.ui.view_more_reviews'|trans }}
+    <a class="editorial-review-more" href="{{ path('sylius_frontend_product_review_index', {'slug': product.slug}) }}">
+        {{ 'app.ui.view_more_reviews'|trans }} {{ icon('arrow-right') }}
     </a>
 </div>
-<!-- comments end -->

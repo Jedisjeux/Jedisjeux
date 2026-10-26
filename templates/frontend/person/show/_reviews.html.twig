@@ -1,12 +1,10 @@
-<h2 class="title">{{ 'sylius.ui.reviews'|trans }}</h2>
-<div class="separator-2"></div>
-<!-- comments start -->
-<div class="comments margin-clear space-top">
-    {{ render(url('sylius_frontend_partial_person_review_latest', {'count': 4, 'personId': person.id, 'template': 'frontend/product_review/_list2.html.twig'})) }}
-
-    {#<a href="{{ path('sylius_frontend_product_review_index', {'slug': product.slug}) }}"#}
-       {#class="btn btn-transparent btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}#}
-        {#<i class="fa fa-arrow-right pl-10"></i>#}
-    {#</a>#}
-</div>
-<!-- comments end -->
+<section class="section light-gray-bg" id="reviews">
+    <div class="container">
+        <div class="editorial-section-heading">
+            <div><span class="editorial-eyebrow">Ce qu'en pensent les joueurs</span><h2>{{ 'sylius.ui.reviews'|trans }}</h2></div>
+        </div>
+        <div>
+            {{ render(url('sylius_frontend_partial_person_review_latest', {'count': 4, 'personId': person.id, 'template': 'frontend/product_review/_list2.html.twig'})) }}
+        </div>
+    </div>
+</section>

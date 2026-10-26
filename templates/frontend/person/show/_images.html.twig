@@ -10,6 +10,7 @@
         </div>
     {% endfor %}
 </div>
+{% if person.images|length > 1 %}
 <div class="content-slider-thumbs-container">
     <div class="slick-carousel content-slider-thumbs">
         {% for image in person.images %}
@@ -19,3 +20,4 @@
         {% endfor %}
     </div>
 </div>
+{% endif %}

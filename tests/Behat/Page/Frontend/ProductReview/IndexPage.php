@@ -30,7 +30,7 @@ class IndexPage extends SymfonyPage
      */
     public function countReviews(): int
     {
-        return count($this->getElement('reviews')->findAll('css', '.comment'));
+        return count($this->getElement('reviews')->findAll('css', '.editorial-review-card'));
     }
 
     /**

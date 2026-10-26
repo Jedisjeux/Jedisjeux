@@ -1,0 +1,48 @@
+{% from 'macro/icon.html.twig' import icon %}
+
+{% set roles = [] %}
+{% if person.productCountAsDesigner > 0 %}{% set roles = roles|merge([{'icon': 'pen', 'label': 'app.ui.designer'|trans, 'count': person.productCountAsDesigner}]) %}{% endif %}
+{% if person.productCountAsArtist > 0 %}{% set roles = roles|merge([{'icon': 'brush', 'label': 'app.ui.artist'|trans, 'count': person.productCountAsArtist}]) %}{% endif %}
+{% if person.productCountAsPublisher > 0 %}{% set roles = roles|merge([{'icon': 'building', 'label': 'app.ui.editor'|trans, 'count': person.productCountAsPublisher}]) %}{% endif %}
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container editorial-game-main editorial-person-main">
+    <div class="container">
+        <div class="row editorial-game-layout">
+            <div class="col-lg-4 col-xl-3">
+                {% if person.images|length > 0 %}
+                    {% include 'frontend/person/show/_images.html.twig' %}
+                {% else %}
+                    <div class="editorial-person-avatar" aria-hidden="true">{{ person.firstName|default('')|first|upper }}{{ person.lastName|default('')|first|upper }}</div>
+                {% endif %}
+            </div>
+            <div class="editorial-game-details col-lg-8 col-xl-9">
+                <span class="editorial-game-category">{{ roles|map(role => role.label)|join(' · ')|default('Ludographie') }}</span>
+                <h1 itemprop="name">{{ person }}</h1>
+
+                {% if roles is not empty or person.zone is not null %}
+                    <div class="editorial-game-facts editorial-person-facts" aria-label="Informations principales">
+                        {% for role in roles %}
+                            <div>{{ icon(role.icon) }}<strong>{{ role.count }} {{ 'app.ui.games'|trans|lower }}</strong><small>{{ role.label|lower }}</small></div>
+                        {% endfor %}
+                        {% if person.zone is not null %}
+                            <div>{{ icon('tag') }}<strong itemprop="nationality">{{ person.zone }}</strong><small>zone géographique</small></div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                {% if person.description is not empty %}
+                    <div class="editorial-game-intro-copy" itemprop="description">{{ person.description|raw }}</div>
+                {% endif %}
+
+                {% if person.website is not null %}
+                    <a class="editorial-game-intro-link" href="{{ person.website }}" target="_blank" rel="noopener" itemprop="url">
+                        {{ person.website|replace({'https://': '', 'http://': ''})|trim('/') }} {{ icon('arrow-right') }}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- main-container end -->
