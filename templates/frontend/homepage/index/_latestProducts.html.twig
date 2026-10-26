@@ -1,10 +1,11 @@
+{% from 'macro/icon.html.twig' import icon %}
 <!-- section start -->
 <!-- ================ -->
 <section class="section editorial-products">
     <div class="container">
         <div class="editorial-section-heading">
             <div><span class="editorial-eyebrow">La ludothèque</span><h2>Jeux à découvrir</h2></div>
-            <a href="{{ path('sylius_frontend_product_index') }}">Tous les jeux <i class="fa fa-arrow-right"></i></a>
+            <a href="{{ path('sylius_frontend_product_index') }}">Tous les jeux {{ icon('arrow-right') }}</a>
         </div>
         {{ render(url('sylius_partial_product_index', {
             'paginate': 4,

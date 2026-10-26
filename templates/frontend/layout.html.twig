@@ -3,6 +3,14 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="color-scheme" content="light dark">
+    <script>
+        (function () {
+            var theme = null;
+            try { theme = localStorage.getItem('jedisjeux-theme'); } catch (e) {}
+            if (theme === 'light' || theme === 'dark') { document.documentElement.setAttribute('data-theme', theme); }
+        })();
+    </script>
     <title>{{ pageTitle|default('')}} {% if pageTitle is defined %} - {% endif %}{% block title %}Jedisjeux - et les autres jours aussi{% endblock title %}</title>
     <meta name="description" content="{{ jedisjeux_description }}">
     <meta name="author" content="author">
@@ -55,6 +63,31 @@
 <!-- ================================================== -->
 
 <script src="{{ asset('assets/frontend/js/app.js') }}"></script>
+<script>
+    (function () {
+        var labels = { auto: 'automatique', light: 'clair', dark: 'sombre' };
+        var next = { auto: 'light', light: 'dark', dark: 'auto' };
+        var root = document.documentElement;
+        function current() { return root.getAttribute('data-theme') || 'auto'; }
+        function sync() {
+            var label = 'Thème : ' + labels[current()];
+            document.querySelectorAll('[data-theme-toggle]').forEach(function (button) {
+                button.setAttribute('data-theme-state', current());
+                button.setAttribute('aria-label', label);
+                button.setAttribute('title', label);
+            });
+        }
+        document.addEventListener('click', function (event) {
+            var button = event.target.closest('[data-theme-toggle]');
+            if (!button) { return; }
+            var theme = next[current()];
+            if (theme === 'auto') { root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme', theme); }
+            try { theme === 'auto' ? localStorage.removeItem('jedisjeux-theme') : localStorage.setItem('jedisjeux-theme', theme); } catch (e) {}
+            sync();
+        });
+        sync();
+    })();
+</script>
 
 <!-- Google Maps javascript -->
 <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>

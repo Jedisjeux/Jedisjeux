@@ -80,6 +80,7 @@
                                             {% include 'frontend/header/_searchShortcuts.html.twig' %}
                                         </div>
                                     </div>
+                                    {% include 'frontend/header/_themeToggle.html.twig' %}
                                     {% if app.user %}
                                         {% include 'frontend/header/_accountMenu.html.twig' with { 'id': 'mobile-account-menu' } %}
                                     {% else %}
@@ -127,6 +128,7 @@
                                 {% include 'frontend/header/_searchShortcuts.html.twig' %}
                             </div>
                         </div>
+                    {% include 'frontend/header/_themeToggle.html.twig' %}
                     {% if app.user %}
                         {% include 'frontend/header/_accountMenu.html.twig' with { 'id': 'desktop-account-menu' } %}
                     {% else %}

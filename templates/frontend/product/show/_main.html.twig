@@ -1,3 +1,4 @@
+{% from 'macro/icon.html.twig' import icon %}
 {% import 'macro/image.html.twig' as images %}
 
 <!-- main-container start -->
@@ -81,22 +82,22 @@
                         {% endif %}
                         <div class="editorial-game-facts" aria-label="Informations principales">
                             <div>
-                                <i class="fa fa-users" aria-hidden="true"></i>
+                                {{ icon('users') }}
                                 <strong><span itemprop="minValue">{{ product.minPlayerCount }}</span>{% if product.maxPlayerCount %}{% if product.maxPlayerCount != product.minPlayerCount %}–<span itemprop="maxValue">{{ product.maxPlayerCount }}</span>{% endif %}{% else %}+{% endif %}</strong>
                                 <small>{{ 'app.ui.players'|trans|lower }}</small>
                             </div>
-                            <div><i class="fa fa-child" aria-hidden="true"></i><strong>{{ product.minAge }}+</strong><small>{{ 'app.ui.age'|trans|lower }}</small></div>
+                            <div>{{ icon('age') }}<strong>{{ product.minAge }}+</strong><small>{{ 'app.ui.age'|trans|lower }}</small></div>
                             <div>
-                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                {{ icon('clock') }}
                                 <strong>{% if product.minDuration %}{{ product.minDuration }}{% if product.minDuration != product.maxDuration %}–{{ product.maxDuration }}{% endif %} min{% else %}—{% endif %}</strong>
                                 <small>{% if product.durationByPlayer %}{{ 'label.per_player'|trans|lower }}{% else %}{{ 'app.ui.duration'|trans|lower }}{% endif %}</small>
                             </div>
-                            <div><i class="fa fa-calendar" aria-hidden="true"></i><strong>{% if product.firstVariant.releasedAt %}{{ product.firstVariant.releasedAt|date('Y') }}{% else %}—{% endif %}</strong><small>{{ 'app.ui.release_date'|trans|lower }}</small></div>
+                            <div>{{ icon('calendar') }}<strong>{% if product.firstVariant.releasedAt %}{{ product.firstVariant.releasedAt|date('Y') }}{% else %}—{% endif %}</strong><small>{{ 'app.ui.release_date'|trans|lower }}</small></div>
                         </div>
                         {% if product.shortDescription is not null %}
                             <p class="editorial-game-intro-copy">{{ product.shortDescription|raw }}</p>
                         {% endif %}
-                        <a class="editorial-game-intro-link" href="#presentation">Découvrir la présentation <i class="fa fa-arrow-down" aria-hidden="true"></i></a>
+                        <a class="editorial-game-intro-link" href="#presentation">Découvrir la présentation {{ icon('arrow-down') }}</a>
                     </div>
                 </div>
                 <div class="editorial-game-actions editorial-game-actions--intro">
