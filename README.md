@@ -47,10 +47,10 @@ default:
             javascript_session: chrome_headless
 ```
 
-Then run the scenarios inside the `app` container:
+Then run the scenarios inside the `app` container (arguments are passed to Behat):
 
 ```bash
-$ docker compose exec app vendor/bin/behat --tags="@javascript"
+$ castor test:behat --tags="@javascript"
 ```
 
 Without Docker, run selenium-server-standalone instead:

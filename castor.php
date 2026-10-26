@@ -7,16 +7,19 @@ defined('CASTOR_USE_CHDIR') || define('CASTOR_USE_CHDIR', true);
 use Castor\Attribute\AsArgument;
 use Castor\Attribute\AsContext;
 use Castor\Attribute\AsListener;
+use Castor\Attribute\AsRawTokens;
 use Castor\Attribute\AsTask;
 use Castor\Context;
 
 use function Castor\capture;
 use function Castor\context;
 use function Castor\run;
+use function Castor\Docker\docker_compose;
 use Castor\Docker\Event\RegisterServiceEvent;
 use Castor\Docker\Service\MariaDBService;
 use Castor\Docker\Service\PhpMode;
 use Castor\Docker\Service\SymfonyService;
+use Symfony\Component\Process\Process;
 
 #[AsContext(default: true)]
 function default_context(): Context
@@ -74,4 +77,16 @@ function deploy(
         'ruby:3.3',
         'sh', '-c', 'bundle install --quiet && bundle exec cap "$0" deploy', $stage,
     ], context: context()->withTty()->withTimeout(null));
+}
+
+#[AsTask(description: 'Run Behat scenarios in the app container, next to the headless Chrome', namespace: 'test')]
+function behat(#[AsRawTokens] array $args = []): int
+{
+    // Not docker_compose_run(): Behat must share the app network to reach Chrome and the test vhost on localhost
+    $tty = Process::isTtySupported();
+
+    return docker_compose(
+        ['exec', ...($tty ? [] : ['-T']), '-e', 'APP_ENV=test', 'app', 'vendor/bin/behat', ...$args],
+        context()->withTty($tty)->withTimeout(null)->withAllowFailure(),
+    )->getExitCode();
 }
