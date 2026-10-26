@@ -39,7 +39,12 @@ class ServicesPass implements CompilerPassInterface
         $contextLocaleCompositeDefinition->setDecoratedService(null);
 
         $authorizationCheckerDefinition = $container->getDefinition('security.authorization_checker');
-        $authorizationCheckerDefinition->setClass(AuthorizationChecker::class);
+        $authorizationCheckerDefinition
+            ->setClass(AuthorizationChecker::class)
+            ->setArguments([
+                new Reference('security.token_storage'),
+                new Reference('security.access.decision_manager'),
+            ]);
 
         $doctrineDriver = $container->getDefinition('sylius.grid_driver.doctrine.orm');
         $doctrineDriver->setClass(Driver::class);

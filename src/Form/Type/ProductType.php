@@ -39,7 +39,7 @@ class ProductType extends AbstractType
             ->add('mainTaxon', EntityType::class, [
                 'label' => 'label.target_audience',
                 'placeholder' => 'label.choose_target_audience',
-                'class' => 'App:Taxon',
+                'class' => \App\Entity\Taxon::class,
                 'group_by' => 'parent',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('o')
@@ -55,7 +55,7 @@ class ProductType extends AbstractType
             ->add('mechanisms', EntityType::class, [
                 'label' => 'app.ui.mechanisms',
                 'placeholder' => 'label.choose_mechanisms',
-                'class' => 'App:Taxon',
+                'class' => \App\Entity\Taxon::class,
                 'group_by' => 'parent',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('o')
@@ -71,7 +71,7 @@ class ProductType extends AbstractType
             ->add('themes', EntityType::class, [
                 'label' => 'app.ui.themes',
                 'placeholder' => 'label.choose_themes',
-                'class' => 'App:Taxon',
+                'class' => \App\Entity\Taxon::class,
                 'group_by' => 'parent',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('o')

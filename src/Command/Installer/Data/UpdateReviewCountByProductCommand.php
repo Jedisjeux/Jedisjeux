@@ -16,7 +16,7 @@ use App\Repository\ProductRepository;
 use App\Updater\ReviewCountByProductUpdater;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use App\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

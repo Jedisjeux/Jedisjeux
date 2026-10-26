@@ -21,7 +21,15 @@ class ErrorPage extends SymfonyPage
      */
     public function getRouteName(): string
     {
-        return '_twig_error_test';
+        return '_preview_error';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function verifyStatusCode(): void
+    {
+        // The error preview responds with the previewed status code since Symfony 5
     }
 
     /**

@@ -12,14 +12,18 @@
 namespace App\Controller;
 
 use App\GoogleAnalytics\SessionService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class SessionController extends Controller
+class SessionController extends AbstractController
 {
+    public function __construct(private SessionService $sessionService)
+    {
+    }
+
     /**
      * @return Response
      */
@@ -28,7 +32,7 @@ class SessionController extends Controller
         $startAt = new \DateTime('first day of');
         $endAt = new \DateTime('today');
 
-        $sessions = $this->getSessionService()->countSessionsPerDay($startAt, $endAt);
+        $sessions = $this->sessionService->countSessionsPerDay($startAt, $endAt);
 
         return $this->render('backend/dashboard/_sessionCount.html.twig', [
             'sessions' => $sessions,
@@ -43,18 +47,10 @@ class SessionController extends Controller
         $startAt = new \DateTime('first day of January');
         $endAt = new \DateTime('today');
 
-        $sessions = $this->getSessionService()->countSessionsPerMonth($startAt, $endAt);
+        $sessions = $this->sessionService->countSessionsPerMonth($startAt, $endAt);
 
         return $this->render('backend/dashboard/_sessionCountPerMonth.html.twig', [
             'sessions' => $sessions,
         ]);
-    }
-
-    /**
-     * @return object|SessionService
-     */
-    protected function getSessionService()
-    {
-        return $this->get('app.google_analytics.session');
     }
 }

@@ -17,7 +17,7 @@
             </div>
 
             <div id="comments" class="comments editorial-play-comments__list">
-                {% if postCount > 0 %}<h3 class="editorial-play-comments__count">{% transchoice postCount %}app.ui.comment.choice{% endtranschoice %}</h3>{% endif %}
+                {% if postCount > 0 %}<h3 class="editorial-play-comments__count">{{ 'app.ui.comment.choice'|trans({'%count%': postCount}) }}</h3>{% endif %}
                 {% if game_play.topic is not null %}
                     {{ render_comments(game_play.topic, game_play.topic.posts|slice(1)) }}
                 {% endif %}

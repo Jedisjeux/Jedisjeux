@@ -46,12 +46,14 @@ class FestivalListType extends AbstractType
                 'label' => 'sylius.ui.start_date',
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
+                'html5' => false,
                 'required' => false,
             ])
             ->add('end_at', DatePickerType::class, [
                 'label' => 'sylius.ui.end_date',
                 'widget' => 'single_text',
                 'format' => 'dd/MM/yyyy',
+                'html5' => false,
                 'required' => false,
             ]);
     }

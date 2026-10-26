@@ -17,7 +17,7 @@ use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use App\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
