@@ -26,7 +26,7 @@
                         <strong>{{ dealer.name }}</strong>
                         {{ status(dealer_price) }}
                     </span>
-                    <strong class="editorial-store-offer__price">{{ (dealer_price.price/100)|localizedcurrency('EUR') }}</strong>
+                    <strong class="editorial-store-offer__price">{{ (dealer_price.price/100)|format_currency('EUR') }}</strong>
                     <span class="editorial-store-offer__arrow" aria-hidden="true">→</span>
                 </a>
             {% endfor %}

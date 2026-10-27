@@ -31,7 +31,7 @@
         {% endif %}
 
         {% if product.shortDescription is not null %}
-            <p class="editorial-catalog-card__description">{{ product.shortDescription|truncate(120, true)|striptags|raw }}</p>
+            <p class="editorial-catalog-card__description">{{ product.shortDescription|u.truncate(120, '...', false)|striptags|raw }}</p>
         {% endif %}
 
         <ul class="editorial-catalog-card__facts">

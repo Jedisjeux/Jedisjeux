@@ -43,6 +43,6 @@
             {{ images.render(avatarPath, 'thumbnail', product_review.author, 'rounded-circle') }}
             <span itemprop="author">{{ product_review.author }}</span>
         {% endif %}
-        <time datetime="{{ product_review.createdAt|date('Y-m-d') }}" itemprop="datePublished">{{ product_review.createdAt|localizeddate('medium', 'none') }}</time>
+        <time datetime="{{ product_review.createdAt|date('Y-m-d') }}" itemprop="datePublished">{{ product_review.createdAt|format_datetime('medium', 'none') }}</time>
     </footer>
 </article>

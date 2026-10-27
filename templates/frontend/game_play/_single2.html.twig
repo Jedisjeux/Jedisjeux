@@ -20,11 +20,11 @@
                 <div class="hidden-lg-down"></div>
                 <h3>{{ game_play.author }}</h3>
                 <p class="small mb-10">
-                    <i class="fa fa-calendar-o pr-1"></i> {{ game_play.createdAt|localizeddate('medium', 'none') }}
+                    <i class="fa fa-calendar-o pr-1"></i> {{ game_play.createdAt|format_datetime('medium', 'none') }}
                 </p>
                 <div class="separator-2"></div>
                 {% if topic is not null and topic.firstPost is not null %}
-                    <p class="margin-clear">{{ topic.firstPost.body|truncate(250, true)|striptags|raw }}</p>
+                    <p class="margin-clear">{{ topic.firstPost.body|u.truncate(250, '...', false)|striptags|raw }}</p>
                 {% endif %}
                 <br>
                 <a href="{{ gamePlayPath }}"

@@ -14,7 +14,7 @@
     </a>
     <div class="editorial-list-card__body">
         <h2><a href="{{ productListPath }}">{{ product_list.name }}</a></h2>
-        <p class="editorial-list-card__meta"><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ product_list.createdAt|localizeddate('medium', 'none') }}</p>
+        <p class="editorial-list-card__meta"><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ product_list.createdAt|format_datetime('medium', 'none') }}</p>
         <a href="{{ productListPath }}" class="editorial-list-card__link">{{ 'sylius.ui.view_more'|trans }} <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
     </div>
 </article>

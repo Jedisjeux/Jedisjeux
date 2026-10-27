@@ -17,7 +17,7 @@
         <header class="editorial-play-heading">
             <span class="editorial-eyebrow">Partie jouée · <a href="{{ productPath }}">{{ product.name }}</a></span>
             <h1>Une partie de {{ product.name }}</h1>
-            <p><span>Par <strong>{{ game_play.author }}</strong></span><span><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ game_play.playedAt|localizeddate('medium', 'none') }}</span></p>
+            <p><span>Par <strong>{{ game_play.author }}</strong></span><span><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ game_play.playedAt|format_datetime('medium', 'none') }}</span></p>
         </header>
 
         <div class="editorial-play-overview">
@@ -31,7 +31,7 @@
             <div class="editorial-play-overview__content">
                 <div class="editorial-play-facts">
                     <div><i class="fa fa-users" aria-hidden="true"></i><strong>{{ game_play.playerCount ?: '—' }}</strong><small>{{ 'app.ui.player_count'|trans }}</small></div>
-                    <div><i class="fa fa-calendar-o" aria-hidden="true"></i><strong>{{ game_play.playedAt|localizeddate('medium', 'none') }}</strong><small>{{ 'sylius.ui.date'|trans }}</small></div>
+                    <div><i class="fa fa-calendar-o" aria-hidden="true"></i><strong>{{ game_play.playedAt|format_datetime('medium', 'none') }}</strong><small>{{ 'sylius.ui.date'|trans }}</small></div>
                     {% if game_play.duration is not null %}
                         <div><i class="fa fa-clock-o" aria-hidden="true"></i><strong>{{ duration(game_play) }}</strong><small>{{ 'app.ui.duration'|trans }}</small></div>
                     {% endif %}
@@ -58,7 +58,7 @@
                 <header>
                     <span class="editorial-eyebrow">Le récit</span>
                     <h2>Autour de la table</h2>
-                    <p>Partagé par <strong>{{ game_play.topic.firstPost.author }}</strong> · {{ game_play.topic.firstPost.createdAt|localizeddate('medium', 'none') }}</p>
+                    <p>Partagé par <strong>{{ game_play.topic.firstPost.author }}</strong> · {{ game_play.topic.firstPost.createdAt|format_datetime('medium', 'none') }}</p>
                 </header>
                 <div class="editorial-play-story__body">{{ game_play.topic.firstPost.body|raw }}</div>
             </article>

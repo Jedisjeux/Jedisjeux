@@ -19,12 +19,12 @@
     <div class="editorial-game-play-card__body">
         <div class="editorial-game-play-card__meta">
             <span class="editorial-game-play-card__game">{{ product.name }}</span>
-            <span><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ game_play.createdAt|localizeddate('medium', 'none') }}</span>
+            <span><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ game_play.createdAt|format_datetime('medium', 'none') }}</span>
         </div>
         <h2><a href="{{ gamePlayPath }}">Une partie de {{ product.name }}</a></h2>
         <p class="editorial-game-play-card__author">Jouée par <strong>{{ game_play.author }}</strong></p>
         {% if topic is not null and topic.firstPost is not null %}
-            <p class="editorial-game-play-card__excerpt">{{ topic.firstPost.body|striptags|truncate(230, true) }}</p>
+            <p class="editorial-game-play-card__excerpt">{{ topic.firstPost.body|striptags|u.truncate(230, '...', false) }}</p>
         {% else %}
             <p class="editorial-game-play-card__excerpt editorial-game-play-card__excerpt--empty">Aucun récit n’accompagne encore cette partie.</p>
         {% endif %}

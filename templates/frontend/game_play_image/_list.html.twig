@@ -15,7 +15,7 @@
                 <h2><a href="{{ gamePlayPath }}">{{ game_play.product.name }}</a></h2>
                 <p class="editorial-photo-card__meta">
                     <span><i class="fa fa-user" aria-hidden="true"></i> {{ game_play.author }}</span>
-                    <time><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ game_play.createdAt|localizeddate('medium', 'none') }}</time>
+                    <time><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ game_play.createdAt|format_datetime('medium', 'none') }}</time>
                 </p>
             </div>
         </article>

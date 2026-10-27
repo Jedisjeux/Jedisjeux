@@ -14,7 +14,7 @@
             {% for session in sessions %}
                 <tr>
                     <td>
-                        {{ session.date|localizeddate('medium', 'none') }}
+                        {{ session.date|format_datetime('medium', 'none') }}
                     </td>
                     <td>
                         {{ session.sessionCount }}

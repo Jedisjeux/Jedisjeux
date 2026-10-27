@@ -27,7 +27,7 @@
         {% endif %}
 
         {% if product.shortDescription is not null %}
-            <p>{{ product.shortDescription|truncate(100, true)|striptags|raw }}</p>
+            <p>{{ product.shortDescription|u.truncate(100, '...', false)|striptags|raw }}</p>
         {% endif %}
 
         <ul class="list-icons small">
