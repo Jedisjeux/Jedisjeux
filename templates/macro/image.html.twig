@@ -3,9 +3,9 @@
 {% endmacro %}
 
 {# Shows the whole image (no crop, no upscale) over a blurred copy of itself #}
-{% macro fit(path, label, filter) %}
+{% macro fit(path, label, filter, class, eager) %}
     {% set src = path | imagine_filter(filter|default('card')) %}
-    <span class="editorial-image-fit" style="--image-fit: url('{{ src }}')">
-        <img src="{{ src }}" alt="{{ label }}" loading="lazy"/>
+    <span class="editorial-image-fit {{ class }}" style="--image-fit: url('{{ src }}')">
+        <img src="{{ src }}" alt="{{ label }}"{% if not eager %} loading="lazy"{% endif %}/>
     </span>
 {% endmacro %}

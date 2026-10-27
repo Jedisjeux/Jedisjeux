@@ -730,7 +730,6 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
 .editorial-article-meta a { color: inherit; }
 .editorial-article-meta a:hover { color: var(--ed-accent); text-decoration: none; }
 .editorial-article-header__image { height: clamp(240px, 36vw, 480px); margin: 0; overflow: hidden; border-radius: 14px; background: var(--ed-line); }
-.editorial-article-header__image img { width: 100%; height: 100%; object-fit: cover; }
 .editorial-article-main { padding: 34px 0 44px; background: var(--ed-surface); }
 .editorial-article-layout { display: grid; grid-template-columns: minmax(0,1fr) 300px; align-items: start; gap: 48px; }
 .editorial-article-body { min-width: 0; max-width: 720px; color: var(--ed-text-soft); font-size: 16px; line-height: 1.8; }
@@ -1138,3 +1137,6 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
 .editorial-image-fit { position: relative; display: block; width: 100%; height: 100%; align-self: stretch; justify-self: stretch; overflow: hidden; background: var(--ed-tint); }
 .editorial-image-fit::before { content: ""; position: absolute; inset: -30px; background: var(--image-fit) center / cover no-repeat; filter: blur(20px) saturate(1.15); opacity: .6; }
 .editorial-image-fit > img { position: relative; display: block; width: 100%; height: 100%; object-fit: contain; }
+/* Never upscale: small pictures stay at their natural size, centered over the backdrop */
+.editorial-image-fit--natural { display: flex; align-items: center; justify-content: center; }
+.editorial-image-fit--natural > img { width: auto; height: auto; max-width: 100%; max-height: 100%; }
