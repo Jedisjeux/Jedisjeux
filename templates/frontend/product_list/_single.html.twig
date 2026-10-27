@@ -6,7 +6,7 @@
 <article class="editorial-list-card">
     <a href="{{ productListPath }}" class="editorial-list-card__image" tabindex="-1" aria-hidden="true">
         {% if lastProduct and lastProduct.mainImage %}
-            {{ images.render(lastProduct.mainImage.webPath, 'magazine_item_wide', product_list.name) }}
+            {{ images.fit(lastProduct.mainImage.webPath, product_list.name) }}
         {% else %}
             <span class="editorial-list-card__placeholder"><i class="fa fa-cubes"></i></span>
         {% endif %}

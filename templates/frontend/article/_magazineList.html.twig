@@ -8,7 +8,7 @@
         <article class="editorial-article-card">
             <a class="editorial-article-card__image" href="{{ articlePath }}">
                 {% if article.mainImage is not null %}
-                    {{ images.render(article.mainImage.webPath, 'magazine_item_wide', article) }}
+                    {{ images.fit(article.mainImage.webPath, article) }}
                 {% else %}
                     {{ images.render('/assets/frontend/images/placeholder.png', 'magazine_item_wide', article) }}
                 {% endif %}

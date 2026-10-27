@@ -71,6 +71,11 @@ liip_imagine:
             quality: 80
             filters:
                 auto_rotate: ~
+        card:
+            quality: 85
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: [1000, 1000], mode: inset }
         pub_banner:
             quality: 80
             filters:
