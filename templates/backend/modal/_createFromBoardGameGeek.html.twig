@@ -9,29 +9,67 @@
         </div>
         <div class="description">
             <div class="ui header">Importer un jeu depuis BoardGameGeek</div>
-            <form action="{{ path('sylius_admin_product_from_bgg_new') }}" class="ui form">
-                <div class="ui basic segment">
-                    <div class="field">
-                        <div class="ui labeled input">
-                            <div class="ui label">
-                                {{ 'app.ui.url'|trans }}
-                            </div>
-                            <input required type="text" name="bggPath"
-                                   placeholder="https://boardgamegeek.com/boardgame/3076/puerto-rico">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="ui basic segment">
-                    <div class="ui buttons">
-                        <button class="ui blue labeled icon button">
-                            <i class="checkmark icon"></i>
-                            {{ 'app.ui.submit'|trans }}
-                        </button>
-                    </div>
-                </div>
-
-            </form>
+            {# BGG blocks server side requests, so the game data is read from the admin's browser on the BGG page #}
+            {% set bookmarklet %}
+void (async () => {
+    const match = location.pathname.match(/^\/(boardgame|boardgameexpansion)\/(\d+)/);
+    if (location.hostname !== 'boardgamegeek.com' || !match) {
+        alert('Ouvrez la page d\'un jeu sur boardgamegeek.com avant de cliquer sur ce favori.');
+        return;
+    }
+    const target = window.open('about:blank', '_blank');
+    try {
+        let item = window.GEEK && GEEK.geekitemPreload && GEEK.geekitemPreload.item;
+        if (!item || String(item.objectid) !== match[2]) {
+            const response = await fetch('/api/geekitems?objecttype=thing&objectid=' + match[2]);
+            item = (await response.json()).item;
+        }
+        const names = (type) => ((item.links || {})[type] || []).map((link) => link.name);
+        const data = {
+            name: item.name,
+            releasedAtYear: item.yearpublished,
+            minDuration: item.minplaytime,
+            maxDuration: item.maxplaytime,
+            age: item.minage,
+            minPlayerCount: item.minplayers,
+            maxPlayerCount: item.maxplayers,
+            description: item.description,
+            imagePath: (item.images && item.images.original) || item.imageurl,
+            mechanisms: names('boardgamemechanic'),
+            designers: names('boardgamedesigner'),
+            artists: names('boardgameartist'),
+            publishers: names('boardgamepublisher'),
+        };
+        const stream = new Blob([JSON.stringify(data)]).stream().pipeThrough(new CompressionStream('deflate-raw'));
+        const bytes = new Uint8Array(await new Response(stream).arrayBuffer());
+        let binary = '';
+        bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
+        const payload = btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+        target.location.href = '{{ url('sylius_admin_product_from_bgg_bookmarklet_new')|e('js') }}?data=' + payload;
+    } catch (error) {
+        if (target) {
+            target.close();
+        }
+        alert('Impossible de lire les données du jeu sur BoardGameGeek.');
+    }
+})();
+            {% endset %}
+            <div class="ui basic segment">
+                <p>
+                    Glissez ce lien dans la barre de favoris de votre navigateur&nbsp;:
+                </p>
+                <p>
+                    <a class="ui blue labeled icon button" href="javascript:{{ bookmarklet|url_encode }}" onclick="return false;">
+                        <i class="bookmark icon"></i>
+                        Importer dans Jedisjeux
+                    </a>
+                </p>
+                <p>
+                    Ouvrez ensuite la page d'un jeu sur
+                    <a href="https://boardgamegeek.com" target="_blank" rel="noopener">BoardGameGeek</a>
+                    et cliquez sur ce favori&nbsp;: le formulaire de création du jeu s'ouvre pré-rempli dans un nouvel onglet.
+                </p>
+            </div>
         </div>
     </div>
 </div>
