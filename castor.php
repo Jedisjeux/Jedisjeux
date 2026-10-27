@@ -17,6 +17,7 @@ use function Castor\run;
 use function Castor\Docker\docker_compose;
 use Castor\Docker\Event\RegisterServiceEvent;
 use Castor\Docker\Service\MariaDBService;
+use Castor\Docker\Service\PhpIniScope;
 use Castor\Docker\Service\PhpMode;
 use Castor\Docker\Service\SymfonyService;
 use Symfony\Component\Process\Process;
@@ -43,6 +44,8 @@ function register_services(RegisterServiceEvent $event): void
         ->withDirectory(__DIR__)
         ->withVersion('8.2')
         ->withMode(PhpMode::Fpm)
+        // Warming up the cache needs more than the default 128M
+        ->withPhpIni(['memory_limit' => '512M'], PhpIniScope::Cli)
         ->addExtension('mysql')
         ->addExtension('gd')
         ->link($database)
