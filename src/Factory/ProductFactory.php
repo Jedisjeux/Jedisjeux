@@ -11,6 +11,7 @@
 
 namespace App\Factory;
 
+use App\Entity\BggProduct;
 use App\Entity\Person;
 use App\Entity\Product;
 use App\Entity\ProductVariant;
@@ -72,10 +73,23 @@ class ProductFactory extends BaseProductFactory
      */
     public function createFromBgg($bggPath)
     {
+        return $this->createFromBggProduct($this->bggProductFactory->createByPath($bggPath));
+    }
+
+    /**
+     * @param string $payload data sent by the BoardGameGeek bookmarklet
+     *
+     * @return Product
+     */
+    public function createFromBggPayload($payload)
+    {
+        return $this->createFromBggProduct($this->bggProductFactory->createFromPayload((string) $payload));
+    }
+
+    private function createFromBggProduct(BggProduct $bggProduct): Product
+    {
         /** @var Product $product */
         $product = parent::createWithVariant();
-
-        $bggProduct = $this->bggProductFactory->createByPath($bggPath);
 
         $product->setName($bggProduct->getName());
         $product->setSlug($this->slugGenerator->generate($product->getName()));
@@ -131,13 +145,15 @@ class ProductFactory extends BaseProductFactory
                 ->addPublisher($publisher);
         }
 
-        /** @var ProductVariantImage $mainImage */
-        $mainImage = $this->productVariantImageFactory->createNew();
-        $mainImage->setMain(true);
-        $mainImage->setPath(basename($bggProduct->getImagePath()));
-        file_put_contents($mainImage->getAbsolutePath(), file_get_contents($bggProduct->getImagePath()));
+        if (null !== $imagePath = $bggProduct->getImagePath()) {
+            /** @var ProductVariantImage $mainImage */
+            $mainImage = $this->productVariantImageFactory->createNew();
+            $mainImage->setMain(true);
+            $mainImage->setPath(basename(parse_url($imagePath, PHP_URL_PATH)));
+            file_put_contents($mainImage->getAbsolutePath(), file_get_contents($imagePath));
 
-        $product->getFirstVariant()->addImage($mainImage);
+            $product->getFirstVariant()->addImage($mainImage);
+        }
 
         return $product;
     }

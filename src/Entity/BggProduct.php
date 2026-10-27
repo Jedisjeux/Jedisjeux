@@ -19,7 +19,7 @@ class BggProduct
     private $name;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $imagePath;
 
@@ -88,7 +88,7 @@ class BggProduct
         $this->name = $name;
     }
 
-    public function getImagePath(): string
+    public function getImagePath(): ?string
     {
         return $this->imagePath;
     }

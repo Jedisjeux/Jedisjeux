@@ -82,3 +82,21 @@ sylius_admin_product_from_bgg_new:
                     form: backend/product/_form.html.twig
     requirements:
         bggPath: "[^?]+"
+sylius_admin_product_from_bgg_bookmarklet_new:
+    methods: [GET, POST]
+    path: /products/bgg/import
+    defaults:
+        _controller: sylius.controller.product::createAction
+        _sylius:
+            section: admin
+            template: backend/crud/create.html.twig
+            factory:
+                method: createFromBggPayload
+                arguments: [$data]
+            vars:
+                route:
+                    name: sylius_admin_product_from_bgg_bookmarklet_new
+                    parameters:
+                        data: $data
+                templates:
+                    form: backend/product/_form.html.twig
