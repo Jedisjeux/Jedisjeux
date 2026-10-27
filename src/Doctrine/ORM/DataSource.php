@@ -67,7 +67,8 @@ final class DataSource implements DataSourceInterface
         // Use output walkers option in QueryAdapter should be false as it affects performance greatly. (see #3775)
         $paginator = new Pagerfanta(new QueryAdapter($this->queryBuilder, false, false));
         $paginator->setNormalizeOutOfRangePages(true);
-        $paginator->setCurrentPage($parameters->get('page', 1));
+        $page = (int) $parameters->get('page', 1);
+        $paginator->setCurrentPage($page > 0 ? $page : 1);
 
         return $paginator;
     }
