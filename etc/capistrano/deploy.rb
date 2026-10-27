@@ -100,3 +100,16 @@ end
 
 after 'deploy:updated', 'symfony:assets:install'
 after 'deploy:updated', 'deploy:migrate'
+
+# CentOS 6 (SysV init): gracefully reload PHP-FPM so OPcache picks up the new release
+set :php_fpm_service, ENV.fetch('PHP_FPM_SERVICE') { 'php82-php-fpm' }
+
+namespace :deploy do
+  task :reload_php_fpm do
+    on roles(:web) do
+      execute :sudo, :service, fetch(:php_fpm_service), :reload
+    end
+  end
+end
+
+after 'deploy:published', 'deploy:reload_php_fpm'
