@@ -16,4 +16,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Backend\ManagingTopicsContext
                 - App\Tests\Behat\Context\Ui\Backend\NotificationContext
             filters:
-                tags: "@managing_topics && @ui"
+                tags: "@managing_topics&&@ui"

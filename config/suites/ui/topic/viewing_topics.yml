@@ -20,4 +20,4 @@ default:
 
                 - App\Tests\Behat\Context\Ui\Frontend\TopicContext
             filters:
-                tags: "@viewing_topics && @ui"
+                tags: "@viewing_topics&&@ui"

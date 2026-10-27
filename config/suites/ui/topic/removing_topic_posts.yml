@@ -20,4 +20,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Frontend\NotificationContext
                 - App\Tests\Behat\Context\Ui\Frontend\PostContext
             filters:
-                tags: "@removing_topic_posts && @ui"
+                tags: "@removing_topic_posts&&@ui"

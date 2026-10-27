@@ -17,4 +17,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Frontend\ProductContext
                 - App\Tests\Behat\Context\Ui\Frontend\ProductReviewContext
             filters:
-                tags: "@viewing_product_reviews && @ui"
+                tags: "@viewing_product_reviews&&@ui"

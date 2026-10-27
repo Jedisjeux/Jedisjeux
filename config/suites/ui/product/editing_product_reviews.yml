@@ -14,4 +14,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Frontend\NotificationContext
                 - App\Tests\Behat\Context\Ui\Frontend\ProductReviewContext
             filters:
-                tags: "@editing_product_reviews && @ui"
+                tags: "@editing_product_reviews&&@ui"

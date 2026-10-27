@@ -20,4 +20,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Frontend\GamePlayPostContext
                 - App\Tests\Behat\Context\Ui\Frontend\NotificationContext
             filters:
-                tags: "@removing_game_play_comments && @ui"
+                tags: "@removing_game_play_comments&&@ui"

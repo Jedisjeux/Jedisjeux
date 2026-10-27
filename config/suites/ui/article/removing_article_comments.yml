@@ -20,4 +20,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Frontend\NotificationContext
                 - App\Tests\Behat\Context\Ui\Frontend\ArticlePostContext
             filters:
-                tags: "@editing_article_comments && @ui"
+                tags: "@editing_article_comments&&@ui"

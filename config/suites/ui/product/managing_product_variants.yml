@@ -15,4 +15,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Backend\ManagingProductVariantsContext
                 - App\Tests\Behat\Context\Ui\Backend\NotificationContext
             filters:
-                tags: "@managing_product_variants && @ui"
+                tags: "@managing_product_variants&&@ui"

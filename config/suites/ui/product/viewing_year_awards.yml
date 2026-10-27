@@ -17,4 +17,4 @@ default:
 
                 - App\Tests\Behat\Context\Ui\Frontend\YearAwardContext
             filters:
-                tags: "@viewing_year_awards && @ui"
+                tags: "@viewing_year_awards&&@ui"

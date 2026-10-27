@@ -15,4 +15,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Backend\ManagingTaxonsContext
                 - App\Tests\Behat\Context\Ui\Backend\NotificationContext
             filters:
-                tags: "@managing_taxons && @ui"
+                tags: "@managing_taxons&&@ui"

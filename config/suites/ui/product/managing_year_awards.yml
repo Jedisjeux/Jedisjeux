@@ -17,4 +17,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Backend\ManagingYearAwardsContext
                 - App\Tests\Behat\Context\Ui\Backend\NotificationContext
             filters:
-                tags: "@managing_year_awards && @ui"
+                tags: "@managing_year_awards&&@ui"

@@ -18,4 +18,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Frontend\NotificationContext
                 - App\Tests\Behat\Context\Ui\Frontend\ProductContext
             filters:
-                tags: "@viewing_product_articles && @ui"
+                tags: "@viewing_product_articles&&@ui"

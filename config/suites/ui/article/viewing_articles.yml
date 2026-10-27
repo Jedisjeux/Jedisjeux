@@ -19,4 +19,4 @@ default:
 
                 - App\Tests\Behat\Context\Ui\Frontend\ArticleContext
             filters:
-                tags: "@viewing_articles && @ui"
+                tags: "@viewing_articles&&@ui"

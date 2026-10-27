@@ -12,4 +12,4 @@ default:
 
                 - App\Tests\Behat\Context\Ui\Frontend\HomepageContext
             filters:
-                tags: "@viewing_articles_on_homepage && @ui"
+                tags: "@viewing_articles_on_homepage&&@ui"

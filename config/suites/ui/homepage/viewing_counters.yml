@@ -15,4 +15,4 @@ default:
 
                 - App\Tests\Behat\Context\Ui\Frontend\HomepageContext
             filters:
-                tags: "@viewing_counters_on_homepage && @ui"
+                tags: "@viewing_counters_on_homepage&&@ui"
