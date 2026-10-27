@@ -4,7 +4,6 @@ namespace project;
 
 defined('CASTOR_USE_CHDIR') || define('CASTOR_USE_CHDIR', true);
 
-use Castor\Attribute\AsArgument;
 use Castor\Attribute\AsContext;
 use Castor\Attribute\AsListener;
 use Castor\Attribute\AsRawTokens;
@@ -57,11 +56,9 @@ function register_services(RegisterServiceEvent $event): void
     $event->addService($app);
 }
 
-#[AsTask(description: 'Deploy the application with Capistrano (staging or production)', namespace: 'app')]
-function deploy(
-    #[AsArgument(description: 'Stage to deploy', autocomplete: ['staging', 'production'])]
-    string $stage = 'staging',
-): void {
+#[AsTask(description: 'Deploy the application to production with Capistrano', namespace: 'app')]
+function deploy(): void
+{
     $home = (string) getenv('HOME');
     $branch = trim(capture(['git', 'rev-parse', '--abbrev-ref', 'HEAD']));
 
@@ -78,7 +75,7 @@ function deploy(
         '-e', 'GIT_CONFIG_VALUE_0=/app',
         '-e', 'BRANCH=' . $branch,
         'ruby:3.3',
-        'sh', '-c', 'bundle install --quiet && bundle exec cap "$0" deploy', $stage,
+        'sh', '-c', 'bundle install --quiet && bundle exec cap production deploy',
     ], context: context()->withTty()->withTimeout(null));
 }
 
