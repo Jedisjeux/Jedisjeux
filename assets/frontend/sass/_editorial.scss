@@ -259,6 +259,7 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
 .editorial-game-tabs .nav-tabs .nav-link { padding: 12px 15px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--ed-text-soft); font-size: 12px; }
 .editorial-game-tabs .nav-tabs .nav-link.active { border-bottom-color: var(--ed-accent); color: var(--ed-ink); font-weight: 700; }
 .editorial-game-tabs ul.nav-tabs.style-4 > li > .nav-link.active { border-bottom: 2px solid var(--ed-accent) !important; background: transparent !important; color: var(--ed-ink) !important; }
+@media (max-width: 575px) { .editorial-game-tabs .nav-tabs { background-color: var(--ed-panel); } }
 .editorial-game-tabs .tab-content { padding: 18px 0 0; }
 .editorial-game-presentation { padding: 22px; border: 1px solid var(--editorial-border); border-radius: 10px; background: var(--editorial-paper); }
 .editorial-game-presentation__copy { color: var(--ed-text); font-size: 14px; line-height: 1.7; }
