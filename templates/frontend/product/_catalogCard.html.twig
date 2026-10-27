@@ -7,7 +7,7 @@
 <article class="editorial-catalog-card" itemscope itemtype="https://schema.org/Game">
     <a class="editorial-catalog-card__image" href="{{ productPath }}" aria-label="{{ product.name }}">
         {% if product.mainImage is not null %}
-            {{ images.render(product.mainImage.webPath, 'magazine_item', product.name) }}
+            {{ images.fit(product.mainImage.webPath, product.name) }}
         {% else %}
             <span class="editorial-catalog-card__placeholder"><i class="fa fa-cubes" aria-hidden="true"></i></span>
         {% endif %}

@@ -1133,3 +1133,8 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
 .alert-info { border: 1px solid var(--ed-line); border-radius: 9px; background: var(--ed-tint); color: var(--ed-text); }
 .alert-info h4, .alert-info .alert-heading { color: var(--ed-ink); }
 .alert-info .fa { color: var(--ed-accent); }
+
+/* Whole image over a blurred copy of itself: no ugly crop or upscale on small/square pictures */
+.editorial-image-fit { position: relative; display: block; width: 100%; height: 100%; align-self: stretch; justify-self: stretch; overflow: hidden; background: var(--ed-tint); }
+.editorial-image-fit::before { content: ""; position: absolute; inset: -30px; background: var(--image-fit) center / cover no-repeat; filter: blur(20px) saturate(1.15); opacity: .6; }
+.editorial-image-fit > img { position: relative; display: block; width: 100%; height: 100%; object-fit: contain; }

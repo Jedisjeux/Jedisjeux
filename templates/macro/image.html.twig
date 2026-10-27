@@ -1,3 +1,11 @@
 {% macro render(path, filter, label, class) %}
     <img class="{{ class }}" src="{{ path | imagine_filter(filter|default('full')) }}" alt="{{ label }}"/>
 {% endmacro %}
+
+{# Shows the whole image (no crop, no upscale) over a blurred copy of itself #}
+{% macro fit(path, label, filter) %}
+    {% set src = path | imagine_filter(filter|default('card')) %}
+    <span class="editorial-image-fit" style="--image-fit: url('{{ src }}')">
+        <img src="{{ src }}" alt="{{ label }}" loading="lazy"/>
+    </span>
+{% endmacro %}
