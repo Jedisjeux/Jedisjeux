@@ -20,7 +20,7 @@
         </div>
         {% if article.mainImage is not null %}
             <figure class="editorial-article-header__image">
-                {{ images.render(article.mainImage.webPath, 'full', article.title) }}
+                {{ images.fit(article.mainImage.webPath, article.title, 'full', 'editorial-image-fit--natural', true) }}
             </figure>
         {% endif %}
     </div>
