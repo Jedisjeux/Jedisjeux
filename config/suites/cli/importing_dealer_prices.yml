@@ -15,4 +15,4 @@ default:
                 - App\Tests\Behat\Context\Cli\CommandContext
                 - App\Tests\Behat\Context\Cli\DealerPriceContext
             filters:
-                tags: "@importing_dealer_prices && @cli"
+                tags: "@importing_dealer_prices&&@cli"

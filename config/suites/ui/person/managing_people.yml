@@ -12,4 +12,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Backend\ManagingPeopleContext
                 - App\Tests\Behat\Context\Ui\Backend\NotificationContext
             filters:
-                tags: "@managing_people && @ui"
+                tags: "@managing_people&&@ui"

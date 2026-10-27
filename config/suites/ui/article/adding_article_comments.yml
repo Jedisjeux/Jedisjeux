@@ -21,4 +21,4 @@ default:
 
                 - App\Tests\Behat\Context\Domain\ArticleContext
             filters:
-                tags: "@adding_article_comments && @ui"
+                tags: "@adding_article_comments&&@ui"

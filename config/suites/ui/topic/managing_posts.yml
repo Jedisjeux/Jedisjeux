@@ -16,4 +16,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Backend\ManagingPostsContext
                 - App\Tests\Behat\Context\Ui\Backend\NotificationContext
             filters:
-                tags: "@managing_posts && @ui"
+                tags: "@managing_posts&&@ui"

@@ -16,4 +16,4 @@ default:
 
                 - App\Tests\Behat\Context\Domain\ProductContext
             filters:
-                tags: "@adding_product_reviews && @ui"
+                tags: "@adding_product_reviews&&@ui"

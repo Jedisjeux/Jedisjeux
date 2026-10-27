@@ -13,4 +13,4 @@ default:
 
                 - App\Tests\Behat\Context\Ui\Frontend\UserContext
             filters:
-                tags: "@viewing_game_libraries && @ui"
+                tags: "@viewing_game_libraries&&@ui"

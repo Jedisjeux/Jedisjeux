@@ -16,4 +16,4 @@ default:
 
                 - App\Tests\Behat\Context\Ui\Frontend\PersonContext
             filters:
-                tags: "@viewing_people && @ui"
+                tags: "@viewing_people&&@ui"

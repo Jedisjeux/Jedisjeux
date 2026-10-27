@@ -16,4 +16,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Backend\ManagingGamePlaysContext
                 - App\Tests\Behat\Context\Ui\Backend\NotificationContext
             filters:
-                tags: "@managing_game_plays && @ui"
+                tags: "@managing_game_plays&&@ui"

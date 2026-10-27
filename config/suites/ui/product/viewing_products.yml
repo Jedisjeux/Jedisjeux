@@ -26,4 +26,4 @@ default:
 
                 - App\Tests\Behat\Context\Ui\Frontend\ProductContext
             filters:
-                tags: "@viewing_products && @ui"
+                tags: "@viewing_products&&@ui"

@@ -12,4 +12,4 @@ default:
 
                 - App\Tests\Behat\Context\Ui\Frontend\UserContext
             filters:
-                tags: "@viewing_users && @ui"
+                tags: "@viewing_users&&@ui"

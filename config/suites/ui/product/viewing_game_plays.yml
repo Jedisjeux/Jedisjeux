@@ -18,4 +18,4 @@ default:
 
                 - App\Tests\Behat\Context\Ui\Frontend\GamePlayContext
             filters:
-                tags: "@viewing_game_plays && @ui"
+                tags: "@viewing_game_plays&&@ui"

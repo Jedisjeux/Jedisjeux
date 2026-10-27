@@ -15,4 +15,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Backend\ManagingGameAwardsContext
                 - App\Tests\Behat\Context\Ui\Backend\NotificationContext
             filters:
-                tags: "@managing_game_awards && @ui"
+                tags: "@managing_game_awards&&@ui"

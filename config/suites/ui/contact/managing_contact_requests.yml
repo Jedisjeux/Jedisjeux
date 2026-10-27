@@ -12,4 +12,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Backend\ManagingContactRequestsContext
                 - App\Tests\Behat\Context\Ui\Backend\NotificationContext
             filters:
-                tags: "@managing_contact_requests && @ui"
+                tags: "@managing_contact_requests&&@ui"

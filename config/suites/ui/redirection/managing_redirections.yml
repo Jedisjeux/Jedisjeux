@@ -13,4 +13,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Backend\ManagingRedirectionsContext
                 - App\Tests\Behat\Context\Ui\Backend\NotificationContext
             filters:
-                tags: "@managing_redirections && @ui"
+                tags: "@managing_redirections&&@ui"

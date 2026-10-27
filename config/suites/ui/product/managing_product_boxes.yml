@@ -18,4 +18,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Backend\ManagingProductBoxesContext
                 - App\Tests\Behat\Context\Ui\Backend\NotificationContext
             filters:
-                tags: "@managing_product_boxes && @ui"
+                tags: "@managing_product_boxes&&@ui"

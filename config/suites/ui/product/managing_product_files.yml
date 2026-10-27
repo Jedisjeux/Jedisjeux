@@ -18,4 +18,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Backend\ManagingProductFilesContext
                 - App\Tests\Behat\Context\Ui\Backend\NotificationContext
             filters:
-                tags: "@managing_product_files && @ui"
+                tags: "@managing_product_files&&@ui"

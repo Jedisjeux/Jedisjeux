@@ -15,4 +15,4 @@ default:
 
                 - App\Tests\Behat\Context\Ui\Frontend\ProductBoxContext
             filters:
-                tags: "@adding_product_boxes && @ui"
+                tags: "@adding_product_boxes&&@ui"

@@ -6,4 +6,4 @@ default:
 
                 - App\Tests\Behat\Context\Ui\Frontend\ErrorContext
             filters:
-                tags: "@viewing_errors && @ui"
+                tags: "@viewing_errors&&@ui"

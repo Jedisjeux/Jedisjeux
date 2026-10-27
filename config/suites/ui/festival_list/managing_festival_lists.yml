@@ -13,4 +13,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Backend\ManagingFestivalListsContext
                 - App\Tests\Behat\Context\Ui\Backend\NotificationContext
             filters:
-                tags: "@managing_festival_lists && @ui"
+                tags: "@managing_festival_lists&&@ui"

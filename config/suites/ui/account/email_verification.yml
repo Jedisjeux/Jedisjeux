@@ -14,4 +14,4 @@ default:
                 - App\Tests\Behat\Context\Ui\EmailContext
                 - App\Tests\Behat\Context\Ui\Frontend\RegistrationContext
             filters:
-                tags: "@email_verification && @ui"
+                tags: "@email_verification&&@ui"

@@ -15,4 +15,4 @@ default:
 
                 - App\Tests\Behat\Context\Ui\Frontend\ProductFileContext
             filters:
-                tags: "@adding_product_files && @ui"
+                tags: "@adding_product_files&&@ui"

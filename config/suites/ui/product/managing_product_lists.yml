@@ -17,4 +17,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Backend\ManagingProductListsContext
                 - App\Tests\Behat\Context\Ui\Backend\NotificationContext
             filters:
-                tags: "@managing_product_lists && @ui"
+                tags: "@managing_product_lists&&@ui"

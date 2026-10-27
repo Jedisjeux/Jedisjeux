@@ -20,4 +20,4 @@ default:
                 - App\Tests\Behat\Context\Ui\Frontend\TopicContext
                 - App\Tests\Behat\Context\Ui\Frontend\NotificationContext
             filters:
-                tags: "@adding_topics && @ui"
+                tags: "@adding_topics&&@ui"
