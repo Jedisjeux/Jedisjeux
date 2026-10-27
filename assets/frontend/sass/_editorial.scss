@@ -1092,6 +1092,7 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
   h1, h2, h3, h4, h5, h6, .title, .logo-font, .logo-font .text-default { color: var(--ed-ink) !important; }
   p, li, dd, label, .breadcrumb, .breadcrumb-item, .breadcrumb-item.active { color: var(--ed-text); }
   a:not(.btn):not(.editorial-btn) { color: var(--ed-accent); }
+  .editorial-article-categories a.active { color: var(--ed-accent-contrast); }
   .card, .modal-content, .dropdown-menu, .list-group-item, .nav-tabs .nav-link.active, .pagination .page-link, .table, .well, .block, .comments .comment { background-color: var(--ed-surface) !important; border-color: var(--ed-line) !important; color: var(--ed-text); }
   .dropdown-item, .dropdown-menu > li > a { color: var(--ed-text); }
   .dropdown-item:hover, .dropdown-menu > li > a:hover { background-color: var(--ed-tint); color: var(--ed-ink); }
