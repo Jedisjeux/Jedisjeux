@@ -59,7 +59,7 @@ services:
                 php_version: '8.2'
                 php_extensions: '["apcu","bcmath","curl","iconv","intl","mbstring","pgsql","uuid","xml","zip","mysql","gd"]'
                 pie_version: 1.0.0
-                node_version: 16.x
+                node_version: 20.x
                 package_manager: npm
             cache_from:
                 - 'type=registry,ref=${REGISTRY:-}/app-builder:cache'

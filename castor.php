@@ -14,6 +14,7 @@ use function Castor\capture;
 use function Castor\context;
 use function Castor\run;
 use function Castor\Docker\docker_compose;
+use function Castor\Docker\docker_exit_code;
 use Castor\Docker\Event\RegisterServiceEvent;
 use Castor\Docker\Service\MariaDBService;
 use Castor\Docker\Service\PhpIniScope;
@@ -50,7 +51,12 @@ function register_services(RegisterServiceEvent $event): void
         ->link($database)
         ->withDomain('jedisjeux.test')
         ->withHttpAccess()
-        ->withNodeVersion('16')
+        // NodeSource has no node_16.x repository for current Debian, so 16 would silently install Debian's Node 20
+        ->withNodeVersion('20')
+        // The extensions phpstan.neon includes from vendor/ are built for PHPStan 1
+        ->withPhpStanVersion('^1.12')
+        // Same version as composer.lock, so the task and the vendor binary agree on the rules
+        ->withPhpCsFixerVersion('3.95.27')
     ;
 
     $event->addService($app);
@@ -86,7 +92,37 @@ function behat(#[AsRawTokens] array $args = []): int
     $tty = Process::isTtySupported();
 
     return docker_compose(
-        ['exec', ...($tty ? [] : ['-T']), '-e', 'APP_ENV=test', 'app', 'vendor/bin/behat', ...$args],
+        // The CLI php.ini of withPhpIni() only reaches the builder, and the Symfony driver boots the kernel in this process
+        ['exec', ...($tty ? [] : ['-T']), '-e', 'APP_ENV=test', 'app', 'php', '-d', 'memory_limit=1G', 'vendor/bin/behat', ...$args],
         context()->withTty($tty)->withTimeout(null)->withAllowFailure(),
     )->getExitCode();
+}
+
+#[AsTask(description: 'Build the front-end assets in the builder container', namespace: 'app')]
+function assets(): int
+{
+    // package.json asks for Node 16, the version production builds with, but the assets build fine on Node 20
+    return docker_exit_code(
+        ['sh', '-c', 'yarn install --frozen-lockfile && yarn build'],
+        'app-builder',
+        environment: ['YARN_IGNORE_ENGINES' => 'true'],
+    );
+}
+
+#[AsTask(description: 'Run Psalm in the builder container', namespace: 'app:qa')]
+function psalm(#[AsRawTokens] array $args = []): int
+{
+    return docker_exit_code(['php', '-d', 'memory_limit=2G', 'vendor/bin/psalm', '--show-info=false', ...$args], 'app-builder');
+}
+
+#[AsTask(description: 'Run phpspec in the builder container', namespace: 'test')]
+function phpspec(#[AsRawTokens] array $args = []): int
+{
+    return docker_exit_code(['vendor/bin/phpspec', 'run', '--no-interaction', ...$args], 'app-builder');
+}
+
+#[AsTask(description: 'Run PHPUnit in the builder container', namespace: 'test')]
+function phpunit(#[AsRawTokens] array $args = []): int
+{
+    return docker_exit_code(['vendor/bin/phpunit', ...$args], 'app-builder', noDeps: false);
 }

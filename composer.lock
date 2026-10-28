@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b731bdc2ec18fe4d158170a1901487ab",
+    "content-hash": "61c6746f6d680f61beafe2405aba5504",
     "packages": [
         {
             "name": "api-platform/core",
@@ -17657,97 +17657,6 @@
                 "source": "https://github.com/FriendsOfBehat/VariadicExtension/tree/v1.7.0"
             },
             "time": "2026-03-23T12:27:14+00:00"
-        },
-        {
-            "name": "friends-of-phpspec/phpspec-code-coverage",
-            "version": "v6.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/friends-of-phpspec/phpspec-code-coverage.git",
-                "reference": "6269ed62485b3e51c4885cb8aa0d3f8cb2829e78"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/friends-of-phpspec/phpspec-code-coverage/zipball/6269ed62485b3e51c4885cb8aa0d3f8cb2829e78",
-                "reference": "6269ed62485b3e51c4885cb8aa0d3f8cb2829e78",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">= 7.3",
-                "phpspec/phpspec": "^6.0 || ^7.0",
-                "phpunit/php-code-coverage": "^9.2 || ^10.0 || ^11.0",
-                "phpunit/php-file-iterator": "^3.0 || ^4.0 || ^5.0"
-            },
-            "conflict": {
-                "sebastian/comparator": "< 2.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.4",
-                "phpstan/phpstan": "^1.5"
-            },
-            "suggest": {
-                "ext-pcov": "Install PCov extension to generate code coverage.",
-                "ext-xdebug": "Install Xdebug to generate phpspec code coverage."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "6.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/bootstrap.php"
-                ],
-                "psr-4": {
-                    "FriendsOfPhpSpec\\PhpSpec\\CodeCoverage\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "ek9",
-                    "email": "dev@ek9.co",
-                    "homepage": "https://ek9.co"
-                },
-                {
-                    "name": "Henrik Bjornskov"
-                },
-                {
-                    "name": "Stéphane Hulard",
-                    "email": "s.hulard@chstudio.fr",
-                    "homepage": "https://chstudio.fr"
-                },
-                {
-                    "name": "Pol Dellaiera",
-                    "email": "pol.dellaiera@protonmail.com",
-                    "homepage": "https://not-a-number.io/"
-                },
-                {
-                    "name": "Jay Linski",
-                    "homepage": "https://github.com/jaylinski"
-                }
-            ],
-            "description": "Generate Code Coverage reports for PhpSpec tests",
-            "homepage": "https://github.com/friends-of-phpspec/phpspec-code-coverage",
-            "keywords": [
-                "code-coverage",
-                "coverage",
-                "phpspec",
-                "report",
-                "spec",
-                "test",
-                "tests"
-            ],
-            "support": {
-                "docs": "https://github.com/friends-of-phpspec/phpspec-code-coverage#phpspec-code-coverage",
-                "issues": "https://github.com/friends-of-phpspec/phpspec-code-coverage/issues",
-                "source": "https://github.com/friends-of-phpspec/phpspec-code-coverage"
-            },
-            "time": "2025-07-16T13:17:04+00:00"
         },
         {
             "name": "friendsofphp/php-cs-fixer",
