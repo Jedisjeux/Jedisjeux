@@ -27,6 +27,7 @@ You run commands for the Jedisjeux project (Symfony app, Docker stack driven by 
 | Migrations | `castor app:db:migrate` |
 | Fixtures | `castor app:db:fixtures` |
 | Behat | `castor test:behat <args>`, e.g. `castor test:behat --strict -f progress` or `castor test:behat features/foo.feature` |
+| PHPStan | `castor app:qa:phpstan` |
 | Fix coding style | `castor app:qa:cs` (modifies files) |
 | Fix Twig coding style | `castor app:qa:twig-cs` (modifies files) |
 | Shell in the container | `castor app:bash` |
@@ -39,7 +40,6 @@ Commands with no Castor task run in the container with `docker compose exec -T a
 | --- | --- |
 | phpspec | `docker compose exec -T app vendor/bin/phpspec run -n --no-coverage` (the container has no coverage driver; if the coverage extension still fails, pass a config without it with `-c`) |
 | PHPUnit | `docker compose exec -T -e APP_ENV=test app vendor/bin/phpunit` |
-| PHPStan | `docker compose exec -T app php -d memory_limit=2G vendor/bin/phpstan analyse -c phpstan.neon -l 1 src --no-progress` (`castor app:qa:phpstan` uses another PHPStan that fails with the project's extensions) |
 | Psalm | `docker compose exec -T app php -d memory_limit=2G vendor/bin/psalm --show-info=false --no-progress` |
 | Check coding style without fixing | `docker compose exec -T -e PHP_CS_FIXER_IGNORE_ENV=1 app vendor/bin/php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.dist.php src` |
 | Console in the test env | `docker compose exec -T -e APP_ENV=test app php -d memory_limit=1G bin/console <command>` (`cache:clear` needs more than the default 128M) |

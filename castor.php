@@ -51,6 +51,8 @@ function register_services(RegisterServiceEvent $event): void
         ->withDomain('jedisjeux.test')
         ->withHttpAccess()
         ->withNodeVersion('16')
+        // The extensions phpstan.neon includes from vendor/ are built for PHPStan 1
+        ->withPhpStanVersion('^1.12')
     ;
 
     $event->addService($app);
