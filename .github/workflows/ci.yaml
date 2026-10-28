@@ -9,276 +9,166 @@ on:
     -
       cron: "0 1 * * 6" # Run at 1am every Saturday
 
+env:
+  # The tasks reach the containers directly, the global Caddy router is not needed
+  CASTOR_DOCKER_ROUTER_AUTOSTART: 0
+
 jobs:
   static-checks:
     runs-on: ubuntu-latest
 
-    name: "Static checks (PHP ${{ matrix.php }})"
-
-    strategy:
-      fail-fast: false
-      matrix:
-        php: [ 8.2 ]
+    name: "Static checks"
 
     steps:
       -
         uses: actions/checkout@v4
 
       -
-        name: Setup PHP
+        name: Setup Castor
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "${{ matrix.php }}"
-          ini-values: date.timezone=Europe/Warsaw
-          extensions: intl, gd, mysql, pdo_mysql, :xdebug
-          tools: symfony
+          php-version: "8.4"
+          tools: castor
           coverage: none
 
       -
-        name: Get Composer cache directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      -
-        name: Cache Composer
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json **/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
+        name: Build the builder image
+        # Created beforehand so Docker does not create the mounted home as root
+        run: |
+          mkdir -p .home
+          castor docker:build app-builder
 
       -
         name: Install PHP dependencies
-        run: composer install --no-interaction
+        run: castor app:install
         id: end-of-setup
 
       -
         name: Validate composer.json
-        run: composer validate --strict
+        run: castor app:composer validate --strict
         if: always() && steps.end-of-setup.outcome == 'success'
 
       -
         name: Check for security vulnerabilities
-        run: composer audit --locked
-        # Symfony 4.4 and Twig 2 are EOL: known advisories cannot be fixed without major upgrades
+        run: castor app:composer audit --locked
+        # Symfony 5.4 and Twig 2 are EOL: known advisories cannot be fixed without major upgrades
         continue-on-error: true
         if: always() && steps.end-of-setup.outcome == 'success'
 
       -
         name: Validate coding standard
-        run: PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.dist.php src
+        run: castor app:qa:cs fix --dry-run --diff
         if: always() && steps.end-of-setup.outcome == 'success'
 
       -
         name: Validate Twig templates
-        run: bin/console lint:twig templates
+        run: castor app:symfony lint:twig templates
         if: always() && steps.end-of-setup.outcome == 'success'
 
       -
         name: Validate Yaml files
-        run: bin/console lint:yaml config --parse-tags
+        run: castor app:symfony lint:yaml config --parse-tags
         if: always() && steps.end-of-setup.outcome == 'success'
 
       -
         name: Run Psalm
-        run: vendor/bin/psalm --show-info=false
+        run: castor app:qa:psalm
         if: always() && steps.end-of-setup.outcome == 'success'
 
       -
         name: Run PHPStan
-        run: vendor/bin/phpstan analyse -c phpstan.neon -l 1 src
+        run: castor app:qa:phpstan
         if: always() && steps.end-of-setup.outcome == 'success'
 
   test-application:
     runs-on: ubuntu-latest
 
-    name: "Test application (PHP ${{ matrix.php }}, Behat driver ${{ matrix.behat_driver }}), MySQL ${{ matrix.mysql }})"
+    name: "Test application"
 
-    timeout-minutes: 25
-
-    strategy:
-      fail-fast: false
-      matrix:
-        php: ["8.2"]
-        node: ["16.x"]
-        mysql: ["5.7"]
-        behat_driver: ["chrome_headless"]
-
-    env:
-      APP_ENV: test
-      DATABASE_URL: "mysql://root:root@127.0.0.1/jedisjeux?charset=utf8mb4&serverVersion=${{ matrix.mysql }}"
+    timeout-minutes: 30
 
     steps:
       -
         uses: actions/checkout@v4
 
       -
-        name: Shutdown default MySQL
-        run: sudo service mysql stop
-
-      -
-        name: Setup MySQL
-        uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql version: "${{ matrix.mysql }}"
-          mysql root password: "root"
-
-      -
-        name: Setup PHP
+        name: Setup Castor
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "${{ matrix.php }}"
-          ini-values: date.timezone=Europe/Paris, opcache.enable=1, opcache.enable_cli=1, opcache.memory_consumption=256, opcache.max_accelerated_files=32531, opcache.interned_strings_buffer=8, opcache.validate_timestamps=0, opcache.save_comments=1, opcache.fast_shutdown=0
-          extensions: intl, gd, opcache, pgsql, pdo_pgsql, :xdebug
-          tools: symfony
+          php-version: "8.4"
+          tools: castor
           coverage: none
 
       -
-        name: Install certificates
+        name: Build and start the stack
+        # Created beforehand so Docker does not create the mounted home as root
         run: |
-          sudo apt-get install -y libnss3-tools
-          mkdir -p $HOME/.pki/nssdb
-          certutil -d sql:$HOME/.pki/nssdb -N --empty-password
-          symfony server:ca:install
+          mkdir -p .home
+          castor docker:build
+          castor docker:up
 
       -
-        name: Configure Behat driver
-        run: |
-          sed -i -e 's/javascript_session: chrome/javascript_session: ${{ matrix.behat_driver }}/g' behat.yml.dist
+        name: Install PHP dependencies
+        run: castor app:install
 
       -
-        name: Run Chrome Headless
-        run: google-chrome-stable --enable-automation --disable-background-networking --no-default-browser-check --no-first-run --disable-popup-blocking --disable-default-apps --disable-translate --disable-extensions --no-sandbox --enable-features=Metal --headless --remote-debugging-port=9222 --window-size=2880,1800 --proxy-server='direct://' --proxy-bypass-list='*' https://127.0.0.1 > /dev/null 2>&1 &
-
-      -
-        name: Get Composer cache directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      -
-        name: Cache Composer
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-${{ hashFiles('**/composer.json **/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-composer-
-
-      -
-        name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --no-interaction
-
-      -
-        name: Install behat driver
-        if: matrix.behat_driver != 'chrome_headless'
-        run: vendor/bin/bdi detect drivers
-
-      -
-        name: Run Selenium
-        if: matrix.behat_driver == 'chrome'
-        run: vendor/bin/selenium-server-standalone -Dwebdriver.chrome.driver=drivers/chromedriver > /dev/null 2>&1 &
-
-      -
-        name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "${{ matrix.node }}"
-
-      -
-        name: Get Yarn cache directory
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      -
-        name: Cache Yarn
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ matrix.node }}-yarn-${{ hashFiles('**/package.json **/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ matrix.node }}-yarn-
-
-      -
-        name: Install JS dependencies
-        run: yarn install --frozen-lockfile
-
-      -
-        name: Validate Yarn packages
-        run: yarn check --integrity
-
-      -
-        name: Dump the environment
-        run: |
-          echo "DATABASE_URL=$DATABASE_URL" >> .env.$APP_ENV
-          composer dump-env $APP_ENV
-
-      -
-        name: Warmup cache
-        run: bin/console cache:warmup
-
-      -
-        name: Run webserver
-        run: symfony server:start --port=8080 --dir=public --daemon
+        name: Build assets
+        run: castor app:assets
 
       -
         name: Prepare application database
         run: |
-          APP_DEBUG=1 bin/console doctrine:database:create -vvv
-          bin/console doctrine:migrations:migrate -n -vvv
-
-      -
-        name: Build assets
-        run: |
-          bin/console assets:install public -vvv
-          yarn build
+          castor app:symfony --env=test doctrine:database:create
+          castor app:symfony --env=test doctrine:migrations:migrate -n
 
       -
         name: Validate Doctrine mapping
-        run: bin/console doctrine:schema:validate
-        if: always() && steps.end-of-setup.outcome == 'success'
+        run: castor app:symfony --env=test doctrine:schema:validate
 
       -
         name: Test provided migrations
         run: |
-          bin/console doctrine:migrations:migrate first --no-interaction
-          bin/console doctrine:migrations:migrate latest --no-interaction
+          castor app:symfony --env=test doctrine:migrations:migrate first --no-interaction
+          castor app:symfony --env=test doctrine:migrations:migrate latest --no-interaction
 
       -
         name: Test installer
-        run: bin/console app:install --no-interaction -vvv
+        run: castor app:symfony --env=test app:install --no-interaction
 
       -
         name: Load fixtures
-        run: bin/console sylius:fixtures:load --no-interaction
+        run: castor app:symfony --env=test sylius:fixtures:load --no-interaction
+
+      -
+        name: Warmup cache
+        run: castor app:symfony --env=test cache:warmup
 
       -
         name: Run PHPSpec
-        run: phpdbg -qrr vendor/bin/phpspec run --no-interaction --no-coverage -f dot
+        run: castor test:phpspec -f dot
 
       -
         name: Run PHPUnit
-        run: vendor/bin/phpunit
+        run: castor test:phpunit
 
       -
         name: Run CLI Behat
-        run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="@cli&&~@todo" --rerun
+        run: castor test:behat --colors --strict -f progress --tags="@cli&&~@todo" || castor test:behat --strict -f progress --tags="@cli&&~@todo" --rerun
 
       -
         name: Run non-JS Behat
-        run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli" || vendor/bin/behat --strict --no-interaction -vvv -f progress --tags="~@javascript&&~@todo&&~@cli" --rerun
+        run: castor test:behat --colors --strict -f progress --tags="~@javascript&&~@todo&&~@cli" || castor test:behat --strict -f progress --tags="~@javascript&&~@todo&&~@cli" --rerun
 
       -
         name: Run JS Behat
-        run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --rerun
+        run: castor test:behat --colors --strict -f progress --tags="@javascript&&~@todo&&~@cli" || castor test:behat --colors --strict -f progress --tags="@javascript&&~@todo&&~@cli" --rerun || castor test:behat --colors --strict -f progress --tags="@javascript&&~@todo&&~@cli" --rerun
 
       -
         name: Upload Behat logs
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: "Behat logs (PHP ${{ matrix.php }})"
+          name: "Behat logs"
           path: etc/build/
           if-no-files-found: ignore
 
@@ -287,6 +177,6 @@ jobs:
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: "Symfony logs (PHP ${{ matrix.php }})"
+          name: "Symfony logs"
           path: var/log/
           if-no-files-found: ignore

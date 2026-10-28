@@ -15,4 +15,5 @@ return (new PhpCsFixer\Config())
         'statement_indentation' => false,
         'trailing_comma_in_multiline' => false,
     ])
+    ->setFinder(PhpCsFixer\Finder::create()->in(__DIR__.'/src'))
 ;

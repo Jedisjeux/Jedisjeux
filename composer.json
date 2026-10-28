@@ -117,7 +117,6 @@
     "friends-of-behat/page-object-extension": "^0.3",
     "friends-of-behat/symfony-extension": "^2.0",
     "friends-of-behat/variadic-extension": "^1.1",
-    "friends-of-phpspec/phpspec-code-coverage": "^6.0",
     "friendsofphp/php-cs-fixer": "^3.0",
     "lchrusciel/api-test-case": "^5.1",
     "monofony/behat-bridge": "^0.9",
