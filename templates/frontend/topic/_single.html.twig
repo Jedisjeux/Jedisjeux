@@ -12,22 +12,22 @@
     <div class="editorial-topic-card__main">
         <div class="editorial-topic-card__meta">
             {% if mainTaxon is not null %}<span class="editorial-topic-card__category">{{ mainTaxon.name }}</span>{% endif %}
-            <span>{{ topic.createdAt|localizeddate('medium', 'none') }}</span>
+            <span>{{ topic.createdAt|format_datetime('medium', 'none') }}</span>
             <span><i class="fa fa-comments-o" aria-hidden="true"></i> {{ topic.postCount }}</span>
         </div>
         <h2><a href="{{ getPath(topic) }}">{{ topic.title }}</a></h2>
         <p class="editorial-topic-card__author">Par {{ topic.author }}</p>
         {% if lastPost %}
-            <p class="editorial-topic-card__excerpt">{{ lastPost.body|truncate(230, true)|striptags|raw }}</p>
+            <p class="editorial-topic-card__excerpt">{{ lastPost.body|u.truncate(230, '...', false)|striptags|raw }}</p>
         {% elseif topic.mainPost is not null %}
-            <p class="editorial-topic-card__excerpt">{{ topic.mainPost.body|truncate(230, true)|striptags|raw }}</p>
+            <p class="editorial-topic-card__excerpt">{{ topic.mainPost.body|u.truncate(230, '...', false)|striptags|raw }}</p>
         {% endif %}
     </div>
     {% if lastPost %}
         <a class="editorial-topic-card__last" href="{{ getPath(topic, lastPage) }}">
             <span>Dernier message</span>
             <strong>{{ lastPost.author }}</strong>
-            <time>{{ lastPost.createdAt|localizeddate('medium', 'short') }}</time>
+            <time>{{ lastPost.createdAt|format_datetime('medium', 'short') }}</time>
             <i class="fa fa-arrow-right" aria-hidden="true"></i>
         </a>
     {% endif %}

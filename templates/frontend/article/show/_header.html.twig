@@ -14,7 +14,7 @@
             <h1>{{ article.title }}</h1>
             <ul class="editorial-article-meta">
                 <li>{{ icon('user') }}Par <strong>{{ article.author }}</strong></li>
-                <li>{{ icon('calendar') }}{{ article.publishStartDate|localizeddate('long', 'none') }}</li>
+                <li>{{ icon('calendar') }}{{ article.publishStartDate|format_datetime('long', 'none') }}</li>
                 <li><a href="#comments">{{ icon('message') }}{{ commentCount }} {{ commentCount > 1 ? 'réactions' : 'réaction' }}</a></li>
             </ul>
         </div>

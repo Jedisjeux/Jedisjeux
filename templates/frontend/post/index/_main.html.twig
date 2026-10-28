@@ -20,7 +20,7 @@
         <h1>{{ topic.title }}</h1>
         <div class="editorial-thread-meta">
             <span><i class="fa fa-user-o" aria-hidden="true"></i> {{ topic.author }}</span>
-            <span><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ topic.createdAt|localizeddate('medium', 'none') }}</span>
+            <span><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ topic.createdAt|format_datetime('medium', 'none') }}</span>
             <span><i class="fa fa-comments-o" aria-hidden="true"></i> {{ replyCount }} réponse{% if replyCount != 1 %}s{% endif %}</span>
         </div>
     </header>

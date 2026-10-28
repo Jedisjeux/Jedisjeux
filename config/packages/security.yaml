@@ -1,8 +1,10 @@
 security:
+    enable_authenticator_manager: true
+
     providers:
         sylius_user_provider:
             id: sylius.app_user_provider.email_or_name_based
-    encoders:
+    password_hashers:
         Sylius\Component\User\Model\UserInterface: sha512
 
     role_hierarchy:
@@ -30,12 +32,12 @@ security:
             pattern: ^/api/
             provider: sylius_user_provider
             user_checker: App\Security\UserChecker
-            anonymous: true
             entry_point: app.security.api_entry_point
             context: user
+            lazy: true
 
         main:
-            anonymous: true
+            lazy: true
             pattern: /.*
             provider: sylius_user_provider
             user_checker: App\Security\UserChecker
@@ -49,7 +51,7 @@ security:
                 default_target_path: app_homepage
                 use_forward:  false
                 #use_referer: true
-                csrf_token_generator: security.csrf.token_manager
+                enable_csrf: true
                 csrf_parameter: _csrf_shop_security_token
                 csrf_token_id: shop_authenticate
             remember_me:
@@ -63,13 +65,13 @@ security:
             context: user
 
     access_control:
-        - { path: "^/_partial.*", role: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1, ::1] }
+        - { path: "^/_partial.*", role: PUBLIC_ACCESS, ips: [127.0.0.1, ::1] }
         - { path: "^/_partial.*", role: ROLE_NO_ACCESS }
 
-        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/verify, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, role: PUBLIC_ACCESS }
+        - { path: ^/register, role: PUBLIC_ACCESS }
+        - { path: ^/resetting, role: PUBLIC_ACCESS }
+        - { path: ^/verify, role: PUBLIC_ACCESS }
         - { path: ^/mon-compte.*, role: ROLE_USER }
 
         - { path: ^/admin/$, roles: [ROLE_DASHBOARD] }

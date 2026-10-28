@@ -17,7 +17,7 @@
         <div class="media-body">
             <h6 class="media-heading"><a href="{{ topicPath }}">{{ topic.title }}</a></h6>
             <p class="small mb-10 text-muted">
-                <i class="fa fa-calendar pr-1"></i> {{ topic.createdAt|localizeddate('short', 'none') }}
+                <i class="fa fa-calendar pr-1"></i> {{ topic.createdAt|format_datetime('short', 'none') }}
                 {% if topic.mainTaxon %}
                     <i class="pl-10 pr-1 fa fa-tag"></i>{{ topic.mainTaxon.name }}
                 {% endif %}

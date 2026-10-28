@@ -29,7 +29,7 @@
                 {{ images.render(avatarPath, 'thumbnail', topic.author, 'rounded-circle') }}
             </div>
             <header>
-                <div class="comment-meta pv-20">By <a href="#">{{ post.author }}</a> | {{ post.createdAt|localizeddate('medium', 'short') }}</div>
+                <div class="comment-meta pv-20">By <a href="#">{{ post.author }}</a> | {{ post.createdAt|format_datetime('medium', 'short') }}</div>
             </header>
             <div class="comment-content">
                 <div class="comment-body clearfix">

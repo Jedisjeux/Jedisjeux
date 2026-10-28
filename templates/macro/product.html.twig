@@ -12,9 +12,9 @@
     {% set date_format = date_format|default('medium') %}
 
     {% if constant('App\\Entity\\ProductVariant::RELEASED_AT_PRECISION_ON_DAY') == product_variant.releasedAtPrecision %}
-        {{ product_variant.releasedAt|localizeddate(date_format, 'none') }}
+        {{ product_variant.releasedAt|format_datetime(date_format, 'none') }}
     {% elseif constant('App\\Entity\\ProductVariant::RELEASED_AT_PRECISION_ON_MONTH') == product_variant.releasedAtPrecision %}
-        {% set format = null %}
+        {% set format = '' %}
 
         {% if 'medium' == date_format %}
             {% set format = 'MMM Y' %}
@@ -22,7 +22,7 @@
             {% set format = 'MMMM Y' %}
         {% endif %}
 
-        {{ product_variant.releasedAt|localizeddate(date_format, 'none', null, null, format) }}
+        {{ product_variant.releasedAt|format_datetime(date_format, 'none', format) }}
     {% elseif constant('App\\Entity\\ProductVariant::RELEASED_AT_PRECISION_ON_YEAR') == product_variant.releasedAtPrecision %}
         {{ product_variant.releasedAt|date('Y') }}
     {% endif %}

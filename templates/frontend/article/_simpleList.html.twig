@@ -14,7 +14,7 @@
                     </span>
                     <span class="editorial-mini-articles__body">
                         <strong>{{ article.title }}</strong>
-                        <small>{{ article.publishStartDate|localizeddate('medium', 'none') }}</small>
+                        <small>{{ article.publishStartDate|format_datetime('medium', 'none') }}</small>
                     </span>
                 </a>
             </li>

@@ -34,7 +34,7 @@
                             <div class="col-md-10 col-sm-8 col-xs-8">
                                 <!-- Your Name / Heading -->
                                 <h2>{{ customer }}</h2>
-                                <span><i class="fa fa-calendar"></i>&nbsp; {{ 'app.ui.registered_at'|trans }} {{ user.createdAt|localizeddate('medium', 'none') }}</span>
+                                <span><i class="fa fa-calendar"></i>&nbsp; {{ 'app.ui.registered_at'|trans }} {{ user.createdAt|format_datetime('medium', 'none') }}</span>
                                 <br>
                                 <a href="{{ path('app_frontend_user_games_library', {'username': user.usernameCanonical}) }}">
                                     <span><i class="fa fa-cubes color"></i>&nbsp; {{ 'app.ui.game_library'|trans }}</span>

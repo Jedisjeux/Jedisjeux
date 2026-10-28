@@ -14,7 +14,7 @@
     </div>
     <div class="body">
         <p class="small mb-10 text-muted">
-            <i class="fa fa-calendar-o pr-1"></i> {{ article.publishStartDate|localizeddate('medium', 'none') }}
+            <i class="fa fa-calendar-o pr-1"></i> {{ article.publishStartDate|format_datetime('medium', 'none') }}
             <i class="pl-10 fa fa-eye pr-1"></i> {{ article.viewCount }}
             {% if article.mainTaxon is not null %}
                 <i class="pl-10 pr-1 fa fa-tag"></i>
@@ -24,7 +24,7 @@
             {% endif %}
         </p>
         {% if article.shortDescription is not null %}
-            <p>{{ article.shortDescription|truncate(150, true)|striptags|raw }}</p>
+            <p>{{ article.shortDescription|u.truncate(150, '...', false)|striptags|raw }}</p>
         {% endif %}
         <a href="{{ articlePath }}" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
     </div>

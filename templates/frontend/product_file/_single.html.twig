@@ -9,7 +9,7 @@
                     <h3 class="title">{{ product_file.title }}</h3>
                     <div class="comment-meta">
                         {{ fileExtension|upper }} |
-                        {{ product_file.createdAt|localizeddate('medium', 'none') }} |
+                        {{ product_file.createdAt|format_datetime('medium', 'none') }} |
                         {{ 'app.ui.added_by'|trans({'%username%': product_file.author}) }}
                     </div>
                 </div>
