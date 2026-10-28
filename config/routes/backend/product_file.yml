@@ -21,7 +21,7 @@ app_backend_product_file_accept:
     path: /product-files/{id}/accept
     methods: [PUT]
     defaults:
-        _controller: app.controller.product_file:applyStateMachineTransitionAction
+        _controller: app.controller.product_file::applyStateMachineTransitionAction
         _sylius:
             permission: true
             state_machine:
@@ -34,7 +34,7 @@ app_backend_product_file_reject:
     path: /product-files/{id}/reject
     methods: [PUT]
     defaults:
-        _controller: app.controller.product_file:applyStateMachineTransitionAction
+        _controller: app.controller.product_file::applyStateMachineTransitionAction
         _sylius:
             permission: true
             state_machine:

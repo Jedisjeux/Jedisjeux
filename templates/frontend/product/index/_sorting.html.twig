@@ -5,7 +5,7 @@
     {% set route = app.request.attributes.get('_route') %}
     {% set route_parameters = app.request.attributes.get('_route_params') %}
 
-    {% set criteria = app.request.query.get('criteria', {}) %}
+    {% set criteria = app.request.query.all('criteria') %}
 
     {% set default_path = path(route, route_parameters|merge({'criteria': criteria})) %}
     {% set oldest_first_path = path(route, route_parameters|merge({'sorting': {'createdAt': 'asc'}, 'criteria': criteria})) %}
@@ -16,21 +16,21 @@
     {% set newest_release_first_path = path(route, route_parameters|merge({'sorting': {'releasedAt': 'desc'}, 'criteria': criteria})) %}
     {% set oldest_release_first_path = path(route, route_parameters|merge({'sorting': {'releasedAt': 'asc'}, 'criteria': criteria})) %}
 
-    {% if app.request.query.get('sorting') is empty %}
+    {% if app.request.query.all('sorting') is empty %}
         {% set current_sorting_label = 'sylius.ui.newest_first'|trans|lower %}
-    {% elseif app.request.query.get('sorting').createdAt is defined and app.request.query.get('sorting').createdAt == 'desc'%}
+    {% elseif app.request.query.all('sorting').createdAt is defined and app.request.query.all('sorting').createdAt == 'desc'%}
         {% set current_sorting_label = 'sylius.ui.newest_first'|trans|lower %}
-    {% elseif app.request.query.get('sorting').createdAt is defined and app.request.query.get('sorting').createdAt == 'asc'%}
+    {% elseif app.request.query.all('sorting').createdAt is defined and app.request.query.all('sorting').createdAt == 'asc'%}
         {% set current_sorting_label = 'sylius.ui.oldest_first'|trans|lower %}
-    {% elseif app.request.query.get('sorting').averageRating is defined and app.request.query.get('sorting').averageRating == 'desc'%}
+    {% elseif app.request.query.all('sorting').averageRating is defined and app.request.query.all('sorting').averageRating == 'desc'%}
         {% set current_sorting_label = 'app.ui.top_rated_first'|trans|lower %}
-    {% elseif app.request.query.get('sorting').viewCount is defined and app.request.query.get('sorting').viewCount == 'desc'%}
+    {% elseif app.request.query.all('sorting').viewCount is defined and app.request.query.all('sorting').viewCount == 'desc'%}
         {% set current_sorting_label = 'app.ui.most_viewed_first'|trans|lower %}
-    {% elseif app.request.query.get('sorting').commentedReviewCount is defined and app.request.query.get('sorting').commentedReviewCount == 'desc'%}
+    {% elseif app.request.query.all('sorting').commentedReviewCount is defined and app.request.query.all('sorting').commentedReviewCount == 'desc'%}
         {% set current_sorting_label = 'app.ui.top_commented_first'|trans|lower %}
-    {% elseif app.request.query.get('sorting').releasedAt is defined and app.request.query.get('sorting').releasedAt == 'desc'%}
+    {% elseif app.request.query.all('sorting').releasedAt is defined and app.request.query.all('sorting').releasedAt == 'desc'%}
         {% set current_sorting_label = 'app.ui.newest_release_first'|trans|lower %}
-    {% elseif app.request.query.get('sorting').releasedAt is defined and app.request.query.get('sorting').releasedAt == 'asc'%}
+    {% elseif app.request.query.all('sorting').releasedAt is defined and app.request.query.all('sorting').releasedAt == 'asc'%}
         {% set current_sorting_label = 'app.ui.oldest_release_first'|trans|lower %}
     {% endif %}
 

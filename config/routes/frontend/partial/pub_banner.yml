@@ -2,7 +2,7 @@ app_frontend_partial_pub_banner_index:
     methods: [GET]
     path: /
     defaults:
-        _controller: app.controller.pub_banner:indexAction
+        _controller: app.controller.pub_banner::indexAction
         _sylius:
             template: $template
             paginate: false

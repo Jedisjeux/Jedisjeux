@@ -2,7 +2,7 @@ sylius_frontend_product_review_index:
     path: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product_review:indexAction
+        _controller: sylius.controller.product_review::indexAction
         _sylius:
             template: 'frontend/product_review/index.html.twig'
             grid: sylius_frontend_product_review
@@ -11,7 +11,7 @@ sylius_frontend_product_review_create:
     path: /new
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.product_review:createAction
+        _controller: sylius.controller.product_review::createAction
         _sylius:
             template: 'frontend/product_review/create.html.twig'
             form:
@@ -30,7 +30,7 @@ sylius_frontend_product_review_update:
     path: /{id}/update
     methods: [GET, PUT]
     defaults:
-        _controller: sylius.controller.product_review:updateAction
+        _controller: sylius.controller.product_review::updateAction
         _sylius:
             template: 'frontend/product_review/update.html.twig'
             repository:
@@ -47,7 +47,7 @@ sylius_frontend_product_rating_create:
     methods: [GET, POST]
     defaults:
         _format: json
-        _controller: sylius.controller.product_review:createAction
+        _controller: sylius.controller.product_review::createAction
         _sylius:
             template: 'frontend/product_review/rating/_form.html.twig'
             form: sylius_product_review_rating
@@ -63,7 +63,7 @@ sylius_frontend_product_rating_update:
     path: /rating/edit
     methods: [GET, PUT, PATCH]
     defaults:
-        _controller: sylius.controller.product_review:updateAction
+        _controller: sylius.controller.product_review::updateAction
         _format: json
         _sylius:
             template: 'frontend/product_review/rating/_form.html.twig'

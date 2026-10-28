@@ -5,17 +5,17 @@
     {% set route = app.request.attributes.get('_route') %}
     {% set route_parameters = app.request.attributes.get('_route_params') %}
 
-    {% set criteria = app.request.query.get('criteria', {}) %}
+    {% set criteria = app.request.query.all('criteria') %}
 
     {% set default_path = path(route, route_parameters|merge({'criteria': criteria})) %}
     {% set oldest_first_path = path(route, route_parameters|merge({'sorting': {'publishStartDate': 'asc'}, 'criteria': criteria})) %}
     {% set newest_first_path = path(route, route_parameters|merge({'sorting': {'publishStartDate': 'desc'}, 'criteria': criteria})) %}
 
-    {% if app.request.query.get('sorting') is empty %}
+    {% if app.request.query.all('sorting') is empty %}
         {% set current_sorting_label = 'sylius.ui.newest_first'|trans|lower %}
-    {% elseif app.request.query.get('sorting').publishStartDate is defined and app.request.query.get('sorting').publishStartDate == 'desc'%}
+    {% elseif app.request.query.all('sorting').publishStartDate is defined and app.request.query.all('sorting').publishStartDate == 'desc'%}
         {% set current_sorting_label = 'sylius.ui.newest_first'|trans|lower %}
-    {% elseif app.request.query.get('sorting').publishStartDate is defined and app.request.query.get('sorting').publishStartDate == 'asc'%}
+    {% elseif app.request.query.all('sorting').publishStartDate is defined and app.request.query.all('sorting').publishStartDate == 'asc'%}
         {% set current_sorting_label = 'sylius.ui.oldest_first'|trans|lower %}
     {% endif %}
 

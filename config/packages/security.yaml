@@ -1,6 +1,4 @@
 security:
-    enable_authenticator_manager: true
-
     providers:
         sylius_user_provider:
             id: sylius.app_user_provider.email_or_name_based

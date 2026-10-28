@@ -1,7 +1,6 @@
 sylius_resource:
     drivers:
         - doctrine/orm
-        - doctrine/phpcr-odm
     resources:
         app.article:
             classes:

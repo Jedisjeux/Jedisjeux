@@ -51,7 +51,7 @@ jobs:
       -
         name: Check for security vulnerabilities
         run: castor app:composer audit --locked
-        # Symfony 5.4 and Twig 2 are EOL: known advisories cannot be fixed without major upgrades
+        # Known advisories of api-platform/core 2.x cannot be fixed without upgrading to API Platform 3
         continue-on-error: true
         if: always() && steps.end-of-setup.outcome == 'success'
 

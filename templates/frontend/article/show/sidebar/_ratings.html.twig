@@ -11,7 +11,7 @@
             <strong>{{ article.averageRating|round(1) }}</strong><small>/10</small>
         </div>
         <ul>
-            {% for criterion in criteria if criterion.value > 0 %}
+            {% for criterion in criteria|filter(criterion => criterion.value > 0) %}
                 <li>
                     <span>{{ criterion.label }}</span>
                     <span class="editorial-article-score__bar" aria-hidden="true"><span style="width: {{ criterion.value * 20 }}%"></span></span>

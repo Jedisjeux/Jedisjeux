@@ -2,7 +2,7 @@ sylius_frontend_user_show:
     methods: [GET]
     path: ""
     defaults:
-        _controller: sylius.controller.customer:showAction
+        _controller: sylius.controller.customer::showAction
         _sylius:
             repository:
                 method: findOneByUsername

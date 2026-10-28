@@ -2,7 +2,7 @@ app_partial_dealer_price_index:
     methods: [GET]
     path: /dealer-prices/
     defaults:
-        _controller: app.controller.dealer_price:indexAction
+        _controller: app.controller.dealer_price::indexAction
         _sylius:
             repository:
                 method: createFilterPaginator
