@@ -92,7 +92,8 @@ function behat(#[AsRawTokens] array $args = []): int
     $tty = Process::isTtySupported();
 
     return docker_compose(
-        ['exec', ...($tty ? [] : ['-T']), '-e', 'APP_ENV=test', 'app', 'vendor/bin/behat', ...$args],
+        // The CLI php.ini of withPhpIni() only reaches the builder, and the Symfony driver boots the kernel in this process
+        ['exec', ...($tty ? [] : ['-T']), '-e', 'APP_ENV=test', 'app', 'php', '-d', 'memory_limit=1G', 'vendor/bin/behat', ...$args],
         context()->withTty($tty)->withTimeout(null)->withAllowFailure(),
     )->getExitCode();
 }
