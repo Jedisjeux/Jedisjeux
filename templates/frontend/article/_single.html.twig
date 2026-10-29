@@ -2,30 +2,25 @@
 
 {% set articlePath = path('app_frontend_article_show', { 'slug': article.slug }) %}
 
-<div class="image-box style-2 mb-20 bordered light-gray-bg">
-    <div class="overlay-container overlay-visible">
+<article class="editorial-article-card">
+    <a class="editorial-article-card__image" href="{{ articlePath }}">
         {% if article.mainImage is not null %}
-            {{ images.render(article.mainImage.webPath, 'magazine_item_wide', article.title) }}
-            <a href="{{ articlePath }}" class="overlay-link"><i class="fa fa-link"></i></a>
+            {{ images.fit(article.mainImage.webPath, article) }}
+        {% else %}
+            {{ images.render('/assets/frontend/images/placeholder.png', 'magazine_item_wide', article) }}
         {% endif %}
-        <div class="overlay-bottom text-left">
-            <p class="lead margin-clear">{{ article.title }}</p>
+    </a>
+    <div class="editorial-article-card__body">
+        {% if article.mainTaxon is not null %}
+            <span class="editorial-article-card__category">{{ article.mainTaxon.name }}</span>
+        {% endif %}
+        <h3><a href="{{ articlePath }}">{{ article.title }}</a></h3>
+        {% if article.shortDescription is not null %}
+            <p>{{ article.shortDescription|striptags|u.truncate(115, '...', false) }}</p>
+        {% endif %}
+        <div class="editorial-article-card__meta">
+            <span>{{ article.publishStartDate|format_datetime('medium', 'none') }}</span>
+            <span><i class="fa fa-comment-o"></i> {{ article.topic is not null ? article.topic.postCount : 0 }}</span>
         </div>
     </div>
-    <div class="body">
-        <p class="small mb-10 text-muted">
-            <i class="fa fa-calendar-o pr-1"></i> {{ article.publishStartDate|format_datetime('medium', 'none') }}
-            <i class="pl-10 fa fa-eye pr-1"></i> {{ article.viewCount }}
-            {% if article.mainTaxon is not null %}
-                <i class="pl-10 pr-1 fa fa-tag"></i>
-                <a href="{{ path('app_frontend_article_index_by_taxon', { 'slug': article.mainTaxon.slug }) }}">
-                    {{ article.mainTaxon.name }}
-                </a>
-            {% endif %}
-        </p>
-        {% if article.shortDescription is not null %}
-            <p>{{ article.shortDescription|u.truncate(150, '...', false)|striptags|raw }}</p>
-        {% endif %}
-        <a href="{{ articlePath }}" class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i></a>
-    </div>
-</div>
+</article>

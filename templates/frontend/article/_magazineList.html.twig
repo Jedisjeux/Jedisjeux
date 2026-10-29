@@ -1,32 +1,9 @@
-{% import 'macro/image.html.twig' as images %}
 {% import 'macro/messages.html.twig' as messages %}
 
 {% if articles.data|length > 0 %}
 <div class="editorial-article-grid">
     {% for article in articles.data %}
-        {% set articlePath = path('app_frontend_article_show', { 'slug': article.slug }) %}
-        <article class="editorial-article-card">
-            <a class="editorial-article-card__image" href="{{ articlePath }}">
-                {% if article.mainImage is not null %}
-                    {{ images.fit(article.mainImage.webPath, article) }}
-                {% else %}
-                    {{ images.render('/assets/frontend/images/placeholder.png', 'magazine_item_wide', article) }}
-                {% endif %}
-            </a>
-            <div class="editorial-article-card__body">
-                {% if article.mainTaxon is not null %}
-                    <span class="editorial-article-card__category">{{ article.mainTaxon.name }}</span>
-                {% endif %}
-                <h3><a href="{{ articlePath }}">{{ article.title }}</a></h3>
-                {% if article.shortDescription is not null %}
-                    <p>{{ article.shortDescription|striptags|u.truncate(115, '...', false) }}</p>
-                {% endif %}
-                <div class="editorial-article-card__meta">
-                    <span>{{ article.publishStartDate|format_datetime('medium', 'none') }}</span>
-                    <span><i class="fa fa-comment-o"></i> {{ article.topic is not null ? article.topic.postCount : 0 }}</span>
-                </div>
-            </div>
-        </article>
+        {% include 'frontend/article/_single.html.twig' %}
     {% endfor %}
 </div>
 {% else %}
