@@ -462,6 +462,26 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
 .editorial-game-play-card__footer a { display: inline-flex; align-items: center; gap: 8px; margin-left: auto; color: var(--ed-accent); font-weight: 700; }
 .editorial-game-play-card__footer a:hover { color: var(--ed-ink); }
 .editorial-game-play-results .pagination { margin-top: 24px; }
+/* Game plays tab of the game page */
+.editorial-game-play-entry { display: flex; min-width: 0; flex-direction: column; padding: 16px 18px; border: 1px solid var(--editorial-border); border-radius: 10px; background: var(--ed-surface); box-shadow: 0 4px 14px rgba(var(--ed-shadow-rgb),.035); }
+.editorial-game-play-entry__author { display: grid; grid-template-columns: 44px minmax(0,1fr) auto; align-items: center; gap: 12px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--editorial-border-soft); }
+.editorial-game-play-entry__avatar { display: block; width: 44px; height: 44px; overflow: hidden; border-radius: 50%; background: var(--ed-tint); }
+.editorial-game-play-entry__avatar img { width: 100%; height: 100%; object-fit: cover; }
+.editorial-game-play-entry__author > span:not(.editorial-game-play-entry__avatar) { display: flex; min-width: 0; flex-direction: column; }
+.editorial-game-play-entry__name { overflow: hidden; color: var(--ed-ink); font-size: 14px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+.editorial-game-play-entry__author time { color: var(--ed-muted); font-size: 11px; }
+.editorial-game-play-entry__photo { position: relative; display: block; width: 52px; height: 44px; overflow: hidden; border-radius: 7px; background: var(--ed-tint); }
+.editorial-game-play-entry__photo img { width: 100%; height: 100%; object-fit: cover; }
+.editorial-game-play-entry__photo span { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(var(--ed-shadow-rgb),.55); color: #fff; font-size: 12px; font-weight: 700; }
+.editorial-game-play-entry__excerpt { display: -webkit-box; margin: 0 0 14px; overflow: hidden; color: var(--ed-text); font: italic 14px/1.6 'PT Serif',Georgia,serif; -webkit-box-orient: vertical; -webkit-line-clamp: 4; }
+.editorial-game-play-entry__excerpt--empty { color: var(--ed-muted); }
+.editorial-game-play-entry__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; margin-top: auto; color: var(--ed-muted); font-size: 11px; }
+.editorial-game-play-entry__meta span { display: inline-flex; align-items: center; gap: 5px; }
+.editorial-game-play-entry__meta .ed-icon { width: 14px; height: 14px; }
+.editorial-game-play-entry__meta span .ed-icon { color: var(--ed-accent); }
+.editorial-game-play-entry__meta a { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; color: var(--ed-accent); font-weight: 700; }
+.editorial-game-play-entry__meta a:hover { color: var(--ed-ink); }
+.editorial-game-play-actions { display: flex; flex-wrap: wrap; gap: 0 24px; }
 /* Community photo gallery */
 .editorial-photo-gallery .editorial-catalog__intro { padding-bottom: 24px; }
 .editorial-photo-gallery-results { padding-top: 26px; }

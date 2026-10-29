@@ -1,36 +1,41 @@
+{% from 'macro/icon.html.twig' import icon %}
+{% from 'macro/game_play.html.twig' import duration %}
 {% import 'macro/image.html.twig' as images %}
 
 {% set product = game_play.product %}
 {% set topic = game_play.topic %}
 {% set gamePlayPath = path('app_frontend_game_play_show', { 'id': game_play.id, 'productSlug': product.slug }) %}
-{% set avatarPath = game_play.author.avatar is not null ? game_play.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png'  %}
+{% set avatarPath = game_play.author.avatar is not null ? game_play.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png' %}
+{% set playImage = game_play.images|length > 0 ? game_play.images|first : null %}
+{% set playedAt = game_play.playedAt ?? game_play.createdAt %}
 
-<div class="image-box style-3 mb-20 shadow bordered light-gray-bg">
-    <div class="row grid-space-0">
-        <div class="col-lg-2 pv-20">
-            <div class="overlay-container d-flex justify-content-center">
-                {{ images.render(avatarPath, 'thumbnail_XL', topic.author, 'rounded-circle') }}
-                <div class="overlay-to-top">
-                    <p class="small margin-clear"><em>{{ game_play.author }}</em></p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-10">
-            <div class="body">
-                <div class="hidden-lg-down"></div>
-                <h3>{{ game_play.author }}</h3>
-                <p class="small mb-10">
-                    <i class="fa fa-calendar-o pr-1"></i> {{ game_play.createdAt|format_datetime('medium', 'none') }}
-                </p>
-                <div class="separator-2"></div>
-                {% if topic is not null and topic.firstPost is not null %}
-                    <p class="margin-clear">{{ topic.firstPost.body|u.truncate(250, '...', false)|striptags|raw }}</p>
-                {% endif %}
-                <br>
-                <a href="{{ gamePlayPath }}"
-                   class="btn btn-default btn-sm margin-clear">{{ 'sylius.ui.view_more'|trans }}<i class="fa fa-arrow-right pl-10"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+<article class="editorial-game-play-entry">
+    <header class="editorial-game-play-entry__author">
+        <span class="editorial-game-play-entry__avatar">
+            {{ images.render(avatarPath, 'thumbnail', game_play.author, 'rounded-circle') }}
+        </span>
+        <span>
+            <strong class="editorial-game-play-entry__name">{{ game_play.author }}</strong>
+            <time datetime="{{ playedAt|date('Y-m-d') }}">{{ playedAt|format_datetime('medium', 'none') }}</time>
+        </span>
+        {% if playImage is not null %}
+            <a class="editorial-game-play-entry__photo" href="{{ gamePlayPath }}" tabindex="-1" aria-hidden="true">
+                {{ images.render(playImage.webPath, 'thumbnail', product.name) }}
+                {% if game_play.imageCount > 1 %}<span>+{{ game_play.imageCount - 1 }}</span>{% endif %}
+            </a>
+        {% endif %}
+    </header>
+
+    {% if topic is not null and topic.firstPost is not null %}
+        <p class="editorial-game-play-entry__excerpt">{{ topic.firstPost.body|striptags|u.truncate(230, '...', false) }}</p>
+    {% else %}
+        <p class="editorial-game-play-entry__excerpt editorial-game-play-entry__excerpt--empty">Aucun récit n’accompagne encore cette partie.</p>
+    {% endif %}
+
+    <footer class="editorial-game-play-entry__meta">
+        {% if game_play.playerCount %}<span>{{ icon('users') }} {{ game_play.playerCount }} joueur{% if game_play.playerCount != 1 %}s{% endif %}</span>{% endif %}
+        {% if game_play.duration %}<span>{{ icon('clock') }} {{ duration(game_play) }}</span>{% endif %}
+        {% if topic is not null and topic.postCount > 0 %}<span>{{ icon('message') }} {{ topic.postCount }}</span>{% endif %}
+        <a href="{{ gamePlayPath }}">{{ 'sylius.ui.view_more'|trans }} {{ icon('arrow-right') }}</a>
+    </footer>
+</article>
