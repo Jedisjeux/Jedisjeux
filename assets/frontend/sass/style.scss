@@ -17,7 +17,6 @@ $text-direction: ltr;
  * 7) Blocks/Widgets
  * 8) Main Slideshow
  * 9) Slick carousel
- * 10) Full Page
  */
 @import '1_elements';
 @import '2_layout';
@@ -28,5 +27,4 @@ $text-direction: ltr;
 @import '7_blocks-widgets';
 @import '8_main-slideshow';
 @import '9_slick-carousel';
-@import '10_full-page';
 @import 'editorial';

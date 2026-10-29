@@ -63,14 +63,9 @@ const paths = {
       upath.joinSafe(nodeModulesPath, 'bootstrap/dist/js/bootstrap.bundle.js'),
       upath.joinSafe(nodeModulesPath, 'rater-jquery/rater.js'),
       upath.joinSafe(vendorUiPath, 'Resources/private/js/sylius-form-collection.js'),
-      upath.joinSafe(appPath, 'plugins/bootstrap-notify/bootstrap-notify.js'),
-      upath.joinSafe(appPath, 'plugins/isotope/imagesloaded.pkgd.min.js'),
-      upath.joinSafe(appPath, 'plugins/isotope/isotope.pkgd.min.js'),
       upath.joinSafe(appPath, 'plugins/magnific-popup/jquery.magnific-popup.min.js'),
       upath.joinSafe(appPath, 'plugins/waypoints/jquery.waypoints.min.js'),
       upath.joinSafe(appPath, 'plugins/waypoints/sticky.min.js'),
-      upath.joinSafe(appPath, 'plugins/countdown/jquery.countdown.js'),
-      upath.joinSafe(appPath, 'plugins/countTo/jquery.countTo.js'),
       upath.joinSafe(appPath, 'plugins/slick/slick.min.js'),
       upath.joinSafe(appPath, 'js/**.js'),
     ],
@@ -138,7 +133,6 @@ export const buildShopJs = async function buildShopJs() {
                 import './shim/shim-polyfill';
                 import './shim/shim-jquery';
                 import './shim/shim-semantic-ui';
-                import './shim/shim-lightbox';
 
                 ${code}
               `,
@@ -240,30 +234,14 @@ export const buildShopCss = function buildShopCss() {
 buildShopCss.description = 'Build app css assets.';
 
 export const buildShopImg = function buildShopImg() {
-  const copyStream = merge(
-    gulp.src(upath.joinSafe(nodeModulesPath, 'lightbox2/dist/images/*'))
-      .pipe(gulp.dest(upath.joinSafe(appRootPath, 'images'))),
-  );
-
-  return merge(
-    copyStream,
-    gulp.src(paths.app.img)
-      .pipe(gulp.dest(upath.joinSafe(appRootPath, 'images'))),
-  );
+  return gulp.src(paths.app.img)
+    .pipe(gulp.dest(upath.joinSafe(appRootPath, 'images')));
 };
 buildShopImg.description = 'Build app img assets.';
 
 export const buildShopFont = function buildShopFont() {
-  const copyStream = merge(
-      gulp.src(upath.joinSafe(nodeModulesPath, 'lightbox2/dist/images/*'))
-          .pipe(gulp.dest(upath.joinSafe(appRootPath, 'fonts'))),
-  );
-
-  return merge(
-      copyStream,
-      gulp.src(paths.app.font)
-          .pipe(gulp.dest(upath.joinSafe(appRootPath, 'fonts'))),
-  );
+  return gulp.src(paths.app.font)
+    .pipe(gulp.dest(upath.joinSafe(appRootPath, 'fonts')));
 };
 buildShopFont.description = 'Build app fonts.';
 
