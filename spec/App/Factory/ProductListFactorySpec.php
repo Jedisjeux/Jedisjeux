@@ -29,8 +29,10 @@ class ProductListFactorySpec extends ObjectBehavior
         $productList->getOwner()->shouldReturn($customer);
     }
 
-    function it_creates_a_list_for_code(): void
+    function it_creates_a_list_for_code(TranslatorInterface $translator): void
     {
+        $translator->trans('app.ui.XYZ')->willReturn('XYZ list');
+
         $productList = $this->createForCode('XYZ');
         $productList->getCode()->shouldReturn('XYZ');
     }

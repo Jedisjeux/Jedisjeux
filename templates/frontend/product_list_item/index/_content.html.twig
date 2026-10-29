@@ -1,8 +1,8 @@
 {% from 'macro/pagination.html.twig' import simple as pagination %}
 
 {% set route = indexPath|default('app_frontend_product_list_item_index') %}
-{% set routeParameters = {'productListSlug': app.request.get('productListSlug'), 'criteria': app.request.query.get('criteria', {})} %}
-{% set sorting = app.request.query.get('sorting') %}
+{% set routeParameters = {'productListSlug': app.request.get('productListSlug'), 'criteria': app.request.query.all('criteria')} %}
+{% set sorting = app.request.query.all('sorting') %}
 {% set oldestFirst = sorting.createdAt is defined and sorting.createdAt == 'asc' %}
 
 <section class="main-container editorial-catalog-results">

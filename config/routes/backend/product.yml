@@ -37,7 +37,7 @@ sylius_admin_product_update_state:
     methods: [PATCH]
     path: /products/{id}/status/{transition}
     defaults:
-        _controller: sylius.controller.product:applyStateMachineTransitionAction
+        _controller: sylius.controller.product::applyStateMachineTransitionAction
         _sylius:
             section: admin
             state_machine:

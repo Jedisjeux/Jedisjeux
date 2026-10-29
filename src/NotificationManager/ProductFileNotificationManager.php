@@ -83,8 +83,6 @@ class ProductFileNotificationManager
 
     public function notifyAuthor(ProductFile $productFile)
     {
-        $target = $this->router->generate('app_frontend_account_games_library');
-
         if (null === $author = $productFile->getAuthor()) {
             return;
         }
@@ -92,6 +90,8 @@ class ProductFileNotificationManager
         if (null === $user = $author->getUser()) {
             return;
         }
+
+        $target = $this->router->generate('app_frontend_account_games_library');
 
         $this->notifyUsers(
             $this->translator->trans(sprintf('text.notification.product_file.%s', $productFile->getStatus()), [

@@ -640,9 +640,6 @@
             "ref": "2f69bd1995730b73a5211a9707622fb25a925df7"
         }
     },
-    "sonata-project/doctrine-extensions": {
-        "version": "1.2.0"
-    },
     "sonata-project/form-extensions": {
         "version": "1.0",
         "recipe": {
@@ -904,9 +901,6 @@
     "symfony/polyfill-php72": {
         "version": "v1.9.0"
     },
-    "symfony/polyfill-php73": {
-        "version": "v1.12.0"
-    },
     "symfony/polyfill-php80": {
         "version": "v1.17.1"
     },
@@ -918,9 +912,6 @@
     },
     "symfony/property-info": {
         "version": "v4.4.16"
-    },
-    "symfony/proxy-manager-bridge": {
-        "version": "v4.1.6"
     },
     "symfony/routing": {
         "version": "4.0",
@@ -1076,11 +1067,8 @@
     "white-october/pagerfanta-bundle": {
         "version": "v1.2.2"
     },
-    "willdurand/hateoas": {
-        "version": "2.12.0"
-    },
     "willdurand/hateoas-bundle": {
-        "version": "1.4.0"
+        "version": "3.0.1"
     },
     "willdurand/jsonp-callback-validator": {
         "version": "v1.1.0"

@@ -2,7 +2,7 @@ app_partial_single_image_block_create:
     methods: [GET, POST]
     path: /single-image-blocks/{imagePosition}/
     defaults:
-        _controller: app.controller.single_image_block:createAction
+        _controller: app.controller.single_image_block::createAction
         _sylius:
             template: backend/single_image_block/_create.html.twig
             factory:

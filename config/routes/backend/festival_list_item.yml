@@ -60,7 +60,7 @@ app_backend_festival_list_item_update:
     path: /{id}/edit
     methods: [GET, PUT]
     defaults:
-        _controller: app.controller.festival_list_item:updateAction
+        _controller: app.controller.festival_list_item::updateAction
         _sylius:
             template: "backend/crud/update.html.twig"
             grid: app_backend_festival_list_item

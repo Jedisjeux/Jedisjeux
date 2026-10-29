@@ -73,7 +73,7 @@ app_backend_article_update_state:
     methods: [PATCH]
     path: /articles/{id}/status/{transition}
     defaults:
-        _controller: app.controller.article:applyStateMachineTransitionAction
+        _controller: app.controller.article::applyStateMachineTransitionAction
         _sylius:
             section: admin
             state_machine:

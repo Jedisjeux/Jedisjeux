@@ -2,7 +2,7 @@ sylius_frontend_partial_taxon_show_by_slug:
     path: /by-slug/{slug}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.taxon:showAction
+        _controller: sylius.controller.taxon::showAction
         _sylius:
             template: $template
             repository:

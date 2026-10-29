@@ -2,7 +2,7 @@ app_frontend_festival_list_item_index:
     methods: [GET]
     path: /festivals/{festivalListSlug}
     defaults:
-        _controller: app.controller.festival_list_item:indexAction
+        _controller: app.controller.festival_list_item::indexAction
         _sylius:
             template: "frontend/festival_list_item/index.html.twig"
             grid: app_frontend_festival_list_item

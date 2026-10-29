@@ -18,7 +18,7 @@ sylius_backend_customer:
 sylius_backend_customer_show:
     path: /customers/{id}
     defaults:
-        _controller: sylius.controller.customer:showAction
+        _controller: sylius.controller.customer::showAction
         _sylius:
             section: admin
             template: backend/customer/show.html.twig

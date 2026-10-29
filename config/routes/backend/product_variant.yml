@@ -11,7 +11,7 @@ sylius_backend_product_variant_index:
     methods: [GET]
     path: /products/{productId}/variants/
     defaults:
-        _controller: sylius.controller.product_variant:indexAction
+        _controller: sylius.controller.product_variant::indexAction
         _sylius:
             template: backend/crud/index.html.twig
             grid: sylius_backend_product_variant
@@ -27,7 +27,7 @@ sylius_backend_product_variant_create:
     methods: [GET, POST]
     path: /products/{productId}/variants/new
     defaults:
-        _controller: sylius.controller.product_variant:createAction
+        _controller: sylius.controller.product_variant::createAction
         _sylius:
             section: backend
             factory:
@@ -50,7 +50,7 @@ sylius_backend_product_variant_update:
     path: /products/{productId}/variants/{id}/edit
     methods: [GET, PUT]
     defaults:
-        _controller: sylius.controller.product_variant:updateAction
+        _controller: sylius.controller.product_variant::updateAction
         _sylius:
             template: "backend/crud/update.html.twig"
             grid: sylius_backend_product_variant

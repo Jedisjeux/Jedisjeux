@@ -83,8 +83,6 @@ class ProductBoxNotificationManager
 
     public function notifyAuthor(ProductBox $productBox)
     {
-        $target = $this->router->generate('app_frontend_account_games_library');
-
         if (null === $author = $productBox->getAuthor()) {
             return;
         }
@@ -92,6 +90,8 @@ class ProductBoxNotificationManager
         if (null === $user = $author->getUser()) {
             return;
         }
+
+        $target = $this->router->generate('app_frontend_account_games_library');
 
         $this->notifyUsers(
             $this->translator->trans(sprintf('text.notification.product_box.%s', $productBox->getStatus()), [

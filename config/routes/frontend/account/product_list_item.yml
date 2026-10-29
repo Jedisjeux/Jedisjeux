@@ -2,7 +2,7 @@ app_frontend_account_product_list_item_index:
     methods: [GET]
     path: /liste-de-jeux/{productListSlug}
     defaults:
-        _controller: app.controller.product_list_item:indexByProductListAction
+        _controller: app.controller.product_list_item::indexByProductListAction
         _sylius:
             template: "frontend/account/product_list_item/index.html.twig"
             grid: app_frontend_product_list_item
@@ -12,7 +12,7 @@ app_frontend_account_games_library:
     methods: [GET]
     path: /ma-ludotheque
     defaults:
-        _controller: app.controller.product_list_item:indexAction
+        _controller: app.controller.product_list_item::indexAction
         _sylius:
             template: frontend/account/games_library/index.html.twig
             section: frontend
