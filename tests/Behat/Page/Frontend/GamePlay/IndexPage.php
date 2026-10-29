@@ -43,7 +43,7 @@ class IndexPage extends SymfonyPage
      */
     public function countGamePlays(): int
     {
-        $gamePlays = $this->getElement('game_plays')->findAll('css', '.editorial-game-play-card, .image-box');
+        $gamePlays = $this->getElement('game_plays')->findAll('css', '.editorial-game-play-card, .editorial-game-play-entry');
 
         return count($gamePlays);
     }

@@ -133,7 +133,7 @@ class ShowPage extends SymfonyPage
 
     public function countGamePlays(): int
     {
-        return count($this->getElement('game_plays')->findAll('css', '.image-box'));
+        return count($this->getElement('game_plays')->findAll('css', '.editorial-game-play-entry'));
     }
 
     public function countFiles(): int
@@ -191,7 +191,7 @@ class ShowPage extends SymfonyPage
      */
     public function hasGamePlayAddedByCustomerEmail(string $email): bool
     {
-        return null !== $this->getElement('game_plays')->find('css', sprintf('.image-box h3:contains("%s")', $email));
+        return null !== $this->getElement('game_plays')->find('css', sprintf('.editorial-game-play-entry__name:contains("%s")', $email));
     }
 
     /**
