@@ -71,6 +71,12 @@ jobs:
         if: always() && steps.end-of-setup.outcome == 'success'
 
       -
+        name: Build the prod container
+        # config/packages/prod is loaded nowhere else: catches what would break the deployment
+        run: castor app:symfony --env=prod --no-debug cache:warmup
+        if: always() && steps.end-of-setup.outcome == 'success'
+
+      -
         name: Run Psalm
         run: castor app:qa:psalm
         if: always() && steps.end-of-setup.outcome == 'success'
