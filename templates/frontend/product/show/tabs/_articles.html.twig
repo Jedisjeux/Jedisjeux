@@ -1,11 +1,9 @@
-<!-- articles start -->
-<div class="margin-clear space-top">
+{% from 'macro/icon.html.twig' import icon %}
+
+<div class="space-top">
     {{ render(url('app_frontend_partial_product_article_latest', {'productId': product.id, 'template': 'frontend/article/_list.html.twig'})) }}
 
-    <a href="{{ path('app_frontend_article_index_by_product', {'productSlug': product.slug}) }}"
-       class="btn btn-gray btn-sm margin-clear">
-        <i class="fa fa-list pr-10"></i>
-        {{ 'app.ui.view_more_articles'|trans }}
+    <a class="editorial-review-more" href="{{ path('app_frontend_article_index_by_product', {'productSlug': product.slug}) }}">
+        {{ 'app.ui.view_more_articles'|trans }} {{ icon('arrow-right') }}
     </a>
 </div>
-<!-- articles end -->

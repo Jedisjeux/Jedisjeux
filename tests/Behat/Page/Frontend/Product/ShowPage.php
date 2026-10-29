@@ -128,7 +128,7 @@ class ShowPage extends SymfonyPage
 
     public function countArticles(): int
     {
-        return count($this->getElement('articles')->findAll('css', '.image-box'));
+        return count($this->getElement('articles')->findAll('css', '.editorial-article-card'));
     }
 
     public function countGamePlays(): int
@@ -167,7 +167,7 @@ class ShowPage extends SymfonyPage
      */
     public function hasArticleTitled(string $title): bool
     {
-        return null !== $this->getElement('articles')->find('css', sprintf('.image-box .lead:contains("%s")', $title));
+        return null !== $this->getElement('articles')->find('css', sprintf('.editorial-article-card h3:contains("%s")', $title));
     }
 
     /**
