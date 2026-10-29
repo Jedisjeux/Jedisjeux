@@ -16,7 +16,7 @@
         {% endif %}
         <h3><a href="{{ articlePath }}">{{ article.title }}</a></h3>
         {% if article.shortDescription is not null %}
-            <p>{{ article.shortDescription|striptags|u.truncate(115, '...', false) }}</p>
+            <p>{{ article.shortDescription|striptags|html_entity_decode|u.truncate(115, '...', false) }}</p>
         {% endif %}
         <div class="editorial-article-card__meta">
             <span>{{ article.publishStartDate|format_datetime('medium', 'none') }}</span>
