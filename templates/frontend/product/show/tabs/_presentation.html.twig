@@ -11,15 +11,12 @@
                         { id: 'product-themes', icon: 'tag', label: 'app.ui.themes'|trans, taxons: product.themes },
                     ]|filter(group => group.taxons|length > 0) %}
                         <div class="editorial-game-taxons__group">
-                            {{ icon(group.icon) }}
-                            <div>
-                                <dt>{{ group.label }}</dt>
-                                <dd id="{{ group.id }}">
-                                    {%- for taxon in group.taxons -%}
-                                        {% if not loop.first %}, {% endif %}<a href="{{ path('sylius_frontend_product_index_by_taxon', { 'slug': taxon.slug }) }}">{{ taxon }}</a>
-                                    {%- endfor -%}
-                                </dd>
-                            </div>
+                            <dt>{{ icon(group.icon) }}{{ group.label }}</dt>
+                            <dd id="{{ group.id }}">
+                                {% for taxon in group.taxons %}
+                                    <a href="{{ path('sylius_frontend_product_index_by_taxon', { 'slug': taxon.slug }) }}">{{ taxon }}</a>
+                                {% endfor %}
+                            </dd>
                         </div>
                     {% endfor %}
                 </dl>
