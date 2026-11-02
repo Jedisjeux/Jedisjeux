@@ -2,39 +2,57 @@
 <section class="editorial-community" aria-labelledby="community-title">
     <div class="container">
         <div class="editorial-community__panel">
-            <div class="editorial-community__intro">
-                <span class="editorial-eyebrow">Ensemble, autour du jeu</span>
+            <div class="editorial-community__main">
                 <h2 id="community-title">La communauté</h2>
-            </div>
 
-            <div class="editorial-community__stats" aria-label="Jedisjeux en chiffres">
-                <div class="editorial-community__stat">
-                    <span class="editorial-community__icon" aria-hidden="true">{{ icon('users') }}</span>
-                    <span class="editorial-community__value counter" id="user-count">{{ userCount|number_format(0, ',', ' ') }}</span>
-                    <span class="editorial-community__label">membres</span>
-                </div>
-                <div class="editorial-community__stat">
-                    <span class="editorial-community__icon" aria-hidden="true">{{ icon('dice') }}</span>
-                    <span class="editorial-community__value counter" id="product-count">{{ productCount|number_format(0, ',', ' ') }}</span>
-                    <span class="editorial-community__label">jeux référencés</span>
-                </div>
-                <div class="editorial-community__stat">
-                    <span class="editorial-community__icon" aria-hidden="true">{{ icon('star') }}</span>
-                    <span class="editorial-community__value counter" id="rating-count">{{ ratingCount|number_format(0, ',', ' ') }}</span>
-                    <span class="editorial-community__label">avis de joueurs</span>
-                </div>
-                <div class="editorial-community__stat">
-                    <span class="editorial-community__icon" aria-hidden="true">{{ icon('newspaper') }}</span>
-                    <span class="editorial-community__value counter" id="article-count">{{ articleCount|number_format(0, ',', ' ') }}</span>
-                    <span class="editorial-community__label">articles</span>
+                <div class="editorial-community__stats" aria-label="Jedisjeux en chiffres">
+                    <div class="editorial-community__stat">
+                        <span class="editorial-community__icon" aria-hidden="true">{{ icon('users') }}</span>
+                        <span class="editorial-community__value counter" id="user-count">{{ userCount|number_format(0, ',', ' ') }}</span>
+                        <span class="editorial-community__label">membres</span>
+                    </div>
+                    <div class="editorial-community__stat">
+                        <span class="editorial-community__icon" aria-hidden="true">{{ icon('dice') }}</span>
+                        <span class="editorial-community__value counter" id="product-count">{{ productCount|number_format(0, ',', ' ') }}</span>
+                        <span class="editorial-community__label">jeux référencés</span>
+                    </div>
+                    <div class="editorial-community__stat">
+                        <span class="editorial-community__icon" aria-hidden="true">{{ icon('star') }}</span>
+                        <span class="editorial-community__value counter" id="rating-count">{{ ratingCount|number_format(0, ',', ' ') }}</span>
+                        <span class="editorial-community__label">avis</span>
+                    </div>
+                    <div class="editorial-community__stat">
+                        <span class="editorial-community__icon" aria-hidden="true">{{ icon('newspaper') }}</span>
+                        <span class="editorial-community__value counter" id="article-count">{{ articleCount|number_format(0, ',', ' ') }}</span>
+                        <span class="editorial-community__label">articles</span>
+                    </div>
                 </div>
             </div>
 
             <blockquote class="editorial-community__quote">
-                <span aria-hidden="true">“</span>
-                <p>Une vraie mine d’or pour tous les passionnés de jeux de société.</p>
-                <cite>La communauté Jedisjeux</cite>
+                <p>« Une vraie mine d’or pour tous les passionnés de jeux de société. »</p>
+                <cite>— Membre de la communauté</cite>
             </blockquote>
         </div>
+
+        {% set audienceIcons = {
+            'target-audiences-1': 'age',
+            'target-audiences-2': 'user',
+            'target-audiences-3': 'users',
+            'target-audiences-4': 'award',
+        } %}
+        {% if targetAudiences is not empty or mechanisms is not empty %}
+            <nav class="editorial-categories" aria-labelledby="categories-title">
+                <h2 id="categories-title">Parcourir par catégorie</h2>
+                <ul>
+                    {% for taxon in targetAudiences %}
+                        <li><a href="{{ path('sylius_frontend_product_index_by_taxon', { 'slug': taxon.slug }) }}">{{ icon(audienceIcons[taxon.code] ?? 'users') }}{{ taxon.name }}</a></li>
+                    {% endfor %}
+                    {% for taxon in mechanisms %}
+                        <li><a href="{{ path('sylius_frontend_product_index_by_taxon', { 'slug': taxon.slug }) }}">{{ icon('cog') }}{{ taxon.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        {% endif %}
     </div>
 </section>

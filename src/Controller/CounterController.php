@@ -11,6 +11,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Taxon;
+use App\Repository\TaxonRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,12 +22,10 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CounterController extends AbstractController
 {
-    /** @var StatisticsProvider */
-    private $statisticProvider;
-
-    public function __construct(StatisticsProvider $statisticProvider)
-    {
-        $this->statisticProvider = $statisticProvider;
+    public function __construct(
+        private readonly StatisticsProvider $statisticProvider,
+        private readonly TaxonRepository $taxonRepository,
+    ) {
     }
 
     /**
@@ -33,6 +33,9 @@ class CounterController extends AbstractController
      */
     public function indexAction(): Response
     {
-        return $this->render('frontend/homepage/index/_counters.html.twig', $this->statisticProvider->getStatistics());
+        return $this->render('frontend/homepage/index/_counters.html.twig', array_merge($this->statisticProvider->getStatistics(), [
+            'targetAudiences' => $this->taxonRepository->findChildrenAsTreeByRootCode(Taxon::CODE_TARGET_AUDIENCE, false),
+            'mechanisms' => $this->taxonRepository->findMostUsedByRootCode(Taxon::CODE_MECHANISM, 4),
+        ]));
     }
 }
