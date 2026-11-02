@@ -144,7 +144,13 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
         $filesystem = new Filesystem();
 
-        foreach ($options['images'] as $imagePath) {
+        $imagePaths = $options['images'];
+
+        if (null !== $options['material_image']) {
+            $imagePaths[] = $options['material_image'];
+        }
+
+        foreach ($imagePaths as $imagePath) {
             $basename = basename($imagePath);
             $filesystem->copy($imagePath, '/tmp/'.$basename);
             $file = new UploadedFile('/tmp/'.$basename, $basename, null, null, true);
@@ -155,6 +161,10 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
             if ($first) {
                 $image->setMain(true);
+            }
+
+            if ($imagePath === $options['material_image']) {
+                $image->setMaterial(true);
             }
 
             $first = false;
@@ -230,6 +240,9 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('images', LazyOption::randomOnesImage(
                 __DIR__.'/../../../tests/Resources/fixtures/products/covers', 2
             ))
+
+            ->setDefault('material_image', null)
+            ->setAllowedTypes('material_image', ['null', 'string'])
 
             ->setDefault('main_taxon', null)
             ->setAllowedTypes('main_taxon', ['null', 'string'])

@@ -52,6 +52,7 @@ class ProductFixture extends AbstractResourceFixture
                 ->scalarNode('main_taxon')->cannotBeEmpty()->end()
                 ->scalarNode('box_content')->end()
                 ->arrayNode('images')->prototype('scalar')->end()->end()
+                ->scalarNode('material_image')->end()
                 ->arrayNode('designers')->prototype('scalar')->end()->end()
                 ->arrayNode('artists')->prototype('scalar')->end()->end()
                 ->arrayNode('publishers')->prototype('scalar')->end()->end()

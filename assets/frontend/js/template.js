@@ -84,6 +84,32 @@ import './../plugins/slick/slick.min';
 					});
 				});
 			}
+			// Opens the gallery zoom on the clicked image, with navigation to the other gallery images
+			$(".popup-gallery-img").on("click", function(event) {
+				var items = [];
+				var index = 0;
+				var href = $(this).attr("href");
+
+				$(".editorial-game-cover .slick-slide:not(.slick-cloned) .slick-carousel--popup-img").each(function() {
+					if ($(this).attr("href") === href) {
+						index = items.length;
+					}
+					items.push({ src: $(this).attr("href"), title: $(this).attr("title") });
+				});
+
+				if (items.length === 0) {
+					return;
+				}
+
+				event.preventDefault();
+				$.magnificPopup.open({
+					type: "image",
+					items: items,
+					gallery: {
+						enabled: true,
+					}
+				}, index);
+			});
 			$('.popup-iframe').magnificPopup({
 				disableOn: 700,
 				type: 'iframe',

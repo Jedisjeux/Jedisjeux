@@ -1,13 +1,42 @@
 {% from 'macro/icon.html.twig' import icon %}
+{% import 'macro/image.html.twig' as images %}
 <div class="editorial-game-presentation" role="tabpanel" aria-labelledby="presentation-tab">
     <div class="row">
         <div class="col-md-8 editorial-game-presentation__copy" itemprop="description">
             {{ product.description|raw }}
+            {% if product.mechanisms|length > 0 or product.themes|length > 0 %}
+                <dl class="editorial-game-taxons">
+                    {% for group in [
+                        { id: 'product-mechanisms', icon: 'cog', label: 'app.ui.mechanisms'|trans, taxons: product.mechanisms },
+                        { id: 'product-themes', icon: 'tag', label: 'app.ui.themes'|trans, taxons: product.themes },
+                    ]|filter(group => group.taxons|length > 0) %}
+                        <div class="editorial-game-taxons__group">
+                            {{ icon(group.icon) }}
+                            <div>
+                                <dt>{{ group.label }}</dt>
+                                <dd id="{{ group.id }}">
+                                    {%- for taxon in group.taxons -%}
+                                        {% if not loop.first %}, {% endif %}<a href="{{ path('sylius_frontend_product_index_by_taxon', { 'slug': taxon.slug }) }}">{{ taxon }}</a>
+                                    {%- endfor -%}
+                                </dd>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </dl>
+            {% endif %}
+            {% set presentationImage = product.materialImage ?? product.getImagesOfAllVariants.get(1) %}
+            {% if presentationImage %}
+                <figure class="editorial-game-presentation__image">
+                    <a class="popup-gallery-img" href="{{ presentationImage.webPath|imagine_filter('full') }}" title="{{ presentationImage.description }}">
+                        {{ images.render(presentationImage.webPath, 'full', presentationImage.description ?: product.name) }}
+                    </a>
+                </figure>
+            {% endif %}
         </div>
         <aside class="col-md-4">
             <div class="editorial-game-keyfacts">
                 <h3>Infos clés</h3>
-                {% include 'frontend/product/show/_specifications.html.twig' %}
+                {% include 'frontend/product/show/_specifications.html.twig' with { 'with_taxons': false } %}
                 {% if product.hasYearAwards %}
                     <h3 class="editorial-game-keyfacts__subheading">{{ 'app.ui.game_awards'|trans }}</h3>
                     {% include 'frontend/product/show/_awards.html.twig' %}
