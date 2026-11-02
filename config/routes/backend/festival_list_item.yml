@@ -20,15 +20,13 @@ app_backend_festival_list_item_index:
     defaults:
         _controller: app.controller.festival_list_item::indexAction
         _sylius:
-            template: "backend/festival_list_item/index.html.twig"
+            template: "backend/crud/index.html.twig"
             grid: app_backend_festival_list_item
             section: backend
             vars:
                 route:
                     parameters:
-                        festovalListId: $festivalListId
-                templates:
-                    breadcrumb: "backend/festival_list_item/index/_breadcrumb.html.twig"
+                        festivalListId: $festivalListId
                 icon: list
                 subheader: app.ui.manage_festival_list_items
 
@@ -52,9 +50,6 @@ app_backend_festival_list_item_create:
                 route:
                     parameters:
                         festivalListId: $festivalListId
-                templates:
-                    breadcrumb: "backend/festival_list_item/create/_breadcrumb.html.twig"
-                    header_title: "backend/festival_list_item/create/_headerTitle.html.twig"
 
 app_backend_festival_list_item_update:
     path: /{id}/edit
@@ -77,5 +72,7 @@ app_backend_festival_list_item_update:
                     parameters:
                         id: $id
                         festivalListId: $festivalListId
-                templates:
-                    breadcrumb: "backend/festival_list_item/update/_breadcrumb.html.twig"
+                index:
+                    route:
+                        parameters:
+                            festivalListId: $festivalListId

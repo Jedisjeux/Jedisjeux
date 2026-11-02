@@ -1,7 +1,9 @@
-<div class="ui tab" data-tab="blocks">
-    <h3 class="ui top attached header">{{ 'app.ui.blocks'|trans }}</h3>
-    <div class="ui attached segment">
-        <div id="app-movable-blocks">
+<div class="tab-pane" id="tab-blocks" role="tabpanel">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{ 'app.ui.blocks'|trans }}</h3>
+        </div>
+        <div class="card-body">
             {{ form_row(form.blocks) }}
         </div>
     </div>

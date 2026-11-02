@@ -1,1 +1,34 @@
-@import "ui";
+$app-brand-color: #4BAEB4;
+$app-logo-color: #09afdf;
+$sidebar-background: #133E56;
+
+:root {
+  --tblr-primary: #{$app-brand-color};
+  --tblr-primary-rgb: 75, 174, 180;
+}
+
+.navbar-vertical[data-bs-theme="dark"] {
+  background: $sidebar-background;
+}
+
+// Same brand as the front-end header
+.app-admin-logo {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.app-admin-logo__name {
+  color: $app-logo-color;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+.app-admin-logo__slogan {
+  color: rgba(255, 255, 255, .6);
+  font-size: .7rem;
+  font-weight: 300;
+  margin-top: .35rem;
+}

@@ -16,7 +16,7 @@ namespace App\Tests\Behat\Context\Setup;
 use App\Entity\ProductInterface;
 use Behat\Behat\Context\Context;
 use Doctrine\Persistence\ObjectManager;
-use Monofony\Bridge\Behat\Service\SharedStorageInterface;
+use App\Tests\Behat\Bridge\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeTranslationInterface;

@@ -11,9 +11,9 @@
 
 namespace App\Tests\Behat\Context\Ui\Backend;
 
-use Monofony\Bridge\Behat\NotificationType;
+use App\Tests\Behat\Bridge\NotificationType;
 use Behat\Behat\Context\Context;
-use Monofony\Bridge\Behat\Service\NotificationCheckerInterface;
+use App\Tests\Behat\Bridge\Service\NotificationCheckerInterface;
 
 final class NotificationContext implements Context
 {

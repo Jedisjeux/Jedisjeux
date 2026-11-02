@@ -15,7 +15,7 @@ use App\Tests\Behat\Behaviour\NamesIt;
 use App\Tests\Behat\Behaviour\WorkflowActions;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Monofony\Bridge\Behat\Crud\AbstractUpdatePage;
+use App\Tests\Behat\Bridge\Crud\AbstractUpdatePage;
 use Webmozart\Assert\Assert;
 
 class UpdatePage extends AbstractUpdatePage
@@ -37,7 +37,7 @@ class UpdatePage extends AbstractUpdatePage
 
         $filesPath = $this->getParameter('files_path');
 
-        $this->getDocument()->clickLink('Add');
+        $this->getElement('images')->find('css', '[data-form-collection="add"]')->click();
 
         $imageForm = $this->getLastImageElement();
 
@@ -62,6 +62,7 @@ class UpdatePage extends AbstractUpdatePage
     {
         return array_merge(parent::getDefinedElements(), [
             'images' => '#sylius_product_firstVariant_images',
+            'tab' => '[data-bs-toggle="tab"][href="#tab-%name%"]',
         ]);
     }
 

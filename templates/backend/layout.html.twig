@@ -1,58 +1,29 @@
-{% extends '@SyliusUi/Layout/sidebar.html.twig' %}
+{% extends '@SyliusAdminUi/base.html.twig' %}
 
-{% block title %}Jedisjeux | {% endblock %}
+{% block title %}Jedisjeux{% endblock %}
 
 {% block metatags %}
+    {{ parent() }}
     {% include '_favicon.html.twig' %}
 {% endblock %}
 
-{% block stylesheets %}
-    {% include '@SyliusUi/_stylesheets.html.twig' with {'path': 'assets/backend/css/style.css'} %}
-{% endblock %}
+{% block body %}
+    {% include '@SyliusBootstrapAdminUi/shared/crud/common/sidebar.html.twig' %}
+    {% include '@SyliusBootstrapAdminUi/shared/crud/common/navbar.html.twig' %}
 
-{% block topbar %}
-    <a class="icon item" id="sidebar-toggle">
-        <i class="sidebar icon"></i>
-    </a>
-    <a href="{{ path('app_homepage') }}" target="_blank" class="item">
-        <i class="ui icon world"></i>
-        {{ 'app.ui.view_website'|trans }}
-    </a>
-    <a href="https://jedisjeux.readthedocs.io/en/latest/user-guide/index.html" target="_blank" class="item">
-        <i class="ui icon book"></i>
-        {{ 'app.ui.user_guide'|trans }}
-    </a>
-    {% include 'backend/layout/_search.html.twig' %}
-    <div class="ui right floated simple dropdown item">
-        <img class="ui avatar image" src="{{ asset('assets/backend/img/avatar.png') }}">
-        <span>{{ app.user.username }}</span>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-            <a href="{{ path('app_frontend_logout') }}" id="sylius-logout-button" class="item">
-                <i class="sign out icon"></i>
-                {{ 'app.ui.logout'|trans }}
-            </a>
+    <div class="page-wrapper">
+        {% include '@SyliusBootstrapAdminUi/shared/crud/common/content/flashes.html.twig' %}
+
+        <div class="page-header">
+            <div class="container-xl">
+                {% block header %}{% endblock %}
+            </div>
+        </div>
+
+        <div class="page-body">
+            <div class="container-xl">
+                {% block content %}{% endblock %}
+            </div>
         </div>
     </div>
-{% endblock %}
-
-{% block sidebar %}
-    <a class="item" href="{{ path('app_backend_dashboard') }}" style="padding: 13px 0;">
-        <div class="sidebar-logo">
-            <img src="{{ asset('assets/backend/img/admin-logo.svg') }}" class="ui fluid image">
-        </div>
-    </a>
-    {{ knp_menu_render('app.admin.main', {'template': '@SyliusUi/Menu/sidebar.html.twig', 'currentClass': 'active'}) }}
-{% endblock %}
-
-{% block footer %}
-    {{ 'sylius.ui.powered_by'|trans }} <a href="https://github.com/Monofony/SymfonyStarter" target="_blank">Monofony</a>.
-{% endblock %}
-
-{% block javascripts %}
-    {% include 'backend/modal/_createFromBoardGameGeek.html.twig' %}
-
-    {% include '@SyliusUi/_javascripts.html.twig' with {'path': 'assets/backend/js/app.js'} %}
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 {% endblock %}

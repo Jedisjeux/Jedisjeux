@@ -29,7 +29,7 @@ class PersonAutocompleteChoiceType extends AbstractType
     {
         $resolver->setDefaults([
             'resource' => 'app.person',
-            'choice_name' => 'name',
+            'choice_name' => 'full_name',
             'choice_value' => 'id',
         ]);
     }

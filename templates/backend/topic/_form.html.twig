@@ -1,13 +1,18 @@
-<div class="ui stackable grid">
-    <div class="twelve wide column">
-        <div class="ui segment">
-            {{ form_errors(form) }}
-            {{ form_row(form.title) }}
-            {{ form_row(form.mainPost.body) }}
-            {{ form_row(form.mainTaxon) }}
+{{ form_errors(form) }}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-3">
+            <div class="card-body">
+                {{ form_row(form.title) }}
+                {{ form_row(form.mainPost.body) }}
+                {{ form_row(form.mainTaxon) }}
+            </div>
         </div>
     </div>
-    <div class="four wide column">
-        {% include 'backend/topic/_author.html.twig' %}
+    <div class="col-md-4">
+        {% if resource.author|default(null) is not null %}
+            {% include 'backend/topic/_author.html.twig' %}
+        {% endif %}
     </div>
 </div>

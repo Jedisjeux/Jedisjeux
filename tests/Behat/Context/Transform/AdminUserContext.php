@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Behat\Context\Transform;
 
-use Monofony\Contracts\Core\Model\User\AdminUserInterface;
+use Sylius\Component\User\Model\UserInterface as AdminUserInterface;
 use Behat\Behat\Context\Context;
-use Monofony\Bridge\Behat\Service\SharedStorageInterface;
+use App\Tests\Behat\Bridge\Service\SharedStorageInterface;
 
 final class AdminUserContext implements Context
 {

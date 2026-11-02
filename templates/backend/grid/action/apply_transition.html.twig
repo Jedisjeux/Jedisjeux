@@ -1,0 +1,10 @@
+{% if sm_can(data, options.transition, options.graph) %}
+    <form action="{{ path(options.link.route, options.link.parameters) }}" method="post">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token(data.id) }}">
+        <input type="hidden" name="_method" value="PUT">
+        <button class="btn {{ options.class|default('btn-outline-primary') }}" type="submit">
+            {% if action.icon %}{{ ux_icon(action.icon) }}{% endif %}
+            {{ action.label|trans }}
+        </button>
+    </form>
+{% endif %}

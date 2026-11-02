@@ -17,3 +17,14 @@ app_admin_ajax_person_by_name_phrase:
                 arguments:
                     phrase: $phrase
 
+
+app_admin_ajax_person_by_id:
+    path: /id
+    methods: [GET]
+    defaults:
+        _controller: app.controller.person::indexAction
+        _sylius:
+            serialization_groups: [Autocomplete]
+            repository:
+                method: findBy
+                arguments: [id: $id]

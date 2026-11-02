@@ -1,1 +1,3 @@
-{% include 'backend/customer/_info.html.twig' with {'customer': article_review.author} %}
+{% if article_review.author is not null %}
+    {% include 'backend/customer/_info.html.twig' with {'customer': article_review.author} %}
+{% endif %}

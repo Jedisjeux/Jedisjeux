@@ -48,6 +48,11 @@ class ServicesPass implements CompilerPassInterface
 
         $doctrineDriver = $container->getDefinition('sylius.grid_driver.doctrine.orm');
         $doctrineDriver->setClass(Driver::class);
+
+        // The resource controllers still fetch these services from the container
+        foreach (['form.factory', 'security.authorization_checker', 'security.csrf.token_manager', 'security.token_storage', 'validator'] as $serviceId) {
+            $container->getDefinition($serviceId)->setPublic(true);
+        }
     }
 
     protected function processFactories(ContainerBuilder $container)

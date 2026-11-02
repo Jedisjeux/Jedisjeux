@@ -11,7 +11,7 @@
 
 namespace App\Tests\Behat\Page\Backend\Taxon;
 
-use Monofony\Bridge\Behat\Crud\AbstractIndexPage;
+use App\Tests\Behat\Bridge\Crud\AbstractIndexPage;
 
 class IndexPage extends AbstractIndexPage
 {

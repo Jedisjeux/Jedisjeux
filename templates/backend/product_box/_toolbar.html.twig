@@ -1,5 +1,5 @@
-<div class="ui right floated buttons">
-    {% include '@SyliusUi/Grid/Action/applyTransition.html.twig' with { data: resource, options: {
+<div class="d-flex gap-2">
+    {% include 'backend/grid/action/apply_transition.html.twig' with { data: resource, options: {
         transition: 'accept',
         graph: 'app_product_box',
         link: {
@@ -8,13 +8,13 @@
                 id: resource.id
             }
         },
-        class: 'green'
+        class: 'btn-success'
     }, action: {
-        icon: 'checkmark',
+        icon: 'tabler:check',
         label: 'sylius.ui.accept'
     } } %}
 
-    {% include '@SyliusUi/Grid/Action/applyTransition.html.twig' with { data: resource, options: {
+    {% include 'backend/grid/action/apply_transition.html.twig' with { data: resource, options: {
         transition: 'reject',
         graph: 'app_product_box',
         link: {
@@ -23,9 +23,9 @@
                 id: resource.id
             }
         },
-        class: 'yellow'
+        class: 'btn-warning'
     }, action: {
-        icon: 'remove',
+        icon: 'tabler:x',
         label: 'sylius.ui.reject'
     } } %}
 </div>

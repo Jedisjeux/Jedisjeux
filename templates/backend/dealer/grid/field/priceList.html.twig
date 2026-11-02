@@ -1,5 +1,5 @@
 {% if data.hasPriceList and data.priceList.active %}
-    <i class="checkmark icon green"></i>
+    {{ ux_icon('tabler:check', {'class': 'icon text-success'}) }}
 {% else %}
-    <i class="remove icon red"></i>
+    {{ ux_icon('tabler:x', {'class': 'icon text-danger'}) }}
 {% endif %}

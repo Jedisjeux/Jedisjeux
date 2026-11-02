@@ -13,7 +13,7 @@ namespace App\Tests\Behat\Page\Backend\Article;
 
 use App\Tests\Behat\Behaviour\WorkflowActions;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Monofony\Bridge\Behat\Crud\AbstractUpdatePage;
+use App\Tests\Behat\Bridge\Crud\AbstractUpdatePage;
 
 class UpdatePage extends AbstractUpdatePage
 {

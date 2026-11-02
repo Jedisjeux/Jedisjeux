@@ -1,5 +1,3 @@
-{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
-
-{{ buttons.show(path('app_backend_post_index', {
-    'topicId': data.id
-} ), 'app.ui.show_posts') }}
+<a href="{{ path('app_backend_post_index', {'topicId': data.id}) }}" class="btn btn-icon" data-bs-toggle="tooltip" data-bs-title="{{ 'app.ui.show_posts'|trans }}">
+    {{ ux_icon('tabler:messages') }}
+</a>

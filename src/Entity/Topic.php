@@ -328,6 +328,6 @@ class Topic implements ResourceInterface
 
     public function __toString(): string
     {
-        return $this->getTitle();
+        return (string) $this->getTitle();
     }
 }

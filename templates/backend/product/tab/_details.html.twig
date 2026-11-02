@@ -1,28 +1,26 @@
-{% set locale =  app.request.locale %}
+{% set locale = app.request.locale %}
 
-<div class="ui active tab" data-tab="details">
-    <h3 class="ui top attached header">{{ 'sylius.ui.details'|trans }}</h3>
-    <div class="ui attached segment">
-        <div class="ui two column stackable grid">
-            <div class="column">
-                <div class="ui content segment">
+<div class="tab-pane active show" id="tab-details" role="tabpanel">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{ 'sylius.ui.details'|trans }}</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
                     {{ form_row(form.translations[locale].name) }}
                     {{ form_row(form.translations[locale].slug, {'attr': {'data-url': path('sylius_admin_ajax_generate_product_slug')}}) }}
                     {{ form_row(form.translations[locale].shortDescription) }}
                 </div>
-            </div>
-            <div class="column">
-                <div class="ui segment">
+                <div class="col-md-6">
                     {{ form_row(form.boxContent) }}
                 </div>
             </div>
-        </div>
-        <div class="ui segment">
             {{ form_row(form.translations[locale].description) }}
+
+            <div class="d-none">
+                {{ form_row(form.firstVariant.name) }}
+            </div>
         </div>
     </div>
-</div>
-
-<div style="display: none">
-    {{ form_row(form.firstVariant.name) }}
 </div>

@@ -11,7 +11,7 @@
 
 namespace App\Tests\Behat\Page\Backend\FestivalList;
 
-use Monofony\Bridge\Behat\Crud\AbstractIndexPage;
+use App\Tests\Behat\Bridge\Crud\AbstractIndexPage;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

@@ -1,35 +1,31 @@
 {% extends 'backend/layout.html.twig' %}
 
-{% import '@SyliusUi/Macro/headers.html.twig' as headers %}
+{% block title %}{{ 'sylius.ui.dashboard'|trans }} | {{ parent() }}{% endblock %}
 
-{% block title %}{{ parent() }}{{ 'sylius.ui.dashboard'|trans }}{% endblock %}
+{% block header %}
+    <div class="row g-2 align-items-center">
+        <div class="col">
+            <h2 class="page-title">
+                {{ ux_icon('tabler:home', {'class': 'icon me-2'}) }}
+                {{ 'sylius.ui.dashboard'|trans }}
+            </h2>
+            <div class="text-secondary mt-1">{{ 'app.ui.overview_of_your_website'|trans }}</div>
+        </div>
+    </div>
+{% endblock %}
 
 {% block content %}
-    {{ headers.default('sylius.ui.dashboard'|trans, 'home', 'app.ui.overview_of_your_website'|trans) }}
-
     {% include 'backend/dashboard/_statistics.html.twig' %}
 
     {% if is_granted('ROLE_ADMIN') %}
-        {% include 'backend/dashboard/_menu.html.twig' %}
-
-        <div class="ui two column stackable grid">
-            <div class="column">
+        <div class="row row-cards">
+            <div class="col-lg-6">
                 {{ render(url('sylius_backend_partial_customer_latest', {'count': 5, 'template': 'backend/dashboard/_customers.html.twig'})) }}
             </div>
-            <div class="column">
+            <div class="col-lg-6">
                 {{ render(url('app_backend_partial_article_latest', {'count': 5, 'template': 'backend/dashboard/_articles.html.twig'})) }}
             </div>
         </div>
-
-        {#<div class="ui two column stackable grid">#}
-        {#<div class="column">#}
-        {#{{ render(url('app_backend_partial_session_count_per_day')) }}#}
-        {#</div>#}
-        {#<div class="column">#}
-        {#{{ render(url('app_backend_partial_session_count_per_month')) }}#}
-        {#</div>#}
-        {#</div>#}
-
     {% elseif is_granted('ROLE_ARTICLE_MANAGER') %}
         {{ render(url('app_backend_partial_article_latest', {'count': 5, 'template': 'backend/dashboard/_articles.html.twig'})) }}
     {% endif %}

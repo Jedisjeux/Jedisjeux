@@ -1,39 +1,65 @@
 {% extends 'backend/layout.html.twig' %}
 
-{% import '@SyliusUi/Macro/headers.html.twig' as headers %}
 {% import 'backend/macro/breadcrumb.html.twig' as breadcrumb %}
-
-{% set breadcrumbs = [
-{ label: 'app.ui.administration'|trans, url: path('app_backend_dashboard') },
-{ label: (metadata.applicationName~'.ui.'~metadata.pluralName)|trans, url: path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({})) },
-{ label: resource.id }
-]
-%}
 
 {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.name) %}
 
-{% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
+{% block title %}{{ header|trans }} | {{ parent() }}{% endblock %}
+
+{% block header %}
+    {{ breadcrumb.crumble([
+        { label: 'sylius.ui.administration'|trans, url: path('app_backend_dashboard') },
+        { label: (metadata.applicationName~'.ui.'~metadata.pluralName)|trans, url: path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({})) },
+        { label: resource.id }
+    ]) }}
+
+    <div class="row g-2 align-items-center mt-1">
+        <div class="col">
+            <h2 class="page-title">
+                {{ ux_icon('tabler:mail', {'class': 'icon me-2'}) }}
+                {{ header|trans }}
+            </h2>
+            {% if configuration.vars.subheader is defined %}
+                <div class="text-secondary mt-1">{{ configuration.vars.subheader|trans }}</div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
 
 {% block content %}
-    {{ headers.default(header|trans, configuration.vars.icon|default('mail'), configuration.vars.subheader|default(null)|trans) }}
-
-    {{ breadcrumb.crumble(breadcrumbs) }}
-
-    <div class="ui two column stackable grid">
-        <div class="column">
-            <div class="ui segment">
-                <h4 class="ui dividing header">{{ 'sylius.ui.customer_details'|trans }}</h4>
-                <p><strong>{{ 'sylius.ui.first_name'|trans }} :</strong> {{ contact_request.firstName }}</p>
-                <p><strong>{{ 'sylius.ui.last_name'|trans }} :</strong> {{ contact_request.lastName }}</p>
-                <p><strong>{{ 'sylius.ui.email'|trans }} :</strong> <span id="email">{{ contact_request.email }}</span></p>
+    <div class="row row-cards">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ 'sylius.ui.customer_details'|trans }}</h3>
+                </div>
+                <div class="card-body">
+                    <div class="datagrid">
+                        <div class="datagrid-item">
+                            <div class="datagrid-title">{{ 'sylius.ui.first_name'|trans }}</div>
+                            <div class="datagrid-content">{{ contact_request.firstName }}</div>
+                        </div>
+                        <div class="datagrid-item">
+                            <div class="datagrid-title">{{ 'sylius.ui.last_name'|trans }}</div>
+                            <div class="datagrid-content">{{ contact_request.lastName }}</div>
+                        </div>
+                        <div class="datagrid-item">
+                            <div class="datagrid-title">{{ 'sylius.ui.email'|trans }}</div>
+                            <div class="datagrid-content"><a href="mailto:{{ contact_request.email }}" id="email">{{ contact_request.email }}</a></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="column">
-            <div class="ui segment">
-                <p><strong>{{ 'sylius.ui.body'|trans }} :</strong> {{ contact_request.body|raw }}</p>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">{{ 'sylius.ui.body'|trans }}</h3>
+                </div>
+                <div class="card-body">
+                    {{ contact_request.body|raw }}
+                </div>
             </div>
         </div>
     </div>
-
-
 {% endblock %}

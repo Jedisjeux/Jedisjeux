@@ -1,3 +1,4 @@
-{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
-
-{{ buttons.create(path('sylius_backend_taxon_create_for_parent', options.link.parameters|default([]))) }}
+<a href="{{ path('sylius_backend_taxon_create_for_parent', options.link.parameters|default([])) }}" class="btn">
+    {{ ux_icon('tabler:plus', {'class': 'icon dropdown-item-icon'}) }}
+    {{ (action.label|default('sylius.ui.create'))|trans }}
+</a>

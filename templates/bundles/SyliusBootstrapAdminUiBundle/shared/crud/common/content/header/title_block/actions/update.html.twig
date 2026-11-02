@@ -1,0 +1,11 @@
+{# Overridden to give the update button the id the Behat update pages press #}
+{% import '@SyliusBootstrapAdminUi/shared/helper/button.html.twig' as button %}
+
+{{ button.primary(
+    sylius_test_form_attribute('update-changes-button')|merge({
+        text: 'sylius.ui.update'|trans,
+        type: 'submit',
+        id: 'sylius_save_changes_button',
+        form: hookable_metadata.context.form.vars.id
+    })
+) }}

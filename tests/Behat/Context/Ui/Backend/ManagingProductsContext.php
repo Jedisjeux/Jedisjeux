@@ -19,7 +19,7 @@ use App\Entity\GameAward;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Behat\Behat\Context\Context;
-use Monofony\Bridge\Behat\Service\Resolver\CurrentPageResolverInterface;
+use App\Tests\Behat\Bridge\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 

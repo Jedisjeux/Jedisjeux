@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Behat\Page\Backend\Customer;
 
-use Monofony\Bridge\Behat\Crud\AbstractIndexPage;
+use App\Tests\Behat\Bridge\Crud\AbstractIndexPage;
 
 class IndexPage extends AbstractIndexPage
 {

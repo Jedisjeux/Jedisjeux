@@ -1,11 +1,11 @@
 {{ form_errors(form) }}
 
-<div class="ui stackable grid sylius-tabular-form">
-    <div class="three wide column">
+<div class="row">
+    <div class="col-md-3">
         {% include 'backend/dealer/_menu.html.twig' %}
     </div>
-    <div class="thirteen wide column">
-        <div>
+    <div class="col-md-9">
+        <div class="tab-content">
             {% include 'backend/dealer/_tabs.html.twig' %}
         </div>
     </div>

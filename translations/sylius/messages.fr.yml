@@ -1,0 +1,135 @@
+# Keys Jedisjeux uses from sylius/ui-bundle 1.14 (c) Sylius Sp. z o.o., MIT license, and the ones Bootstrap Admin UI needs
+sylius:
+    ui:
+        accept: Accepter
+        account_credentials: "Informations d'identification"
+        actions: Actions
+        add: Ajouter
+        add_new_entry: 'Ajouter une entrée'
+        administration: Administration
+        administration_panel_login: "Connexion à l'espace d'administration"
+        all: Tous
+        are_your_sure_you_want_to_perform_this_action: 'Êtes-vous sûr de vouloir effectuer cette action ?'
+        association_types: "Types d'associations"
+        associations: Associations
+        attributes: Attributs
+        body: Corps
+        cancel: Annuler
+        category: Catégorie
+        change_password: 'Changer votre mot de passe'
+        code: Code
+        color: Couleur
+        comment: Commentaire
+        configuration: Configuration
+        contact_us: 'Nous contacter'
+        contains: Contient
+        create: Créer
+        create_an_account: 'Créer un compte'
+        created_at: 'Créé le'
+        creation_date: 'Date de création'
+        currency: Devise
+        customer_details: 'Informations sur le client'
+        dashboard: 'Tableau de bord'
+        date: Date
+        date_filter: '%label% | %altLabel%'
+        delete: Supprimer
+        description: Description
+        details: Détails
+        disable: Désactiver
+        disabled: Désactivé
+        edit: Modifier
+        email: E-mail
+        email_verified: 'Email vérifié'
+        empty: Vide
+        enable: Activer
+        enabled: Activée
+        end_date: 'Date de fin'
+        ends_with: 'Se termine par'
+        equal: Égal
+        error: Erreur
+        filters: Filtres
+        first_name: Prénom
+        forgot_password: "Mot de passe oublié\_?"
+        from: De
+        go: Envoyer
+        greater_than: 'Supérieur à'
+        group_membership: 'Appartenance au groupe'
+        guest: Invité
+        guest_customer: 'Client invité'
+        hello: Bonjour
+        home: Accueil
+        image: Image
+        images: Images
+        in: Dans
+        info: Info
+        jump_to_page: 'Aller à la page'
+        last_name: Nom
+        less_than: 'Inférieur à'
+        list_variants: 'Liste des variantes'
+        login: Connexion
+        login_button: Connexion
+        logout: Déconnexion
+        manage: Gérer
+        manage_categorization_of_your_products: 'Gérer les catégories de vos produits'
+        manage_reviews: 'Gérer les avis'
+        manage_variants: 'Gérer les variantes'
+        media: Media
+        message: Message
+        more: Plus
+        my_account: 'Mon compte'
+        name: Nom
+        new: Nouveau
+        newest_first: 'Plus récent en premier'
+        no_results: 'Aucun résultat'
+        no_results_adjust_your_search: 'Essayez de modifier votre recherche ou vos filtres.'
+        no_results_to_display: "Il n'y a aucun résultat à afficher"
+        not_contains: 'Ne contient pas'
+        not_empty: 'Non vide'
+        not_in: 'Pas dans'
+        oldest_first: 'Plus ancien en premier'
+        pagination:
+            number_of_results: '%from% à %to% sur %total% résultats'
+        parent: Parent
+        password: 'Mot de passe'
+        personal_information: 'Informations personnelles'
+        price: Prix
+        product_variants: 'Variantes de produit'
+        rating: Note
+        registration_date: "Date d'enregistrement"
+        reject: Rejet
+        repeat_new_password: 'Confirmer le mot de passe'
+        reset: Réinitialiser
+        reset_button: Réinitialiser
+        reset_password: 'Réinitialisation du mot de passe'
+        reviews: Avis
+        save_changes: 'Enregistrer les modifications'
+        search: Rechercher
+        search_menu: 'Rechercher dans le menu'
+        send: Envoyer
+        simple_product: 'Produit standard'
+        sort: Trier
+        start_date: 'Date de début'
+        start_typing_to_search: 'Commencez à saisir pour rechercher'
+        starts_with: 'Commence par'
+        status: Statut
+        success: Succès
+        taxonomy: Taxonomie
+        taxons: Taxons
+        there_are_no_reviews: "Il n'y a aucun avis"
+        this_form_contains_errors: 'Ce formulaire contient des erreurs.'
+        title: Titre
+        to: À
+        total_records: 'Enregistrements totaux'
+        type: Type
+        update: 'Mise à jour'
+        use_the_contact_form_below_to_send_us_a_message: 'Utilisez le formulaire de contact ci-dessous pour nous envoyer un message.'
+        user_details: "Détails d'un utilisateur"
+        username: Identifiant
+        value: Valeur
+        verified: Vérifié
+        view_more: 'En savoir plus'
+    form:
+        login:
+            password: 'Mot de passe'
+            remember_me: 'Rester connecté'
+            username: Identifiant

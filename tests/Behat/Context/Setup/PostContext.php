@@ -18,7 +18,7 @@ use App\Entity\Topic;
 use App\Fixture\Factory\PostExampleFactory;
 use App\Fixture\Factory\TopicExampleFactory;
 use Behat\Behat\Context\Context;
-use Monofony\Bridge\Behat\Service\SharedStorageInterface;
+use App\Tests\Behat\Bridge\Service\SharedStorageInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 

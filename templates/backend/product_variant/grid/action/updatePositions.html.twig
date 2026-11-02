@@ -1,6 +1,29 @@
 <form class="sylius-update-product-variants" action="{{ path('sylius_backend_ajax_product_variants_update_position') }}" data-csrf-token="{{ csrf_token('update-product-variant-position') }}">
-    <button class="ui labeled loadable icon button sylius-save-position" type="submit">
-        <i class="icon checkmark"></i>
+    <button class="btn sylius-save-position" type="submit">
+        {{ ux_icon('tabler:check', {'class': 'icon'}) }}
         {{ 'sylius.ui.save_positions'|trans }}
     </button>
 </form>
+
+<script>
+    document.querySelectorAll('form.sylius-update-product-variants').forEach((form) => {
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const body = new URLSearchParams({ _csrf_token: form.dataset.csrfToken });
+            document.querySelectorAll('.sylius-product-variant-position').forEach((input, index) => {
+                body.append(`productVariants[${index}][id]`, input.dataset.id);
+                body.append(`productVariants[${index}][position]`, input.value);
+            });
+
+            form.querySelector('button').disabled = true;
+            const response = await fetch(form.action, { method: 'PUT', body });
+
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                form.querySelector('button').disabled = false;
+            }
+        });
+    });
+</script>

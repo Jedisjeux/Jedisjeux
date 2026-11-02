@@ -343,74 +343,8 @@
             "ref": "523b4b0cfb88dc8637cb56e427e6be7718bdce32"
         }
     },
-    "monofony/admin": {
-        "version": "v0.4.1"
-    },
     "monofony/admin-bundle": {
         "version": "v0.2.3"
-    },
-    "monofony/admin-contracts": {
-        "version": "v0.4.1"
-    },
-    "monofony/admin-meta": {
-        "version": "0.9",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "0.8",
-            "ref": "8d32c12797d022e670e2e9b8416c00235089ef06"
-        }
-    },
-    "monofony/api-meta": {
-        "version": "0.9",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "0.8",
-            "ref": "b9fd776a767cdd112e60a83aae97a892baf5905d"
-        }
-    },
-    "monofony/behat-bridge": {
-        "version": "v0.4.1"
-    },
-    "monofony/core": {
-        "version": "v0.2.3"
-    },
-    "monofony/core-bundle": {
-        "version": "0.1",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "871",
-            "version": "0.1",
-            "ref": ""
-        }
-    },
-    "monofony/core-contracts": {
-        "version": "v0.4.1"
-    },
-    "monofony/core-meta": {
-        "version": "0.9",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "0.8",
-            "ref": "7fa5f4b232834f5857ca279e99bb8ad57cc4dff9"
-        }
-    },
-    "monofony/front-contracts": {
-        "version": "v0.4.1"
-    },
-    "monofony/front-meta": {
-        "version": "0.9",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "0.8",
-            "ref": "2b36169bbc23f68e3b052d9517326872596511ce"
-        }
-    },
-    "monofony/sylius-user-bridge": {
-        "version": "v0.4.1"
     },
     "monolog/monolog": {
         "version": "1.23.0"
@@ -673,11 +607,17 @@
     "sylius-labs/polyfill-symfony-event-dispatcher": {
         "version": "v1.0.0"
     },
+    "sylius/admin-ui": {
+        "version": "v0.9.1"
+    },
     "sylius/attribute": {
         "version": "v1.2.7"
     },
     "sylius/attribute-bundle": {
         "version": "v1.2.7"
+    },
+    "sylius/bootstrap-admin-ui": {
+        "version": "v0.9.1"
     },
     "sylius/customer": {
         "version": "v1.2.7"
@@ -727,8 +667,11 @@
     "sylius/taxonomy-bundle": {
         "version": "v1.2.7"
     },
-    "sylius/ui-bundle": {
-        "version": "v1.2.7"
+    "sylius/twig-extra": {
+        "version": "v0.9.1"
+    },
+    "sylius/twig-hooks": {
+        "version": "v0.9.1"
     },
     "sylius/user": {
         "version": "v1.2.7"
@@ -943,6 +886,15 @@
     "symfony/service-contracts": {
         "version": "v1.1.7"
     },
+    "symfony/stimulus-bundle": {
+        "version": "2.36",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.8",
+            "ref": "9e33a8a3794b603fb4be6c04ee5ecab901ce549e"
+        }
+    },
     "symfony/stopwatch": {
         "version": "v4.1.6"
     },
@@ -972,6 +924,55 @@
             "version": "3.3",
             "ref": "369b5b29dc52b2c190002825ae7ec24ab6f962dd"
         }
+    },
+    "symfony/ux-autocomplete": {
+        "version": "2.36",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.6",
+            "ref": "07d9602b7231ba355f484305d6cea58310c01741"
+        },
+        "files": [
+            "config/routes/ux_autocomplete.yaml"
+        ]
+    },
+    "symfony/ux-icons": {
+        "version": "2.36",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.19",
+            "ref": "c965ca0bf8a40e03420d57e08cff0bf6045e4ae7"
+        },
+        "files": [
+            "assets/icons/symfony.svg",
+            "config/packages/ux_icons.yaml"
+        ]
+    },
+    "symfony/ux-live-component": {
+        "version": "2.36",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.6",
+            "ref": "b7130b7b5ddc2f8994bd6149d7c093b184782f0c"
+        },
+        "files": [
+            "config/routes/ux_live_component.yaml"
+        ]
+    },
+    "symfony/ux-twig-component": {
+        "version": "2.36",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.13",
+            "ref": "f367ae2a1faf01c503de2171f1ec22567febeead"
+        },
+        "files": [
+            "config/packages/twig_component.yaml"
+        ]
     },
     "symfony/validator": {
         "version": "4.1",

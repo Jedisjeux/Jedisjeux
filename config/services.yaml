@@ -18,6 +18,8 @@ services:
             calls:
                 - [setContainer, ['@service_container']]
 
+    Doctrine\Persistence\ObjectManager: '@doctrine.orm.entity_manager'
+
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services
@@ -248,13 +250,8 @@ services:
 
     app.menu_builder:
         class: App\Menu\AdminMenuBuilder
+        decorates: sylius_admin_ui.knp.menu_builder
         arguments: ["@knp_menu.factory", "@security.authorization_checker"]
-
-    app.admin_menu:
-        class: Knp\Menu\MenuItem # the service definition requires setting the class
-        factory: ["@app.menu_builder", createMenu]
-        tags:
-            - { name: knp_menu.menu, alias: app.admin.main } # The alias is what is used to retrieve the menu
 
     app.backend.menu_builder.product_form:
         class: App\Menu\ProductMenuBuilder

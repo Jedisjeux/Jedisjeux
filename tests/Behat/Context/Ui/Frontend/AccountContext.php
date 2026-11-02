@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace App\Tests\Behat\Context\Ui\Frontend;
 
 use Behat\Behat\Context\Context;
-use Monofony\Bridge\Behat\NotificationType;
+use App\Tests\Behat\Bridge\NotificationType;
 use App\Tests\Behat\Page\Frontend\Account\ChangePasswordPage;
 use App\Tests\Behat\Page\Frontend\Account\DashboardPage;
 use App\Tests\Behat\Page\Frontend\Account\LoginPage;
 use App\Tests\Behat\Page\Frontend\Account\ProfileUpdatePage;
 use App\Formatter\StringInflector;
-use Monofony\Bridge\Behat\Service\NotificationCheckerInterface;
+use App\Tests\Behat\Bridge\Service\NotificationCheckerInterface;
 use Webmozart\Assert\Assert;
 
 final class AccountContext implements Context

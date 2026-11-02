@@ -1,0 +1,6 @@
+# Bootstrap Admin UI templates link to these routes
+sylius_admin_ui_dashboard:
+    alias: app_backend_dashboard
+
+sylius_admin_ui_logout:
+    alias: app_frontend_logout

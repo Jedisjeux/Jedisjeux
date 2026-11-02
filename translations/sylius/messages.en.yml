@@ -1,0 +1,158 @@
+# Keys Jedisjeux uses from sylius/ui-bundle 1.14 (c) Sylius Sp. z o.o., MIT license, and the ones Bootstrap Admin UI needs
+sylius:
+    ui:
+        accept: Accept
+        account_credentials: 'Account credentials'
+        actions: Actions
+        add: Add
+        add_new_entry: 'Add new entry'
+        administration: Administration
+        administration_panel_login: 'Administration panel login'
+        all: All
+        are_your_sure_you_want_to_perform_this_action: 'Are you sure you want to perform this action?'
+        association_types: 'Association types'
+        associations: Associations
+        attributes: Attributes
+        body: Body
+        cancel: Cancel
+        category: Category
+        change_password: 'Change password'
+        code: Code
+        color: Color
+        comment: Comment
+        configuration: Configuration
+        contact_us: 'Contact us'
+        contains: Contains
+        create: Create
+        create_an_account: 'Create an account'
+        created_at: 'Created at'
+        creation_date: 'Creation date'
+        currency: Currency
+        customer: Customer
+        customer_details: 'Customer details'
+        customer_groups: 'Customer groups'
+        customer_since: 'Customer since'
+        customers: Customers
+        dashboard: Dashboard
+        date: Date
+        date_filter: '%label% | %altLabel%'
+        delete: Delete
+        description: Description
+        details: Details
+        disable: Disable
+        disabled: Disabled
+        edit: Edit
+        email: Email
+        email_verified: 'Email verified'
+        empty: Empty
+        enable: Enable
+        enabled: Enabled
+        end_date: 'End date'
+        ends_with: 'Ends with'
+        equal: Equal
+        error: Error
+        filter: Filter
+        filters: Filters
+        first_name: 'First name'
+        forgot_password: 'Forgot password?'
+        from: From
+        go: Go
+        greater_than: 'Greater than'
+        group_membership: 'Group membership'
+        guest: Guest
+        guest_customer: 'Guest customer'
+        hello: Hello
+        home: Home
+        image: Image
+        images: Images
+        in: In
+        info: Info
+        jump_to_page: 'Jump to page'
+        last_name: 'Last name'
+        less_than: 'Less than'
+        list_variants: 'List variants'
+        login: Login
+        login_button: Login
+        logout: Logout
+        manage: Manage
+        manage_association_types_of_your_products: 'Manage association types of your products'
+        manage_categorization_of_your_products: 'Manage categorization of your products'
+        manage_customer_groups: 'Manage groups of your customers'
+        manage_products: 'Manage products'
+        manage_reviews: 'Manage reviews'
+        manage_reviews_of_your_products: 'Manage reviews of your products'
+        manage_variants: 'Manage variants'
+        manage_your_customers: 'Manage your customers'
+        media: Media
+        message: Message
+        more: More
+        my_account: 'My account'
+        name: Name
+        new: New
+        new_customers: 'New customers'
+        newest_first: 'Newest first'
+        no_label: 'No'
+        no_results: 'No results'
+        no_results_adjust_your_search: 'Try adjusting your search or filters.'
+        no_results_to_display: 'There are no results to display'
+        not_contains: 'Not contains'
+        not_empty: 'Not empty'
+        not_equal: 'Not equal'
+        not_in: 'Not in'
+        oldest_first: 'Oldest first'
+        out_of_stock: 'Out of stock'
+        pagination:
+            number_of_results: '%from% to %to% of %total% results'
+        parent: Parent
+        password: Password
+        personal_information: 'Personal information'
+        position: Position
+        price: Price
+        product: Product
+        product_reviews: 'Product reviews'
+        product_variants: 'Product variants'
+        products: Products
+        rating: Rating
+        register: Register
+        registration_date: 'Registration date'
+        reject: Reject
+        repeat_new_password: 'Repeat new password'
+        reset: Reset
+        reset_button: Reset
+        reset_password: 'Reset password'
+        reviews: Reviews
+        save_changes: 'Save changes'
+        save_positions: 'Save positions'
+        search: Search
+        search_menu: 'Search menu'
+        select_products: 'Select products'
+        send: Send
+        show: Show
+        simple_product: 'Simple product'
+        sort: Sort
+        start_date: 'Start Date'
+        start_typing_to_search: 'Start typing to search'
+        starts_with: 'Starts with'
+        status: Status
+        success: Success
+        taxonomy: Taxonomy
+        taxons: Taxons
+        there_are_no_reviews: 'There are no reviews'
+        this_form_contains_errors: 'This form contains errors.'
+        title: Title
+        to: To
+        total_records: 'Total records'
+        type: Type
+        update: Update
+        use_the_contact_form_below_to_send_us_a_message: 'Use the contact form below to send us a message.'
+        user_details: 'User details'
+        username: Username
+        value: Value
+        verified: Verified
+        view_more: 'View more'
+        yes_label: 'Yes'
+    form:
+        login:
+            password: Password
+            remember_me: 'Remember me'
+            username: Username

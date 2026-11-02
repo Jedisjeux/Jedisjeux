@@ -1,5 +1,0 @@
-{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
-
-{% set routeParameters = grid.requestConfiguration.vars.route.parameters|default([]) %}
-
-{{ buttons.create(path(grid.requestConfiguration.getRouteName('create'), routeParameters)) }}

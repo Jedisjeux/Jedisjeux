@@ -18,7 +18,7 @@ use App\Tests\Behat\Page\Backend\Article\UpdatePage;
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
-use Monofony\Bridge\Behat\Service\Resolver\CurrentPageResolverInterface;
+use App\Tests\Behat\Bridge\Service\Resolver\CurrentPageResolverInterface;
 use Webmozart\Assert\Assert;
 
 final class ManagingArticlesContext implements Context

@@ -1,13 +1,9 @@
-<div class="ui right floated buttons">
-    <a class="ui labeled icon button"
-       target="_blank"
-       href="{{ path('app_frontend_article_show', {'slug': article.slug}) }}">
-        <i class="icon search"></i>
-        {{ 'app.ui.preview'|trans }}
-    </a>
+<a class="btn" target="_blank" href="{{ path('app_frontend_article_show', {'slug': resource.slug}) }}">
+    {{ ux_icon('tabler:eye', {'class': 'icon'}) }}
+    {{ 'app.ui.preview'|trans }}
+</a>
 
-    {{ render(url('app_frontend_partial_article_status_show', {
-        'id': article.id,
-        'template': 'backend/article/button/_status.html.twig'
-    })) }}
-</div>
+{{ render(url('app_frontend_partial_article_status_show', {
+    'id': resource.id,
+    'template': 'backend/article/button/_status.html.twig'
+})) }}

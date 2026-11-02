@@ -11,7 +11,7 @@
 
 namespace App\Tests\Behat\Page\Backend\GamePlay;
 
-use Monofony\Bridge\Behat\Crud\AbstractUpdatePage;
+use App\Tests\Behat\Bridge\Crud\AbstractUpdatePage;
 
 class UpdatePage extends AbstractUpdatePage
 {

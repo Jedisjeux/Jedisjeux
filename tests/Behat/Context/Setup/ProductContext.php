@@ -17,7 +17,7 @@ use App\Fixture\Factory\ProductExampleFactory;
 use App\Formatter\StringInflector;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
-use Monofony\Bridge\Behat\Service\SharedStorageInterface;
+use App\Tests\Behat\Bridge\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;

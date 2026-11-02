@@ -1,13 +1,12 @@
-{% import 'backend/macro/breadcrumb.html.twig' as breadcrumb %}
+{% from '@SyliusBootstrapAdminUi/shared/helper/breadcrumbs.html.twig' import breadcrumbs %}
 
-{% set breadcrumbs = [
-        { label: 'sylius.ui.administration'|trans, url: path('app_backend_dashboard') },
-        { label: 'app.ui.festival_lists'|trans, url: path('app_backend_festival_list_index') },
-        { label: resource.list.name, url: path('app_backend_festival_list_update', {'id': resource.list.id}) },
-        { label: 'sylius.ui.products'|trans, url: path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({})) },
-        { label: resource.code|default(resource.id) },
-        { label: 'sylius.ui.edit'|trans }
-    ]
-%}
+{% set resource = hookable_metadata.context.resource %}
 
-{{ breadcrumb.crumble(breadcrumbs) }}
+{{ breadcrumbs([
+    { name: 'sylius.ui.dashboard', url: path('sylius_admin_ui_dashboard') },
+    { name: 'app.ui.festival_lists', url: path('app_backend_festival_list_index') },
+    { name: resource.list.name, url: path('app_backend_festival_list_update', {'id': resource.list.id}) },
+    { name: 'sylius.ui.products', url: path('app_backend_festival_list_item_index', {'festivalListId': resource.list.id}) },
+    { name: resource.product.name|default(resource.id) },
+    { name: 'sylius.ui.edit', active: true },
+]) }}

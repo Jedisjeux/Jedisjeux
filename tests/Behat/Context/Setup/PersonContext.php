@@ -14,7 +14,7 @@ namespace App\Tests\Behat\Context\Setup;
 use App\Entity\Person;
 use App\Fixture\Factory\PersonExampleFactory;
 use Behat\Behat\Context\Context;
-use Monofony\Bridge\Behat\Service\SharedStorageInterface;
+use App\Tests\Behat\Bridge\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**

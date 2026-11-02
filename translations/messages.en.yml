@@ -3,6 +3,7 @@ app:
         access_denied: Access Denied
         administration: Administration
         administrator: Administrator
+        moderator: Moderator
         add_article: Add article
         add_review_article: Add review article
         added_at: Added at
@@ -45,6 +46,7 @@ app:
         created_at_female: Created at
         dealer: Dealer
         dealers: Dealers
+        dealer_price: Dealer price
         dealer_prices: Dealer prices
         delimiter: Delimiter
         designer: Designer
@@ -88,6 +90,7 @@ app:
         game_library: Game library
         game_specifications: Game specifications
         game_play_of: Partie de %product%
+        game_play: Game play
         game_plays: Game plays
         game_play_details: Game play details
         game_play_images: Game play images
@@ -193,13 +196,17 @@ app:
         player_count: Player count
         players: Players
         plays: Plays
+        post: Post
         posts: Posts
         preview: Preview
         previews: Previews
         prices: Prices
         price_list: Price list
+        product_box: Product box
         product_boxes: Product boxes
+        product_file: Product file
         product_files: Product files
+        product_list: Product list
         product_lists: Product lists
         product_manager: Product manager
         propose_a_file: Propose a file
@@ -215,6 +222,7 @@ app:
         react_on_this_game_play: React on this game play
         recent_articles: Recent articles
         redactor: Redactor
+        redirection: Redirection
         redirections: Redirections
         redirection_count: Redirection count
         referer: Referer
@@ -273,6 +281,7 @@ app:
         view_more_reviews: View more reviews
         view_website: View website
         year: Year
+        year_award: Year award
         year_awards: Year awards
         your_comment: Your comment
         your_rating: Your rating

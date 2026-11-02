@@ -1,10 +1,16 @@
-<div class="ui active tab" data-tab="details">
-    <h3 class="ui dividing header">{{ 'sylius.ui.details'|trans }}</h3>
-    {{ form_row(form.name) }}
+<div class="tab-pane active show" id="tab-details" role="tabpanel">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{ 'sylius.ui.details'|trans }}</h3>
+        </div>
+        <div class="card-body">
+            {{ form_row(form.name) }}
 
-    <h4 class="ui dividing header">{{ 'label.release_date'|trans }}</h4>
-    <div class="two fields">
-        {{ form_row(form.releasedAtPrecision) }}
-        {{ form_row(form.releasedAt) }}
+            <h4 class="mb-3">{{ 'label.release_date'|trans }}</h4>
+            <div class="row">
+                <div class="col-md-6">{{ form_row(form.releasedAtPrecision) }}</div>
+                <div class="col-md-6">{{ form_row(form.releasedAt) }}</div>
+            </div>
+        </div>
     </div>
 </div>
