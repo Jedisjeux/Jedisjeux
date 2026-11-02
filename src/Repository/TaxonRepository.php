@@ -11,6 +11,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Product;
 use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository as BaseTaxonRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
@@ -106,6 +107,32 @@ class TaxonRepository extends BaseTaxonRepository
         }
 
         return $this->findChildrenAsTree($root, $showPrivate);
+    }
+
+    /**
+     * Finds the taxons of a taxonomy which have the most published products.
+     *
+     * @return TaxonInterface[]
+     */
+    public function findMostUsedByRootCode(string $code, int $limit): array
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.root', 'root')
+            ->innerJoin(Product::class, 'product', 'WITH', 'o MEMBER OF product.taxons')
+            ->addSelect('COUNT(DISTINCT product.id) AS HIDDEN productCount')
+            ->andWhere('root.code = :code')
+            ->andWhere('o.id != root.id')
+            ->andWhere('o.public = :public')
+            ->andWhere('product.status = :status')
+            ->groupBy('o.id')
+            ->orderBy('productCount', 'DESC')
+            ->addOrderBy('o.left', 'ASC')
+            ->setMaxResults($limit)
+            ->setParameter('code', $code)
+            ->setParameter('public', true)
+            ->setParameter('status', Product::PUBLISHED)
+            ->getQuery()
+            ->getResult();
     }
 
     /**
