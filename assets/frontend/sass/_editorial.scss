@@ -272,9 +272,9 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
 .editorial-game-taxons dt { color: var(--ed-text-soft); font-size: 11px; font-weight: 500; line-height: 1.35; }
 .editorial-game-taxons dd { margin: 2px 0 0; color: var(--ed-text-soft); font-size: 12px; line-height: 1.45; }
 .editorial-game-taxons a { color: var(--ed-accent); font-weight: 600; }
-.editorial-game-presentation__image { margin: 24px 0 0; }
-.editorial-game-presentation__image a { display: block; cursor: zoom-in; }
-.editorial-game-presentation__image img { display: block; width: 100%; height: auto; border-radius: 9px; }
+.editorial-game-presentation__image { margin: 24px 0 0; text-align: center; }
+.editorial-game-presentation__image a { display: inline-block; max-width: 100%; vertical-align: top; cursor: zoom-in; }
+.editorial-game-presentation__image img { display: block; max-width: 100%; height: auto; border-radius: 9px; }
 .editorial-game-keyfacts { padding: 18px; border: 1px solid var(--editorial-border); border-radius: 9px; background: var(--ed-panel); }
 .editorial-game-keyfacts h3 { margin: 0 0 13px; color: var(--ed-ink); font: 700 19px 'PT Serif',Georgia,serif; }
 .editorial-game-keyfacts .editorial-game-keyfacts__subheading { margin-top: 18px; }
