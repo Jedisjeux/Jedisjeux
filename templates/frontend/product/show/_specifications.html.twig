@@ -37,13 +37,13 @@
             <dd>{{ duration(product) }}</dd>
         </div>
     {% endif %}
-    {% if product.mechanisms|length > 0 %}
+    {% if with_taxons ?? true and product.mechanisms|length > 0 %}
         <div class="editorial-game-spec">
             <dt>{{ icon('cog') }}{{ 'app.ui.mechanisms'|trans }}</dt>
             <dd id="product-mechanisms">{{ self.show_taxons(product.mechanisms) }}</dd>
         </div>
     {% endif %}
-    {% if product.themes|length > 0 %}
+    {% if with_taxons ?? true and product.themes|length > 0 %}
         <div class="editorial-game-spec">
             <dt>{{ icon('tag') }}{{ 'app.ui.themes'|trans }}</dt>
             <dd id="product-themes">{{ self.show_taxons(product.themes) }}</dd>

@@ -33,6 +33,7 @@ sylius_fixtures:
                                 released_at_precision: "on-month"
                                 images:
                                     - "tests/Resources/fixtures/games/covers/les_brumes_d_avalon.jpg"
+                                material_image: "tests/Resources/fixtures/games/materials/les_brumes_d_avalon_material.jpg"
                                 short_description: "<p>Les chevaliers de la Table ronde s'enfoncent dans les brumes pour retrouver le Graal avant que Morgane ne s'en empare.</p>"
                                 description: "<p>Chaque joueur incarne un chevalier qui améliore son paquet de cartes au fil des quêtes. Les brumes avancent à chaque tour : il faudra coopérer, partager ses reliques et choisir quels lieux sacrifier pour espérer atteindre l'île d'Avalon.</p>"
                                 box_content: |
@@ -207,6 +208,7 @@ sylius_fixtures:
                                 released_at_precision: "on-month"
                                 images:
                                     - "tests/Resources/fixtures/games/covers/nebula_7.jpg"
+                                    - "tests/Resources/fixtures/games/illustrations/nebula_7_illustration.jpg"
                                 short_description: "<p>Sept factions se disputent le contrôle d'une nébuleuse riche en ressources.</p>"
                                 description: "<p>Programmez secrètement vos ordres, déplacez vos flottes et colonisez les planètes. Diplomatie, trahisons et batailles spatiales rythment une partie épique qui peut durer toute une soirée.</p>"
                                 box_content: |
@@ -543,6 +545,7 @@ sylius_fixtures:
                                 released_at_precision: "on-month"
                                 images:
                                     - "tests/Resources/fixtures/games/covers/chroniques_de_la_station.jpg"
+                                material_image: "tests/Resources/fixtures/games/materials/chroniques_de_la_station_material.jpg"
                                 short_description: "<p>Une campagne legacy à bord d'une station spatiale à la dérive. Vos décisions changeront le jeu pour toujours.</p>"
                                 description: "<p>Réparez la station, explorez les modules abandonnés et découvrez ce qui est arrivé à l'équipage précédent. Autocollants, enveloppes scellées et cartes à détruire : chaque boîte devient unique.</p>"
                                 box_content: |
