@@ -16,21 +16,27 @@
 {% endmacro %}
 
 <dl class="editorial-game-spec-list">
-    <div class="editorial-game-spec">
-        <dt>{{ icon('users') }}{{ 'app.ui.player_count'|trans }}</dt>
-        <dd itemprop="numberOfPlayers" itemscope itemtype="http://schema.org/QuantitativeValue">{{ playerCount(product) }}</dd>
-    </div>
-    <div class="editorial-game-spec">
-        <dt>{{ icon('age') }}{{ 'app.ui.age'|trans }}</dt>
-        <dd itemprop="audience" itemscope itemtype="http://schema.org/PeopleAudience">
-            {{ 'app.ui.from_years'|trans({ '%count%': product.minAge })|lower }}
-            <meta itemprop="suggestedMinAge" content="{{ product.minAge }}">
-        </dd>
-    </div>
-    <div class="editorial-game-spec">
-        <dt>{{ icon('clock') }}{{ 'app.ui.duration'|trans }}</dt>
-        <dd>{{ duration(product) }}</dd>
-    </div>
+    {% if product.minPlayerCount %}
+        <div class="editorial-game-spec">
+            <dt>{{ icon('users') }}{{ 'app.ui.player_count'|trans }}</dt>
+            <dd itemprop="numberOfPlayers" itemscope itemtype="http://schema.org/QuantitativeValue">{{ playerCount(product) }}</dd>
+        </div>
+    {% endif %}
+    {% if product.minAge %}
+        <div class="editorial-game-spec">
+            <dt>{{ icon('age') }}{{ 'app.ui.age'|trans }}</dt>
+            <dd itemprop="audience" itemscope itemtype="http://schema.org/PeopleAudience">
+                {{ 'app.ui.from_years'|trans({ '%count%': product.minAge })|lower }}
+                <meta itemprop="suggestedMinAge" content="{{ product.minAge }}">
+            </dd>
+        </div>
+    {% endif %}
+    {% if product.minDuration %}
+        <div class="editorial-game-spec">
+            <dt>{{ icon('clock') }}{{ 'app.ui.duration'|trans }}</dt>
+            <dd>{{ duration(product) }}</dd>
+        </div>
+    {% endif %}
     {% if product.mechanisms|length > 0 %}
         <div class="editorial-game-spec">
             <dt>{{ icon('cog') }}{{ 'app.ui.mechanisms'|trans }}</dt>
@@ -43,10 +49,12 @@
             <dd id="product-themes">{{ self.show_taxons(product.themes) }}</dd>
         </div>
     {% endif %}
-    <div class="editorial-game-spec">
-        <dt>{{ icon('calendar') }}{{ 'app.ui.release_date'|trans }}</dt>
-        <dd>{{ releasedAt(product.firstVariant) }}</dd>
-    </div>
+    {% if product.firstVariant and product.firstVariant.releasedAt %}
+        <div class="editorial-game-spec">
+            <dt>{{ icon('calendar') }}{{ 'app.ui.release_date'|trans }}</dt>
+            <dd>{{ releasedAt(product.firstVariant) }}</dd>
+        </div>
+    {% endif %}
     {% if product.designers|length > 0 %}
         <div class="editorial-game-spec">
             <dt>{{ icon('pen') }}Auteur(s)</dt>
