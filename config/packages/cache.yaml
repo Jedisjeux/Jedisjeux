@@ -1,0 +1,7 @@
+framework:
+    cache:
+        pools:
+            # Community counters and categories on the homepage
+            homepage.cache:
+                adapter: cache.app
+                default_lifetime: 600
