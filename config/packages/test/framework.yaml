@@ -2,3 +2,8 @@ framework:
     test: true
     session:
         storage_factory_id: session.storage.factory.mock_file
+    cache:
+        pools:
+            # In memory only, so scenarios never read counters from a previous one
+            homepage.cache:
+                adapter: cache.adapter.array

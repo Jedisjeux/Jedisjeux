@@ -13,9 +13,11 @@ namespace App\Controller;
 
 use App\Entity\Taxon;
 use App\Repository\TaxonRepository;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Cache\CacheInterface;
 
 /**
  * @Route("/counter")
@@ -25,6 +27,7 @@ class CounterController extends AbstractController
     public function __construct(
         private readonly StatisticsProvider $statisticProvider,
         private readonly TaxonRepository $taxonRepository,
+        private readonly CacheInterface $homepageCache,
     ) {
     }
 
@@ -33,9 +36,26 @@ class CounterController extends AbstractController
      */
     public function indexAction(): Response
     {
-        return $this->render('frontend/homepage/index/_counters.html.twig', array_merge($this->statisticProvider->getStatistics(), [
-            'targetAudiences' => $this->taxonRepository->findChildrenAsTreeByRootCode(Taxon::CODE_TARGET_AUDIENCE, false),
-            'mechanisms' => $this->taxonRepository->findMostUsedByRootCode(Taxon::CODE_MECHANISM, 4),
+        // Only scalars are cached: Doctrine entities would come back detached
+        $parameters = $this->homepageCache->get('community', fn (): array => array_merge($this->statisticProvider->getStatistics(), [
+            'targetAudiences' => $this->normalizeTaxons($this->taxonRepository->findChildrenAsTreeByRootCode(Taxon::CODE_TARGET_AUDIENCE, false)),
+            'mechanisms' => $this->normalizeTaxons($this->taxonRepository->findMostUsedByRootCode(Taxon::CODE_MECHANISM, 4)),
         ]));
+
+        return $this->render('frontend/homepage/index/_counters.html.twig', $parameters);
+    }
+
+    /**
+     * @param TaxonInterface[] $taxons
+     *
+     * @return array<array{code: string, name: string, slug: string}>
+     */
+    private function normalizeTaxons(array $taxons): array
+    {
+        return array_map(fn (TaxonInterface $taxon): array => [
+            'code' => $taxon->getCode(),
+            'name' => $taxon->getName(),
+            'slug' => $taxon->getSlug(),
+        ], $taxons);
     }
 }
