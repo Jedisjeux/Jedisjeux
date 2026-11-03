@@ -72,7 +72,8 @@ final class AdminMenuBuilder implements MenuBuilderInterface
         $catalog = $menu
             ->addChild('catalog')
             ->setLabel('app.ui.catalog')
-            ->setLabelAttribute('icon', 'tabler:books');
+            ->setLabelAttribute('icon', 'tabler:books')
+            ->setExtra('always_open', true);
 
         if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
             $catalog
@@ -151,7 +152,8 @@ final class AdminMenuBuilder implements MenuBuilderInterface
         $content = $menu
             ->addChild('content')
             ->setLabel('app.ui.content')
-            ->setLabelAttribute('icon', 'tabler:news');
+            ->setLabelAttribute('icon', 'tabler:news')
+            ->setExtra('always_open', true);
 
         $content
             ->addChild('backend_article', ['route' => 'app_backend_article_index'])
