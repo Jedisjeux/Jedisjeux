@@ -17,10 +17,9 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_article_review")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_article_review')]
 class ArticleReview extends Review
 {
     /**

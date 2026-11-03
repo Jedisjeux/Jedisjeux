@@ -17,19 +17,17 @@ trait BlameableEntity
 {
     /**
      * @var User
-     *
-     * @Gedmo\Blameable(on="create")
-     * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
      */
+    #[Gedmo\Blameable(on: 'create')]
+    #[ORM\ManyToOne(targetEntity: \JDJ\UserBundle\Entity\User::class)]
+    #[ORM\JoinColumn(nullable: false)]
     protected $createdBy;
 
     /**
      * @var User
-     *
-     * @Gedmo\Blameable(on="update")
-     * @ORM\ManyToOne(targetEntity="JDJ\UserBundle\Entity\User")
      */
+    #[Gedmo\Blameable(on: 'update')]
+    #[ORM\ManyToOne(targetEntity: \JDJ\UserBundle\Entity\User::class)]
     protected $updatedBy;
 
     /**

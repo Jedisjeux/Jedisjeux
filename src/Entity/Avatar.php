@@ -13,12 +13,10 @@ use JMS\Serializer\Annotation as JMS;
 
 /**
  * Class Avatar.
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_customer_avatar")
- *
- * @JMS\ExclusionPolicy("all")
  */
+#[ORM\Entity]
+#[JMS\ExclusionPolicy('all')]
+#[ORM\Table(name: 'jdj_customer_avatar')]
 class Avatar extends AbstractImage
 {
     /**

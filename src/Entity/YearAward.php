@@ -15,33 +15,28 @@ use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * @ORM\Entity
- * @ORM\Table("jdj_year_award")
- */
+#[ORM\Entity]
+#[ORM\Table('jdj_year_award')]
 class YearAward implements ResourceInterface
 {
     use IdentifiableTrait;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     private $year;
 
     /**
      * @var GameAward|null
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\GameAward")
      */
+    #[ORM\ManyToOne(targetEntity: \App\Entity\GameAward::class)]
     private $award;
 
     /**
      * @var ProductInterface|null
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="yearAwards")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class, inversedBy: 'yearAwards')]
     private $product;
 
     public function getYear(): ?string

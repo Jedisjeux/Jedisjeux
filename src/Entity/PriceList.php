@@ -16,54 +16,47 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table("jdj_price_list")
  */
+#[ORM\Entity]
+#[ORM\Table('jdj_price_list')]
 class PriceList implements ResourceInterface
 {
     use IdentifiableTrait;
 
     /**
      * @var Dealer
-     *
-     * @ORM\OneToOne(targetEntity="Dealer", inversedBy="priceList")
      */
+    #[ORM\OneToOne(targetEntity: \Dealer::class, inversedBy: 'priceList')]
     protected $dealer;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $path;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(type="boolean")
      */
+    #[ORM\Column(type: 'boolean')]
     protected $headers = false;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $delimiter = ';';
 
     /**
      * @var bool
-     *
-     * @ORM\Column(type="boolean", name="is_utf8")
      */
+    #[ORM\Column(type: 'boolean', name: 'is_utf8')]
     protected $utf8 = true;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(type="boolean")
      */
+    #[ORM\Column(type: 'boolean')]
     protected $active = false;
 
     public function getDealer(): ?Dealer

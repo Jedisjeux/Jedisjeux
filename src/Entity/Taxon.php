@@ -17,10 +17,9 @@ use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="sylius_taxon")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'sylius_taxon')]
 class Taxon extends BaseTaxon
 {
     // taxons of articles
@@ -50,37 +49,32 @@ class Taxon extends BaseTaxon
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $iconClass;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $color;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(type="boolean")
      */
+    #[ORM\Column(type: 'boolean')]
     protected $public;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
     protected $topicCount;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
     protected $productCount;
 
     /**
@@ -97,10 +91,9 @@ class Taxon extends BaseTaxon
 
     /**
      * @return string
-     *
-     * @JMS\VirtualProperty
-     * @JMS\Groups({"Default", "Autocomplete"})
      */
+    #[JMS\VirtualProperty]
+    #[JMS\Groups(['Default', 'Autocomplete'])]
     public function getCode(): ?string
     {
         return parent::getCode();
@@ -108,10 +101,9 @@ class Taxon extends BaseTaxon
 
     /**
      * @return string
-     *
-     * @JMS\VirtualProperty
-     * @JMS\Groups({"Detailed", "Autocomplete"})
      */
+    #[JMS\VirtualProperty]
+    #[JMS\Groups(['Detailed', 'Autocomplete'])]
     public function getName(): ?string
     {
         return parent::getName();

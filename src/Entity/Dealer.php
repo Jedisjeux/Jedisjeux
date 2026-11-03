@@ -19,62 +19,53 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_dealer")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_dealer')]
 class Dealer implements ResourceInterface
 {
     use IdentifiableTrait;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", unique=true)
-     * @Assert\NotBlank()
      */
+    #[ORM\Column(type: 'string', unique: true)]
+    #[Assert\NotBlank]
     protected $code;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
      */
+    #[ORM\Column(type: 'string')]
+    #[Assert\NotBlank]
     protected $name;
 
     /**
      * @var DealerImage
-     *
-     * @ORM\OneToOne(targetEntity="DealerImage", cascade={"persist"})
-     *
-     * @Assert\Type(type="App\Entity\DealerImage")
-     * @Assert\Valid()
      */
+    #[ORM\OneToOne(targetEntity: \DealerImage::class, cascade: ['persist'])]
+    #[Assert\Type(type: 'App\Entity\DealerImage')]
+    #[Assert\Valid]
     protected $image;
 
     /**
      * @var PriceList
-     *
-     * @ORM\OneToOne(targetEntity="PriceList", mappedBy="dealer", cascade={"persist", "merge", "remove"})
-     *
-     * @Assert\Type(type="App\Entity\PriceList")
-     * @Assert\Valid()
      */
+    #[ORM\OneToOne(targetEntity: \PriceList::class, mappedBy: 'dealer', cascade: ['persist', 'merge', 'remove'])]
+    #[Assert\Type(type: 'App\Entity\PriceList')]
+    #[Assert\Valid]
     protected $priceList;
 
     /**
      * @var ArrayCollection|PubBanner[]
-     *
-     * @ORM\OneToMany(targetEntity="PubBanner", mappedBy="dealer", orphanRemoval=true, cascade={"persist", "merge", "remove"})
      */
+    #[ORM\OneToMany(targetEntity: \PubBanner::class, mappedBy: 'dealer', orphanRemoval: true, cascade: ['persist', 'merge', 'remove'])]
     protected $pubBanners;
 
     /**
      * @var Collection|DealerContact[]
-     *
-     * @ORM\OneToMany(targetEntity="DealerContact", mappedBy="dealer", orphanRemoval=true, cascade={"persist", "merge", "remove"})
      */
+    #[ORM\OneToMany(targetEntity: \DealerContact::class, mappedBy: 'dealer', orphanRemoval: true, cascade: ['persist', 'merge', 'remove'])]
     protected $contacts;
 
     /**

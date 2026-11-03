@@ -17,26 +17,23 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_product_barcode")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_product_barcode')]
 class ProductBarcode implements ResourceInterface
 {
     use IdentifiableTrait;
 
     /**
      * @var ProductInterface|Product
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="barcodes")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class, inversedBy: 'barcodes')]
     protected $product;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     protected $code;
 
     /**

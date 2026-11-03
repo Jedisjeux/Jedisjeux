@@ -17,10 +17,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_product_list_item")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_product_list_item')]
 class ProductListItem implements ResourceInterface
 {
     use IdentifiableTrait;
@@ -28,16 +27,14 @@ class ProductListItem implements ResourceInterface
 
     /**
      * @var ProductList
-     *
-     * @ORM\ManyToOne(targetEntity="ProductList", inversedBy="items")
      */
+    #[ORM\ManyToOne(targetEntity: \ProductList::class, inversedBy: 'items')]
     protected $list;
 
     /**
      * @var ProductInterface
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="listItems")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class, inversedBy: 'listItems')]
     protected $product;
 
     public function getList(): ?ProductList

@@ -16,10 +16,8 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="jdj_product_video")
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_product_video')]
 class ProductVideo implements ResourceInterface
 {
     use IdentifiableTrait;
@@ -27,34 +25,28 @@ class ProductVideo implements ResourceInterface
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Assert\NotBlank(groups={"sylius"})
      */
+    #[ORM\Column(type: 'string')]
+    #[Assert\NotBlank(groups: ['sylius'])]
     private $title;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Assert\NotBlank(groups={"sylius"})
      */
+    #[ORM\Column(type: 'string')]
+    #[Assert\NotBlank(groups: ['sylius'])]
     private $path;
 
     /**
      * @var ProductInterface|null
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="videos")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class, inversedBy: 'videos')]
     private $product;
 
     /**
      * @var ProductVideoImage|null
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\ProductVideoImage", cascade={"persist", "remove"})
      */
+    #[ORM\OneToOne(targetEntity: \App\Entity\ProductVideoImage::class, cascade: ['persist', 'remove'])]
     private $image;
 
     public function getTitle(): ?string

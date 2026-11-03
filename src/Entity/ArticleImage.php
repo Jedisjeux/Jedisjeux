@@ -15,10 +15,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_article_image")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_article_image')]
 class ArticleImage extends AbstractImage
 {
 }

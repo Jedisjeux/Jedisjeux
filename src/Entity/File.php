@@ -14,9 +14,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\MappedSuperclass
- */
+#[ORM\MappedSuperclass]
 abstract class File
 {
     use IdentifiableTrait;
@@ -29,9 +27,8 @@ abstract class File
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     private $path;
 
     public function getFile(): ?\SplFileInfo

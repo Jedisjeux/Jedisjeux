@@ -15,24 +15,21 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_block_image")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_block_image')]
 class BlockImage extends AbstractImage
 {
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $label;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $linkUrl;
 
     public function getLabel(): ?string

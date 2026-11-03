@@ -18,10 +18,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_product_box")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_product_box')]
 class ProductBox implements ResourceInterface
 {
     use IdentifiableTrait;
@@ -36,55 +35,46 @@ class ProductBox implements ResourceInterface
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     private $status;
 
     /**
      * @var ProductInterface|null
-     *
-     * @ORM\ManyToOne(targetEntity="Product")
      */
+    #[ORM\ManyToOne(targetEntity: \Product::class)]
     private $product;
 
     /**
      * @var ProductVariantInterface|null
-     *
-     * @ORM\ManyToOne(targetEntity="ProductVariant", inversedBy="boxes")
      */
+    #[ORM\ManyToOne(targetEntity: \ProductVariant::class, inversedBy: 'boxes')]
     private $productVariant;
 
     /**
      * @var ProductBoxImage|null
-     *
-     * @ORM\OneToOne(targetEntity="ProductBoxImage", cascade={"persist"})
-     *
-     * @Assert\Valid
      */
+    #[ORM\OneToOne(targetEntity: \ProductBoxImage::class, cascade: ['persist'])]
+    #[Assert\Valid]
     private $image;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
     private $height;
 
     /**
      * @var int|null
-     *
-     * @ORM\Column(type="integer")
-     *
-     * @Assert\NotBlank
      */
+    #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank]
     private $realHeight;
 
     /**
      * @var CustomerInterface|null
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
     private $author;
 
     public function __construct()

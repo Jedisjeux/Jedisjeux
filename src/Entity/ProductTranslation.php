@@ -16,19 +16,16 @@ use Sylius\Component\Product\Model\ProductTranslation as BaseProductTranslation;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="sylius_product_translation", indexes={
- *      @ORM\Index(name="name_idx", columns={"name"})
- * })
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'sylius_product_translation')]
+#[ORM\Index(name: 'name_idx', columns: ['name'])]
 class ProductTranslation extends BaseProductTranslation
 {
     /**
      * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
      */
+    #[ORM\Column(type: 'text', nullable: true)]
     protected $shortDescription;
 
     public function getShortDescription(): ?string

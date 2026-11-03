@@ -26,13 +26,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  *
- * @ORM\Entity
- * @ORM\Table(name="sylius_product")
  *
  * @CustomAssert\MaxPlayerCountGreaterThanOrEqualMinPlayer(groups={"sylius"})
- *
- * @JMS\ExclusionPolicy("all")
  */
+#[ORM\Entity]
+#[JMS\ExclusionPolicy('all')]
+#[ORM\Table(name: 'sylius_product')]
 class Product extends BaseProduct implements ProductInterface
 {
     /**
@@ -46,141 +45,101 @@ class Product extends BaseProduct implements ProductInterface
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="status", type="string")
      */
+    #[ORM\Column(name: 'status', type: 'string')]
     protected $status;
 
     /**
      * @var ArrayCollection|TaxonInterface[]
-     *
-     * @ORM\ManyToMany(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
-     * @ORM\JoinTable("sylius_product_taxon",
-     *      inverseJoinColumns={@ORM\JoinColumn(name="taxoninterface_id", referencedColumnName="id")}
-     * )
      */
+    #[ORM\ManyToMany(targetEntity: \Sylius\Component\Taxonomy\Model\TaxonInterface::class)]
+    #[ORM\JoinTable('sylius_product_taxon', inverseJoinColumns: [new ORM\JoinColumn(name: 'taxoninterface_id', referencedColumnName: 'id')])]
     protected $taxons;
 
     /**
      * @var TaxonInterface
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Taxonomy\Model\TaxonInterface::class)]
     protected $mainTaxon;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
-     *
-     * @JMS\Expose
-     * @JMS\SerializedName("min_age")
-     * @JMS\Groups({"Default", "Detailed"})
-     *
-     * @Assert\Range(
-     *      min = 0,
-     *      groups={"sylius"}
-     * )
      */
+    #[ORM\Column(type: 'integer', nullable: true, options: ['unsigned' => true])]
+    #[JMS\Expose]
+    #[JMS\SerializedName('min_age')]
+    #[JMS\Groups(['Default', 'Detailed'])]
+    #[Assert\Range(min: 0, groups: ['sylius'])]
     protected $minAge;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
-     *
-     * @JMS\Expose
-     * @JMS\SerializedName("min_player_count")
-     * @JMS\Groups({"Default", "Detailed"})
-     *
-     * @Assert\Range(
-     *      min = 1,
-     *      groups={"sylius"}
-     * )
      */
+    #[ORM\Column(type: 'integer', nullable: true, options: ['unsigned' => true])]
+    #[JMS\Expose]
+    #[JMS\SerializedName('min_player_count')]
+    #[JMS\Groups(['Default', 'Detailed'])]
+    #[Assert\Range(min: 1, groups: ['sylius'])]
     protected $minPlayerCount;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
-     *
-     * @JMS\Expose
-     * @JMS\SerializedName("max_player_count")
-     * @JMS\Groups({"Default", "Detailed"})
-     *
-     * @Assert\Range(
-     *      min = 1,
-     *      groups={"sylius"}
-     * )
      */
+    #[ORM\Column(type: 'integer', nullable: true, options: ['unsigned' => true])]
+    #[JMS\Expose]
+    #[JMS\SerializedName('max_player_count')]
+    #[JMS\Groups(['Default', 'Detailed'])]
+    #[Assert\Range(min: 1, groups: ['sylius'])]
     protected $maxPlayerCount;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
-     *
-     * @JMS\Expose
-     * @JMS\SerializedName("min_duration")
-     * @JMS\Groups({"Default", "Detailed"})
-     *
-     * @Assert\Range(
-     *      min = 1,
-     *      groups={"sylius"}
-     * )
      */
+    #[ORM\Column(type: 'integer', nullable: true, options: ['unsigned' => true])]
+    #[JMS\Expose]
+    #[JMS\SerializedName('min_duration')]
+    #[JMS\Groups(['Default', 'Detailed'])]
+    #[Assert\Range(min: 1, groups: ['sylius'])]
     protected $minDuration;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
-     *
-     * @JMS\Expose
-     * @JMS\SerializedName("max_duration")
-     * @JMS\Groups({"Default", "Detailed"})
-     *
-     * @Assert\Range(
-     *      min = 1,
-     *      groups={"sylius"}
-     * )
      */
+    #[ORM\Column(type: 'integer', nullable: true, options: ['unsigned' => true])]
+    #[JMS\Expose]
+    #[JMS\SerializedName('max_duration')]
+    #[JMS\Groups(['Default', 'Detailed'])]
+    #[Assert\Range(min: 1, groups: ['sylius'])]
     protected $maxDuration;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(type="boolean")
      */
+    #[ORM\Column(type: 'boolean')]
     protected $durationByPlayer;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
      */
+    #[ORM\Column(type: 'text', nullable: true)]
     protected $boxContent;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
     protected $viewCount = 0;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
     protected $reviewCount = 0;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
     protected $commentedReviewCount = 0;
 
     /**
@@ -190,70 +149,59 @@ class Product extends BaseProduct implements ProductInterface
 
     /**
      * @var ArrayCollection|ProductBarcode[]
-     *
-     * @ORM\OneToMany(targetEntity="ProductBarcode", mappedBy="product", cascade={"persist", "merge", "remove"}, orphanRemoval=true)
      */
+    #[ORM\OneToMany(targetEntity: \ProductBarcode::class, mappedBy: 'product', cascade: ['persist', 'merge', 'remove'], orphanRemoval: true)]
     protected $barcodes;
 
     /**
      * @var float
-     *
-     * @ORM\Column(type="float")
-     *
-     * @JMS\Expose
-     * @JMS\Groups({"Default", "Detailed"})
      */
+    #[ORM\Column(type: 'float')]
+    #[JMS\Expose]
+    #[JMS\Groups(['Default', 'Detailed'])]
     protected $averageRating = 0;
 
     /**
      * @var Collection|Article[]
-     *
-     * @ORM\OneToMany(targetEntity="Article", mappedBy="product")
      */
+    #[ORM\OneToMany(targetEntity: \Article::class, mappedBy: 'product')]
     protected $articles;
 
     /**
      * @var Collection|GamePlay[]
-     *
-     * @ORM\OneToMany(targetEntity="GamePlay", mappedBy="product")
      */
+    #[ORM\OneToMany(targetEntity: \GamePlay::class, mappedBy: 'product')]
     protected $gamePlays;
 
     /**
      * @var Collection|ProductList[]
-     *
-     * @ORM\OneToMany(targetEntity="ProductListItem", mappedBy="product")
      */
+    #[ORM\OneToMany(targetEntity: \ProductListItem::class, mappedBy: 'product')]
     protected $listItems;
 
     /**
      * @var Collection|Notification[]
-     *
-     * @ORM\OneToMany(targetEntity="Notification", mappedBy="product", cascade={"remove"})
      */
+    #[ORM\OneToMany(targetEntity: \Notification::class, mappedBy: 'product', cascade: ['remove'])]
     protected $notifications;
 
     /**
      * @var Collection|ProductVideo[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductVideo", cascade={"persist", "remove"}, orphanRemoval=true, mappedBy="product")
-     *
-     * @Assert\Valid(groups={"sylius"})
      */
+    #[ORM\OneToMany(targetEntity: \App\Entity\ProductVideo::class, cascade: ['persist', 'remove'], orphanRemoval: true, mappedBy: 'product')]
+    #[Assert\Valid(groups: ['sylius'])]
     private $videos;
 
     /**
      * @var Collection|ProductFile[]
-     *
-     * @ORM\OneToMany(targetEntity="ProductFile", mappedBy="product", cascade={"persist", "remove"}, orphanRemoval=true)
      */
+    #[ORM\OneToMany(targetEntity: \ProductFile::class, mappedBy: 'product', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private $files;
 
     /**
      * @var Collection|YearAward[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\YearAward", mappedBy="product", cascade={"persist", "remove"}, orphanRemoval=true)
      */
+    #[ORM\OneToMany(targetEntity: \App\Entity\YearAward::class, mappedBy: 'product', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private $yearAwards;
 
     /**
@@ -303,10 +251,8 @@ class Product extends BaseProduct implements ProductInterface
         $this->status = $status;
     }
 
-    /**
-     * @JMS\VirtualProperty
-     * @JMS\Groups({"Detailed"})
-     */
+    #[JMS\VirtualProperty]
+    #[JMS\Groups(['Detailed'])]
     public function getShortDescription(): ?string
     {
         return $this->getTranslation()->getShortDescription();
@@ -319,11 +265,10 @@ class Product extends BaseProduct implements ProductInterface
 
     /**
      * @return ProductVariantImage
-     *
-     * @JMS\VirtualProperty
-     * @JMS\SerializedName("image")
-     * @JMS\Groups({"Default", "Detailed"})
      */
+    #[JMS\VirtualProperty]
+    #[JMS\SerializedName('image')]
+    #[JMS\Groups(['Default', 'Detailed'])]
     public function getMainImage(): ?ProductVariantImage
     {
         if (null === $firstVariant = $this->getFirstVariant()) {
@@ -589,11 +534,10 @@ class Product extends BaseProduct implements ProductInterface
 
     /**
      * @return ArrayCollection
-     *
-     * @JMS\VirtualProperty
-     * @JMS\Groups({"Detailed"})
-     * @JMS\Type("ArrayCollection<App\Entity\Taxon>")
      */
+    #[JMS\VirtualProperty]
+    #[JMS\Groups(['Detailed'])]
+    #[JMS\Type('ArrayCollection<App\Entity\Taxon>')]
     public function getMechanisms(): Collection
     {
         return $this->getTaxons('mechanisms');
@@ -609,11 +553,9 @@ class Product extends BaseProduct implements ProductInterface
         $this->removeTaxon($mechanism);
     }
 
-    /**
-     * @JMS\VirtualProperty
-     * @JMS\Groups({"Detailed"})
-     * @JMS\Type("ArrayCollection<App\Entity\Taxon>")
-     */
+    #[JMS\VirtualProperty]
+    #[JMS\Groups(['Detailed'])]
+    #[JMS\Type('ArrayCollection<App\Entity\Taxon>')]
     public function getThemes(): Collection
     {
         return $this->getTaxons('themes');
@@ -845,10 +787,9 @@ class Product extends BaseProduct implements ProductInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @JMS\VirtualProperty
-     * @JMS\Groups({"Default", "Autocomplete"})
      */
+    #[JMS\VirtualProperty]
+    #[JMS\Groups(['Default', 'Autocomplete'])]
     public function getCode(): ?string
     {
         return parent::getCode();
@@ -856,10 +797,9 @@ class Product extends BaseProduct implements ProductInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @JMS\VirtualProperty
-     * @JMS\Groups({"Default", "Autocomplete"})
      */
+    #[JMS\VirtualProperty]
+    #[JMS\Groups(['Default', 'Autocomplete'])]
     public function getName(): ?string
     {
         return parent::getName();
@@ -867,10 +807,9 @@ class Product extends BaseProduct implements ProductInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @JMS\VirtualProperty
-     * @JMS\Groups({"Default"})
      */
+    #[JMS\VirtualProperty]
+    #[JMS\Groups(['Default'])]
     public function getSlug(): ?string
     {
         return parent::getSlug();

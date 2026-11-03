@@ -19,9 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Cache\CacheInterface;
 
-/**
- * @Route("/counter")
- */
+#[Route(path: '/counter')]
 class CounterController extends AbstractController
 {
     public function __construct(
@@ -31,9 +29,7 @@ class CounterController extends AbstractController
     ) {
     }
 
-    /**
-     * @Route("/", name="app_counter_index")
-     */
+    #[Route(path: '/', name: 'app_counter_index')]
     public function indexAction(): Response
     {
         // Only scalars are cached: Doctrine entities would come back detached

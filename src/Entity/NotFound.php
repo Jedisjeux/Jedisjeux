@@ -17,19 +17,17 @@ use Zenstruck\RedirectBundle\Model\NotFound as BaseNotFound;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_not_found")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_not_found')]
 class NotFound extends BaseNotFound implements ResourceInterface
 {
     /**
      * @var int|null
-     *
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private $id;
 
     /**

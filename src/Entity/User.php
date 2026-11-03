@@ -18,24 +18,17 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
- *
- * @ORM\Entity
- * @ORM\Table("sylius_user")
- * @UniqueEntity(
- *     fields={"username"},
- *     errorPath="username",
- *     message="app.user.username.unique",
- *     groups="sylius"
- * )
  */
+#[ORM\Entity]
+#[UniqueEntity(fields: ['username'], errorPath: 'username', message: 'app.user.username.unique', groups: 'sylius')]
+#[ORM\Table('sylius_user')]
 class User extends BaseUser implements AppUserInterface
 {
     /**
      * @var CustomerInterface
-     *
-     * @ORM\OneToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface", inversedBy="user", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
      */
+    #[ORM\OneToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class, inversedBy: 'user', cascade: ['persist'])]
+    #[ORM\JoinColumn(nullable: false)]
     protected $customer;
 
     public function getCustomer(): ?CustomerInterface

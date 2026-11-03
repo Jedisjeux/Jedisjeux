@@ -20,36 +20,30 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="sylius_customer")
- *
- * @JMS\ExclusionPolicy("all")
  */
+#[ORM\Entity]
+#[JMS\ExclusionPolicy('all')]
+#[ORM\Table(name: 'sylius_customer')]
 class Customer extends BaseCustomer implements CustomerInterface, ReviewerInterface
 {
     /**
      * @var UserInterface
-     *
-     * @ORM\OneToOne(targetEntity="Sylius\Component\User\Model\UserInterface", mappedBy="customer", cascade={"persist"})
-     *
-     * @Assert\Valid(groups={"sylius"})
      */
+    #[ORM\OneToOne(targetEntity: \Sylius\Component\User\Model\UserInterface::class, mappedBy: 'customer', cascade: ['persist'])]
+    #[Assert\Valid(groups: ['sylius'])]
     private $user;
 
     /**
      * @var Avatar
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Avatar" , cascade={"persist"})
-     * @JMS\Expose
      */
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Avatar::class, cascade: ['persist'])]
+    #[JMS\Expose]
     private $avatar;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true, unique=true)
      */
+    #[ORM\Column(type: 'string', nullable: true, unique: true)]
     private $code;
 
     public function getAvatar(): ?Avatar

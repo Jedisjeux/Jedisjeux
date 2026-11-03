@@ -18,10 +18,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_game_play")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_game_play')]
 class GamePlay implements ResourceInterface
 {
     use IdentifiableTrait;
@@ -29,77 +28,66 @@ class GamePlay implements ResourceInterface
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true, unique=true)
      */
+    #[ORM\Column(type: 'string', nullable: true, unique: true)]
     protected $code;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true})
      */
+    #[ORM\Column(type: 'integer', nullable: true, options: ['unsigned' => true])]
     protected $duration;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer", nullable=true)
      */
+    #[ORM\Column(type: 'integer', nullable: true)]
     protected $playerCount;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(type="date", nullable=true)
      */
+    #[ORM\Column(type: 'date', nullable: true)]
     protected $playedAt;
 
     /**
      * @var ProductInterface
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="gamePlays")
-     * @ORM\JoinColumn(nullable=false)
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class, inversedBy: 'gamePlays')]
+    #[ORM\JoinColumn(nullable: false)]
     protected $product;
 
     /**
      * @var CustomerInterface
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
-     * @ORM\JoinColumn(nullable=false)
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
+    #[ORM\JoinColumn(nullable: false)]
     protected $author;
 
     /**
      * @var Topic
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\Topic", inversedBy="gamePlay")
-     * @ORM\JoinColumn(onDelete="SET NULL")
      */
+    #[ORM\OneToOne(targetEntity: \App\Entity\Topic::class, inversedBy: 'gamePlay')]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     protected $topic;
 
     /**
      * @var ArrayCollection|GamePlayImage[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\GamePlayImage", mappedBy="gamePlay", cascade={"persist", "merge", "remove"})
-     *
-     * @Assert\Valid()
      */
+    #[ORM\OneToMany(targetEntity: \App\Entity\GamePlayImage::class, mappedBy: 'gamePlay', cascade: ['persist', 'merge', 'remove'])]
+    #[Assert\Valid]
     protected $images;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
     private $imageCount = 0;
 
     /**
      * @var ArrayCollection|Player[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Player", mappedBy="gamePlay", cascade={"persist", "merge", "remove"})
      */
+    #[ORM\OneToMany(targetEntity: \App\Entity\Player::class, mappedBy: 'gamePlay', cascade: ['persist', 'merge', 'remove'])]
     protected $players;
 
     /**

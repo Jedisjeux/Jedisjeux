@@ -14,42 +14,36 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="sylius_product_variant_image")
- *
- * @JMS\ExclusionPolicy("all")
  */
+#[ORM\Entity]
+#[JMS\ExclusionPolicy('all')]
+#[ORM\Table(name: 'sylius_product_variant_image')]
 class ProductVariantImage extends AbstractImage
 {
     /**
      * The associated product variant.
      *
      * @var ProductVariantInterface
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductVariantInterface", inversedBy="images")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductVariantInterface::class, inversedBy: 'images')]
     protected $variant;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $description;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(type="boolean", name="is_main")
      */
+    #[ORM\Column(type: 'boolean', name: 'is_main')]
     protected $main;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(type="boolean", name="is_material")
      */
+    #[ORM\Column(type: 'boolean', name: 'is_material')]
     protected $material;
 
     /**

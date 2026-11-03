@@ -16,10 +16,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_dealer_price")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_dealer_price')]
 class DealerPrice implements ResourceInterface
 {
     use IdentifiableTrait;
@@ -31,51 +30,44 @@ class DealerPrice implements ResourceInterface
 
     /**
      * @var Dealer
-     *
-     * @ORM\ManyToOne(targetEntity="Dealer")
      */
+    #[ORM\ManyToOne(targetEntity: \Dealer::class)]
     protected $dealer;
 
     /**
      * @var Product
-     *
-     * @ORM\ManyToOne(targetEntity="Product")
      */
+    #[ORM\ManyToOne(targetEntity: \Product::class)]
     protected $product;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", unique=true)
      */
+    #[ORM\Column(type: 'string', unique: true)]
     protected $url;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     protected $name;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
     protected $price;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $barcode;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     protected $status;
 
     public function getDealer(): ?Dealer
