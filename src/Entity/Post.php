@@ -19,10 +19,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table("jdj_post")
  */
+#[ORM\Entity]
+#[ORM\Table('jdj_post')]
 class Post implements ResourceInterface
 {
     use IdentifiableTrait;
@@ -30,69 +29,60 @@ class Post implements ResourceInterface
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true, unique=true)
      */
+    #[ORM\Column(type: 'string', nullable: true, unique: true)]
     protected $code;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="text")
-     * @Assert\NotBlank()
      */
+    #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank]
     protected $body;
 
     /**
      * @var Topic
-     *
-     * @ORM\OneToOne(targetEntity="Topic", mappedBy="mainPost")
      */
+    #[ORM\OneToOne(targetEntity: Topic::class, mappedBy: 'mainPost')]
     protected $parent;
 
     /**
      * @var Topic
-     *
-     * @ORM\ManyToOne(targetEntity="Topic", inversedBy="posts")
-     * @ORM\JoinColumn(onDelete="CASCADE")
      */
+    #[ORM\ManyToOne(targetEntity: Topic::class, inversedBy: 'posts')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     protected $topic;
 
     /**
      * @var GamePlay
-     *
-     * @ORM\ManyToOne(targetEntity="GamePlay")
-     * @ORM\JoinColumn(onDelete="CASCADE")
      */
+    #[ORM\ManyToOne(targetEntity: GamePlay::class)]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     protected $gamePlay;
 
     /**
      * @var Article
-     *
-     * @ORM\ManyToOne(targetEntity="Article")
-     * @ORM\JoinColumn(onDelete="CASCADE")
      */
+    #[ORM\ManyToOne(targetEntity: Article::class)]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     protected $article;
 
     /**
      * @var CustomerInterface
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
     protected $author;
 
     /**
      * @var Post
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Post", inversedBy="replies")
      */
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Post::class, inversedBy: 'replies')]
     protected $replyTo;
 
     /**
      * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="replyTo")
      */
+    #[ORM\OneToMany(targetEntity: \App\Entity\Post::class, mappedBy: 'replyTo')]
     protected $replies;
 
     /**

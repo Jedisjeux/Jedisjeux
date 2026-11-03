@@ -15,42 +15,35 @@ use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="jdj_dealer_contact")
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_dealer_contact')]
 class DealerContact implements ResourceInterface
 {
     use IdentifiableTrait;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Assert\NotBlank()
      */
+    #[ORM\Column(type: 'string')]
+    #[Assert\NotBlank]
     protected $email;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $firstName;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $lastName;
 
     /**
      * @var Dealer|null
-     *
-     * @ORM\ManyToOne(targetEntity="Dealer", inversedBy="contacts")
      */
+    #[ORM\ManyToOne(targetEntity: Dealer::class, inversedBy: 'contacts')]
     protected $dealer;
 
     public function getEmail(): ?string

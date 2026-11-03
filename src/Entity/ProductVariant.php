@@ -17,12 +17,9 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="sylius_product_variant")
- *
- * @JMS\ExclusionPolicy("all")
- */
+#[ORM\Entity]
+#[JMS\ExclusionPolicy('all')]
+#[ORM\Table(name: 'sylius_product_variant')]
 class ProductVariant extends BaseProductVariant implements ProductVariantInterface
 {
     const RELEASED_AT_PRECISION_ON_DAY = 'on-day';
@@ -31,77 +28,56 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
 
     /**
      * @var ArrayCollection|ProductVariantImage[]
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductVariantImage", mappedBy="variant", cascade={"persist", "merge", "remove"})
-     *
-     * @JMS\Groups({"Detailed"})
      */
+    #[ORM\OneToMany(targetEntity: \App\Entity\ProductVariantImage::class, mappedBy: 'variant', cascade: ['persist', 'merge', 'remove'])]
+    #[JMS\Groups(['Detailed'])]
     protected $images;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(type="date", nullable=true)
-     *
-     * @JMS\Groups({"Detailed"})
      */
+    #[ORM\Column(type: 'date', nullable: true)]
+    #[JMS\Groups(['Detailed'])]
     protected $releasedAt;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
-     *
-     * @JMS\Groups({"Detailed"})
      */
+    #[ORM\Column(type: 'string', nullable: true)]
+    #[JMS\Groups(['Detailed'])]
     protected $releasedAtPrecision;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $oldHref;
 
     /**
      * @var ProductBox[]|Collection
-     *
-     * @ORM\OneToMany(targetEntity="ProductBox", mappedBy="productVariant")
      */
+    #[ORM\OneToMany(targetEntity: ProductBox::class, mappedBy: 'productVariant')]
     protected $boxes;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Person", inversedBy="designerProducts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(
-     *      name="jdj_designer_product_variant",
-     *      joinColumns={@ORM\JoinColumn(name="productvariant_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")}
-     * )
      */
+    #[ORM\ManyToMany(targetEntity: \App\Entity\Person::class, inversedBy: 'designerProducts', cascade: ['persist', 'merge'])]
+    #[ORM\JoinTable(name: 'jdj_designer_product_variant', joinColumns: [new ORM\JoinColumn(name: 'productvariant_id', referencedColumnName: 'id')], inverseJoinColumns: [new ORM\JoinColumn(name: 'person_id', referencedColumnName: 'id')])]
     protected $designers;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Person", inversedBy="artistProducts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="jdj_artist_product_variant",
-     *      joinColumns={@ORM\JoinColumn(name="productvariant_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")}
-     * )
      */
+    #[ORM\ManyToMany(targetEntity: \App\Entity\Person::class, inversedBy: 'artistProducts', cascade: ['persist', 'merge'])]
+    #[ORM\JoinTable(name: 'jdj_artist_product_variant', joinColumns: [new ORM\JoinColumn(name: 'productvariant_id', referencedColumnName: 'id')], inverseJoinColumns: [new ORM\JoinColumn(name: 'person_id', referencedColumnName: 'id')])]
     protected $artists;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="App\Entity\Person", inversedBy="publisherProducts", cascade={"persist", "merge"})
-     * @ORM\JoinTable(name="jdj_publisher_product_variant",
-     *      joinColumns={@ORM\JoinColumn(name="productvariant_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="person_id", referencedColumnName="id")}
-     * )
      */
+    #[ORM\ManyToMany(targetEntity: \App\Entity\Person::class, inversedBy: 'publisherProducts', cascade: ['persist', 'merge'])]
+    #[ORM\JoinTable(name: 'jdj_publisher_product_variant', joinColumns: [new ORM\JoinColumn(name: 'productvariant_id', referencedColumnName: 'id')], inverseJoinColumns: [new ORM\JoinColumn(name: 'person_id', referencedColumnName: 'id')])]
     protected $publishers;
 
     /**

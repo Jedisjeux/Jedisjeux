@@ -13,10 +13,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="jdj_dealer_image")
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_dealer_image')]
 class DealerImage extends AbstractImage
 {
 }

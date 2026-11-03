@@ -23,7 +23,7 @@ class ProductBoxImageType extends AbstractImageType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
 
@@ -35,7 +35,7 @@ class ProductBoxImageType extends AbstractImageType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'app_product_box_image';
     }

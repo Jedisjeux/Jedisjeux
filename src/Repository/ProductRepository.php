@@ -27,6 +27,8 @@ use SyliusLabs\AssociationHydrator\AssociationHydrator;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
+ *
+ * @extends BaseProductRepository<Product>
  */
 class ProductRepository extends BaseProductRepository
 {

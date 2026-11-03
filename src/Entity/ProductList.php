@@ -23,12 +23,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_product_list")
- *
- * @JMS\ExclusionPolicy("all")
  */
+#[ORM\Entity]
+#[JMS\ExclusionPolicy('all')]
+#[ORM\Table(name: 'jdj_product_list')]
 class ProductList implements ResourceInterface
 {
     use IdentifiableTrait;
@@ -40,47 +38,40 @@ class ProductList implements ResourceInterface
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
-     * @JMS\Expose
-     * @JMS\Groups({"Default"})
      */
+    #[ORM\Column(type: 'string')]
+    #[JMS\Expose]
+    #[JMS\Groups(['Default'])]
     protected $code;
 
     /**
      * @var string
-     *
-     * @Gedmo\Slug(fields={"name"})
-     * @ORM\Column(type="string", unique=true)
      */
+    #[Gedmo\Slug(fields: ['name'])]
+    #[ORM\Column(type: 'string', unique: true)]
     protected $slug;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
-     *
-     * @Assert\NotBlank()
-     *
-     * @JMS\Expose
-     * @JMS\Groups({"Default"})
      */
+    #[ORM\Column(type: 'string', nullable: true)]
+    #[Assert\NotBlank]
+    #[JMS\Expose]
+    #[JMS\Groups(['Default'])]
     protected $name;
 
     /**
      * @var CustomerInterface
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
-     * @ORM\JoinColumn(nullable=false)
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
+    #[ORM\JoinColumn(nullable: false)]
     protected $owner;
 
     /**
      * @var Collection
-     *
-     * @ORM\OneToMany(targetEntity="ProductListItem", mappedBy="list", cascade={"all"})
-     * @ORM\OrderBy({"createdAt" = "ASC"})
      */
+    #[ORM\OneToMany(targetEntity: ProductListItem::class, mappedBy: 'list', cascade: ['all'])]
+    #[ORM\OrderBy(['createdAt' => 'ASC'])]
     protected $items;
 
     /**

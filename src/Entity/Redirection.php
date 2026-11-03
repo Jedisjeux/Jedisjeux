@@ -17,17 +17,14 @@ use Zenstruck\RedirectBundle\Model\Redirect as BaseRedirect;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_redirect")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_redirect')]
 class Redirection extends BaseRedirect implements ResourceInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private $id;
 
     /**

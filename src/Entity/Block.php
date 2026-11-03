@@ -17,10 +17,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_block")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_block')]
 class Block implements ResourceInterface
 {
     use IdentifiableTrait;
@@ -31,68 +30,59 @@ class Block implements ResourceInterface
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", unique=true, nullable=true)
      */
+    #[ORM\Column(type: 'string', unique: true, nullable: true)]
     protected $code;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $title;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
      */
+    #[ORM\Column(type: 'text', nullable: true)]
     protected $body;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $imagePosition;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $class;
 
     /**
      * @var int
-     *
-     * @Gedmo\SortablePosition
-     * @ORM\column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
+    #[Gedmo\SortablePosition]
     protected $position;
 
     /**
      * @var BlockImage
-     *
-     * @ORM\OneToOne(targetEntity="BlockImage", cascade={"persist", "merge"})
      */
+    #[ORM\OneToOne(targetEntity: BlockImage::class, cascade: ['persist', 'merge'])]
     protected $image;
 
     /**
      * @var Article
-     *
-     * @Gedmo\SortableGroup
-     * @ORM\ManyToOne(targetEntity="Article", inversedBy="blocks")
      */
+    #[Gedmo\SortableGroup]
+    #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'blocks')]
     protected $article;
 
     /**
      * @var SlideShowBlock
-     *
-     * @Gedmo\SortableGroup
-     * @ORM\ManyToOne(targetEntity="SlideShowBlock", inversedBy="blocks", cascade={"persist", "merge"})
      */
+    #[Gedmo\SortableGroup]
+    #[ORM\ManyToOne(targetEntity: SlideShowBlock::class, inversedBy: 'blocks', cascade: ['persist', 'merge'])]
     protected $slideShowBlock;
 
     public function getCode(): ?string

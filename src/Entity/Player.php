@@ -14,41 +14,36 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_player")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_player')]
 class Player implements ResourceInterface
 {
     use IdentifiableTrait;
 
     /**
      * @var float
-     *
-     * @ORM\Column(type="float", nullable=true)
      */
+    #[ORM\Column(type: 'float', nullable: true)]
     protected $score;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $name;
 
     /**
      * @var CustomerInterface
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
     protected $customer;
 
     /**
      * @var GamePlay
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\GamePlay", inversedBy="players")
-     * @ORM\JoinColumn(nullable=false)
      */
+    #[ORM\ManyToOne(targetEntity: \App\Entity\GamePlay::class, inversedBy: 'players')]
+    #[ORM\JoinColumn(nullable: false)]
     protected $gamePlay;
 
     public function getScore(): ?float

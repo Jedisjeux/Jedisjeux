@@ -16,14 +16,11 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Mapping\Attribute as Vich;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="jdj_product_file")
- *
- * @Vich\Uploadable
- */
+#[ORM\Entity]
+#[Vich\Uploadable]
+#[ORM\Table(name: 'jdj_product_file')]
 class ProductFile extends File implements ResourceInterface
 {
     const STATUS_NEW = 'new';
@@ -32,48 +29,40 @@ class ProductFile extends File implements ResourceInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @Vich\UploadableField(mapping="product_file", fileNameProperty="path")
-     *
-     * @Assert\File(maxSize="6000000", mimeTypes={"image/*", "application/pdf"})
      */
+    #[Vich\UploadableField(mapping: 'product_file', fileNameProperty: 'path')]
+    #[Assert\File(maxSize: 6000000, mimeTypes: ['image/*', 'application/pdf'])]
     protected $file;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(type="string", unique=true)
      */
+    #[ORM\Column(type: 'string', unique: true)]
     private $code;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Assert\NotBlank
      */
+    #[ORM\Column(type: 'string')]
+    #[Assert\NotBlank]
     private $title;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     private $status;
 
     /**
      * @var ProductInterface|null
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="files")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class, inversedBy: 'files')]
     private $product;
 
     /**
      * @var CustomerInterface|null
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
     private $author;
 
     public function __construct()

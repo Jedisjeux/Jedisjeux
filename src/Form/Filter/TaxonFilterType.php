@@ -36,7 +36,7 @@ class TaxonFilterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $onlyPublic = $this->authorizationChecker->isGranted('ROLE_STAFF') ? false : true;
 
@@ -74,7 +74,7 @@ class TaxonFilterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefaults([

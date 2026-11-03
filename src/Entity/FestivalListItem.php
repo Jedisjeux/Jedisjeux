@@ -18,16 +18,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table("jdj_festival_list_item")
- *
- * @UniqueEntity(
- *     fields={"list", "product"},
- *     errorPath="product",
- *     message="app.festival_list_item.product.unique"
- * )
  */
+#[ORM\Entity]
+#[UniqueEntity(fields: ['list', 'product'], errorPath: 'product', message: 'app.festival_list_item.product.unique')]
+#[ORM\Table('jdj_festival_list_item')]
 class FestivalListItem implements ResourceInterface
 {
     use IdentifiableTrait;
@@ -35,16 +29,14 @@ class FestivalListItem implements ResourceInterface
 
     /**
      * @var FestivalList
-     *
-     * @ORM\ManyToOne(targetEntity="FestivalList")
      */
+    #[ORM\ManyToOne(targetEntity: FestivalList::class)]
     protected $list;
 
     /**
      * @var ProductInterface
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class)]
     protected $product;
 
     public function getList(): ?FestivalList

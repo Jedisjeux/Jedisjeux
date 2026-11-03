@@ -17,17 +17,15 @@ use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="sylius_product_review")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'sylius_product_review')]
 class ProductReview extends Review
 {
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", unique=true, nullable=true)
      */
+    #[ORM\Column(type: 'string', unique: true, nullable: true)]
     protected $code;
 
     /**

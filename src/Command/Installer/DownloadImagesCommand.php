@@ -22,7 +22,7 @@ class DownloadImagesCommand extends AbstractInstallCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('app:install:download-images')
@@ -37,7 +37,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln(sprintf('Downloading Jedisjeux images and avatars for environment <info>%s</info>.', $this->getEnvironment()));
 

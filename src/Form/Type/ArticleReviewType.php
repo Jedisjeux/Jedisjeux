@@ -71,7 +71,7 @@ class ArticleReviewType extends ReviewType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_article_review';
     }

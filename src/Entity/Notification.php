@@ -19,12 +19,10 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_notification")
- *
- * @ExclusionPolicy("all")
  */
+#[ORM\Entity]
+#[ExclusionPolicy('all')]
+#[ORM\Table(name: 'jdj_notification')]
 class Notification implements ResourceInterface
 {
     use IdentifiableTrait;
@@ -32,86 +30,68 @@ class Notification implements ResourceInterface
 
     /**
      * @var CustomerInterface[]|Collection
-     *
-     * @ORM\ManyToMany(
-     *      targetEntity="Sylius\Component\Customer\Model\CustomerInterface"
-     * )
-     * @ORM\JoinTable(
-     *     name="jdj_notification_author",
-     *     inverseJoinColumns={@ORM\JoinColumn(name="author_id", referencedColumnName="id")}
-     * )
-     *
-     * @Expose
      */
+    #[ORM\ManyToMany(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
+    #[ORM\JoinTable(name: 'jdj_notification_author', inverseJoinColumns: [new ORM\JoinColumn(name: 'author_id', referencedColumnName: 'id')])]
+    #[Expose]
     private $authors;
 
     /**
      * @var CustomerInterface
-     *
-     * @ORM\ManyToOne(
-     *      targetEntity="Sylius\Component\Customer\Model\CustomerInterface",
-     * )
-     * @ORM\JoinColumn(nullable=false)
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
+    #[ORM\JoinColumn(nullable: false)]
     private $recipient;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(type="boolean", name="is_read")
      */
+    #[ORM\Column(type: 'boolean', name: 'is_read')]
     private $read;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="text")
-     * @Expose
      */
+    #[ORM\Column(type: 'text')]
+    #[Expose]
     private $message;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
-     * @Expose
      */
+    #[ORM\Column(type: 'string')]
+    #[Expose]
     private $target;
 
     /**
      * @var Topic
-     *
-     * @ORM\ManyToOne(targetEntity="Topic")
-     * @Expose
      */
+    #[ORM\ManyToOne(targetEntity: Topic::class)]
+    #[Expose]
     private $topic;
 
     /**
      * @var ProductInterface|null
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="notifications")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class, inversedBy: 'notifications')]
     private $product;
 
     /**
      * @var Article|null
-     *
-     * @ORM\ManyToOne(targetEntity="Article")
      */
+    #[ORM\ManyToOne(targetEntity: Article::class)]
     private $article;
 
     /**
      * @var ProductBox|null
-     *
-     * @ORM\ManyToOne(targetEntity="ProductBox")
      */
+    #[ORM\ManyToOne(targetEntity: ProductBox::class)]
     private $productBox;
 
     /**
      * @var ProductFile|null
-     *
-     * @ORM\ManyToOne(targetEntity="ProductFile")
      */
+    #[ORM\ManyToOne(targetEntity: ProductFile::class)]
     private $productFile;
 
     /**

@@ -35,7 +35,7 @@ class CalculateReviewCountByProductSubscriber implements EventSubscriberInterfac
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             'sylius.product_review.post_create' => 'onProductCreate',

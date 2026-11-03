@@ -24,16 +24,6 @@ app_frontend_partial_article_index:
     requirements:
         template: "[^?]+"
 
-app_frontend_partial_article_status_show:
-    methods: [GET]
-    path: /{id}/status
-    defaults:
-        _controller: app.controller.article::showStatusAction
-        _sylius:
-            template: $template
-    requirements:
-        template: "[^?]+"
-
 app_frontend_partial_article_index_by_taxon:
     methods: [GET]
     path: /{slug}

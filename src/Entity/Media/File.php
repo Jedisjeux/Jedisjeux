@@ -10,9 +10,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Symfony\Component\Serializer\Annotation as Serializer;
 
-/**
- * @ORM\MappedSuperclass
- */
+#[ORM\MappedSuperclass]
 abstract class File implements FileInterface, ResourceInterface
 {
     use IdentifiableTrait;
@@ -23,25 +21,21 @@ abstract class File implements FileInterface, ResourceInterface
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Serializer\Groups({"Default", "Detailed"})
      */
+    #[ORM\Column(type: 'string')]
+    #[Serializer\Groups(['Default', 'Detailed'])]
     protected $path;
 
     /**
      * @var \DateTimeInterface|null
-     *
-     * @ORM\Column(type="datetime")
      */
+    #[ORM\Column(type: 'datetime')]
     protected $createdAt;
 
     /**
      * @var \DateTimeInterface|null
-     *
-     * @ORM\Column(type="datetime", nullable=true)
      */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     protected $updatedAt;
 
     public function __construct()

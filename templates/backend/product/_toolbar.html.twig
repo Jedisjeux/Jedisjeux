@@ -7,7 +7,4 @@
     </a>
 {% endif %}
 
-{{ render(url('sylius_partial_product_status_show', {
-    'id': product.id,
-    'template': 'backend/product/button/_status.html.twig'
-})) }}
+{% include 'backend/product/button/_status.html.twig' with { product: product } %}

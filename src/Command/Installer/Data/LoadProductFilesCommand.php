@@ -21,18 +21,18 @@ use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
+#[AsCommand(name: 'app:load-product-files')]
 class LoadProductFilesCommand extends Command
 {
     /**
      * {@inheritdoc}
      */
-    protected static $defaultName = 'app:load-product-files';
-
     /** @var ObjectManager */
     private $objectManager;
 
@@ -80,7 +80,7 @@ class LoadProductFilesCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $i = 0;
         $batchSize = 20;

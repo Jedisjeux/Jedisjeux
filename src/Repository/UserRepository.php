@@ -16,6 +16,8 @@ use Sylius\Component\User\Model\UserInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
+ *
+ * @extends BaseUserRepository<UserInterface>
  */
 class UserRepository extends BaseUserRepository
 {

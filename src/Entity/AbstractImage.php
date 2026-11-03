@@ -19,10 +19,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\MappedSuperclass
- * @ORM\HasLifecycleCallbacks()
  */
+#[ORM\MappedSuperclass]
+#[ORM\HasLifecycleCallbacks]
 abstract class AbstractImage implements ResourceInterface
 {
     use IdentifiableTrait;
@@ -30,17 +29,15 @@ abstract class AbstractImage implements ResourceInterface
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
      */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $path;
 
     /**
      * @var UploadedFile
-     *
-     * @Assert\File(maxSize="6000000")
-     * @Assert\Image
      */
+    #[Assert\File(maxSize: 6000000)]
+    #[Assert\Image]
     private $file;
 
     public function getPath(): ?string
@@ -105,10 +102,9 @@ abstract class AbstractImage implements ResourceInterface
 
     /**
      * This function uploads the file to the server.
-     *
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
      */
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
     public function upload()
     {
         // Checks if the path is null
@@ -127,12 +123,10 @@ abstract class AbstractImage implements ResourceInterface
         $this->file = null;
     }
 
-    /**
-     * @JMS\VirtualProperty
-     * @JMS\SerializedName("default")
-     * @JMS\Type("LiipSerializer")
-     * @JMS\Groups({"Default", "Detailed"})
-     */
+    #[JMS\VirtualProperty]
+    #[JMS\SerializedName('default')]
+    #[JMS\Type('LiipSerializer')]
+    #[JMS\Groups(['Default', 'Detailed'])]
     public function getDefaultSerialize()
     {
         if (null === $this->getWebPath()) {
@@ -145,12 +139,10 @@ abstract class AbstractImage implements ResourceInterface
         ];
     }
 
-    /**
-     * @JMS\VirtualProperty
-     * @JMS\SerializedName("thumbnail")
-     * @JMS\Type("LiipSerializer")
-     * @JMS\Groups({"Default", "Detailed"})
-     */
+    #[JMS\VirtualProperty]
+    #[JMS\SerializedName('thumbnail')]
+    #[JMS\Type('LiipSerializer')]
+    #[JMS\Groups(['Default', 'Detailed'])]
     public function getThumbnailSerialize()
     {
         if (null === $this->getWebPath()) {
@@ -163,12 +155,10 @@ abstract class AbstractImage implements ResourceInterface
         ];
     }
 
-    /**
-     * @JMS\VirtualProperty
-     * @JMS\SerializedName("magazine_item")
-     * @JMS\Type("LiipSerializer")
-     * @JMS\Groups({"Default", "Detailed"})
-     */
+    #[JMS\VirtualProperty]
+    #[JMS\SerializedName('magazine_item')]
+    #[JMS\Type('LiipSerializer')]
+    #[JMS\Groups(['Default', 'Detailed'])]
     public function getMagazineItemSerialize()
     {
         if (null === $this->getWebPath()) {

@@ -21,10 +21,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table("jdj_festival_list")
  */
+#[ORM\Entity]
+#[ORM\Table('jdj_festival_list')]
 class FestivalList implements ResourceInterface
 {
     use IdentifiableTrait;
@@ -32,54 +31,47 @@ class FestivalList implements ResourceInterface
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
-     * @JMS\Expose
-     * @JMS\Groups({"Default"})
      */
+    #[ORM\Column(type: 'string')]
+    #[JMS\Expose]
+    #[JMS\Groups(['Default'])]
     protected $code;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     protected $name;
 
     /**
      * @var string
-     *
-     * @Gedmo\Slug(fields={"name"})
-     * @ORM\Column(type="string", unique=true)
      */
+    #[Gedmo\Slug(fields: ['name'])]
+    #[ORM\Column(type: 'string', unique: true)]
     protected $slug;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
      */
+    #[ORM\Column(type: 'text', nullable: true)]
     protected $description;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(type="datetime", nullable=true)
      */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     protected $startAt;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(type="datetime", nullable=true)
      */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     protected $endAt;
 
     /**
      * @var FestivalListImage|null
-     *
-     * @ORM\ManyToOne(targetEntity="FestivalListImage", cascade={"persist"})
      */
+    #[ORM\ManyToOne(targetEntity: FestivalListImage::class, cascade: ['persist'])]
     protected $image;
 
     /**

@@ -15,24 +15,21 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_pub_banner")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_pub_banner')]
 class PubBanner extends AbstractImage
 {
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     protected $targetUrl;
 
     /**
      * @var Dealer
-     *
-     * @ORM\ManyToOne(targetEntity="Dealer", inversedBy="pubBanners")
      */
+    #[ORM\ManyToOne(targetEntity: Dealer::class, inversedBy: 'pubBanners')]
     protected $dealer;
 
     public function getTargetUrl(): ?string

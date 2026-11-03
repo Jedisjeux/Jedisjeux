@@ -15,20 +15,9 @@ namespace spec\App\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
 use App\Templating\Helper\CurrencyHelperInterface;
-use Symfony\Component\Templating\Helper\Helper;
 
 final class CurrencyHelperSpec extends ObjectBehavior
 {
-    function it_is_a_templating_helper(): void
-    {
-        $this->shouldHaveType(Helper::class);
-    }
-
-    function it_has_a_name()
-    {
-        $this->getName()->shouldReturn('sylius_currency');
-    }
-
     function it_implements_a_currency_helper_interface(): void
     {
         $this->shouldImplement(CurrencyHelperInterface::class);

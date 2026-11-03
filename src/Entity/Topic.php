@@ -22,12 +22,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
- *
- * @ORM\Entity
- * @ORM\Table("jdj_topic")
- *
- * @JMS\ExclusionPolicy("all")
  */
+#[ORM\Entity]
+#[JMS\ExclusionPolicy('all')]
+#[ORM\Table('jdj_topic')]
 class Topic implements ResourceInterface
 {
     use IdentifiableTrait;
@@ -35,98 +33,81 @@ class Topic implements ResourceInterface
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", unique=true)
      */
+    #[ORM\Column(type: 'string', unique: true)]
     protected $code;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Assert\NotBlank()
-     *
-     * @JMS\Expose
      */
+    #[ORM\Column(type: 'string')]
+    #[Assert\NotBlank]
+    #[JMS\Expose]
     protected $title;
 
     /**
      * @var CustomerInterface
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
-     * @ORM\JoinColumn(nullable=false)
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
+    #[ORM\JoinColumn(nullable: false)]
     protected $author;
 
     /**
      * @var Post
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\Post", inversedBy="parent", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
-     *
-     * @Assert\Valid()
      */
+    #[ORM\OneToOne(targetEntity: \App\Entity\Post::class, inversedBy: 'parent', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    #[Assert\Valid]
     protected $mainPost;
 
     /**
      * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="topic", cascade={"persist", "remove"},  orphanRemoval=true)
      */
+    #[ORM\OneToMany(targetEntity: \App\Entity\Post::class, mappedBy: 'topic', cascade: ['persist', 'remove'], orphanRemoval: true)]
     protected $posts;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
-     * @JMS\Expose
      */
+    #[ORM\Column(type: 'integer')]
+    #[JMS\Expose]
     protected $postCount;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
     protected $viewCount = 0;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(type="datetime", nullable=true)
      */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     protected $lastPostCreatedAt;
 
     /**
      * @var Taxon
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Taxonomy\Model\TaxonInterface::class)]
     protected $mainTaxon;
 
     /**
      * @var GamePlay
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\GamePlay", mappedBy="topic")
      */
+    #[ORM\OneToOne(targetEntity: \App\Entity\GamePlay::class, mappedBy: 'topic')]
     protected $gamePlay;
 
     /**
      * @var Article
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\Article", mappedBy="topic")
      */
+    #[ORM\OneToOne(targetEntity: \App\Entity\Article::class, mappedBy: 'topic')]
     protected $article;
 
     /**
      * @var ArrayCollection|CustomerInterface[]
-     *
-     * @ORM\ManyToMany(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
-     * @ORM\JoinTable(name="jdj_topic_follower",
-     *      inverseJoinColumns={@ORM\JoinColumn(name="customerinterface_id", referencedColumnName="id")}
-     * )
      */
+    #[ORM\ManyToMany(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
+    #[ORM\JoinTable(name: 'jdj_topic_follower', inverseJoinColumns: [new ORM\JoinColumn(name: 'customerinterface_id', referencedColumnName: 'id')])]
     protected $followers;
 
     /**

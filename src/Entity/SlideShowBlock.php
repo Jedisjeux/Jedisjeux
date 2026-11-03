@@ -18,19 +18,17 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_slideshow_block")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_slideshow_block')]
 class SlideShowBlock implements ResourceInterface
 {
     use IdentifiableTrait;
 
     /**
      * @var Collection|Block[]
-     *
-     * @ORM\OneToMany(targetEntity="Block", mappedBy="slideShowBlock")
      */
+    #[ORM\OneToMany(targetEntity: Block::class, mappedBy: 'slideShowBlock')]
     protected $blocks;
 
     public function __construct()

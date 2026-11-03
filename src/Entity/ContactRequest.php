@@ -17,10 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table("jdj_contact_request")
  */
+#[ORM\Entity]
+#[ORM\Table('jdj_contact_request')]
 class ContactRequest implements ResourceInterface
 {
     use IdentifiableTrait;
@@ -28,31 +27,29 @@ class ContactRequest implements ResourceInterface
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     protected $firstName;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string")use Prophecy\Argument;
+     * use Prophecy\Argument;
      */
+    #[ORM\Column(type: 'string')]
     protected $lastName;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     protected $email;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="text")
-     * @Assert\NotBlank()
      */
+    #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank]
     protected $body;
 
     public function getFirstName(): ?string

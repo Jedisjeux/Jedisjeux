@@ -19,9 +19,8 @@ trait ToggleableTrait
 {
     /**
      * @var bool
-     *
-     * @ORM\Column(type="boolean")
      */
+    #[ORM\Column(type: 'boolean')]
     protected $enabled = true;
 
     public function isEnabled(): bool

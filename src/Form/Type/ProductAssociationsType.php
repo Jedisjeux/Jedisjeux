@@ -44,7 +44,7 @@ final class ProductAssociationsType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $productAssociationTypes = $this->productAssociationTypeRepository->findAll();
 
@@ -61,7 +61,7 @@ final class ProductAssociationsType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_product_associations';
     }

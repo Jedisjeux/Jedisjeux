@@ -26,12 +26,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_article", indexes={
- *      @ORM\Index(name="publishable_idx", columns={"publishable"})
- * })
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_article')]
+#[ORM\Index(name: 'publishable_idx', columns: ['publishable'])]
 class Article implements ResourceInterface, ReviewableInterface, RoutedItemInterface
 {
     use IdentifiableTrait;
@@ -47,121 +45,104 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", unique=true)
      */
+    #[ORM\Column(type: 'string', unique: true)]
     protected $code;
 
     /**
      * @var string
-     *
-     * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(type="string", unique=true, nullable=true)
      */
+    #[Gedmo\Slug(fields: ['title'])]
+    #[ORM\Column(type: 'string', unique: true, nullable: true)]
     protected $slug;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
      */
+    #[ORM\Column(type: 'string')]
+    #[Assert\NotBlank]
     protected $title;
 
     /**
      * @var \DateTime|null
-     *
-     * @ORM\Column(type="datetime", nullable=true)
      */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     protected $publishStartDate;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
      */
+    #[ORM\Column(type: 'text', nullable: true)]
     protected $shortDescription;
 
     /**
      * @var ArticleImage
-     *
-     * @ORM\OneToOne(targetEntity="ArticleImage", cascade={"persist", "merge"})
-     *
-     * @Assert\Valid()
      */
+    #[ORM\OneToOne(targetEntity: ArticleImage::class, cascade: ['persist', 'merge'])]
+    #[Assert\Valid]
     protected $mainImage;
 
     /**
      * @var TaxonInterface
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Taxonomy\Model\TaxonInterface::class)]
     protected $mainTaxon;
 
     /**
      * @var \DateTime|null
-     *
-     * @ORM\Column(type="datetime", nullable=true)
      */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     protected $publishEndDate;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(type="boolean")
      */
+    #[ORM\Column(type: 'boolean')]
     protected $publishable = true;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
      */
+    #[ORM\Column(type: 'string')]
+    #[Assert\NotBlank]
     protected $status;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $imagePath;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank()
      */
+    #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank]
     protected $viewCount = 0;
 
     /**
      * @var SlideShowBlock|null
-     *
-     * @ORM\OneToOne(targetEntity="SlideShowBlock", cascade={"persist", "merge"})
      */
+    #[ORM\OneToOne(targetEntity: SlideShowBlock::class, cascade: ['persist', 'merge'])]
     protected $slideShowBlock;
 
     /**
      * @var ProductInterface
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Product\Model\ProductInterface", inversedBy="articles")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class, inversedBy: 'articles')]
     protected $product;
 
     /**
      * @var CustomerInterface
-     *
-     * @ORM\ManyToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface")
      */
+    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
     protected $author;
 
     /**
      * @var Topic
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\Topic", inversedBy="article")
-     * @ORM\JoinColumn(onDelete="SET NULL")
      */
+    #[ORM\OneToOne(targetEntity: \App\Entity\Topic::class, inversedBy: 'article')]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     protected $topic;
 
     /**
@@ -171,40 +152,34 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
 
     /**
      * @var Collection|Block[]
-     *
-     * @ORM\OneToMany(targetEntity="Block", mappedBy="article", cascade={"persist", "merge"})
-     * @ORM\OrderBy({"position" = "ASC"})
-     *
-     * @Assert\Valid()
      */
+    #[ORM\OneToMany(targetEntity: Block::class, mappedBy: 'article', cascade: ['persist', 'merge'])]
+    #[ORM\OrderBy(['position' => 'ASC'])]
+    #[Assert\Valid]
     protected $blocks;
 
     /**
      * @var float
-     *
-     * @ORM\Column(type="float")
      */
+    #[ORM\Column(type: 'float')]
     protected $averageRating = 0;
 
     /**
      * @var float
-     *
-     * @ORM\Column(type="float")
      */
+    #[ORM\Column(type: 'float')]
     protected $materialRating = 0;
 
     /**
      * @var float
-     *
-     * @ORM\Column(type="float")
      */
+    #[ORM\Column(type: 'float')]
     protected $rulesRating = 0;
 
     /**
      * @var float
-     *
-     * @ORM\Column(type="float")
      */
+    #[ORM\Column(type: 'float')]
     protected $lifetimeRating = 0;
 
     /**

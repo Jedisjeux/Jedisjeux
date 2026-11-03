@@ -16,14 +16,12 @@ trait IdentifiableTrait
 {
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     *
-     * @JMS\Expose
-     * @JMS\Groups({"Default", "Detailed", "Autocomplete"})
      */
+    #[ORM\Column(type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[JMS\Expose]
+    #[JMS\Groups(['Default', 'Detailed', 'Autocomplete'])]
     protected $id;
 
     /**

@@ -12,31 +12,27 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_person_image")
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'jdj_person_image')]
 class PersonImage extends AbstractImage
 {
     /**
      * @var Person
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Person", inversedBy="images")
      */
+    #[ORM\ManyToOne(targetEntity: \App\Entity\Person::class, inversedBy: 'images')]
     protected $person;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $description;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(type="boolean", name="is_main")
      */
+    #[ORM\Column(type: 'boolean', name: 'is_main')]
     protected $main = false;
 
     public function getPerson(): ?Person

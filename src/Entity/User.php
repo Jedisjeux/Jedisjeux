@@ -15,28 +15,57 @@ use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\User\Model\User as BaseUser;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterface;
 
 /**
  * @author Loïc Frémont <lc.fremont@gmail.com>
- *
- * @ORM\Entity
- * @ORM\Table("sylius_user")
- * @UniqueEntity(
- *     fields={"username"},
- *     errorPath="username",
- *     message="app.user.username.unique",
- *     groups="sylius"
- * )
  */
-class User extends BaseUser implements AppUserInterface
+#[ORM\Entity]
+#[UniqueEntity(fields: ['username'], errorPath: 'username', message: 'app.user.username.unique', groups: ['sylius'])]
+#[ORM\Table('sylius_user')]
+class User extends BaseUser implements AppUserInterface, LegacyPasswordAuthenticatedUserInterface
 {
     /**
-     * @var CustomerInterface
+     * Sylius 2 dropped the salt, but it is still needed to check the legacy sha512 passwords until they are all rehashed on login.
      *
-     * @ORM\OneToOne(targetEntity="Sylius\Component\Customer\Model\CustomerInterface", inversedBy="user", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @var string
      */
+    #[ORM\Column(type: 'string')]
+    protected $salt;
+
+    /**
+     * @var CustomerInterface
+     */
+    #[ORM\OneToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class, inversedBy: 'user', cascade: ['persist'])]
+    #[ORM\JoinColumn(nullable: false)]
     protected $customer;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->salt = base_convert(bin2hex(random_bytes(20)), 16, 36);
+    }
+
+    public function getSalt(): ?string
+    {
+        return $this->salt;
+    }
+
+    /**
+     * The salt has to be serialized too, otherwise the security token considers the user has changed and logs them out.
+     */
+    public function __serialize(): array
+    {
+        return [...parent::__serialize(), $this->salt];
+    }
+
+    public function __unserialize(array $data): void
+    {
+        parent::__unserialize($data);
+
+        $this->salt = $data[5] ?? null;
+    }
 
     public function getCustomer(): ?CustomerInterface
     {

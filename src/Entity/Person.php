@@ -14,12 +14,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Person.
- *
- * @ORM\Entity
- * @ORM\Table(name="jdj_person", indexes={@ORM\Index(name="search_idx", columns={"slug"})})
- *
- * @JMS\ExclusionPolicy("all")
  */
+#[ORM\Entity]
+#[JMS\ExclusionPolicy('all')]
+#[ORM\Table(name: 'jdj_person')]
+#[ORM\Index(name: 'search_idx', columns: ['slug'])]
 class Person implements ResourceInterface
 {
     use IdentifiableTrait;
@@ -27,131 +26,107 @@ class Person implements ResourceInterface
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", unique=true)
-     *
-     * @JMS\Expose
-     * @JMS\Groups({"Default"})
      */
+    #[ORM\Column(type: 'string', unique: true)]
+    #[JMS\Expose]
+    #[JMS\Groups(['Default'])]
     protected $code;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", length=50)
-     *
-     * @Assert\NotBlank()
-     *
-     * @JMS\Expose
-     * @JMS\Groups({"Default", "Detailed"})
      */
+    #[ORM\Column(type: 'string', length: 50)]
+    #[Assert\NotBlank]
+    #[JMS\Expose]
+    #[JMS\Groups(['Default', 'Detailed'])]
     private $lastName;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", length=50, nullable=true)
-     *
-     * @JMS\Expose
-     * @JMS\Groups({"Default", "Detailed"})
      */
+    #[ORM\Column(type: 'string', length: 50, nullable: true)]
+    #[JMS\Expose]
+    #[JMS\Groups(['Default', 'Detailed'])]
     private $firstName;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", length=200, nullable=true)
-     *
-     * @JMS\Expose
-     * @JMS\Groups({"Detailed"})
      */
+    #[ORM\Column(type: 'string', length: 200, nullable: true)]
+    #[JMS\Expose]
+    #[JMS\Groups(['Detailed'])]
     private $website;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
-     *
-     * @JMS\Expose
-     * @JMS\Groups({"Detailed"})
      */
+    #[ORM\Column(type: 'text', nullable: true)]
+    #[JMS\Expose]
+    #[JMS\Groups(['Detailed'])]
     private $description;
 
     /**
      * @var string
-     *
-     * @Gedmo\Slug(fields={"firstName","lastName"}, separator="-")
-     * @ORM\Column(type="string", length=128, unique=true)
-     *
-     * @JMS\Expose
-     * @JMS\Groups({"Default", "Detailed"})
      */
+    #[Gedmo\Slug(fields: ['firstName', 'lastName'], separator: '-')]
+    #[ORM\Column(type: 'string', length: 128, unique: true)]
+    #[JMS\Expose]
+    #[JMS\Groups(['Default', 'Detailed'])]
     private $slug;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
     protected $productCount = 0;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
     protected $productCountAsDesigner = 0;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
     protected $productCountAsArtist = 0;
 
     /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
     protected $productCountAsPublisher = 0;
 
     /**
      * @var PersonImage[]|Collection
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\PersonImage", mappedBy="person", cascade={"persist", "merge", "remove"})
      */
+    #[ORM\OneToMany(targetEntity: \App\Entity\PersonImage::class, mappedBy: 'person', cascade: ['persist', 'merge', 'remove'])]
     protected $images;
 
     /**
      * @var Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Sylius\Component\Taxonomy\Model\TaxonInterface")
-     * @ORM\JoinTable("jdj_person_taxon",
-     *      inverseJoinColumns={@ORM\JoinColumn(name="taxoninterface_id", referencedColumnName="id")}
-     * )
      */
+    #[ORM\ManyToMany(targetEntity: \Sylius\Component\Taxonomy\Model\TaxonInterface::class)]
+    #[ORM\JoinTable('jdj_person_taxon', inverseJoinColumns: [new ORM\JoinColumn(name: 'taxoninterface_id', referencedColumnName: 'id')])]
     protected $taxons;
 
     /**
      * @var ProductInterface[]|Collection
-     *
-     * @ORM\ManyToMany(targetEntity="App\Entity\ProductVariant", mappedBy="designers", cascade={"persist", "merge"})
      */
+    #[ORM\ManyToMany(targetEntity: \App\Entity\ProductVariant::class, mappedBy: 'designers', cascade: ['persist', 'merge'])]
     private $designerProducts;
 
     /**
      * @var ProductInterface[]|Collection
-     *
-     * @ORM\ManyToMany(targetEntity="App\Entity\ProductVariant", mappedBy="artists", cascade={"persist", "merge"})
      */
+    #[ORM\ManyToMany(targetEntity: \App\Entity\ProductVariant::class, mappedBy: 'artists', cascade: ['persist', 'merge'])]
     private $artistProducts;
 
     /**
      * @var ProductInterface[]|Collection
-     *
-     * @ORM\ManyToMany(targetEntity="App\Entity\ProductVariant", mappedBy="publishers", cascade={"persist", "merge"})
      */
+    #[ORM\ManyToMany(targetEntity: \App\Entity\ProductVariant::class, mappedBy: 'publishers', cascade: ['persist', 'merge'])]
     private $publisherProducts;
 
     /**
@@ -189,11 +164,10 @@ class Person implements ResourceInterface
 
     /**
      * @return PersonImage
-     *
-     * @JMS\VirtualProperty
-     * @JMS\SerializedName("image")
-     * @JMS\Groups({"Default", "Detailed"})
      */
+    #[JMS\VirtualProperty]
+    #[JMS\SerializedName('image')]
+    #[JMS\Groups(['Default', 'Detailed'])]
     public function getFirstImage(): ?PersonImage
     {
         $firstImage = $this->images->first();
@@ -390,11 +364,9 @@ class Person implements ResourceInterface
         $this->taxons->removeElement($taxon);
     }
 
-    /**
-     * @JMS\VirtualProperty
-     * @JMS\SerializedName("full_name")
-     * @JMS\Groups({"Default", "Detailed", "Autocomplete"})
-     */
+    #[JMS\VirtualProperty]
+    #[JMS\SerializedName('full_name')]
+    #[JMS\Groups(['Default', 'Detailed', 'Autocomplete'])]
     public function getFullName(): string
     {
         if (null === $this->getFirstName()) {

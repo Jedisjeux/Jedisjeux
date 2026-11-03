@@ -14,9 +14,7 @@ namespace App\Controller;
 use App\Entity\Taxon;
 use App\Repository\TaxonRepository;
 use FOS\RestBundle\View\View;
-use SM\Factory\Factory;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -110,45 +108,6 @@ class ProductController extends ResourceController
         }
 
         return $this->viewHandler->handle($configuration, $view);
-    }
-
-    /**
-     * @return Response
-     */
-    public function showStatusAction(Request $request)
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
-        $this->isGrantedOr403($configuration, ResourceActions::SHOW);
-        /** @var ProductInterface $resource */
-        $resource = $this->findOr404($configuration);
-
-        $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
-
-        $view = View::create($resource);
-
-        if ($configuration->isHtmlRequest()) {
-            return $this->render($configuration->getTemplate(ResourceActions::SHOW.'.html'), [
-                'configuration' => $configuration,
-                'metadata' => $this->metadata,
-                'resource' => $resource,
-                $this->metadata->getName() => $resource,
-                'state_machine' => $this->getResourceStateMachine($resource),
-            ]);
-        }
-
-        return $this->viewHandler->handle($configuration, $view);
-    }
-
-    /**
-     * @return \SM\StateMachine\StateMachineInterface
-     */
-    protected function getResourceStateMachine(ProductInterface $product)
-    {
-        /** @var Factory $factory */
-        $factory = $this->get('sm.factory');
-
-        return $factory->get($product, 'sylius_product');
     }
 
     /**

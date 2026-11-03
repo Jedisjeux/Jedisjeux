@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\DependencyInjection\Compiler\DoctrineEventSubscriberPass;
 use App\DependencyInjection\Compiler\ServicesPass;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Inflector\InflectorFactory;
@@ -15,6 +16,7 @@ use Sylius\Component\Resource\Metadata\Metadata;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
+use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
@@ -53,6 +55,8 @@ class Kernel extends BaseKernel
         $container->registerForAutoconfiguration(EventSubscriber::class)
             ->addTag('doctrine.event_subscriber');
 
+        // Runs before the Doctrine pass that registers the listeners
+        $container->addCompilerPass(new DoctrineEventSubscriberPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 1);
         $container->addCompilerPass(new ServicesPass());
     }
 

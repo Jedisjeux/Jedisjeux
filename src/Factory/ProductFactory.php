@@ -24,6 +24,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
+ *
+ * @extends BaseProductFactory<Product>
  */
 class ProductFactory extends BaseProductFactory
 {

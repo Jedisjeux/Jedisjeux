@@ -16,36 +16,30 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity
- * @ORM\Table("jdj_game_award")
- */
+#[ORM\Entity]
+#[ORM\Table('jdj_game_award')]
 class GameAward implements ResourceInterface
 {
     use IdentifiableTrait;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Assert\NotBlank()
      */
+    #[ORM\Column(type: 'string')]
+    #[Assert\NotBlank]
     private $name;
 
     /**
      * @var string|null
-     *
-     * @Gedmo\Slug(fields={"name"})
-     * @ORM\Column(type="string", unique=true, nullable=true)
      */
+    #[Gedmo\Slug(fields: ['name'])]
+    #[ORM\Column(type: 'string', unique: true, nullable: true)]
     private $slug;
 
     /**
      * @var string|null
-     *
-     * @ORM\Column(type="text", nullable=true)
      */
+    #[ORM\Column(type: 'text', nullable: true)]
     private $description;
 
     public function getName(): ?string
@@ -60,11 +54,9 @@ class GameAward implements ResourceInterface
 
     /**
      * @var GameAwardImage|null
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\GameAwardImage", cascade={"persist"})
-     *
-     * @Assert\Valid()
      */
+    #[ORM\OneToOne(targetEntity: \App\Entity\GameAwardImage::class, cascade: ['persist'])]
+    #[Assert\Valid]
     private $image;
 
     public function getSlug(): ?string
