@@ -17,7 +17,7 @@ use App\Tests\Behat\Page\Backend\Taxon\IndexByParentPage;
 use App\Tests\Behat\Page\Backend\Taxon\IndexPage;
 use App\Tests\Behat\Page\Backend\Taxon\UpdatePage;
 use Behat\Behat\Context\Context;
-use Monofony\Bridge\Behat\Service\SharedStorageInterface;
+use App\Tests\Behat\Bridge\Service\SharedStorageInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 

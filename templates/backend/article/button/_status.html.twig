@@ -1,40 +1,28 @@
 {% import _self as self %}
 
-{% macro updateStateButton(article, transition, icon, color) %}
-    {% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
-
-    <form style="display: inline-block" action="{{ path('app_backend_article_update_state', {
+{% macro updateStateButton(article, transition, icon, class) %}
+    <form class="d-inline-block" action="{{ path('app_backend_article_update_state', {
         'id': article.id,
         'transition': transition
     }) }}" method="post">
         <input type="hidden" name="_method" value="PATCH">
-        <button class="ui {{ color|default('') }} labeled icon button" type="submit">
-            <i class="icon {{ icon }}"></i> {{ ('app.ui.'~transition)|trans }}
+        <button class="btn {{ class|default('btn-outline-primary') }}" type="submit">
+            {{ ux_icon('tabler:' ~ icon, {'class': 'icon'}) }}
+            {{ ('app.ui.'~transition)|trans }}
         </button>
     </form>
-
 {% endmacro %}
 
-{% if is_granted('ROLE_WORKFLOW') %}
+{% if is_granted('ROLE_WORKFLOW') and article.status != constant('App\\Entity\\Article::STATUS_PUBLISHED') %}
+    {% if state_machine.can('ask_for_review') %}
+        {{ self.updateStateButton(article, 'ask_for_review', 'book') }}
+    {% endif %}
 
-    {% if(article.status != constant('App\\Entity\\Article::STATUS_PUBLISHED')) %}
-        <div class="alert alert-warning changeStatusContainer" role="alert">
-            <span class="fa fa-exclamation-triangle"></span>
+    {% if state_machine.can('ask_for_publication') %}
+        {{ self.updateStateButton(article, 'ask_for_publication', 'thumb-up') }}
+    {% endif %}
 
-            <div class="pull-right control-group">
-                {% if state_machine.can('ask_for_review') %}
-                    {{ self.updateStateButton(article, 'ask_for_review', 'book') }}
-                {% endif %}
-
-                {% if state_machine.can('ask_for_publication') %}
-                    {{ self.updateStateButton(article, 'ask_for_publication', 'check') }}
-                {% endif %}
-
-                {% if state_machine.can('publish') %}
-                    {{ self.updateStateButton(article, 'publish', 'upload', 'green') }}
-                {% endif %}
-
-            </div>
-        </div>
+    {% if state_machine.can('publish') %}
+        {{ self.updateStateButton(article, 'publish', 'upload', 'btn-success') }}
     {% endif %}
 {% endif %}

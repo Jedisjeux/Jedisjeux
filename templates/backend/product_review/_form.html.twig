@@ -1,13 +1,16 @@
-<div class="ui stackable grid">
-    <div class="twelve wide column">
-        <div class="ui segment">
-            {{ form_errors(form) }}
-            {{ form_row(form.title) }}
-            {{ form_row(form.comment) }}
-            {{ form_row(form.rating) }}
+{{ form_errors(form) }}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-3">
+            <div class="card-body">
+                {{ form_row(form.title) }}
+                {{ form_row(form.comment) }}
+                {{ form_row(form.rating) }}
+            </div>
         </div>
     </div>
-    <div class="four wide column">
+    <div class="col-md-4">
         {% include 'backend/product_review/_product.html.twig' %}
         {% include 'backend/product_review/_author.html.twig' %}
     </div>

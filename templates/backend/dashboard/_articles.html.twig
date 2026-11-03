@@ -1,36 +1,31 @@
-{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
-{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
-{% import '@SyliusUi/Macro/labels.html.twig' as labels %}
-
-<div class="ui segment">
-    <h3 class="ui dividing header">{{ 'app.ui.new_articles'|trans }}</h3>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">{{ 'app.ui.new_articles'|trans }}</h3>
+    </div>
 
     {% if articles|length > 0 %}
-        <table class="ui stackable very basic table" id="customers">
-            <thead>
-                <th>{{ 'sylius.ui.title'|trans }}</th>
-                <th></th>
-                <th></th>
-            </thead>
-            <tbody>
-            {% for article in articles %}
-                <tr>
-                    <td>
-                        {{ article }}
-                    </td>
-                    <td>
-                        {% include 'backend/grid/field/state.html.twig' with {'data': article.status,'options': {'vars': {'labels': 'backend/article/label/state'}}} %}
-                    </td>
-                    <td>
-                        <div class="ui right floated buttons">
-                            {{ buttons.edit(path('app_backend_article_update', {'id': article.id})) }}
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table card-table table-vcenter" id="articles">
+                <tbody>
+                {% for article in articles %}
+                    <tr>
+                        <td>{{ article }}</td>
+                        <td>
+                            {% include 'backend/grid/field/state.html.twig' with {'data': article.status, 'options': {'vars': {'labels': 'backend/article/label/state'}}} %}
+                        </td>
+                        <td class="text-end">
+                            <a href="{{ path('app_backend_article_update', {'id': article.id}) }}" class="btn btn-icon" data-bs-toggle="tooltip" data-bs-title="{{ 'sylius.ui.edit'|trans }}">
+                                {{ ux_icon('tabler:pencil') }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% else %}
-        {{ messages.info('sylius.ui.no_results_to_display') }}
+        <div class="card-body">
+            <div class="alert alert-info mb-0">{{ 'sylius.ui.no_results_to_display'|trans }}</div>
+        </div>
     {% endif %}
 </div>

@@ -1,10 +1,16 @@
-{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
-
-<div class="ui floating labeled icon dropdown button link">
-    <i class="star icon"></i>
-    <span class="text">{{ 'sylius.ui.manage_reviews'|trans }}</span>
-    <div class="menu">
-        <a class="item" href="{{ path('sylius_backend_article_review_index', { articleId: data.id }) }}"><i class="list icon"></i> {{ 'app.ui.list_reviews'|trans }}</a>
-        <a class="item" href="{{ path('sylius_backend_article_review_create', { articleId: data.id }) }}"><i class="plus icon"></i> {{ 'sylius.ui.add'|trans }}</a>
+<div class="dropdown">
+    <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ ux_icon('tabler:star', {'class': 'icon'}) }}
+        {{ 'sylius.ui.manage_reviews'|trans }}
+    </button>
+    <div class="dropdown-menu dropdown-menu-end">
+        <a class="dropdown-item" href="{{ path('sylius_backend_article_review_index', { articleId: data.id }) }}">
+            {{ ux_icon('tabler:list', {'class': 'icon dropdown-item-icon'}) }}
+            {{ 'app.ui.list_reviews'|trans }}
+        </a>
+        <a class="dropdown-item" href="{{ path('sylius_backend_article_review_create', { articleId: data.id }) }}">
+            {{ ux_icon('tabler:plus', {'class': 'icon dropdown-item-icon'}) }}
+            {{ 'sylius.ui.add'|trans }}
+        </a>
     </div>
 </div>

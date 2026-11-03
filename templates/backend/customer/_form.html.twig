@@ -1,32 +1,51 @@
-<div class="ui two column stackable grid">
-    {{ form_errors(form) }}
-    <div class="column">
-        <div class="ui segment">
-            <h4 class="ui dividing header">{{ 'sylius.ui.customer_details'|trans }}</h4>
-            {{ form_row(form.email) }}
-            {{ form_row(form.group) }}
+{{ form_errors(form) }}
+
+<div class="row row-cards">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{ 'sylius.ui.customer_details'|trans }}</h3>
+            </div>
+            <div class="card-body">
+                {{ form_row(form.email) }}
+                {{ form_row(form.group) }}
+                {{ form_row(form.firstName) }}
+                {{ form_row(form.lastName) }}
+            </div>
         </div>
     </div>
-    <div class="column">
-        <div class="ui segment">
-            <h4 class="ui dividing header">{{ 'sylius.ui.account_credentials'|trans }}</h4>
-            {% if customer.user is empty or customer.user.id is null %}
-                <div class="field">
-                    <div class="ui toggle checkbox">
-                        {{ form_row(form.createUser) }}
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{ 'sylius.ui.account_credentials'|trans }}</h3>
+            </div>
+            <div class="card-body">
+                {% if form.vars.data.user is empty or form.vars.data.user.id is null %}
+                    {{ form_row(form.createUser) }}
+                {% endif %}
+                {% if form.user is defined %}
+                    <div id="user-form" {% if form.user.vars.data.id is not defined %}style="display: none"{% endif %}>
+                        {{ form_row(form.user.plainPassword) }}
+                        {{ form_row(form.user.enabled) }}
+                        {{ form_row(form.user.roles) }}
                     </div>
-                </div>
-            {% endif %}
-            {% if form.user is defined %}
-                <div id="user-form" {% if form.user.vars.data.id is not defined %} style="display: none" {% endif %}>
-                    {{ form_row(form.user.plainPassword) }}
-                    {{ form_row(form.user.enabled) }}
-                    {{ form_row(form.user.roles) }}
-                </div>
-            {% endif %}
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>
 
-{{ form_row(form.firstName) }}
-{{ form_row(form.lastName) }}
+{% if form.vars.data.user is empty or form.vars.data.user.id is null %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const createUser = document.getElementById('{{ form.createUser.vars.id }}');
+        const userForm = document.getElementById('user-form');
+
+        if (createUser && userForm) {
+            const toggle = () => { userForm.style.display = createUser.checked ? '' : 'none'; };
+            createUser.addEventListener('change', toggle);
+            toggle();
+        }
+    });
+</script>
+{% endif %}

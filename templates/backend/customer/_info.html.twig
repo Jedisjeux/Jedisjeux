@@ -1,30 +1,23 @@
-<div class="ui fluid card" id="customer">
-    <div class="content">
-        <a href="{{ path('sylius_backend_customer_show', {'id': customer.id}) }}" class="header sylius-customer-name">{{ customer }}</a>
-        <div class="meta">
-            <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|format_datetime('medium', 'none') }}.</span>
+<div class="card mb-3" id="customer">
+    <div class="card-header">
+        <h3 class="card-title">{{ 'sylius.ui.customer'|trans }}</h3>
+    </div>
+    <div class="card-body">
+        <a href="{{ path('sylius_backend_customer_show', {'id': customer.id}) }}" class="fw-bold sylius-customer-name">{{ customer }}</a>
+        <div class="text-secondary">
+            {{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|format_datetime('medium', 'none') }}.
         </div>
     </div>
-    <div class="extra content">
-        <a href="mailto: {{ customer.email }}">
-            <i class="envelope icon"></i>
+    <div class="list-group list-group-flush">
+        <a href="mailto:{{ customer.email }}" class="list-group-item list-group-item-action">
+            {{ ux_icon('tabler:mail', {'class': 'icon'}) }}
             {{ customer.email }}
         </a>
+        {% if customer.phoneNumber is not empty %}
+            <div class="list-group-item">
+                {{ ux_icon('tabler:phone', {'class': 'icon'}) }}
+                {{ customer.phoneNumber }}
+            </div>
+        {% endif %}
     </div>
-    {% if customer.phoneNumber is not empty %}
-        <div class="extra content">
-        <span>
-            <i class="phone icon"></i>
-            {{ customer.phoneNumber }}
-        </span>
-        </div>
-    {% endif %}
-    {% if order.customerIp is defined and order.customerIp is not empty %}
-        <div class="extra content" id="ipAddress">
-        <span>
-            <i class="desktop icon"></i>
-            {{ order.customerIp }}
-        </span>
-        </div>
-    {% endif %}
 </div>

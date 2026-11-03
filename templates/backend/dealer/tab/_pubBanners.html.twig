@@ -1,6 +1,10 @@
-<div class="ui tab" data-tab="pub_banners">
-    <h3 class="ui top attached header">{{ 'app.ui.pub_banners'|trans }}</h3>
-    <div class="ui attached segment">
-        {{ form_row(form.pubBanners) }}
+<div class="tab-pane" id="tab-pub_banners" role="tabpanel">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{ 'app.ui.pub_banners'|trans }}</h3>
+        </div>
+        <div class="card-body">
+            {{ form_row(form.pubBanners) }}
+        </div>
     </div>
 </div>

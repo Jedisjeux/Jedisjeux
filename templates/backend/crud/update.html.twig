@@ -1,15 +1,1 @@
-{% extends 'backend/layout.html.twig' %}
-
-{% import '@SyliusUi/Macro/headers.html.twig' as headers %}
-{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
-
-{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.edit_'~metadata.name) %}
-
-{% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
-
-{% form_theme form 'backend/form/theme.html.twig' %}
-
-{% block content %}
-    {% include 'backend/crud/update/_header.html.twig' %}
-    {% include 'backend/crud/update/_content.html.twig' %}
-{% endblock %}
+{% extends '@SyliusAdminUi/crud/update.html.twig' %}

@@ -1,13 +1,17 @@
-<div class="ui labeled icon floating dropdown primary link button">
-    <i class="plus icon"></i>
-    <span class="text">{{ 'sylius.ui.create'|trans }}</span>
-    <div class="menu">
-        <div class="header">
-            <i class="cube icon"></i>
-            {{ 'sylius.ui.type'|trans }}
-        </div>
-        <div class="divider"></div>
-        <a class="item" href="{{ path('sylius_admin_product_create') }}"><i class="plus icon"></i> {{ 'sylius.ui.simple_product'|trans }}</a>
-        <a onclick="$('#board-game-geek-modal').modal('show')" class="item" href="#"><i class="plus icon"></i> {{ 'app.ui.from_board_game_geek'|trans }}</a>
+<div class="dropdown">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ ux_icon('tabler:plus', {'class': 'icon'}) }}
+        {{ 'sylius.ui.create'|trans }}
+    </button>
+    <div class="dropdown-menu dropdown-menu-end">
+        <h6 class="dropdown-header">{{ 'sylius.ui.type'|trans }}</h6>
+        <a class="dropdown-item" href="{{ path('sylius_admin_product_create') }}">
+            {{ ux_icon('tabler:plus', {'class': 'icon dropdown-item-icon'}) }}
+            {{ 'sylius.ui.simple_product'|trans }}
+        </a>
+        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#board-game-geek-modal">
+            {{ ux_icon('tabler:plus', {'class': 'icon dropdown-item-icon'}) }}
+            {{ 'app.ui.from_board_game_geek'|trans }}
+        </a>
     </div>
 </div>

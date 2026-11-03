@@ -1,12 +1,33 @@
-{% set locale =  app.request.locale %}
+{% set locale = app.request.locale %}
+{% set slug_locked = form.vars.data.id|default(null) is not null %}
 
-<div class="content" data-locale="{{ locale }}">
-    {{ form_row(form.code) }}
-    {{ form_row(form.parent) }}
-    {{ form_row(form.translations[locale].name) }}
-    {{ form_row(form.translations[locale].slug, {'attr': {'data-url': path('sylius_admin_ajax_generate_taxon_slug'), 'data-parent': app.request.attributes.get('id')}}) }}
-    {{ form_row(form.translations[locale].description) }}
-    {{ form_row(form.public) }}
-    {{ form_row(form.iconClass) }}
-    {{ form_row(form.color) }}
+<div class="card">
+    <div class="card-body" data-locale="{{ locale }}">
+        <div class="row">
+            <div class="col-md-6">{{ form_row(form.code) }}</div>
+            <div class="col-md-6">{{ form_row(form.parent) }}</div>
+        </div>
+        {{ form_row(form.translations[locale].name) }}
+
+        {% set slug = form.translations[locale].slug %}
+        <div class="mb-3">
+            {{ form_label(slug) }}
+            <div class="input-group">
+                {{ form_widget(slug, {'attr': {'data-url': path('sylius_admin_ajax_generate_taxon_slug'), 'data-parent': slug_locked ? false : app.request.attributes.get('id'), 'readonly': slug_locked}}) }}
+                {% if slug_locked %}
+                    <button type="button" class="btn btn-outline-secondary btn-icon toggle-taxon-slug-modification" data-bs-toggle="tooltip" data-bs-title="{{ 'sylius.ui.edit'|trans }}">
+                        {{ ux_icon('tabler:lock') }}
+                    </button>
+                {% endif %}
+            </div>
+            {{ form_errors(slug) }}
+        </div>
+
+        {{ form_row(form.translations[locale].description) }}
+        <div class="row">
+            <div class="col-md-4">{{ form_row(form.public) }}</div>
+            <div class="col-md-4">{{ form_row(form.iconClass) }}</div>
+            <div class="col-md-4">{{ form_row(form.color) }}</div>
+        </div>
+    </div>
 </div>

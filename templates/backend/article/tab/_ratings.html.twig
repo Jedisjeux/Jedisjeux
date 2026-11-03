@@ -1,8 +1,12 @@
-<div class="ui tab" data-tab="ratings">
-    <h3 class="ui top attached header">{{ 'app.ui.ratings'|trans }}</h3>
-    <div class="ui attached segment">
-        {{ form_row(form.materialRating) }}
-        {{ form_row(form.rulesRating) }}
-        {{ form_row(form.lifetimeRating) }}
+<div class="tab-pane" id="tab-ratings" role="tabpanel">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{ 'app.ui.ratings'|trans }}</h3>
+        </div>
+        <div class="card-body">
+            {{ form_row(form.materialRating) }}
+            {{ form_row(form.rulesRating) }}
+            {{ form_row(form.lifetimeRating) }}
+        </div>
     </div>
 </div>

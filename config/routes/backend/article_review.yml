@@ -45,7 +45,6 @@ sylius_backend_article_review_create:
                         articleId: $articleId
                 templates:
                     form: "backend/article_review/_form.html.twig"
-                    breadcrumb: "backend/article_review/update/_breadcrumb.html.twig"
 
 sylius_backend_article_review_update:
     path: /articles/{articleId}/reviews/{id}/edit
@@ -64,7 +63,10 @@ sylius_backend_article_review_update:
                     parameters:
                         id: $id
                         articleId: $articleId
+                index:
+                    route:
+                        parameters:
+                            articleId: $articleId
                 templates:
                     form: "backend/article_review/_form.html.twig"
-                    breadcrumb: "backend/article_review/update/_breadcrumb.html.twig"
             permission: true

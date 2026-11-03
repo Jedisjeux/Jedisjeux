@@ -398,7 +398,7 @@ class Person implements ResourceInterface
     public function getFullName(): string
     {
         if (null === $this->getFirstName()) {
-            return $this->getLastName();
+            return (string) $this->getLastName();
         }
 
         return $this->getFirstName().' '.$this->getLastName();

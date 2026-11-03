@@ -1,25 +1,28 @@
-<div class="ui tab" data-tab="attributes">
-    <h3 class="ui top attached header">{{ 'sylius.ui.attributes'|trans }}</h3>
-
-    <div class="ui attached segment">
-        {{ form_row(form.minAge) }}
-
-        <h4 class="ui dividing header">{{ 'app.ui.release_date'|trans }}</h4>
-        <div class="two fields">
-            {{ form_row(form.firstVariant.releasedAtPrecision) }}
-            {{ form_row(form.firstVariant.releasedAt) }}
+<div class="tab-pane" id="tab-attributes" role="tabpanel">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{ 'sylius.ui.attributes'|trans }}</h3>
         </div>
+        <div class="card-body">
+            {{ form_row(form.minAge) }}
 
-        <h4 class="ui dividing header">{{ 'app.ui.player_count'|trans }}</h4>
-        <div class="two fields">
-            {{ form_row(form.minPlayerCount) }}
-            {{ form_row(form.maxPlayerCount) }}
-        </div>
+            <h4 class="mb-3">{{ 'app.ui.release_date'|trans }}</h4>
+            <div class="row">
+                <div class="col-md-6">{{ form_row(form.firstVariant.releasedAtPrecision) }}</div>
+                <div class="col-md-6">{{ form_row(form.firstVariant.releasedAt) }}</div>
+            </div>
 
-        <h4 class="ui dividing header">{{ 'app.ui.duration'|trans }}</h4>
-        <div class="two fields">
-            {{ form_row(form.minDuration) }}
-            {{ form_row(form.maxDuration) }}
+            <h4 class="mb-3">{{ 'app.ui.player_count'|trans }}</h4>
+            <div class="row">
+                <div class="col-md-6">{{ form_row(form.minPlayerCount) }}</div>
+                <div class="col-md-6">{{ form_row(form.maxPlayerCount) }}</div>
+            </div>
+
+            <h4 class="mb-3">{{ 'app.ui.duration'|trans }}</h4>
+            <div class="row">
+                <div class="col-md-6">{{ form_row(form.minDuration) }}</div>
+                <div class="col-md-6">{{ form_row(form.maxDuration) }}</div>
+            </div>
         </div>
     </div>
 </div>

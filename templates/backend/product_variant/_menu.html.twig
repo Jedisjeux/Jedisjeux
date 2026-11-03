@@ -1,5 +1,11 @@
-<div class="ui large fluid vertical menu">
-    <a class="active item" data-tab="details">{{ 'sylius.ui.details'|trans }}</a>
-    <a class="item" data-tab="people">{{ 'app.ui.people'|trans }}</a>
-    <a class="item" data-tab="media">{{ 'sylius.ui.media'|trans }}</a>
+<div class="list-group list-group-transparent mb-3" role="tablist">
+    <a href="#tab-details" class="list-group-item list-group-item-action active" data-bs-toggle="tab" role="tab">
+        {{ 'sylius.ui.details'|trans }}
+    </a>
+    <a href="#tab-people" class="list-group-item list-group-item-action" data-bs-toggle="tab" role="tab">
+        {{ 'app.ui.people'|trans }}
+    </a>
+    <a href="#tab-media" class="list-group-item list-group-item-action" data-bs-toggle="tab" role="tab">
+        {{ 'sylius.ui.media'|trans }}
+    </a>
 </div>

@@ -1,6 +1,10 @@
-<div class="ui tab" data-tab="contacts">
-    <h3 class="ui top attached header">{{ 'app.ui.contacts'|trans }}</h3>
-    <div class="ui attached segment">
-        {{ form_row(form.contacts) }}
+<div class="tab-pane" id="tab-contacts" role="tabpanel">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{ 'app.ui.contacts'|trans }}</h3>
+        </div>
+        <div class="card-body">
+            {{ form_row(form.contacts) }}
+        </div>
     </div>
 </div>

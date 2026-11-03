@@ -3,6 +3,7 @@ app:
         access_denied: Accès non autorisé
         administration: Administration
         administrator: Administrateur
+        moderator: Modérateur
         add_article: Créer un article
         add_review_article: Créer un test de jeu
         added_at: Date d'ajout
@@ -45,6 +46,7 @@ app:
         created_at_female: Créée le
         dealer: Vendeur
         dealers: Vendeurs
+        dealer_price: Tarif de vendeur
         dealer_prices: Tarifs des vendeurs
         delimiter: Separateur
         designer: Auteur
@@ -88,6 +90,7 @@ app:
         game_library: Ludothèque
         game_specifications: Spécifications du jeu
         game_play_of: Partie de %product%
+        game_play: Partie de jeu
         game_plays: Parties de jeu
         game_play_details: Informations de la partie
         game_play_images: Photos de partie
@@ -193,13 +196,17 @@ app:
         player_count: Nombre de joueurs
         players: Joueurs
         plays: Parties
+        post: Message
         posts: Messages
         preview: Aperçu
         previews: Previews
         prices: Tarifs
         price_list: Liste de prix
+        product_box: Boite de jeu
         product_boxes: Boites de jeu
+        product_file: Fichier de jeu
         product_files: Fichiers de jeu
+        product_list: Liste de jeu
         product_lists: Listes de jeu
         product_manager: Gestionnaire de jeux
         propose_a_file: Proposer un fichier
@@ -215,6 +222,7 @@ app:
         react_on_this_game_play: Réagir à cette partie de jeu
         recent_articles: Articles récents
         redactor: Rédacteur
+        redirection: Redirection
         redirections: Redirections
         redirection_count: Nombre de redirections
         referer: Référent
@@ -273,6 +281,7 @@ app:
         view_more_reviews: Voir plus d'avis
         view_website: Voir le site
         year: Année
+        year_award: Récompense annuelle
         year_awards: Récompenses annuelles
         your_comment: Votre commentaire
         your_rating: Votre note
@@ -320,6 +329,7 @@ sylius:
         product: Jeu
         products: Jeux
         product_association_types: Types d'association de jeux
+        product_review: Avis de jeu
         product_reviews: Avis de jeu
         published: Publié
         register: Inscription

@@ -13,9 +13,10 @@ namespace App\Tests\Behat\Page\Backend\Product;
 
 use App\Entity\GameAward;
 use App\Tests\Behat\Behaviour\NamesIt;
+use Behat\Mink\Driver\BrowserKitDriver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Monofony\Bridge\Behat\Crud\AbstractCreatePage;
+use App\Tests\Behat\Bridge\Crud\AbstractCreatePage;
 use Webmozart\Assert\Assert;
 
 class CreatePage extends AbstractCreatePage
@@ -25,6 +26,25 @@ class CreatePage extends AbstractCreatePage
     public function getRouteName(): string
     {
         return 'sylius_admin_product_create';
+    }
+
+    public function create(): void
+    {
+        if ($this->getDriver() instanceof BrowserKitDriver) {
+            parent::create();
+
+            return;
+        }
+
+        // With a javascript driver, the "Create" button is at the top of the page, out of the viewport once a tab content has been filled
+        $this->getSession()->executeScript('window.scrollTo(0, 0)');
+
+        parent::create();
+
+        // Wait for the submitted page to be loaded (image uploads can be slow)
+        $this->getDocument()->waitFor(10, function (): bool {
+            return $this->getDocument()->has('css', '.sylius-flash-message, .sylius-validation-error');
+        });
     }
 
     /**
@@ -46,7 +66,7 @@ class CreatePage extends AbstractCreatePage
 
         $filesPath = $this->getParameter('files_path');
 
-        $this->getDocument()->clickLink('Add');
+        $this->getElement('images')->find('css', '[data-form-collection="add"]')->click();
 
         $imageForm = $this->getLastImageElement();
 
@@ -60,7 +80,7 @@ class CreatePage extends AbstractCreatePage
     {
         $this->clickTabIfItsNotActive('media');
 
-        $this->getDocument()->find('css', '#sylius_product_videos a[data-form-collection="add"]')->click();
+        $this->getDocument()->find('css', '#sylius_product_videos [data-form-collection="add"]')->click();
 
         $this->getElement('video_title')->setValue($title);
         $this->getElement('video_path')->setValue($path);
@@ -73,7 +93,7 @@ class CreatePage extends AbstractCreatePage
     {
         $this->clickTabIfItsNotActive('awards');
 
-        $this->getDocument()->find('css', '#sylius_product_yearAwards a[data-form-collection="add"]')->click();
+        $this->getDocument()->find('css', '#sylius_product_yearAwards [data-form-collection="add"]')->click();
 
         $this->getElement('award_name')->setValue($gameAward->getId());
         $this->getElement('award_year')->setValue($year);
@@ -108,7 +128,7 @@ class CreatePage extends AbstractCreatePage
             'min_player_count' => '#sylius_product_minPlayerCount',
             'max_player_count' => '#sylius_product_maxPlayerCount',
             'slug' => '#sylius_product_translations_en_US_slug',
-            'tab' => '.menu [data-tab="%name%"]',
+            'tab' => '[data-bs-toggle="tab"][href="#tab-%name%"]',
             'video_title' => '#sylius_product_videos_0_title',
             'video_path' => '#sylius_product_videos_0_path',
         ]);

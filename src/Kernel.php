@@ -3,6 +3,7 @@
 namespace App;
 
 use App\DependencyInjection\Compiler\ServicesPass;
+use Doctrine\Common\EventSubscriber;
 use Doctrine\Inflector\InflectorFactory;
 use Doctrine\Inflector\Rules\Patterns;
 use Doctrine\Inflector\Rules\Ruleset;
@@ -47,6 +48,10 @@ class Kernel extends BaseKernel
     protected function build(ContainerBuilder $container): void
     {
         parent::build($container);
+
+        // Monofony used to tag the Doctrine subscribers of the application
+        $container->registerForAutoconfiguration(EventSubscriber::class)
+            ->addTag('doctrine.event_subscriber');
 
         $container->addCompilerPass(new ServicesPass());
     }

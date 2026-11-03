@@ -15,7 +15,7 @@ use App\Entity\Taxon;
 use App\Fixture\Factory\TaxonExampleFactory;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
-use Monofony\Bridge\Behat\Service\SharedStorageInterface;
+use App\Tests\Behat\Bridge\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 

@@ -13,12 +13,13 @@ namespace App\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
+use Sylius\AdminUi\Knp\Menu\MenuBuilderInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-final class AdminMenuBuilder
+final class AdminMenuBuilder implements MenuBuilderInterface
 {
     /**
      * @var FactoryInterface
@@ -36,12 +37,14 @@ final class AdminMenuBuilder
         $this->authorizationChecker = $authorizationChecker;
     }
 
-    /**
-     * @return ItemInterface
-     */
-    public function createMenu()
+    public function createMenu(array $options = []): ItemInterface
     {
         $menu = $this->factory->createItem('root');
+
+        $menu
+            ->addChild('dashboard', ['route' => 'app_backend_dashboard'])
+            ->setLabel('sylius.ui.dashboard')
+            ->setLabelAttribute('icon', 'tabler:dashboard');
 
         if ($this->authorizationChecker->isGranted('ROLE_PRODUCT_MANAGER')) {
             $this->addCatalogSubMenu($menu);
@@ -68,36 +71,32 @@ final class AdminMenuBuilder
     {
         $catalog = $menu
             ->addChild('catalog')
-            ->setLabel('app.ui.catalog');
+            ->setLabel('app.ui.catalog')
+            ->setLabelAttribute('icon', 'tabler:books');
 
         if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
             $catalog
                 ->addChild('backend_taxon', ['route' => 'sylius_backend_taxon_index'])
-                ->setLabel('sylius.ui.taxons')
-                ->setLabelAttribute('icon', 'folder');
+                ->setLabel('sylius.ui.taxons');
         }
 
         $catalog
             ->addChild('backend_product', ['route' => 'sylius_admin_product_index'])
-            ->setLabel('sylius.ui.products')
-            ->setLabelAttribute('icon', 'cube');
+            ->setLabel('sylius.ui.products');
 
         if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
             $catalog
                 ->addChild('backend_association_type', ['route' => 'sylius_backend_product_association_type_index'])
-                ->setLabel('sylius.ui.association_types')
-                ->setLabelAttribute('icon', 'tasks');
+                ->setLabel('sylius.ui.association_types');
         }
 
         $catalog
             ->addChild('backend_person', ['route' => 'app_backend_person_index'])
-            ->setLabel('app.ui.people')
-            ->setLabelAttribute('icon', 'spy');
+            ->setLabel('app.ui.people');
 
         $catalog
             ->addChild('backend_game_award', ['route' => 'app_backend_game_award_index'])
-            ->setLabel('app.ui.game_awards')
-            ->setLabelAttribute('icon', 'trophy');
+            ->setLabel('app.ui.game_awards');
 
         return $catalog;
     }
@@ -106,47 +105,40 @@ final class AdminMenuBuilder
     {
         $moderation = $menu
             ->addChild('moderation')
-            ->setLabel('app.ui.moderation');
+            ->setLabel('app.ui.moderation')
+            ->setLabelAttribute('icon', 'tabler:shield-check');
 
         $moderation
             ->addChild('backend_customer', ['route' => 'sylius_backend_customer_index'])
-            ->setLabel('sylius.ui.customers')
-            ->setLabelAttribute('icon', 'users');
+            ->setLabel('sylius.ui.customers');
 
         $moderation
             ->addChild('backend_product_review', ['route' => 'sylius_backend_product_review_index'])
-            ->setLabel('sylius.ui.product_reviews')
-            ->setLabelAttribute('icon', 'star');
+            ->setLabel('sylius.ui.product_reviews');
 
         $moderation
             ->addChild('backend_product_box', ['route' => 'app_backend_product_box_index'])
-            ->setLabel('app.ui.product_boxes')
-            ->setLabelAttribute('icon', 'th');
+            ->setLabel('app.ui.product_boxes');
 
         $moderation
             ->addChild('backend_product_file', ['route' => 'app_backend_product_file_index'])
-            ->setLabel('app.ui.product_files')
-            ->setLabelAttribute('icon', 'file');
+            ->setLabel('app.ui.product_files');
 
         $moderation
             ->addChild('backend_game_play', ['route' => 'app_backend_game_play_index'])
-            ->setLabel('app.ui.game_plays')
-            ->setLabelAttribute('icon', 'play');
+            ->setLabel('app.ui.game_plays');
 
         $moderation
             ->addChild('backend_product_list', ['route' => 'app_backend_product_list_index'])
-            ->setLabel('app.ui.product_lists')
-            ->setLabelAttribute('icon', 'list');
+            ->setLabel('app.ui.product_lists');
 
         $moderation
             ->addChild('backend_topic', ['route' => 'app_backend_topic_index'])
-            ->setLabel('app.ui.topics')
-            ->setLabelAttribute('icon', 'comment');
+            ->setLabel('app.ui.topics');
 
         $moderation
             ->addChild('backend_post', ['route' => 'app_backend_post_index'])
-            ->setLabel('app.ui.posts')
-            ->setLabelAttribute('icon', 'comments');
+            ->setLabel('app.ui.posts');
 
         return $moderation;
     }
@@ -158,17 +150,16 @@ final class AdminMenuBuilder
     {
         $content = $menu
             ->addChild('content')
-            ->setLabel('app.ui.content');
+            ->setLabel('app.ui.content')
+            ->setLabelAttribute('icon', 'tabler:news');
 
         $content
             ->addChild('backend_article', ['route' => 'app_backend_article_index'])
-            ->setLabel('app.ui.articles')
-            ->setLabelAttribute('icon', 'newspaper');
+            ->setLabel('app.ui.articles');
 
         $content
             ->addChild('backend_festival_list', ['route' => 'app_backend_festival_list_index'])
-            ->setLabel('app.ui.festival_lists')
-            ->setLabelAttribute('icon', 'list');
+            ->setLabel('app.ui.festival_lists');
 
         return $content;
     }
@@ -180,12 +171,12 @@ final class AdminMenuBuilder
     {
         $contact = $menu
             ->addChild('contact')
-            ->setLabel('app.ui.contact');
+            ->setLabel('app.ui.contact')
+            ->setLabelAttribute('icon', 'tabler:mail');
 
         $contact
             ->addChild('backend_contact_request', ['route' => 'app_backend_contact_request_index'])
-            ->setLabel('app.ui.contact_requests')
-            ->setLabelAttribute('icon', 'mail');
+            ->setLabel('app.ui.contact_requests');
 
         return $contact;
     }
@@ -197,12 +188,12 @@ final class AdminMenuBuilder
     {
         $errors = $menu
             ->addChild('errors')
-            ->setLabel('app.ui.errors');
+            ->setLabel('app.ui.errors')
+            ->setLabelAttribute('icon', 'tabler:alert-triangle');
 
         $errors
             ->addChild('backend_not_found_page', ['route' => 'app_backend_not_found_page_index'])
-            ->setLabel('app.ui.not_found_pages')
-            ->setLabelAttribute('icon', 'warning sign');
+            ->setLabel('app.ui.not_found_pages');
 
         return $errors;
     }
@@ -214,26 +205,23 @@ final class AdminMenuBuilder
     {
         $configuration = $menu
             ->addChild('configuration')
-            ->setLabel('sylius.ui.configuration');
+            ->setLabel('sylius.ui.configuration')
+            ->setLabelAttribute('icon', 'tabler:settings');
 
         $configuration
             ->addChild('backend_dealer', ['route' => 'app_backend_dealer_index'])
-            ->setLabel('app.ui.dealers')
-            ->setLabelAttribute('icon', 'building');
+            ->setLabel('app.ui.dealers');
 
         $configuration
             ->addChild('backend_dealer_price', ['route' => 'app_backend_dealer_price_index'])
-            ->setLabel('app.ui.prices')
-            ->setLabelAttribute('icon', 'euro');
+            ->setLabel('app.ui.prices');
 
         $configuration->addChild('backend_redirection', ['route' => 'app_backend_redirection_index'])
-            ->setLabel('app.ui.redirections')
-            ->setLabelAttribute('icon', 'exchange');
+            ->setLabel('app.ui.redirections');
 
         $configuration
             ->addChild('backend_customer_group', ['route' => 'sylius_backend_customer_group_index'])
-            ->setLabel('sylius.ui.groups')
-            ->setLabelAttribute('icon', 'archive');
+            ->setLabel('sylius.ui.groups');
 
         return $configuration;
     }

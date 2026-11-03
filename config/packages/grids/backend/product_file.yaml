@@ -29,7 +29,7 @@ sylius_grid:
                     label: sylius.ui.status
                     sortable: ~
                     options:
-                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        template: "backend/grid/field/state.html.twig"
                         vars:
                             labels: "backend/product_file/label/status"
                 createdAt:
@@ -51,25 +51,25 @@ sylius_grid:
                     accept:
                         type: apply_transition
                         label: sylius.ui.accept
-                        icon: checkmark
+                        icon: tabler:check
                         options:
                             link:
                                 route: app_backend_product_file_accept
                                 parameters:
                                     id: resource.id
-                            class: green
+                            class: btn-sm btn-outline-success
                             transition: accept
                             graph: app_product_file
                     reject:
                         type: apply_transition
                         label: sylius.ui.reject
-                        icon: remove
+                        icon: tabler:x
                         options:
                             link:
                                 route: app_backend_product_file_reject
                                 parameters:
                                     id: resource.id
-                            class: yellow
+                            class: btn-sm btn-outline-warning
                             transition: reject
                             graph: app_product_file
                     delete:

@@ -11,7 +11,7 @@
 
 namespace App\Tests\Behat\Page\Backend\Redirection;
 
-use Monofony\Bridge\Behat\Crud\AbstractCreatePage;
+use App\Tests\Behat\Bridge\Crud\AbstractCreatePage;
 
 class CreatePage extends AbstractCreatePage
 {

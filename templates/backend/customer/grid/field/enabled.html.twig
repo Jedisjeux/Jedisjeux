@@ -1,8 +1,9 @@
 {% if data.user is not null %}
-    {% import '@SyliusUi/Macro/labels.html.twig' as label %}
-    {{ label.status(data.user.enabled) }}
+    {% if data.user.enabled %}
+        <span class="badge bg-success-lt">{{ ux_icon('tabler:check', {'class': 'icon'}) }} {{ 'sylius.ui.enabled'|trans }}</span>
+    {% else %}
+        <span class="badge bg-danger-lt">{{ ux_icon('tabler:x', {'class': 'icon'}) }} {{ 'sylius.ui.disabled'|trans }}</span>
+    {% endif %}
 {% else %}
-    <span class="ui icon label">
-        <i class="spy icon"></i> {{ 'sylius.ui.guest'|trans }}
-    </span>
+    <span class="badge bg-secondary-lt">{{ ux_icon('tabler:spy', {'class': 'icon'}) }} {{ 'sylius.ui.guest'|trans }}</span>
 {% endif %}

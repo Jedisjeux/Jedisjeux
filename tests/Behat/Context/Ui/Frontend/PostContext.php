@@ -17,7 +17,7 @@ use App\Tests\Behat\Page\Frontend\Post\UpdatePage;
 use App\Entity\Post;
 use App\Entity\Topic;
 use Behat\Behat\Context\Context;
-use Monofony\Bridge\Behat\Service\SharedStorageInterface;
+use App\Tests\Behat\Bridge\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 final class PostContext implements Context

@@ -1,0 +1,36 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Tests\Behat\Bridge\Service;
+
+use Psr\Cache\CacheItemPoolInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Mailer\Event\MessageEvent;
+
+final class MessageSendCacher implements EventSubscriberInterface
+{
+    public const CACHE_KEY = 'messages';
+
+    public function __construct(private CacheItemPoolInterface $cache)
+    {
+    }
+
+    public function onMessage(MessageEvent $event): void
+    {
+        if ($event->isQueued()) {
+            return;
+        }
+
+        $item = $this->cache->getItem(self::CACHE_KEY);
+        $messages = $item->isHit() ? $item->get() : [];
+        $messages[] = $event->getMessage();
+        $item->set($messages);
+        $this->cache->save($item);
+    }
+
+    public static function getSubscribedEvents(): array
+    {
+        return [MessageEvent::class => ['onMessage', -1024]];
+    }
+}

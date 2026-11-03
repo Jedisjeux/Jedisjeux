@@ -11,7 +11,7 @@
 
 namespace App\Tests\Behat\Page\Backend\Topic;
 
-use Monofony\Bridge\Behat\Crud\AbstractUpdatePage;
+use App\Tests\Behat\Bridge\Crud\AbstractUpdatePage;
 
 class UpdatePage extends AbstractUpdatePage
 {

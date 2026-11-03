@@ -52,7 +52,6 @@ const rootPath = upath.normalizeSafe(argv.rootPath);
 const appRootPath = upath.joinSafe(rootPath, 'frontend');
 const vendorPath = upath.normalizeSafe(argv.vendorPath || '.');
 const appPath = vendorPath === '.' ? '.' : upath.joinSafe(vendorPath, '../../assets/frontend');
-const vendorUiPath = vendorPath === '.' ? '../../vendor/sylius/ui-bundle' : upath.joinSafe(vendorPath, 'sylius/ui-bundle');
 const nodeModulesPath = upath.normalizeSafe(argv.nodeModulesPath);
 
 const paths = {
@@ -62,7 +61,6 @@ const paths = {
       upath.joinSafe(nodeModulesPath, 'jquery-ui-dist/jquery-ui.min.js'),
       upath.joinSafe(nodeModulesPath, 'bootstrap/dist/js/bootstrap.bundle.js'),
       upath.joinSafe(nodeModulesPath, 'rater-jquery/rater.js'),
-      upath.joinSafe(vendorUiPath, 'Resources/private/js/sylius-form-collection.js'),
       upath.joinSafe(appPath, 'plugins/magnific-popup/jquery.magnific-popup.min.js'),
       upath.joinSafe(appPath, 'plugins/waypoints/jquery.waypoints.min.js'),
       upath.joinSafe(appPath, 'plugins/waypoints/sticky.min.js'),
@@ -94,10 +92,6 @@ const sourcePathMap = [
   {
     sourceDir: upath.relative('', upath.joinSafe(appPath, 'Resources/private')),
     destPath: '/SyliusShopBundle/',
-  },
-  {
-    sourceDir: upath.relative('', upath.joinSafe(vendorUiPath, 'Resources/private')),
-    destPath: '/SyliusUiBundle/',
   },
   {
     sourceDir: upath.relative('', nodeModulesPath),
@@ -181,11 +175,6 @@ export const buildShopJs = async function buildShopJs() {
         plugins: [
           ['external-helpers'],
           ['fast-async'],
-          ['module-resolver', {
-            alias: {
-              'sylius/ui': upath.relative('', upath.joinSafe(vendorUiPath, 'Resources/private/js')),
-            },
-          }],
           ['transform-object-rest-spread', {
             useBuiltIns: false,
           }],

@@ -881,7 +881,7 @@ class Product extends BaseProduct implements ProductInterface
      */
     public function __toString(): string
     {
-        return $this->getName();
+        return (string) $this->getName();
     }
 
     /**

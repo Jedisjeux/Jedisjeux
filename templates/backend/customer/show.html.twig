@@ -1,19 +1,66 @@
 {% extends 'backend/layout.html.twig' %}
 
-{% import '@SyliusUi/Macro/labels.html.twig' as label %}
-{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+{% import 'backend/macro/breadcrumb.html.twig' as breadcrumb %}
 
-{% block title %}{{ parent() }} {{ 'sylius.ui.customer'|trans ~' '~ customer.email }}{% endblock %}
+{% block title %}{{ 'sylius.ui.customer'|trans ~ ' ' ~ customer.email }} | {{ parent() }}{% endblock %}
+
+{% block header %}
+    {{ breadcrumb.crumble([
+        { label: 'sylius.ui.administration'|trans, url: path('app_backend_dashboard') },
+        { label: 'sylius.ui.customers'|trans, url: path('sylius_backend_customer_index') },
+        { label: customer.email }
+    ]) }}
+
+    <div class="row g-2 align-items-center mt-1">
+        <div class="col">
+            <h2 class="page-title">
+                {{ ux_icon('tabler:user', {'class': 'icon me-2'}) }}
+                {{ customer|default('sylius.ui.guest_customer'|trans) }}
+            </h2>
+            <div class="text-secondary mt-1">
+                {{ customer.email }}
+                {% if customer.user is null %}
+                    <span class="badge bg-secondary-lt ms-2">{{ ux_icon('tabler:spy', {'class': 'icon'}) }} {{ 'sylius.ui.guest'|trans }}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-auto ms-auto">
+            <a href="{{ path('sylius_backend_customer_update', {'id': customer.id}) }}" class="btn btn-primary">
+                {{ ux_icon('tabler:pencil', {'class': 'icon'}) }}
+                {{ 'sylius.ui.edit'|trans }}
+            </a>
+        </div>
+    </div>
+{% endblock %}
 
 {% block content %}
-    <div class="ui stackable two column grid">
-        {% include 'backend/customer/show/_header.html.twig' %}
-    </div>
-
-    <div class="ui divider"></div>
-    {% include 'backend/customer/show/_breadcrumb.html.twig' %}
-
-    <div class="ui stackable grid">
-        {% include 'backend/customer/show/_content.html.twig' %}
+    <div class="row">
+        <div class="col-md-6" id="info">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title mb-1">{{ customer|default('sylius.ui.guest_customer'|trans) }}</h3>
+                    <div class="text-secondary">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|format_datetime('medium', 'none') }}</div>
+                    {% if customer.group is not null %}
+                        <div class="text-secondary group">{{ 'sylius.ui.group_membership'|trans }}: {{ customer.group }}</div>
+                    {% endif %}
+                </div>
+                <div class="list-group list-group-flush">
+                    {% if customer.user is not null %}
+                        <div class="list-group-item" id="verified-email">
+                            {% if customer.user.verified %}
+                                {{ ux_icon('tabler:check', {'class': 'icon text-success me-1'}) }}
+                            {% else %}
+                                {{ ux_icon('tabler:x', {'class': 'icon text-danger me-1'}) }}
+                            {% endif %}
+                            {{ 'sylius.ui.email_verified'|trans }}
+                        </div>
+                    {% endif %}
+                    <a href="mailto:{{ customer.email }}" class="list-group-item list-group-item-action">
+                        {{ ux_icon('tabler:mail', {'class': 'icon me-1'}) }}
+                        {{ customer.email }}
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

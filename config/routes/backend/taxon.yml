@@ -68,12 +68,3 @@ sylius_backend_taxon_delete:
         _controller: sylius.controller.taxon::deleteAction
         _sylius:
             redirect: sylius_backend_taxon_index
-
-sylius_backend_taxon_product_index:
-    path: /{id}/products
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product::indexByTaxonIdAction
-        _sylius:
-            template: "@SyliusWeb/Backend/Taxon/productIndex.html.twig"
-            paginate: 30

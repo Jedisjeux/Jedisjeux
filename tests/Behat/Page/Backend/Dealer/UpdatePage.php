@@ -13,7 +13,7 @@ namespace App\Tests\Behat\Page\Backend\Dealer;
 
 use App\Tests\Behat\Behaviour\NamesIt;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Monofony\Bridge\Behat\Crud\AbstractUpdatePage;
+use App\Tests\Behat\Bridge\Crud\AbstractUpdatePage;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

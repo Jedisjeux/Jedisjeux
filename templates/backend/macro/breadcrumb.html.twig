@@ -1,17 +1,15 @@
 {% macro crumble(crumbs = {}) %}
-    <div class="ui breadcrumb">
+    <ol class="breadcrumb" aria-label="breadcrumbs">
         {% for crumb in crumbs %}
             {% if loop.last %}
-                <div class="active section">{{ crumb.label }}</div>
+                <li class="breadcrumb-item active" aria-current="page">{{ crumb.label }}</li>
             {% elseif crumb.url is defined %}
-                <a href="{{ crumb.url }}" class="section">{{ crumb.label }}</a>
-                <i class="right chevron icon divider"></i>
+                <li class="breadcrumb-item"><a href="{{ crumb.url }}">{{ crumb.label }}</a></li>
             {% else %}
-                <div class="section">{{ crumb.label }}</div>
-                <i class="right chevron icon divider"></i>
+                <li class="breadcrumb-item">{{ crumb.label }}</li>
             {% endif %}
         {% else %}
-            <a href="{{ path('sylius_admin_dashboard') }}" class="section">{{ 'sylius.ui.administration'|trans }}</a>
+            <li class="breadcrumb-item"><a href="{{ path('app_backend_dashboard') }}">{{ 'sylius.ui.administration'|trans }}</a></li>
         {% endfor %}
-    </div>
+    </ol>
 {% endmacro %}

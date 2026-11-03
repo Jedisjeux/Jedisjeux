@@ -1,44 +1,32 @@
 {% import _self as self %}
 
 {% macro updateStateButton(product, transition, icon, color) %}
-    {% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
-
-    <form style="display: inline-block" action="{{ path('sylius_admin_product_update_state', {
+    <form class="d-inline-block" action="{{ path('sylius_admin_product_update_state', {
         'id': product.id,
         'transition': transition
     }) }}" method="post">
         <input type="hidden" name="_method" value="PATCH">
-        <button class="ui {{ color|default('') }} labeled icon button" type="submit">
-            <i class="icon {{ icon }}"></i> {{ ('app.ui.'~transition)|trans }}
+        <button class="btn {{ color|default('') }}" type="submit">
+            {{ ux_icon('tabler:' ~ icon, {'class': 'icon'}) }}
+            {{ ('app.ui.'~transition)|trans }}
         </button>
     </form>
-
 {% endmacro %}
 
-{% if is_granted('ROLE_WORKFLOW') %}
+{% if is_granted('ROLE_WORKFLOW') and product.status != constant('PUBLISHED', product) %}
+    {% if state_machine.can('ask_for_translation') %}
+        {{ self.updateStateButton(product, 'ask_for_translation', 'language') }}
+    {% endif %}
 
-    {% if(product.status != constant('PUBLISHED', product)) %}
-        <div class="alert alert-warning changeStatusContainer" role="alert">
-            <span class="fa fa-exclamation-triangle"></span>
+    {% if state_machine.can('ask_for_review') %}
+        {{ self.updateStateButton(product, 'ask_for_review', 'book') }}
+    {% endif %}
 
-            <div class="pull-right control-group">
-                {% if state_machine.can('ask_for_translation') %}
-                    {{ self.updateStateButton(product, 'ask_for_translation', 'translate') }}
-                {% endif %}
+    {% if state_machine.can('ask_for_publication') %}
+        {{ self.updateStateButton(product, 'ask_for_publication', 'check') }}
+    {% endif %}
 
-                {% if state_machine.can('ask_for_review') %}
-                    {{ self.updateStateButton(product, 'ask_for_review', 'book') }}
-                {% endif %}
-
-                {% if state_machine.can('ask_for_publication') %}
-                    {{ self.updateStateButton(product, 'ask_for_publication', 'check') }}
-                {% endif %}
-
-                {% if state_machine.can('publish') %}
-                    {{ self.updateStateButton(product, 'publish', 'upload', 'green') }}
-                {% endif %}
-
-            </div>
-        </div>
+    {% if state_machine.can('publish') %}
+        {{ self.updateStateButton(product, 'publish', 'upload', 'btn-success') }}
     {% endif %}
 {% endif %}

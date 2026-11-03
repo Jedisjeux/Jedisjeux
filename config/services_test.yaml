@@ -1,10 +1,9 @@
-imports:
-    - { resource: "../vendor\/monofony\/behat-bridge\/services_test.yaml" }
-
 parameters:
     locale: 'en_US'
 
 services:
+    Symfony\Component\HttpFoundation\Session\SessionFactoryInterface: '@session.factory'
+
     _defaults:
         autowire: true
         autoconfigure: true
@@ -15,14 +14,15 @@ services:
     App\Tests\Behat\:
         resource: '../tests/Behat/*'
 
-    Monofony\Bridge\Behat\Service\EmailChecker:
+    App\Tests\Behat\Bridge\Service\EmailChecker:
         arguments:
             $cache: '@test.mailer_pool'
 
-    Monofony\Bridge\Behat\Service\MessageSendCacher:
+    App\Tests\Behat\Bridge\Service\MessageSendCacher:
         arguments:
             $cache: '@test.mailer_pool'
 
-    Monofony\Bridge\Behat\Service\EmailCheckerInterface: '@Monofony\Bridge\Behat\Service\EmailChecker'
+    App\Tests\Behat\Bridge\Service\EmailCheckerInterface: '@App\Tests\Behat\Bridge\Service\EmailChecker'
+    App\Tests\Behat\Bridge\Service\NotificationCheckerInterface: '@App\Tests\Behat\Bridge\Service\NotificationChecker'
 
-    Monofony\Bundle\CoreBundle\Tests\Behat\Service\SecurityServiceInterface: '@App\Tests\Behat\Service\SecurityService'
+    App\Tests\Behat\Bridge\Service\SecurityServiceInterface: '@App\Tests\Behat\Service\SecurityService'

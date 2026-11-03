@@ -1,0 +1,13 @@
+{% set form = hookable_metadata.context.form %}
+{% set resource = hookable_metadata.context.resource ?? null %}
+{% set configuration = hookable_metadata.context.configuration ?? null %}
+
+{% form_theme form 'backend/form/theme.html.twig' %}
+
+<div class="col-12">
+    {% if configuration is not null and configuration.vars.templates.form is defined %}
+        {% include configuration.vars.templates.form %}
+    {% else %}
+        {{ form_widget(form) }}
+    {% endif %}
+</div>

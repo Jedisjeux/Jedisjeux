@@ -1,52 +1,24 @@
-<div class="ui grid">
-    <div class="center aligned doubling four column row">
-        <div class="column">
-            <div class="ui red segment">
-                <div class="ui small statistic">
-                    <div id="total-articles" class="value" style="padding-bottom: 10px;">
-                        {{ articleCount }}
-                    </div>
-                    <div class="label">
-                        {{ 'app.ui.articles'|trans }}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="ui yellow segment">
-                <div class="ui small statistic">
-                    <div id="total-products" class="value" style="padding-bottom: 10px;">
-                        {{ productCount }}
-                    </div>
-                    <div class="label">
-                        {{ 'app.ui.games'|trans }}
+<div class="row row-cards mb-3">
+    {% for stat in [
+        {'id': 'total-articles', 'value': articleCount, 'label': 'app.ui.articles', 'icon': 'tabler:news'},
+        {'id': 'total-products', 'value': productCount, 'label': 'app.ui.games', 'icon': 'tabler:dice'},
+        {'id': 'new-customers', 'value': userCount, 'label': 'sylius.ui.customers', 'icon': 'tabler:users'},
+        {'id': 'average-order-value', 'value': ratingCount, 'label': 'app.ui.ratings', 'icon': 'tabler:star'},
+    ] %}
+        <div class="col-sm-6 col-lg-3">
+            <div class="card card-sm">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <span class="bg-primary-lt avatar">{{ ux_icon(stat.icon, {'class': 'icon'}) }}</span>
+                        </div>
+                        <div class="col">
+                            <div id="{{ stat.id }}" class="h2 mb-0">{{ stat.value }}</div>
+                            <div class="text-secondary">{{ stat.label|trans }}</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="column">
-            <div class="ui blue segment">
-                <div class="ui small statistic">
-                    <div id="new-customers" class="value" style="padding-bottom: 10px;">
-                        {{ userCount }}
-                    </div>
-                    <div class="label">
-                        {{ 'sylius.ui.customers'|trans }}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="ui green segment">
-                <div class="ui small statistic">
-                    <div id="average-order-value" class="value" style="padding-bottom: 10px;">
-                        {{ ratingCount }}
-                    </div>
-                    <div class="label">
-                        {{ 'app.ui.ratings'|trans }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 </div>

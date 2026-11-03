@@ -1,0 +1,5 @@
+{% set configuration = hookable_metadata.context.configuration ?? null %}
+
+{% if configuration is not null and configuration.vars.templates.toolbar is defined %}
+    {% include configuration.vars.templates.toolbar with { resource: hookable_metadata.context.resource ?? null } %}
+{% endif %}

@@ -44,7 +44,6 @@ sylius_backend_product_variant_create:
                         productId: $productId
                 templates:
                     form: "backend/product_variant/_form.html.twig"
-                    breadcrumb: "backend/product_variant/update/_breadcrumb.html.twig"
 
 sylius_backend_product_variant_update:
     path: /products/{productId}/variants/{id}/edit
@@ -65,5 +64,4 @@ sylius_backend_product_variant_update:
                         productId: $productId
                 templates:
                     form: "backend/product_variant/_form.html.twig"
-                    breadcrumb: "backend/product_variant/update/_breadcrumb.html.twig"
             permission: true

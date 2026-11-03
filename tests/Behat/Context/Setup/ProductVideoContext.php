@@ -14,7 +14,7 @@ namespace App\Tests\Behat\Context\Setup;
 use App\Entity\ProductVideo;
 use App\Fixture\Factory\ProductVideoExampleFixture;
 use Behat\Behat\Context\Context;
-use Monofony\Bridge\Behat\Service\SharedStorageInterface;
+use App\Tests\Behat\Bridge\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 

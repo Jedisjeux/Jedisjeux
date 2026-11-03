@@ -15,7 +15,7 @@ use App\Entity\User;
 use App\Fixture\Factory\AppUserExampleFactory;
 use App\Tests\Behat\Service\SecurityService;
 use Behat\Behat\Context\Context;
-use Monofony\Bridge\Behat\Service\SharedStorageInterface;
+use App\Tests\Behat\Bridge\Service\SharedStorageInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;

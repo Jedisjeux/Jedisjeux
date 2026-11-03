@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Tests\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Monofony\Bridge\Behat\Service\EmailCheckerInterface;
-use Monofony\Bridge\Behat\Service\SharedStorageInterface;
+use App\Tests\Behat\Bridge\Service\EmailCheckerInterface;
+use App\Tests\Behat\Bridge\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 final class EmailContext implements Context

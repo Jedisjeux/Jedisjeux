@@ -14,7 +14,7 @@ namespace App\Tests\Behat\Page\Backend\ProductFile;
 use App\Tests\Behat\Behaviour\SpecifiesItsTitle;
 use App\Tests\Behat\Behaviour\WorkflowActions;
 use Behat\Mink\Exception\ElementNotFoundException;
-use Monofony\Bridge\Behat\Crud\AbstractUpdatePage;
+use App\Tests\Behat\Bridge\Crud\AbstractUpdatePage;
 use Webmozart\Assert\Assert;
 
 class UpdatePage extends AbstractUpdatePage

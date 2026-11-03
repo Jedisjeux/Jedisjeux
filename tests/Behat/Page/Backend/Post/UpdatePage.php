@@ -11,7 +11,7 @@
 
 namespace App\Tests\Behat\Page\Backend\Post;
 
-use Monofony\Bridge\Behat\Crud\AbstractUpdatePage;
+use App\Tests\Behat\Bridge\Crud\AbstractUpdatePage;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>

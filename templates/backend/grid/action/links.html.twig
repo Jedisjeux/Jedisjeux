@@ -1,0 +1,21 @@
+{% if options.visible ?? true %}
+    <div class="dropdown">
+        <button type="button" class="btn dropdown-toggle {{ options.class|default('') }}" data-bs-toggle="dropdown" aria-expanded="false">
+            {% if options.icon is defined %}{{ ux_icon(options.icon) }}{% endif %}
+            {{ action.label|trans }}
+        </button>
+        <div class="dropdown-menu dropdown-menu-end">
+            {% if options.header is defined %}
+                <h6 class="dropdown-header">{{ options.header.label|trans }}</h6>
+            {% endif %}
+            {% for link in options.links %}
+                {% if link.visible ?? true %}
+                    <a class="dropdown-item" href="{{ link.url is defined ? link.url : path(link.route, link.parameters|default({})) }}">
+                        {% if link.icon is defined %}{{ ux_icon(link.icon) }}{% endif %}
+                        {{ link.label|trans }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

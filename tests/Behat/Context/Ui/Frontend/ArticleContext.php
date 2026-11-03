@@ -18,7 +18,7 @@ use App\Tests\Behat\Page\Frontend\Article\ShowPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use App\Entity\Article;
 use Behat\Behat\Context\Context;
-use Monofony\Bridge\Behat\Service\Resolver\CurrentPageResolverInterface;
+use App\Tests\Behat\Bridge\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;

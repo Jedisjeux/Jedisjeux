@@ -1,22 +1,16 @@
-<div class="ui active tab" data-tab="details">
-    <h3 class="ui dividing header">{{ 'sylius.ui.details'|trans }}</h3>
-    <div class="ui two column stackable grid">
-        <div class="column">
-            <div class="ui segment">
-                <div class="two fields">
-                    {{ form_row(form.firstName) }}
-                    {{ form_row(form.lastName) }}
-                </div>
-            </div>
+<div class="tab-pane active show" id="tab-details" role="tabpanel">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{ 'sylius.ui.details'|trans }}</h3>
         </div>
-        <div class="column">
-            <div class="ui segment">
-                {{ form_row(form.zone) }}
-                {{ form_row(form.website) }}
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">{{ form_row(form.firstName) }}</div>
+                <div class="col-md-6">{{ form_row(form.lastName) }}</div>
+                <div class="col-md-6">{{ form_row(form.zone) }}</div>
+                <div class="col-md-6">{{ form_row(form.website) }}</div>
             </div>
+            {{ form_row(form.description) }}
         </div>
-    </div>
-    <div class="ui segment">
-        {{ form_row(form.description) }}
     </div>
 </div>

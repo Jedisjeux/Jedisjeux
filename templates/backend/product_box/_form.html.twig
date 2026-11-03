@@ -1,10 +1,12 @@
-<div class="ui stackable grid">
-    <div class="twelve wide column">
-        <div class="ui segment">
-            {{ form_widget(form) }}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-3">
+            <div class="card-body">
+                {{ form_widget(form) }}
+            </div>
         </div>
     </div>
-    <div class="four wide column">
+    <div class="col-md-4">
         {% include 'backend/product_box/_product.html.twig' %}
         {% include 'backend/product_box/_author.html.twig' %}
     </div>

@@ -577,6 +577,6 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
      */
     public function __toString(): string
     {
-        return $this->getTitle();
+        return (string) $this->getTitle();
     }
 }

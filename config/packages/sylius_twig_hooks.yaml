@@ -1,0 +1,40 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.base#base_title':
+            default:
+                template: 'backend/layout/title.html.twig'
+
+        'sylius_admin.base#stylesheets':
+            app:
+                template: 'backend/layout/stylesheets.html.twig'
+
+        'sylius_admin.base#javascripts':
+            app:
+                template: 'backend/layout/javascripts.html.twig'
+
+        'sylius_admin.common.component.sidebar.logo':
+            image:
+                template: 'backend/layout/logo.html.twig'
+
+        'sylius_admin.common.component.navbar.items':
+            website:
+                template: 'backend/layout/navbar/website.html.twig'
+                priority: 100
+
+        'sylius_admin.common.create.content.header.title_block.actions':
+            toolbar:
+                template: 'backend/crud/common/toolbar.html.twig'
+                priority: 100
+
+        'sylius_admin.common.update.content.header.title_block.actions':
+            toolbar:
+                template: 'backend/crud/common/toolbar.html.twig'
+                priority: 100
+
+        'sylius_admin.common.create.content.form.sections.general':
+            default:
+                template: 'backend/crud/common/form.html.twig'
+
+        'sylius_admin.common.update.content.form.sections.general':
+            default:
+                template: 'backend/crud/common/form.html.twig'

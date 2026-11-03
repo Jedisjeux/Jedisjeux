@@ -11,8 +11,8 @@
 
 namespace App\Tests\Behat\Service;
 
-use Monofony\Bridge\Behat\Service\AbstractSecurityService;
-use Monofony\Bridge\Behat\Service\Setter\CookieSetterInterface;
+use App\Tests\Behat\Bridge\Service\AbstractSecurityService;
+use App\Tests\Behat\Bridge\Service\Setter\CookieSetterInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionFactoryInterface;
 

@@ -1,0 +1,13 @@
+sylius_twig_hooks:
+    hooks:
+        'sylius_admin.festival_list_item.index.content.header':
+            breadcrumbs:
+                template: 'backend/festival_list_item/index/_header.html.twig'
+
+        'sylius_admin.festival_list_item.create.content.header':
+            breadcrumbs:
+                template: 'backend/festival_list_item/create/_breadcrumb.html.twig'
+
+        'sylius_admin.festival_list_item.update.content.header':
+            breadcrumbs:
+                template: 'backend/festival_list_item/update/_breadcrumb.html.twig'

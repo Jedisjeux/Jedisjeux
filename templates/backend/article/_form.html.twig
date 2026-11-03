@@ -1,13 +1,15 @@
+{% set article = form.vars.data %}
+
 {{ form_errors(form) }}
 
 {% include 'backend/article/_steps.html.twig' %}
 
-<div class="ui stackable grid sylius-tabular-form">
-    <div class="three wide column">
+<div class="row">
+    <div class="col-md-3">
         {% include 'backend/article/_menu.html.twig' %}
     </div>
-    <div class="thirteen wide column">
-        <div>
+    <div class="col-md-9">
+        <div class="tab-content">
             {% include 'backend/article/_tabs.html.twig' %}
         </div>
     </div>
