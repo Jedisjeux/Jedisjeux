@@ -6,13 +6,12 @@ sylius_api_product_view_count_update:
         _sylius:
             form: App\Form\Type\ProductViewCountType
 
-sylius_api_product:
-    resource: |
-        section: api
-        alias: sylius.product
-        only: [index, show]
-        grid: sylius_api_product
-        identifier: code
-        criteria:
-            code: $code
-    type: sylius.resource_api
+sylius_api_product_show:
+    methods: [GET]
+    path: /products/{code}
+    defaults:
+        _controller: sylius.controller.product::showAction
+        _sylius:
+            section: api
+            criteria:
+                code: $code

@@ -1,6 +1,4 @@
 imports:
-    - { resource: 'grids/api/product.yaml' }
-
     - { resource: 'grids/backend/article.yaml' }
     - { resource: 'grids/backend/article_for_product.yaml' }
     - { resource: 'grids/backend/article_review.yaml' }

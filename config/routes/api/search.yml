@@ -1,6 +1,0 @@
-app_api_search_autocomplete:
-    path: /search/autocomplete/
-    methods: [GET]
-    defaults:
-        _controller: app.controller.elastic_search
-        _format: json

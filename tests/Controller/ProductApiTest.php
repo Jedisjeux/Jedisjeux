@@ -39,20 +39,6 @@ class ProductApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_allows_indexing_product()
-    {
-        $this->loadFixturesFromFile('resources/products.yml');
-        $this->loadFixturesFromFile('resources/many_products.yml');
-
-        $this->client->request('GET', '/api/products/', [], [], static::$authorizedHeaderWithAccept);
-
-        $response = $this->client->getResponse();
-        $this->assertResponse($response, 'product/index_response', Response::HTTP_OK);
-    }
-
-    /**
-     * @test
-     */
     public function it_allows_showing_product()
     {
         $products = $this->loadFixturesFromFile('resources/products.yml');
