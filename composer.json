@@ -17,7 +17,7 @@
   "require": {
     "php": "^8.2",
     "ext-zip": "*",
-    "api-platform/core": "^2.6",
+    "api-platform/core": "^4.1",
     "doctrine/doctrine-bundle": "^1.12 || ^2.0",
     "doctrine/doctrine-fixtures-bundle": "^3.4",
     "doctrine/doctrine-migrations-bundle": "^3.2",
