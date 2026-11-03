@@ -19,7 +19,7 @@ class InstallDataCommand extends AbstractInstallCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('app:install:data')
@@ -34,7 +34,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln(sprintf('Loading Jedisjeux data for environment <info>%s</info>.', $this->getEnvironment()));
 

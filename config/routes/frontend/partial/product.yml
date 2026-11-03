@@ -10,16 +10,6 @@ sylius_partial_product_index:
     requirements:
         template: "[^?]+"
 
-sylius_partial_product_status_show:
-    methods: [GET]
-    path: /{id}/statuses/
-    defaults:
-        _controller: sylius.controller.product::showStatusAction
-        _sylius:
-            template: $template
-    requirements:
-        template: "[^?]+"
-
 sylius_frontend_partial_product_show_by_slug:
     path: /{slug}
     methods: [GET]

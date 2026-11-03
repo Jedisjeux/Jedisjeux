@@ -78,7 +78,7 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     /**
      * @var ArticleImage
      */
-    #[ORM\OneToOne(targetEntity: \ArticleImage::class, cascade: ['persist', 'merge'])]
+    #[ORM\OneToOne(targetEntity: ArticleImage::class, cascade: ['persist', 'merge'])]
     #[Assert\Valid]
     protected $mainImage;
 
@@ -123,7 +123,7 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     /**
      * @var SlideShowBlock|null
      */
-    #[ORM\OneToOne(targetEntity: \SlideShowBlock::class, cascade: ['persist', 'merge'])]
+    #[ORM\OneToOne(targetEntity: SlideShowBlock::class, cascade: ['persist', 'merge'])]
     protected $slideShowBlock;
 
     /**
@@ -153,7 +153,7 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     /**
      * @var Collection|Block[]
      */
-    #[ORM\OneToMany(targetEntity: \Block::class, mappedBy: 'article', cascade: ['persist', 'merge'])]
+    #[ORM\OneToMany(targetEntity: Block::class, mappedBy: 'article', cascade: ['persist', 'merge'])]
     #[ORM\OrderBy(['position' => 'ASC'])]
     #[Assert\Valid]
     protected $blocks;

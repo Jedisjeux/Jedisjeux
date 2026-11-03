@@ -31,13 +31,13 @@ class DealerPrice implements ResourceInterface
     /**
      * @var Dealer
      */
-    #[ORM\ManyToOne(targetEntity: \Dealer::class)]
+    #[ORM\ManyToOne(targetEntity: Dealer::class)]
     protected $dealer;
 
     /**
      * @var Product
      */
-    #[ORM\ManyToOne(targetEntity: \Product::class)]
+    #[ORM\ManyToOne(targetEntity: Product::class)]
     protected $product;
 
     /**

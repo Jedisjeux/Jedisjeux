@@ -43,27 +43,27 @@ class Post implements ResourceInterface
     /**
      * @var Topic
      */
-    #[ORM\OneToOne(targetEntity: \Topic::class, mappedBy: 'mainPost')]
+    #[ORM\OneToOne(targetEntity: Topic::class, mappedBy: 'mainPost')]
     protected $parent;
 
     /**
      * @var Topic
      */
-    #[ORM\ManyToOne(targetEntity: \Topic::class, inversedBy: 'posts')]
+    #[ORM\ManyToOne(targetEntity: Topic::class, inversedBy: 'posts')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     protected $topic;
 
     /**
      * @var GamePlay
      */
-    #[ORM\ManyToOne(targetEntity: \GamePlay::class)]
+    #[ORM\ManyToOne(targetEntity: GamePlay::class)]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     protected $gamePlay;
 
     /**
      * @var Article
      */
-    #[ORM\ManyToOne(targetEntity: \Article::class)]
+    #[ORM\ManyToOne(targetEntity: Article::class)]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     protected $article;
 

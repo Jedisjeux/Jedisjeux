@@ -71,7 +71,7 @@ class FestivalList implements ResourceInterface
     /**
      * @var FestivalListImage|null
      */
-    #[ORM\ManyToOne(targetEntity: \FestivalListImage::class, cascade: ['persist'])]
+    #[ORM\ManyToOne(targetEntity: FestivalListImage::class, cascade: ['persist'])]
     protected $image;
 
     /**

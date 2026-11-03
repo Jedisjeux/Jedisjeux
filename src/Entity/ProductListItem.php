@@ -28,7 +28,7 @@ class ProductListItem implements ResourceInterface
     /**
      * @var ProductList
      */
-    #[ORM\ManyToOne(targetEntity: \ProductList::class, inversedBy: 'items')]
+    #[ORM\ManyToOne(targetEntity: ProductList::class, inversedBy: 'items')]
     protected $list;
 
     /**

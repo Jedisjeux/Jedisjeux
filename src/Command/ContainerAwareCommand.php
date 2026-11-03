@@ -14,16 +14,19 @@ declare(strict_types=1);
 namespace App\Command;
 
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Replaces the FrameworkBundle ContainerAwareCommand removed in Symfony 5.
  */
-abstract class ContainerAwareCommand extends Command implements ContainerAwareInterface
+abstract class ContainerAwareCommand extends Command
 {
-    use ContainerAwareTrait;
+    protected ?ContainerInterface $container = null;
+
+    public function setContainer(?ContainerInterface $container = null): void
+    {
+        $this->container = $container;
+    }
 
     protected function getContainer(): ContainerInterface
     {

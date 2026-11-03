@@ -32,7 +32,7 @@ class SendRegistrationEmailSubscriber implements EventSubscriberInterface
         $this->sender = $sender;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             'sylius.customer.post_register' => 'onRegister',

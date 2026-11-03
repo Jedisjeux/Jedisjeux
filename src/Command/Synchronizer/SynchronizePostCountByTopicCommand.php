@@ -17,14 +17,14 @@ use App\Entity\Topic;
 use App\Repository\TopicRepository;
 use App\Updater\PostCountByTopicUpdater;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'app:synchronize-post-count-by-topic')]
 class SynchronizePostCountByTopicCommand extends Command
 {
-    protected static $defaultName = 'app:synchronize-post-count-by-topic';
-
     /** @var PostCountByTopicUpdater */
     private $postCountByTopicUpdater;
 
@@ -49,7 +49,7 @@ class SynchronizePostCountByTopicCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('Synchronizing post count by topic...');
         $this->recalculate();

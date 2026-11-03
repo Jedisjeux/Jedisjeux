@@ -35,7 +35,7 @@ class GenerateProductTaxonSitemapSubscriberSpec extends ObjectBehavior
     function it_subscribes_to_events(): void
     {
         $this::getSubscribedEvents()->shouldReturn([
-            SitemapPopulateEvent::ON_SITEMAP_POPULATE => 'populate',
+            SitemapPopulateEvent::class => 'populate',
         ]);
     }
 

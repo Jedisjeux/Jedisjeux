@@ -34,7 +34,7 @@ class TransformPhilibertPriceListCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('app:philibert-price-list:transform')
@@ -49,7 +49,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln(sprintf('<comment>%s</comment>', $this->getDescription()));
         $this->removeTmpFile();

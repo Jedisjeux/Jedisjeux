@@ -462,8 +462,6 @@ services:
 
     App\Templating\Helper\CurrencyHelper:
         lazy: true
-        tags:
-            - { name: templating.helper, alias: "sylius_currency" }
 
     App\Twig\CurrencyExtension:
         arguments:

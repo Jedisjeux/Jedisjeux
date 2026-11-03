@@ -42,19 +42,19 @@ class ProductBox implements ResourceInterface
     /**
      * @var ProductInterface|null
      */
-    #[ORM\ManyToOne(targetEntity: \Product::class)]
+    #[ORM\ManyToOne(targetEntity: Product::class)]
     private $product;
 
     /**
      * @var ProductVariantInterface|null
      */
-    #[ORM\ManyToOne(targetEntity: \ProductVariant::class, inversedBy: 'boxes')]
+    #[ORM\ManyToOne(targetEntity: ProductVariant::class, inversedBy: 'boxes')]
     private $productVariant;
 
     /**
      * @var ProductBoxImage|null
      */
-    #[ORM\OneToOne(targetEntity: \ProductBoxImage::class, cascade: ['persist'])]
+    #[ORM\OneToOne(targetEntity: ProductBoxImage::class, cascade: ['persist'])]
     #[Assert\Valid]
     private $image;
 

@@ -4,6 +4,9 @@ parameters:
 services:
     Symfony\Component\HttpFoundation\Session\SessionFactoryInterface: '@session.factory'
 
+    # Behat runs the kernel from the CLI, where Symfony renders the errors as text instead of the Twig error pages
+    error_renderer.default: '@error_renderer.html'
+
     _defaults:
         autowire: true
         autoconfigure: true

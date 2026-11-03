@@ -68,21 +68,21 @@ class Block implements ResourceInterface
     /**
      * @var BlockImage
      */
-    #[ORM\OneToOne(targetEntity: \BlockImage::class, cascade: ['persist', 'merge'])]
+    #[ORM\OneToOne(targetEntity: BlockImage::class, cascade: ['persist', 'merge'])]
     protected $image;
 
     /**
      * @var Article
      */
     #[Gedmo\SortableGroup]
-    #[ORM\ManyToOne(targetEntity: \Article::class, inversedBy: 'blocks')]
+    #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'blocks')]
     protected $article;
 
     /**
      * @var SlideShowBlock
      */
     #[Gedmo\SortableGroup]
-    #[ORM\ManyToOne(targetEntity: \SlideShowBlock::class, inversedBy: 'blocks', cascade: ['persist', 'merge'])]
+    #[ORM\ManyToOne(targetEntity: SlideShowBlock::class, inversedBy: 'blocks', cascade: ['persist', 'merge'])]
     protected $slideShowBlock;
 
     public function getCode(): ?string

@@ -43,7 +43,7 @@ class DealerContact implements ResourceInterface
     /**
      * @var Dealer|null
      */
-    #[ORM\ManyToOne(targetEntity: \Dealer::class, inversedBy: 'contacts')]
+    #[ORM\ManyToOne(targetEntity: Dealer::class, inversedBy: 'contacts')]
     protected $dealer;
 
     public function getEmail(): ?string

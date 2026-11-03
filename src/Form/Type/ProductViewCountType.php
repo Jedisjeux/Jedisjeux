@@ -22,7 +22,7 @@ class ProductViewCountType extends AbstractViewCountType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Product::class,
@@ -32,7 +32,7 @@ class ProductViewCountType extends AbstractViewCountType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'sylius_product_view_count';
     }

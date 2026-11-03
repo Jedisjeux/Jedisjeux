@@ -22,7 +22,7 @@ class FestivalListImageType extends AbstractImageType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
 
@@ -34,7 +34,7 @@ class FestivalListImageType extends AbstractImageType
     /**
      * @return string
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'app_festival_list_image';
     }

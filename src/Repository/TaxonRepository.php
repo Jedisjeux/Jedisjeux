@@ -17,6 +17,8 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
+ *
+ * @extends BaseTaxonRepository<TaxonInterface>
  */
 class TaxonRepository extends BaseTaxonRepository
 {

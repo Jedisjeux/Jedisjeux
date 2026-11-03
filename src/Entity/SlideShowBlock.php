@@ -28,7 +28,7 @@ class SlideShowBlock implements ResourceInterface
     /**
      * @var Collection|Block[]
      */
-    #[ORM\OneToMany(targetEntity: \Block::class, mappedBy: 'slideShowBlock')]
+    #[ORM\OneToMany(targetEntity: Block::class, mappedBy: 'slideShowBlock')]
     protected $blocks;
 
     public function __construct()

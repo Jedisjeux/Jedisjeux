@@ -14,19 +14,19 @@
 {% endmacro %}
 
 {% if is_granted('ROLE_WORKFLOW') and product.status != constant('PUBLISHED', product) %}
-    {% if state_machine.can('ask_for_translation') %}
+    {% if sm_can(product, 'ask_for_translation', 'sylius_product') %}
         {{ self.updateStateButton(product, 'ask_for_translation', 'language') }}
     {% endif %}
 
-    {% if state_machine.can('ask_for_review') %}
+    {% if sm_can(product, 'ask_for_review', 'sylius_product') %}
         {{ self.updateStateButton(product, 'ask_for_review', 'book') }}
     {% endif %}
 
-    {% if state_machine.can('ask_for_publication') %}
+    {% if sm_can(product, 'ask_for_publication', 'sylius_product') %}
         {{ self.updateStateButton(product, 'ask_for_publication', 'check') }}
     {% endif %}
 
-    {% if state_machine.can('publish') %}
+    {% if sm_can(product, 'publish', 'sylius_product') %}
         {{ self.updateStateButton(product, 'publish', 'upload', 'btn-success') }}
     {% endif %}
 {% endif %}

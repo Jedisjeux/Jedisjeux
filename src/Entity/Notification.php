@@ -66,7 +66,7 @@ class Notification implements ResourceInterface
     /**
      * @var Topic
      */
-    #[ORM\ManyToOne(targetEntity: \Topic::class)]
+    #[ORM\ManyToOne(targetEntity: Topic::class)]
     #[Expose]
     private $topic;
 
@@ -79,19 +79,19 @@ class Notification implements ResourceInterface
     /**
      * @var Article|null
      */
-    #[ORM\ManyToOne(targetEntity: \Article::class)]
+    #[ORM\ManyToOne(targetEntity: Article::class)]
     private $article;
 
     /**
      * @var ProductBox|null
      */
-    #[ORM\ManyToOne(targetEntity: \ProductBox::class)]
+    #[ORM\ManyToOne(targetEntity: ProductBox::class)]
     private $productBox;
 
     /**
      * @var ProductFile|null
      */
-    #[ORM\ManyToOne(targetEntity: \ProductFile::class)]
+    #[ORM\ManyToOne(targetEntity: ProductFile::class)]
     private $productFile;
 
     /**

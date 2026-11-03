@@ -29,6 +29,7 @@ app_backend_festival_list_item_index:
                         festivalListId: $festivalListId
                 icon: list
                 subheader: app.ui.manage_festival_list_items
+                festival_list: expr:notFoundOnNull(service('app.repository.festival_list').find($festivalListId))
 
 app_backend_festival_list_item_create:
     path: /new

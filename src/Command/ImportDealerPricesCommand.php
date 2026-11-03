@@ -93,7 +93,7 @@ class ImportDealerPricesCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('app:dealer-prices:import')
@@ -144,7 +144,7 @@ EOT
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $dealer = $this->ensureDealerAlreadyExists();
         $i = 0;

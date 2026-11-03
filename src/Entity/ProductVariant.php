@@ -56,7 +56,7 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
     /**
      * @var ProductBox[]|Collection
      */
-    #[ORM\OneToMany(targetEntity: \ProductBox::class, mappedBy: 'productVariant')]
+    #[ORM\OneToMany(targetEntity: ProductBox::class, mappedBy: 'productVariant')]
     protected $boxes;
 
     /**

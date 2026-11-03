@@ -25,11 +25,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- *
- * @CustomAssert\MaxPlayerCountGreaterThanOrEqualMinPlayer(groups={"sylius"})
  */
 #[ORM\Entity]
+#[CustomAssert\MaxPlayerCountGreaterThanOrEqualMinPlayer(groups: ['sylius'])]
 #[JMS\ExclusionPolicy('all')]
 #[ORM\Table(name: 'sylius_product')]
 class Product extends BaseProduct implements ProductInterface
@@ -150,7 +148,7 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * @var ArrayCollection|ProductBarcode[]
      */
-    #[ORM\OneToMany(targetEntity: \ProductBarcode::class, mappedBy: 'product', cascade: ['persist', 'merge', 'remove'], orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: ProductBarcode::class, mappedBy: 'product', cascade: ['persist', 'merge', 'remove'], orphanRemoval: true)]
     protected $barcodes;
 
     /**
@@ -164,25 +162,25 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * @var Collection|Article[]
      */
-    #[ORM\OneToMany(targetEntity: \Article::class, mappedBy: 'product')]
+    #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'product')]
     protected $articles;
 
     /**
      * @var Collection|GamePlay[]
      */
-    #[ORM\OneToMany(targetEntity: \GamePlay::class, mappedBy: 'product')]
+    #[ORM\OneToMany(targetEntity: GamePlay::class, mappedBy: 'product')]
     protected $gamePlays;
 
     /**
      * @var Collection|ProductList[]
      */
-    #[ORM\OneToMany(targetEntity: \ProductListItem::class, mappedBy: 'product')]
+    #[ORM\OneToMany(targetEntity: ProductListItem::class, mappedBy: 'product')]
     protected $listItems;
 
     /**
      * @var Collection|Notification[]
      */
-    #[ORM\OneToMany(targetEntity: \Notification::class, mappedBy: 'product', cascade: ['remove'])]
+    #[ORM\OneToMany(targetEntity: Notification::class, mappedBy: 'product', cascade: ['remove'])]
     protected $notifications;
 
     /**
@@ -195,7 +193,7 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * @var Collection|ProductFile[]
      */
-    #[ORM\OneToMany(targetEntity: \ProductFile::class, mappedBy: 'product', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: ProductFile::class, mappedBy: 'product', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private $files;
 
     /**

@@ -3,7 +3,4 @@
     {{ 'app.ui.preview'|trans }}
 </a>
 
-{{ render(url('app_frontend_partial_article_status_show', {
-    'id': resource.id,
-    'template': 'backend/article/button/_status.html.twig'
-})) }}
+{% include 'backend/article/button/_status.html.twig' with { article: resource } %}

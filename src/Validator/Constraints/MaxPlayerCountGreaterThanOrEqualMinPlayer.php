@@ -15,9 +15,8 @@ use Symfony\Component\Validator\Constraint;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
- *
- * @Annotation
  */
+#[\Attribute(\Attribute::TARGET_CLASS)]
 class MaxPlayerCountGreaterThanOrEqualMinPlayer extends Constraint
 {
     public $message = 'app.product.player_count.min_value_should_not_be_greater_than_max_value';
@@ -25,7 +24,7 @@ class MaxPlayerCountGreaterThanOrEqualMinPlayer extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function getTargets()
+    public function getTargets(): string|array
     {
         return self::CLASS_CONSTRAINT;
     }

@@ -25,7 +25,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class ProductVariantType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         parent::buildForm($builder, $options);
 
@@ -74,7 +74,7 @@ class ProductVariantType extends AbstractType
             ->remove('presentation');
     }
 
-    public function getParent()
+    public function getParent(): ?string
     {
         return BaseProductVariantType::class;
     }

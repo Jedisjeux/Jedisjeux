@@ -26,7 +26,7 @@ class PriceList implements ResourceInterface
     /**
      * @var Dealer
      */
-    #[ORM\OneToOne(targetEntity: \Dealer::class, inversedBy: 'priceList')]
+    #[ORM\OneToOne(targetEntity: Dealer::class, inversedBy: 'priceList')]
     protected $dealer;
 
     /**

@@ -29,7 +29,7 @@ class PubBanner extends AbstractImage
     /**
      * @var Dealer
      */
-    #[ORM\ManyToOne(targetEntity: \Dealer::class, inversedBy: 'pubBanners')]
+    #[ORM\ManyToOne(targetEntity: Dealer::class, inversedBy: 'pubBanners')]
     protected $dealer;
 
     public function getTargetUrl(): ?string

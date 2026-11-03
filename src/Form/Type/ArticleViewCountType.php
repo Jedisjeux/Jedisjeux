@@ -22,7 +22,7 @@ class ArticleViewCountType extends AbstractViewCountType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Article::class,
@@ -32,7 +32,7 @@ class ArticleViewCountType extends AbstractViewCountType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'app_article_view_count';
     }

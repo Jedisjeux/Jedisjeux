@@ -30,7 +30,7 @@ class FestivalListItem implements ResourceInterface
     /**
      * @var FestivalList
      */
-    #[ORM\ManyToOne(targetEntity: \FestivalList::class)]
+    #[ORM\ManyToOne(targetEntity: FestivalList::class)]
     protected $list;
 
     /**

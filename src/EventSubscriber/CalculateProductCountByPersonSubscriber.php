@@ -38,7 +38,7 @@ class CalculateProductCountByPersonSubscriber implements EventSubscriberInterfac
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             ProductEvents::PRE_CREATE => 'onProductCreate',

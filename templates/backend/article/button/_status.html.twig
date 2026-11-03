@@ -14,15 +14,15 @@
 {% endmacro %}
 
 {% if is_granted('ROLE_WORKFLOW') and article.status != constant('App\\Entity\\Article::STATUS_PUBLISHED') %}
-    {% if state_machine.can('ask_for_review') %}
+    {% if sm_can(article, 'ask_for_review', 'app_article') %}
         {{ self.updateStateButton(article, 'ask_for_review', 'book') }}
     {% endif %}
 
-    {% if state_machine.can('ask_for_publication') %}
+    {% if sm_can(article, 'ask_for_publication', 'app_article') %}
         {{ self.updateStateButton(article, 'ask_for_publication', 'thumb-up') }}
     {% endif %}
 
-    {% if state_machine.can('publish') %}
+    {% if sm_can(article, 'publish', 'app_article') %}
         {{ self.updateStateButton(article, 'publish', 'upload', 'btn-success') }}
     {% endif %}
 {% endif %}

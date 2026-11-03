@@ -43,7 +43,7 @@ class Dealer implements ResourceInterface
     /**
      * @var DealerImage
      */
-    #[ORM\OneToOne(targetEntity: \DealerImage::class, cascade: ['persist'])]
+    #[ORM\OneToOne(targetEntity: DealerImage::class, cascade: ['persist'])]
     #[Assert\Type(type: 'App\Entity\DealerImage')]
     #[Assert\Valid]
     protected $image;
@@ -51,7 +51,7 @@ class Dealer implements ResourceInterface
     /**
      * @var PriceList
      */
-    #[ORM\OneToOne(targetEntity: \PriceList::class, mappedBy: 'dealer', cascade: ['persist', 'merge', 'remove'])]
+    #[ORM\OneToOne(targetEntity: PriceList::class, mappedBy: 'dealer', cascade: ['persist', 'merge', 'remove'])]
     #[Assert\Type(type: 'App\Entity\PriceList')]
     #[Assert\Valid]
     protected $priceList;
@@ -59,13 +59,13 @@ class Dealer implements ResourceInterface
     /**
      * @var ArrayCollection|PubBanner[]
      */
-    #[ORM\OneToMany(targetEntity: \PubBanner::class, mappedBy: 'dealer', orphanRemoval: true, cascade: ['persist', 'merge', 'remove'])]
+    #[ORM\OneToMany(targetEntity: PubBanner::class, mappedBy: 'dealer', orphanRemoval: true, cascade: ['persist', 'merge', 'remove'])]
     protected $pubBanners;
 
     /**
      * @var Collection|DealerContact[]
      */
-    #[ORM\OneToMany(targetEntity: \DealerContact::class, mappedBy: 'dealer', orphanRemoval: true, cascade: ['persist', 'merge', 'remove'])]
+    #[ORM\OneToMany(targetEntity: DealerContact::class, mappedBy: 'dealer', orphanRemoval: true, cascade: ['persist', 'merge', 'remove'])]
     protected $contacts;
 
     /**

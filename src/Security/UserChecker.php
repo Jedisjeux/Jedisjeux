@@ -14,10 +14,7 @@ namespace App\View;
 namespace App\Security;
 
 use Sylius\Component\User\Model\UserInterface as SyliusUserInterface;
-use Symfony\Component\Security\Core\Exception\AccountExpiredException;
-use Symfony\Component\Security\Core\Exception\CredentialsExpiredException;
 use Symfony\Component\Security\Core\Exception\DisabledException;
-use Symfony\Component\Security\Core\Exception\LockedException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -27,17 +24,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 final class UserChecker implements UserCheckerInterface
 {
-    public function checkPreAuth(UserInterface $user)
+    public function checkPreAuth(UserInterface $user): void
     {
         if (!$user instanceof SyliusUserInterface) {
             return;
-        }
-
-        if (!$user->isAccountNonLocked()) {
-            $exception = new LockedException('User account is locked.');
-            $exception->setUser($user);
-
-            throw $exception;
         }
 
         if (!$user->isEnabled()) {
@@ -46,26 +36,9 @@ final class UserChecker implements UserCheckerInterface
 
             throw $exception;
         }
-
-        if (!$user->isAccountNonExpired()) {
-            $exception = new AccountExpiredException('User account has expired.');
-            $exception->setUser($user);
-
-            throw $exception;
-        }
     }
 
-    public function checkPostAuth(UserInterface $user)
+    public function checkPostAuth(UserInterface $user): void
     {
-        if (!$user instanceof SyliusUserInterface) {
-            return;
-        }
-
-        if (!$user->isCredentialsNonExpired()) {
-            $exception = new CredentialsExpiredException('User credentials have expired.');
-            $exception->setUser($user);
-
-            throw $exception;
-        }
     }
 }

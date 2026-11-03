@@ -22,7 +22,7 @@ class TopicViewCountType extends AbstractViewCountType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Topic::class,
@@ -32,7 +32,7 @@ class TopicViewCountType extends AbstractViewCountType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'app_topic_view_count';
     }
