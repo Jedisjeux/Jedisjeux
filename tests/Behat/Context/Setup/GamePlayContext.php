@@ -112,6 +112,35 @@ class GamePlayContext implements Context
     }
 
     /**
+     * @Given /^I played (product "[^"]+") (once|\d+ times) in (\d{4})$/
+     */
+    public function iPlayedProductInYear(ProductInterface $product, string $times, int $year): void
+    {
+        $this->customerPlayedProductInYear($this->sharedStorage->get('customer'), $product, $times, $year);
+    }
+
+    /**
+     * @Given /^(customer "[^"]+") played (product "[^"]+") (once|\d+ times) in (\d{4})$/
+     */
+    public function customerPlayedProductInYear(CustomerInterface $customer, ProductInterface $product, string $times, int $year): void
+    {
+        $count = 'once' === $times ? 1 : (int) $times;
+
+        for ($i = 0; $i < $count; ++$i) {
+            /** @var GamePlay $gamePlay */
+            $gamePlay = $this->gamePlayFactory->create([
+                'product' => $product,
+                'author' => $customer,
+                // Spread over the year, without crossing its bounds
+                'played_at' => sprintf('%d-%02d-15', $year, $i % 12 + 1),
+                'created_at' => 'now',
+            ]);
+
+            $this->gamePlayRepository->add($gamePlay);
+        }
+    }
+
+    /**
      * @Given /^(this product) has one game play from (customer "[^"]+") with (\d+) comments$/
      * @Given /^(this product) has(?:| also) a game play added by (customer "[^"]+") with (\d+) comments(?:|, created (\d+) days ago)$/
      *

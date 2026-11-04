@@ -76,6 +76,9 @@ abstract class AbstractResourceFixture implements FixtureInterface
 
         $optionsNode->children()->integerNode('random')->min(0)->defaultValue(0);
 
+        // Options shared by the random resources
+        $this->configureResourceNode($optionsNode->children()->arrayNode('prototype'));
+
         /** @var ArrayNodeDefinition $resourcesNode */
         $resourcesNode = $optionsNode->children()->arrayNode('custom');
 

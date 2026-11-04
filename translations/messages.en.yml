@@ -30,6 +30,7 @@ app:
         boardgames: Boardgames
         box: Box
         box_content: Box content
+        busiest_month: Busiest month
         catalog: Catalog
         categories: Categories
         choose_category: Choose category
@@ -52,6 +53,7 @@ app:
         designer: Designer
         designers: Designers
         destination: Destination
+        different_games_played: Different games played
         do_not_have_an_account_yet: Don't have an account yet?
         download: Download
         duration: Duration
@@ -75,6 +77,7 @@ app:
         editors: Editors
         error: Error
         errors: Errors
+        favorite_game: Favorite game
         festival_lists: Festival Lists
         festival_list_items: Festival List items
         file: File
@@ -92,6 +95,8 @@ app:
         game_play_of: Partie de %product%
         game_play: Game play
         game_plays: Game plays
+        game_plays_in_year: "Game plays in %year%"
+        game_plays_per_month: Game plays per month
         game_play_details: Game play details
         game_play_images: Game play images
         game_play_specifications: Game play specifications
@@ -157,6 +162,7 @@ app:
         moderation: Moderation
         more: More
         most_commented_first: Most commented first
+        most_played_games: Most played games
         most_viewed: Most viewed
         most_viewed_first: Most viewed first
         move_up: Move up
@@ -164,6 +170,7 @@ app:
         my_game_library: My game library
         my_game_lists: My game lists
         my_game_plays: My game plays
+        my_statistics: My statistics
         my_virtual_game_library: My virtual game library
         name: Name
         new_article: New article
@@ -182,6 +189,7 @@ app:
         new_topic: New topic
         newest_release_first: Newest release first
         news: News
+        no_game_play_in_year: "No game play recorded in %year%."
         normal: Normal
         not_found_page: Not found page
         not_found_pages: not_found_pages

@@ -1,0 +1,5 @@
+app_frontend_account_statistics:
+    methods: [GET]
+    path: /statistiques/
+    defaults:
+        _controller: App\Controller\AccountStatisticsController::indexAction

@@ -483,6 +483,59 @@ sylius_fixtures:
                 game_play:
                     options:
                         random: 20
+                # Game plays of the demo members over the last three years, with a favorite game each, for their statistics page
+                customer_game_play:
+                    name: game_play
+                    options:
+                        random: 40
+                        prototype:
+                            author: "customer@example.com"
+                customer_favorite_game_play:
+                    name: game_play
+                    options:
+                        random: 12
+                        prototype:
+                            author: "customer@example.com"
+                            product: "cargo_celeste"
+                blue_game_play:
+                    name: game_play
+                    options:
+                        random: 70
+                        prototype:
+                            author: "blue@example.com"
+                blue_favorite_game_play:
+                    name: game_play
+                    options:
+                        random: 18
+                        prototype:
+                            author: "blue@example.com"
+                            product: "hexapolis"
+                loic_425_game_play:
+                    name: game_play
+                    options:
+                        random: 50
+                        prototype:
+                            author: "loic_425@example.com"
+                loic_425_favorite_game_play:
+                    name: game_play
+                    options:
+                        random: 15
+                        prototype:
+                            author: "loic_425@example.com"
+                            product: "la_derniere_bougie"
+                meeplefou_game_play:
+                    name: game_play
+                    options:
+                        random: 30
+                        prototype:
+                            author: "meeplefou@example.com"
+                meeplefou_favorite_game_play:
+                    name: game_play
+                    options:
+                        random: 10
+                        prototype:
+                            author: "meeplefou@example.com"
+                            product: "pirates_de_poche"
                 game_play_image:
                     options:
                         random: 40
