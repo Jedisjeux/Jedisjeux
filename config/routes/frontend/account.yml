@@ -48,3 +48,6 @@ app_account_product_list:
 
 app_account_product_list_item:
     resource: "account/product_list_item.yml"
+
+app_account_statistics:
+    resource: "account/statistics.yml"

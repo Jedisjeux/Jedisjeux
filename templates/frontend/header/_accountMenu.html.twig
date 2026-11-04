@@ -10,6 +10,7 @@
         <li><a href="{{ path('app_frontend_account_product_list_index') }}"><i class="fa fa-list"></i>{{ 'app.ui.my_game_lists'|trans }}</a></li>
         <li><a href="{{ path('app_frontend_user_games_library', {'username': app.user.usernameCanonical}) }}"><i class="fa fa-th"></i>{{ 'app.ui.my_virtual_game_library'|trans }}</a></li>
         <li><a href="{{ path('app_frontend_account_game_play_index') }}"><i class="fa fa-play"></i>{{ 'app.ui.my_game_plays'|trans }}</a></li>
+        <li><a href="{{ path('app_frontend_account_statistics') }}"><i class="fa fa-bar-chart"></i>{{ 'app.ui.my_statistics'|trans }}</a></li>
         <li><a class="app-logout-button" href="{{ path('app_frontend_logout') }}"><i class="fa fa-sign-out"></i>{{ 'sylius.ui.logout'|trans }}</a></li>
     </ul>
 </div>

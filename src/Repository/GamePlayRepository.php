@@ -38,6 +38,118 @@ class GamePlayRepository extends EntityRepository
     }
 
     /**
+     * @return array{gamePlayCount: int, productCount: int}
+     */
+    public function countByAuthorBetween(int $authorId, \DateTimeInterface $startDate, \DateTimeInterface $endDate): array
+    {
+        $result = $this->createAuthorBetweenQueryBuilder($authorId, $startDate, $endDate)
+            ->select('COUNT(o.id) AS gamePlayCount')
+            ->addSelect('COUNT(DISTINCT o.product) AS productCount')
+            ->getQuery()
+            ->getSingleResult();
+
+        return [
+            'gamePlayCount' => (int) $result['gamePlayCount'],
+            'productCount' => (int) $result['productCount'],
+        ];
+    }
+
+    /**
+     * @return list<array{name: string, slug: string, imagePath: string|null, gamePlayCount: int}>
+     */
+    public function findMostPlayedByAuthorBetween(
+        int $authorId,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate,
+        string $locale,
+    ): array {
+        $rows = $this->createAuthorBetweenQueryBuilder($authorId, $startDate, $endDate)
+            ->select('productTranslation.name AS name')
+            ->addSelect('productTranslation.slug AS slug')
+            ->addSelect('MAX(image.path) AS imagePath')
+            ->addSelect('COUNT(DISTINCT o.id) AS gamePlayCount')
+            ->join('o.product', 'product')
+            ->join('product.translations', 'productTranslation', Join::WITH, 'productTranslation.locale = :locale')
+            ->leftJoin('product.variants', 'variant', Join::WITH, 'variant.position = 0')
+            ->leftJoin('variant.images', 'image', Join::WITH, 'image.main = :main')
+            ->setParameter('locale', $locale)
+            ->setParameter('main', true)
+            ->groupBy('product.id')
+            ->addGroupBy('productTranslation.name')
+            ->addGroupBy('productTranslation.slug')
+            ->orderBy('gamePlayCount', 'DESC')
+            ->addOrderBy('productTranslation.name', 'ASC')
+            ->getQuery()
+            ->getArrayResult();
+
+        return array_map(static fn (array $row): array => [
+            'name' => (string) $row['name'],
+            'slug' => (string) $row['slug'],
+            'imagePath' => null === $row['imagePath'] ? null : 'uploads/img/'.$row['imagePath'],
+            'gamePlayCount' => (int) $row['gamePlayCount'],
+        ], $rows);
+    }
+
+    /**
+     * @return array<int, int> Game play count indexed by month number (1 to 12)
+     */
+    public function countByMonthForAuthorBetween(int $authorId, \DateTimeInterface $startDate, \DateTimeInterface $endDate): array
+    {
+        // Grouped by day (playedAt is a date) then by month in PHP, as DQL has no MONTH() function here
+        $rows = $this->createAuthorBetweenQueryBuilder($authorId, $startDate, $endDate)
+            ->select('o.playedAt AS playedAt')
+            ->addSelect('COUNT(o.id) AS gamePlayCount')
+            ->groupBy('o.playedAt')
+            ->getQuery()
+            ->getArrayResult();
+
+        $months = array_fill(1, 12, 0);
+
+        foreach ($rows as $row) {
+            $months[(int) $row['playedAt']->format('n')] += (int) $row['gamePlayCount'];
+        }
+
+        return $months;
+    }
+
+    /**
+     * @return list<int> Years with at least one game play, most recent first
+     */
+    public function findPlayedYearsByAuthor(int $authorId): array
+    {
+        $result = $this->createQueryBuilder('o')
+            ->select('MIN(o.playedAt) AS firstPlayedAt')
+            ->addSelect('MAX(o.playedAt) AS lastPlayedAt')
+            ->andWhere('o.author = :author')
+            ->setParameter('author', $authorId)
+            ->getQuery()
+            ->getSingleResult();
+
+        if (null === $result['firstPlayedAt'] || null === $result['lastPlayedAt']) {
+            return [];
+        }
+
+        return range(
+            (int) (new \DateTime($result['lastPlayedAt']))->format('Y'),
+            (int) (new \DateTime($result['firstPlayedAt']))->format('Y'),
+        );
+    }
+
+    private function createAuthorBetweenQueryBuilder(
+        int $authorId,
+        \DateTimeInterface $startDate,
+        \DateTimeInterface $endDate,
+    ): QueryBuilder {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.author = :author')
+            ->andWhere('o.playedAt >= :startDate')
+            ->andWhere('o.playedAt < :endDate')
+            ->setParameter('author', $authorId)
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate);
+    }
+
+    /**
      * @return QueryBuilder
      */
     protected function getQueryBuilder()

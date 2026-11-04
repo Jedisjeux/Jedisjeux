@@ -30,6 +30,7 @@ app:
         boardgames: Jeux de société
         box: Encart
         box_content: Contenu de la boite
+        busiest_month: Mois le plus joué
         catalog: Catalogue
         categories: Catégories
         choose_category: Choisir une catégorie
@@ -52,6 +53,7 @@ app:
         designer: Auteur
         designers: Auteurs
         destination: Destination
+        different_games_played: Jeux différents joués
         do_not_have_an_account_yet: Pas encore de compte ?
         download: Télécharger
         duration: Durée
@@ -75,6 +77,7 @@ app:
         editors: Editeurs
         error: Erreur
         errors: Erreurs
+        favorite_game: Jeu favori
         festival_lists: Listes de festival
         festival_list_items: Items de liste de festival
         file: Fichier
@@ -92,6 +95,8 @@ app:
         game_play_of: Partie de %product%
         game_play: Partie de jeu
         game_plays: Parties de jeu
+        game_plays_in_year: "Parties jouées en %year%"
+        game_plays_per_month: Parties par mois
         game_play_details: Informations de la partie
         game_play_images: Photos de partie
         game_play_specifications: Spécifications de la partie
@@ -157,6 +162,7 @@ app:
         moderation: Modération
         more: Plus
         most_commented_first: Plus commentés en premier
+        most_played_games: Jeux les plus joués
         most_viewed: Plus vus
         most_viewed_first: Plus vus en premier
         move_up: Monter
@@ -164,6 +170,7 @@ app:
         my_game_library: Ma ludothèque
         my_game_lists: Mes listes de jeu
         my_game_plays: Mes parties de jeu
+        my_statistics: Mes statistiques
         my_virtual_game_library: Ma ludothèque virtuelle
         name: Nom
         new_article: Nouvel article
@@ -182,6 +189,7 @@ app:
         new_topic: Nouveau sujet
         newest_release_first: Sorti plus récemment en premier
         news: Actualités
+        no_game_play_in_year: "Aucune partie enregistrée en %year%."
         normal: Normal
         not_found_page: Page introuvable
         not_found_pages: Pages non trouvées

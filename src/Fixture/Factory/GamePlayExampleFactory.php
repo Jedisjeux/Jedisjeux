@@ -98,7 +98,7 @@ class GamePlayExampleFactory extends AbstractExampleFactory implements ExampleFa
             })
 
             ->setDefault('played_at', function (Options $options) {
-                return $this->faker->dateTimeBetween('-1 year', 'yesterday');
+                return $this->faker->dateTimeBetween('-3 years', 'yesterday');
             })
             ->setAllowedTypes('played_at', ['null', 'string', \DateTimeInterface::class])
             ->setNormalizer('played_at', function (Options $options, $playedAt) {
