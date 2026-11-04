@@ -19,6 +19,12 @@ const { argv } = yargs
       requiresArg: true,
       required: true,
     },
+    nodeModulesPath: {
+      description: '<path> path to node_modules directory',
+      type: 'string',
+      requiresArg: true,
+      required: true,
+    },
   });
 
 const env = process.env.GULP_ENV;
@@ -30,11 +36,15 @@ const options = {
 const rootPath = upath.normalizeSafe(argv.rootPath);
 const adminRootPath = upath.joinSafe(rootPath, 'backend');
 const adminPath = rootPath === '.' ? '.' : upath.joinSafe(rootPath, '../../assets/backend');
+const nodeModulesPath = upath.normalizeSafe(argv.nodeModulesPath);
 
 // The Bootstrap Admin UI bundle ships the admin theme, these assets only add the Jedisjeux specific parts
 const paths = {
   admin: {
-    js: [upath.joinSafe(adminPath, 'js/**')],
+    js: [
+      upath.joinSafe(nodeModulesPath, 'apexcharts/dist/apexcharts.min.js'),
+      upath.joinSafe(adminPath, 'js/**'),
+    ],
     sass: [upath.joinSafe(adminPath, 'sass/**')],
   },
 };

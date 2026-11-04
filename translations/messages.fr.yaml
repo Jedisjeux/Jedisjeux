@@ -4,8 +4,18 @@ app:
         create_user: Créer un utilisateur
         forgotten_password: Mot de passe oublié
         legal_notices: Mentions légales
+        new_games: Nouveaux jeux
+        new_members: Nouveaux membres
         overview_of_your_website: Aperçu de votre site web
+        published_articles: Articles publiés
         search_customers: Chercher des clients
+        statistics:
+            2weeks: 2 semaines
+            month: Mois
+            year: Année
+            total: '%count% au total'
+            previous_period: Période précédente
+            next_period: Période suivante
         validate: Valider
         view_website: Voir le site
 sylius:

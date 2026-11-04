@@ -16,16 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class StatisticsController extends AbstractController
 {
-    /** @var StatisticsProvider */
-    private $statisticProvider;
-
-    public function __construct(StatisticsProvider $statisticProvider)
-    {
-        $this->statisticProvider = $statisticProvider;
-    }
-
     public function indexAction(): Response
     {
-        return $this->render('backend/index.html.twig', $this->statisticProvider->getStatistics());
+        // Statistics are rendered by the Dashboard:Statistics live component
+        return $this->render('backend/index.html.twig');
     }
 }

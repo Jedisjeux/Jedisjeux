@@ -78,6 +78,25 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
+     * @return \DateTimeInterface[]
+     */
+    public function findPublishStartDatesBetween(\DateTimeInterface $startDate, \DateTimeInterface $endDate): array
+    {
+        $result = $this->createQueryBuilder('o')
+            ->select('o.publishStartDate')
+            ->where('o.status = :status')
+            ->andWhere('o.publishStartDate >= :startDate')
+            ->andWhere('o.publishStartDate < :endDate')
+            ->setParameter('status', Article::STATUS_PUBLISHED)
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
+            ->getQuery()
+            ->getArrayResult();
+
+        return array_column($result, 'publishStartDate');
+    }
+
+    /**
      * @param int|null $productId
      */
     public function createListQueryBuilder(string $localeCode, $productId): QueryBuilder
