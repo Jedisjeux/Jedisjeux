@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Twig\Components\Dashboard;
 
 use App\Controller\StatisticsProvider;
+use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
@@ -34,6 +35,14 @@ final class Statistics
     public const PERIOD_TWO_WEEKS = '2 weeks';
     public const PERIOD_MONTH = 'month';
     public const PERIOD_YEAR = 'year';
+
+    // Stacking order of the chart, from the bottom to the top
+    private const STATUSES = [
+        Article::STATUS_PUBLISHED,
+        Article::STATUS_PENDING_PUBLICATION,
+        Article::STATUS_PENDING_REVIEW,
+        Article::STATUS_NEW,
+    ];
 
     #[LiveProp]
     public string $startDate = 'first day of next month last year';
@@ -87,7 +96,9 @@ final class Statistics
     }
 
     /**
-     * @return array{intervals: string[], articles_count: int[], ranges: array<array{from: string, to: string}>}
+     * Created articles of each interval, stacked by their current status.
+     *
+     * @return array{intervals: string[], articles_count_by_status: array<string, int[]>, ranges: array<array{from: string, to: string}>}
      */
     #[ExposeInTemplate(name: 'statistics')]
     public function getStatistics(): array
@@ -96,29 +107,30 @@ final class Statistics
         $endDate = new \DateTimeImmutable($this->endDate);
         $format = 'month' === $this->interval ? 'Y-m' : 'Y-m-d';
 
-        $counts = [];
+        $emptyCounts = [];
         foreach (new \DatePeriod($startDate, $this->resolveInterval(), $endDate) as $date) {
-            $counts[$date->format($format)] = 0;
+            $emptyCounts[$date->format($format)] = 0;
         }
 
-        foreach ($this->articleRepository->findPublishStartDatesBetween($startDate, $endDate) as $publishStartDate) {
-            $key = $publishStartDate->format($format);
+        $counts = array_fill_keys(self::STATUSES, $emptyCounts);
+        foreach ($this->articleRepository->findCreatedAtAndStatusBetween($startDate, $endDate) as $article) {
+            $key = $article['createdAt']->format($format);
 
-            if (array_key_exists($key, $counts)) {
-                ++$counts[$key];
+            if (isset($counts[$article['status']]) && array_key_exists($key, $counts[$article['status']])) {
+                ++$counts[$article['status']][$key];
             }
         }
 
         return [
             'intervals' => array_map(
                 fn (string $key): string => $this->formatLabel($key),
-                array_keys($counts),
+                array_keys($emptyCounts),
             ),
-            'articles_count' => array_values($counts),
+            'articles_count_by_status' => array_map(array_values(...), $counts),
             // Dates of each bar, used to open the article list filtered on them when clicking on it
             'ranges' => array_map(
                 fn (string $key): array => $this->resolveRange($key),
-                array_keys($counts),
+                array_keys($emptyCounts),
             ),
         ];
     }

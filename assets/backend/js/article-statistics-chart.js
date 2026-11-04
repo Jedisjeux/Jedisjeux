@@ -1,4 +1,4 @@
-// Published articles chart of the dashboard, inspired by the Sylius e-commerce statistics chart
+// Created articles chart of the dashboard, stacked by status, inspired by the Sylius e-commerce statistics chart
 (() => {
   const selector = '#article-statistics-chart';
   let chart = null;
@@ -7,7 +7,7 @@
 
   const signatureOf = element => [
     element.dataset.intervals,
-    element.dataset.articlesCount,
+    element.dataset.series,
     document.documentElement.getAttribute('data-bs-theme'),
   ].join('|');
 
@@ -31,35 +31,40 @@
 
     const styles = getComputedStyle(document.documentElement);
     const labelColor = styles.getPropertyValue('--tblr-body-color').trim();
-    const primaryColor = styles.getPropertyValue('--tblr-primary').trim();
+    const series = JSON.parse(element.dataset.series);
+    const intervals = JSON.parse(element.dataset.intervals);
+    const totals = intervals.map((interval, index) => series.reduce((total, serie) => total + serie.data[index], 0));
 
     chart = new ApexCharts(element, {
       theme: {
         mode: document.documentElement.getAttribute('data-bs-theme') || 'light',
       },
-      colors: [primaryColor],
-      series: [{
-        name: element.dataset.label,
-        data: JSON.parse(element.dataset.articlesCount),
-      }],
+      colors: series.map(serie => styles.getPropertyValue(`--tblr-${serie.color}`).trim()),
+      series: series.map(({ name, data }) => ({ name, data })),
+      legend: {
+        position: 'top',
+        labels: { colors: labelColor },
+      },
       chart: {
         background: 'transparent',
         toolbar: { show: false },
         height: 350,
         type: 'bar',
+        stacked: true,
         events: {
-          // Opens the published articles of the clicked day or month
+          // Opens the articles of the clicked status, created on the clicked day or month
           dataPointSelection: (event, chartContext, config) => {
             const range = JSON.parse(element.dataset.ranges)[config.dataPointIndex];
+            const serie = series[config.seriesIndex];
 
-            if (!range) {
+            if (!range || !serie) {
               return;
             }
 
             const params = new URLSearchParams({
-              'criteria[status][status]': 'published',
-              'criteria[publishStartDate][from][date]': range.from,
-              'criteria[publishStartDate][to][date]': range.to,
+              'criteria[status][status]': serie.status,
+              'criteria[createdAt][from][date]': range.from,
+              'criteria[createdAt][to][date]': range.to,
             });
 
             window.location.href = `${element.dataset.redirect}?${params.toString()}`;
@@ -72,22 +77,27 @@
       plotOptions: {
         bar: {
           borderRadius: 4,
-          dataLabels: { position: 'top' },
+          borderRadiusApplication: 'end',
+          borderRadiusWhenStacked: 'last',
+          dataLabels: {
+            total: {
+              enabled: true,
+              style: { color: labelColor },
+              formatter: val => (val > 0 ? val : ''),
+            },
+          },
         },
       },
       dataLabels: {
-        enabled: true,
-        offsetY: -20,
-        style: { colors: [labelColor] },
-        formatter: val => (val > 0 ? val : ''),
+        enabled: false,
       },
       xaxis: {
-        categories: JSON.parse(element.dataset.intervals),
+        categories: intervals,
         labels: {
           style: { colors: labelColor },
           rotate: -45,
           // A month split into days has too many labels to be displayed horizontally
-          rotateAlways: JSON.parse(element.dataset.intervals).length > 16,
+          rotateAlways: intervals.length > 16,
         },
         axisBorder: { show: false },
         axisTicks: { show: false },
@@ -95,7 +105,7 @@
       yaxis: {
         min: 0,
         // Article counts are integers, keep one tick per unit for small values to avoid duplicated labels
-        tickAmount: Math.max(1, Math.min(5, Math.max(...JSON.parse(element.dataset.articlesCount)))),
+        tickAmount: Math.max(1, Math.min(5, Math.max(...totals))),
         labels: {
           style: { colors: labelColor },
           formatter: val => Math.round(val),
@@ -134,7 +144,7 @@
       attributes: true,
       childList: true,
       subtree: true,
-      attributeFilter: ['data-intervals', 'data-articles-count'],
+      attributeFilter: ['data-intervals', 'data-series'],
     });
 
     new MutationObserver(scheduleRender).observe(document.documentElement, {

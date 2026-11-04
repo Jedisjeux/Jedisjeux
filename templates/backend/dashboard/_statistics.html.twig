@@ -78,17 +78,22 @@
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">{{ 'app.ui.published_articles'|trans }}</h3>
+            <h3 class="card-title">{{ 'app.ui.created_articles'|trans }}</h3>
         </div>
         <div class="card-body" data-loading="addClass(opacity-50)">
+            {# Same colors as the article status labels #}
+            {% set status_colors = {'new': 'blue', 'pending_review': 'orange', 'pending_publication': 'yellow', 'published': 'green'} %}
+            {% set series = [] %}
+            {% for status, data in statistics.articles_count_by_status %}
+                {% set series = series|merge([{'name': ('sylius.ui.' ~ status)|trans, 'data': data, 'color': status_colors[status], 'status': status}]) %}
+            {% endfor %}
             <div
                 id="article-statistics-chart"
                 class="chart-lg"
                 data-intervals="{{ statistics.intervals|json_encode }}"
-                data-articles-count="{{ statistics.articles_count|json_encode }}"
+                data-series="{{ series|json_encode }}"
                 data-ranges="{{ statistics.ranges|json_encode }}"
                 data-redirect="{{ path('app_backend_article_index') }}"
-                data-label="{{ 'app.ui.published_articles'|trans }}"
             ></div>
         </div>
     </div>
