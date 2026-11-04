@@ -1,17 +1,16 @@
-$app-brand-color: #4BAEB4;
-$app-logo-color: #09afdf;
-$sidebar-background: #133E56;
-
 :root {
-  --tblr-primary: #{$app-brand-color};
+  --app-brand-color: #4BAEB4;
+  --app-logo-color: #09afdf;
+  --app-sidebar-background: #133E56;
+  --tblr-primary: var(--app-brand-color);
   --tblr-primary-rgb: 75, 174, 180;
 }
 
 .navbar-vertical[data-bs-theme="dark"] {
-  background: $sidebar-background;
+  background: var(--app-sidebar-background);
 }
 
-// Same brand as the front-end header
+/* Same brand as the front-end header */
 .app-admin-logo {
   display: inline-flex;
   flex-direction: column;
@@ -19,7 +18,7 @@ $sidebar-background: #133E56;
 }
 
 .app-admin-logo__name {
-  color: $app-logo-color;
+  color: var(--app-logo-color);
   font-family: 'Noto Serif JP', serif;
   font-size: 1.6rem;
   font-weight: 700;
@@ -33,7 +32,7 @@ $sidebar-background: #133E56;
   margin-top: .35rem;
 }
 
-// Bars of the dashboard chart open the matching articles
+/* Bars of the dashboard chart open the matching articles */
 #article-statistics-chart .apexcharts-bar-area {
   cursor: pointer;
 }

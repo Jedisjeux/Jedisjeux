@@ -99,6 +99,12 @@ after 'deploy:updated', :build_assets do
 end
 
 after 'deploy:updated', 'symfony:assets:install'
+
+# Downloads the vendor packages of importmap.php and writes the AssetMapper assets in public/assets
+after 'deploy:updated', :compile_asset_map do
+    invoke 'symfony:console', 'importmap:install'
+    invoke! 'symfony:console', 'asset-map:compile'
+end
 after 'deploy:updated', 'deploy:migrate'
 
 # CentOS 6 (SysV init): gracefully reload PHP-FPM so OPcache picks up the new release

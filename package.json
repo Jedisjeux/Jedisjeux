@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "apexcharts": "^3.54.1",
     "bootstrap": "^4.0.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
@@ -48,7 +47,7 @@
     "build": "gulp build",
     "gulp": "gulp build",
     "lint": "yarn lint:js",
-    "lint:js": "eslint gulpfile.babel.js src/Sylius/Bundle/AdminBundle/gulpfile.babel.js src/Sylius/Bundle/ShopBundle/gulpfile.babel.js src/Sylius/Bundle/UiBundle/Resources/private/js src/Sylius/Bundle/AdminBundle/Resources/private/js src/Sylius/Bundle/ShopBundle/Resources/private/js"
+    "lint:js": "eslint gulpfile.babel.js src/Sylius/Bundle/ShopBundle/gulpfile.babel.js src/Sylius/Bundle/UiBundle/Resources/private/js src/Sylius/Bundle/AdminBundle/Resources/private/js src/Sylius/Bundle/ShopBundle/Resources/private/js"
   },
   "engines": {
     "node": "16.x"

@@ -63,6 +63,7 @@
     "sylius/user": "^2.0",
     "sylius/user-bundle": "^2.0",
     "symfony/asset": "7.4.*",
+    "symfony/asset-mapper": "7.4.*",
     "symfony/config": "7.4.*",
     "symfony/dotenv": "7.4.*",
     "symfony/expression-language": "7.4.*",
@@ -125,7 +126,8 @@
     "auto-scripts": {
       "cache:clear": "symfony-cmd",
       "ckeditor:install --tag=4.6.0 --clear=drop": "symfony-cmd",
-      "assets:install %PUBLIC_DIR%": "symfony-cmd"
+      "assets:install %PUBLIC_DIR%": "symfony-cmd",
+      "importmap:install": "symfony-cmd"
     },
     "post-install-cmd": [
       "@auto-scripts"

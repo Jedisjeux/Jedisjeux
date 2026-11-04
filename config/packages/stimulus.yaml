@@ -1,0 +1,5 @@
+stimulus:
+    controller_paths:
+        - '%kernel.project_dir%/assets/controllers'
+        # Prebuilt in the symfony_ux.js of the Bootstrap Admin UI bundle, which is replaced by AssetMapper
+        - '%kernel.project_dir%/vendor/sylius/bootstrap-admin-ui/assets/controllers'

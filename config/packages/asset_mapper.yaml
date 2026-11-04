@@ -1,0 +1,20 @@
+framework:
+    asset_mapper:
+        # The paths to make available to the asset mapper.
+        paths:
+            assets/: ''
+            # Stimulus controllers of the Bootstrap Admin UI bundle (theme switcher, copy to clipboard), see config/packages/stimulus.yaml
+            vendor/sylius/bootstrap-admin-ui/assets/controllers: sylius-bootstrap-admin-ui/controllers
+        excluded_patterns:
+            # Still built by Gulp until the front-end is migrated
+            - '*/assets/frontend/*'
+            # Read by UX Icons, not served as assets
+            - '*/assets/icons/*'
+            - '*/gulpfile.babel.js'
+            - '*/.eslintrc.js'
+        missing_import_mode: strict
+
+when@prod:
+    framework:
+        asset_mapper:
+            missing_import_mode: warn
