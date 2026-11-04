@@ -7,13 +7,13 @@ sylius_fixtures:
                         random: 20
                 news_article:
                     options:
-                        amount: 10
+                        amount: 30
                 review_article:
                     options:
-                        amount: 10
+                        amount: 20
                 in_the_box_article:
                     options:
-                        amount: 5
+                        amount: 10
                 block:
                     options:
                         random: 40
