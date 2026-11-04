@@ -7,7 +7,7 @@
         {% if article.mainImage is not null %}
             {{ images.fit(article.mainImage.webPath, article) }}
         {% else %}
-            {{ images.render('/assets/frontend/images/placeholder.png', 'magazine_item_wide', article) }}
+            {{ images.render('@frontend_images:placeholder.png', 'magazine_item_wide', article) }}
         {% endif %}
     </a>
     <div class="editorial-article-card__body">
@@ -20,7 +20,7 @@
         {% endif %}
         <div class="editorial-article-card__meta">
             <span>{{ article.publishStartDate|format_datetime('medium', 'none') }}</span>
-            <span><i class="fa fa-comment-o"></i> {{ article.topic is not null ? article.topic.postCount : 0 }}</span>
+            <span><i class="fa fa-comment-o" aria-hidden="true">{{ ux_icon('fa:comment-o', {class: 'fa-svg'}) }}</i> {{ article.topic is not null ? article.topic.postCount : 0 }}</span>
         </div>
     </div>
 </article>

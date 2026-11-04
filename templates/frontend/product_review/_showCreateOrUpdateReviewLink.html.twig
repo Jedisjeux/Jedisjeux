@@ -4,6 +4,6 @@
     {% set path = path('sylius_frontend_product_review_update', { 'slug': app.request.get('productSlug'), 'id': resource.id } ) %}
 {% endif %}
 
-<a id="productReviewButton" href="{{ path }}" class="wishlist">
-    <i class="fa fa-star-o pl-10 pr-1"></i>Votre avis
+<a id="productReviewButton" href="{{ path }}" class="wishlist" data-product-slug="{{ app.request.get('productSlug') }}">
+    <i class="fa fa-star-o pl-10 pr-1" aria-hidden="true">{{ ux_icon('fa:star-o', {class: 'fa-svg'}) }}</i>Votre avis
 </a>

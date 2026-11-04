@@ -1,7 +1,7 @@
 {% for child in taxons %}
     <li>
         <a href="{{ path('sylius_frontend_product_index_by_taxon', { 'slug': child.slug }) }}">
-            <i class="{{ child.iconClass ?: 'fa fa-user' }}" aria-hidden="true"></i>
+            {{ fa_icon(child.iconClass ?: 'fa fa-user') }}
             {{ child.name }}
         </a>
     </li>

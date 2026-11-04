@@ -4,7 +4,7 @@
 {% set show_product = show_product ?? true %}
 {% set product = product_review.reviewSubject %}
 {% set productPath = path('sylius_frontend_product_show', { 'slug': product.slug }) %}
-{% set avatarPath = product_review.author.avatar is not null ? product_review.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png' %}
+{% set avatarPath = product_review.author.avatar is not null ? product_review.author.avatar.webPath : '@frontend_images:avatar-placeholder.png' %}
 
 <article class="editorial-review-card" {% if not show_product %}itemprop="review" {% endif %}itemscope itemtype="https://schema.org/Review">
     {% if show_product %}
@@ -13,7 +13,7 @@
                 {% if product.mainImage is not null %}
                     {{ images.render(product.mainImage.webPath, 'small_width_fixed', product.name) }}
                 {% else %}
-                    <i class="fa fa-cubes"></i>
+                    <i class="fa fa-cubes" aria-hidden="true">{{ ux_icon('fa:cubes', {class: 'fa-svg'}) }}</i>
                 {% endif %}
             </a>
             <a class="editorial-review-card__name" href="{{ productPath }}" itemprop="name">{{ product.name }}</a>

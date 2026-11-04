@@ -4,13 +4,13 @@
 
     <a href="{{ path('app_frontend_product_file_index', {'slug': product.slug}) }}"
        class="btn btn-gray btn-sm margin-clear">
-        <i class="fa fa-list pr-10"></i>
+        <i class="fa fa-list pr-10" aria-hidden="true">{{ ux_icon('fa:list', {class: 'fa-svg'}) }}</i>
         {{ 'app.ui.view_more_files'|trans }}
     </a>
 
     <a href="{{ path('app_frontend_product_file_create', {'slug': product.slug}) }}"
        class="btn btn-default btn-sm margin-clear">
-        <i class="fa fa-plus pr-10"></i>
+        <i class="fa fa-plus pr-10" aria-hidden="true">{{ ux_icon('fa:plus', {class: 'fa-svg'}) }}</i>
         {{ 'app.ui.propose_a_file'|trans }}
     </a>
 </div>

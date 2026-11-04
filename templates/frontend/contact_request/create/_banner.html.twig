@@ -2,7 +2,7 @@
 
 <!-- banner start -->
 <!-- ================ -->
-<div class="banner border-clear light-translucent-bg" style="background-image:url('/assets/frontend/images/shop-banner-2.jpg');background-position: 50% 32%;">
+<div class="banner border-clear light-translucent-bg" style="background-image:url('{{ asset('frontend/images/shop-banner-2.jpg') }}');background-position: 50% 32%;">
     {% include 'frontend/contact_request/create/_breadcrumb.html.twig' %}
     <div class="container">
         <div class="row justify-content-lg-center">
@@ -12,7 +12,7 @@
                 <p class="lead text-center">{{ 'sylius.ui.use_the_contact_form_below_to_send_us_a_message'|trans }}</p>
                 <ul class="list-inline mb-20 text-center">
                     <li class="list-inline-item">
-                        <i class="text-default fa fa-map-marker pr-2"></i>{{ head_office }}
+                        <i class="text-default fa fa-map-marker pr-2" aria-hidden="true">{{ ux_icon('fa:map-marker', {class: 'fa-svg'}) }}</i>{{ head_office }}
                     </li>
                 </ul>
                 <div class="separator"></div>

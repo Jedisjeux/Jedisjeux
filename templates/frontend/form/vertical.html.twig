@@ -8,7 +8,7 @@
     {{- form_label(form) -}}
     {{- form_widget(form) -}}
     {% if icon_class is defined %}
-        <i class="{{ icon_class|default('') }} form-control-feedback pr-4"></i>
+        {{ fa_icon(icon_class|default(''), {class: 'form-control-feedback pr-4'}) }}
     {% endif %}
     </{{ element|default('div') }}>
 {%- endblock form_row %}

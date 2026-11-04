@@ -8,14 +8,14 @@
         <article class="editorial-photo-card">
             <a class="editorial-photo-card__image" href="{{ gamePlayPath }}" aria-label="Voir la partie de {{ game_play.product.name }}">
                 {{ images.render(image.webPath, 'magazine_item_wide', image.description|default(game_play.product.name)) }}
-                <span class="editorial-photo-card__open"><i class="fa fa-link" aria-hidden="true"></i></span>
+                <span class="editorial-photo-card__open"><i class="fa fa-link" aria-hidden="true">{{ ux_icon('fa:link', {class: 'fa-svg'}) }}</i></span>
             </a>
             <div class="editorial-photo-card__caption">
                 {% if image.description is not empty %}<p class="editorial-photo-card__description">{{ image.description }}</p>{% endif %}
                 <h2><a href="{{ gamePlayPath }}">{{ game_play.product.name }}</a></h2>
                 <p class="editorial-photo-card__meta">
-                    <span><i class="fa fa-user" aria-hidden="true"></i> {{ game_play.author }}</span>
-                    <time><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ game_play.createdAt|format_datetime('medium', 'none') }}</time>
+                    <span><i class="fa fa-user" aria-hidden="true">{{ ux_icon('fa:user', {class: 'fa-svg'}) }}</i> {{ game_play.author }}</span>
+                    <time><i class="fa fa-calendar-o" aria-hidden="true">{{ ux_icon('fa:calendar-o', {class: 'fa-svg'}) }}</i> {{ game_play.createdAt|format_datetime('medium', 'none') }}</time>
                 </p>
             </div>
         </article>

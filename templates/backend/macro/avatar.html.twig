@@ -1,5 +1,5 @@
 {% macro getPath(resource) %}{% apply spaceless %}
-    {% set imageSrc = resource.avatar ? resource.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png' %}
+    {% set imageSrc = resource.avatar ? resource.avatar.webPath : '@frontend_images:avatar-placeholder.png' %}
 
     {{ imageSrc }}
 {% endapply %}{% endmacro %}

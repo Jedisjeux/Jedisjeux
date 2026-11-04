@@ -8,5 +8,5 @@
     'template': 'frontend/topic/_simpleList.html.twig'
 })) }}
 <div class="text-right space-top">
-    <a href="{{ path('app_frontend_topic_index') }}" class="link-dark"><i class="fa fa-plus-circle pl-1 pr-1"></i>{{ 'app.ui.more'|trans }}</a>
+    <a href="{{ path('app_frontend_topic_index') }}" class="link-dark"><i class="fa fa-plus-circle pl-1 pr-1" aria-hidden="true">{{ ux_icon('fa:plus-circle', {class: 'fa-svg'}) }}</i>{{ 'app.ui.more'|trans }}</a>
 </div>

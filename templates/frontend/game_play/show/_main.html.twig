@@ -9,7 +9,7 @@
         {% if app.user and app.user.customer.id == game_play.author.id %}
             <div class="editorial-play-edit">
                 <a title="{{ 'app.ui.edit_game_play'|trans }}" class="btn btn-default" href="{{ path('app_frontend_game_play_update', {'id': game_play.id, 'productSlug': product.slug}) }}">
-                    <i class="fa fa-pencil" aria-hidden="true"></i> Modifier cette partie
+                    <i class="fa fa-pencil" aria-hidden="true">{{ ux_icon('fa:pencil', {class: 'fa-svg'}) }}</i> Modifier cette partie
                 </a>
             </div>
         {% endif %}
@@ -17,7 +17,7 @@
         <header class="editorial-play-heading">
             <span class="editorial-eyebrow">Partie jouée · <a href="{{ productPath }}">{{ product.name }}</a></span>
             <h1>Une partie de {{ product.name }}</h1>
-            <p><span>Par <strong>{{ game_play.author }}</strong></span><span><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ game_play.playedAt|format_datetime('medium', 'none') }}</span></p>
+            <p><span>Par <strong>{{ game_play.author }}</strong></span><span><i class="fa fa-calendar-o" aria-hidden="true">{{ ux_icon('fa:calendar-o', {class: 'fa-svg'}) }}</i> {{ game_play.playedAt|format_datetime('medium', 'none') }}</span></p>
         </header>
 
         <div class="editorial-play-overview">
@@ -26,14 +26,14 @@
                     {{ images.render(product.mainImage.webPath, 'full', product.name) }}
                 </a>
             {% else %}
-                <a class="editorial-play-cover editorial-play-cover--empty" href="{{ productPath }}" aria-label="Voir {{ product.name }}"><i class="fa fa-cubes" aria-hidden="true"></i></a>
+                <a class="editorial-play-cover editorial-play-cover--empty" href="{{ productPath }}" aria-label="Voir {{ product.name }}"><i class="fa fa-cubes" aria-hidden="true">{{ ux_icon('fa:cubes', {class: 'fa-svg'}) }}</i></a>
             {% endif %}
             <div class="editorial-play-overview__content">
                 <div class="editorial-play-facts">
-                    <div><i class="fa fa-users" aria-hidden="true"></i><strong>{{ game_play.playerCount ?: '—' }}</strong><small>{{ 'app.ui.player_count'|trans }}</small></div>
-                    <div><i class="fa fa-calendar-o" aria-hidden="true"></i><strong>{{ game_play.playedAt|format_datetime('medium', 'none') }}</strong><small>{{ 'sylius.ui.date'|trans }}</small></div>
+                    <div><i class="fa fa-users" aria-hidden="true">{{ ux_icon('fa:users', {class: 'fa-svg'}) }}</i><strong>{{ game_play.playerCount ?: '—' }}</strong><small>{{ 'app.ui.player_count'|trans }}</small></div>
+                    <div><i class="fa fa-calendar-o" aria-hidden="true">{{ ux_icon('fa:calendar-o', {class: 'fa-svg'}) }}</i><strong>{{ game_play.playedAt|format_datetime('medium', 'none') }}</strong><small>{{ 'sylius.ui.date'|trans }}</small></div>
                     {% if game_play.duration is not null %}
-                        <div><i class="fa fa-clock-o" aria-hidden="true"></i><strong>{{ duration(game_play) }}</strong><small>{{ 'app.ui.duration'|trans }}</small></div>
+                        <div><i class="fa fa-clock-o" aria-hidden="true">{{ ux_icon('fa:clock-o', {class: 'fa-svg'}) }}</i><strong>{{ duration(game_play) }}</strong><small>{{ 'app.ui.duration'|trans }}</small></div>
                     {% endif %}
                 </div>
 
@@ -43,7 +43,7 @@
                         <h2><a href="{{ productPath }}">{{ product.name }}</a></h2>
                         <p>Retrouvez la fiche complète, les avis et toutes les informations sur ce jeu.</p>
                     </div>
-                    <a class="editorial-play-game-info__link" href="{{ productPath }}">Voir la fiche du jeu <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    <a class="editorial-play-game-info__link" href="{{ productPath }}">Voir la fiche du jeu <i class="fa fa-arrow-right" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i></a>
                 </div>
 
                 <div class="editorial-play-product-specs editorial-game-keyfacts">

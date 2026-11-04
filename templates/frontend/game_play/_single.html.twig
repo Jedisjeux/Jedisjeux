@@ -12,14 +12,14 @@
         {% elseif product.mainImage is not null %}
             {{ images.render(product.mainImage.webPath, 'magazine_item_wide', product.name) }}
         {% else %}
-            <span class="editorial-game-play-card__placeholder"><i class="fa fa-dice" aria-hidden="true"></i></span>
+            <span class="editorial-game-play-card__placeholder"><i class="fa fa-dice" aria-hidden="true">{{ ux_icon('fa:dice', {class: 'fa-svg'}) }}</i></span>
         {% endif %}
-        {% if game_play.imageCount > 0 %}<span class="editorial-game-play-card__photo-count"><i class="fa fa-camera" aria-hidden="true"></i> {{ game_play.imageCount }}</span>{% endif %}
+        {% if game_play.imageCount > 0 %}<span class="editorial-game-play-card__photo-count"><i class="fa fa-camera" aria-hidden="true">{{ ux_icon('fa:camera', {class: 'fa-svg'}) }}</i> {{ game_play.imageCount }}</span>{% endif %}
     </a>
     <div class="editorial-game-play-card__body">
         <div class="editorial-game-play-card__meta">
             <span class="editorial-game-play-card__game">{{ product.name }}</span>
-            <span><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ game_play.createdAt|format_datetime('medium', 'none') }}</span>
+            <span><i class="fa fa-calendar-o" aria-hidden="true">{{ ux_icon('fa:calendar-o', {class: 'fa-svg'}) }}</i> {{ game_play.createdAt|format_datetime('medium', 'none') }}</span>
         </div>
         <h2><a href="{{ gamePlayPath }}">Une partie de {{ product.name }}</a></h2>
         <p class="editorial-game-play-card__author">Jouée par <strong>{{ game_play.author }}</strong></p>
@@ -29,9 +29,9 @@
             <p class="editorial-game-play-card__excerpt editorial-game-play-card__excerpt--empty">Aucun récit n’accompagne encore cette partie.</p>
         {% endif %}
         <div class="editorial-game-play-card__footer">
-            {% if game_play.playerCount %}<span><i class="fa fa-users" aria-hidden="true"></i> {{ game_play.playerCount }} joueur{% if game_play.playerCount != 1 %}s{% endif %}</span>{% endif %}
-            {% if topic is not null and topic.postCount > 0 %}<span><i class="fa fa-comments-o" aria-hidden="true"></i> {{ topic.postCount }} commentaire{% if topic.postCount != 1 %}s{% endif %}</span>{% endif %}
-            <a href="{{ gamePlayPath }}">En savoir plus <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+            {% if game_play.playerCount %}<span><i class="fa fa-users" aria-hidden="true">{{ ux_icon('fa:users', {class: 'fa-svg'}) }}</i> {{ game_play.playerCount }} joueur{% if game_play.playerCount != 1 %}s{% endif %}</span>{% endif %}
+            {% if topic is not null and topic.postCount > 0 %}<span><i class="fa fa-comments-o" aria-hidden="true">{{ ux_icon('fa:comments-o', {class: 'fa-svg'}) }}</i> {{ topic.postCount }} commentaire{% if topic.postCount != 1 %}s{% endif %}</span>{% endif %}
+            <a href="{{ gamePlayPath }}">En savoir plus <i class="fa fa-arrow-right" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i></a>
         </div>
     </div>
 </article>

@@ -16,6 +16,10 @@ return [
         'path' => './assets/backend/app.js',
         'entrypoint' => true,
     ],
+    'app' => [
+        'path' => './assets/frontend/app.js',
+        'entrypoint' => true,
+    ],
     'apexcharts' => [
         'version' => '3.54.1',
     ],
@@ -52,5 +56,9 @@ return [
     ],
     '@symfony/stimulus-bundle' => [
         'path' => './vendor/symfony/stimulus-bundle/assets/dist/loader.js',
+    ],
+    'bootstrap/dist/css/bootstrap.min.css' => [
+        'version' => '4.6.2',
+        'type' => 'css',
     ],
 ];

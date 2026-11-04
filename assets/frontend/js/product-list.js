@@ -1,167 +1,55 @@
-$(function () {
-  'use strict';
+import { appendFlash, escapeHtml, request, route } from './http.js';
 
-  $(document).ready(function () {
+// "Add to" menu of the game page: adds the game to the lists of the user, or to a new list
+const form = document.getElementById('productListForm');
+const newListForm = document.getElementById('newProductListForm');
 
-    var successMessageForAdd = "Le jeu a bien été ajouté à votre liste.";
-    var successMessageForRemove = "Le jeu a bien été supprimé de votre liste.";
-    var $productListForm = $('#productListForm');
-    var $newProductListForm = $('#newProductListForm');
-    var productId = $('input[name=productId]', $productListForm).val();
+const productId = form?.querySelector('input[name=productId]')?.value;
+const findCheckbox = (code) => Array.from(form.querySelectorAll('input[data-code]')).find((input) => input.dataset.code === code);
 
-    if ($productListForm.length > 0) {
-      initLists();
-      selectListHandler();
-      createNewListHandler();
-    }
+const addListOnDom = (code, name) => {
+  if (!findCheckbox(code)) {
+    form.insertAdjacentHTML('beforeend', `<div class="list"><input id="${escapeHtml(code)}" type="checkbox" data-code="${escapeHtml(code)}"> <label for="${escapeHtml(code)}">${escapeHtml(name)}</label></div>`);
+  }
+};
 
-    /**
-     * Init all lists
-     */
-    function initLists() {
-      $.ajax({
-        type: 'GET',
-        url: Routing.generate('app_api_product_list_index'),
-        success: function (lists) {
-          $.each(lists, function (index, list) {
-            addNewListOnDom(list.code, list.name)
-          });
+const selectList = (code) => {
+  const checkbox = findCheckbox(code);
 
-          getListsByProducts();
-        },
-        error: function (xhr, textStatus, errorThrown) {
-          if (xhr.status === 401) {
-            //handle error
-            window.location.replace('/login');
-          }
-        }
-      });
-    }
+  if (checkbox) {
+    checkbox.checked = true;
+  }
+};
 
-    function getListsByProducts() {
-      $.ajax({
-        type: 'GET',
-        url: Routing.generate('app_api_product_list_by_product', {'productId': productId}),
-        success: function (lists) {
-          $.each(lists, function (index, list) {
-            selectList(list.code)
-          });
-        },
-        error: function (xhr, textStatus, errorThrown) {
-          if (xhr.status === 401) {
-            //handle error
-            window.location.replace('/login');
-          }
-        }
-      });
-    }
-
-    function createNewListHandler() {
-      $newProductListForm.submit(function (event) {
-        event.preventDefault();
-
-        var name = $('input[name=name]', $newProductListForm).val();
-
-        $.ajax({
-          type: 'POST',
-          url: Routing.generate('app_api_product_list_create'),
-          data: {
-            'name': name
-          },
-          success: function (list) {
-            var code = list.code;
-            addOrRemoveProductFromList('POST', code);
-            addNewListOnDom(code, name);
-            selectList(list.code);
-          },
-          error: function (xhr, textStatus, errorThrown) {
-            if (xhr.status === 401) {
-              //handle error
-              window.location.replace('/login');
-            }
-          }
-        });
-
-      });
-    }
-
-    function addNewListOnDom(code, name) {
-      if (isListOnDom(code)) {
-        return;
-      }
-
-      $productListForm.append(
-        $('<div>')
-          .attr('class', 'list')
-          .append(
-            $('<input>')
-              .attr('id', code)
-              .attr('type', 'checkbox')
-              .attr('data-code', code)
-          )
-          .append(' ')
-          .append(
-            $('<label>')
-              .attr('for', code)
-              .html(name)
-          )
-      );
-    }
-
-    function selectList(code) {
-      $('input', $productListForm).each(function () {
-        if (code === $(this).attr('data-code')) {
-          $(this).prop('checked', 'checked');
-        }
-      });
-    }
-
-    function isListOnDom(code) {
-      var present = false;
-
-      $('input', $productListForm).each(function () {
-        if (code === $(this).attr('data-code')) {
-          present = true;
-        }
-      });
-
-      return present;
-    }
-
-    function selectListHandler() {
-      $($productListForm).on('change', 'input', function () {
-        var code = $(this).data('code');
-        var method = $(this).prop('checked') ? 'POST' : 'DELETE';
-
-        addOrRemoveProductFromList(method, code);
-      });
-    }
-
-    function addOrRemoveProductFromList(method, code) {
-      $.ajax({
-        type: method,
-        url: Routing.generate('app_api_product_list_add_product', {
-          'code': code, 'productId': productId
-        }),
-        success: function (results) {
-          var message = method === 'POST' ? successMessageForAdd : successMessageForRemove;
-
-          appendFlash(message);
-        },
-        error: function (xhr, textStatus, errorThrown) {
-          if (xhr.status === 401) {
-            //handle error
-            window.location.replace('/login');
-          }
-        }
-      });
-    }
-
-    function appendFlash(successMessage, messageHolderSelector) {
-      messageHolderSelector = messageHolderSelector ? messageHolderSelector : '#flashes';
-
-      $(messageHolderSelector).html('<div class="alert alert-success"><a class="close" data-dismiss="alert" href="#">×</a>' + successMessage + '</div>');
-    }
-
+const addOrRemoveProduct = async (add, code) => {
+  await request(route(add ? 'app_api_product_list_add_product' : 'app_api_product_list_remove_product', { code, productId }), {
+    method: add ? 'POST' : 'DELETE',
+    loginOnUnauthorized: true,
   });
-});
+
+  appendFlash(add ? 'Le jeu a bien été ajouté à votre liste.' : 'Le jeu a bien été supprimé de votre liste.');
+};
+
+if (form) {
+  (async () => {
+    (await request(route('app_api_product_list_index'), { loginOnUnauthorized: true }) ?? []).forEach((list) => addListOnDom(list.code, list.name));
+    (await request(route('app_api_product_list_by_product', { productId }), { loginOnUnauthorized: true }) ?? []).forEach((list) => selectList(list.code));
+  })();
+
+  form.addEventListener('change', (event) => {
+    if (event.target.matches('input[data-code]')) {
+      addOrRemoveProduct(event.target.checked, event.target.dataset.code);
+    }
+  });
+
+  newListForm?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const name = newListForm.querySelector('input[name=name]').value;
+    const list = await request(route('app_api_product_list_create'), { method: 'POST', data: { name }, loginOnUnauthorized: true });
+
+    await addOrRemoveProduct(true, list.code);
+    addListOnDom(list.code, name);
+    selectList(list.code);
+  });
+}

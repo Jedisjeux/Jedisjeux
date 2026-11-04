@@ -1,6 +1,6 @@
 <!-- banner start -->
 <!-- ================ -->
-<div class="banner border-clear light-translucent-bg" style="background-image:url('/assets/frontend/images/shop-banner-2.jpg');background-position: 50% 32%;">
+<div class="banner border-clear light-translucent-bg" style="background-image:url('{{ asset('frontend/images/shop-banner-2.jpg') }}');background-position: 50% 32%;">
     {{ render(url('app_frontend_partial_game_award_show', {
         'slug': app.request.get('slug'),
         'template': 'frontend/year_award/indexByAward/_bannerContent.html.twig'

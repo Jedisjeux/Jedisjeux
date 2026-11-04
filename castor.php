@@ -51,8 +51,6 @@ function register_services(RegisterServiceEvent $event): void
         ->link($database)
         ->withDomain('jedisjeux.test')
         ->withHttpAccess()
-        // NodeSource has no node_16.x repository for current Debian, so 16 would silently install Debian's Node 20
-        ->withNodeVersion('20')
         // The extensions phpstan.neon includes from vendor/ are built for PHPStan 1
         ->withPhpStanVersion('^1.12')
         // Same version as composer.lock, so the task and the vendor binary agree on the rules
@@ -98,15 +96,11 @@ function behat(#[AsRawTokens] array $args = []): int
     )->getExitCode();
 }
 
-#[AsTask(description: 'Build the front-end assets in the builder container', namespace: 'app')]
+#[AsTask(description: 'Download the importmap packages of the front-end in the builder container', namespace: 'app')]
 function assets(): int
 {
-    // package.json asks for Node 16, the version production builds with, but the assets build fine on Node 20
-    return docker_exit_code(
-        ['sh', '-c', 'yarn install --frozen-lockfile && yarn build'],
-        'app-builder',
-        environment: ['YARN_IGNORE_ENGINES' => 'true'],
-    );
+    // AssetMapper serves the other assets on the fly in dev and test, and compiles them on deploy
+    return docker_exit_code(['php', 'bin/console', 'importmap:install'], 'app-builder');
 }
 
 #[AsTask(description: 'Run Psalm in the builder container', namespace: 'app:qa')]

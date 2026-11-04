@@ -1,0 +1,9 @@
+{%- extends '@BabDevPagerfanta/twitter_bootstrap4.html.twig' -%}
+
+{%- block previous_page_message -%}
+    <i class="fa fa-angle-left" aria-hidden="true">{{ ux_icon('fa:angle-left', {class: 'fa-svg'}) }}</i><span class="sr-only">{{ parent() }}</span>
+{%- endblock previous_page_message -%}
+
+{%- block next_page_message -%}
+    <i class="fa fa-angle-right" aria-hidden="true">{{ ux_icon('fa:angle-right', {class: 'fa-svg'}) }}</i><span class="sr-only">{{ parent() }}</span>
+{%- endblock next_page_message -%}

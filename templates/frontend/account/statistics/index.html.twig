@@ -7,7 +7,7 @@
         {% if game.imagePath %}
             <img src="{{ game.imagePath|imagine_filter(filter) }}" alt="" loading="lazy"/>
         {% else %}
-            <i class="fa fa-puzzle-piece" aria-hidden="true"></i>
+            <i class="fa fa-puzzle-piece" aria-hidden="true">{{ ux_icon('fa:puzzle-piece', {class: 'fa-svg'}) }}</i>
         {% endif %}
     </span>
 {% endmacro %}
@@ -20,7 +20,7 @@
     <div class="breadcrumb-container">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a class="link-dark" href="{{ path('app_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
+                <li class="breadcrumb-item"><i class="fa fa-home pr-2" aria-hidden="true">{{ ux_icon('fa:home', {class: 'fa-svg'}) }}</i><a class="link-dark" href="{{ path('app_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
                 <li class="breadcrumb-item"><a class="link-dark" href="{{ path('sylius_frontend_account_dashboard') }}">{{ 'sylius.ui.my_account'|trans }}</a></li>
                 <li class="breadcrumb-item active">{{ pageTitle }}</li>
             </ol>
@@ -48,39 +48,39 @@
         <div class="container">
             {% if totals.gamePlayCount == 0 %}
                 <div id="statistics-empty" class="editorial-statistics__card editorial-statistics__empty">
-                    <span class="editorial-statistics__empty-icon" aria-hidden="true"><i class="fa fa-bar-chart"></i></span>
+                    <span class="editorial-statistics__empty-icon" aria-hidden="true"><i class="fa fa-bar-chart" aria-hidden="true">{{ ux_icon('fa:bar-chart', {class: 'fa-svg'}) }}</i></span>
                     <p>{{ 'app.ui.no_game_play_in_year'|trans({'%year%': year}) }}</p>
                     <a class="btn btn-default" href="{{ path('app_frontend_account_game_play_index') }}">{{ 'app.ui.my_game_plays'|trans }}</a>
                 </div>
             {% else %}
                 <div class="editorial-statistics__tiles">
                     <div class="editorial-statistics__tile">
-                        <span class="editorial-statistics__tile-icon" aria-hidden="true"><i class="fa fa-play"></i></span>
+                        <span class="editorial-statistics__tile-icon" aria-hidden="true"><i class="fa fa-play" aria-hidden="true">{{ ux_icon('fa:play', {class: 'fa-svg'}) }}</i></span>
                         <span id="statistics-game-play-count" class="editorial-statistics__value">{{ totals.gamePlayCount }}</span>
                         <span class="editorial-statistics__label">{{ 'app.ui.game_plays_in_year'|trans({'%year%': year}) }}</span>
                         {% if previousTotals %}
                             {% set delta = totals.gamePlayCount - previousTotals.gamePlayCount %}
                             <span class="editorial-statistics__delta editorial-statistics__delta--{{ delta > 0 ? 'up' : (delta < 0 ? 'down' : 'flat') }}">
-                                <i class="fa fa-{{ delta > 0 ? 'arrow-up' : (delta < 0 ? 'arrow-down' : 'minus') }}" aria-hidden="true"></i>
+                                {{ fa_icon('fa fa-' ~ (delta > 0 ? 'arrow-up' : (delta < 0 ? 'arrow-down' : 'minus'))) }}
                                 {{ delta > 0 ? '+' }}{{ delta }} par rapport à {{ year - 1 }}
                             </span>
                         {% endif %}
                     </div>
                     <div class="editorial-statistics__tile">
-                        <span class="editorial-statistics__tile-icon" aria-hidden="true"><i class="fa fa-cubes"></i></span>
+                        <span class="editorial-statistics__tile-icon" aria-hidden="true"><i class="fa fa-cubes" aria-hidden="true">{{ ux_icon('fa:cubes', {class: 'fa-svg'}) }}</i></span>
                         <span id="statistics-product-count" class="editorial-statistics__value">{{ totals.productCount }}</span>
                         <span class="editorial-statistics__label">{{ 'app.ui.different_games_played'|trans }}</span>
                         {% if previousTotals %}
                             {% set delta = totals.productCount - previousTotals.productCount %}
                             <span class="editorial-statistics__delta editorial-statistics__delta--{{ delta > 0 ? 'up' : (delta < 0 ? 'down' : 'flat') }}">
-                                <i class="fa fa-{{ delta > 0 ? 'arrow-up' : (delta < 0 ? 'arrow-down' : 'minus') }}" aria-hidden="true"></i>
+                                {{ fa_icon('fa fa-' ~ (delta > 0 ? 'arrow-up' : (delta < 0 ? 'arrow-down' : 'minus'))) }}
                                 {{ delta > 0 ? '+' }}{{ delta }} par rapport à {{ year - 1 }}
                             </span>
                         {% endif %}
                     </div>
                     {% if busiestMonth %}
                         <div class="editorial-statistics__tile">
-                            <span class="editorial-statistics__tile-icon" aria-hidden="true"><i class="fa fa-calendar"></i></span>
+                            <span class="editorial-statistics__tile-icon" aria-hidden="true"><i class="fa fa-calendar" aria-hidden="true">{{ ux_icon('fa:calendar', {class: 'fa-svg'}) }}</i></span>
                             <span class="editorial-statistics__value editorial-statistics__value--text">{{ date(year ~ '-' ~ busiestMonth ~ '-01')|format_date(pattern: 'MMMM')|capitalize }}</span>
                             <span class="editorial-statistics__label">{{ 'app.ui.busiest_month'|trans }} · {{ months[busiestMonth] }} {{ 'app.ui.game_plays'|trans|lower }}</span>
                         </div>

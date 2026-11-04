@@ -156,28 +156,6 @@ services:
         tags:
             - { name: form.type }
 
-    pagerfanta.view.semantic_ui:
-        class: App\View\SemanticUiView
-
-    pagerfanta.view.semantic_ui_translated:
-        class: App\View\SemanticUiTranslatedView
-        arguments:
-            - "@pagerfanta.view.semantic_ui"
-            - "@translator"
-        tags:
-            - { name: 'pagerfanta.view', alias: 'semantic_ui_translated' }
-
-    pagerfanta.view.frontend:
-        class: App\View\FrontendView
-
-    pagerfanta.view.frontend_translated:
-        class: App\View\FrontendTranslatedView
-        arguments:
-            - "@pagerfanta.view.frontend"
-            - "@translator"
-        tags:
-            - { name: 'pagerfanta.view', alias: 'frontend_translated' }
-
     sylius.validator.customer_initializer:
         class: App\Validator\Initializer\CustomerInitializer
         arguments:
@@ -258,7 +236,6 @@ services:
         arguments: ["@knp_menu.factory"]
         tags:
             - { name: knp_menu.menu_builder, method: createMenu, alias: app.backend.product_form }
-
 
     sylius.installer.checker.command_directory:
         class: App\Installer\Checker\CommandDirectoryChecker

@@ -8,7 +8,7 @@
     <div class="breadcrumb-container">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a class="link-dark" href="{{ path('app_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
+                <li class="breadcrumb-item"><i class="fa fa-home pr-2" aria-hidden="true">{{ ux_icon('fa:home', {class: 'fa-svg'}) }}</i><a class="link-dark" href="{{ path('app_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
                 <li class="breadcrumb-item active">{{ pageTitle }}</li>
             </ol>
         </div>
@@ -32,46 +32,46 @@
                         {{ avatar.render(customer, 'thumbnail_XL', customer.user, 'rounded-circle') }}
                     </div>
                     <h2>{{ customer.user }}</h2>
-                    <p class="editorial-account__email"><i class="fa fa-envelope-o" aria-hidden="true"></i><span>{{ customer.email }}</span></p>
+                    <p class="editorial-account__email"><i class="fa fa-envelope-o" aria-hidden="true">{{ ux_icon('fa:envelope-o', {class: 'fa-svg'}) }}</i><span>{{ customer.email }}</span></p>
                     <nav class="editorial-account__actions" aria-label="{{ 'sylius.ui.personal_information'|trans }}">
-                        <a href="{{ path('sylius_frontend_account_profile_update') }}"><i class="fa fa-pencil" aria-hidden="true"></i>{{ 'sylius.ui.personal_information'|trans }}</a>
-                        <a href="{{ path('sylius_frontend_account_change_password') }}"><i class="fa fa-lock" aria-hidden="true"></i>{{ 'sylius.ui.change_password'|trans }}</a>
-                        <a class="app-logout-button" href="{{ path('app_frontend_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>{{ 'sylius.ui.logout'|trans }}</a>
+                        <a href="{{ path('sylius_frontend_account_profile_update') }}"><i class="fa fa-pencil" aria-hidden="true">{{ ux_icon('fa:pencil', {class: 'fa-svg'}) }}</i>{{ 'sylius.ui.personal_information'|trans }}</a>
+                        <a href="{{ path('sylius_frontend_account_change_password') }}"><i class="fa fa-lock" aria-hidden="true">{{ ux_icon('fa:lock', {class: 'fa-svg'}) }}</i>{{ 'sylius.ui.change_password'|trans }}</a>
+                        <a class="app-logout-button" href="{{ path('app_frontend_logout') }}"><i class="fa fa-sign-out" aria-hidden="true">{{ ux_icon('fa:sign-out', {class: 'fa-svg'}) }}</i>{{ 'sylius.ui.logout'|trans }}</a>
                     </nav>
                 </aside>
 
                 <div class="editorial-account__shortcuts">
                     <a class="editorial-account-card" href="{{ path('app_frontend_account_product_list_index') }}">
-                        <span class="editorial-account-card__icon" aria-hidden="true"><i class="fa fa-list"></i></span>
+                        <span class="editorial-account-card__icon" aria-hidden="true"><i class="fa fa-list" aria-hidden="true">{{ ux_icon('fa:list', {class: 'fa-svg'}) }}</i></span>
                         <span class="editorial-account-card__body">
                             <strong>{{ 'app.ui.my_game_lists'|trans }}</strong>
                             <span>Gérez votre ludothèque, vos envies et vos autres listes.</span>
                         </span>
-                        <i class="fa fa-arrow-right editorial-account-card__arrow" aria-hidden="true"></i>
+                        <i class="fa fa-arrow-right editorial-account-card__arrow" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i>
                     </a>
                     <a class="editorial-account-card" href="{{ path('app_frontend_user_games_library', {'username': customer.user.usernameCanonical}) }}">
-                        <span class="editorial-account-card__icon" aria-hidden="true"><i class="fa fa-th"></i></span>
+                        <span class="editorial-account-card__icon" aria-hidden="true"><i class="fa fa-th" aria-hidden="true">{{ ux_icon('fa:th', {class: 'fa-svg'}) }}</i></span>
                         <span class="editorial-account-card__body">
                             <strong>{{ 'app.ui.my_virtual_game_library'|trans }}</strong>
                             <span>Affichez vos jeux comme sur une étagère et partagez-la.</span>
                         </span>
-                        <i class="fa fa-arrow-right editorial-account-card__arrow" aria-hidden="true"></i>
+                        <i class="fa fa-arrow-right editorial-account-card__arrow" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i>
                     </a>
                     <a class="editorial-account-card" href="{{ path('app_frontend_account_game_play_index') }}">
-                        <span class="editorial-account-card__icon" aria-hidden="true"><i class="fa fa-play"></i></span>
+                        <span class="editorial-account-card__icon" aria-hidden="true"><i class="fa fa-play" aria-hidden="true">{{ ux_icon('fa:play', {class: 'fa-svg'}) }}</i></span>
                         <span class="editorial-account-card__body">
                             <strong>{{ 'app.ui.my_game_plays'|trans }}</strong>
                             <span>Retrouvez et gérez les parties que vous avez partagées.</span>
                         </span>
-                        <i class="fa fa-arrow-right editorial-account-card__arrow" aria-hidden="true"></i>
+                        <i class="fa fa-arrow-right editorial-account-card__arrow" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i>
                     </a>
                     <a class="editorial-account-card" href="{{ path('app_frontend_account_statistics') }}">
-                        <span class="editorial-account-card__icon" aria-hidden="true"><i class="fa fa-bar-chart"></i></span>
+                        <span class="editorial-account-card__icon" aria-hidden="true"><i class="fa fa-bar-chart" aria-hidden="true">{{ ux_icon('fa:bar-chart', {class: 'fa-svg'}) }}</i></span>
                         <span class="editorial-account-card__body">
                             <strong>{{ 'app.ui.my_statistics'|trans }}</strong>
                             <span>Votre bilan ludique : nombre de parties et jeux les plus joués, année par année.</span>
                         </span>
-                        <i class="fa fa-arrow-right editorial-account-card__arrow" aria-hidden="true"></i>
+                        <i class="fa fa-arrow-right editorial-account-card__arrow" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i>
                     </a>
                 </div>
             </div>

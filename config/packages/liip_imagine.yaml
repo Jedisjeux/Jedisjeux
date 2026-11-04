@@ -5,7 +5,9 @@ liip_imagine:
             filesystem:
                 locator: filesystem_insecure
                 data_root:
-                    - '%kernel.project_dir%/public'
+                    public: '%kernel.project_dir%/public'
+                    # Placeholders of the templates, e.g. '@frontend_images:placeholder.png'
+                    frontend_images: '%kernel.project_dir%/assets/frontend/images'
     filter_sets:
         # @see http://symfony.com/doc/current/bundles/LiipImagineBundle/filters.html
         cache: ~

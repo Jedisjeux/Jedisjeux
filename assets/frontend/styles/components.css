@@ -1,0 +1,152 @@
+/* Components of the front-end scripts, see assets/frontend/js */
+
+/* UX Icons of the Font Awesome 4 "fa" set, inside the <i class="fa fa-*"> elements of the former icon font */
+.fa {
+  display: inline-block;
+  font-style: normal;
+  line-height: 1;
+}
+
+.fa-svg {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -.125em;
+}
+
+/* Galleries: one image at a time, the thumbnails select it */
+.content-slider-with-thumbs.is-ready > :not(.is-active) {
+  display: none !important;
+}
+
+.content-slider-thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.content-slider-thumbs > * {
+  cursor: pointer;
+  opacity: .6;
+  transition: opacity .2s;
+}
+
+.content-slider-thumbs > .is-active,
+.content-slider-thumbs > :hover,
+.content-slider-thumbs > :focus-visible {
+  opacity: 1;
+}
+
+.content-slider-thumbs img {
+  display: block;
+  width: 100%;
+}
+
+/* Lightbox of the images and videos */
+.lightbox {
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.lightbox::backdrop {
+  background: rgba(11, 11, 11, .85);
+}
+
+.lightbox[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox__figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: calc(100vw - 120px);
+  margin: 0;
+}
+
+.lightbox__figure img {
+  max-width: 100%;
+  max-height: calc(100vh - 100px);
+  object-fit: contain;
+}
+
+.lightbox__figure iframe {
+  width: min(900px, calc(100vw - 120px));
+  aspect-ratio: 16 / 9;
+  border: 0;
+  background: #000;
+}
+
+.lightbox__figure figcaption {
+  margin-top: 8px;
+  color: #f3f3f3;
+  font-size: 13px;
+}
+
+.lightbox__close,
+.lightbox__nav {
+  position: absolute;
+  border: 0;
+  background: none;
+  color: #fff;
+  line-height: 1;
+  opacity: .7;
+  cursor: pointer;
+}
+
+.lightbox__close:hover,
+.lightbox__nav:hover {
+  opacity: 1;
+}
+
+.lightbox__close {
+  top: 10px;
+  right: 16px;
+  font-size: 40px;
+}
+
+.lightbox__nav {
+  top: 50%;
+  padding: 10px 16px;
+  font-size: 60px;
+  transform: translateY(-50%);
+}
+
+.lightbox__nav--prev {
+  left: 0;
+}
+
+.lightbox__nav--next {
+  right: 0;
+}
+
+.lightbox--single .lightbox__nav {
+  display: none;
+}
+
+/* Star ratings */
+.rating {
+  display: inline-flex;
+  white-space: nowrap;
+}
+
+.rating__star {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-size: inherit;
+  line-height: 1;
+}
+
+button.rating__star {
+  cursor: pointer;
+}

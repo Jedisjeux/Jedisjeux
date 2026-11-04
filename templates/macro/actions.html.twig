@@ -21,7 +21,7 @@
 {% macro createButton() %}
     <button type="submit"
             class="btn btn-default">
-        <span class="fa fa-check"></span>
+        <i class="fa fa-check" aria-hidden="true">{{ ux_icon('fa:check', {class: 'fa-svg'}) }}</i>
         {{ 'sylius.ui.create'|trans }}
     </button>
 {% endmacro %}
@@ -29,7 +29,7 @@
 {% macro updateButton() %}
     <button type="submit"
             class="btn btn-default">
-        <span class="fa fa-save"></span>
+        <i class="fa fa-save" aria-hidden="true">{{ ux_icon('fa:save', {class: 'fa-svg'}) }}</i>
         {{ 'sylius.ui.save_changes'|trans }}
     </button>
 {% endmacro %}
@@ -37,7 +37,7 @@
 {% macro cancelButton(cancel_url) %}
     <a href="{{ cancel_url|default(app.request.headers.get('referer')) }}"
        class="btn btn-danger">
-        <span class="fa fa-remove"></span>
+        <i class="fa fa-remove" aria-hidden="true">{{ ux_icon('fa:remove', {class: 'fa-svg'}) }}</i>
         {{ 'sylius.ui.cancel'|trans }}
     </a>
 {% endmacro %}
@@ -45,7 +45,7 @@
 {% macro search() %}
     <button type="submit"
             class="fa fa-default">
-        <i class="fa fa-search"></i>
+        <i class="fa fa-search" aria-hidden="true">{{ ux_icon('fa:search', {class: 'fa-svg'}) }}</i>
         {{ 'sylius.ui.search'|trans }}
     </button>
 {% endmacro %}

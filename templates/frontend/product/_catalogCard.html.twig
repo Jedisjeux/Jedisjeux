@@ -9,7 +9,7 @@
         {% if product.mainImage is not null %}
             {{ images.fit(product.mainImage.webPath, product.name) }}
         {% else %}
-            <span class="editorial-catalog-card__placeholder"><i class="fa fa-cubes" aria-hidden="true"></i></span>
+            <span class="editorial-catalog-card__placeholder"><i class="fa fa-cubes" aria-hidden="true">{{ ux_icon('fa:cubes', {class: 'fa-svg'}) }}</i></span>
         {% endif %}
     </a>
     <div class="editorial-catalog-card__body">

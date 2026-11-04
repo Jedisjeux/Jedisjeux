@@ -29,7 +29,7 @@
     <figure class="editorial-article-figure {{ positionClass }}">
         <a class="popup-img" href="{{ image.webPath|imagine_filter('full') }}" title="{{ image.label }}">
             {{ images.render(image.webPath, 'full', image.label) }}
-            <span class="editorial-article-figure__zoom" aria-hidden="true"><i class="fa fa-search-plus"></i></span>
+            <span class="editorial-article-figure__zoom" aria-hidden="true"><i class="fa fa-search-plus" aria-hidden="true">{{ ux_icon('fa:search-plus', {class: 'fa-svg'}) }}</i></span>
         </a>
         {% if image.label %}<figcaption>{{ image.label }}</figcaption>{% endif %}
     </figure>

@@ -3,8 +3,8 @@
     {% set player_review_comment = player_review.comment|striptags|trim %}
     <figure class="editorial-player-review" itemprop="review" itemscope itemtype="http://schema.org/Review">
         <div class="editorial-player-review__heading">
-            <span><i class="fa fa-quote-left" aria-hidden="true"></i> Avis d'un joueur</span>
-            <strong itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating"><i class="fa fa-star" aria-hidden="true"></i> {{ player_review.rating|round(1) }}/10<meta itemprop="ratingValue" content="{{ player_review.rating }}"><meta itemprop="bestRating" content="10"><meta itemprop="worstRating" content="1"></strong>
+            <span><i class="fa fa-quote-left" aria-hidden="true">{{ ux_icon('fa:quote-left', {class: 'fa-svg'}) }}</i> Avis d'un joueur</span>
+            <strong itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating"><i class="fa fa-star" aria-hidden="true">{{ ux_icon('fa:star', {class: 'fa-svg'}) }}</i> {{ player_review.rating|round(1) }}/10<meta itemprop="ratingValue" content="{{ player_review.rating }}"><meta itemprop="bestRating" content="10"><meta itemprop="worstRating" content="1"></strong>
         </div>
         {% if player_review.title %}
             <h3>{{ player_review.title }}</h3>
@@ -14,6 +14,6 @@
             <span itemprop="author">{{ player_review.author }}</span>
             <time datetime="{{ player_review.createdAt|date('c') }}">{{ player_review.createdAt|format_datetime('medium', 'none') }}</time>
         </figcaption>
-        <a class="editorial-player-review__link" href="#reviews" data-toggle="tab">Lire les avis <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        <a class="editorial-player-review__link" href="#reviews" data-toggle="tab">Lire les avis <i class="fa fa-arrow-right" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i></a>
     </figure>
 {% endif %}

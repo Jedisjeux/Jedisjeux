@@ -44,7 +44,7 @@
                         <summary>Contenu de la boîte <span>{{ boxItems|length }} élément{{ boxItems|length > 1 ? 's' : '' }}</span></summary>
                         <ul class="nav flex-column list-style-icons">
                             {% for row in boxItems %}
-                                <li class="nav-item"><i class="fa fa-check pr-10" aria-hidden="true"></i>{{ row }}</li>
+                                <li class="nav-item"><i class="fa fa-check pr-10" aria-hidden="true">{{ ux_icon('fa:check', {class: 'fa-svg'}) }}</i>{{ row }}</li>
                             {% endfor %}
                         </ul>
                     </details>

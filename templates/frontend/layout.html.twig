@@ -28,7 +28,9 @@
     <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif+JP:700" rel="stylesheet">
 
-    <link href="{{ asset('assets/frontend/css/style.css') }}" rel="stylesheet">
+    {# Stylesheets imported by app.js and the scripts, loaded as deferred modules #}
+    {{ importmap('app') }}
+
 
 </head>
 
@@ -44,7 +46,7 @@
 
 <!-- scrollToTop -->
 <!-- ================ -->
-<div class="scrollToTop circle"><i class="fa fa-angle-up"></i></div>
+<div class="scrollToTop circle"><i class="fa fa-angle-up" aria-hidden="true">{{ ux_icon('fa:angle-up', {class: 'fa-svg'}) }}</i></div>
 
 <!-- page wrapper start -->
 <!-- ================ -->
@@ -62,7 +64,11 @@
 <!-- JavaScript files placed at the end of the document so the pages load faster -->
 <!-- ================================================== -->
 
-<script src="{{ asset('assets/frontend/js/app.js') }}"></script>
+{# Icons cloned by the scripts #}
+<template id="app-rating-star"><i class="fa fa-star" aria-hidden="true">{{ ux_icon('fa:star', {class: 'fa-svg'}) }}</i></template>
+{% for icon in ['user', 'child', 'clock-o', 'cog', 'picture-o'] %}
+    <template id="app-entity-icon-{{ icon }}">{{ fa_icon('fa fa-' ~ icon) }}</template>
+{% endfor %}
 <script>
     (function () {
         var labels = { auto: 'automatique', light: 'clair', dark: 'sombre' };
