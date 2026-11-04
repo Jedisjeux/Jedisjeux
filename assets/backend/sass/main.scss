@@ -32,3 +32,8 @@ $sidebar-background: #133E56;
   font-weight: 300;
   margin-top: .35rem;
 }
+
+// Bars of the dashboard chart open the matching articles
+#article-statistics-chart .apexcharts-bar-area {
+  cursor: pointer;
+}

@@ -86,6 +86,8 @@
                 class="chart-lg"
                 data-intervals="{{ statistics.intervals|json_encode }}"
                 data-articles-count="{{ statistics.articles_count|json_encode }}"
+                data-ranges="{{ statistics.ranges|json_encode }}"
+                data-redirect="{{ path('app_backend_article_index') }}"
                 data-label="{{ 'app.ui.published_articles'|trans }}"
             ></div>
         </div>
