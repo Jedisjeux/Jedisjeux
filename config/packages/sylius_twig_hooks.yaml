@@ -4,11 +4,16 @@ sylius_twig_hooks:
             default:
                 template: 'backend/layout/title.html.twig'
 
+        # Stimulus and the Symfony UX assets come from AssetMapper instead of the prebuilt files of the Bootstrap Admin UI bundle
         'sylius_admin.base#stylesheets':
+            symfony_ux:
+                enabled: false
             app:
                 template: 'backend/layout/stylesheets.html.twig'
 
         'sylius_admin.base#javascripts':
+            symfony_ux:
+                enabled: false
             app:
                 template: 'backend/layout/javascripts.html.twig'
 

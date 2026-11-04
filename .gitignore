@@ -3,7 +3,6 @@
 /log
 .castor.stub.php
 
-/public/assets
 /public/media
 /public/uploads/avatar/*
 !/public/uploads/avatar/.gitkeep
@@ -65,3 +64,8 @@ yarn-error.log
 ###> lexik/jwt-authentication-bundle ###
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
+
+###> symfony/asset-mapper ###
+/public/assets/
+/assets/vendor/
+###< symfony/asset-mapper ###
