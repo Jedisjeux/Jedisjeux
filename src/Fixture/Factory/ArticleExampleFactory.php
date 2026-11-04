@@ -95,6 +95,7 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
         $article->setCode($options['code']);
         $article->setTitle($options['title']);
         $article->setShortDescription($options['short_description']);
+        $article->setCreatedAt($options['created_at']);
         $article->setPublishStartDate($options['publish_start_date']);
         $article->setStatus($options['status']);
         $article->setAuthor($options['author']);
@@ -141,8 +142,23 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return '<p>'.implode('</p><p>', $this->faker->paragraphs(2)).'</p>';
             })
 
+            // Spread over the last year, so the dashboard chart has something to show
+            ->setDefault('created_at', function (Options $options) {
+                return $this->faker->dateTimeBetween('-1 year', 'now');
+            })
+            ->setNormalizer('created_at', function (Options $options, $createdAt) {
+                if (!is_string($createdAt)) {
+                    return $createdAt;
+                }
+
+                return new \DateTime($createdAt);
+            })
+
+            // Articles are published a few days after they have been written
             ->setDefault('publish_start_date', function (Options $options) {
-                return $this->faker->dateTimeBetween('2 months ago', 'yesterday');
+                $publishEndDate = min((clone $options['created_at'])->modify('+15 days'), new \DateTime());
+
+                return $this->faker->dateTimeBetween($options['created_at'], $publishEndDate);
             })
             ->setNormalizer('publish_start_date', function (Options $options, $createdAt) {
                 if (!is_string($createdAt)) {
@@ -153,6 +169,11 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
             })
 
             ->setDefault('status', function (Options $options) {
+                // Old articles are mostly published, the recent ones are still in progress
+                if ($options['created_at'] < new \DateTime('-1 month') && $this->faker->boolean(85)) {
+                    return Article::STATUS_PUBLISHED;
+                }
+
                 return $this->faker->randomElement([
                     Article::STATUS_NEW,
                     Article::STATUS_PENDING_REVIEW,
