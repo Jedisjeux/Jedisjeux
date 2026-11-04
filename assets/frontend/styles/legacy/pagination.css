@@ -1,0 +1,56 @@
+/* Former template: Pagination */
+ul.pagination,
+ul.pager {
+  margin: 20px 0 40px;
+  text-align: left;
+}
+ul.pagination .page-item {
+  padding: 0;
+  margin: 0 5px 0 0;
+  border-bottom: none;
+  display: inline-block;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+ul.pagination .page-item:last-child {
+  margin: 0;
+}
+ul.pagination .page-item .page-link,
+.pagination .page-item:first-child .page-link,
+.pagination .page-item:last-child .page-link,
+ul.pager .page-item .page-link {
+  text-align: center;
+  padding: 0;
+  height: 35px;
+  width: 35px;
+  border: 1px solid #777777;
+  line-height: 34px;
+  background-color: #777777;
+  color: #ffffff;
+  display: inline-block;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+}
+ul.pagination .page-item .page-link:hover,
+ul.pagination .page-item .page-link:focus {
+  background-color: transparent;
+  color: #ffffff;
+}
+ul.pagination .page-item.active .page-link,
+.page-item.active .page-link:hover,
+.page-item.active .page-link:focus {
+  color: #ffffff;
+}
+ul.pagination .page-item .page-link:hover,
+ul.pagination .page-item .page-link:focus {
+  background-color: #0c9ec7;
+  border-color: #0c9ec7;
+}
+ul.pagination .page-item.active .page-link,
+.page-item.active .page-link:hover,
+.page-item.active .page-link:focus {
+  background-color: #09afdf;
+  border-color: #09afdf;
+}

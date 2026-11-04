@@ -1,0 +1,93 @@
+/* Former template: Buttons */
+.btn:focus {
+  color: inherit;
+}
+.btn {
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.btn-default {
+  color: #ffffff;
+}
+.btn-default:hover,
+.btn-default:focus,
+.btn-default.focus,
+.btn-default:active,
+.btn-default.active,
+.show > .dropdown-toggle.btn-default {
+  color: #ffffff;
+}
+.btn-default-transparent {
+  color: #333333;
+  background-color: transparent;
+}
+.btn-default-transparent:hover,
+.btn-default-transparent:focus,
+.btn-default-transparent.focus,
+.btn-default-transparent:active,
+.btn-default-transparent.active,
+.show > .dropdown-toggle.btn-default-transparent {
+  color: #ffffff;
+}
+.btn-gray {
+  color: #333333;
+  background-color: #e1e1e1;
+  border-color: #d3d3d3;
+}
+.btn-gray:hover,
+.btn-gray:focus,
+.btn-gray.focus,
+.btn-gray:active,
+.btn-gray.active,
+.show > .dropdown-toggle.btn-gray {
+  color: #333333;
+  background-color: #cdcdcd;
+  border-color: #cdcdcd;
+}
+.btn {
+  padding: 7px 20px;
+  font-size: 14px;
+  line-height: 1.4666666667;
+  border-radius: 3px;
+  margin: 10px 0;
+}
+.btn-sm {
+  padding: 5px 15px;
+  font-size: 12px;
+  line-height: 1.4666666667;
+  border-radius: 3px;
+  margin: 5px 0;
+}
+.btn-lg {
+  padding: 10px 25px;
+  font-size: 18px;
+  line-height: 1.4666666667;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+.btn-default {
+  background-color: #09afdf;
+  border-color: #0c9ec7;
+}
+.btn-default:hover,
+.btn-default:focus,
+.btn-default.focus,
+.btn-default:active,
+.btn-default.active,
+.show > .dropdown-toggle.btn-default {
+  background-color: #0c9ec7;
+  border-color: #0c9ec7;
+}
+.btn-default-transparent {
+  border-color: #09afdf;
+}
+.btn-default-transparent:hover,
+.btn-default-transparent:focus,
+.btn-default-transparent.focus,
+.btn-default-transparent:active,
+.btn-default-transparent.active,
+.show > .dropdown-toggle.btn-default-transparent {
+  background-color: #0c9ec7;
+  border-color: #0c9ec7;
+}
