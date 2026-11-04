@@ -2,6 +2,7 @@ app:
     ui:
         avatar: Avatar
         create_user: Créer un utilisateur
+        created_articles: Articles créés
         forgotten_password: Mot de passe oublié
         legal_notices: Mentions légales
         new_games: Nouveaux jeux
