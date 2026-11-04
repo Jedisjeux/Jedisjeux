@@ -87,7 +87,7 @@ final class Statistics
     }
 
     /**
-     * @return array{intervals: string[], articles_count: int[]}
+     * @return array{intervals: string[], articles_count: int[], ranges: array<array{from: string, to: string}>}
      */
     #[ExposeInTemplate(name: 'statistics')]
     public function getStatistics(): array
@@ -115,6 +115,11 @@ final class Statistics
                 array_keys($counts),
             ),
             'articles_count' => array_values($counts),
+            // Dates of each bar, used to open the article list filtered on them when clicking on it
+            'ranges' => array_map(
+                fn (string $key): array => $this->resolveRange($key),
+                array_keys($counts),
+            ),
         ];
     }
 
@@ -173,6 +178,20 @@ final class Statistics
             'month' => 'P1M',
             default => throw new \InvalidArgumentException(sprintf('Interval "%s" is not supported.', $this->interval)),
         });
+    }
+
+    /**
+     * @return array{from: string, to: string}
+     */
+    private function resolveRange(string $key): array
+    {
+        if ('month' === $this->interval) {
+            $date = \DateTimeImmutable::createFromFormat('!Y-m', $key);
+
+            return ['from' => $date->format('Y-m-01'), 'to' => $date->format('Y-m-t')];
+        }
+
+        return ['from' => $key, 'to' => $key];
     }
 
     private function formatLabel(string $key): string

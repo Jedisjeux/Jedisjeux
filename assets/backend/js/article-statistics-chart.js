@@ -47,6 +47,27 @@
         toolbar: { show: false },
         height: 350,
         type: 'bar',
+        events: {
+          // Opens the published articles of the clicked day or month
+          dataPointSelection: (event, chartContext, config) => {
+            const range = JSON.parse(element.dataset.ranges)[config.dataPointIndex];
+
+            if (!range) {
+              return;
+            }
+
+            const params = new URLSearchParams({
+              'criteria[status][status]': 'published',
+              'criteria[publishStartDate][from][date]': range.from,
+              'criteria[publishStartDate][to][date]': range.to,
+            });
+
+            window.location.href = `${element.dataset.redirect}?${params.toString()}`;
+          },
+        },
+      },
+      states: {
+        active: { filter: { type: 'none' } },
       },
       plotOptions: {
         bar: {
