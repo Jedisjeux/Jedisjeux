@@ -23,9 +23,9 @@
                     <h2>Faites partie de la table.</h2>
                     <p>Retrouvez les joueurs, partagez vos parties et échangez autour de vos jeux préférés.</p>
                     <ul>
-                        <li><i class="fa fa-comments-o" aria-hidden="true"></i> Participer aux discussions</li>
-                        <li><i class="fa fa-camera" aria-hidden="true"></i> Partager vos parties</li>
-                        <li><i class="fa fa-user" aria-hidden="true"></i> Créer votre profil joueur</li>
+                        <li><i class="fa fa-comments-o" aria-hidden="true">{{ ux_icon('fa:comments-o', {class: 'fa-svg'}) }}</i> Participer aux discussions</li>
+                        <li><i class="fa fa-camera" aria-hidden="true">{{ ux_icon('fa:camera', {class: 'fa-svg'}) }}</i> Partager vos parties</li>
+                        <li><i class="fa fa-user" aria-hidden="true">{{ ux_icon('fa:user', {class: 'fa-svg'}) }}</i> Créer votre profil joueur</li>
                     </ul>
                 </aside>
                 <div class="editorial-register__panel">
@@ -45,7 +45,7 @@
                         {{ form_rest(form) }}
 
                         <div class="editorial-register__submit">
-                            <button type="submit" class="btn btn-default">{{ 'sylius.ui.create_an_account'|trans }} <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                            <button type="submit" class="btn btn-default">{{ 'sylius.ui.create_an_account'|trans }} <i class="fa fa-arrow-right" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i></button>
                         </div>
                     </form>
                     <p class="editorial-register__login">Vous avez déjà un compte ? <a href="{{ path('sylius_frontend_login') }}">Se connecter</a></p>

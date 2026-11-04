@@ -90,10 +90,8 @@ end
 
 before "deploy:updated", "deploy:set_permissions:acl"
 
-after 'deploy:updated', :build_assets do
+after 'deploy:updated', :dump_env do
     on roles(:web) do
-        puts "Build assets"
-        execute "cd #{release_path} && yarn install && GULP_ENV=prod yarn run gulp"
         execute "cd #{release_path} && composer dump-env prod"
     end
 end

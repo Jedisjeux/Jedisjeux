@@ -11,7 +11,7 @@
         <a href="{{ path('app_frontend_article_index') }}" class="nav-link dropdown-toggle" id="seventh-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ 'app.ui.articles'|trans }}</a>
         <ul class="dropdown-menu editorial-nav-menu" aria-labelledby="seventh-dropdown">
             <li class="editorial-nav-menu__heading">Le magazine</li>
-            <li><a href="{{ path('app_frontend_article_index') }}"><i class="fa fa-newspaper-o" aria-hidden="true"></i>{{ 'sylius.ui.all'|trans }}</a></li>
+            <li><a href="{{ path('app_frontend_article_index') }}"><i class="fa fa-newspaper-o" aria-hidden="true">{{ ux_icon('fa:newspaper-o', {class: 'fa-svg'}) }}</i>{{ 'sylius.ui.all'|trans }}</a></li>
             {{  render(url('sylius_partial_taxon_index_by_code', {
                 'code': constant('App\\Entity\\Taxon::CODE_ARTICLE'),
                 'template': 'frontend/taxon/_listForArticles.html.twig'
@@ -33,14 +33,14 @@
             <li class="editorial-nav-menu__column">
                 <span class="editorial-nav-menu__heading">Sélections</span>
                 <ul>
-                    <li><a href="{{ path('sylius_frontend_product_index', {'criteria': {'reviewCount': {value: 5}}, 'sorting': {'averageRating': 'desc'}}) }}"><i class="fa fa-star" aria-hidden="true"></i>{{ 'app.ui.top_rated'|trans }}</a></li>
-                    <li><a href="{{ path('sylius_frontend_product_index', {'sorting': {'viewCount': 'desc'}}) }}"><i class="fa fa-eye" aria-hidden="true"></i>{{ 'app.ui.most_viewed'|trans }}</a></li>
-                    <li><a href="{{ path('sylius_frontend_product_index', {'sorting': {'commentedReviewCount': 'desc'}}) }}"><i class="fa fa-comments" aria-hidden="true"></i>{{ 'app.ui.top_commented'|trans }}</a></li>
-                    <li><a href="{{ path('app_frontend_year_award_index') }}"><i class="fa fa-trophy" aria-hidden="true"></i>{{ 'app.ui.award_winning_games'|trans }}</a></li>
+                    <li><a href="{{ path('sylius_frontend_product_index', {'criteria': {'reviewCount': {value: 5}}, 'sorting': {'averageRating': 'desc'}}) }}"><i class="fa fa-star" aria-hidden="true">{{ ux_icon('fa:star', {class: 'fa-svg'}) }}</i>{{ 'app.ui.top_rated'|trans }}</a></li>
+                    <li><a href="{{ path('sylius_frontend_product_index', {'sorting': {'viewCount': 'desc'}}) }}"><i class="fa fa-eye" aria-hidden="true">{{ ux_icon('fa:eye', {class: 'fa-svg'}) }}</i>{{ 'app.ui.most_viewed'|trans }}</a></li>
+                    <li><a href="{{ path('sylius_frontend_product_index', {'sorting': {'commentedReviewCount': 'desc'}}) }}"><i class="fa fa-comments" aria-hidden="true">{{ ux_icon('fa:comments', {class: 'fa-svg'}) }}</i>{{ 'app.ui.top_commented'|trans }}</a></li>
+                    <li><a href="{{ path('app_frontend_year_award_index') }}"><i class="fa fa-trophy" aria-hidden="true">{{ ux_icon('fa:trophy', {class: 'fa-svg'}) }}</i>{{ 'app.ui.award_winning_games'|trans }}</a></li>
                 </ul>
             </li>
             <li class="editorial-nav-menu__footer">
-                <a href="{{ path('sylius_frontend_product_index') }}">Voir tous les jeux <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                <a href="{{ path('sylius_frontend_product_index') }}">Voir tous les jeux <i class="fa fa-arrow-right" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i></a>
             </li>
         </ul>
     </li>
@@ -53,8 +53,8 @@
            aria-expanded="false">{{ 'app.ui.plays'|trans }}</a>
         <ul class="dropdown-menu editorial-nav-menu" aria-labelledby="game-plays-dropdown">
             <li class="editorial-nav-menu__heading">La communauté joue</li>
-            <li><a href="{{ path('app_frontend_game_play_index') }}"><i class="fa fa-play-circle-o" aria-hidden="true"></i>{{ 'app.ui.game_plays'|trans }}</a></li>
-            <li><a href="{{ path('app_frontend_game_play_image_index') }}"><i class="fa fa-camera" aria-hidden="true"></i>{{ 'app.ui.game_play_images'|trans }}</a></li>
+            <li><a href="{{ path('app_frontend_game_play_index') }}"><i class="fa fa-play-circle-o" aria-hidden="true">{{ ux_icon('fa:play-circle-o', {class: 'fa-svg'}) }}</i>{{ 'app.ui.game_plays'|trans }}</a></li>
+            <li><a href="{{ path('app_frontend_game_play_image_index') }}"><i class="fa fa-camera" aria-hidden="true">{{ ux_icon('fa:camera', {class: 'fa-svg'}) }}</i>{{ 'app.ui.game_play_images'|trans }}</a></li>
         </ul>
     </li>
     <li class="nav-item {% if 'person' == activeMenu %}active {% endif %}mega-menu mega-menu--wide">

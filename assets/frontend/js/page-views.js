@@ -1,44 +1,21 @@
-$(function () {
-    'use strict';
+import { request, route } from './http.js';
 
-    $(document).ready(function () {
+// Counts the views of the articles, games and topics
+const element = document.getElementById('page-views');
+const updateRoutes = {
+  article: 'app_api_article_view_count_update',
+  product: 'sylius_api_product_view_count_update',
+  topic: 'app_api_topic_view_count_update',
+};
 
-        var $pageViews = $("#page-views");
+if (element) {
+  (async () => {
+    const { pagePath, object, id } = element.dataset;
+    const results = await request(route('app_api_page_views_show', { pagePath }));
+    const updateRoute = updateRoutes[object];
 
-        if ($pageViews.length > 0) {
-            var pagePath = $pageViews.data('page-path');
-
-            $.ajax({
-                type: "GET",
-                url: Routing.generate('app_api_page_views_show', {'pagePath': pagePath}),
-                success: function (results) {
-                    updatePageViews(results.view_count);
-                }
-            });
-        }
-
-        function updatePageViews(viewCount) {
-
-            var updatePath = null;
-            var object = $pageViews.data('object');
-
-            if ('product' === object) {
-                updatePath = 'sylius_api_product_view_count_update';
-            } else if ('article' === object) {
-                updatePath = 'app_api_article_view_count_update';
-            } else if ('topic' === object) {
-                updatePath = 'app_api_topic_view_count_update';
-            }
-
-            if (updatePath) {
-                $.ajax({
-                    type: "PATCH",
-                    url: Routing.generate(updatePath, {'id': $pageViews.data('id')}),
-                    data: {
-                        'viewCount': viewCount
-                    }
-                });
-            }
-        }
-    });
-});
+    if (updateRoute) {
+      await request(route(updateRoute, { id }), { method: 'PATCH', data: { viewCount: results.view_count } });
+    }
+  })();
+}

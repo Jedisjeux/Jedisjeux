@@ -1,19 +1,19 @@
 {% from 'macro/topic.html.twig' import getPath %}
 
 {% set mainTaxon = topic.mainTaxon %}
-{% set avatarPath = topic.author.avatar is not null ? topic.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png' %}
+{% set avatarPath = topic.author.avatar is not null ? topic.author.avatar.webPath : '@frontend_images:avatar-placeholder.png' %}
 {% set lastPage = topic.lastPageNumber %}
 {% set lastPost = topic.lastPost %}
 
 <article class="editorial-topic-card">
     <div class="editorial-topic-card__avatar" aria-hidden="true">
-        <img class="rounded-circle" src="{{ avatarPath|imagine_filter('thumbnail_XL') }}" alt="{{ topic.author }}" onerror="this.onerror=null;this.src='{{ asset('assets/frontend/images/avatar-placeholder.png') }}'">
+        <img class="rounded-circle" src="{{ avatarPath|imagine_filter('thumbnail_XL') }}" alt="{{ topic.author }}" onerror="this.onerror=null;this.src='{{ asset('frontend/images/avatar-placeholder.png') }}'">
     </div>
     <div class="editorial-topic-card__main">
         <div class="editorial-topic-card__meta">
             {% if mainTaxon is not null %}<span class="editorial-topic-card__category">{{ mainTaxon.name }}</span>{% endif %}
             <span>{{ topic.createdAt|format_datetime('medium', 'none') }}</span>
-            <span><i class="fa fa-comments-o" aria-hidden="true"></i> {{ topic.postCount }}</span>
+            <span><i class="fa fa-comments-o" aria-hidden="true">{{ ux_icon('fa:comments-o', {class: 'fa-svg'}) }}</i> {{ topic.postCount }}</span>
         </div>
         <h2><a href="{{ getPath(topic) }}">{{ topic.title }}</a></h2>
         <p class="editorial-topic-card__author">Par {{ topic.author }}</p>
@@ -28,7 +28,7 @@
             <span>Dernier message</span>
             <strong>{{ lastPost.author }}</strong>
             <time>{{ lastPost.createdAt|format_datetime('medium', 'short') }}</time>
-            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            <i class="fa fa-arrow-right" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i>
         </a>
     {% endif %}
 </article>

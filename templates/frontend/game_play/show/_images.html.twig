@@ -17,7 +17,7 @@
                             {{ images.render(image.webPath, 'full', image.description) }}
                             <a href="{{ image.webPath | imagine_filter(filter|default('full')) }}"
                                class="slick-carousel--popup-img overlay-link"
-                               title="{{ image.description }}"><i class="fa fa-plus"></i></a>
+                               title="{{ image.description }}"><i class="fa fa-plus" aria-hidden="true">{{ ux_icon('fa:plus', {class: 'fa-svg'}) }}</i></a>
                         </div>
                     {% endfor %}
                 </div>

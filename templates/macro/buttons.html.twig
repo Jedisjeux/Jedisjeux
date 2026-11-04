@@ -3,7 +3,7 @@
             {% if id is not empty %} id="{{ id }}"{% endif %}
        href="{{ url }}">
         {% if icon is not empty %}
-            <i class="fa fa-{{ icon }}"></i>
+            {{ fa_icon('fa fa-' ~ icon) }}
         {% endif %}
         {{ message|trans }}
     </a>
@@ -60,7 +60,7 @@
         <form action="{{ url }}" name="form" method="post" style="display: inline;">
             <input type="hidden" name="_method" value="DELETE">
             <button class="btn btn-danger btn-confirm" type="submit">
-                <i class="fa fa-trash"></i> <span>{{ message is empty ? 'label.delete'|trans : message }}</span>
+                <i class="fa fa-trash" aria-hidden="true">{{ ux_icon('fa:trash', {class: 'fa-svg'}) }}</i> <span>{{ message is empty ? 'label.delete'|trans : message }}</span>
             </button>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token(resourceId) }}" />
         </form>
@@ -71,7 +71,7 @@
     <form action="{{ url }}" method="post" novalidate style="display: inline;">
         <input type="hidden" name="_method" value="PATCH">
         <button class="btn btn-{{ class|default('default') }}" type="submit">
-            <i class="fa fa-{{ icon|default('transfer') }}"></i> <span>{{ message|trans }}</span>
+            {{ fa_icon('fa fa-' ~ icon|default('exchange')) }} <span>{{ message|trans }}</span>
         </button>
     </form>
 {% endmacro %}

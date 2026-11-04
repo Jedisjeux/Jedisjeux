@@ -7,25 +7,25 @@
         {% if person.mainImage is not null %}
             {{ images.render(person.mainImage.webPath, 'magazine_item', person) }}
         {% else %}
-            <span class="editorial-person-card__placeholder"><i class="fa fa-user-o" aria-hidden="true"></i></span>
+            <span class="editorial-person-card__placeholder"><i class="fa fa-user-o" aria-hidden="true">{{ ux_icon('fa:user-o', {class: 'fa-svg'}) }}</i></span>
         {% endif %}
     </a>
     <div class="editorial-person-card__body">
         <h2><a href="{{ personPath }}">{{ person }}</a></h2>
         <ul class="editorial-person-card__roles">
             {% if person.productCountAsDesigner > 0 %}
-                <li><i class="fa fa-cogs" aria-hidden="true"></i><span>Auteur</span><strong>{{ person.productCountAsDesigner }} jeux</strong></li>
+                <li><i class="fa fa-cogs" aria-hidden="true">{{ ux_icon('fa:cogs', {class: 'fa-svg'}) }}</i><span>Auteur</span><strong>{{ person.productCountAsDesigner }} jeux</strong></li>
             {% endif %}
             {% if person.productCountAsArtist > 0 %}
-                <li><i class="fa fa-paint-brush" aria-hidden="true"></i><span>Illustrateur</span><strong>{{ person.productCountAsArtist }} jeux</strong></li>
+                <li><i class="fa fa-paint-brush" aria-hidden="true">{{ ux_icon('fa:paint-brush', {class: 'fa-svg'}) }}</i><span>Illustrateur</span><strong>{{ person.productCountAsArtist }} jeux</strong></li>
             {% endif %}
             {% if person.productCountAsPublisher > 0 %}
-                <li><i class="fa fa-upload" aria-hidden="true"></i><span>Éditeur</span><strong>{{ person.productCountAsPublisher }} jeux</strong></li>
+                <li><i class="fa fa-upload" aria-hidden="true">{{ ux_icon('fa:upload', {class: 'fa-svg'}) }}</i><span>Éditeur</span><strong>{{ person.productCountAsPublisher }} jeux</strong></li>
             {% endif %}
             {% if person.productCountAsDesigner == 0 and person.productCountAsArtist == 0 and person.productCountAsPublisher == 0 %}
-                <li class="editorial-person-card__contributor"><i class="fa fa-user-o" aria-hidden="true"></i><span>Contributeur de la ludothèque</span></li>
+                <li class="editorial-person-card__contributor"><i class="fa fa-user-o" aria-hidden="true">{{ ux_icon('fa:user-o', {class: 'fa-svg'}) }}</i><span>Contributeur de la ludothèque</span></li>
             {% endif %}
         </ul>
-        <a href="{{ personPath }}" class="editorial-person-card__link">Découvrir <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        <a href="{{ personPath }}" class="editorial-person-card__link">Découvrir <i class="fa fa-arrow-right" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i></a>
     </div>
 </article>

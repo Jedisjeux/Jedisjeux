@@ -21,11 +21,12 @@ Documentation is available at [docs.jedisjeux.net](https://jedisjeux.readthedocs
 Installation
 ------------
 
-You need [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) to install PHP packages and [yarn](https://yarnpkg.com/lang/en/docs/install/) to install JS packages.
+You need [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) to install PHP packages. The front-end assets
+are served by [AssetMapper](https://symfony.com/doc/current/frontend/asset_mapper.html), no Node.js build is needed: Composer
+downloads the JavaScript packages of `importmap.php` with `importmap:install`.
 
 ```bash
 $ php bin/console app:install
-$ yarn install && yarn run gulp
 $ php bin/console server:start
 ```
 

@@ -1,11 +1,11 @@
 <div class="col-12 pv-20 editorial-game-tabs">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs style-4" role="tablist">
-        <li class="nav-item"><a class="nav-link active" href="#presentation" role="tab" id="presentation-tab" aria-controls="presentation" aria-selected="true" data-toggle="tab"><i class="fa fa-book pr-1"></i>Présentation</a></li>
-        <li class="nav-item"><a class="nav-link" href="#reviews" role="tab" data-toggle="tab"><i class="fa fa-star-o pr-1"></i>({{ product.commentedReviews|length }}) {{ 'sylius.ui.reviews'|trans }}</a></li>
-        <li class="nav-item"><a class="nav-link" href="#articles" role="tab" data-toggle="tab"><i class="fa fa-newspaper-o pr-1"></i>({{ product.publishedArticles|length }}) {{ 'app.ui.articles'|trans }}</a></li>
-        <li class="nav-item"><a class="nav-link" href="#game-plays" role="tab" data-toggle="tab"><i class="fa fa-table pr-1"></i>({{ product.gamePlaysWithTopic|length }}) {{ 'app.ui.game_plays'|trans }}</a></li>
-        <li class="nav-item"><a class="nav-link" href="#files" role="tab" data-toggle="tab"><i class="fa fa-paperclip pr-1"></i>({{ product.files|length }}) {{ 'app.ui.files'|trans }}</a></li>
+        <li class="nav-item"><a class="nav-link active" href="#presentation" role="tab" id="presentation-tab" aria-controls="presentation" aria-selected="true" data-toggle="tab"><i class="fa fa-book pr-1" aria-hidden="true">{{ ux_icon('fa:book', {class: 'fa-svg'}) }}</i>Présentation</a></li>
+        <li class="nav-item"><a class="nav-link" href="#reviews" role="tab" data-toggle="tab"><i class="fa fa-star-o pr-1" aria-hidden="true">{{ ux_icon('fa:star-o', {class: 'fa-svg'}) }}</i>({{ product.commentedReviews|length }}) {{ 'sylius.ui.reviews'|trans }}</a></li>
+        <li class="nav-item"><a class="nav-link" href="#articles" role="tab" data-toggle="tab"><i class="fa fa-newspaper-o pr-1" aria-hidden="true">{{ ux_icon('fa:newspaper-o', {class: 'fa-svg'}) }}</i>({{ product.publishedArticles|length }}) {{ 'app.ui.articles'|trans }}</a></li>
+        <li class="nav-item"><a class="nav-link" href="#game-plays" role="tab" data-toggle="tab"><i class="fa fa-table pr-1" aria-hidden="true">{{ ux_icon('fa:table', {class: 'fa-svg'}) }}</i>({{ product.gamePlaysWithTopic|length }}) {{ 'app.ui.game_plays'|trans }}</a></li>
+        <li class="nav-item"><a class="nav-link" href="#files" role="tab" data-toggle="tab"><i class="fa fa-paperclip pr-1" aria-hidden="true">{{ ux_icon('fa:paperclip', {class: 'fa-svg'}) }}</i>({{ product.files|length }}) {{ 'app.ui.files'|trans }}</a></li>
     </ul>
     <!-- Tab panes -->
     <div class="tab-content padding-top-clear padding-bottom-clear">

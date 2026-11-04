@@ -6,7 +6,7 @@
     <div class="breadcrumb-container">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a class="link-dark" href="{{ path('app_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
+                <li class="breadcrumb-item"><i class="fa fa-home pr-2" aria-hidden="true">{{ ux_icon('fa:home', {class: 'fa-svg'}) }}</i><a class="link-dark" href="{{ path('app_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
                 <li class="breadcrumb-item active">{{ pageTitle }}</li>
             </ol>
         </div>
@@ -29,7 +29,7 @@
                     <span class="editorial-eyebrow">Reprenez votre place</span>
                     <h2>La table vous attend.</h2>
                     <p>Connectez-vous pour retrouver les discussions et les moments de jeu partagés par la communauté.</p>
-                    <div class="editorial-login__note"><i class="fa fa-shield" aria-hidden="true"></i><span>Votre compte Jedisjeux vous accompagne dans toutes vos découvertes ludiques.</span></div>
+                    <div class="editorial-login__note"><i class="fa fa-shield" aria-hidden="true">{{ ux_icon('fa:shield', {class: 'fa-svg'}) }}</i><span>Votre compte Jedisjeux vous accompagne dans toutes vos découvertes ludiques.</span></div>
                 </aside>
                 <div class="editorial-login__panel">
                     <h2>{{ pageTitle }}</h2>
@@ -55,7 +55,7 @@
 
                         <input type="hidden" name="_csrf_shop_security_token" value="{{ csrf_token('shop_authenticate') }}">
                         {{ form_rest(form, {'render_rest': false}) }}
-                        <button id="_login" type="submit" class="editorial-login__submit">{{ 'sylius.ui.login_button'|trans }} <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                        <button id="_login" type="submit" class="editorial-login__submit">{{ 'sylius.ui.login_button'|trans }} <i class="fa fa-arrow-right" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i></button>
                     </form>
                     <p class="editorial-login__register">{{ 'app.ui.do_not_have_an_account_yet'|trans }} <a href="{{ path('app_frontend_register') }}">{{ 'sylius.ui.register'|trans }}</a></p>
                 </div>

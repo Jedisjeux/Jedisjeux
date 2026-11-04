@@ -1,6 +1,6 @@
 {% macro default(message, icon, type, header) %}
     <div class="alert alert-icon alert-{{ type|default('') }}" role="alert">
-        <i class="fa fa-{{ icon }}"></i>
+        {{ fa_icon('fa fa-' ~ icon) }}
         <h3>{{ header|trans }}</h3>
         {{ message|trans }}
     </div>

@@ -5,7 +5,7 @@
 {% set product = game_play.product %}
 {% set topic = game_play.topic %}
 {% set gamePlayPath = path('app_frontend_game_play_show', { 'id': game_play.id, 'productSlug': product.slug }) %}
-{% set avatarPath = game_play.author.avatar is not null ? game_play.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png' %}
+{% set avatarPath = game_play.author.avatar is not null ? game_play.author.avatar.webPath : '@frontend_images:avatar-placeholder.png' %}
 {% set playImage = game_play.images|length > 0 ? game_play.images|first : null %}
 {% set playedAt = game_play.playedAt ?? game_play.createdAt %}
 

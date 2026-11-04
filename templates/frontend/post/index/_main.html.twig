@@ -6,11 +6,11 @@
 <main class="main col-lg-8 editorial-thread-main">
     {% if app.user and topic.author.id == app.user.customer.id %}
         <div class="editorial-thread-controls">
-            <a class="editorial-thread-controls__edit" title="Modifier le sujet" href="{{ path('app_frontend_topic_update', {'id': topic.id}) }}"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</a>
+            <a class="editorial-thread-controls__edit" title="Modifier le sujet" href="{{ path('app_frontend_topic_update', {'id': topic.id}) }}"><i class="fa fa-pencil" aria-hidden="true">{{ ux_icon('fa:pencil', {class: 'fa-svg'}) }}</i> Modifier</a>
             <form action="{{ path('app_frontend_topic_delete', {'id': topic.id}) }}" method="post">
                 <input type="hidden" name="_method" value="DELETE">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token(topic.id) }}">
-                <button class="editorial-thread-controls__delete btn-confirm" type="submit" title="{{ 'label.delete'|trans }}"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                <button class="editorial-thread-controls__delete btn-confirm" type="submit" title="{{ 'label.delete'|trans }}"><i class="fa fa-trash-o" aria-hidden="true">{{ ux_icon('fa:trash-o', {class: 'fa-svg'}) }}</i></button>
             </form>
         </div>
     {% endif %}
@@ -19,9 +19,9 @@
         <span class="editorial-eyebrow">Le forum{% if topic.mainTaxon is not null %} · {{ topic.mainTaxon }}{% endif %}</span>
         <h1>{{ topic.title }}</h1>
         <div class="editorial-thread-meta">
-            <span><i class="fa fa-user-o" aria-hidden="true"></i> {{ topic.author }}</span>
-            <span><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ topic.createdAt|format_datetime('medium', 'none') }}</span>
-            <span><i class="fa fa-comments-o" aria-hidden="true"></i> {{ replyCount }} réponse{% if replyCount != 1 %}s{% endif %}</span>
+            <span><i class="fa fa-user-o" aria-hidden="true">{{ ux_icon('fa:user-o', {class: 'fa-svg'}) }}</i> {{ topic.author }}</span>
+            <span><i class="fa fa-calendar-o" aria-hidden="true">{{ ux_icon('fa:calendar-o', {class: 'fa-svg'}) }}</i> {{ topic.createdAt|format_datetime('medium', 'none') }}</span>
+            <span><i class="fa fa-comments-o" aria-hidden="true">{{ ux_icon('fa:comments-o', {class: 'fa-svg'}) }}</i> {{ replyCount }} réponse{% if replyCount != 1 %}s{% endif %}</span>
         </div>
     </header>
 
@@ -34,7 +34,7 @@
             {% endif %}
         </div>
         {% if topic.mainTaxon is not null %}
-            <footer><span class="editorial-thread-tag"><i class="fa fa-tag" aria-hidden="true"></i> {{ topic.mainTaxon }}</span></footer>
+            <footer><span class="editorial-thread-tag"><i class="fa fa-tag" aria-hidden="true">{{ ux_icon('fa:tag', {class: 'fa-svg'}) }}</i> {{ topic.mainTaxon }}</span></footer>
         {% endif %}
     </article>
 

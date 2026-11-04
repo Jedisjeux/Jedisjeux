@@ -3,7 +3,7 @@
         <a class="nav-link{% if current is not null and current.slug == child.slug %} active{% endif %}"
            href="{{ path('app_frontend_topic_index_by_taxon', { 'slug': child.slug }) }}">
             {% if child.iconClass is not null %}
-                <i class="{{ child.iconClass }} pr-2"></i>
+                {{ fa_icon(child.iconClass, {class: 'pr-2'}) }}
             {% endif %}
             {{ child.name }}
         </a>

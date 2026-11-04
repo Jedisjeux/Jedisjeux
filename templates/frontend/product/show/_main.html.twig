@@ -18,10 +18,8 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-pills editorial-game-media-tabs">
                             <li class="nav-item"><a class="nav-link active" href="#pill-1" data-toggle="tab"
-                                                    title="images"><i
-                                            class="fa fa-camera pr-1"></i> Photo</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#videos" data-toggle="tab" title="videos"><i
-                                            class="fa fa-video-camera pr-1"></i>({{ product.videos|length }}) {{ 'app.ui.videos'|trans }}</a></li>
+                                                    title="images"><i class="fa fa-camera pr-1" aria-hidden="true">{{ ux_icon('fa:camera', {class: 'fa-svg'}) }}</i> Photo</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#videos" data-toggle="tab" title="videos"><i class="fa fa-video-camera pr-1" aria-hidden="true">{{ ux_icon('fa:video-camera', {class: 'fa-svg'}) }}</i>({{ product.videos|length }}) {{ 'app.ui.videos'|trans }}</a></li>
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content clear-style">
@@ -32,7 +30,7 @@
                                             {{ images.render(image.webPath, 'full', product.name) }}
                                             <a href="{{ image.webPath | imagine_filter('full') }}"
                                                class="slick-carousel--popup-img overlay-link"
-                                               title="{{ image.description }}"><i class="fa fa-plus"></i></a>
+                                               title="{{ image.description }}"><i class="fa fa-plus" aria-hidden="true">{{ ux_icon('fa:plus', {class: 'fa-svg'}) }}</i></a>
                                         </div>
                                     {% endfor %}
                                 </div>
@@ -51,11 +49,11 @@
                             <div class="tab-pane" id="videos">
                                 {% for video in product.videos %}
                                     <div class="overlay-container overlay-visible">
-                                        {% set imagePath = video.image is not null and video.image.webpath is not null ? video.image.webPath : '/assets/frontend/images/placeholder.png' %}
+                                        {% set imagePath = video.image is not null and video.image.webpath is not null ? video.image.webPath : '@frontend_images:placeholder.png' %}
                                         <a class="popup-iframe" href="{{ video.path }}">
                                             {{ images.render(imagePath, 'full', video.title) }}
                                         </a>
-                                        <a class="overlay-link popup-iframe" href="{{ video.path }}"><i class="fa fa-link"></i></a>
+                                        <a class="overlay-link popup-iframe" href="{{ video.path }}"><i class="fa fa-link" aria-hidden="true">{{ ux_icon('fa:link', {class: 'fa-svg'}) }}</i></a>
                                         <div class="overlay-bottom text-left">
                                             <p class="lead margin-clear">{{ video.title }}</p>
                                         </div>
@@ -70,7 +68,7 @@
                         <h1 itemprop="name">{{ product.name }}</h1>
                         {% if product.averageRating > 0 %}
                             <div class="editorial-game-rating" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-                                <span class="editorial-game-rating__stars" aria-hidden="true"><i class="fa fa-star"></i></span>
+                                <span class="editorial-game-rating__stars" aria-hidden="true"><i class="fa fa-star" aria-hidden="true">{{ ux_icon('fa:star', {class: 'fa-svg'}) }}</i></span>
                                 <strong>{{ product.averageRating|round(1) }}<small>/10</small></strong>
                                 <a href="#reviews">({{ product.reviewCount }} {{ 'app.ui.ratings'|trans|lower }})</a>
                                 <meta itemprop="ratingValue" content="{{ product.averageRating|round(1) }}">
@@ -106,7 +104,7 @@
                         {{ render(url('sylius_partial_product_rating_show', { 'productId': product.id })) }}
                     </div>
                     <div class="editorial-game-actions__links">
-                        <a href="#" class="wishlist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus pr-1"></i>Ajouter à</a>
+                        <a href="#" class="wishlist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus pr-1" aria-hidden="true">{{ ux_icon('fa:plus', {class: 'fa-svg'}) }}</i>Ajouter à</a>
                         <ul class="dropdown-menu" style="white-space: nowrap; padding: 10px">
                             <li>
                                 <form id="productListForm">
@@ -120,12 +118,12 @@
                                 <hr/>
                                 <form method="post" class="form-inline" id="newProductListForm">
                                     <div class="form-group"><input type="text" id="list_name" name="name" class="form-control" placeholder="{{ 'app.ui.new_list'|trans }}"/></div>
-                                    <button type="submit" class="btn btn-default"><span class="fa fa-check"></span> {{ 'sylius.ui.create'|trans }}</button>
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-check" aria-hidden="true">{{ ux_icon('fa:check', {class: 'fa-svg'}) }}</i> {{ 'sylius.ui.create'|trans }}</button>
                                 </form>
                             </li>
                         </ul>
                         {{ render(url('sylius_partial_product_review_show_create_or_update_link', {'productSlug': product.slug})) }}
-                        <a href="{{ path('app_frontend_game_play_create', { 'productSlug': product.slug } ) }}" class="wishlist"><i class="fa fa-table pr-1"></i>Enregistrer une partie</a>
+                        <a href="{{ path('app_frontend_game_play_create', { 'productSlug': product.slug } ) }}" class="wishlist"><i class="fa fa-table pr-1" aria-hidden="true">{{ ux_icon('fa:table', {class: 'fa-svg'}) }}</i>Enregistrer une partie</a>
                     </div>
                 </div>
             </div>

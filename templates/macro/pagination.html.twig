@@ -1,7 +1,7 @@
 {% macro simple(paginator) %}
     {% if paginator.haveToPaginate() %}
         <div class="pagination justify-content-center">
-            {{ pagerfanta(paginator, 'frontend_translated') }}
+            {{ pagerfanta(paginator, 'twig', {template: 'frontend/pagination.html.twig', proximity: 1}) }}
         </div>
     {% endif %}
 {% endmacro %}

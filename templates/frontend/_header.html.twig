@@ -20,6 +20,7 @@
 
                         <!-- logo -->
                         <div id="logo" class="logo">
+                            <span class="logo-mark"><i class="fa fa-cube" aria-hidden="true">{{ ux_icon('fa:cube', {class: 'fa-svg'}) }}</i></span>
                             <a href="{{ path('app_homepage') }}"><h1 class="logo-font"><span class="text-default">Jedisjeux</span></h1></a>
                         </div>
 
@@ -49,6 +50,7 @@
 
                                     <!-- logo -->
                                     <div id="logo-mobile" class="logo">
+                                        <span class="logo-mark"><i class="fa fa-cube" aria-hidden="true">{{ ux_icon('fa:cube', {class: 'fa-svg'}) }}</i></span>
                                         <a href="{{ path('app_homepage') }}"><h1 class="logo-font-mobile"><span class="text-default">Jedisjeux</span></h1></a>
                                     </div>
 
@@ -62,19 +64,19 @@
                                 <!-- header dropdown buttons -->
                                 <div class="header-dropdown-buttons hidden-lg-up p-0 ml-auto mr-3">
                                     <div class="btn-group">
-                                        <button type="button" class="btn dropdown-toggle dropdown-toggle--no-caret" id="header-drop-3" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search"></i></button>
+                                        <button type="button" class="btn dropdown-toggle dropdown-toggle--no-caret" id="header-drop-3" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search" aria-hidden="true">{{ ux_icon('fa:search', {class: 'fa-svg'}) }}</i></button>
                                         <div class="dropdown-menu dropdown-menu-right editorial-search" aria-labelledby="header-drop-3">
                                             <form role="search" class="editorial-search__form" action="{{ path('sylius_frontend_product_index') }}">
                                                 <label class="editorial-eyebrow" for="mobile-search-input">Rechercher un jeu</label>
                                                 <div class="editorial-search__field">
-                                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                                    <i class="fa fa-search" aria-hidden="true">{{ ux_icon('fa:search', {class: 'fa-svg'}) }}</i>
                                                     <input type="search"
                                                            id="mobile-search-input"
                                                            {% if criteria['search'] is defined %}value="{{ criteria['search']['value'] }}"{% endif %}
                                                            name="criteria[search][value]"
                                                            autocomplete="off"
                                                            placeholder="Nom du jeu, par exemple Carcassonne">
-                                                    <button type="submit" aria-label="{{ 'sylius.ui.search'|trans }}"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                                                    <button type="submit" aria-label="{{ 'sylius.ui.search'|trans }}"><i class="fa fa-arrow-right" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i></button>
                                                 </div>
                                             </form>
                                             {% include 'frontend/header/_searchShortcuts.html.twig' %}
@@ -84,7 +86,7 @@
                                     {% if app.user %}
                                         {% include 'frontend/header/_accountMenu.html.twig' with { 'id': 'mobile-account-menu' } %}
                                     {% else %}
-                                        <a class="editorial-header-user" href="{{ path('sylius_frontend_login') }}" aria-label="{{ 'sylius.ui.login'|trans }}" title="{{ 'sylius.ui.login'|trans }}"><i class="fa fa-user" aria-hidden="true"></i></a>
+                                        <a class="editorial-header-user" href="{{ path('sylius_frontend_login') }}" aria-label="{{ 'sylius.ui.login'|trans }}" title="{{ 'sylius.ui.login'|trans }}"><i class="fa fa-user" aria-hidden="true">{{ ux_icon('fa:user', {class: 'fa-svg'}) }}</i></a>
                                     {% endif %}
                                     {% if app.user %}
                                         {% include 'frontend/header/_notifications.html.twig' with { 'id': 'header-drop-4' } %}
@@ -110,19 +112,19 @@
                     <!-- header dropdown buttons -->
                     <div class="header-dropdown-buttons">
                         <div class="btn-group">
-                            <button type="button" class="btn dropdown-toggle dropdown-toggle--no-caret" id="header-drop-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search"></i></button>
+                            <button type="button" class="btn dropdown-toggle dropdown-toggle--no-caret" id="header-drop-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search" aria-hidden="true">{{ ux_icon('fa:search', {class: 'fa-svg'}) }}</i></button>
                             <div class="dropdown-menu dropdown-menu-right editorial-search" aria-labelledby="header-drop-1">
                                 <form role="search" class="editorial-search__form" action="{{ path('sylius_frontend_product_index') }}">
                                     <label class="editorial-eyebrow" for="header-search-input">Rechercher un jeu</label>
                                     <div class="editorial-search__field">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                        <i class="fa fa-search" aria-hidden="true">{{ ux_icon('fa:search', {class: 'fa-svg'}) }}</i>
                                         <input type="search"
                                                id="header-search-input"
                                                {% if criteria['search'] is defined %}value="{{ criteria['search']['value'] }}"{% endif %}
                                                name="criteria[search][value]"
                                                autocomplete="off"
                                                placeholder="Nom du jeu, par exemple Carcassonne">
-                                        <button type="submit" aria-label="{{ 'sylius.ui.search'|trans }}"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                                        <button type="submit" aria-label="{{ 'sylius.ui.search'|trans }}"><i class="fa fa-arrow-right" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i></button>
                                     </div>
                                 </form>
                                 {% include 'frontend/header/_searchShortcuts.html.twig' %}
@@ -132,7 +134,7 @@
                     {% if app.user %}
                         {% include 'frontend/header/_accountMenu.html.twig' with { 'id': 'desktop-account-menu' } %}
                     {% else %}
-                        <a class="editorial-header-user" href="{{ path('sylius_frontend_login') }}" aria-label="{{ 'sylius.ui.login'|trans }}" title="{{ 'sylius.ui.login'|trans }}"><i class="fa fa-user" aria-hidden="true"></i></a>
+                        <a class="editorial-header-user" href="{{ path('sylius_frontend_login') }}" aria-label="{{ 'sylius.ui.login'|trans }}" title="{{ 'sylius.ui.login'|trans }}"><i class="fa fa-user" aria-hidden="true">{{ ux_icon('fa:user', {class: 'fa-svg'}) }}</i></a>
                     {% endif %}
                         {% if app.user %}
                             {% include 'frontend/header/_notifications.html.twig' with { 'id': 'header-drop-2' } %}

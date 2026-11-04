@@ -4,21 +4,21 @@
 
     {% for post in posts %}
         {% set avatar = post.author.avatar %}
-        {% set avatarPath = avatar is not null ? avatar.webPath : '/assets/frontend/images/avatar-placeholder.png' %}
+        {% set avatarPath = avatar is not null ? avatar.webPath : '@frontend_images:avatar-placeholder.png' %}
 
         <!-- comment start -->
         <div class="comment clearfix">
             {% if app.user and post.author.id == app.user.customer.id %}
                 <div class="float-right mb-10">
                     <div class="btn-group">
-                        <a class="btn btn-default" href="{{ self.getUpdatePath(topic, post) }}"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-default" href="{{ self.getUpdatePath(topic, post) }}"><i class="fa fa-pencil" aria-hidden="true">{{ ux_icon('fa:pencil', {class: 'fa-svg'}) }}</i></a>
                     </div>
 
                     <div class="btn-group">
                         <form class="form-inline" action="{{ path('app_frontend_post_delete', { 'id': post.id }) }}" name="form" method="post">
                             <input type="hidden" name="_method" value="DELETE">
                             <button class="btn btn-danger btn-confirm" type="submit" title="{{ 'label.delete'|trans }}">
-                                <i class="fa fa-remove"></i>
+                                <i class="fa fa-remove" aria-hidden="true">{{ ux_icon('fa:remove', {class: 'fa-svg'}) }}</i>
                             </button>
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token(post.id) }}" />
                         </form>
@@ -34,7 +34,7 @@
             <div class="comment-content">
                 <div class="comment-body clearfix">
                     {{ post.body|raw }}
-                    {#<a href="#" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply"></i> Reply</a>#}
+                    {#<a href="#" class="btn-sm-link link-dark pull-right"><i class="fa fa-reply" aria-hidden="true">{{ ux_icon('fa:reply', {class: 'fa-svg'}) }}</i> Reply</a>#}
                 </div>
             </div>
         </div>

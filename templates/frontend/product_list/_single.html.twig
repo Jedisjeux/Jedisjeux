@@ -8,13 +8,13 @@
         {% if lastProduct and lastProduct.mainImage %}
             {{ images.fit(lastProduct.mainImage.webPath, product_list.name) }}
         {% else %}
-            <span class="editorial-list-card__placeholder"><i class="fa fa-cubes"></i></span>
+            <span class="editorial-list-card__placeholder"><i class="fa fa-cubes" aria-hidden="true">{{ ux_icon('fa:cubes', {class: 'fa-svg'}) }}</i></span>
         {% endif %}
         <span class="editorial-list-card__count">{{ product_list.items|length }} {{ 'app.ui.games'|trans|lower }}</span>
     </a>
     <div class="editorial-list-card__body">
         <h2><a href="{{ productListPath }}">{{ product_list.name }}</a></h2>
-        <p class="editorial-list-card__meta"><i class="fa fa-calendar-o" aria-hidden="true"></i> {{ product_list.createdAt|format_datetime('medium', 'none') }}</p>
-        <a href="{{ productListPath }}" class="editorial-list-card__link">{{ 'sylius.ui.view_more'|trans }} <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        <p class="editorial-list-card__meta"><i class="fa fa-calendar-o" aria-hidden="true">{{ ux_icon('fa:calendar-o', {class: 'fa-svg'}) }}</i> {{ product_list.createdAt|format_datetime('medium', 'none') }}</p>
+        <a href="{{ productListPath }}" class="editorial-list-card__link">{{ 'sylius.ui.view_more'|trans }} <i class="fa fa-arrow-right" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i></a>
     </div>
 </article>

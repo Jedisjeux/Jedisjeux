@@ -1,9 +1,9 @@
 <div class="editorial-search__shortcuts">
     <span class="editorial-search__label">Explorer</span>
-    <a href="{{ path('sylius_frontend_product_index', {'criteria': {'reviewCount': {value: 5}}, 'sorting': {'averageRating': 'desc'}}) }}"><i class="fa fa-star" aria-hidden="true"></i>{{ 'app.ui.top_rated'|trans }}</a>
-    <a href="{{ path('sylius_frontend_product_index', {'sorting': {'viewCount': 'desc'}}) }}"><i class="fa fa-eye" aria-hidden="true"></i>{{ 'app.ui.most_viewed'|trans }}</a>
-    <a href="{{ path('app_frontend_year_award_index') }}"><i class="fa fa-trophy" aria-hidden="true"></i>{{ 'app.ui.award_winning_games'|trans }}</a>
-    <a href="{{ path('app_frontend_article_index') }}"><i class="fa fa-newspaper-o" aria-hidden="true"></i>{{ 'app.ui.articles'|trans }}</a>
+    <a href="{{ path('sylius_frontend_product_index', {'criteria': {'reviewCount': {value: 5}}, 'sorting': {'averageRating': 'desc'}}) }}"><i class="fa fa-star" aria-hidden="true">{{ ux_icon('fa:star', {class: 'fa-svg'}) }}</i>{{ 'app.ui.top_rated'|trans }}</a>
+    <a href="{{ path('sylius_frontend_product_index', {'sorting': {'viewCount': 'desc'}}) }}"><i class="fa fa-eye" aria-hidden="true">{{ ux_icon('fa:eye', {class: 'fa-svg'}) }}</i>{{ 'app.ui.most_viewed'|trans }}</a>
+    <a href="{{ path('app_frontend_year_award_index') }}"><i class="fa fa-trophy" aria-hidden="true">{{ ux_icon('fa:trophy', {class: 'fa-svg'}) }}</i>{{ 'app.ui.award_winning_games'|trans }}</a>
+    <a href="{{ path('app_frontend_article_index') }}"><i class="fa fa-newspaper-o" aria-hidden="true">{{ ux_icon('fa:newspaper-o', {class: 'fa-svg'}) }}</i>{{ 'app.ui.articles'|trans }}</a>
 </div>
 
 <script>

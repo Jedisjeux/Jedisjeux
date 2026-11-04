@@ -3,7 +3,7 @@
 <dl id="product-awards" class="row">
     {% for yearAward in product.yearAwards %}
         {% set image = yearAward.award.image %}
-        {% set imagePath = image is not null and image.webPath is not null ? image.webPath : '/assets/frontend/images/placeholder.png' %}
+        {% set imagePath = image is not null and image.webPath is not null ? image.webPath : '@frontend_images:placeholder.png' %}
         <dt class="col-sm-1">{{ images.render(imagePath, 'thumbnail', yearAward.award.name, 'rounded-circle') }}</dt>
         <dd class="col-sm-11">{{ yearAward.name }}</dd>
     {% endfor %}

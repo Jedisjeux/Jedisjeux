@@ -12,8 +12,6 @@
 /public/media/*
 /public/*.xml
 
-**/node_modules/*
-
 .idea
 *.DS_Store
 
@@ -53,12 +51,6 @@ coverage/*
 infection-log.txt
 ###< infection/infection ###
 
-###> symfony/webpack-encore-bundle ###
-/node_modules/
-/public/build/
-npm-debug.log
-yarn-error.log
-###< symfony/webpack-encore-bundle ###
 /.phpunit.result.cache
 
 ###> lexik/jwt-authentication-bundle ###

@@ -11,7 +11,6 @@
 
 namespace App\Tests\Behat\Page\Frontend\ProductReview;
 
-use App\Tests\Behat\Service\JQueryHelper;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
@@ -60,10 +59,10 @@ class CreatePage extends SymfonyPage
      */
     public function rateReview(int $rate)
     {
-        JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
+        // The stars are rendered by the rating script once the page is loaded
+        $this->getDocument()->waitFor(5, fn (): bool => $this->hasElement('rate', ['%rate%' => $rate]));
 
-        $this->getElement('rate', ['%rate%' => $rate])->mouseOver();
-        $this->getElement('rate_hover', ['%rate%' => $rate])->click();
+        $this->getElement('rate', ['%rate%' => $rate])->click();
     }
 
     /**
@@ -82,8 +81,7 @@ class CreatePage extends SymfonyPage
         return array_merge(parent::getDefinedElements(), [
             'title' => '#sylius_product_review_title',
             'comment' => '#sylius_product_review_comment',
-            'rate' => '.rate-base-layer span:nth-child(%rate%) .fa-star',
-            'rate_hover' => '.rate-hover-layer span:nth-child(%rate%) .fa-star',
+            'rate' => '.rating .rating__star:nth-child(%rate%)',
         ]);
     }
 }

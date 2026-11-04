@@ -4,22 +4,22 @@
 {% set topics = topics.data is defined ? topics.data : topics %}
 
 {% for topic in topics %}
-    {% set avatarPath = topic.author.avatar is not null ? topic.author.avatar.webPath : '/assets/frontend/images/avatar-placeholder.png'  %}
+    {% set avatarPath = topic.author.avatar is not null ? topic.author.avatar.webPath : '@frontend_images:avatar-placeholder.png'  %}
     {% set topicPath = getPath(topic) %}
 
     <div class="media margin-clear">
         <div class="d-flex pr-2">
             <div class="overlay-container">
                 {{ images.render(avatarPath, 'thumbnail', topic.author, 'rounded-circle media-object') }}
-                <a href="{{ topicPath }}" class="overlay-link small"><i class="fa fa-link"></i></a>
+                <a href="{{ topicPath }}" class="overlay-link small"><i class="fa fa-link" aria-hidden="true">{{ ux_icon('fa:link', {class: 'fa-svg'}) }}</i></a>
             </div>
         </div>
         <div class="media-body">
             <h6 class="media-heading"><a href="{{ topicPath }}">{{ topic.title }}</a></h6>
             <p class="small mb-10 text-muted">
-                <i class="fa fa-calendar pr-1"></i> {{ topic.createdAt|format_datetime('short', 'none') }}
+                <i class="fa fa-calendar pr-1" aria-hidden="true">{{ ux_icon('fa:calendar', {class: 'fa-svg'}) }}</i> {{ topic.createdAt|format_datetime('short', 'none') }}
                 {% if topic.mainTaxon %}
-                    <i class="pl-10 pr-1 fa fa-tag"></i>{{ topic.mainTaxon.name }}
+                    <i class="pl-10 pr-1 fa fa-tag" aria-hidden="true">{{ ux_icon('fa:tag', {class: 'fa-svg'}) }}</i>{{ topic.mainTaxon.name }}
                 {% endif %}
             </p>
         </div>

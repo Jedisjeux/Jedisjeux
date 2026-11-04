@@ -25,8 +25,8 @@
                             </ul>
                             <div class="separator-2"></div>
                             <ul class="list-icons">
-                                {% if head_office is not empty %}<li><i class="fa fa-map-marker pr-2 text-default"></i> {{ head_office }}</li>{% endif %}
-                                <li><a href="{{ path('app_frontend_contact_request_create') }}"><i class="fa fa-envelope-o pr-2"></i>{{ 'sylius.ui.contact_us'|trans }}</a></li>
+                                {% if head_office is not empty %}<li><i class="fa fa-map-marker pr-2 text-default" aria-hidden="true">{{ ux_icon('fa:map-marker', {class: 'fa-svg'}) }}</i> {{ head_office }}</li>{% endif %}
+                                <li><a href="{{ path('app_frontend_contact_request_create') }}"><i class="fa fa-envelope-o pr-2" aria-hidden="true">{{ ux_icon('fa:envelope-o', {class: 'fa-svg'}) }}</i>{{ 'sylius.ui.contact_us'|trans }}</a></li>
                             </ul>
                         </div>
                     </div>

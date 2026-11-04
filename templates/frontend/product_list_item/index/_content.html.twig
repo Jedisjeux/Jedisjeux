@@ -30,7 +30,7 @@
                 {{ pagination(product_list_items.data) }}
             {% else %}
                 <div class="editorial-list-empty">
-                    <i class="fa fa-cubes" aria-hidden="true"></i>
+                    <i class="fa fa-cubes" aria-hidden="true">{{ ux_icon('fa:cubes', {class: 'fa-svg'}) }}</i>
                     <p>Aucun jeu dans cette liste pour le moment.</p>
                 </div>
             {% endif %}
