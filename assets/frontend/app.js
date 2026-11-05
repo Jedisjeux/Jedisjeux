@@ -21,6 +21,7 @@ import './styles/legacy/scroll-to-top.css';
 import './styles/helpers.css';
 import './styles/editorial.css';
 
+import './js/stimulus.js';
 import './js/bootstrap-components.js';
 import './js/layout.js';
 import './js/gallery.js';

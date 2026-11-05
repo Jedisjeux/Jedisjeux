@@ -1,0 +1,7 @@
+{#- Front-end pagination of a live component: the links change the page through its "changePage" live action, their
+    href stays as a fallback. -#}
+{%- extends 'frontend/pagination.html.twig' -%}
+
+{%- block link_attributes -%}
+    {{- ' ' -}}data-action="live#action:prevent" data-live-action-param="changePage" data-live-page-param="{{ page }}"
+{%- endblock link_attributes -%}
