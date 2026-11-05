@@ -1,0 +1,42 @@
+<?php
+
+/*
+ * This file is part of Jedisjeux.
+ *
+ * (c) Loïc Frémont
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace App\Grid\Frontend;
+
+use Sylius\Component\Grid\Attribute\AsGrid;
+use Sylius\Component\Grid\Builder\GridBuilderInterface;
+
+#[AsGrid(
+    name: 'sylius_frontend_product_from_taxon',
+)]
+final class ProductFromTaxonGrid
+{
+    public function __construct(
+        private readonly string $locale,
+    ) {
+    }
+
+    public function __invoke(GridBuilderInterface $gridBuilder): void
+    {
+        $gridBuilder
+            ->setRepositoryMethod('createListQueryBuilder', [
+                'locale' => $this->locale,
+                'onlyPublished' => true,
+                'criteria' => 'expr:service(\'request_stack\').getCurrentRequest().get(\'criteria\', [])',
+                'taxon' => 'expr:service(\'sylius.repository.taxon\').findOneBySlug($slug, \''.$this->locale.'\')',
+            ])
+            ->extends('sylius_frontend_product')
+            ->orderBy('createdAt', 'desc')
+        ;
+    }
+}
