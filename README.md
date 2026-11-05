@@ -1,14 +1,9 @@
 <h1 align="center">
-    <a href="http://www.jedisjeux.net" target="_blank">
-        <img src="http://www.jedisjeux.net/media/cache/resolve/full/assets/frontend/images/logo.png" />
-    </a>
+    Jedisjeux
     <br />
-    <a href="http://travis-ci.org/Jedisjeux/Jedisjeux" title="Build status" target="_blank">
-        <img src="https://img.shields.io/travis/Jedisjeux/Jedisjeux/master.svg" />
+    <a href="https://github.com/Jedisjeux/Jedisjeux/actions/workflows/ci.yaml" title="Build status" target="_blank">
+        <img src="https://github.com/Jedisjeux/Jedisjeux/actions/workflows/ci.yaml/badge.svg" />
     </a>
-    <a href="https://scrutinizer-ci.com/g/Jedisjeux/Jedisjeux/" title="Scrutinizer" target="_blank">
-        <img src="https://img.shields.io/scrutinizer/g/Jedisjeux/Jedisjeux.svg" />
-    </a>    
 </h1>
 
 [Jedisjeux](https://www.jedisjeux.net) is a PHP boardgame website, based on [Symfony Framework](http://symfony.com/) and [Sylius](http://sylius.org/).
@@ -21,22 +16,58 @@ Documentation is available at [docs.jedisjeux.net](https://jedisjeux.readthedocs
 Installation
 ------------
 
-You need [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx) to install PHP packages. The front-end assets
-are served by [AssetMapper](https://symfony.com/doc/current/frontend/asset_mapper.html), no Node.js build is needed: Composer
-downloads the JavaScript packages of `importmap.php` with `importmap:install`.
+The development stack runs on Docker and is driven by [Castor](https://castor.jolicode.com/): PHP 8.2 with nginx in the
+`app` container, MariaDB 10.6, and a headless Chrome for the JavaScript Behat scenarios. Build and start it:
 
 ```bash
-$ php bin/console app:install
-$ php bin/console server:start
+castor docker:build
+castor docker:up
 ```
 
-Then open `http://localhost:8000/` in your web browser to enjoy Jedisjeux website in a development environment.
+Then install the PHP dependencies, the front-end packages and the database:
 
-[Behat](http://behat.org) scenarios
------------------------------------
+```bash
+castor app:install
+castor app:assets
+castor app:db:migrate
+castor app:symfony sylius:fixtures:load
+```
 
-With the Docker stack, the `app` container serves the test environment on port 8080 and the `chrome`
-container runs a headless Chrome sharing its network. Create a `behat.yml` file to use them:
+The front-end assets are served by [AssetMapper](https://symfony.com/doc/current/frontend/asset_mapper.html), no Node.js
+build is needed: `castor app:assets` downloads the JavaScript packages of `importmap.php`.
+
+Open `https://jedisjeux.test/` in your web browser to enjoy Jedisjeux website in a development environment.
+`castor docker:about` lists every URL of the stack, and `castor docker:doctor` says how to fix your environment
+when something goes wrong.
+
+Run any Symfony or Composer command through Castor:
+
+```bash
+castor app:symfony debug:router
+castor app:composer require vendor/package
+```
+
+Tests
+-----
+
+Prepare the test database (the test environment uses its own `jdj_test` database, so the tests never purge the
+development one):
+
+```bash
+castor app:symfony --env=test doctrine:database:create
+castor app:symfony --env=test doctrine:migrations:migrate -n
+```
+
+Then run [phpspec](https://phpspec.net), [PHPUnit](https://phpunit.de) and [Behat](https://behat.org):
+
+```bash
+castor test:phpspec
+castor test:phpunit
+castor test:behat
+```
+
+The `app` container serves the test environment on port 8080 and the `chrome` container shares its network, so Behat
+runs inside the `app` container. Create a `behat.yml` file to use them:
 
 ```yaml
 imports: ["behat.yml.dist"]
@@ -48,31 +79,28 @@ default:
             javascript_session: chrome_headless
 ```
 
-Then run the scenarios inside the `app` container (arguments are passed to Behat):
+Arguments are passed to Behat, for instance to run only the JavaScript scenarios:
 
 ```bash
-$ castor test:behat --tags="@javascript"
+castor test:behat --tags="@javascript"
 ```
 
-Without Docker, run selenium-server-standalone instead:
+Quality
+-------
 
 ```bash
-$ bin/selenium-server-standalone -Dwebdriver.chrome.driver=$PWD/bin/chromedriver
+castor app:qa:cs
+castor app:qa:phpstan
+castor app:qa:psalm
 ```
 
-Then setup your test database:
+Deployment
+----------
+
+The application is deployed to production with [Capistrano](https://capistranorb.com/), run in a Ruby container:
 
 ```bash
-$ php bin/console doctrine:database:create --env=test
-$ php bin/console doctrine:schema:create --env=test
-$ php bin/console cache:clear --no-warmup --env=test
-$ php bin/console doctrine:phpcr:repository:init --env=test
-```
-
-You can run Behat using the following commands:
-
-```bash
-$ vendor/bin/behat
+castor app:deploy
 ```
 
 Bug Tracking
