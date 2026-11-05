@@ -1,0 +1,157 @@
+{% macro thumbnail(game, filter, class) %}
+    <span class="{{ class }}">
+        {% if game.imagePath %}
+            <img src="{{ game.imagePath|imagine_filter(filter) }}" alt="" loading="lazy"/>
+        {% else %}
+            <i class="fa fa-puzzle-piece" aria-hidden="true">{{ ux_icon('fa:puzzle-piece', {class: 'fa-svg'}) }}</i>
+        {% endif %}
+    </span>
+{% endmacro %}
+
+{% set totals = statistics.totals %}
+{% set previousTotals = statistics.previousTotals %}
+{% set months = statistics.months %}
+{% set busiestMonth = statistics.busiestMonth %}
+{% set mostPlayed = statistics.mostPlayed %}
+{% set maxMonth = max(months) %}
+{% set favorite = mostPlayed|first %}
+{% set maxGame = favorite ? favorite.gamePlayCount : 0 %}
+
+<div {{ attributes.defaults({class: 'editorial-statistics-component'}) }} data-loading="addClass(editorial-statistics-component--loading)">
+    <div class="editorial-catalog editorial-account">
+        <section class="editorial-catalog__intro">
+            <div class="container">
+                <span class="editorial-eyebrow">Mon espace · Bilan ludique</span>
+                <h1>{{ 'app.ui.my_statistics'|trans }} <span class="editorial-statistics__year">{{ year }}</span></h1>
+                <p>Vos parties, vos jeux fétiches et vos mois les plus ludiques, année après année.</p>
+                {% if years|length > 1 %}
+                    <nav class="editorial-statistics__years" aria-label="{{ 'app.ui.year'|trans }}">
+                        {% for item in years %}
+                            <a
+                                href="{{ path('app_frontend_account_statistics', {'annee': item}) }}"
+                                data-action="live#action:prevent"
+                                data-live-action-param="changeYear"
+                                data-live-year-param="{{ item }}"
+                                {% if item == year %}class="active" aria-current="page"{% endif %}
+                            >{{ item }}</a>
+                        {% endfor %}
+                    </nav>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+
+    <section class="editorial-account-main editorial-statistics">
+        <div class="container">
+            {% if totals.gamePlayCount == 0 %}
+                <div id="statistics-empty" class="editorial-statistics__card editorial-statistics__empty">
+                    <span class="editorial-statistics__empty-icon" aria-hidden="true"><i class="fa fa-bar-chart" aria-hidden="true">{{ ux_icon('fa:bar-chart', {class: 'fa-svg'}) }}</i></span>
+                    <p>{{ 'app.ui.no_game_play_in_year'|trans({'%year%': year}) }}</p>
+                    <a class="btn btn-default" href="{{ path('app_frontend_account_game_play_index') }}">{{ 'app.ui.my_game_plays'|trans }}</a>
+                </div>
+            {% else %}
+                <div class="editorial-statistics__tiles">
+                    <div class="editorial-statistics__tile">
+                        <span class="editorial-statistics__tile-icon" aria-hidden="true"><i class="fa fa-play" aria-hidden="true">{{ ux_icon('fa:play', {class: 'fa-svg'}) }}</i></span>
+                        <span id="statistics-game-play-count" class="editorial-statistics__value">{{ totals.gamePlayCount }}</span>
+                        <span class="editorial-statistics__label">{{ 'app.ui.game_plays_in_year'|trans({'%year%': year}) }}</span>
+                        {% if previousTotals %}
+                            {% set delta = totals.gamePlayCount - previousTotals.gamePlayCount %}
+                            <span class="editorial-statistics__delta editorial-statistics__delta--{{ delta > 0 ? 'up' : (delta < 0 ? 'down' : 'flat') }}">
+                                {{ fa_icon('fa fa-' ~ (delta > 0 ? 'arrow-up' : (delta < 0 ? 'arrow-down' : 'minus'))) }}
+                                {{ delta > 0 ? '+' }}{{ delta }} par rapport à {{ year - 1 }}
+                            </span>
+                        {% endif %}
+                    </div>
+                    <div class="editorial-statistics__tile">
+                        <span class="editorial-statistics__tile-icon" aria-hidden="true"><i class="fa fa-cubes" aria-hidden="true">{{ ux_icon('fa:cubes', {class: 'fa-svg'}) }}</i></span>
+                        <span id="statistics-product-count" class="editorial-statistics__value">{{ totals.productCount }}</span>
+                        <span class="editorial-statistics__label">{{ 'app.ui.different_games_played'|trans }}</span>
+                        {% if previousTotals %}
+                            {% set delta = totals.productCount - previousTotals.productCount %}
+                            <span class="editorial-statistics__delta editorial-statistics__delta--{{ delta > 0 ? 'up' : (delta < 0 ? 'down' : 'flat') }}">
+                                {{ fa_icon('fa fa-' ~ (delta > 0 ? 'arrow-up' : (delta < 0 ? 'arrow-down' : 'minus'))) }}
+                                {{ delta > 0 ? '+' }}{{ delta }} par rapport à {{ year - 1 }}
+                            </span>
+                        {% endif %}
+                    </div>
+                    {% if busiestMonth %}
+                        <div class="editorial-statistics__tile">
+                            <span class="editorial-statistics__tile-icon" aria-hidden="true"><i class="fa fa-calendar" aria-hidden="true">{{ ux_icon('fa:calendar', {class: 'fa-svg'}) }}</i></span>
+                            <span class="editorial-statistics__value editorial-statistics__value--text">{{ date(year ~ '-' ~ busiestMonth ~ '-01')|format_date(pattern: 'MMMM')|capitalize }}</span>
+                            <span class="editorial-statistics__label">{{ 'app.ui.busiest_month'|trans }} · {{ months[busiestMonth] }} {{ 'app.ui.game_plays'|trans|lower }}</span>
+                        </div>
+                    {% endif %}
+                    {% if favorite %}
+                        <a class="editorial-statistics__tile editorial-statistics__tile--favorite" href="{{ path('sylius_frontend_product_show', {'slug': favorite.slug}) }}">
+                            {{ _self.thumbnail(favorite, 'thumbnail', 'editorial-statistics__favorite-image') }}
+                            <span class="editorial-statistics__value editorial-statistics__value--text">{{ favorite.name }}</span>
+                            <span class="editorial-statistics__label">{{ 'app.ui.favorite_game'|trans }} · {{ favorite.gamePlayCount }} {{ 'app.ui.game_plays'|trans|lower }}</span>
+                        </a>
+                    {% endif %}
+                </div>
+
+                <div class="editorial-statistics__card">
+                    <h2 class="editorial-statistics__title">{{ 'app.ui.game_plays_per_month'|trans }}</h2>
+                    <ol class="editorial-statistics__chart">
+                        {% for month, count in months %}
+                            {% set label = date(year ~ '-' ~ month ~ '-01')|format_date(pattern: 'MMMM') %}
+                            <li class="editorial-statistics__bar{% if month == busiestMonth %} editorial-statistics__bar--top{% endif %}" title="{{ label|capitalize }} : {{ count }}">
+                                <span class="editorial-statistics__bar-count">{{ count > 0 ? count }}</span>
+                                <span class="editorial-statistics__bar-track">
+                                    <span class="editorial-statistics__bar-fill" style="height: {{ maxMonth > 0 ? (count / maxMonth * 100)|round : 0 }}%"></span>
+                                </span>
+                                <span class="editorial-statistics__bar-label"><abbr title="{{ label }}">{{ date(year ~ '-' ~ month ~ '-01')|format_date(pattern: 'MMM')|trim('.')|capitalize }}</abbr></span>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+
+                <div id="statistics-most-played" class="editorial-statistics__card">
+                    <h2 class="editorial-statistics__title">{{ 'app.ui.most_played_games'|trans }}</h2>
+
+                    <ol class="editorial-statistics__podium">
+                        {% for game in mostPlayed|slice(0, 3) %}
+                            <li class="editorial-statistics__podium-item editorial-statistics__podium-item--{{ loop.index }}" data-game="{{ game.name }}" data-game-play-count="{{ game.gamePlayCount }}">
+                                <a href="{{ path('sylius_frontend_product_show', {'slug': game.slug}) }}">
+                                    <span class="editorial-statistics__medal">{{ loop.index }}</span>
+                                    {{ _self.thumbnail(game, 'thumbnail_XL', 'editorial-statistics__podium-image') }}
+                                    <strong>{{ game.name }}</strong>
+                                    <span>{{ game.gamePlayCount }} {{ 'app.ui.game_plays'|trans|lower }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ol>
+
+                    {% if ranking.nbResults > 0 %}
+                        {% set offset = constant('App\\Twig\\Components\\Account\\Statistics::PODIUM_SIZE') + ranking.currentPageOffsetStart - 1 %}
+                        <ol id="statistics-ranking" class="editorial-statistics__ranking" start="{{ offset + 1 }}">
+                            {% for game in ranking %}
+                                <li data-game="{{ game.name }}" data-game-play-count="{{ game.gamePlayCount }}">
+                                    <span class="editorial-statistics__rank">{{ offset + loop.index }}</span>
+                                    {{ _self.thumbnail(game, 'thumbnail', 'editorial-statistics__ranking-image') }}
+                                    <span class="editorial-statistics__ranking-body">
+                                        <a href="{{ path('sylius_frontend_product_show', {'slug': game.slug}) }}">{{ game.name }}</a>
+                                        <span class="editorial-statistics__ranking-bar"><span style="width: {{ (game.gamePlayCount / maxGame * 100)|round }}%"></span></span>
+                                    </span>
+                                    <span class="editorial-statistics__ranking-count">{{ game.gamePlayCount }}</span>
+                                </li>
+                            {% endfor %}
+                        </ol>
+
+                        {% if ranking.haveToPaginate %}
+                            <div id="statistics-pagination" class="pagination justify-content-center">
+                                {{ pagerfanta(ranking, 'twig', {
+                                    template: 'frontend/live_pagination.html.twig',
+                                    proximity: 1,
+                                    routeName: 'app_frontend_account_statistics',
+                                    routeParams: {'annee': year},
+                                }) }}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+</div>
