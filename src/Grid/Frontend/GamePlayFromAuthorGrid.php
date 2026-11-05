@@ -1,0 +1,46 @@
+<?php
+
+/*
+ * This file is part of Jedisjeux.
+ *
+ * (c) Loïc Frémont
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace App\Grid\Frontend;
+
+use App\Entity\GamePlay;
+use Sylius\Bundle\GridBundle\Builder\Field\Field;
+use Sylius\Component\Grid\Attribute\AsGrid;
+use Sylius\Component\Grid\Builder\GridBuilderInterface;
+
+#[AsGrid(
+    name: 'app_frontend_game_play_from_author',
+    resourceClass: GamePlay::class,
+)]
+final class GamePlayFromAuthorGrid
+{
+    public function __construct(
+        private readonly string $locale,
+    ) {
+    }
+
+    public function __invoke(GridBuilderInterface $gridBuilder): void
+    {
+        $gridBuilder
+            ->setRepositoryMethod('createListQueryBuilder', [
+                $this->locale,
+                'expr:service(\'app.context.customer\').getCustomer().getId()',
+            ])
+            ->orderBy('createdAt', 'desc')
+            ->withFields(
+                Field::create('createdAt', 'twig')
+                    ->setSortable(true),
+            )
+        ;
+    }
+}
