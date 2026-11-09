@@ -14,6 +14,8 @@ namespace App\Fixture\Factory;
 use App\Entity\Dealer;
 use App\Entity\DealerPrice;
 use App\Fixture\OptionsResolver\LazyOption;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -26,40 +28,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class DealerPriceExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    private $dealerPriceFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $productRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $dealerRepository;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $dealerPriceFactory,
-        RepositoryInterface $productRepository,
-        RepositoryInterface $dealerRepository
+        private FactoryInterface $dealerPriceFactory,
+        private RepositoryInterface $productRepository,
+        private RepositoryInterface $dealerRepository
     ) {
-        $this->dealerPriceFactory = $dealerPriceFactory;
-        $this->productRepository = $productRepository;
-        $this->dealerRepository = $dealerRepository;
-
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -71,7 +51,7 @@ class DealerPriceExampleFactory extends AbstractExampleFactory implements Exampl
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('name', function (Options $options) {
+            ->setDefault('name', function (Options $options): string {
                 return ucfirst($this->faker->words(3, true));
             })
 
@@ -79,7 +59,7 @@ class DealerPriceExampleFactory extends AbstractExampleFactory implements Exampl
                 return $this->faker->randomNumber(4);
             })
 
-            ->setDefault('url', function (Options $options) {
+            ->setDefault('url', function (Options $options): string {
                 return ucfirst($this->faker->unique()->url);
             })
 

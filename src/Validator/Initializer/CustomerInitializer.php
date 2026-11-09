@@ -17,14 +17,8 @@ use Symfony\Component\Validator\ObjectInitializerInterface;
 
 final class CustomerInitializer implements ObjectInitializerInterface
 {
-    /**
-     * @var CanonicalizerInterface
-     */
-    private $canonicalizer;
-
-    public function __construct(CanonicalizerInterface $canonicalizer)
+    public function __construct(private CanonicalizerInterface $canonicalizer)
     {
-        $this->canonicalizer = $canonicalizer;
     }
 
     /**

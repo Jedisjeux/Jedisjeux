@@ -15,6 +15,8 @@ use App\Entity\Article;
 use App\Entity\Block;
 use App\Entity\BlockImage;
 use App\Fixture\OptionsResolver\LazyOption;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -26,40 +28,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class BlockExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    private $blockFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $blockImageFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $articleRepository;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $blockFactory,
-        FactoryInterface $blockImageFactory,
-        RepositoryInterface $articleRepository
+        private FactoryInterface $blockFactory,
+        private FactoryInterface $blockImageFactory,
+        private RepositoryInterface $articleRepository
     ) {
-        $this->blockFactory = $blockFactory;
-        $this->blockImageFactory = $blockImageFactory;
-        $this->articleRepository = $articleRepository;
-
-        $this->faker = \Faker\Factory::create('fr_FR');
+        $this->faker = Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -86,7 +66,7 @@ class BlockExampleFactory extends AbstractExampleFactory implements ExampleFacto
         return $block;
     }
 
-    private function createImage(Block $block, array $options)
+    private function createImage(Block $block, array $options): void
     {
         $imagePath = $options['image'];
         /** @var BlockImage $blockImage */
@@ -107,7 +87,7 @@ class BlockExampleFactory extends AbstractExampleFactory implements ExampleFacto
         $resolver
             ->setDefault('title', null)
 
-            ->setDefault('body', function (Options $options) {
+            ->setDefault('body', function (Options $options): string {
                 return '<p>'.implode('</p><p>', $this->faker->paragraphs(5)).'</p>';
             })
 

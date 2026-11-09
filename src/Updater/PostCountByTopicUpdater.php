@@ -18,7 +18,7 @@ use App\Entity\Topic;
  */
 class PostCountByTopicUpdater
 {
-    public function update(Topic $topic)
+    public function update(Topic $topic): void
     {
         $postCount = $topic->getPosts()->count();
         $topic->setPostCount($postCount);

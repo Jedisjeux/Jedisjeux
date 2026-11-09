@@ -43,7 +43,7 @@ class AppUserRegistrationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_app_user_registration';
     }

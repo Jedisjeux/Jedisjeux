@@ -14,6 +14,7 @@ namespace App\Repository;
 use App\Entity\Dealer;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
+use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
@@ -79,7 +80,7 @@ class DealerPriceRepository extends EntityRepository
     /**
      * {@inheritdoc}
      */
-    public function createFilterPaginator(?array $criteria = null, ?array $sorting = null)
+    public function createFilterPaginator(?array $criteria = null, ?array $sorting = null): PagerfantaInterface
     {
         $queryBuilder = $this->getQueryBuilder();
 

@@ -13,6 +13,8 @@ namespace App\Fixture\Factory;
 
 use App\Entity\FestivalList;
 use App\Formatter\StringInflector;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,28 +25,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class FestivalListExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    private $festivalListFactory;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     /**
      * FestivalListExampleFactory constructor.
      */
-    public function __construct(FactoryInterface $festivalListFactory)
+    public function __construct(private FactoryInterface $festivalListFactory)
     {
-        $this->festivalListFactory = $festivalListFactory;
-
-        $this->faker = \Faker\Factory::create('fr_FR');
+        $this->faker = Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -56,15 +48,15 @@ class FestivalListExampleFactory extends AbstractExampleFactory implements Examp
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('name', function (Options $options) {
+            ->setDefault('name', function (Options $options): string {
                 return ucfirst($this->faker->unique()->words(3, true));
             })
 
-            ->setDefault('code', function (Options $options) {
+            ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);
             })
 
-            ->setDefault('description', function (Options $options) {
+            ->setDefault('description', function (Options $options): string {
                 return '<p>'.implode('</p><p>', $this->faker->paragraphs(5)).'</p>';
             })
 

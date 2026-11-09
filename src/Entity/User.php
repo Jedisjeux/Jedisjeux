@@ -36,7 +36,7 @@ class User extends BaseUser implements AppUserInterface, LegacyPasswordAuthentic
     /**
      * @var CustomerInterface
      */
-    #[ORM\OneToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class, inversedBy: 'user', cascade: ['persist'])]
+    #[ORM\OneToOne(targetEntity: CustomerInterface::class, inversedBy: 'user', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     protected $customer;
 

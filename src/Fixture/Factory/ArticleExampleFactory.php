@@ -15,6 +15,8 @@ use App\Entity\Article;
 use App\Entity\ArticleImage;
 use App\Fixture\OptionsResolver\LazyOption;
 use App\Formatter\StringInflector;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -30,54 +32,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    private $articleFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $articleImageFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $customerRepository;
-
-    /**
-     * @var TaxonRepositoryInterface
-     */
-    private $taxonRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $productRepository;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $articleFactory,
-        FactoryInterface $articleImageFactory,
-        RepositoryInterface $customerRepository,
-        TaxonRepositoryInterface $taxonRepository,
-        RepositoryInterface $productRepository
+        private FactoryInterface $articleFactory,
+        private FactoryInterface $articleImageFactory,
+        private RepositoryInterface $customerRepository,
+        private TaxonRepositoryInterface $taxonRepository,
+        private RepositoryInterface $productRepository
     ) {
-        $this->articleFactory = $articleFactory;
-        $this->articleImageFactory = $articleImageFactory;
-        $this->customerRepository = $customerRepository;
-        $this->taxonRepository = $taxonRepository;
-        $this->productRepository = $productRepository;
-
-        $this->faker = \Faker\Factory::create('fr_FR');
+        $this->faker = Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -112,7 +80,7 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
         return $article;
     }
 
-    private function createImage(Article $article, array $options)
+    private function createImage(Article $article, array $options): void
     {
         $imagePath = $options['main_image'];
         /** @var ArticleImage $articleImage */
@@ -130,15 +98,15 @@ class ArticleExampleFactory extends AbstractExampleFactory implements ExampleFac
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('title', function (Options $options) {
+            ->setDefault('title', function (Options $options): string {
                 return ucfirst($this->faker->words(3, true));
             })
 
-            ->setDefault('code', function (Options $options) {
+            ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['title']);
             })
 
-            ->setDefault('short_description', function (Options $options) {
+            ->setDefault('short_description', function (Options $options): string {
                 return '<p>'.implode('</p><p>', $this->faker->paragraphs(2)).'</p>';
             })
 

@@ -22,20 +22,8 @@ use Webmozart\Assert\Assert;
  */
 class TaxonFilter implements FilterInterface
 {
-    /**
-     * @var TaxonRepositoryInterface
-     */
-    private $taxonRepository;
-
-    /**
-     * @var string
-     */
-    private $locale;
-
-    public function __construct(TaxonRepositoryInterface $taxonRepository, string $locale)
+    public function __construct(private TaxonRepositoryInterface $taxonRepository, private string $locale)
     {
-        $this->taxonRepository = $taxonRepository;
-        $this->locale = $locale;
     }
 
     /**
@@ -70,7 +58,7 @@ class TaxonFilter implements FilterInterface
      *
      * @return mixed
      */
-    private function getOption(array $options, string $name, $default)
+    private function getOption(array $options, string $name, string $default)
     {
         return $options[$name] ?? $default;
     }

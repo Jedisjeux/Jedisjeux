@@ -188,14 +188,14 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * @var ArrayCollection|TaxonInterface[]
      */
-    #[ORM\ManyToMany(targetEntity: \Sylius\Component\Taxonomy\Model\TaxonInterface::class)]
+    #[ORM\ManyToMany(targetEntity: TaxonInterface::class)]
     #[ORM\JoinTable('sylius_product_taxon', inverseJoinColumns: [new ORM\JoinColumn(name: 'taxoninterface_id', referencedColumnName: 'id')])]
     protected $taxons;
 
     /**
      * @var TaxonInterface
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Taxonomy\Model\TaxonInterface::class)]
+    #[ORM\ManyToOne(targetEntity: TaxonInterface::class)]
     protected $mainTaxon;
 
     /**
@@ -324,7 +324,7 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * @var Collection|ProductVideo[]
      */
-    #[ORM\OneToMany(targetEntity: \App\Entity\ProductVideo::class, cascade: ['persist', 'remove'], orphanRemoval: true, mappedBy: 'product')]
+    #[ORM\OneToMany(targetEntity: ProductVideo::class, cascade: ['persist', 'remove'], orphanRemoval: true, mappedBy: 'product')]
     #[Assert\Valid(groups: ['sylius'])]
     private $videos;
 
@@ -337,7 +337,7 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * @var Collection|YearAward[]
      */
-    #[ORM\OneToMany(targetEntity: \App\Entity\YearAward::class, mappedBy: 'product', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: YearAward::class, mappedBy: 'product', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private $yearAwards;
 
     /**
@@ -460,7 +460,7 @@ class Product extends BaseProduct implements ProductInterface
     /**
      * @deprecated
      */
-    public function getMasterVariant()
+    public function getMasterVariant(): ?ProductVariantInterface
     {
         return $this->getFirstVariant();
     }
@@ -498,12 +498,12 @@ class Product extends BaseProduct implements ProductInterface
     public function getTaxons($taxonomy = null): Collection
     {
         if (null !== $taxonomy) {
-            return $this->taxons->filter(function (TaxonInterface $taxon) use ($taxonomy) {
+            return $this->taxons->filter(function (TaxonInterface $taxon) use ($taxonomy): bool {
                 return $taxonomy === strtolower($taxon->getRoot()->getCode());
             });
         }
 
-        return $this->taxons->filter(function (TaxonInterface $taxon) use ($taxonomy) {
+        return $this->taxons->filter(function (TaxonInterface $taxon) use ($taxonomy): true {
             return 'forum' !== $taxonomy;
         });
     }
@@ -734,7 +734,7 @@ class Product extends BaseProduct implements ProductInterface
      */
     public function getRatings(): Collection
     {
-        return $this->reviews->filter(function (ReviewInterface $review) {
+        return $this->reviews->filter(function (ReviewInterface $review): bool {
             return null === $review->getComment();
         });
     }
@@ -744,7 +744,7 @@ class Product extends BaseProduct implements ProductInterface
      */
     public function getCommentedReviews(): Collection
     {
-        return $this->reviews->filter(function (ReviewInterface $review) {
+        return $this->reviews->filter(function (ReviewInterface $review): bool {
             return null !== $review->getComment();
         });
     }
@@ -802,7 +802,7 @@ class Product extends BaseProduct implements ProductInterface
      */
     public function getPublishedArticles(): Collection
     {
-        return $this->articles->filter(function (Article $article) {
+        return $this->articles->filter(function (Article $article): bool {
             return Article::STATUS_PUBLISHED === $article->getStatus();
         });
     }
@@ -820,7 +820,7 @@ class Product extends BaseProduct implements ProductInterface
      */
     public function getGamePlaysWithTopic(): Collection
     {
-        return $this->gamePlays->filter(function (GamePlay $gamePlay) {
+        return $this->gamePlays->filter(function (GamePlay $gamePlay): bool {
             return null !== $gamePlay->getTopic();
         });
     }
@@ -830,7 +830,7 @@ class Product extends BaseProduct implements ProductInterface
      */
     public function getGamePlaysByAuthor(CustomerInterface $author)
     {
-        return $this->gamePlays->filter(function (GamePlay $gamePlay) use ($author) {
+        return $this->gamePlays->filter(function (GamePlay $gamePlay) use ($author): bool {
             return $author === $gamePlay->getAuthor();
         });
     }

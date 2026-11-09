@@ -19,14 +19,8 @@ use Knp\Menu\ItemInterface;
  */
 final class ProductMenuBuilder
 {
-    /**
-     * @var FactoryInterface
-     */
-    private $factory;
-
-    public function __construct(FactoryInterface $factory)
+    public function __construct(private FactoryInterface $factory)
     {
-        $this->factory = $factory;
     }
 
     /**

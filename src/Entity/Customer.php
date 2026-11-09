@@ -98,22 +98,22 @@ class Customer extends BaseCustomer implements CustomerInterface, ReviewerInterf
     /**
      * @var UserInterface
      */
-    #[ORM\OneToOne(targetEntity: \Sylius\Component\User\Model\UserInterface::class, mappedBy: 'customer', cascade: ['persist'])]
+    #[ORM\OneToOne(targetEntity: UserInterface::class, mappedBy: 'customer', cascade: ['persist'])]
     #[Assert\Valid(groups: ['sylius'])]
     private $user;
 
     /**
      * @var Avatar
      */
-    #[ORM\ManyToOne(targetEntity: \App\Entity\Avatar::class, cascade: ['persist'])]
+    #[ORM\ManyToOne(targetEntity: Avatar::class, cascade: ['persist'])]
     #[JMS\Expose]
-    private $avatar;
+    private ?Avatar $avatar = null;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true, unique: true)]
-    private $code;
+    private ?string $code = null;
 
     public function getAvatar(): ?Avatar
     {

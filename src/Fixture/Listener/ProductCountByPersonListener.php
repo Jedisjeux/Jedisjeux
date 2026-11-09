@@ -23,20 +23,10 @@ use Sylius\Bundle\FixturesBundle\Listener\SuiteEvent;
  */
 class ProductCountByPersonListener extends AbstractListener implements AfterSuiteListenerInterface
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-
-    /**
-     * @var ProductCountByPersonUpdater
-     */
-    private $updater;
-
-    public function __construct(EntityManagerInterface $entityManager, ProductCountByPersonUpdater $updater)
-    {
-        $this->entityManager = $entityManager;
-        $this->updater = $updater;
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+        private ProductCountByPersonUpdater $updater
+    ) {
     }
 
     public function afterSuite(SuiteEvent $suiteEvent, array $options): void

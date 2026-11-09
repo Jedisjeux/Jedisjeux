@@ -212,7 +212,7 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     /**
      * @var TaxonInterface
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Taxonomy\Model\TaxonInterface::class)]
+    #[ORM\ManyToOne(targetEntity: TaxonInterface::class)]
     protected $mainTaxon;
 
     /**
@@ -256,19 +256,19 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     /**
      * @var ProductInterface
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class, inversedBy: 'articles')]
+    #[ORM\ManyToOne(targetEntity: ProductInterface::class, inversedBy: 'articles')]
     protected $product;
 
     /**
      * @var CustomerInterface
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
+    #[ORM\ManyToOne(targetEntity: CustomerInterface::class)]
     protected $author;
 
     /**
      * @var Topic
      */
-    #[ORM\OneToOne(targetEntity: \App\Entity\Topic::class, inversedBy: 'article')]
+    #[ORM\OneToOne(targetEntity: Topic::class, inversedBy: 'article')]
     #[ORM\JoinColumn(onDelete: 'SET NULL')]
     protected $topic;
 

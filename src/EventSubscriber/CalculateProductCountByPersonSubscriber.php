@@ -23,16 +23,10 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class CalculateProductCountByPersonSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var ProductCountByPersonUpdater
-     */
-    protected $updater;
-
-    /**
      * CalculateProductCountByTaxonSubscriber constructor.
      */
-    public function __construct(ProductCountByPersonUpdater $updater)
+    public function __construct(protected ProductCountByPersonUpdater $updater)
     {
-        $this->updater = $updater;
     }
 
     /**
@@ -46,7 +40,7 @@ class CalculateProductCountByPersonSubscriber implements EventSubscriberInterfac
         ];
     }
 
-    public function onProductCreate(GenericEvent $event)
+    public function onProductCreate(GenericEvent $event): void
     {
         /** @var Product $product */
         $product = $event->getSubject();
@@ -64,7 +58,7 @@ class CalculateProductCountByPersonSubscriber implements EventSubscriberInterfac
         }
     }
 
-    public function onProductUpdate(GenericEvent $event)
+    public function onProductUpdate(GenericEvent $event): void
     {
         $this->onProductCreate($event);
     }

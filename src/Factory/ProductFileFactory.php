@@ -22,20 +22,8 @@ use Webmozart\Assert\Assert;
 
 class ProductFileFactory implements FactoryInterface
 {
-    /**
-     * @var FactoryInterface
-     */
-    private $factory;
-
-    /**
-     * @var CustomerContextInterface
-     */
-    private $customerContext;
-
-    public function __construct(FactoryInterface $factory, CustomerContextInterface $customerContext)
+    public function __construct(private FactoryInterface $factory, private CustomerContextInterface $customerContext)
     {
-        $this->factory = $factory;
-        $this->customerContext = $customerContext;
     }
 
     /**

@@ -18,7 +18,7 @@ class DateCalculator
      *
      * @return \DateTime
      */
-    public function getDay($string)
+    public function getDay($string): object|false
     {
         switch ($string) {
             case 'today':
@@ -66,7 +66,7 @@ class DateCalculator
     /**
      * @return \DateTime
      */
-    public function getFirstDayOfTheMonth()
+    public function getFirstDayOfTheMonth(): \DateTime
     {
         $date = new \DateTime();
         $date
@@ -79,7 +79,7 @@ class DateCalculator
     /**
      * @return \DateTime
      */
-    public function getFirstDayOfNextMonth()
+    public function getFirstDayOfNextMonth(): object
     {
         $firstDayOfTheMonth = $this->getFirstDayOfTheMonth();
         $date = clone $firstDayOfTheMonth;
@@ -92,7 +92,7 @@ class DateCalculator
     /**
      * @return \DateTime
      */
-    public function getFirstDayOfPreviousMonth()
+    public function getFirstDayOfPreviousMonth(): object
     {
         $firstDayOfTheMonth = $this->getFirstDayOfTheMonth();
         $date = clone $firstDayOfTheMonth;
@@ -105,7 +105,7 @@ class DateCalculator
     /**
      * @return \DateTime
      */
-    public function getFirstDayOfTheYear()
+    public function getFirstDayOfTheYear(): object
     {
         $firstDayOfTheMonth = $this->getFirstDayOfTheMonth();
         $date = clone $firstDayOfTheMonth;
@@ -119,7 +119,7 @@ class DateCalculator
     /**
      * @return \DateTime
      */
-    public function getLastDayOfTheMonth()
+    public function getLastDayOfTheMonth(): object
     {
         $firstDayOfTheMonth = $this->getFirstDayOfNextMonth();
         $date = clone $firstDayOfTheMonth;
@@ -132,7 +132,7 @@ class DateCalculator
     /**
      * @return \DateTime
      */
-    public function getLastDayOfPreviousMonth()
+    public function getLastDayOfPreviousMonth(): object
     {
         $firstDayOfTheMonth = $this->getFirstDayOfTheMonth();
         $date = clone $firstDayOfTheMonth;
@@ -145,7 +145,7 @@ class DateCalculator
     /**
      * @return \DateTime
      */
-    public function getFirstDayOfTheWeek()
+    public function getFirstDayOfTheWeek(): \DateTime
     {
         $date = new \DateTime();
         $date->setTime(0, 0);
@@ -165,7 +165,7 @@ class DateCalculator
     /**
      * @return \DateTime
      */
-    public function getLastDayOfTheWeek()
+    public function getLastDayOfTheWeek(): object
     {
         $firstDayOfTheWeek = $this->getFirstDayOfTheWeek();
         $date = clone $firstDayOfTheWeek;
@@ -174,7 +174,7 @@ class DateCalculator
         return $date;
     }
 
-    public function getFirstDayOfNextWeek()
+    public function getFirstDayOfNextWeek(): object
     {
         $firstDayOfTheWeek = $this->getFirstDayOfTheWeek();
         $date = clone $firstDayOfTheWeek;
@@ -186,7 +186,7 @@ class DateCalculator
     /**
      * @return \DateTime
      */
-    public function getFirstSecondOfToday()
+    public function getFirstSecondOfToday(): \DateTime
     {
         /** First second of the day */
         $date = new \DateTime();
@@ -199,7 +199,7 @@ class DateCalculator
     /**
      * @return \DateTime
      */
-    public function getFirstSecondOfTomorrow()
+    public function getFirstSecondOfTomorrow(): object
     {
         $firstSecondOfToday = $this->getFirstSecondOfToday();
         $date = clone $firstSecondOfToday;

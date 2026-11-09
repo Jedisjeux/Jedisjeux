@@ -34,7 +34,7 @@ class RatingType extends ProductReviewType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_product_review_rating';
     }

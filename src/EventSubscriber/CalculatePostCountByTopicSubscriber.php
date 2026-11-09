@@ -20,16 +20,8 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 class CalculatePostCountByTopicSubscriber implements EventSubscriberInterface
 {
-    /** @var PostCountByTopicUpdater */
-    private $updater;
-
-    /** @var EntityManagerInterface */
-    private $entityManager;
-
-    public function __construct(PostCountByTopicUpdater $updater, EntityManagerInterface $entityManager)
+    public function __construct(private PostCountByTopicUpdater $updater, private EntityManagerInterface $entityManager)
     {
-        $this->updater = $updater;
-        $this->entityManager = $entityManager;
     }
 
     /**
@@ -42,7 +34,7 @@ class CalculatePostCountByTopicSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onPostCreate(GenericEvent $event)
+    public function onPostCreate(GenericEvent $event): void
     {
         /** @var Post $post */
         $post = $event->getSubject();

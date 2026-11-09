@@ -33,7 +33,7 @@ class GamePlayImage extends AbstractImage
     /**
      * @var GamePlay
      */
-    #[ORM\ManyToOne(targetEntity: \App\Entity\GamePlay::class, inversedBy: 'images')]
+    #[ORM\ManyToOne(targetEntity: GamePlay::class, inversedBy: 'images')]
     protected $gamePlay;
 
     /**

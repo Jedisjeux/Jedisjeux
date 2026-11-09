@@ -25,43 +25,18 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ProductNotificationManager
 {
     /**
-     * @var NotificationFactory
-     */
-    protected $factory;
-
-    /**
-     * @var ObjectManager
-     */
-    protected $manager;
-
-    /**
-     * @var UserRepository
-     */
-    protected $userRepository;
-
-    /**
-     * @var RouterInterface
-     */
-    protected $router;
-
-    /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
-
-    /**
      * ProductNotificationManager constructor.
      */
-    public function __construct(NotificationFactory $factory, ObjectManager $manager, UserRepository $userRepository, RouterInterface $router, TranslatorInterface $translator)
-    {
-        $this->factory = $factory;
-        $this->manager = $manager;
-        $this->userRepository = $userRepository;
-        $this->router = $router;
-        $this->translator = $translator;
+    public function __construct(
+        protected NotificationFactory $factory,
+        protected ObjectManager $manager,
+        protected UserRepository $userRepository,
+        protected RouterInterface $router,
+        protected TranslatorInterface $translator
+    ) {
     }
 
-    public function notifyTranslators(ProductInterface $product)
+    public function notifyTranslators(ProductInterface $product): void
     {
         /** @var UserInterface[] $users */
         $users = $this->userRepository->findByRole('ROLE_TRANSLATOR');
@@ -71,7 +46,7 @@ class ProductNotificationManager
         ]), $product, $users);
     }
 
-    public function notifyReviewers(ProductInterface $product)
+    public function notifyReviewers(ProductInterface $product): void
     {
         /** @var UserInterface[] $users */
         $users = $this->userRepository->findByRole('ROLE_REVIEWER');
@@ -81,7 +56,7 @@ class ProductNotificationManager
         ]), $product, $users);
     }
 
-    public function notifyPublishers(ProductInterface $product)
+    public function notifyPublishers(ProductInterface $product): void
     {
         /** @var UserInterface[] $users */
         $users = $this->userRepository->findByRole('ROLE_PUBLISHER');

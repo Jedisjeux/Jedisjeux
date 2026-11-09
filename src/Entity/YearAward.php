@@ -58,19 +58,19 @@ class YearAward implements ResourceInterface
      * @var string|null
      */
     #[ORM\Column(type: 'string')]
-    private $year;
+    private ?string $year = null;
 
     /**
      * @var GameAward|null
      */
-    #[ORM\ManyToOne(targetEntity: \App\Entity\GameAward::class)]
-    private $award;
+    #[ORM\ManyToOne(targetEntity: GameAward::class)]
+    private ?GameAward $award = null;
 
     /**
      * @var ProductInterface|null
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class, inversedBy: 'yearAwards')]
-    private $product;
+    #[ORM\ManyToOne(targetEntity: ProductInterface::class, inversedBy: 'yearAwards')]
+    private ?ProductInterface $product = null;
 
     public function getYear(): ?string
     {

@@ -58,7 +58,7 @@ final class LazyOption
 
     public static function randomOneImage(string $directory)
     {
-        return function (Options $options) use ($directory) {
+        return function (Options $options) use ($directory): string {
             $finder = new Finder();
             $files = $finder->files()->in($directory);
             $images = [];
@@ -103,7 +103,7 @@ final class LazyOption
      */
     public static function randomOneImageOrNull(string $directory, int $chanceOfRandomOne)
     {
-        return function (Options $options) use ($directory, $chanceOfRandomOne) {
+        return function (Options $options) use ($directory, $chanceOfRandomOne): ?string {
             if (mt_rand(1, 100) > $chanceOfRandomOne) {
                 return null;
             }
@@ -130,7 +130,7 @@ final class LazyOption
      */
     public static function randomOnes(RepositoryInterface $repository, $amount)
     {
-        return function (Options $options) use ($repository, $amount) {
+        return function (Options $options) use ($repository, $amount): array {
             $objects = $repository->findAll();
 
             if ($objects instanceof Collection) {
@@ -152,7 +152,7 @@ final class LazyOption
 
     public static function randomOnesImage(string $directory, int $amount)
     {
-        return function (Options $options) use ($directory, $amount) {
+        return function (Options $options) use ($directory, $amount): array {
             $finder = new Finder();
             $files = $finder->files()->in($directory);
             $images = [];
@@ -194,7 +194,7 @@ final class LazyOption
      */
     public static function findBy(RepositoryInterface $repository, $field)
     {
-        return function (Options $options, $previousValues) use ($repository, $field) {
+        return function (Options $options, $previousValues) use ($repository, $field): ?array {
             if (null === $previousValues || [] === $previousValues) {
                 return $previousValues;
             }

@@ -19,7 +19,7 @@ trait BlameableEntity
      * @var User
      */
     #[Gedmo\Blameable(on: 'create')]
-    #[ORM\ManyToOne(targetEntity: \JDJ\UserBundle\Entity\User::class)]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
     protected $createdBy;
 
@@ -27,7 +27,7 @@ trait BlameableEntity
      * @var User
      */
     #[Gedmo\Blameable(on: 'update')]
-    #[ORM\ManyToOne(targetEntity: \JDJ\UserBundle\Entity\User::class)]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     protected $updatedBy;
 
     /**

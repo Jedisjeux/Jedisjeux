@@ -21,16 +21,10 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 class FestivalListItemFactory implements FactoryInterface
 {
     /**
-     * @var string
-     */
-    private $className;
-
-    /**
      * @param string $className
      */
-    public function __construct($className)
+    public function __construct(private $className)
     {
-        $this->className = $className;
     }
 
     /**

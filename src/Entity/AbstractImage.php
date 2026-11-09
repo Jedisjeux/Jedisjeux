@@ -33,12 +33,9 @@ abstract class AbstractImage implements ResourceInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $path;
 
-    /**
-     * @var UploadedFile
-     */
     #[Assert\File(maxSize: 6000000)]
     #[Assert\Image]
-    private $file;
+    private ?UploadedFile $file = null;
 
     public function getPath(): ?string
     {

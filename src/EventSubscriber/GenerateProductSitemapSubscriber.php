@@ -24,23 +24,11 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class GenerateProductSitemapSubscriber implements EventSubscriberInterface
 {
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
-
-    /** @var ProductRepository */
-    private $productRepository;
-
-    /** @var EntityManagerInterface */
-    private $entityManager;
-
     public function __construct(
-        UrlGeneratorInterface $urlGenerator,
-        ProductRepository $productRepository,
-        EntityManagerInterface $entityManager
+        private UrlGeneratorInterface $urlGenerator,
+        private ProductRepository $productRepository,
+        private EntityManagerInterface $entityManager
     ) {
-        $this->urlGenerator = $urlGenerator;
-        $this->productRepository = $productRepository;
-        $this->entityManager = $entityManager;
     }
 
     /**

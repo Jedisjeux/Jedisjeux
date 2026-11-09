@@ -21,7 +21,7 @@ class ProductCountByPersonCalculator
     /**
      * @return int
      */
-    public function calculateAsDesigner(Person $person)
+    public function calculateAsDesigner(Person $person): int
     {
         $productCount = count($person->getDesignerProducts());
 
@@ -31,7 +31,7 @@ class ProductCountByPersonCalculator
     /**
      * @return int
      */
-    public function calculateAsArtist(Person $person)
+    public function calculateAsArtist(Person $person): int
     {
         $productCount = count($person->getArtistProducts());
 
@@ -41,7 +41,7 @@ class ProductCountByPersonCalculator
     /**
      * @return int
      */
-    public function calculateAsPublisher(Person $person)
+    public function calculateAsPublisher(Person $person): int
     {
         $productCount = count($person->getPublisherProducts());
 

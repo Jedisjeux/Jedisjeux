@@ -14,6 +14,8 @@ namespace App\Fixture\Factory;
 use App\Entity\GamePlay;
 use App\Entity\GamePlayImage;
 use App\Fixture\OptionsResolver\LazyOption;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -25,36 +27,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class GamePlayImageExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    protected $gamePlayImageFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    protected $gamePlayRepository;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     /**
      * GamePlayExampleFactory constructor.
      */
     public function __construct(
-        FactoryInterface $gamePlayImageFactory,
-        RepositoryInterface $gamePlayRepository
+        protected FactoryInterface $gamePlayImageFactory,
+        protected RepositoryInterface $gamePlayRepository
     ) {
-        $this->gamePlayImageFactory = $gamePlayImageFactory;
-        $this->gamePlayRepository = $gamePlayRepository;
-
-        $this->faker = \Faker\Factory::create('fr_FR');
+        $this->faker = Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -97,7 +83,7 @@ class GamePlayImageExampleFactory extends AbstractExampleFactory implements Exam
         return $gamePlayImage;
     }
 
-    private function createImage(GamePlayImage $gamePlayImage, array $options)
+    private function createImage(GamePlayImage $gamePlayImage, array $options): void
     {
         $imagePath = $options['image'];
         $gamePlayImage->setPath(basename($imagePath));

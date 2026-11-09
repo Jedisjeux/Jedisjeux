@@ -25,48 +25,18 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ArticleNotificationManager
 {
     /**
-     * @var NotificationFactory
-     */
-    protected $factory;
-
-    /**
-     * @var ObjectManager
-     */
-    protected $manager;
-
-    /**
-     * @var UserRepository
-     */
-    protected $userRepository;
-
-    /**
-     * @var RouterInterface
-     */
-    protected $router;
-
-    /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
-
-    /**
      * ProductNotificationManager constructor.
      */
     public function __construct(
-        NotificationFactory $factory,
-        ObjectManager $manager,
-        UserRepository $userRepository,
-        RouterInterface $router,
-        TranslatorInterface $translator
+        protected NotificationFactory $factory,
+        protected ObjectManager $manager,
+        protected UserRepository $userRepository,
+        protected RouterInterface $router,
+        protected TranslatorInterface $translator
     ) {
-        $this->factory = $factory;
-        $this->manager = $manager;
-        $this->userRepository = $userRepository;
-        $this->router = $router;
-        $this->translator = $translator;
     }
 
-    public function notifyReviewers(Article $article)
+    public function notifyReviewers(Article $article): void
     {
         /** @var UserInterface[] $users */
         $users = $this->userRepository->findByRole('ROLE_REVIEWER');
@@ -76,7 +46,7 @@ class ArticleNotificationManager
         ]), $article, $users);
     }
 
-    public function notifyPublishers(Article $article)
+    public function notifyPublishers(Article $article): void
     {
         /** @var UserInterface[] $users */
         $users = $this->userRepository->findByRole('ROLE_PUBLISHER');

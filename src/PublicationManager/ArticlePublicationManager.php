@@ -12,6 +12,8 @@
 namespace App\PublicationManager;
 
 use App\Entity\Article;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ObjectManager;
 
 /**
@@ -20,23 +22,17 @@ use Doctrine\Persistence\ObjectManager;
 class ArticlePublicationManager
 {
     /**
-     * @var ObjectManager
-     */
-    protected $manager;
-
-    /**
      * ArticlePublicationManager constructor.
      */
-    public function __construct(ObjectManager $manager)
+    public function __construct(protected ObjectManager $manager)
     {
-        $this->manager = $manager;
     }
 
     /**
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
-    public function start(Article $article)
+    public function start(Article $article): void
     {
         $article->setPublishStartDate(new \DateTime());
 

@@ -12,8 +12,6 @@
 namespace App\NotificationManager;
 
 use App\Entity\ProductFile;
-use App\Factory\NotificationFactory;
-use App\Repository\UserRepository;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Model\UserInterface;
@@ -23,46 +21,19 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProductFileNotificationManager
 {
-    /**
-     * @var UserRepositoryInterface|UserRepository
-     */
-    private $userRepository;
-
-    /**
-     * @var FactoryInterface|NotificationFactory
-     */
-    private $notificationFactory;
-
-    /**
-     * @var RouterInterface
-     */
-    private $router;
-
-    /**
-     * @var TranslatorInterface
-     */
-    private $translator;
-
-    /**
-     * @var ObjectManager
-     */
-    private $manager;
+    private UserRepositoryInterface $userRepository;
 
     public function __construct(
         UserRepositoryInterface $appUserRepository,
-        FactoryInterface $notificationFactory,
-        RouterInterface $router,
-        TranslatorInterface $translator,
-        ObjectManager $manager
+        private FactoryInterface $notificationFactory,
+        private RouterInterface $router,
+        private TranslatorInterface $translator,
+        private ObjectManager $manager
     ) {
         $this->userRepository = $appUserRepository;
-        $this->notificationFactory = $notificationFactory;
-        $this->router = $router;
-        $this->translator = $translator;
-        $this->manager = $manager;
     }
 
-    public function notifyModerators(ProductFile $productFile)
+    public function notifyModerators(ProductFile $productFile): void
     {
         /** @var UserInterface[] $users */
         $users = $this->userRepository->findByRole('ROLE_MODERATOR');
@@ -81,7 +52,7 @@ class ProductFileNotificationManager
         );
     }
 
-    public function notifyAuthor(ProductFile $productFile)
+    public function notifyAuthor(ProductFile $productFile): void
     {
         if (null === $author = $productFile->getAuthor()) {
             return;
@@ -106,7 +77,7 @@ class ProductFileNotificationManager
     /**
      * @param string $message
      */
-    private function notifyUsers($message, ProductFile $productFile, string $target, array $users)
+    private function notifyUsers(string $message, ProductFile $productFile, string $target, array $users): void
     {
         foreach ($users as $user) {
             $notification = $this->notificationFactory->createForProductFile($productFile, $user->getCustomer());

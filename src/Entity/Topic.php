@@ -124,14 +124,14 @@ class Topic implements ResourceInterface
     /**
      * @var CustomerInterface
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
+    #[ORM\ManyToOne(targetEntity: CustomerInterface::class)]
     #[ORM\JoinColumn(nullable: false)]
     protected $author;
 
     /**
      * @var Post
      */
-    #[ORM\OneToOne(targetEntity: \App\Entity\Post::class, inversedBy: 'parent', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: Post::class, inversedBy: 'parent', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     #[Assert\Valid]
     protected $mainPost;
@@ -139,7 +139,7 @@ class Topic implements ResourceInterface
     /**
      * @var ArrayCollection
      */
-    #[ORM\OneToMany(targetEntity: \App\Entity\Post::class, mappedBy: 'topic', cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'topic', cascade: ['persist', 'remove'], orphanRemoval: true)]
     protected $posts;
 
     /**
@@ -164,25 +164,25 @@ class Topic implements ResourceInterface
     /**
      * @var Taxon
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Taxonomy\Model\TaxonInterface::class)]
+    #[ORM\ManyToOne(targetEntity: TaxonInterface::class)]
     protected $mainTaxon;
 
     /**
      * @var GamePlay
      */
-    #[ORM\OneToOne(targetEntity: \App\Entity\GamePlay::class, mappedBy: 'topic')]
+    #[ORM\OneToOne(targetEntity: GamePlay::class, mappedBy: 'topic')]
     protected $gamePlay;
 
     /**
      * @var Article
      */
-    #[ORM\OneToOne(targetEntity: \App\Entity\Article::class, mappedBy: 'topic')]
+    #[ORM\OneToOne(targetEntity: Article::class, mappedBy: 'topic')]
     protected $article;
 
     /**
      * @var ArrayCollection|CustomerInterface[]
      */
-    #[ORM\ManyToMany(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
+    #[ORM\ManyToMany(targetEntity: CustomerInterface::class)]
     #[ORM\JoinTable(name: 'jdj_topic_follower', inverseJoinColumns: [new ORM\JoinColumn(name: 'customerinterface_id', referencedColumnName: 'id')])]
     protected $followers;
 

@@ -22,14 +22,8 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class SendRegistrationEmailSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var SenderInterface
-     */
-    protected $sender;
-
-    public function __construct(SenderInterface $sender)
+    public function __construct(protected SenderInterface $sender)
     {
-        $this->sender = $sender;
     }
 
     public static function getSubscribedEvents(): array
@@ -39,7 +33,7 @@ class SendRegistrationEmailSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onRegister(GenericEvent $event)
+    public function onRegister(GenericEvent $event): void
     {
         /** @var CustomerInterface $customer */
         $customer = $event->getSubject();

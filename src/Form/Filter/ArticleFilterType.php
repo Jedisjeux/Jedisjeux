@@ -48,7 +48,7 @@ class ArticleFilterType extends AbstractType
             ])
             ->add('mainTaxon', 'entity', [
                 'label' => 'label.category',
-                'class' => \App\Entity\Taxon::class,
+                'class' => Taxon::class,
                 'choice_label' => 'name',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('o')
@@ -80,7 +80,7 @@ class ArticleFilterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'app_filter_article';
     }

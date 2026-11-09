@@ -11,6 +11,7 @@
 
 namespace App\Repository;
 
+use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
@@ -29,7 +30,7 @@ class ContactRequestRepository extends EntityRepository
     /**
      * {@inheritdoc}
      */
-    public function createFilterPaginator(?array $criteria = null, ?array $sorting = null)
+    public function createFilterPaginator(?array $criteria = null, ?array $sorting = null): PagerfantaInterface
     {
         $queryBuilder = $this->getQueryBuilder();
 

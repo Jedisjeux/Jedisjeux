@@ -11,12 +11,8 @@ use Sylius\Component\User\Model\UserInterface;
 
 final class CanonicalizerSubscriber implements EventSubscriber
 {
-    /** @var CanonicalizerInterface */
-    private $canonicalizer;
-
-    public function __construct(CanonicalizerInterface $canonicalizer)
+    public function __construct(private CanonicalizerInterface $canonicalizer)
     {
-        $this->canonicalizer = $canonicalizer;
     }
 
     /**

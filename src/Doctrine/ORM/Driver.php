@@ -24,12 +24,8 @@ class Driver implements DriverInterface
 {
     public const NAME = 'doctrine/orm';
 
-    /** @var ManagerRegistry */
-    private $managerRegistry;
-
-    public function __construct(ManagerRegistry $managerRegistry)
+    public function __construct(private ManagerRegistry $managerRegistry)
     {
-        $this->managerRegistry = $managerRegistry;
     }
 
     /**

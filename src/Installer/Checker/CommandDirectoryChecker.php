@@ -27,24 +27,18 @@ final class CommandDirectoryChecker
      */
     private $name;
 
-    /**
-     * @var Filesystem
-     */
-    private $filesystem;
-
-    public function __construct(Filesystem $filesystem)
+    public function __construct(private Filesystem $filesystem)
     {
-        $this->filesystem = $filesystem;
     }
 
-    public function ensureDirectoryExists($directory, OutputInterface $output)
+    public function ensureDirectoryExists($directory, OutputInterface $output): void
     {
         if (!is_dir($directory)) {
             $this->createDirectory($directory, $output);
         }
     }
 
-    public function ensureDirectoryIsWritable($directory, OutputInterface $output)
+    public function ensureDirectoryIsWritable($directory, OutputInterface $output): void
     {
         try {
             $this->changePermissionsRecursively($directory, $output);
@@ -55,7 +49,7 @@ final class CommandDirectoryChecker
         }
     }
 
-    public function setCommandName($name)
+    public function setCommandName($name): void
     {
         $this->name = $name;
     }
@@ -63,7 +57,7 @@ final class CommandDirectoryChecker
     /**
      * @param string $directory
      */
-    private function createDirectory($directory, OutputInterface $output)
+    private function createDirectory($directory, OutputInterface $output): void
     {
         try {
             $this->filesystem->mkdir($directory, 0755);
@@ -79,7 +73,7 @@ final class CommandDirectoryChecker
     /**
      * @param string $directory
      */
-    private function changePermissionsRecursively($directory, OutputInterface $output)
+    private function changePermissionsRecursively($directory, OutputInterface $output): void
     {
         if (is_file($directory) && is_writable($directory)) {
             return;
@@ -103,7 +97,7 @@ final class CommandDirectoryChecker
      *
      * @throws AccessDeniedException if directory/file permissions cannot be changed
      */
-    private function changePermissions($directory, OutputInterface $output)
+    private function changePermissions($directory, OutputInterface $output): void
     {
         try {
             $this->filesystem->chmod($directory, 0755, 0000, true);
@@ -119,7 +113,7 @@ final class CommandDirectoryChecker
      *
      * @return string
      */
-    private function createUnexistingDirectoryMessage($directory)
+    private function createUnexistingDirectoryMessage(string $directory): string
     {
         return
             '<error>Cannot run command due to unexisting directory (tried to create it automatically, failed).</error>'.PHP_EOL.
@@ -132,7 +126,7 @@ final class CommandDirectoryChecker
      *
      * @return string
      */
-    private function createBadPermissionsMessage($directory)
+    private function createBadPermissionsMessage(string $directory): string
     {
         return
             '<error>Cannot run command due to bad directory permissions (tried to change permissions to 0755).</error>'.PHP_EOL.

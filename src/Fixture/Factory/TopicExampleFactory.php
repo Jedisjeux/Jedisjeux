@@ -13,10 +13,11 @@ namespace App\Fixture\Factory;
 
 use App\Entity\Article;
 use App\Entity\GamePlay;
-use App\Entity\Topic;
 use App\Factory\TopicFactory;
 use App\Fixture\OptionsResolver\LazyOption;
 use App\Formatter\StringInflector;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -29,54 +30,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class TopicExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var TopicFactory
-     */
-    private $topicFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $customerRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $articleRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $gamePlayRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $taxonRepository;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
-        TopicFactory $topicFactory,
-        RepositoryInterface $customerRepository,
-        RepositoryInterface $articleRepository,
-        RepositoryInterface $gamePlayRepository,
-        RepositoryInterface $taxonRepository
+        private TopicFactory $topicFactory,
+        private RepositoryInterface $customerRepository,
+        private RepositoryInterface $articleRepository,
+        private RepositoryInterface $gamePlayRepository,
+        private RepositoryInterface $taxonRepository
     ) {
-        $this->topicFactory = $topicFactory;
-        $this->customerRepository = $customerRepository;
-        $this->articleRepository = $articleRepository;
-        $this->gamePlayRepository = $gamePlayRepository;
-        $this->taxonRepository = $taxonRepository;
-
-        $this->faker = \Faker\Factory::create('fr_FR');
+        $this->faker = Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -120,15 +87,15 @@ class TopicExampleFactory extends AbstractExampleFactory implements ExampleFacto
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('title', function (Options $options) {
+            ->setDefault('title', function (Options $options): string {
                 return ucfirst($this->faker->words(3, true));
             })
 
-            ->setDefault('code', function (Options $options) {
+            ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['title']);
             })
 
-            ->setDefault('body', function (Options $options) {
+            ->setDefault('body', function (Options $options): string {
                 return '<p>'.implode('</p><p>', $this->faker->paragraphs(5)).'</p>';
             })
 

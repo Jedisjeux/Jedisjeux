@@ -22,14 +22,8 @@ use Webmozart\Assert\Assert;
 
 class NotifyModeratorsForNewFileSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var ProductFileNotificationManager
-     */
-    private $productFileNotificationManager;
-
-    public function __construct(ProductFileNotificationManager $productFileNotificationManager)
+    public function __construct(private ProductFileNotificationManager $productFileNotificationManager)
     {
-        $this->productFileNotificationManager = $productFileNotificationManager;
     }
 
     /**

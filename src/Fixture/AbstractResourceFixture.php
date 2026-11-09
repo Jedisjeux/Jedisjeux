@@ -12,20 +12,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractResourceFixture implements FixtureInterface
 {
-    /** @var ObjectManager */
-    private $objectManager;
+    private OptionsResolver $optionsResolver;
 
-    /** @var ExampleFactoryInterface */
-    private $exampleFactory;
-
-    /** @var OptionsResolver */
-    private $optionsResolver;
-
-    public function __construct(ObjectManager $objectManager, ExampleFactoryInterface $exampleFactory)
+    public function __construct(private ObjectManager $objectManager, private ExampleFactoryInterface $exampleFactory)
     {
-        $this->objectManager = $objectManager;
-        $this->exampleFactory = $exampleFactory;
-
         $this->optionsResolver =
             (new OptionsResolver())
                 ->setDefault('random', 0)
@@ -34,7 +24,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
                 ->setAllowedTypes('prototype', 'array')
                 ->setDefault('custom', [])
                 ->setAllowedTypes('custom', 'array')
-                ->setNormalizer('custom', function (Options $options, array $custom) {
+                ->setNormalizer('custom', function (Options $options, array $custom): array {
                     if ($options['random'] <= 0) {
                         return $custom;
                     }
@@ -69,7 +59,7 @@ abstract class AbstractResourceFixture implements FixtureInterface
     /**
      * {@inheritdoc}
      */
-    final public function getConfigTreeBuilder(): \Symfony\Component\Config\Definition\Builder\TreeBuilder
+    final public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder($this->getName());
         $optionsNode = $treeBuilder->getRootNode();

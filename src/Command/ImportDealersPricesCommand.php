@@ -13,7 +13,6 @@ namespace App\Command;
 
 use App\Command\Installer\CommandExecutor;
 use App\Entity\Dealer;
-use App\Repository\DealerPriceRepository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -22,36 +21,16 @@ use Symfony\Component\Process\Exception\RuntimeException;
 
 class ImportDealersPricesCommand extends Command
 {
-    /**
-     * @var RepositoryInterface
-     */
-    private $dealerRepository;
+    private ?OutputInterface $output = null;
 
-    /**
-     * @var RepositoryInterface|DealerPriceRepository
-     */
-    private $dealerPriceRepository;
+    private ?CommandExecutor $commandExecutor = null;
 
-    /**
-     * @var OutputInterface
-     */
-    private $output;
+    private bool $isErrored = false;
 
-    /**
-     * @var CommandExecutor
-     */
-    private $commandExecutor;
-
-    /**
-     * @var bool
-     */
-    private $isErrored = false;
-
-    public function __construct(RepositoryInterface $dealerRepository, RepositoryInterface $dealerPriceRepository)
-    {
-        $this->dealerRepository = $dealerRepository;
-        $this->dealerPriceRepository = $dealerPriceRepository;
-
+    public function __construct(
+        private RepositoryInterface $dealerRepository,
+        private RepositoryInterface $dealerPriceRepository
+    ) {
         parent::__construct();
     }
 

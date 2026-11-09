@@ -20,7 +20,7 @@ class PersonImage extends AbstractImage
     /**
      * @var Person
      */
-    #[ORM\ManyToOne(targetEntity: \App\Entity\Person::class, inversedBy: 'images')]
+    #[ORM\ManyToOne(targetEntity: Person::class, inversedBy: 'images')]
     protected $person;
 
     /**

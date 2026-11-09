@@ -22,27 +22,24 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class StatisticsProvider
 {
     /** @var ArticleRepository */
-    private $articleRepository;
+    private RepositoryInterface $articleRepository;
 
     /** @var ProductRepository */
-    private $productRepository;
-
-    /** @var RepositoryInterface */
-    private $personRepository;
+    private RepositoryInterface $productRepository;
 
     /** @var UserRepository */
-    private $appUserRepository;
+    private RepositoryInterface $appUserRepository;
 
-    /** @var RepositoryInterface */
-    private $productReviewRepository;
-
-    public function __construct(RepositoryInterface $articleRepository, RepositoryInterface $productRepository, RepositoryInterface $personRepository, RepositoryInterface $appUserRepository, RepositoryInterface $productReviewRepository)
-    {
+    public function __construct(
+        RepositoryInterface $articleRepository,
+        RepositoryInterface $productRepository,
+        private RepositoryInterface $personRepository,
+        RepositoryInterface $appUserRepository,
+        private RepositoryInterface $productReviewRepository
+    ) {
         $this->articleRepository = $articleRepository;
         $this->productRepository = $productRepository;
-        $this->personRepository = $personRepository;
         $this->appUserRepository = $appUserRepository;
-        $this->productReviewRepository = $productReviewRepository;
     }
 
     public function getStatistics(): array

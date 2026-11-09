@@ -20,19 +20,13 @@ use App\Entity\Taxon;
 class TopicCountByTaxonUpdater
 {
     /**
-     * @var TopicCountByTaxonCalculator
-     */
-    protected $calculator;
-
-    /**
      * TopicCountByTaxonSubscriber constructor.
      */
-    public function __construct(TopicCountByTaxonCalculator $calculator)
+    public function __construct(protected TopicCountByTaxonCalculator $calculator)
     {
-        $this->calculator = $calculator;
     }
 
-    public function update(Taxon $taxon)
+    public function update(Taxon $taxon): void
     {
         $topicCount = $this->calculator->calculate($taxon);
         $taxon->setTopicCount($topicCount);

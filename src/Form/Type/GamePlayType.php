@@ -43,7 +43,7 @@ class GamePlayType extends AbstractType
     /**
      * @param EntityManager $manager
      */
-    public function setManager($manager)
+    public function setManager($manager): void
     {
         $this->manager = $manager;
     }
@@ -91,7 +91,7 @@ class GamePlayType extends AbstractType
             ->addEventListener(FormEvents::POST_SUBMIT, [$this, 'onPostSubmit']);
     }
 
-    public function onPostSetData(FormEvent $event)
+    public function onPostSetData(FormEvent $event): void
     {
         /** @var GamePlay $gamePlay */
         $gamePlay = $event->getData();
@@ -103,7 +103,7 @@ class GamePlayType extends AbstractType
         }
     }
 
-    public function onPostSubmit(FormEvent $event)
+    public function onPostSubmit(FormEvent $event): void
     {
         /** @var GamePlay $gamePlay */
         $gamePlay = $event->getData();

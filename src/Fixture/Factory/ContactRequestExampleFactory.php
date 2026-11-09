@@ -11,6 +11,8 @@
 namespace App\Fixture\Factory;
 
 use App\Entity\ContactRequest;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,25 +20,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ContactRequestExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    private $contactRequestFactory;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
-    public function __construct(FactoryInterface $contactRequestFactory)
+    public function __construct(private FactoryInterface $contactRequestFactory)
     {
-        $this->contactRequestFactory = $contactRequestFactory;
-
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -60,7 +52,7 @@ class ContactRequestExampleFactory extends AbstractExampleFactory implements Exa
                 return $this->faker->email;
             })
 
-            ->setDefault('body', function (Options $options) {
+            ->setDefault('body', function (Options $options): string {
                 return '<p>'.implode('</p><p>', $this->faker->paragraphs(5)).'</p>';
             })
         ;

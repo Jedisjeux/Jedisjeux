@@ -13,7 +13,6 @@ namespace App\Factory;
 
 use App\Context\CustomerContext;
 use App\Entity\GamePlay;
-use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -23,29 +22,11 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class GamePlayFactory implements FactoryInterface
 {
-    /**
-     * @var string
-     */
-    private $className;
-
-    /**
-     * @var ProductRepositoryInterface
-     */
-    protected $productRepository;
-
-    /**
-     * @var CustomerContextInterface
-     */
-    protected $customerContext;
-
     public function __construct(
-        string $className,
-        ProductRepositoryInterface $productRepository,
-        CustomerContext $customerContext
+        private string $className,
+        protected ProductRepositoryInterface $productRepository,
+        protected CustomerContext $customerContext
     ) {
-        $this->className = $className;
-        $this->productRepository = $productRepository;
-        $this->customerContext = $customerContext;
     }
 
     /**

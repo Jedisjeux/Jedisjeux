@@ -17,14 +17,8 @@ use Webmozart\Assert\Assert;
 
 class ProductBoxPublicationManager
 {
-    /**
-     * @var ObjectManager
-     */
-    private $objectManager;
-
-    public function __construct(ObjectManager $objectManager)
+    public function __construct(private ObjectManager $objectManager)
     {
-        $this->objectManager = $objectManager;
     }
 
     public function enable(ProductBox $box): void

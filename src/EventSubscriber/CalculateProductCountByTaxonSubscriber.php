@@ -14,7 +14,6 @@ namespace App\EventSubscriber;
 use App\Entity\Product;
 use App\Event\ProductEvents;
 use App\Updater\ProductCountByTaxonUpdater;
-use App\Updater\TopicCountByTaxonUpdater;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -24,16 +23,10 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class CalculateProductCountByTaxonSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var TopicCountByTaxonUpdater
-     */
-    protected $updater;
-
-    /**
      * CalculateProductCountByTaxonSubscriber constructor.
      */
-    public function __construct(ProductCountByTaxonUpdater $updater)
+    public function __construct(protected ProductCountByTaxonUpdater $updater)
     {
-        $this->updater = $updater;
     }
 
     /**
@@ -47,7 +40,7 @@ class CalculateProductCountByTaxonSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onProductCreate(GenericEvent $event)
+    public function onProductCreate(GenericEvent $event): void
     {
         /** @var Product $product */
         $product = $event->getSubject();
@@ -63,7 +56,7 @@ class CalculateProductCountByTaxonSubscriber implements EventSubscriberInterface
         }
     }
 
-    public function onProductUpdate(GenericEvent $event)
+    public function onProductUpdate(GenericEvent $event): void
     {
         $this->onProductCreate($event);
     }

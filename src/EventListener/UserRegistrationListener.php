@@ -24,29 +24,11 @@ use Webmozart\Assert\Assert;
 
 final class UserRegistrationListener
 {
-    /**
-     * @var ObjectManager
-     */
-    private $userManager;
-
-    /**
-     * @var GeneratorInterface
-     */
-    private $tokenGenerator;
-
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
-
     public function __construct(
-        ObjectManager $userManager,
-        GeneratorInterface $tokenGenerator,
-        EventDispatcherInterface $eventDispatcher
+        private ObjectManager $userManager,
+        private GeneratorInterface $tokenGenerator,
+        private EventDispatcherInterface $eventDispatcher
     ) {
-        $this->userManager = $userManager;
-        $this->tokenGenerator = $tokenGenerator;
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function handleUserVerification(GenericEvent $event): void

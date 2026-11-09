@@ -16,6 +16,8 @@ use App\Entity\ProductBoxImage;
 use App\Entity\ProductInterface;
 use App\Entity\ProductVariantInterface;
 use App\Fixture\OptionsResolver\LazyOption;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -25,57 +27,23 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ProductBoxExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    private $productBoxFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $productBoxImageFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $productRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $productVariantRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $customerRepository;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     /**
      * PostExampleFactory constructor.
      */
     public function __construct(
-        FactoryInterface $productBoxFactory,
-        FactoryInterface $productBoxImageFactory,
-        RepositoryInterface $productRepository,
-        RepositoryInterface $productVariantRepository,
-        RepositoryInterface $customerRepository
+        private FactoryInterface $productBoxFactory,
+        private FactoryInterface $productBoxImageFactory,
+        private RepositoryInterface $productRepository,
+        private RepositoryInterface $productVariantRepository,
+        private RepositoryInterface $customerRepository
     ) {
-        $this->productBoxFactory = $productBoxFactory;
-        $this->productBoxImageFactory = $productBoxImageFactory;
-        $this->productRepository = $productRepository;
-        $this->productVariantRepository = $productVariantRepository;
-        $this->customerRepository = $customerRepository;
-
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -105,14 +73,14 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
                 __DIR__.'/../../../tests/Resources/fixtures/boxes'
             ))
 
-            ->setDefault('height', function (Options $options) {
+            ->setDefault('height', function (Options $options): int {
                 $imageSize = getimagesize(realpath($options['image']));
                 $height = $imageSize[1];
 
                 return $height;
             })
 
-            ->setDefault('real_height', function (Options $options) {
+            ->setDefault('real_height', function (Options $options): int {
                 return (int) round($options['height'] / ProductBox::RATIO);
             })
 
@@ -120,7 +88,7 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
                 return $this->faker->randomElement([ProductBox::STATUS_NEW, ProductBox::STATUS_ACCEPTED, ProductBox::STATUS_REJECTED]);
             })
 
-            ->setDefault('enabled', function (Options $options) {
+            ->setDefault('enabled', function (Options $options): bool {
                 return ProductBox::STATUS_ACCEPTED === $options['status'];
             })
 
@@ -152,7 +120,7 @@ class ProductBoxExampleFactory extends AbstractExampleFactory implements Example
         return $productBox;
     }
 
-    private function createImage(ProductBox $productBox, array $options)
+    private function createImage(ProductBox $productBox, array $options): void
     {
         $imagePath = $options['image'];
         /** @var ProductBoxImage $image */

@@ -25,28 +25,13 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class CreateTopicForArticleSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var ObjectManager
-     */
-    protected $manager;
-
-    /**
-     * @var TopicRepository
-     */
-    protected $topicRepository;
-
-    /**
-     * @var TopicFactory
-     */
-    protected $topicFactory;
-
-    /**
      * CreateTopicForArticleSubscriber constructor.
      */
-    public function __construct(ObjectManager $manager, TopicRepository $topicRepository, TopicFactory $topicFactory)
-    {
-        $this->manager = $manager;
-        $this->topicRepository = $topicRepository;
-        $this->topicFactory = $topicFactory;
+    public function __construct(
+        protected ObjectManager $manager,
+        protected TopicRepository $topicRepository,
+        protected TopicFactory $topicFactory
+    ) {
     }
 
     /**
@@ -59,7 +44,7 @@ class CreateTopicForArticleSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onCreate(GenericEvent $event)
+    public function onCreate(GenericEvent $event): void
     {
         /** @var Post $post */
         $post = $event->getSubject();

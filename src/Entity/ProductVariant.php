@@ -89,7 +89,7 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
     /**
      * @var ArrayCollection|ProductVariantImage[]
      */
-    #[ORM\OneToMany(targetEntity: \App\Entity\ProductVariantImage::class, mappedBy: 'variant', cascade: ['persist', 'merge', 'remove'])]
+    #[ORM\OneToMany(targetEntity: ProductVariantImage::class, mappedBy: 'variant', cascade: ['persist', 'merge', 'remove'])]
     #[JMS\Groups(['Detailed'])]
     protected $images;
 
@@ -120,23 +120,23 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
     protected $boxes;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      */
-    #[ORM\ManyToMany(targetEntity: \App\Entity\Person::class, inversedBy: 'designerProducts', cascade: ['persist', 'merge'])]
+    #[ORM\ManyToMany(targetEntity: Person::class, inversedBy: 'designerProducts', cascade: ['persist', 'merge'])]
     #[ORM\JoinTable(name: 'jdj_designer_product_variant', joinColumns: [new ORM\JoinColumn(name: 'productvariant_id', referencedColumnName: 'id')], inverseJoinColumns: [new ORM\JoinColumn(name: 'person_id', referencedColumnName: 'id')])]
     protected $designers;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      */
-    #[ORM\ManyToMany(targetEntity: \App\Entity\Person::class, inversedBy: 'artistProducts', cascade: ['persist', 'merge'])]
+    #[ORM\ManyToMany(targetEntity: Person::class, inversedBy: 'artistProducts', cascade: ['persist', 'merge'])]
     #[ORM\JoinTable(name: 'jdj_artist_product_variant', joinColumns: [new ORM\JoinColumn(name: 'productvariant_id', referencedColumnName: 'id')], inverseJoinColumns: [new ORM\JoinColumn(name: 'person_id', referencedColumnName: 'id')])]
     protected $artists;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      */
-    #[ORM\ManyToMany(targetEntity: \App\Entity\Person::class, inversedBy: 'publisherProducts', cascade: ['persist', 'merge'])]
+    #[ORM\ManyToMany(targetEntity: Person::class, inversedBy: 'publisherProducts', cascade: ['persist', 'merge'])]
     #[ORM\JoinTable(name: 'jdj_publisher_product_variant', joinColumns: [new ORM\JoinColumn(name: 'productvariant_id', referencedColumnName: 'id')], inverseJoinColumns: [new ORM\JoinColumn(name: 'person_id', referencedColumnName: 'id')])]
     protected $publishers;
 
@@ -272,7 +272,7 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
      */
     public function getEnabledBox(): ?ProductBox
     {
-        $boxes = $this->boxes->filter(function (ProductBox $box) {
+        $boxes = $this->boxes->filter(function (ProductBox $box): bool {
             return $box->isEnabled();
         });
 

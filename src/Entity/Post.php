@@ -200,19 +200,19 @@ class Post implements ResourceInterface
     /**
      * @var CustomerInterface
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
+    #[ORM\ManyToOne(targetEntity: CustomerInterface::class)]
     protected $author;
 
     /**
      * @var Post
      */
-    #[ORM\ManyToOne(targetEntity: \App\Entity\Post::class, inversedBy: 'replies')]
+    #[ORM\ManyToOne(targetEntity: Post::class, inversedBy: 'replies')]
     protected $replyTo;
 
     /**
      * @var ArrayCollection
      */
-    #[ORM\OneToMany(targetEntity: \App\Entity\Post::class, mappedBy: 'replyTo')]
+    #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'replyTo')]
     protected $replies;
 
     /**

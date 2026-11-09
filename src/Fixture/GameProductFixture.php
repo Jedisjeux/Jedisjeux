@@ -12,38 +12,24 @@
 namespace App\Fixture;
 
 use App\Entity\Taxon;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GameProductFixture extends AbstractFixture
 {
-    /**
-     * @var TaxonFixture
-     */
-    private $taxonFixture;
+    private OptionsResolver $optionsResolver;
 
     /**
-     * @var ProductFixture
-     */
-    private $productFixture;
-
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    public function __construct(TaxonFixture $taxonFixture, ProductFixture $productFixture)
+    public function __construct(private TaxonFixture $taxonFixture, private ProductFixture $productFixture)
     {
-        $this->taxonFixture = $taxonFixture;
-        $this->productFixture = $productFixture;
-
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver =
             (new OptionsResolver())
                 ->setRequired('amount')

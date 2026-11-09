@@ -14,6 +14,8 @@ namespace App\Fixture\Factory;
 use App\Entity\Post;
 use App\Entity\Topic;
 use App\Fixture\OptionsResolver\LazyOption;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -26,43 +28,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PostExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    private $postFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $topicRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $customerRepository;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     /**
      * PostExampleFactory constructor.
      */
     public function __construct(
-        FactoryInterface $postFactory,
-        RepositoryInterface $topicRepository,
-        RepositoryInterface $customerRepository
+        private FactoryInterface $postFactory,
+        private RepositoryInterface $topicRepository,
+        private RepositoryInterface $customerRepository
     ) {
-        $this->postFactory = $postFactory;
-        $this->topicRepository = $topicRepository;
-        $this->customerRepository = $customerRepository;
-
-        $this->faker = \Faker\Factory::create('fr_FR');
+        $this->faker = Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -74,7 +54,7 @@ class PostExampleFactory extends AbstractExampleFactory implements ExampleFactor
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('body', function (Options $options) {
+            ->setDefault('body', function (Options $options): string {
                 return '<p>'.implode('</p><p>', $this->faker->paragraphs(5)).'</p>';
             })
 

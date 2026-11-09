@@ -15,6 +15,8 @@ use App\Entity\Avatar;
 use App\Entity\Customer;
 use App\Entity\User;
 use App\Fixture\OptionsResolver\LazyOption;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,43 +27,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    private $appUserFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $customerFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $avatarFactory;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     /**
      * AppUserExampleFactory constructor.
      */
     public function __construct(
-        FactoryInterface $appUserFactory,
-        FactoryInterface $customerFactory,
-        FactoryInterface $avatarFactory
+        private FactoryInterface $appUserFactory,
+        private FactoryInterface $customerFactory,
+        private FactoryInterface $avatarFactory
     ) {
-        $this->appUserFactory = $appUserFactory;
-        $this->customerFactory = $customerFactory;
-        $this->avatarFactory = $avatarFactory;
-
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -101,7 +81,7 @@ class AppUserExampleFactory extends AbstractExampleFactory implements ExampleFac
         return $user;
     }
 
-    private function createAvatar(Customer $customer, array $options)
+    private function createAvatar(Customer $customer, array $options): void
     {
         $imagePath = $options['avatar'];
 

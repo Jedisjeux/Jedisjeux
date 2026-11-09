@@ -105,7 +105,7 @@ class ProductFile extends File implements ResourceInterface
      */
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
-    private $title;
+    private ?string $title = null;
 
     /**
      * @var string
@@ -117,13 +117,13 @@ class ProductFile extends File implements ResourceInterface
      * @var ProductInterface|null
      */
     #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class, inversedBy: 'files')]
-    private $product;
+    private ?ProductInterface $product = null;
 
     /**
      * @var CustomerInterface|null
      */
     #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
-    private $author;
+    private ?CustomerInterface $author = null;
 
     public function __construct()
     {

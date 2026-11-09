@@ -25,16 +25,10 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class AddTopicFollowerSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var CustomerContextInterface
-     */
-    protected $customerContext;
-
-    /**
      * AddTopicFollowerSubscriber constructor.
      */
-    public function __construct(CustomerContextInterface $customerContext)
+    public function __construct(protected CustomerContextInterface $customerContext)
     {
-        $this->customerContext = $customerContext;
     }
 
     /**
@@ -48,7 +42,7 @@ class AddTopicFollowerSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onTopicCreate(GenericEvent $event)
+    public function onTopicCreate(GenericEvent $event): void
     {
         /** @var Topic $topic */
         $topic = $event->getSubject();
@@ -56,7 +50,7 @@ class AddTopicFollowerSubscriber implements EventSubscriberInterface
         $topic->addFollower($this->getCustomer());
     }
 
-    public function onPostCreate(GenericEvent $event)
+    public function onPostCreate(GenericEvent $event): void
     {
         /** @var Post $post */
         $post = $event->getSubject();
@@ -71,7 +65,7 @@ class AddTopicFollowerSubscriber implements EventSubscriberInterface
     /**
      * @return CustomerInterface
      */
-    public function getCustomer()
+    public function getCustomer(): ?CustomerInterface
     {
         return $this->customerContext->getCustomer();
     }

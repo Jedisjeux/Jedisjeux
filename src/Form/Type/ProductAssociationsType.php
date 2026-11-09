@@ -23,22 +23,10 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 final class ProductAssociationsType extends AbstractType
 {
-    /**
-     * @var RepositoryInterface
-     */
-    protected $productAssociationTypeRepository;
-
-    /**
-     * @var DataTransformerInterface
-     */
-    protected $productsToProductAssociationsTransformer;
-
     public function __construct(
-        RepositoryInterface $productAssociationTypeRepository,
-        DataTransformerInterface $productsToProductAssociationsTransformer
+        protected RepositoryInterface $productAssociationTypeRepository,
+        protected DataTransformerInterface $productsToProductAssociationsTransformer
     ) {
-        $this->productAssociationTypeRepository = $productAssociationTypeRepository;
-        $this->productsToProductAssociationsTransformer = $productsToProductAssociationsTransformer;
     }
 
     /**

@@ -96,7 +96,7 @@ EOT
     /**
      * @return EntityManager|object
      */
-    protected function getManager()
+    protected function getManager(): ?object
     {
         return $this->getContainer()->get('doctrine.orm.entity_manager');
     }

@@ -28,26 +28,26 @@ class ProductVideo implements ResourceInterface
      */
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank(groups: ['sylius'])]
-    private $title;
+    private ?string $title = null;
 
     /**
      * @var string|null
      */
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank(groups: ['sylius'])]
-    private $path;
+    private ?string $path = null;
 
     /**
      * @var ProductInterface|null
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class, inversedBy: 'videos')]
-    private $product;
+    #[ORM\ManyToOne(targetEntity: ProductInterface::class, inversedBy: 'videos')]
+    private ?ProductInterface $product = null;
 
     /**
      * @var ProductVideoImage|null
      */
-    #[ORM\OneToOne(targetEntity: \App\Entity\ProductVideoImage::class, cascade: ['persist', 'remove'])]
-    private $image;
+    #[ORM\OneToOne(targetEntity: ProductVideoImage::class, cascade: ['persist', 'remove'])]
+    private ?ProductVideoImage $image = null;
 
     public function getTitle(): ?string
     {

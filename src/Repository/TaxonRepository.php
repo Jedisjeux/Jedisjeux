@@ -12,6 +12,7 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository as BaseTaxonRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
@@ -23,7 +24,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 class TaxonRepository extends BaseTaxonRepository
 {
     /**
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
     public function createRootListQueryBuilder($localeCode)
     {
@@ -39,7 +40,7 @@ class TaxonRepository extends BaseTaxonRepository
     }
 
     /**
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
     public function createChildrenListQueryBuilder($localeCode, TaxonInterface $taxon)
     {
@@ -64,7 +65,7 @@ class TaxonRepository extends BaseTaxonRepository
     }
 
     /**
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
     public function getQueryBuilder()
     {

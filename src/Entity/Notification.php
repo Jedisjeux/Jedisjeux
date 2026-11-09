@@ -31,7 +31,7 @@ class Notification implements ResourceInterface
     /**
      * @var CustomerInterface[]|Collection
      */
-    #[ORM\ManyToMany(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
+    #[ORM\ManyToMany(targetEntity: CustomerInterface::class)]
     #[ORM\JoinTable(name: 'jdj_notification_author', inverseJoinColumns: [new ORM\JoinColumn(name: 'author_id', referencedColumnName: 'id')])]
     #[Expose]
     private $authors;
@@ -39,60 +39,57 @@ class Notification implements ResourceInterface
     /**
      * @var CustomerInterface
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
+    #[ORM\ManyToOne(targetEntity: CustomerInterface::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private $recipient;
+    private ?CustomerInterface $recipient = null;
 
-    /**
-     * @var bool
-     */
     #[ORM\Column(type: 'boolean', name: 'is_read')]
-    private $read;
+    private bool $read;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'text')]
     #[Expose]
-    private $message;
+    private ?string $message = null;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string')]
     #[Expose]
-    private $target;
+    private ?string $target = null;
 
     /**
      * @var Topic
      */
     #[ORM\ManyToOne(targetEntity: Topic::class)]
     #[Expose]
-    private $topic;
+    private ?Topic $topic = null;
 
     /**
      * @var ProductInterface|null
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class, inversedBy: 'notifications')]
-    private $product;
+    #[ORM\ManyToOne(targetEntity: ProductInterface::class, inversedBy: 'notifications')]
+    private ?ProductInterface $product = null;
 
     /**
      * @var Article|null
      */
     #[ORM\ManyToOne(targetEntity: Article::class)]
-    private $article;
+    private ?Article $article = null;
 
     /**
      * @var ProductBox|null
      */
     #[ORM\ManyToOne(targetEntity: ProductBox::class)]
-    private $productBox;
+    private ?ProductBox $productBox = null;
 
     /**
      * @var ProductFile|null
      */
     #[ORM\ManyToOne(targetEntity: ProductFile::class)]
-    private $productFile;
+    private ?ProductFile $productFile = null;
 
     /**
      * Notification constructor.

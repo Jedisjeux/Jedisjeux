@@ -14,6 +14,8 @@ namespace App\Fixture\Factory;
 use App\Entity\GameAward;
 use App\Entity\YearAward;
 use App\Fixture\OptionsResolver\LazyOption;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -23,40 +25,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class YearAwardExampleFactory extends AbstractExampleFactory
 {
     /**
-     * @var FactoryInterface
-     */
-    private $yearAwardFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $gameAwardRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $productRepository;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $yearAwardFactory,
-        RepositoryInterface $gameAwardRepository,
-        RepositoryInterface $productRepository
+        private FactoryInterface $yearAwardFactory,
+        private RepositoryInterface $gameAwardRepository,
+        private RepositoryInterface $productRepository
     ) {
-        $this->yearAwardFactory = $yearAwardFactory;
-        $this->gameAwardRepository = $gameAwardRepository;
-        $this->productRepository = $productRepository;
-
-        $this->faker = \Faker\Factory::create('fr_FR');
+        $this->faker = Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);

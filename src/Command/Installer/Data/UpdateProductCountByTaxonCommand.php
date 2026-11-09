@@ -78,7 +78,7 @@ EOT
     /**
      * @return ProductCountByTaxonUpdater|object
      */
-    protected function getProductCountByTaxonUpdater()
+    protected function getProductCountByTaxonUpdater(): ?object
     {
         return $this->getContainer()->get('App\Updater\ProductCountByTaxonUpdater');
     }
@@ -86,7 +86,7 @@ EOT
     /**
      * @return TaxonRepository|object
      */
-    protected function getTaxonRepository()
+    protected function getTaxonRepository(): ?object
     {
         return $this->getContainer()->get('sylius.repository.taxon');
     }
@@ -94,7 +94,7 @@ EOT
     /**
      * @return EntityManager|object
      */
-    protected function getManager()
+    protected function getManager(): ?object
     {
         return $this->getContainer()->get('doctrine.orm.entity_manager');
     }

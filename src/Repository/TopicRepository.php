@@ -17,6 +17,7 @@ use App\Entity\Topic;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
+use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
@@ -128,7 +129,7 @@ class TopicRepository extends EntityRepository
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = [], $sorting = [], $showPrivate = true)
+    public function createFilterPaginator($criteria = [], $sorting = [], $showPrivate = true): PagerfantaInterface
     {
         $queryBuilder = $this->getQueryBuilder();
 
@@ -183,7 +184,7 @@ class TopicRepository extends EntityRepository
      *
      * @return Pagerfanta
      */
-    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = [], array $sorting = [], $showPrivate = true)
+    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = [], array $sorting = [], $showPrivate = true): PagerfantaInterface
     {
         $queryBuilder = $this->getQueryBuilder();
 

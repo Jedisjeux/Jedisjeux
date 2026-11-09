@@ -25,7 +25,7 @@ class ProductVariantImage extends AbstractImage
      *
      * @var ProductVariantInterface
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductVariantInterface::class, inversedBy: 'images')]
+    #[ORM\ManyToOne(targetEntity: ProductVariantInterface::class, inversedBy: 'images')]
     protected $variant;
 
     /**

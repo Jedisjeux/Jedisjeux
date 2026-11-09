@@ -25,22 +25,10 @@ use Webmozart\Assert\Assert;
 class SendContactEmailSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var SenderInterface
-     */
-    protected $sender;
-
-    /**
-     * @var string
-     */
-    protected $contactEmail;
-
-    /**
      * SendContactEmailSubscriber constructor.
      */
-    public function __construct(SenderInterface $sender, string $contactEmail)
+    public function __construct(protected SenderInterface $sender, protected string $contactEmail)
     {
-        $this->sender = $sender;
-        $this->contactEmail = $contactEmail;
     }
 
     /**
@@ -53,7 +41,7 @@ class SendContactEmailSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onPostCreate(GenericEvent $event)
+    public function onPostCreate(GenericEvent $event): void
     {
         /** @var ContactRequest $contactRequest */
         $contactRequest = $event->getSubject();

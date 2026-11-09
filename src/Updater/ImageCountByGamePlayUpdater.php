@@ -18,7 +18,7 @@ use App\Entity\GamePlay;
  */
 class ImageCountByGamePlayUpdater
 {
-    public function update(GamePlay $gamePlay)
+    public function update(GamePlay $gamePlay): void
     {
         $imageCount = $gamePlay->getImages()->count();
         $gamePlay->setImageCount($imageCount);

@@ -19,7 +19,7 @@ use Sylius\Component\Product\Model\ProductInterface;
  */
 class AddProductAssociationOwnerToProductUpdater extends AbstractProductAssociationUpdater
 {
-    public function update(ProductAssociationInterface $association, ProductInterface $product)
+    public function update(ProductAssociationInterface $association, ProductInterface $product): void
     {
         $this->addProductAssociationOwnerToProduct($association, $product);
     }

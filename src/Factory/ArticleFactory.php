@@ -24,36 +24,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 class ArticleFactory implements FactoryInterface
 {
-    /**
-     * @var string
-     */
-    private $className;
-
-    /**
-     * @var RepositoryInterface
-     */
-    protected $productRepository;
-
-    /**
-     * @var CustomerContextInterface
-     */
-    protected $customerContext;
-
-    /**
-     * @var FactoryInterface
-     */
-    protected $blockFactory;
-
     public function __construct(
-        string $className,
-        RepositoryInterface $productRepository,
-        CustomerContextInterface $customerContext,
-        FactoryInterface $blockFactory
+        private string $className,
+        protected RepositoryInterface $productRepository,
+        protected CustomerContextInterface $customerContext,
+        protected FactoryInterface $blockFactory
     ) {
-        $this->className = $className;
-        $this->productRepository = $productRepository;
-        $this->customerContext = $customerContext;
-        $this->blockFactory = $blockFactory;
     }
 
     /**

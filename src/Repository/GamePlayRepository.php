@@ -13,6 +13,8 @@ namespace App\Repository;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
@@ -266,9 +268,9 @@ class GamePlayRepository extends EntityRepository
      * @param array $criteria
      * @param array $sorting
      *
-     * @return \Pagerfanta\Pagerfanta
+     * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = [], $sorting = [])
+    public function createFilterPaginator($criteria = [], $sorting = []): PagerfantaInterface
     {
         $queryBuilder = $this->getQueryBuilder();
 

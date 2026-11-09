@@ -32,7 +32,7 @@ class MaxPlayerCountGreaterThanOrEqualMinPlayer extends Constraint
     /**
      * {@inheritdoc}
      */
-    public function validateBy()
+    public function validateBy(): string
     {
         return MaxPlayerCountGreaterThanOrEqualMinPlayerValidator::class;
     }

@@ -62,7 +62,7 @@ class ProductFilterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'app_filter_product';
     }

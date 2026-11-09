@@ -11,10 +11,7 @@ use Symfony\Component\Process\Exception\RuntimeException;
  */
 class InstallCommand extends AbstractInstallCommand
 {
-    /**
-     * @var array
-     */
-    private $commands = [
+    private array $commands = [
         [
             'command' => 'database',
             'message' => 'Setting up the database.',
@@ -76,7 +73,7 @@ EOT
     /**
      * @return string
      */
-    private function getProperFinalMessage($errored)
+    private function getProperFinalMessage(bool $errored): string
     {
         if ($errored) {
             return '<info>Jedisjeux has been installed, but some error occurred.</info>';
@@ -88,7 +85,7 @@ EOT
     /**
      * @return string
      */
-    private function getLogo()
+    private function getLogo(): string
     {
         return '
         

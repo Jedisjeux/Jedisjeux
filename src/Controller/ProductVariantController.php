@@ -26,7 +26,7 @@ class ProductVariantController extends ResourceController
      *
      * @throws HttpException
      */
-    public function updatePositionsAction(Request $request)
+    public function updatePositionsAction(Request $request): JsonResponse
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);

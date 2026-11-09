@@ -24,18 +24,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class GenerateProductTaxonSitemapSubscriber implements EventSubscriberInterface
 {
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
-
-    /** @var TaxonRepository */
-    private $taxonRepository;
-
-    public function __construct(
-        UrlGeneratorInterface $urlGenerator,
-        TaxonRepository $taxonRepository
-    ) {
-        $this->urlGenerator = $urlGenerator;
-        $this->taxonRepository = $taxonRepository;
+    public function __construct(private UrlGeneratorInterface $urlGenerator, private TaxonRepository $taxonRepository)
+    {
     }
 
     /**
@@ -62,7 +52,7 @@ class GenerateProductTaxonSitemapSubscriber implements EventSubscriberInterface
         ];
 
         $rootTaxons = $this->taxonRepository->findRootNodes();
-        $productTaxons = array_filter($rootTaxons, function (TaxonInterface $rootTaxon) use ($productTaxonsCodes) {
+        $productTaxons = array_filter($rootTaxons, function (TaxonInterface $rootTaxon) use ($productTaxonsCodes): bool {
             return in_array($rootTaxon->getCode(), $productTaxonsCodes);
         });
 

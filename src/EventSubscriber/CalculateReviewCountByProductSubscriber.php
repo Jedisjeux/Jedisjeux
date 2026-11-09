@@ -20,16 +20,10 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 class CalculateReviewCountByProductSubscriber implements EventSubscriberInterface
 {
-    /** @var ReviewCountByProductUpdater */
-    private $updater;
-
-    /** @var EntityManagerInterface */
-    private $entityManager;
-
-    public function __construct(ReviewCountByProductUpdater $updater, EntityManagerInterface $entityManager)
-    {
-        $this->updater = $updater;
-        $this->entityManager = $entityManager;
+    public function __construct(
+        private ReviewCountByProductUpdater $updater,
+        private EntityManagerInterface $entityManager
+    ) {
     }
 
     /**
@@ -43,7 +37,7 @@ class CalculateReviewCountByProductSubscriber implements EventSubscriberInterfac
         ];
     }
 
-    public function onProductCreate(GenericEvent $event)
+    public function onProductCreate(GenericEvent $event): void
     {
         /** @var ProductReview $productReview */
         $productReview = $event->getSubject();
@@ -55,7 +49,7 @@ class CalculateReviewCountByProductSubscriber implements EventSubscriberInterfac
         $this->entityManager->flush();
     }
 
-    public function onProductUpdate(GenericEvent $event)
+    public function onProductUpdate(GenericEvent $event): void
     {
         $this->onProductCreate($event);
     }

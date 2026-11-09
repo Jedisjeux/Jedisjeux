@@ -11,6 +11,8 @@
 
 namespace App\Repository;
 
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository as BaseUserRepository;
 use Sylius\Component\User\Model\UserInterface;
 
@@ -60,8 +62,8 @@ class UserRepository extends BaseUserRepository
     /**
      * @return int
      *
-     * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function findNbResults()
     {

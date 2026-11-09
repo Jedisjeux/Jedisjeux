@@ -21,20 +21,10 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 final class AdminMenuBuilder implements MenuBuilderInterface
 {
-    /**
-     * @var FactoryInterface
-     */
-    private $factory;
-
-    /**
-     * @var AuthorizationCheckerInterface
-     */
-    private $authorizationChecker;
-
-    public function __construct(FactoryInterface $factory, AuthorizationCheckerInterface $authorizationChecker)
-    {
-        $this->factory = $factory;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(
+        private FactoryInterface $factory,
+        private AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function createMenu(array $options = []): ItemInterface

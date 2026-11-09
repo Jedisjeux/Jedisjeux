@@ -34,7 +34,7 @@ class GreaterThanOrEqualFilter implements FilterInterface
      *
      * @return mixed
      */
-    private function getOption(array $options, string $name, $default)
+    private function getOption(array $options, string $name, string $default)
     {
         return $options[$name] ?? $default;
     }

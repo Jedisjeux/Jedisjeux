@@ -23,16 +23,10 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 class CalculateTopicCountByTaxonSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var TopicCountByTaxonUpdater
-     */
-    protected $updater;
-
-    /**
      * TopicCountByTaxonSubscriber constructor.
      */
-    public function __construct(TopicCountByTaxonUpdater $updater)
+    public function __construct(protected TopicCountByTaxonUpdater $updater)
     {
-        $this->updater = $updater;
     }
 
     /**
@@ -45,7 +39,7 @@ class CalculateTopicCountByTaxonSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onTopicCreate(GenericEvent $event)
+    public function onTopicCreate(GenericEvent $event): void
     {
         /** @var Topic $topic */
         $topic = $event->getSubject();

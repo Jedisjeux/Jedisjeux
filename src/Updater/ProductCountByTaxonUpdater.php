@@ -20,19 +20,13 @@ use App\Entity\Taxon;
 class ProductCountByTaxonUpdater
 {
     /**
-     * @var ProductCountByTaxonCalculator
-     */
-    protected $calculator;
-
-    /**
      * ProductCountByTaxonUpdater constructor.
      */
-    public function __construct(ProductCountByTaxonCalculator $calculator)
+    public function __construct(protected ProductCountByTaxonCalculator $calculator)
     {
-        $this->calculator = $calculator;
     }
 
-    public function update(Taxon $taxon)
+    public function update(Taxon $taxon): void
     {
         $productCount = $this->calculator->calculate($taxon);
         $taxon->setProductCount($productCount);

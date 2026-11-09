@@ -68,7 +68,7 @@ class PageType extends AbstractType
         ]);
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'app_page';
     }

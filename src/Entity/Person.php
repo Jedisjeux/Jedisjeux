@@ -83,7 +83,7 @@ class Person implements ResourceInterface
     #[Assert\NotBlank]
     #[JMS\Expose]
     #[JMS\Groups(['Default', 'Detailed'])]
-    private $lastName;
+    private ?string $lastName = null;
 
     /**
      * @var string
@@ -91,7 +91,7 @@ class Person implements ResourceInterface
     #[ORM\Column(type: 'string', length: 50, nullable: true)]
     #[JMS\Expose]
     #[JMS\Groups(['Default', 'Detailed'])]
-    private $firstName;
+    private ?string $firstName = null;
 
     /**
      * @var string
@@ -99,7 +99,7 @@ class Person implements ResourceInterface
     #[ORM\Column(type: 'string', length: 200, nullable: true)]
     #[JMS\Expose]
     #[JMS\Groups(['Detailed'])]
-    private $website;
+    private ?string $website = null;
 
     /**
      * @var string
@@ -107,7 +107,7 @@ class Person implements ResourceInterface
     #[ORM\Column(type: 'text', nullable: true)]
     #[JMS\Expose]
     #[JMS\Groups(['Detailed'])]
-    private $description;
+    private ?string $description = null;
 
     /**
      * @var string
@@ -116,7 +116,7 @@ class Person implements ResourceInterface
     #[ORM\Column(type: 'string', length: 128, unique: true)]
     #[JMS\Expose]
     #[JMS\Groups(['Default', 'Detailed'])]
-    private $slug;
+    private ?string $slug = null;
 
     /**
      * @var int
@@ -145,32 +145,32 @@ class Person implements ResourceInterface
     /**
      * @var PersonImage[]|Collection
      */
-    #[ORM\OneToMany(targetEntity: \App\Entity\PersonImage::class, mappedBy: 'person', cascade: ['persist', 'merge', 'remove'])]
+    #[ORM\OneToMany(targetEntity: PersonImage::class, mappedBy: 'person', cascade: ['persist', 'merge', 'remove'])]
     protected $images;
 
     /**
      * @var Collection
      */
-    #[ORM\ManyToMany(targetEntity: \Sylius\Component\Taxonomy\Model\TaxonInterface::class)]
+    #[ORM\ManyToMany(targetEntity: TaxonInterface::class)]
     #[ORM\JoinTable('jdj_person_taxon', inverseJoinColumns: [new ORM\JoinColumn(name: 'taxoninterface_id', referencedColumnName: 'id')])]
     protected $taxons;
 
     /**
      * @var ProductInterface[]|Collection
      */
-    #[ORM\ManyToMany(targetEntity: \App\Entity\ProductVariant::class, mappedBy: 'designers', cascade: ['persist', 'merge'])]
+    #[ORM\ManyToMany(targetEntity: ProductVariant::class, mappedBy: 'designers', cascade: ['persist', 'merge'])]
     private $designerProducts;
 
     /**
      * @var ProductInterface[]|Collection
      */
-    #[ORM\ManyToMany(targetEntity: \App\Entity\ProductVariant::class, mappedBy: 'artists', cascade: ['persist', 'merge'])]
+    #[ORM\ManyToMany(targetEntity: ProductVariant::class, mappedBy: 'artists', cascade: ['persist', 'merge'])]
     private $artistProducts;
 
     /**
      * @var ProductInterface[]|Collection
      */
-    #[ORM\ManyToMany(targetEntity: \App\Entity\ProductVariant::class, mappedBy: 'publishers', cascade: ['persist', 'merge'])]
+    #[ORM\ManyToMany(targetEntity: ProductVariant::class, mappedBy: 'publishers', cascade: ['persist', 'merge'])]
     private $publisherProducts;
 
     /**
@@ -201,7 +201,7 @@ class Person implements ResourceInterface
      *
      * @deprecated
      */
-    public function getMainImage()
+    public function getMainImage(): ?PersonImage
     {
         return $this->getFirstImage();
     }
@@ -362,12 +362,12 @@ class Person implements ResourceInterface
     /**
      * @param string|null $rootTaxon
      *
-     * @return Collection|\Sylius\Component\Taxonomy\Model\TaxonInterface[]
+     * @return Collection|TaxonInterface[]
      */
     public function getTaxons($rootTaxon = null): Collection
     {
         if (null !== $rootTaxon) {
-            return $this->taxons->filter(function (TaxonInterface $taxon) use ($rootTaxon) {
+            return $this->taxons->filter(function (TaxonInterface $taxon) use ($rootTaxon): bool {
                 return $rootTaxon === strtolower($taxon->getRoot()->getCode());
             });
         }

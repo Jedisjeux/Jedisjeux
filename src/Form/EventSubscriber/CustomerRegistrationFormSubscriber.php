@@ -23,14 +23,8 @@ use Symfony\Component\Form\FormEvents;
  */
 final class CustomerRegistrationFormSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var RepositoryInterface
-     */
-    private $customerRepository;
-
-    public function __construct(RepositoryInterface $customerRepository)
+    public function __construct(private RepositoryInterface $customerRepository)
     {
-        $this->customerRepository = $customerRepository;
     }
 
     /**
@@ -46,7 +40,7 @@ final class CustomerRegistrationFormSubscriber implements EventSubscriberInterfa
     /**
      * {@inheritdoc}
      */
-    public function preSubmit(FormEvent $event)
+    public function preSubmit(FormEvent $event): void
     {
         $rawData = $event->getData();
         $form = $event->getForm();

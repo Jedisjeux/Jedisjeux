@@ -11,7 +11,6 @@
 
 namespace App\Calculator;
 
-use App\Repository\TopicRepository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
@@ -20,14 +19,8 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 class TopicCountByTaxonCalculator
 {
-    /**
-     * @var RepositoryInterface|TopicRepository
-     */
-    protected $topicRepository;
-
-    public function __construct(RepositoryInterface $topicRepository)
+    public function __construct(protected RepositoryInterface $topicRepository)
     {
-        $this->topicRepository = $topicRepository;
     }
 
     /**
