@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Factory;
 
 use App\Entity\BggProduct;
+use App\Entity\Person;
 use App\Entity\Product;
 use App\Entity\ProductVariant;
 use App\Entity\ProductVariantImage;
@@ -95,6 +96,7 @@ final class ProductFactoryTest extends TestCase
                 $bggProductFactory,
                 $slugGenerator,
                 $personRepository,
+                $this->createStub(FactoryInterface::class),
             );
 
             $this->assertInstanceOf(
@@ -104,5 +106,84 @@ final class ProductFactoryTest extends TestCase
         } finally {
             unlink($imagePath);
         }
+    }
+
+    public function testItCreatesMissingPersonsFromBgg(): void
+    {
+        $variant = new ProductVariant();
+        $product = $this->createStub(Product::class);
+        $product->method('getFirstVariant')->willReturn($variant);
+        $product->method('getName')->willReturn('Puerto Rico');
+
+        $factory = $this->createStub(FactoryInterface::class);
+        $factory->method('createNew')->willReturn($product);
+
+        $variantFactory = $this->createStub(FactoryInterface::class);
+        $variantFactory->method('createNew')->willReturn($variant);
+
+        $bggProduct = $this->createStub(BggProduct::class);
+        $bggProduct->method('getName')->willReturn('Puerto Rico');
+        $bggProduct->method('getDesigners')->willReturn(['Andreas Seyfarth', '(Uncredited)']);
+        $bggProduct->method('getArtists')->willReturn(['Franz Vohwinkel', 'Jeff Smith (I)']);
+        $bggProduct->method('getPublishers')->willReturn(['Rio Grande Games']);
+
+        $bggProductFactory = $this->createStub(BggProductFactory::class);
+        $bggProductFactory->method('createFromPayload')->willReturn($bggProduct);
+
+        $existingPerson = new Person();
+        $existingPerson->setFirstName('Franz');
+        $existingPerson->setLastName('Vohwinkel');
+
+        $personRepository = $this->createMock(RepositoryInterface::class);
+        $personRepository->method('findOneBy')->willReturnCallback(
+            fn (array $criteria) => 'franz-vohwinkel' === $criteria['slug'] ? $existingPerson : null,
+        );
+        $personRepository->expects($this->exactly(3))->method('add');
+
+        $personFactory = $this->createStub(FactoryInterface::class);
+        $personFactory->method('createNew')->willReturnCallback(fn () => new Person());
+
+        $productFactory = new ProductFactory(
+            $factory,
+            $variantFactory,
+            $this->createStub(FactoryInterface::class),
+            $bggProductFactory,
+            $this->createStub(SlugGeneratorInterface::class),
+            $personRepository,
+            $personFactory,
+        );
+
+        $productFactory->createFromBggPayload('payload');
+
+        $this->assertSame(['Andreas Seyfarth'], $this->getFullNames($variant->getDesigners()));
+        $this->assertSame(['Franz Vohwinkel', 'Jeff Smith'], $this->getFullNames($variant->getArtists()));
+        $this->assertSame(['Rio Grande Games'], $this->getFullNames($variant->getPublishers()));
+        $this->assertSame($existingPerson, $variant->getArtists()->first());
+
+        /** @var Person $designer */
+        $designer = $variant->getDesigners()->first();
+        $this->assertSame('Andreas', $designer->getFirstName());
+        $this->assertSame('Seyfarth', $designer->getLastName());
+
+        /** @var Person $publisher */
+        $publisher = $variant->getPublishers()->first();
+        $this->assertNull($publisher->getFirstName());
+        $this->assertSame('Rio Grande Games', $publisher->getLastName());
+    }
+
+    /**
+     * @param iterable<Person> $persons
+     *
+     * @return list<string>
+     */
+    private function getFullNames(iterable $persons): array
+    {
+        $fullNames = [];
+
+        foreach ($persons as $person) {
+            $fullNames[] = $person->getFullName();
+        }
+
+        return $fullNames;
     }
 }
