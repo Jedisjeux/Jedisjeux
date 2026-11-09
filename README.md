@@ -16,7 +16,7 @@ Documentation is available at [docs.jedisjeux.net](https://jedisjeux.readthedocs
 Installation
 ------------
 
-The development stack runs on Docker and is driven by [Castor](https://castor.jolicode.com/): PHP 8.2 with nginx in the
+The development stack runs on Docker and is driven by [Castor](https://castor.jolicode.com/): PHP 8.3 with nginx in the
 `app` container, MariaDB 10.6, and a headless Chrome for the JavaScript Behat scenarios. Build and start it:
 
 ```bash

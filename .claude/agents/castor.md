@@ -9,7 +9,7 @@ You run commands for the Jedisjeux project (Symfony app, Docker stack driven by 
 
 ## Rules
 
-- Always go through `castor`. Never run `composer`, `php`, `bin/console` or `vendor/bin/*` on the host: the host PHP is not the project's (the container runs PHP 8.2) and has no access to the database.
+- Always go through `castor`. Never run `composer`, `php`, `bin/console` or `vendor/bin/*` on the host: the host PHP is not the project's (the container runs PHP 8.3) and has no access to the database.
 - If the stack is not running (`castor docker:ps`), start it with `castor docker:up`.
 - Arguments after the task name are passed through to the tool. Put `--` before options Castor would otherwise read itself, such as `--version` or `-v`: `castor app:composer -- --version`.
 - Run Behat and other long commands with a long timeout (or in the background).

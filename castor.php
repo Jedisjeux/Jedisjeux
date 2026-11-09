@@ -42,8 +42,8 @@ function register_services(RegisterServiceEvent $event): void
     $event->addService($database);
     $app = (new SymfonyService('app'))
         ->withDirectory(__DIR__)
-        // 8.2 runs in production, the CI also tests 8.5 to prepare the migration
-        ->withVersion(getenv('APP_PHP_VERSION') ?: '8.2')
+        // 8.3 runs in production, the CI also tests 8.5 to prepare the migration
+        ->withVersion(getenv('APP_PHP_VERSION') ?: '8.3')
         ->withMode(PhpMode::Fpm)
         // Warming up the cache needs more than the default 128M
         ->withPhpIni(['memory_limit' => '512M'], PhpIniScope::Cli)
