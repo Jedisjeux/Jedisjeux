@@ -46,6 +46,7 @@ final class BggProductFactoryTest extends TestCase
             'description' => 'In &quot;Puerto Rico&quot;,<br/>players&#10;assume roles.',
             'imagePath' => 'https://cf.geekdo-images.com/abc__original/img/def=/0x0/filters:format(jpeg)/pic158548.jpg',
             'mechanisms' => ['Variable Phase Order'],
+            'categories' => ['Economic', 'Farming'],
             'designers' => ['Andreas Seyfarth'],
             'artists' => ['Harald Lieske', 'Franz Vohwinkel'],
             'publishers' => ['alea'],
@@ -63,6 +64,7 @@ final class BggProductFactoryTest extends TestCase
         $this->assertSame("In \"Puerto Rico\",\nplayers\nassume roles.", $bggProduct->getDescription());
         $this->assertSame('https://cf.geekdo-images.com/abc__original/img/def=/0x0/filters:format(jpeg)/pic158548.jpg', $bggProduct->getImagePath());
         $this->assertSame(['Variable Phase Order'], $bggProduct->getMechanisms());
+        $this->assertSame(['Economic', 'Farming'], $bggProduct->getCategories());
         $this->assertSame(['Andreas Seyfarth'], $bggProduct->getDesigners());
         $this->assertSame(['Harald Lieske', 'Franz Vohwinkel'], $bggProduct->getArtists());
         $this->assertSame(['alea'], $bggProduct->getPublishers());

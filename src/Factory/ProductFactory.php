@@ -21,6 +21,8 @@ use Sylius\Component\Product\Factory\ProductFactory as BaseProductFactory;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\FlashBagAwareSessionInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
@@ -40,7 +42,8 @@ class ProductFactory extends BaseProductFactory
         private BggProductFactory $bggProductFactory,
         private SlugGeneratorInterface $slugGenerator,
         private RepositoryInterface $personRepository,
-        private FactoryInterface $personFactory
+        private FactoryInterface $personFactory,
+        private RequestStack $requestStack,
     ) {
         parent::__construct($factory, $variantFactory);
     }
@@ -73,6 +76,8 @@ class ProductFactory extends BaseProductFactory
         $product->setName($bggProduct->getName());
         $product->setSlug($this->slugGenerator->generate($product->getName()));
         $product->setDescription($bggProduct->getDescription());
+
+        $this->addTaxonsNotice($bggProduct);
 
         if (null !== $releasedAtYear = $bggProduct->getReleasedAtYear()) {
             $releasedAt = \DateTime::createFromFormat('Y-m-d', $releasedAtYear.'-01-01');
@@ -135,6 +140,38 @@ class ProductFactory extends BaseProductFactory
         }
 
         return $product;
+    }
+
+    /**
+     * BGG mechanisms and categories do not match the Jedisjeux taxons, so they are shown to the
+     * redactor who picks the mechanisms and themes by hand.
+     */
+    private function addTaxonsNotice(BggProduct $bggProduct): void
+    {
+        if ([] === $bggProduct->getMechanisms() && [] === $bggProduct->getCategories()) {
+            return;
+        }
+
+        $request = $this->requestStack->getMainRequest();
+
+        // The factory runs again when the form is submitted, the notice is only useful on the form display
+        if (null === $request || !$request->isMethod('GET') || !$request->hasSession()) {
+            return;
+        }
+
+        $session = $request->getSession();
+
+        if (!$session instanceof FlashBagAwareSessionInterface) {
+            return;
+        }
+
+        $session->getFlashBag()->add('info', [
+            'message' => 'app.product.bgg_taxons',
+            'parameters' => [
+                '%mechanisms%' => implode(', ', $bggProduct->getMechanisms()) ?: '-',
+                '%categories%' => implode(', ', $bggProduct->getCategories()) ?: '-',
+            ],
+        ]);
     }
 
     /**

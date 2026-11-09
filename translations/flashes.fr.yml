@@ -23,6 +23,8 @@ app:
         create: Le message a bien été créé.
         update: Le message a bien été mis à jour.
         delete: Le message a bien été supprimé.
+    product:
+        bgg_taxons: "Sur BoardGameGeek, mécanismes : %mechanisms%. Catégories : %categories%. Choisissez les mécanismes et thèmes correspondants."
     product_box:
         accept: 'La boite de jeu a été acceptée avec succès.'
         reject: 'La boite de jeu a été rejetée avec succès.'

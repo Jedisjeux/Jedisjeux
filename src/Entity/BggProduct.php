@@ -60,6 +60,8 @@ class BggProduct
 
     private array $mechanisms = [];
 
+    private array $categories = [];
+
     private array $designers = [];
 
     private array $artists = [];
@@ -178,6 +180,31 @@ class BggProduct
         if (false !== $key = array_search($mechanism, $this->mechanisms, true)) {
             unset($this->mechanisms[$key]);
             $this->mechanisms = array_values($this->mechanisms);
+        }
+    }
+
+    public function getCategories(): array
+    {
+        return $this->categories;
+    }
+
+    public function hasCategory(string $category): bool
+    {
+        return in_array($category, $this->categories, true);
+    }
+
+    public function addCategory(string $category): void
+    {
+        if (!$this->hasCategory($category)) {
+            $this->categories[] = $category;
+        }
+    }
+
+    public function removeCategory(string $category): void
+    {
+        if (false !== $key = array_search($category, $this->categories, true)) {
+            unset($this->categories[$key]);
+            $this->categories = array_values($this->categories);
         }
     }
 

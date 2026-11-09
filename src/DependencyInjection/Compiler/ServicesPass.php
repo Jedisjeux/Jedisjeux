@@ -80,7 +80,8 @@ class ServicesPass implements CompilerPassInterface
             ->addArgument(new Reference('app.factory.bgg_product'))
             ->addArgument(new Reference('sylius.generator.slug'))
             ->addArgument(new Reference('app.repository.person'))
-            ->addArgument(new Reference('app.factory.person'));
+            ->addArgument(new Reference('app.factory.person'))
+            ->addArgument(new Reference('request_stack'));
 
         $articleFactoryDefinition = $container->getDefinition('app.factory.article');
         $articleFactoryDefinition

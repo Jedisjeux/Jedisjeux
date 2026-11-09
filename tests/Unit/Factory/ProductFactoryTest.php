@@ -24,6 +24,10 @@ use PHPUnit\Framework\TestCase;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 final class ProductFactoryTest extends TestCase
 {
@@ -97,6 +101,7 @@ final class ProductFactoryTest extends TestCase
                 $slugGenerator,
                 $personRepository,
                 $this->createStub(FactoryInterface::class),
+                new RequestStack(),
             );
 
             $this->assertInstanceOf(
@@ -151,6 +156,7 @@ final class ProductFactoryTest extends TestCase
             $this->createStub(SlugGeneratorInterface::class),
             $personRepository,
             $personFactory,
+            new RequestStack(),
         );
 
         $productFactory->createFromBggPayload('payload');
@@ -169,6 +175,74 @@ final class ProductFactoryTest extends TestCase
         $publisher = $variant->getPublishers()->first();
         $this->assertNull($publisher->getFirstName());
         $this->assertSame('Rio Grande Games', $publisher->getLastName());
+    }
+
+    public function testItShowsBggMechanismsAndCategoriesOnFormDisplay(): void
+    {
+        $session = new Session(new MockArraySessionStorage());
+
+        $this->createProductFromBggWithTaxons('GET', $session);
+
+        $this->assertSame([[
+            'message' => 'app.product.bgg_taxons',
+            'parameters' => [
+                '%mechanisms%' => 'Variable Phase Order, Worker Placement',
+                '%categories%' => '-',
+            ],
+        ]], $session->getFlashBag()->get('info'));
+    }
+
+    public function testItDoesNotShowBggMechanismsAndCategoriesOnFormSubmit(): void
+    {
+        $session = new Session(new MockArraySessionStorage());
+
+        $this->createProductFromBggWithTaxons('POST', $session);
+
+        $this->assertSame([], $session->getFlashBag()->get('info'));
+    }
+
+    private function createProductFromBggWithTaxons(string $method, Session $session): void
+    {
+        $variant = new ProductVariant();
+        $product = $this->createStub(Product::class);
+        $product->method('getFirstVariant')->willReturn($variant);
+        $product->method('getName')->willReturn('Puerto Rico');
+
+        $factory = $this->createStub(FactoryInterface::class);
+        $factory->method('createNew')->willReturn($product);
+
+        $variantFactory = $this->createStub(FactoryInterface::class);
+        $variantFactory->method('createNew')->willReturn($variant);
+
+        $bggProduct = $this->createStub(BggProduct::class);
+        $bggProduct->method('getName')->willReturn('Puerto Rico');
+        $bggProduct->method('getMechanisms')->willReturn(['Variable Phase Order', 'Worker Placement']);
+        $bggProduct->method('getCategories')->willReturn([]);
+        $bggProduct->method('getDesigners')->willReturn([]);
+        $bggProduct->method('getArtists')->willReturn([]);
+        $bggProduct->method('getPublishers')->willReturn([]);
+
+        $bggProductFactory = $this->createStub(BggProductFactory::class);
+        $bggProductFactory->method('createFromPayload')->willReturn($bggProduct);
+
+        $request = Request::create('/admin/products/bgg/import', $method);
+        $request->setSession($session);
+
+        $requestStack = new RequestStack();
+        $requestStack->push($request);
+
+        $productFactory = new ProductFactory(
+            $factory,
+            $variantFactory,
+            $this->createStub(FactoryInterface::class),
+            $bggProductFactory,
+            $this->createStub(SlugGeneratorInterface::class),
+            $this->createStub(RepositoryInterface::class),
+            $this->createStub(FactoryInterface::class),
+            $requestStack,
+        );
+
+        $productFactory->createFromBggPayload('payload');
     }
 
     /**

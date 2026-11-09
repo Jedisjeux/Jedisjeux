@@ -48,6 +48,10 @@ class BggProductFactory
             $bggProduct->addMechanism((string) $mechanism);
         }
 
+        foreach ($boardGame->boardgamecategory as $category) {
+            $bggProduct->addCategory((string) $category);
+        }
+
         foreach ($boardGame->boardgamedesigner as $designer) {
             $bggProduct->addDesigner((string) $designer);
         }
@@ -96,6 +100,10 @@ class BggProductFactory
 
         foreach ($this->getNames($data, 'mechanisms') as $mechanism) {
             $bggProduct->addMechanism($mechanism);
+        }
+
+        foreach ($this->getNames($data, 'categories') as $category) {
+            $bggProduct->addCategory($category);
         }
 
         foreach ($this->getNames($data, 'designers') as $designer) {

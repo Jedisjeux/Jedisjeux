@@ -23,6 +23,8 @@ app:
         create: Post has been successfully created.
         update: Post has been successfully updated.
         delete: Post has been successfully deleted.
+    product:
+        bgg_taxons: "On BoardGameGeek, mechanisms: %mechanisms%. Categories: %categories%. Pick the matching mechanisms and themes."
     product_box:
         accept: Game box has been successfully accepted.
         reject: Game box has been successfully rejected.
