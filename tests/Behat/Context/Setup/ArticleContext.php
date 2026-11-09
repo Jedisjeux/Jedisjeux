@@ -12,6 +12,7 @@
 namespace App\Tests\Behat\Context\Setup;
 
 use App\Entity\Article;
+use App\Entity\Block;
 use App\Fixture\Factory\ArticleExampleFactory;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
@@ -164,5 +165,21 @@ class ArticleContext implements Context
     {
         $article->setViewCount($viewCount);
         $this->manager->flush($article);
+    }
+
+    /**
+     * @Given /^(this article) has a block titled "([^"]+)" presenting (product "[^"]+")$/
+     */
+    public function articleHasBlockPresentingProduct(Article $article, string $title, ProductInterface $product): void
+    {
+        $block = new Block();
+        $block->setTitle($title);
+        $block->setBody('<p>Lorem ipsum dolor sit amet.</p>');
+        $block->setImagePosition(Block::POSITION_TOP);
+        $block->setProduct($product);
+        $article->addBlock($block);
+
+        $this->manager->persist($block);
+        $this->manager->flush();
     }
 }

@@ -12,6 +12,7 @@
 namespace App\Repository;
 
 use App\Entity\Article;
+use App\Entity\Product;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
@@ -51,6 +52,10 @@ class ArticleRepository extends EntityRepository
         $queryBuilder = $this->createQueryBuilder('o');
 
         $queryBuilder
+            ->addSelect('block', 'blockImage', 'blockProduct')
+            ->leftJoin('o.blocks', 'block')
+            ->leftJoin('block.image', 'blockImage')
+            ->leftJoin('block.product', 'blockProduct')
             ->andWhere('o.slug = :slug')
             ->setParameter('slug', $slug);
 
@@ -60,7 +65,43 @@ class ArticleRepository extends EntityRepository
                 ->setParameter('published', Article::STATUS_PUBLISHED);
         }
 
-        return $queryBuilder->getQuery()->getOneOrNullResult();
+        /** @var Article|null $article */
+        $article = $queryBuilder->getQuery()->getOneOrNullResult();
+
+        if (null !== $article) {
+            $this->loadBlockProducts($article);
+        }
+
+        return $article;
+    }
+
+    /**
+     * Loads the details shown on the game cards of the blocks in a single query, instead of a few queries per block.
+     */
+    private function loadBlockProducts(Article $article): void
+    {
+        $productIds = [];
+
+        foreach ($article->getBlocks() as $block) {
+            if (null !== $product = $block->getProduct()) {
+                $productIds[$product->getId()] = $product->getId();
+            }
+        }
+
+        if ([] === $productIds) {
+            return;
+        }
+
+        $this->getEntityManager()->createQueryBuilder()
+            ->select('product', 'translation', 'variant', 'image')
+            ->from(Product::class, 'product')
+            ->leftJoin('product.translations', 'translation')
+            ->leftJoin('product.variants', 'variant')
+            ->leftJoin('variant.images', 'image')
+            ->andWhere('product.id IN (:productIds)')
+            ->setParameter('productIds', array_values($productIds))
+            ->getQuery()
+            ->getResult();
     }
 
     /**

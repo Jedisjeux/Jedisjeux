@@ -16,6 +16,7 @@ document.addEventListener('click', (event) => {
 
     list.insertAdjacentHTML('beforeend', prototype.innerHTML.replace(name, index));
     list.lastElementChild.dataset.formCollectionIndex = index;
+    list.lastElementChild.dispatchEvent(new CustomEvent('app:form-collection:item-added', { bubbles: true }));
 
     return;
   }

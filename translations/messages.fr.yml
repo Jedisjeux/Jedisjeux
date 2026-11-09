@@ -123,6 +123,7 @@ app:
         latest_videos: Dernières vidéos
         less_commented_first: Moins commentés en premier
         lifetime_rating: Note de la durée de vie
+        linked_game: Jeu lié
         list_articles: Liste des articles
         list_games: Liste des jeux
         list_reviews: Liste des avis

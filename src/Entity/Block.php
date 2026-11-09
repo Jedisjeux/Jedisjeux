@@ -13,6 +13,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -84,6 +85,13 @@ class Block implements ResourceInterface
     #[Gedmo\SortableGroup]
     #[ORM\ManyToOne(targetEntity: SlideShowBlock::class, inversedBy: 'blocks', cascade: ['persist', 'merge'])]
     protected $slideShowBlock;
+
+    /**
+     * @var ProductInterface|null
+     */
+    #[ORM\ManyToOne(targetEntity: ProductInterface::class)]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
+    protected $product;
 
     public function getCode(): ?string
     {
@@ -176,5 +184,15 @@ class Block implements ResourceInterface
     public function setSlideShowBlock(?SlideShowBlock $slideShowBlock): void
     {
         $this->slideShowBlock = $slideShowBlock;
+    }
+
+    public function getProduct(): ?ProductInterface
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?ProductInterface $product): void
+    {
+        $this->product = $product;
     }
 }

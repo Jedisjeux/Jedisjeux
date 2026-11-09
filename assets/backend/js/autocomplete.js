@@ -2,6 +2,11 @@
 const escapeHtml = (text) => String(text).replace(/[&<>"']/g, (char) => `&#${char.charCodeAt(0)};`);
 
 const initAutocomplete = (container) => {
+  if (container.dataset.autocompleteReady) {
+    return;
+  }
+
+  container.dataset.autocompleteReady = '1';
   const { searchUrl, initUrl, choiceName, choiceValue, createUrl } = container.dataset;
   const multiple = container.dataset.multiple === '1';
   const hiddenInput = container.querySelector('input[type="hidden"]');
@@ -112,4 +117,9 @@ const initAutocomplete = (container) => {
 
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-app-autocomplete]').forEach(initAutocomplete);
+});
+
+// Items added from a collection prototype, such as the blocks of an article
+document.addEventListener('app:form-collection:item-added', (event) => {
+  event.target.querySelectorAll('[data-app-autocomplete]').forEach(initAutocomplete);
 });

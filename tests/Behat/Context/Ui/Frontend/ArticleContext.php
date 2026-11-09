@@ -150,6 +150,17 @@ final class ArticleContext implements Context
     }
 
     /**
+     * @Then /^I should see (product "[^"]+") presented in the "([^"]+)" block$/
+     */
+    public function iShouldSeeProductPresentedInBlock(ProductInterface $product, string $blockTitle): void
+    {
+        $link = $this->showPage->getBlockGameLink($blockTitle, $product->getName());
+
+        Assert::notNull($link, sprintf('The "%s" block does not present the "%s" game.', $blockTitle, $product->getName()));
+        Assert::endsWith((string) $link->getAttribute('href'), '/'.$product->getSlug());
+    }
+
+    /**
      * @Then /^I should be able to see (this article)'s details$/
      */
     public function iShouldBeAbleToSeeArticleDetails(Article $article)

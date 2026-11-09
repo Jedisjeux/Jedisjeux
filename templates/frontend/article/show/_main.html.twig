@@ -12,7 +12,29 @@
             {{ self.show_block_image(block.image, block.imagePosition) }}
         {% endif %}
         {{ block.body|raw }}
+        {% if block.product is not null %}
+            {{ self.show_block_product(block.product) }}
+        {% endif %}
     </section>
+{% endmacro %}
+
+{% macro show_block_product(product) %}
+    {% from 'macro/icon.html.twig' import icon %}
+    {% from 'macro/product.html.twig' import duration, playerCount %}
+
+    {% set productPath = path('sylius_frontend_product_show', {'slug': product.slug}) %}
+
+    <aside class="editorial-block-game" aria-label="Le jeu : {{ product.name }}">
+        <a class="editorial-block-game__name" href="{{ productPath }}">{{ icon('dice') }}{{ product.name }}</a>
+        {% if product.minPlayerCount or product.minAge or product.minDuration %}
+            <ul class="editorial-block-game__facts">
+                {% if product.minPlayerCount %}<li>{{ icon('user') }}{{ playerCount(product) }}</li>{% endif %}
+                {% if product.minAge %}<li>{{ icon('age') }}{{ product.minAge }}+</li>{% endif %}
+                {% if product.minDuration %}<li>{{ icon('clock') }}{{ duration(product) }}</li>{% endif %}
+            </ul>
+        {% endif %}
+        <a class="editorial-block-game__link" href="{{ productPath }}">Voir la fiche{{ icon('arrow-right') }}</a>
+    </aside>
 {% endmacro %}
 
 {% macro show_block_image(image, position) %}

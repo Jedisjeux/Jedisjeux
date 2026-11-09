@@ -13,6 +13,7 @@ namespace App\Form\Type;
 
 use App\Entity\Block;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductAutocompleteChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -61,6 +62,10 @@ class BlockType extends AbstractType
             ->add('body', CKEditorType::class, [
                 'label' => 'sylius.ui.body',
                 'config_name' => 'article',
+                'required' => false,
+            ])
+            ->add('product', ProductAutocompleteChoiceType::class, [
+                'label' => 'app.ui.linked_game',
                 'required' => false,
             ])
             ->add('position', HiddenType::class, [

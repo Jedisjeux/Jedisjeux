@@ -72,6 +72,17 @@ class ShowPage extends SymfonyPage
         return null !== $this->getDocument()->find('css', sprintf('#latest-articles .editorial-mini-articles strong:contains("%s")', $title));
     }
 
+    public function getBlockGameLink(string $blockTitle, string $productName): ?NodeElement
+    {
+        foreach ($this->getDocument()->findAll('css', '.editorial-article-block') as $block) {
+            if ($blockTitle === $block->find('css', 'h2')?->getText()) {
+                return $block->find('css', sprintf('.editorial-block-game__name:contains("%s")', $productName));
+            }
+        }
+
+        return null;
+    }
+
     /**
      * {@inheritdoc}
      */
