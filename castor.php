@@ -84,6 +84,53 @@ function deploy(): void
     ], context: context()->withTty()->withTimeout(null));
 }
 
+#[AsTask(description: 'Serve the documentation with live reload and open it in the browser', namespace: 'docs')]
+function open(int $port = 4321): void
+{
+    $url = 'http://localhost:' . $port;
+
+    // Opens the browser once the dev server answers, the server keeps the terminal
+    $browser = new Process(['sh', '-c', \sprintf(
+        'until curl -s -o /dev/null %1$s; do sleep 1; done; %2$s %1$s',
+        $url,
+        'Darwin' === \PHP_OS_FAMILY ? 'open' : 'xdg-open',
+    )]);
+    $browser->setTimeout(null);
+    $browser->start();
+
+    docs_npm('run dev -- --host 0.0.0.0 --port 4321', ['-p', $port . ':4321']);
+
+    $browser->stop();
+}
+
+#[AsTask(description: 'Build the documentation as a static site in docs/dist', namespace: 'docs')]
+function build(): int
+{
+    return docs_npm('run build');
+}
+
+/**
+ * Node runs inside Docker (no Node needed on your machine), node_modules stays in a volume for the Linux binaries.
+ *
+ * @param list<string> $dockerOptions
+ */
+function docs_npm(string $command, array $dockerOptions = []): int
+{
+    $tty = Process::isTtySupported();
+
+    return run([
+        'docker', 'run', '--rm', ...($tty ? ['-it'] : []),
+        '-v', __DIR__ . '/docs:/docs',
+        '-v', 'jedisjeux-docs-node-modules:/docs/node_modules',
+        '-w', '/docs',
+        '-e', 'NPM_CONFIG_UPDATE_NOTIFIER=false',
+        '-e', 'ASTRO_TELEMETRY_DISABLED=1',
+        ...$dockerOptions,
+        'node:24-alpine',
+        'sh', '-c', 'npm ci --no-audit --no-fund --loglevel=error && npm ' . $command,
+    ], context: context()->withTty($tty)->withTimeout(null)->withAllowFailure())->getExitCode();
+}
+
 #[AsTask(description: 'Run Behat scenarios in the app container, next to the headless Chrome', namespace: 'test')]
 function behat(#[AsRawTokens] array $args = []): int
 {

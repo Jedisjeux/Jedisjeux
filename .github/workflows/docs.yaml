@@ -1,0 +1,68 @@
+name: Docs
+
+on:
+  push:
+    branches: [main]
+    paths: ['docs/**', '.github/workflows/docs.yaml']
+  pull_request:
+    paths: ['docs/**', '.github/workflows/docs.yaml']
+  workflow_dispatch: ~
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # The tasks reach the containers directly, the global Caddy router is not needed
+  CASTOR_DOCKER_ROUTER_AUTOSTART: 0
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    name: "Build the documentation"
+
+    steps:
+      -
+        uses: actions/checkout@v4
+
+      -
+        name: Setup Castor
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          tools: castor
+          coverage: none
+
+      -
+        name: Build
+        run: castor docs:build
+
+      -
+        name: Upload the site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/dist
+        if: github.ref == 'refs/heads/main'
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+
+    runs-on: ubuntu-latest
+
+    name: "Deploy to GitHub Pages"
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      -
+        name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
