@@ -16,17 +16,11 @@ use App\Entity\ProductInterface;
 
 class ReviewCountByProductUpdater
 {
-    /**
-     * @var ReviewCountByProductCalculator
-     */
-    private $calculator;
-
-    public function __construct(ReviewCountByProductCalculator $calculator)
+    public function __construct(private ReviewCountByProductCalculator $calculator)
     {
-        $this->calculator = $calculator;
     }
 
-    public function update(ProductInterface $product)
+    public function update(ProductInterface $product): void
     {
         $ratingCount = $this->calculator->calculate($product);
         $product->setReviewCount($ratingCount);

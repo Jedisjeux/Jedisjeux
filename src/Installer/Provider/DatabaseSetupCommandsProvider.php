@@ -20,20 +20,14 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProviderInterface
 {
-    /**
-     * @var Registry
-     */
-    private $doctrineRegistry;
-
-    public function __construct(Registry $doctrineRegistry)
+    public function __construct(private Registry $doctrineRegistry)
     {
-        $this->doctrineRegistry = $doctrineRegistry;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper)
+    public function getCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
     {
         if (!$this->isDatabasePresent()) {
             return [
@@ -56,7 +50,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
      *
      * @throws \Exception
      */
-    private function isDatabasePresent()
+    private function isDatabasePresent(): bool
     {
         $databaseName = $this->getDatabaseName();
 
@@ -81,7 +75,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     /**
      * @return array
      */
-    private function getRequiredCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper)
+    private function getRequiredCommands(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
     {
         if ($input->getOption('no-interaction')) {
             $commands['doctrine:schema:update'] = ['--force' => true];
@@ -93,7 +87,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     /**
      * @return array
      */
-    private function setupDatabase(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper)
+    private function setupDatabase(InputInterface $input, OutputInterface $output, QuestionHelper $questionHelper): array
     {
         $question = new ConfirmationQuestion('It appears that your database already exists. Would you like to reset it? (y/N) ', false);
         if ($questionHelper->ask($input, $output, $question)) {
@@ -124,7 +118,7 @@ final class DatabaseSetupCommandsProvider implements DatabaseSetupCommandsProvid
     /**
      * @return bool
      */
-    private function isSchemaPresent()
+    private function isSchemaPresent(): bool
     {
         return 0 !== count($this->getSchemaManager()->listTableNames());
     }

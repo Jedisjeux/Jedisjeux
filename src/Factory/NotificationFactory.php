@@ -29,11 +29,6 @@ use Symfony\Component\Translation\Translator;
 class NotificationFactory implements FactoryInterface
 {
     /**
-     * @var string
-     */
-    private $className;
-
-    /**
      * @var Router
      */
     protected $router;
@@ -43,9 +38,8 @@ class NotificationFactory implements FactoryInterface
      */
     protected $translator;
 
-    public function __construct(string $className)
+    public function __construct(private string $className)
     {
-        $this->className = $className;
     }
 
     /**
@@ -101,7 +95,7 @@ class NotificationFactory implements FactoryInterface
     /**
      * @return int
      */
-    protected function calculateTopicNbPages(Topic $topic)
+    protected function calculateTopicNbPages(Topic $topic): int
     {
         return (int) ceil($topic->getPostCount() / 10);
     }
@@ -157,7 +151,7 @@ class NotificationFactory implements FactoryInterface
     /**
      * @param Router $router
      */
-    public function setRouter($router)
+    public function setRouter($router): void
     {
         $this->router = $router;
     }
@@ -165,7 +159,7 @@ class NotificationFactory implements FactoryInterface
     /**
      * @param Translator $translator
      */
-    public function setTranslator($translator)
+    public function setTranslator($translator): void
     {
         $this->translator = $translator;
     }

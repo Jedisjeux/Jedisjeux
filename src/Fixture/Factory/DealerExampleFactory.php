@@ -15,6 +15,8 @@ use App\Entity\Dealer;
 use App\Entity\DealerImage;
 use App\Fixture\OptionsResolver\LazyOption;
 use App\Formatter\StringInflector;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,34 +27,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class DealerExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    protected $dealerFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    protected $dealerImageFactory;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     /**
      * DealerExampleFactory constructor.
      */
-    public function __construct(FactoryInterface $dealerFactory, FactoryInterface $dealerImageFactory)
-    {
-        $this->dealerFactory = $dealerFactory;
-        $this->dealerImageFactory = $dealerImageFactory;
-
-        $this->faker = \Faker\Factory::create('fr_FR');
+    public function __construct(
+        protected FactoryInterface $dealerFactory,
+        protected FactoryInterface $dealerImageFactory
+    ) {
+        $this->faker = Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -77,7 +65,7 @@ class DealerExampleFactory extends AbstractExampleFactory implements ExampleFact
         return $dealer;
     }
 
-    private function createImage(Dealer $dealer, array $options)
+    private function createImage(Dealer $dealer, array $options): void
     {
         $imagePath = $options['image'];
         /** @var DealerImage $dealerImage */
@@ -95,11 +83,11 @@ class DealerExampleFactory extends AbstractExampleFactory implements ExampleFact
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('name', function (Options $options) {
+            ->setDefault('name', function (Options $options): string {
                 return ucfirst($this->faker->words(3, true));
             })
 
-            ->setDefault('code', function (Options $options) {
+            ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);
             })
 

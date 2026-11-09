@@ -30,48 +30,16 @@ use Symfony\Component\Filesystem\Filesystem;
 #[AsCommand(name: 'app:load-product-files')]
 class LoadProductFilesCommand extends Command
 {
-    /**
-     * {@inheritdoc}
-     */
-    /** @var ObjectManager */
-    private $objectManager;
-
-    /* @var Connection */
-    private $connection;
-
-    /* @var FactoryInterface */
-    private $productFileFactory;
-
-    /** @var RepositoryInterface */
-    private $productFileRepository;
-
-    /** @var RepositoryInterface */
-    private $productVariantRepository;
-
-    /** @var RepositoryInterface */
-    private $customerRepository;
-
-    /** @var string */
-    private $uploadDestination;
-
     public function __construct(
-        ObjectManager $objectManager,
-        Connection $connection,
-        FactoryInterface $productFileFactory,
-        RepositoryInterface $productFileRepository,
-        RepositoryInterface $productVariantRepository,
-        RepositoryInterface $customerRepository,
-        string $uploadDestination
+        private ObjectManager $objectManager,
+        private Connection $connection,
+        private FactoryInterface $productFileFactory,
+        private RepositoryInterface $productFileRepository,
+        private RepositoryInterface $productVariantRepository,
+        private RepositoryInterface $customerRepository,
+        private string $uploadDestination
     ) {
         parent::__construct();
-
-        $this->objectManager = $objectManager;
-        $this->connection = $connection;
-        $this->productFileFactory = $productFileFactory;
-        $this->productFileRepository = $productFileRepository;
-        $this->productVariantRepository = $productVariantRepository;
-        $this->customerRepository = $customerRepository;
-        $this->uploadDestination = $uploadDestination;
 
         $fileSystem = new Filesystem();
         $fileSystem->mkdir($this->uploadDestination);

@@ -15,7 +15,6 @@ use App\Entity\Article;
 use App\Entity\GamePlay;
 use App\Entity\Post;
 use App\Entity\Topic;
-use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -26,36 +25,12 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 class TopicFactory implements FactoryInterface
 {
-    /**
-     * @var string
-     */
-    private $className;
-
-    /**
-     * @var CustomerContextInterface
-     */
-    protected $customerContext;
-
-    /**
-     * @var EntityRepository
-     */
-    protected $gamePlayRepository;
-
-    /**
-     * @var FactoryInterface
-     */
-    protected $postFactory;
-
     public function __construct(
-        string $className,
-        CustomerContextInterface $customerContext,
-        RepositoryInterface $gamePlayRepository,
-        FactoryInterface $postFactory
+        private string $className,
+        protected CustomerContextInterface $customerContext,
+        protected RepositoryInterface $gamePlayRepository,
+        protected FactoryInterface $postFactory
     ) {
-        $this->className = $className;
-        $this->customerContext = $customerContext;
-        $this->gamePlayRepository = $gamePlayRepository;
-        $this->postFactory = $postFactory;
     }
 
     /**

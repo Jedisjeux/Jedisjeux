@@ -82,7 +82,7 @@ class ProductVariantType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return 'sylius_product_variant';
     }

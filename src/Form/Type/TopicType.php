@@ -34,7 +34,7 @@ class TopicType extends AbstractType
     /**
      * @param CustomerContextInterface $authorizationChecker
      */
-    public function setAuthorizationChecker(AuthorizationCheckerInterface $authorizationChecker)
+    public function setAuthorizationChecker(AuthorizationCheckerInterface $authorizationChecker): void
     {
         $this->authorizationChecker = $authorizationChecker;
     }
@@ -57,7 +57,7 @@ class TopicType extends AbstractType
             ])
             ->add('mainTaxon', EntityType::class, [
                 'label' => 'sylius.ui.category',
-                'class' => \App\Entity\Taxon::class,
+                'class' => Taxon::class,
                 'group_by' => 'parent',
                 'query_builder' => function (EntityRepository $er) use ($onlyPublic) {
                     $queryBuilder = $er->createQueryBuilder('o')

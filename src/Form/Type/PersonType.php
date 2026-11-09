@@ -36,7 +36,7 @@ class PersonType extends AbstractType
             ])
             ->add('zone', EntityType::class, [
                 'label' => 'label.zone',
-                'class' => \App\Entity\Taxon::class,
+                'class' => Taxon::class,
                 'group_by' => 'parent',
                 'choice_label' => 'name',
                 'query_builder' => function (EntityRepository $er) {

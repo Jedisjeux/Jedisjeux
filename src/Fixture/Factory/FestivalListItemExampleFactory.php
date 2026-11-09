@@ -14,6 +14,8 @@ namespace App\Fixture\Factory;
 use App\Entity\FestivalList;
 use App\Entity\FestivalListItem;
 use App\Fixture\OptionsResolver\LazyOption;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -26,40 +28,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class FestivalListItemExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    private $festivalListItemFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $productRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $festivalListRepository;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $festivalListItemFactory,
-        RepositoryInterface $productRepository,
-        RepositoryInterface $festivalListRepository
+        private FactoryInterface $festivalListItemFactory,
+        private RepositoryInterface $productRepository,
+        private RepositoryInterface $festivalListRepository
     ) {
-        $this->festivalListItemFactory = $festivalListItemFactory;
-        $this->productRepository = $productRepository;
-        $this->festivalListRepository = $festivalListRepository;
-
-        $this->faker = \Faker\Factory::create('fr_FR');
+        $this->faker = Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);

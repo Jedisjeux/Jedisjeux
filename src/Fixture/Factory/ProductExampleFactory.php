@@ -16,6 +16,8 @@ use App\Entity\ProductVariant;
 use App\Entity\ProductVariantImage;
 use App\Fixture\OptionsResolver\LazyOption;
 use App\Formatter\StringInflector;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -31,54 +33,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ProductExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var ProductFactoryInterface
-     */
-    private $productFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $productVariantImageFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    protected $personRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    protected $taxonRepository;
-
-    /**
-     * @var SlugGeneratorInterface
-     */
-    private $slugGenerator;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
-        ProductFactoryInterface $productFactory,
-        FactoryInterface $productVariantImageFactory,
-        RepositoryInterface $personRepository,
-        RepositoryInterface $taxonRepository,
-        SlugGeneratorInterface $slugGenerator
+        private ProductFactoryInterface $productFactory,
+        private FactoryInterface $productVariantImageFactory,
+        protected RepositoryInterface $personRepository,
+        protected RepositoryInterface $taxonRepository,
+        private SlugGeneratorInterface $slugGenerator
     ) {
-        $this->productFactory = $productFactory;
-        $this->productVariantImageFactory = $productVariantImageFactory;
-        $this->personRepository = $personRepository;
-        $this->taxonRepository = $taxonRepository;
-        $this->slugGenerator = $slugGenerator;
-
-        $this->faker = \Faker\Factory::create('fr_FR');
+        $this->faker = Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -138,7 +106,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         return $product;
     }
 
-    private function createImages(Product $product, array $options)
+    private function createImages(Product $product, array $options): void
     {
         $first = true;
 
@@ -179,11 +147,11 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('name', function (Options $options) {
+            ->setDefault('name', function (Options $options): string {
                 return ucfirst($this->faker->words(3, true));
             })
 
-            ->setDefault('code', function (Options $options) {
+            ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);
             })
 
@@ -217,15 +185,15 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
                 return $this->faker->randomElement([30, 45, 60, 90, 180]);
             })
 
-            ->setDefault('short_description', function (Options $options) {
+            ->setDefault('short_description', function (Options $options): string {
                 return '<p>'.implode('</p><p>', $this->faker->paragraphs(2)).'</p>';
             })
 
-            ->setDefault('description', function (Options $options) {
+            ->setDefault('description', function (Options $options): string {
                 return '<p>'.implode('</p><p>', $this->faker->paragraphs(5)).'</p>';
             })
 
-            ->setDefault('box_content', function (Options $options) {
+            ->setDefault('box_content', function (Options $options): string {
                 $itemCount = $this->faker->numberBetween(5, 10);
 
                 $boxContentList = [];

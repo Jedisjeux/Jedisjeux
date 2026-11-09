@@ -71,7 +71,7 @@ class ProductListItem implements ResourceInterface
     /**
      * @var ProductInterface
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class, inversedBy: 'listItems')]
+    #[ORM\ManyToOne(targetEntity: ProductInterface::class, inversedBy: 'listItems')]
     protected $product;
 
     public function getList(): ?ProductList

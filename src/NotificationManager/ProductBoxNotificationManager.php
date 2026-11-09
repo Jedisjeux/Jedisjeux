@@ -12,8 +12,6 @@
 namespace App\NotificationManager;
 
 use App\Entity\ProductBox;
-use App\Factory\NotificationFactory;
-use App\Repository\UserRepository;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Model\UserInterface;
@@ -23,46 +21,19 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProductBoxNotificationManager
 {
-    /**
-     * @var UserRepositoryInterface|UserRepository
-     */
-    private $userRepository;
-
-    /**
-     * @var FactoryInterface|NotificationFactory
-     */
-    private $notificationFactory;
-
-    /**
-     * @var RouterInterface
-     */
-    private $router;
-
-    /**
-     * @var TranslatorInterface
-     */
-    private $translator;
-
-    /**
-     * @var ObjectManager
-     */
-    private $manager;
+    private UserRepositoryInterface $userRepository;
 
     public function __construct(
         UserRepositoryInterface $appUserRepository,
-        FactoryInterface $notificationFactory,
-        RouterInterface $router,
-        TranslatorInterface $translator,
-        ObjectManager $manager
+        private FactoryInterface $notificationFactory,
+        private RouterInterface $router,
+        private TranslatorInterface $translator,
+        private ObjectManager $manager
     ) {
         $this->userRepository = $appUserRepository;
-        $this->notificationFactory = $notificationFactory;
-        $this->router = $router;
-        $this->translator = $translator;
-        $this->manager = $manager;
     }
 
-    public function notifyModerators(ProductBox $productBox)
+    public function notifyModerators(ProductBox $productBox): void
     {
         /** @var UserInterface[] $users */
         $users = $this->userRepository->findByRole('ROLE_MODERATOR');
@@ -81,7 +52,7 @@ class ProductBoxNotificationManager
         );
     }
 
-    public function notifyAuthor(ProductBox $productBox)
+    public function notifyAuthor(ProductBox $productBox): void
     {
         if (null === $author = $productBox->getAuthor()) {
             return;
@@ -106,7 +77,7 @@ class ProductBoxNotificationManager
     /**
      * @param string $message
      */
-    private function notifyUsers($message, ProductBox $productBox, string $target, array $users)
+    private function notifyUsers(string $message, ProductBox $productBox, string $target, array $users): void
     {
         foreach ($users as $user) {
             $notification = $this->notificationFactory->createForProductBox($productBox, $user->getCustomer());

@@ -12,6 +12,8 @@
 namespace App\Fixture\Factory;
 
 use App\Fixture\OptionsResolver\LazyOption;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Review\Factory\ReviewFactoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -21,40 +23,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ArticleReviewExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var ReviewFactoryInterface
-     */
-    private $articleReviewFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $articleRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $customerRepository;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
-        ReviewFactoryInterface $articleReviewFactory,
-        RepositoryInterface $articleRepository,
-        RepositoryInterface $customerRepository
+        private ReviewFactoryInterface $articleReviewFactory,
+        private RepositoryInterface $articleRepository,
+        private RepositoryInterface $customerRepository
     ) {
-        $this->articleReviewFactory = $articleReviewFactory;
-        $this->articleRepository = $articleRepository;
-        $this->customerRepository = $customerRepository;
-
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);

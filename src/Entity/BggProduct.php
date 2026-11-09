@@ -16,67 +16,55 @@ class BggProduct
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var string|null
      */
-    private $imagePath;
+    private ?string $imagePath = null;
 
     /**
      * @var string|null
      */
-    private $releasedAtYear;
+    private ?string $releasedAtYear = null;
 
     /**
      * @var string|null
      */
-    private $minDuration;
+    private ?string $minDuration = null;
 
     /**
      * @var string|null
      */
-    private $maxDuration;
+    private ?string $maxDuration = null;
 
     /**
      * @var string|null
      */
-    private $age;
+    private ?string $age = null;
 
     /**
      * @var string|null
      */
-    private $minPlayerCount;
+    private ?string $minPlayerCount = null;
 
     /**
      * @var string|null
      */
-    private $maxPlayerCount;
+    private ?string $maxPlayerCount = null;
 
     /**
      * @var string|null
      */
-    private $description;
+    private ?string $description = null;
 
-    /**
-     * @var array
-     */
-    private $mechanisms = [];
+    private array $mechanisms = [];
 
-    /**
-     * @var array
-     */
-    private $designers = [];
+    private array $designers = [];
 
-    /**
-     * @var array
-     */
-    private $artists = [];
+    private array $artists = [];
 
-    /**
-     * @var array
-     */
-    private $publishers = [];
+    private array $publishers = [];
 
     public function getName(): string
     {
@@ -178,7 +166,7 @@ class BggProduct
         return in_array($mechanism, $this->mechanisms, true);
     }
 
-    public function addMechanism(string $mechanism)
+    public function addMechanism(string $mechanism): void
     {
         if (!$this->hasMechanism($mechanism)) {
             $this->mechanisms[] = $mechanism;
@@ -203,7 +191,7 @@ class BggProduct
         return in_array($designer, $this->designers, true);
     }
 
-    public function addDesigner(string $designer)
+    public function addDesigner(string $designer): void
     {
         if (!$this->hasDesigner($designer)) {
             $this->designers[] = $designer;
@@ -228,7 +216,7 @@ class BggProduct
         return in_array($artist, $this->artists, true);
     }
 
-    public function addArtist(string $artist)
+    public function addArtist(string $artist): void
     {
         if (!$this->hasArtist($artist)) {
             $this->artists[] = $artist;
@@ -253,7 +241,7 @@ class BggProduct
         return in_array($publisher, $this->publishers, true);
     }
 
-    public function addPublisher(string $publisher)
+    public function addPublisher(string $publisher): void
     {
         if (!$this->hasPublisher($publisher)) {
             $this->publishers[] = $publisher;

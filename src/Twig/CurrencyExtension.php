@@ -5,17 +5,13 @@ declare(strict_types=1);
 namespace App\Twig;
 
 use App\Templating\Helper\CurrencyHelperInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-final class CurrencyExtension extends \Twig\Extension\AbstractExtension
+final class CurrencyExtension extends AbstractExtension
 {
-    /**
-     * @var CurrencyHelperInterface
-     */
-    private $helper;
-
-    public function __construct(CurrencyHelperInterface $helper)
+    public function __construct(private CurrencyHelperInterface $helper)
     {
-        $this->helper = $helper;
     }
 
     /**
@@ -24,7 +20,7 @@ final class CurrencyExtension extends \Twig\Extension\AbstractExtension
     public function getFilters(): array
     {
         return [
-            new \Twig\TwigFilter('sylius_currency_symbol', [$this->helper, 'convertCurrencyCodeToSymbol']),
+            new TwigFilter('sylius_currency_symbol', [$this->helper, 'convertCurrencyCodeToSymbol']),
         ];
     }
 }

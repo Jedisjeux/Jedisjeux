@@ -19,22 +19,16 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class ProductGuard
 {
     /**
-     * @var AuthorizationCheckerInterface
-     */
-    protected $authorizationChecker;
-
-    /**
      * ArticleGuard constructor.
      */
-    public function __construct(AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(protected AuthorizationCheckerInterface $authorizationChecker)
     {
-        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
      * @return bool
      */
-    public function canAskForPublication()
+    public function canAskForPublication(): bool
     {
         return $this->authorizationChecker->isGranted('ROLE_REVIEWER');
     }
@@ -42,7 +36,7 @@ class ProductGuard
     /**
      * @return bool
      */
-    public function canPublish()
+    public function canPublish(): bool
     {
         return $this->authorizationChecker->isGranted('ROLE_PUBLISHER');
     }

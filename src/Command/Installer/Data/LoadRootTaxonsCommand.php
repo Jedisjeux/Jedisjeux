@@ -79,7 +79,7 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
     /**
      * @return TaxonSlugGeneratorInterface|object
      */
-    protected function getTaxonSlugGenerator()
+    protected function getTaxonSlugGenerator(): ?object
     {
         return $this->getContainer()->get('sylius.generator.taxon_slug');
     }
@@ -87,7 +87,7 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
     /**
      * @return array
      */
-    protected function getRootTaxons()
+    protected function getRootTaxons(): array
     {
         return [
             [
@@ -123,7 +123,7 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
     /**
      * @return Factory
      */
-    protected function getFactory()
+    protected function getFactory(): ?object
     {
         return $this->getContainer()->get('sylius.factory.taxon');
     }
@@ -131,7 +131,7 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
     /**
      * @return EntityRepository
      */
-    protected function getRepository()
+    protected function getRepository(): ?object
     {
         return $this->getContainer()->get('sylius.repository.taxon');
     }
@@ -139,7 +139,7 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
     /**
      * @return EntityManager
      */
-    protected function getManager()
+    protected function getManager(): ?object
     {
         return $this->getContainer()->get('doctrine.orm.entity_manager');
     }

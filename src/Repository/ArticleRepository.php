@@ -13,9 +13,12 @@ namespace App\Repository;
 
 use App\Entity\Article;
 use App\Entity\Product;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
+use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
@@ -236,7 +239,7 @@ class ArticleRepository extends EntityRepository
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator(?array $criteria = null, ?array $sorting = null, $status = Article::STATUS_PUBLISHED)
+    public function createFilterPaginator(?array $criteria = null, ?array $sorting = null, $status = Article::STATUS_PUBLISHED): PagerfantaInterface
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
@@ -293,7 +296,7 @@ class ArticleRepository extends EntityRepository
      *
      * @return Pagerfanta
      */
-    public function createByTaxonPaginator(TaxonInterface $taxon, ?array $criteria = null, ?array $sorting = null, $status = Article::STATUS_PUBLISHED)
+    public function createByTaxonPaginator(TaxonInterface $taxon, ?array $criteria = null, ?array $sorting = null, $status = Article::STATUS_PUBLISHED): PagerfantaInterface
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
@@ -324,8 +327,8 @@ class ArticleRepository extends EntityRepository
     /**
      * @return int
      *
-     * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function findNbResults()
     {

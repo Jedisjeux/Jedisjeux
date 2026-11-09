@@ -93,7 +93,7 @@ class ProductList implements ResourceInterface
     /**
      * @var CustomerInterface
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
+    #[ORM\ManyToOne(targetEntity: CustomerInterface::class)]
     #[ORM\JoinColumn(nullable: false)]
     protected $owner;
 

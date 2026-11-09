@@ -13,6 +13,8 @@ namespace App\Fixture\Factory;
 
 use App\Entity\ProductVideo;
 use App\Fixture\OptionsResolver\LazyOption;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -22,31 +24,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ProductVideoExampleFixture extends AbstractExampleFactory
 {
     /**
-     * @var FactoryInterface
-     */
-    private $productVideoFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $productRepository;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
-    public function __construct(FactoryInterface $productVideoFactory, RepositoryInterface $productRepository)
-    {
-        $this->productVideoFactory = $productVideoFactory;
-        $this->productRepository = $productRepository;
-
-        $this->faker = \Faker\Factory::create();
+    public function __construct(
+        private FactoryInterface $productVideoFactory,
+        private RepositoryInterface $productRepository
+    ) {
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -58,7 +46,7 @@ class ProductVideoExampleFixture extends AbstractExampleFactory
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('title', function (Options $options) {
+            ->setDefault('title', function (Options $options): string {
                 return ucfirst($this->faker->unique()->words(3, true));
             })
 

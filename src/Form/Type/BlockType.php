@@ -97,7 +97,7 @@ class BlockType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'app_block';
     }

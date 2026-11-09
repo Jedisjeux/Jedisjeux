@@ -11,40 +11,26 @@
 
 namespace App\Fixture;
 
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ForumTopicFixture extends AbstractFixture
 {
-    /**
-     * @var AbstractResourceFixture
-     */
-    private $taxonFixture;
+    private OptionsResolver $optionsResolver;
 
     /**
-     * @var AbstractResourceFixture
-     */
-    private $topicFixture;
-
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
     public function __construct(
-        AbstractResourceFixture $taxonFixture,
-        AbstractResourceFixture $topicFixture
+        private AbstractResourceFixture $taxonFixture,
+        private AbstractResourceFixture $topicFixture
     ) {
-        $this->taxonFixture = $taxonFixture;
-        $this->topicFixture = $topicFixture;
-
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver =
             (new OptionsResolver())
                 ->setRequired('amount')

@@ -16,6 +16,8 @@ namespace App\Fixture\Factory;
 use App\Entity\Taxon;
 use App\Fixture\OptionsResolver\LazyOption;
 use App\Formatter\StringInflector;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -26,40 +28,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    private $taxonFactory;
-
-    /**
-     * @var TaxonRepositoryInterface
-     */
-    private $taxonRepository;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var TaxonSlugGeneratorInterface
-     */
-    private $taxonSlugGenerator;
-
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $taxonFactory,
-        TaxonRepositoryInterface $taxonRepository,
-        TaxonSlugGeneratorInterface $taxonSlugGenerator
+        private FactoryInterface $taxonFactory,
+        private TaxonRepositoryInterface $taxonRepository,
+        private TaxonSlugGeneratorInterface $taxonSlugGenerator
     ) {
-        $this->taxonFactory = $taxonFactory;
-        $this->taxonRepository = $taxonRepository;
-        $this->taxonSlugGenerator = $taxonSlugGenerator;
-
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -122,7 +102,7 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
                 return $this->faker->words(3, true);
             })
 
-            ->setDefault('code', function (Options $options) {
+            ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['name']);
             })
 

@@ -24,22 +24,10 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 class PostFactory implements FactoryInterface
 {
     /**
-     * @var string
-     */
-    private $className;
-
-    /**
-     * @var CustomerContextInterface
-     */
-    protected $customerContext;
-
-    /**
      * @param string $className
      */
-    public function __construct($className, CustomerContextInterface $customerContext)
+    public function __construct(private $className, protected CustomerContextInterface $customerContext)
     {
-        $this->className = $className;
-        $this->customerContext = $customerContext;
     }
 
     /**

@@ -14,6 +14,8 @@ namespace App\Fixture\Factory;
 use App\Entity\GameAward;
 use App\Entity\GameAwardImage;
 use App\Fixture\OptionsResolver\LazyOption;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,31 +23,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class GameAwardExampleFactory extends AbstractExampleFactory
 {
     /**
-     * @var FactoryInterface
-     */
-    private $gameAwardFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $gameAwardImageFactory;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
-    public function __construct(FactoryInterface $gameAwardFactory, FactoryInterface $gameAwardImageFactory)
-    {
-        $this->gameAwardFactory = $gameAwardFactory;
-        $this->gameAwardImageFactory = $gameAwardImageFactory;
-
-        $this->faker = \Faker\Factory::create();
+    public function __construct(
+        private FactoryInterface $gameAwardFactory,
+        private FactoryInterface $gameAwardImageFactory
+    ) {
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -57,11 +45,11 @@ class GameAwardExampleFactory extends AbstractExampleFactory
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('name', function (Options $options) {
+            ->setDefault('name', function (Options $options): string {
                 return ucfirst($this->faker->words(3, true));
             })
 
-            ->setDefault('description', function (Options $options) {
+            ->setDefault('description', function (Options $options): string {
                 return sprintf('<p>%s</p>', $this->faker->sentences(3, true));
             })
 
@@ -90,7 +78,7 @@ class GameAwardExampleFactory extends AbstractExampleFactory
         return $gameAward;
     }
 
-    private function createImage(GameAward $gameAward, array $options)
+    private function createImage(GameAward $gameAward, array $options): void
     {
         $imagePath = $options['image'];
         /** @var GameAwardImage $image */

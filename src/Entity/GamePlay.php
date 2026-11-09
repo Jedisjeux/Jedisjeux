@@ -128,28 +128,28 @@ class GamePlay implements ResourceInterface
     /**
      * @var ProductInterface
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class, inversedBy: 'gamePlays')]
+    #[ORM\ManyToOne(targetEntity: ProductInterface::class, inversedBy: 'gamePlays')]
     #[ORM\JoinColumn(nullable: false)]
     protected $product;
 
     /**
      * @var CustomerInterface
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
+    #[ORM\ManyToOne(targetEntity: CustomerInterface::class)]
     #[ORM\JoinColumn(nullable: false)]
     protected $author;
 
     /**
      * @var Topic
      */
-    #[ORM\OneToOne(targetEntity: \App\Entity\Topic::class, inversedBy: 'gamePlay')]
+    #[ORM\OneToOne(targetEntity: Topic::class, inversedBy: 'gamePlay')]
     #[ORM\JoinColumn(onDelete: 'SET NULL')]
     protected $topic;
 
     /**
      * @var ArrayCollection|GamePlayImage[]
      */
-    #[ORM\OneToMany(targetEntity: \App\Entity\GamePlayImage::class, mappedBy: 'gamePlay', cascade: ['persist', 'merge', 'remove'])]
+    #[ORM\OneToMany(targetEntity: GamePlayImage::class, mappedBy: 'gamePlay', cascade: ['persist', 'merge', 'remove'])]
     #[Assert\Valid]
     protected $images;
 
@@ -157,12 +157,12 @@ class GamePlay implements ResourceInterface
      * @var int
      */
     #[ORM\Column(type: 'integer')]
-    private $imageCount = 0;
+    private int $imageCount = 0;
 
     /**
      * @var ArrayCollection|Player[]
      */
-    #[ORM\OneToMany(targetEntity: \App\Entity\Player::class, mappedBy: 'gamePlay', cascade: ['persist', 'merge', 'remove'])]
+    #[ORM\OneToMany(targetEntity: Player::class, mappedBy: 'gamePlay', cascade: ['persist', 'merge', 'remove'])]
     protected $players;
 
     /**

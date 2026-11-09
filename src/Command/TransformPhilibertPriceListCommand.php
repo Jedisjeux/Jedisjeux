@@ -19,10 +19,7 @@ class TransformPhilibertPriceListCommand extends Command
 {
     const TMP_FILENAME = '/tmp/philibert.csv';
 
-    /**
-     * @var Filesystem
-     */
-    private $fileSystem;
+    private ?Filesystem $fileSystem = null;
 
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
@@ -59,12 +56,12 @@ EOT
         return 0;
     }
 
-    private function removeTmpFile()
+    private function removeTmpFile(): void
     {
         $this->fileSystem->remove(static::TMP_FILENAME);
     }
 
-    private function transformData(InputInterface $input)
+    private function transformData(InputInterface $input): void
     {
         $filename = $input->getArgument('filename');
 

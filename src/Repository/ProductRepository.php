@@ -16,7 +16,9 @@ use App\Entity\Product;
 use App\Entity\YearAward;
 use App\Utils\DateCalculator;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Mapping;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
@@ -31,12 +33,9 @@ use SyliusLabs\AssociationHydrator\AssociationHydrator;
  */
 class ProductRepository extends BaseProductRepository
 {
-    /**
-     * @var AssociationHydrator
-     */
-    private $associationHydrator;
+    private AssociationHydrator $associationHydrator;
 
-    public function __construct(EntityManager $entityManager, Mapping\ClassMetadata $class)
+    public function __construct(EntityManager $entityManager, ClassMetadata $class)
     {
         parent::__construct($entityManager, $class);
 
@@ -171,7 +170,7 @@ class ProductRepository extends BaseProductRepository
      *
      * @return ProductInterface|null
      *
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function findOneBySlug(string $locale, string $slug, $showUnpublished = true)
     {
@@ -270,8 +269,8 @@ class ProductRepository extends BaseProductRepository
     /**
      * @return int
      *
-     * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function findNbResults()
     {

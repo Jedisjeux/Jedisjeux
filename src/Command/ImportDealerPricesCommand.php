@@ -15,8 +15,8 @@ use App\Command\Helper\ProgressBarCreator;
 use App\Entity\Dealer;
 use App\Entity\DealerPrice;
 use App\Entity\Product;
-use App\Repository\ProductRepository;
 use Behat\Transliterator\Transliterator;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -32,50 +32,19 @@ class ImportDealerPricesCommand extends Command
 {
     private const BATCH_SIZE = 1;
 
-    /** @var FactoryInterface */
-    private $dealerPriceFactory;
+    private ?InputInterface $input = null;
 
-    /** @var RepositoryInterface */
-    private $dealerRepository;
-
-    /** @var RepositoryInterface */
-    private $dealerPriceRepository;
-
-    /** @var RepositoryInterface|ProductRepository */
-    private $productRepository;
-
-    /** @var ObjectManager */
-    private $manager;
-
-    /** @var string */
-    private $locale;
-
-    /** @var InputInterface */
-    private $input;
-
-    /** @var OutputInterface */
-    private $output;
-
-    /** @var ProgressBarCreator */
-    private $progressBarCreator;
+    private ?OutputInterface $output = null;
 
     public function __construct(
-        FactoryInterface $dealerPriceFactory,
-        RepositoryInterface $dealerRepository,
-        RepositoryInterface $dealerPriceRepository,
-        RepositoryInterface $productRepository,
-        ObjectManager $manager,
-        string $locale,
-        ProgressBarCreator $progressBarCreator
+        private FactoryInterface $dealerPriceFactory,
+        private RepositoryInterface $dealerRepository,
+        private RepositoryInterface $dealerPriceRepository,
+        private RepositoryInterface $productRepository,
+        private ObjectManager $manager,
+        private string $locale,
+        private ProgressBarCreator $progressBarCreator
     ) {
-        $this->dealerPriceFactory = $dealerPriceFactory;
-        $this->dealerRepository = $dealerRepository;
-        $this->dealerPriceRepository = $dealerPriceRepository;
-        $this->productRepository = $productRepository;
-        $this->manager = $manager;
-        $this->locale = $locale;
-        $this->progressBarCreator = $progressBarCreator;
-
         parent::__construct();
     }
 
@@ -210,7 +179,7 @@ EOT
     /**
      * @return DealerPrice
      *
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     private function createOrReplaceDealerPrice(array $data, Dealer $dealer)
     {
@@ -258,7 +227,7 @@ EOT
      *
      * @throws \Exception
      */
-    private function getCsvData()
+    private function getCsvData(): array
     {
         $filename = $this->input->getOption('filename');
         $data = [];
@@ -321,7 +290,7 @@ EOT
     /**
      * @return Product|null
      *
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     private function findOneProductByData(array $data)
     {

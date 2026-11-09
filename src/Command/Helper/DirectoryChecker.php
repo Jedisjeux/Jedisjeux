@@ -18,12 +18,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DirectoryChecker
 {
-    /** @var CommandDirectoryChecker */
-    private $commandDirectoryChecker;
-
-    public function __construct(CommandDirectoryChecker $commandDirectoryChecker)
+    public function __construct(private CommandDirectoryChecker $commandDirectoryChecker)
     {
-        $this->commandDirectoryChecker = $commandDirectoryChecker;
     }
 
     public function ensureDirectoryExistsAndIsWritable(string $directory, OutputInterface $output, string $commandName): void

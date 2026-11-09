@@ -11,6 +11,7 @@
 
 namespace App\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -21,7 +22,7 @@ use Sylius\Component\Product\Model\ProductInterface;
 class ProductListRepository extends EntityRepository
 {
     /**
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
     public function createListQueryBuilder()
     {

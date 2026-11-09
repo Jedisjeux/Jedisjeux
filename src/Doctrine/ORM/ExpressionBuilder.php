@@ -22,12 +22,8 @@ use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
  */
 final class ExpressionBuilder implements ExpressionBuilderInterface
 {
-    /** @var QueryBuilder */
-    private $queryBuilder;
-
-    public function __construct(QueryBuilder $queryBuilder)
+    public function __construct(private QueryBuilder $queryBuilder)
     {
-        $this->queryBuilder = $queryBuilder;
     }
 
     /**

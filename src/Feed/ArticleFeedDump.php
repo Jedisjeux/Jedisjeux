@@ -21,37 +21,17 @@ use Eko\FeedBundle\Service\FeedDumpService;
 class ArticleFeedDump
 {
     /**
-     * @var FeedDumpService
-     */
-    protected $feedDump;
-
-    /**
-     * @var EntityRepository
-     */
-    protected $repository;
-
-    /**
-     * @var string
-     */
-    protected $rootDir;
-
-    /**
-     * @var string
-     */
-    protected $fileName;
-
-    /**
      * ArticleFeedDump constructor.
      *
      * @param string $rootDir
      * @param string $fileName
      */
-    public function __construct(FeedDumpService $feedDump, EntityRepository $repository, $rootDir, $fileName)
-    {
-        $this->feedDump = $feedDump;
-        $this->repository = $repository;
-        $this->rootDir = $rootDir;
-        $this->fileName = $fileName;
+    public function __construct(
+        protected FeedDumpService $feedDump,
+        protected EntityRepository $repository,
+        protected $rootDir,
+        protected $fileName
+    ) {
     }
 
     public function getRootDir(): string
@@ -67,7 +47,7 @@ class ArticleFeedDump
     /**
      * Dumps article feed.
      */
-    public function dump()
+    public function dump(): void
     {
         $articles = $this->findPublishedArticles();
 

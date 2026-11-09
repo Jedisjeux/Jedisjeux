@@ -104,20 +104,20 @@ class ProductBox implements ResourceInterface
      * @var ProductVariantInterface|null
      */
     #[ORM\ManyToOne(targetEntity: ProductVariant::class, inversedBy: 'boxes')]
-    private $productVariant;
+    private ?ProductVariantInterface $productVariant = null;
 
     /**
      * @var ProductBoxImage|null
      */
     #[ORM\OneToOne(targetEntity: ProductBoxImage::class, cascade: ['persist'])]
     #[Assert\Valid]
-    private $image;
+    private ?ProductBoxImage $image = null;
 
     /**
      * @var int
      */
     #[ORM\Column(type: 'integer')]
-    private $height;
+    private ?int $height = null;
 
     /**
      * @var int|null
@@ -129,8 +129,8 @@ class ProductBox implements ResourceInterface
     /**
      * @var CustomerInterface|null
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
-    private $author;
+    #[ORM\ManyToOne(targetEntity: CustomerInterface::class)]
+    private ?CustomerInterface $author = null;
 
     public function __construct()
     {

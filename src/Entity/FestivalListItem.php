@@ -88,7 +88,7 @@ class FestivalListItem implements ResourceInterface
     /**
      * @var ProductInterface
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class)]
+    #[ORM\ManyToOne(targetEntity: ProductInterface::class)]
     protected $product;
 
     public function getList(): ?FestivalList

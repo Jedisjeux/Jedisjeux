@@ -19,14 +19,8 @@ use Doctrine\ORM\Events;
 
 class CalculateCommentedReviewCountByProductSubscriber implements EventSubscriber
 {
-    /**
-     * @var CommentedReviewCountByProductUpdater
-     */
-    protected $updater;
-
-    public function __construct(CommentedReviewCountByProductUpdater $updater)
+    public function __construct(protected CommentedReviewCountByProductUpdater $updater)
     {
-        $this->updater = $updater;
     }
 
     /**
@@ -40,17 +34,17 @@ class CalculateCommentedReviewCountByProductSubscriber implements EventSubscribe
         ];
     }
 
-    public function prePersist(LifecycleEventArgs $args)
+    public function prePersist(LifecycleEventArgs $args): void
     {
         $this->updateReviewCount($args);
     }
 
-    public function preUpdate(LifecycleEventArgs $args)
+    public function preUpdate(LifecycleEventArgs $args): void
     {
         $this->updateReviewCount($args);
     }
 
-    public function updateReviewCount(LifecycleEventArgs $args)
+    public function updateReviewCount(LifecycleEventArgs $args): void
     {
         $product = $args->getObject();
 

@@ -13,6 +13,8 @@ namespace App\Fixture\Factory;
 
 use App\Entity\ProductFile;
 use App\Fixture\OptionsResolver\LazyOption;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -23,40 +25,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ProductFileExampleFixture extends AbstractExampleFactory
 {
     /**
-     * @var FactoryInterface
-     */
-    private $productFileFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $productRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $customerRepository;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $productFileFactory,
-        RepositoryInterface $productRepository,
-        RepositoryInterface $customerRepository
+        private FactoryInterface $productFileFactory,
+        private RepositoryInterface $productRepository,
+        private RepositoryInterface $customerRepository
     ) {
-        $this->productFileFactory = $productFileFactory;
-        $this->productRepository = $productRepository;
-        $this->customerRepository = $customerRepository;
-
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -68,11 +48,11 @@ class ProductFileExampleFixture extends AbstractExampleFactory
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('title', function (Options $options) {
+            ->setDefault('title', function (Options $options): string {
                 return ucfirst($this->faker->unique()->words(3, true));
             })
 
-            ->setDefault('path', function (Options $options) {
+            ->setDefault('path', function (Options $options): string {
                 return sprintf('%s.%s', $this->faker->word, $this->faker->fileExtension);
             })
 

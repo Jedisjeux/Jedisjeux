@@ -16,17 +16,11 @@ use App\Entity\Product;
 
 class CommentedReviewCountByProductUpdater
 {
-    /**
-     * @var CommentedReviewCountByProductCalculator
-     */
-    private $calculator;
-
-    public function __construct(CommentedReviewCountByProductCalculator $calculator)
+    public function __construct(private CommentedReviewCountByProductCalculator $calculator)
     {
-        $this->calculator = $calculator;
     }
 
-    public function update(Product $product)
+    public function update(Product $product): void
     {
         $ratingCount = $this->calculator->calculate($product);
         $product->setCommentedReviewCount($ratingCount);

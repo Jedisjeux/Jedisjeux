@@ -18,20 +18,8 @@ class BggProductFactory
 {
     private const MAX_PAYLOAD_LENGTH = 1048576;
 
-    /**
-     * @var string
-     */
-    private $className;
-
-    /**
-     * @var string
-     */
-    private $baseUrl;
-
-    public function __construct(string $className, string $baseUrl)
+    public function __construct(private string $className, private string $baseUrl)
     {
-        $this->className = $className;
-        $this->baseUrl = $baseUrl;
     }
 
     public function createNew(): BggProduct
@@ -147,7 +135,7 @@ class BggProductFactory
     {
         $names = $data[$key] ?? [];
 
-        return array_filter(is_array($names) ? $names : [], function ($name) {
+        return array_filter(is_array($names) ? $names : [], function ($name): bool {
             return is_string($name) && '' !== $name;
         });
     }
@@ -157,7 +145,7 @@ class BggProductFactory
      *
      * @return string
      */
-    private function getApiUrl($url)
+    private function getApiUrl(string $url): string
     {
         preg_match('/\/(?P<gameId>\d+)/', $url, $matches);
 

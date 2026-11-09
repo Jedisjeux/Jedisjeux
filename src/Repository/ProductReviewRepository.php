@@ -11,8 +11,11 @@
 
 namespace App\Repository;
 
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
+use Pagerfanta\PagerfantaInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -97,7 +100,7 @@ class ProductReviewRepository extends EntityRepository
     }
 
     /**
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function findOneByProductSlugAndAuthor(
         string $locale,
@@ -174,7 +177,7 @@ class ProductReviewRepository extends EntityRepository
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator($criteria = [], $sorting = [])
+    public function createFilterPaginator($criteria = [], $sorting = []): PagerfantaInterface
     {
         $queryBuilder = $this->getQueryBuilder()
             ->groupBy('o.id');
@@ -211,8 +214,8 @@ class ProductReviewRepository extends EntityRepository
     /**
      * @return int
      *
-     * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function findNbResults()
     {

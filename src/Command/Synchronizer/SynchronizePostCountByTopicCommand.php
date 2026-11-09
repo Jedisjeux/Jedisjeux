@@ -25,25 +25,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[AsCommand(name: 'app:synchronize-post-count-by-topic')]
 class SynchronizePostCountByTopicCommand extends Command
 {
-    /** @var PostCountByTopicUpdater */
-    private $postCountByTopicUpdater;
-
-    /** @var TopicRepository */
-    private $topicRepository;
-
-    /** @var EntityManagerInterface */
-    private $entityManager;
-
     public function __construct(
-        PostCountByTopicUpdater $postCountByTopicUpdater,
-        TopicRepository $topicRepository,
-        EntityManagerInterface $entityManager
+        private PostCountByTopicUpdater $postCountByTopicUpdater,
+        private TopicRepository $topicRepository,
+        private EntityManagerInterface $entityManager
     ) {
         parent::__construct();
-
-        $this->postCountByTopicUpdater = $postCountByTopicUpdater;
-        $this->topicRepository = $topicRepository;
-        $this->entityManager = $entityManager;
     }
 
     /**

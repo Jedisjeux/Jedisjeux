@@ -14,6 +14,8 @@ namespace App\Fixture\Factory;
 use App\Entity\ProductList;
 use App\Entity\ProductListItem;
 use App\Fixture\OptionsResolver\LazyOption;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -26,47 +28,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ProductListExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    private $productListFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $productListItemFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    protected $customerRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $productRepository;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $productListFactory,
-        FactoryInterface $productListItemFactory,
-        RepositoryInterface $customerRepository,
-        RepositoryInterface $productRepository
+        private FactoryInterface $productListFactory,
+        private FactoryInterface $productListItemFactory,
+        protected RepositoryInterface $customerRepository,
+        private RepositoryInterface $productRepository
     ) {
-        $this->productListFactory = $productListFactory;
-        $this->productListItemFactory = $productListItemFactory;
-        $this->customerRepository = $customerRepository;
-        $this->productRepository = $productRepository;
-
-        $this->faker = \Faker\Factory::create('fr_FR');
+        $this->faker = Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -78,7 +52,7 @@ class ProductListExampleFactory extends AbstractExampleFactory implements Exampl
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('name', function (Options $options) {
+            ->setDefault('name', function (Options $options): string {
                 return ucfirst($this->faker->words(3, true));
             })
 
@@ -116,7 +90,7 @@ class ProductListExampleFactory extends AbstractExampleFactory implements Exampl
         return $productList;
     }
 
-    public function createItems(ProductList $list, array $products)
+    public function createItems(ProductList $list, array $products): void
     {
         foreach ($products as $product) {
             /** @var ProductListItem $item */

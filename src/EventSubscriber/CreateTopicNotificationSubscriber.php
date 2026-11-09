@@ -28,43 +28,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class CreateTopicNotificationSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var CustomerContextInterface
-     */
-    protected $customerContext;
-
-    /**
-     * @var NotificationFactory
-     */
-    protected $notificationFactory;
-
-    /**
-     * @var ObjectManager
-     */
-    protected $manager;
-
-    /**
-     * @var EntityRepository
-     */
-    protected $notificationRepository;
-
-    /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
-
     public function __construct(
-        CustomerContextInterface $customerContext,
-        NotificationFactory $notificationFactory,
-        ObjectManager $manager,
-        EntityRepository $notificationRepository,
-        TranslatorInterface $translator
+        protected CustomerContextInterface $customerContext,
+        protected NotificationFactory $notificationFactory,
+        protected ObjectManager $manager,
+        protected EntityRepository $notificationRepository,
+        protected TranslatorInterface $translator
     ) {
-        $this->customerContext = $customerContext;
-        $this->notificationFactory = $notificationFactory;
-        $this->manager = $manager;
-        $this->notificationRepository = $notificationRepository;
-        $this->translator = $translator;
     }
 
     /**
@@ -77,7 +47,7 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onPostCreate(GenericEvent $event)
+    public function onPostCreate(GenericEvent $event): void
     {
         /** @var Post $post */
         $post = $event->getSubject();
@@ -127,7 +97,7 @@ class CreateTopicNotificationSubscriber implements EventSubscriberInterface
     /**
      * @return CustomerInterface
      */
-    public function getCustomer()
+    public function getCustomer(): ?CustomerInterface
     {
         return $this->customerContext->getCustomer();
     }

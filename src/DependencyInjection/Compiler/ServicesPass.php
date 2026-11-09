@@ -26,7 +26,7 @@ class ServicesPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $this->processFactories($container);
         $this->processFormTypes($container);
@@ -113,7 +113,7 @@ class ServicesPass implements CompilerPassInterface
             ->addMethodCall('setAuthorizationChecker', [new Reference('security.authorization_checker')]);
     }
 
-    private function processListeners(ContainerBuilder $container)
+    private function processListeners(ContainerBuilder $container): void
     {
         $listenerPasswordUpdaterDefinition = $container->getDefinition('sylius.listener.password_updater');
         $listenerPasswordUpdaterDefinition

@@ -30,50 +30,19 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class ProductFactory extends BaseProductFactory
 {
     /**
-     * @var RepositoryInterface
-     */
-    private $personRepository;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $productVariantImageFactory;
-
-    /**
-     * @var BggProductFactory
-     */
-    private $bggProductFactory;
-
-    /**
-     * @var SlugGeneratorInterface
-     */
-    private $slugGenerator;
-
-    /**
-     * @var FactoryInterface<Person>
-     */
-    private $personFactory;
-
-    /**
      * @param BggProductFactory        $bggProductFactory,
      * @param FactoryInterface<Person> $personFactory
      */
     public function __construct(
         FactoryInterface $factory,
         FactoryInterface $variantFactory,
-        FactoryInterface $productVariantImageFactory,
-        BggProductFactory $bggProductFactory,
-        SlugGeneratorInterface $slugGenerator,
-        RepositoryInterface $personRepository,
-        FactoryInterface $personFactory
+        private FactoryInterface $productVariantImageFactory,
+        private BggProductFactory $bggProductFactory,
+        private SlugGeneratorInterface $slugGenerator,
+        private RepositoryInterface $personRepository,
+        private FactoryInterface $personFactory
     ) {
         parent::__construct($factory, $variantFactory);
-
-        $this->bggProductFactory = $bggProductFactory;
-        $this->productVariantImageFactory = $productVariantImageFactory;
-        $this->slugGenerator = $slugGenerator;
-        $this->personRepository = $personRepository;
-        $this->personFactory = $personFactory;
     }
 
     /**
@@ -81,7 +50,7 @@ class ProductFactory extends BaseProductFactory
      *
      * @return Product
      */
-    public function createFromBgg($bggPath)
+    public function createFromBgg($bggPath): Product
     {
         return $this->createFromBggProduct($this->bggProductFactory->createByPath($bggPath));
     }
@@ -91,7 +60,7 @@ class ProductFactory extends BaseProductFactory
      *
      * @return Product
      */
-    public function createFromBggPayload($payload)
+    public function createFromBggPayload($payload): Product
     {
         return $this->createFromBggProduct($this->bggProductFactory->createFromPayload((string) $payload));
     }

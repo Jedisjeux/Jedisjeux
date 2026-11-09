@@ -22,16 +22,10 @@ use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 class LiipSerializeHandler implements SubscribingHandlerInterface
 {
     /**
-     * @var CacheManager
-     */
-    protected $manager;
-
-    /**
      * LiipSerializeHandler constructor.
      */
-    public function __construct(CacheManager $manager)
+    public function __construct(protected CacheManager $manager)
     {
-        $this->manager = $manager;
     }
 
     /**

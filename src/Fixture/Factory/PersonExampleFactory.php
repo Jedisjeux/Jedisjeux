@@ -15,6 +15,8 @@ use App\Entity\Person;
 use App\Entity\PersonImage;
 use App\Fixture\OptionsResolver\LazyOption;
 use App\Formatter\StringInflector;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,33 +27,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PersonExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    private $personFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $personImageFactory;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $personFactory,
-        FactoryInterface $personImageFactory
+        private FactoryInterface $personFactory,
+        private FactoryInterface $personImageFactory
     ) {
-        $this->personFactory = $personFactory;
-        $this->personImageFactory = $personImageFactory;
-
-        $this->faker = \Faker\Factory::create('fr_FR');
+        $this->faker = Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -77,7 +63,7 @@ class PersonExampleFactory extends AbstractExampleFactory implements ExampleFact
         return $person;
     }
 
-    private function createImages(Person $person, array $options)
+    private function createImages(Person $person, array $options): void
     {
         $first = true;
 
@@ -112,7 +98,7 @@ class PersonExampleFactory extends AbstractExampleFactory implements ExampleFact
                 return $this->faker->lastName;
             })
 
-            ->setDefault('code', function (Options $options) {
+            ->setDefault('code', function (Options $options): string {
                 return StringInflector::nameToCode($options['first_name'].' '.$options['last_name']);
             })
 

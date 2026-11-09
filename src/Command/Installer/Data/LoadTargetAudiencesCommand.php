@@ -97,7 +97,7 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
     /**
      * @return TaxonSlugGeneratorInterface|object
      */
-    protected function getTaxonSlugGenerator()
+    protected function getTaxonSlugGenerator(): ?object
     {
         return $this->getContainer()->get('sylius.generator.taxon_slug');
     }
@@ -105,7 +105,7 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
     /**
      * @return string
      */
-    public function getYAMLFileName()
+    public function getYAMLFileName(): string
     {
         return $this->getContainer()->get('kernel')->getProjectDir().'/src/Resources/initialData/target_audiences.yml';
     }
@@ -115,7 +115,7 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
      *
      * @return mixed
      */
-    public function getRows()
+    public function getRows(): mixed
     {
         $yaml = new Parser();
 
@@ -125,7 +125,7 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
     /**
      * @return Factory
      */
-    public function getFactory()
+    public function getFactory(): ?object
     {
         return $this->getContainer()->get('sylius.factory.taxon');
     }
@@ -133,7 +133,7 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
     /**
      * @return TaxonRepository
      */
-    public function getRepository()
+    public function getRepository(): ?object
     {
         return $this->getContainer()->get('sylius.repository.taxon');
     }
@@ -141,7 +141,7 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
     /**
      * @return EntityManager
      */
-    public function getManager()
+    public function getManager(): ?object
     {
         return $this->getContainer()->get('sylius.manager.taxon');
     }

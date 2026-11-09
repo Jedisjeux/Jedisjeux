@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace App\Fixture\Factory;
 
 use App\ProductAssociationTypes;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -21,21 +23,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ProductAssociationTypeExampleFactory extends AbstractExampleFactory
 {
-    /** @var FactoryInterface */
-    private $productAssociationTypeFactory;
-
-    /** @var \Faker\Generator */
+    /** @var Generator */
     private $faker;
 
-    /** @var OptionsResolver */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
-        FactoryInterface $productAssociationTypeFactory
+        private FactoryInterface $productAssociationTypeFactory
     ) {
-        $this->productAssociationTypeFactory = $productAssociationTypeFactory;
-
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);
@@ -59,13 +55,13 @@ final class ProductAssociationTypeExampleFactory extends AbstractExampleFactory
     /**
      * {@inheritdoc}
      */
-    protected function configureOptions(OptionsResolver $resolver)
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver
             ->setDefault('code', function (Options $options) {
                 return $this->faker->randomElement([ProductAssociationTypes::COLLECTION, ProductAssociationTypes::EXPANSION]);
             })
-            ->setDefault('name', function (Options $options) {
+            ->setDefault('name', function (Options $options): string {
                 return ucfirst($options['code']);
             })
         ;

@@ -66,7 +66,7 @@ class DownloadImageCommand extends ContainerAwareCommand
     /**
      * @return EntityRepository[]
      */
-    protected function getRepositories()
+    protected function getRepositories(): array
     {
         $repositories = [
             'article_image' => $this->getContainer()->get('app.repository.article_image'),
@@ -118,7 +118,7 @@ class DownloadImageCommand extends ContainerAwareCommand
     /**
      * @return EntityManager|object
      */
-    protected function getManager()
+    protected function getManager(): ?object
     {
         return $this->getContainer()->get('doctrine.orm.entity_manager');
     }
@@ -126,7 +126,7 @@ class DownloadImageCommand extends ContainerAwareCommand
     /**
      * @return string
      */
-    protected function getImageOriginalPath(AbstractImage $image)
+    protected function getImageOriginalPath(AbstractImage $image): string
     {
         return $this->input->getOption('image-original-path').$image->getPath();
     }

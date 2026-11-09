@@ -77,7 +77,7 @@ EOT
     /**
      * @return CommentedReviewCountByProductUpdater|object
      */
-    protected function getReviewCountByProductUpdater()
+    protected function getReviewCountByProductUpdater(): ?object
     {
         return $this->getContainer()->get('App\Updater\CommentedReviewCountByProductUpdater');
     }
@@ -85,7 +85,7 @@ EOT
     /**
      * @return ProductRepository|object
      */
-    protected function getProductRepository()
+    protected function getProductRepository(): ?object
     {
         return $this->getContainer()->get('sylius.repository.product');
     }
@@ -93,7 +93,7 @@ EOT
     /**
      * @return EntityManager|object
      */
-    protected function getManager()
+    protected function getManager(): ?object
     {
         return $this->getContainer()->get('doctrine.orm.entity_manager');
     }

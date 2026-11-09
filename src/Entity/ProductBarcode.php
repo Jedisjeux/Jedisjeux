@@ -27,7 +27,7 @@ class ProductBarcode implements ResourceInterface
     /**
      * @var ProductInterface|Product
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Product\Model\ProductInterface::class, inversedBy: 'barcodes')]
+    #[ORM\ManyToOne(targetEntity: ProductInterface::class, inversedBy: 'barcodes')]
     protected $product;
 
     /**

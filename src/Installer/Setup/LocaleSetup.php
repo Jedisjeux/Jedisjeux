@@ -23,28 +23,16 @@ use Symfony\Component\Intl\Languages;
  */
 final class LocaleSetup
 {
-    /**
-     * @var RepositoryInterface
-     */
-    private $localeRepository;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $localeFactory;
-
-    /**
-     * @var string
-     */
-    private $locale;
+    private string $locale;
 
     /**
      * @param string $locale
      */
-    public function __construct(RepositoryInterface $localeRepository, FactoryInterface $localeFactory, $locale)
-    {
-        $this->localeRepository = $localeRepository;
-        $this->localeFactory = $localeFactory;
+    public function __construct(
+        private RepositoryInterface $localeRepository,
+        private FactoryInterface $localeFactory,
+        $locale
+    ) {
         $this->locale = trim($locale);
     }
 
@@ -73,7 +61,7 @@ final class LocaleSetup
      *
      * @return string|null
      */
-    private function getLanguageName($code)
+    private function getLanguageName(string $code): string
     {
         return Languages::getName($code);
     }

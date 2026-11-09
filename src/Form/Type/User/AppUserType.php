@@ -55,7 +55,7 @@ class AppUserType extends UserType
             ->addEventListener(FormEvents::POST_SUBMIT, [$this, 'onPostSubmit']);
     }
 
-    public function onPostSubmit(FormEvent $event)
+    public function onPostSubmit(FormEvent $event): void
     {
         /** @var UserInterface $user */
         $user = $event->getData();

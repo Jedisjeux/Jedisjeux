@@ -48,7 +48,7 @@ class ArticleType extends AbstractType
     /**
      * @param EntityManager $manager
      */
-    public function setManager($manager)
+    public function setManager($manager): void
     {
         $this->manager = $manager;
     }
@@ -75,7 +75,7 @@ class ArticleType extends AbstractType
             ->add('mainTaxon', EntityType::class, [
                 'label' => 'sylius.ui.category',
                 'placeholder' => '---',
-                'class' => \App\Entity\Taxon::class,
+                'class' => Taxon::class,
                 'group_by' => 'parent',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('o')
@@ -121,7 +121,7 @@ class ArticleType extends AbstractType
     /**
      * @return array
      */
-    protected function getRatingChoiceValues()
+    protected function getRatingChoiceValues(): array
     {
         return [
             'Choisissez une note' => 0,
@@ -138,7 +138,7 @@ class ArticleType extends AbstractType
         ];
     }
 
-    public function onPostSetData(FormEvent $event)
+    public function onPostSetData(FormEvent $event): void
     {
         /** @var Article $article */
         $article = $event->getData();
@@ -150,7 +150,7 @@ class ArticleType extends AbstractType
         }
     }
 
-    public function onPostSubmit(FormEvent $event)
+    public function onPostSubmit(FormEvent $event): void
     {
         /** @var Article $article */
         $article = $event->getData();

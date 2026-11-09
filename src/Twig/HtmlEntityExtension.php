@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Twig;
 
-final class HtmlEntityExtension extends \Twig\Extension\AbstractExtension
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+
+final class HtmlEntityExtension extends AbstractExtension
 {
     /**
      * {@inheritdoc}
@@ -12,7 +15,7 @@ final class HtmlEntityExtension extends \Twig\Extension\AbstractExtension
     public function getFilters(): array
     {
         return [
-            new \Twig\TwigFilter('html_entity_decode', [$this, 'decode']),
+            new TwigFilter('html_entity_decode', [$this, 'decode']),
         ];
     }
 

@@ -29,7 +29,7 @@ abstract class File
      * @var string|null
      */
     #[ORM\Column(type: 'string')]
-    private $path;
+    private ?string $path = null;
 
     public function getFile(): ?\SplFileInfo
     {

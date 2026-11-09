@@ -22,14 +22,8 @@ use Webmozart\Assert\Assert;
 
 class NotifyModeratorsForNewBoxSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var ProductBoxNotificationManager
-     */
-    private $productBoxNotificationManager;
-
-    public function __construct(ProductBoxNotificationManager $productBoxNotificationManager)
+    public function __construct(private ProductBoxNotificationManager $productBoxNotificationManager)
     {
-        $this->productBoxNotificationManager = $productBoxNotificationManager;
     }
 
     /**

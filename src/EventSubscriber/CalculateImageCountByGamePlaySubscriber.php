@@ -23,16 +23,10 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 class CalculateImageCountByGamePlaySubscriber implements EventSubscriber
 {
     /**
-     * @var ImageCountByGamePlayUpdater
-     */
-    protected $updater;
-
-    /**
      * CalculatePostCountByTopicSubscriber constructor.
      */
-    public function __construct(ImageCountByGamePlayUpdater $updater)
+    public function __construct(protected ImageCountByGamePlayUpdater $updater)
     {
-        $this->updater = $updater;
     }
 
     /**
@@ -49,7 +43,7 @@ class CalculateImageCountByGamePlaySubscriber implements EventSubscriber
     /**
      * {@inheritdoc}
      */
-    public function prePersist(LifecycleEventArgs $args)
+    public function prePersist(LifecycleEventArgs $args): void
     {
         $this->updateImageCount($args);
     }
@@ -57,12 +51,12 @@ class CalculateImageCountByGamePlaySubscriber implements EventSubscriber
     /**
      * {@inheritdoc}
      */
-    public function preUpdate(LifecycleEventArgs $args)
+    public function preUpdate(LifecycleEventArgs $args): void
     {
         $this->updateImageCount($args);
     }
 
-    public function updateImageCount(LifecycleEventArgs $args)
+    public function updateImageCount(LifecycleEventArgs $args): void
     {
         $gamePlay = $args->getObject();
 

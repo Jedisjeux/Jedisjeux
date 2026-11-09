@@ -13,6 +13,8 @@ namespace App\Fixture\Factory;
 
 use App\Entity\GamePlay;
 use App\Fixture\OptionsResolver\LazyOption;
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -26,40 +28,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class GamePlayExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
-     * @var FactoryInterface
-     */
-    private $gamePlayFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $customerRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $productRepository;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     /**
      * GamePlayExampleFactory constructor.
      */
-    public function __construct(FactoryInterface $gamePlayFactory, RepositoryInterface $customerRepository, RepositoryInterface $productRepository)
-    {
-        $this->gamePlayFactory = $gamePlayFactory;
-        $this->customerRepository = $customerRepository;
-        $this->productRepository = $productRepository;
-
-        $this->faker = \Faker\Factory::create('fr_FR');
+    public function __construct(
+        private FactoryInterface $gamePlayFactory,
+        private RepositoryInterface $customerRepository,
+        private RepositoryInterface $productRepository
+    ) {
+        $this->faker = Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();
 
         $this->configureOptions($this->optionsResolver);

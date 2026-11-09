@@ -34,7 +34,7 @@ class UpdateLastTopicPostCreatedAtSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onTopicCreate(GenericEvent $event)
+    public function onTopicCreate(GenericEvent $event): void
     {
         /** @var Topic $topic */
         $topic = $event->getSubject();
@@ -43,7 +43,7 @@ class UpdateLastTopicPostCreatedAtSubscriber implements EventSubscriberInterface
         $topic->setLastPostCreatedAt(new \DateTime());
     }
 
-    public function onPostCreate(GenericEvent $event)
+    public function onPostCreate(GenericEvent $event): void
     {
         /** @var Post $post */
         $post = $event->getSubject();

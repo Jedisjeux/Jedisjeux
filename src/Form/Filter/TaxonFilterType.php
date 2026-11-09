@@ -11,6 +11,7 @@
 
 namespace App\Form\Filter;
 
+use App\Entity\Taxon;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -23,14 +24,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class TaxonFilterType extends AbstractType
 {
-    /**
-     * @var AuthorizationCheckerInterface
-     */
-    protected $authorizationChecker;
-
-    public function __construct(AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(protected AuthorizationCheckerInterface $authorizationChecker)
     {
-        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
@@ -43,7 +38,7 @@ class TaxonFilterType extends AbstractType
         $builder->add('mainTaxon', EntityType::class, [
             'label' => false,
             'placeholder' => $options['placeholder'],
-            'class' => \App\Entity\Taxon::class,
+            'class' => Taxon::class,
             'group_by' => 'parent',
             'choice_value' => 'slug',
             'choice_label' => 'name',

@@ -22,28 +22,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ProductListFactory implements FactoryInterface
 {
     /**
-     * @var string
-     */
-    private $className;
-
-    /**
-     * @var CustomerContextInterface
-     */
-    protected $customerContext;
-
-    /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
-
-    /**
      * @param string $className
      */
-    public function __construct($className, CustomerContextInterface $customerContext, TranslatorInterface $translator)
-    {
-        $this->className = $className;
-        $this->customerContext = $customerContext;
-        $this->translator = $translator;
+    public function __construct(
+        private $className,
+        protected CustomerContextInterface $customerContext,
+        protected TranslatorInterface $translator
+    ) {
     }
 
     /**

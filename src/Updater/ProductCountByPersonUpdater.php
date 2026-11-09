@@ -20,19 +20,13 @@ use App\Entity\Person;
 class ProductCountByPersonUpdater
 {
     /**
-     * @var ProductCountByPersonCalculator
-     */
-    protected $calculator;
-
-    /**
      * ProductCountByTaxonUpdater constructor.
      */
-    public function __construct(ProductCountByPersonCalculator $calculator)
+    public function __construct(protected ProductCountByPersonCalculator $calculator)
     {
-        $this->calculator = $calculator;
     }
 
-    public function update(Person $person)
+    public function update(Person $person): void
     {
         $productCountAsDesigner = $this->calculator->calculateAsDesigner($person);
         $productCountAsArtist = $this->calculator->calculateAsArtist($person);

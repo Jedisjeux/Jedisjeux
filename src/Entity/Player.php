@@ -36,13 +36,13 @@ class Player implements ResourceInterface
     /**
      * @var CustomerInterface
      */
-    #[ORM\ManyToOne(targetEntity: \Sylius\Component\Customer\Model\CustomerInterface::class)]
+    #[ORM\ManyToOne(targetEntity: CustomerInterface::class)]
     protected $customer;
 
     /**
      * @var GamePlay
      */
-    #[ORM\ManyToOne(targetEntity: \App\Entity\GamePlay::class, inversedBy: 'players')]
+    #[ORM\ManyToOne(targetEntity: GamePlay::class, inversedBy: 'players')]
     #[ORM\JoinColumn(nullable: false)]
     protected $gamePlay;
 

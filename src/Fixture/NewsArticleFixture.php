@@ -11,38 +11,24 @@
 
 namespace App\Fixture;
 
+use Faker\Factory;
+use Faker\Generator;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class NewsArticleFixture extends AbstractFixture
 {
-    /**
-     * @var TaxonFixture
-     */
-    private $taxonFixture;
+    private OptionsResolver $optionsResolver;
 
     /**
-     * @var ArticleFixture
-     */
-    private $articleFixture;
-
-    /**
-     * @var OptionsResolver
-     */
-    private $optionsResolver;
-
-    /**
-     * @var \Faker\Generator
+     * @var Generator
      */
     private $faker;
 
-    public function __construct(TaxonFixture $taxonFixture, ArticleFixture $articleFixture)
+    public function __construct(private TaxonFixture $taxonFixture, private ArticleFixture $articleFixture)
     {
-        $this->taxonFixture = $taxonFixture;
-        $this->articleFixture = $articleFixture;
-
-        $this->faker = \Faker\Factory::create();
+        $this->faker = Factory::create();
         $this->optionsResolver =
             (new OptionsResolver())
                 ->setRequired('amount')

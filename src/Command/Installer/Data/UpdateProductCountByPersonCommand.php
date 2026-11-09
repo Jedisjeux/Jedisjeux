@@ -85,7 +85,7 @@ EOT
     /**
      * @return ProductCountByPersonUpdater|object
      */
-    protected function getProductCountByPersonUpdater()
+    protected function getProductCountByPersonUpdater(): ?object
     {
         return $this->getContainer()->get('App\Updater\ProductCountByPersonUpdater');
     }
@@ -93,7 +93,7 @@ EOT
     /**
      * @return ProductRepository|object
      */
-    protected function getPersonRepository()
+    protected function getPersonRepository(): ?object
     {
         return $this->getContainer()->get('app.repository.person');
     }
@@ -101,7 +101,7 @@ EOT
     /**
      * @return EntityManager|object
      */
-    protected function getManager()
+    protected function getManager(): ?object
     {
         return $this->getContainer()->get('doctrine.orm.entity_manager');
     }

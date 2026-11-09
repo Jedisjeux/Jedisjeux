@@ -45,20 +45,20 @@ class GameAward implements ResourceInterface
      */
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
-    private $name;
+    private ?string $name = null;
 
     /**
      * @var string|null
      */
     #[Gedmo\Slug(fields: ['name'])]
     #[ORM\Column(type: 'string', unique: true, nullable: true)]
-    private $slug;
+    private ?string $slug = null;
 
     /**
      * @var string|null
      */
     #[ORM\Column(type: 'text', nullable: true)]
-    private $description;
+    private ?string $description = null;
 
     public function getName(): ?string
     {
@@ -73,9 +73,9 @@ class GameAward implements ResourceInterface
     /**
      * @var GameAwardImage|null
      */
-    #[ORM\OneToOne(targetEntity: \App\Entity\GameAwardImage::class, cascade: ['persist'])]
+    #[ORM\OneToOne(targetEntity: GameAwardImage::class, cascade: ['persist'])]
     #[Assert\Valid]
-    private $image;
+    private ?GameAwardImage $image = null;
 
     public function getSlug(): ?string
     {
