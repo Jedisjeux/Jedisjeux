@@ -28,7 +28,7 @@ use Sylius\Resource\Metadata\Update;
 #[AsResource(
     alias: 'sylius.taxon',
     section: 'backend',
-    templatesDir: 'backend/crud',
+    templatesDir: '@SyliusAdminUi/crud',
     routePrefix: '/admin/taxons',
     vars: ['templates' => ['form' => 'backend/taxon/_form.html.twig']],
     operations: [
@@ -36,14 +36,14 @@ use Sylius\Resource\Metadata\Update;
         new Index(
             shortName: 'index_by_parent',
             path: 'children/{id}/',
-            template: 'backend/crud/index.html.twig',
+            template: '@SyliusAdminUi/crud/index.html.twig',
             grid: 'sylius_backend_taxon_from_root',
         ),
         new Create(
             shortName: 'create_for_parent',
             eventShortName: 'create',
             path: 'new/{id}',
-            template: 'backend/crud/create.html.twig',
+            template: '@SyliusAdminUi/crud/create.html.twig',
             factoryMethod: 'createForParent',
             factoryArguments: [
                 'parent' => "@=throw_not_found_on_null(sylius_repositories.get('sylius.repository.taxon').find(request.attributes.get('id')))",

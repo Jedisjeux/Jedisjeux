@@ -24,7 +24,7 @@ use Sylius\Resource\Metadata\Update;
 #[AsResource(
     alias: 'app.year_award',
     section: 'backend',
-    templatesDir: 'backend/crud',
+    templatesDir: '@SyliusAdminUi/crud',
     routePrefix: '/admin',
     vars: ['subheader' => 'app.ui.manage_year_awards'],
     operations: [

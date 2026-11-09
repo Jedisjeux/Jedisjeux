@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[AsResource(
     alias: 'app.product_box',
     section: 'backend',
-    templatesDir: 'backend/crud',
+    templatesDir: '@SyliusAdminUi/crud',
     routePrefix: '/admin',
     vars: ['subheader' => 'app.ui.manage_product_boxes'],
     operations: [

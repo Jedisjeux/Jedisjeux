@@ -24,7 +24,7 @@ return (new ResourceMetadata())
     ->withClass(CustomerGroup::class)
     ->withAlias('sylius.customer_group')
     ->withSection('backend')
-    ->withTemplatesDir('backend/crud')
+    ->withTemplatesDir('@SyliusAdminUi/crud')
     ->withRoutePrefix('/admin')
     ->withVars([
         'header' => 'sylius.ui.customer_groups',

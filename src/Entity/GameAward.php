@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[AsResource(
     alias: 'app.game_award',
     section: 'backend',
-    templatesDir: 'backend/crud',
+    templatesDir: '@SyliusAdminUi/crud',
     routePrefix: '/admin',
     vars: ['subheader' => 'app.ui.manage_game_awards'],
     operations: [

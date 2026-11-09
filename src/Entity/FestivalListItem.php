@@ -30,7 +30,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[AsResource(
     alias: 'app.festival_list_item',
     section: 'backend',
-    templatesDir: 'backend/crud',
+    templatesDir: '@SyliusAdminUi/crud',
     routePrefix: '/admin/festival-lists/{festivalListId}/items',
     vars: [
         'subheader' => 'app.ui.manage_festival_list_items',

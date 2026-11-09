@@ -41,7 +41,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[AsResource(
     alias: 'app.article',
     section: 'backend',
-    templatesDir: 'backend/crud',
+    templatesDir: '@SyliusAdminUi/crud',
     routePrefix: '/admin',
     vars: [
         'subheader' => 'app.ui.manage_articles',
@@ -63,14 +63,14 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Index(
             shortName: 'per_product_index',
             path: 'products/{productId}/articles/',
-            template: 'backend/crud/index.html.twig',
+            template: '@SyliusAdminUi/crud/index.html.twig',
             grid: 'app_backend_article_for_product',
         ),
         new Create(
             shortName: 'create_for_product',
             eventShortName: 'create',
             path: 'articles/products/{productId}/new',
-            template: 'backend/crud/create.html.twig',
+            template: '@SyliusAdminUi/crud/create.html.twig',
             factoryMethod: 'createForProduct',
             factoryArguments: [
                 'product' => "@=throw_not_found_on_null(sylius_repositories.get('sylius.repository.product').find(request.attributes.get('productId')))",
@@ -87,7 +87,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             shortName: 'create_for_product_review',
             eventShortName: 'create',
             path: 'articles/reviews/{productId}/new',
-            template: 'backend/crud/create.html.twig',
+            template: '@SyliusAdminUi/crud/create.html.twig',
             factoryMethod: 'createReviewArticleForProduct',
             factoryArguments: [
                 'product' => "@=throw_not_found_on_null(sylius_repositories.get('sylius.repository.product').find(request.attributes.get('productId')))",

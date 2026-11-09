@@ -30,7 +30,7 @@ use Vich\UploaderBundle\Mapping\Attribute as Vich;
 #[AsResource(
     alias: 'app.product_file',
     section: 'backend',
-    templatesDir: 'backend/crud',
+    templatesDir: '@SyliusAdminUi/crud',
     routePrefix: '/admin',
     vars: ['subheader' => 'app.ui.manage_product_files'],
     operations: [
