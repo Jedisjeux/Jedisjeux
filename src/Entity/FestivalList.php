@@ -32,7 +32,7 @@ use Sylius\Resource\Metadata\Update;
 #[AsResource(
     alias: 'app.festival_list',
     section: 'backend',
-    templatesDir: 'backend/crud',
+    templatesDir: '@SyliusAdminUi/crud',
     routePrefix: '/admin',
     vars: ['subheader' => 'app.ui.manage_festival_lists'],
     operations: [

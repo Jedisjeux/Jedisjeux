@@ -28,7 +28,7 @@ Les routes qui renvoient du JSON (API, AJAX) restent en YAML : elles sont séria
 #[AsResource(
     alias: 'app.dealer',
     section: 'backend',
-    templatesDir: 'backend/crud',
+    templatesDir: '@SyliusAdminUi/crud',
     routePrefix: '/admin',
     vars: [
         'subheader' => 'app.ui.manage_dealers',
@@ -58,7 +58,7 @@ new Create(
     shortName: 'create_for_product',
     eventShortName: 'create',
     path: 'articles/products/{productId}/new',
-    template: 'backend/crud/create.html.twig',
+    template: '@SyliusAdminUi/crud/create.html.twig',
     factoryMethod: 'createForProduct',
     factoryArguments: ['product' => "@=throw_not_found_on_null(sylius_repositories.get('sylius.repository.product').find(request.attributes.get('productId')))"],
     redirectToRoute: 'app_backend_article_update',
@@ -133,7 +133,7 @@ return (new ResourceMetadata())
     ->withClass(CustomerGroup::class)
     ->withAlias('sylius.customer_group')
     ->withSection('backend')
-    ->withTemplatesDir('backend/crud')
+    ->withTemplatesDir('@SyliusAdminUi/crud')
     ->withRoutePrefix('/admin')
     ->withOperations(new Operations([
         new Index(grid: 'sylius_backend_customer_group', vars: ['icon' => 'archive']),

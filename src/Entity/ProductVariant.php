@@ -28,7 +28,7 @@ use Sylius\Resource\Metadata\Update;
 #[AsResource(
     alias: 'sylius.product_variant',
     section: 'backend',
-    templatesDir: 'backend/crud',
+    templatesDir: '@SyliusAdminUi/crud',
     routePrefix: '/admin',
     vars: [
         'templates' => ['form' => 'backend/product_variant/_form.html.twig'],

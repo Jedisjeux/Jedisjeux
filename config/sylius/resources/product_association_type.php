@@ -24,7 +24,7 @@ return (new ResourceMetadata())
     ->withClass(ProductAssociationType::class)
     ->withAlias('sylius.product_association_type')
     ->withSection('backend')
-    ->withTemplatesDir('backend/crud')
+    ->withTemplatesDir('@SyliusAdminUi/crud')
     ->withRoutePrefix('/admin')
     ->withVars([
         'subheader' => 'sylius.ui.manage_association_types_of_your_products',

@@ -42,7 +42,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[AsResource(
     alias: 'sylius.product',
     section: 'admin',
-    templatesDir: 'backend/crud',
+    templatesDir: '@SyliusAdminUi/crud',
     routePrefix: '/admin',
     vars: [
         'subheader' => 'sylius.ui.manage_products',
@@ -66,7 +66,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             shortName: 'from_bgg_new',
             eventShortName: 'create',
             path: 'products/bgg/new',
-            template: 'backend/crud/create.html.twig',
+            template: '@SyliusAdminUi/crud/create.html.twig',
             factoryMethod: 'createFromBgg',
             factoryArguments: ['bggPath' => "@=request.query.get('bggPath')"],
             redirectToRoute: 'sylius_admin_product_update',
@@ -81,7 +81,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             shortName: 'from_bgg_bookmarklet_new',
             eventShortName: 'create',
             path: 'products/bgg/import',
-            template: 'backend/crud/create.html.twig',
+            template: '@SyliusAdminUi/crud/create.html.twig',
             factoryMethod: 'createFromBggPayload',
             factoryArguments: ['payload' => "@=request.query.get('data')"],
             redirectToRoute: 'sylius_admin_product_update',

@@ -34,7 +34,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[AsResource(
     alias: 'sylius.customer',
     section: 'backend',
-    templatesDir: 'backend/crud',
+    templatesDir: '@SyliusAdminUi/crud',
     routePrefix: '/admin',
     vars: [
         'subheader' => 'sylius.ui.manage_your_customers',

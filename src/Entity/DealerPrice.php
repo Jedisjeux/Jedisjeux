@@ -28,7 +28,7 @@ use Sylius\Resource\Metadata\Update;
 #[AsResource(
     alias: 'app.dealer_price',
     section: 'backend',
-    templatesDir: 'backend/crud',
+    templatesDir: '@SyliusAdminUi/crud',
     routePrefix: '/admin',
     vars: ['subheader' => 'app.ui.manage_dealer_prices'],
     operations: [

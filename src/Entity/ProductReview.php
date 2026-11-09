@@ -28,7 +28,7 @@ use Sylius\Resource\Metadata\Update;
 #[AsResource(
     alias: 'sylius.product_review',
     section: 'backend',
-    templatesDir: 'backend/crud',
+    templatesDir: '@SyliusAdminUi/crud',
     routePrefix: '/admin',
     vars: [
         'subheader' => 'sylius.ui.manage_reviews_of_your_products',

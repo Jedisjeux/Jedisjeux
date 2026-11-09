@@ -28,7 +28,7 @@ use Sylius\Resource\Metadata\Update;
 #[AsResource(
     alias: 'sylius.article_review',
     section: 'backend',
-    templatesDir: 'backend/crud',
+    templatesDir: '@SyliusAdminUi/crud',
     routePrefix: '/admin',
     vars: ['templates' => ['form' => 'backend/article_review/_form.html.twig']],
     operations: [
