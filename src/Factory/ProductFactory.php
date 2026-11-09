@@ -50,7 +50,13 @@ class ProductFactory extends BaseProductFactory
     private $slugGenerator;
 
     /**
-     * @param BggProductFactory $bggProductFactory,
+     * @var FactoryInterface<Person>
+     */
+    private $personFactory;
+
+    /**
+     * @param BggProductFactory        $bggProductFactory,
+     * @param FactoryInterface<Person> $personFactory
      */
     public function __construct(
         FactoryInterface $factory,
@@ -58,7 +64,8 @@ class ProductFactory extends BaseProductFactory
         FactoryInterface $productVariantImageFactory,
         BggProductFactory $bggProductFactory,
         SlugGeneratorInterface $slugGenerator,
-        RepositoryInterface $personRepository
+        RepositoryInterface $personRepository,
+        FactoryInterface $personFactory
     ) {
         parent::__construct($factory, $variantFactory);
 
@@ -66,6 +73,7 @@ class ProductFactory extends BaseProductFactory
         $this->productVariantImageFactory = $productVariantImageFactory;
         $this->slugGenerator = $slugGenerator;
         $this->personRepository = $personRepository;
+        $this->personFactory = $personFactory;
     }
 
     /**
@@ -115,7 +123,7 @@ class ProductFactory extends BaseProductFactory
         $product->setMaxPlayerCount($bggProduct->getMaxPlayerCount());
 
         foreach ($bggProduct->getDesigners() as $fullName) {
-            $designer = $this->getPersonByFullName($fullName);
+            $designer = $this->getOrCreatePerson($fullName, false);
 
             if (null === $designer) {
                 continue;
@@ -126,7 +134,7 @@ class ProductFactory extends BaseProductFactory
         }
 
         foreach ($bggProduct->getArtists() as $fullName) {
-            $artist = $this->getPersonByFullName($fullName);
+            $artist = $this->getOrCreatePerson($fullName, false);
 
             if (null === $artist) {
                 continue;
@@ -137,7 +145,7 @@ class ProductFactory extends BaseProductFactory
         }
 
         foreach ($bggProduct->getPublishers() as $fullName) {
-            $publisher = $this->getPersonByFullName($fullName);
+            $publisher = $this->getOrCreatePerson($fullName, true);
 
             if (null === $publisher) {
                 continue;
@@ -161,21 +169,35 @@ class ProductFactory extends BaseProductFactory
     }
 
     /**
-     * @param string $fullName
-     *
-     * @return Person
+     * Finds the person by its BoardGameGeek name, or creates it when it does not exist yet.
+     * New persons are saved right away because the product form references them by their identifier.
      */
-    protected function getPersonByFullName($fullName)
+    private function getOrCreatePerson(string $fullName, bool $isCompany): ?Person
     {
-        $fullName = strtolower($fullName);
-        $slug = Urlizer::urlize($fullName, '-');
+        // BGG suffixes homonyms with a roman numeral, such as "Jeff Smith (I)"
+        $fullName = trim((string) preg_replace('/\s*\([IVX]+\)$/', '', trim($fullName)));
 
-        /** @var Person $person */
-        $person = $this->personRepository->findOneBy(['slug' => $slug]);
-
-        if (null === $person) {
+        // BGG placeholders, such as "(Uncredited)", "(Unknown)" or "(Self-Published)"
+        if ('' === $fullName || str_starts_with($fullName, '(')) {
             return null;
         }
+
+        /** @var Person|null $person */
+        $person = $this->personRepository->findOneBy(['slug' => Urlizer::urlize(mb_strtolower($fullName), '-')]);
+
+        if (null !== $person) {
+            return $person;
+        }
+
+        $names = preg_split('/\s+/', $fullName) ?: [$fullName];
+        $hasFirstName = !$isCompany && count($names) > 1;
+
+        /** @var Person $person */
+        $person = $this->personFactory->createNew();
+        $person->setFirstName($hasFirstName ? mb_substr(array_shift($names), 0, 50) : null);
+        $person->setLastName(mb_substr($hasFirstName ? implode(' ', $names) : $fullName, 0, 50));
+
+        $this->personRepository->add($person);
 
         return $person;
     }
