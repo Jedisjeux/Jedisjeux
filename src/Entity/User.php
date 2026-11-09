@@ -31,14 +31,14 @@ class User extends BaseUser implements AppUserInterface, LegacyPasswordAuthentic
      * @var string
      */
     #[ORM\Column(type: 'string')]
-    protected $salt;
+    private $salt;
 
     /**
      * @var CustomerInterface
      */
     #[ORM\OneToOne(targetEntity: CustomerInterface::class, inversedBy: 'user', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
-    protected $customer;
+    private $customer;
 
     public function __construct()
     {

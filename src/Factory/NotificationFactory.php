@@ -31,12 +31,12 @@ class NotificationFactory implements FactoryInterface
     /**
      * @var Router
      */
-    protected $router;
+    private $router;
 
     /**
      * @var Translator
      */
-    protected $translator;
+    private $translator;
 
     public function __construct(private string $className)
     {
@@ -95,7 +95,7 @@ class NotificationFactory implements FactoryInterface
     /**
      * @return int
      */
-    protected function calculateTopicNbPages(Topic $topic): int
+    private function calculateTopicNbPages(Topic $topic): int
     {
         return (int) ceil($topic->getPostCount() / 10);
     }

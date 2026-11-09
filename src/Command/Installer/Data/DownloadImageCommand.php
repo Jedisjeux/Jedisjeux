@@ -19,12 +19,12 @@ class DownloadImageCommand extends ContainerAwareCommand
     /**
      * @var InputInterface
      */
-    protected $input;
+    private $input;
 
     /**
      * @var OutputInterface
      */
-    protected $output;
+    private $output;
 
     /**
      * {@inheritdoc}
@@ -66,7 +66,7 @@ class DownloadImageCommand extends ContainerAwareCommand
     /**
      * @return EntityRepository[]
      */
-    protected function getRepositories(): array
+    private function getRepositories(): array
     {
         $repositories = [
             'article_image' => $this->getContainer()->get('app.repository.article_image'),
@@ -92,13 +92,13 @@ class DownloadImageCommand extends ContainerAwareCommand
         return [$entityOption => $repositories[$entityOption]];
     }
 
-    protected function downloadImagesFromRepository(EntityRepository $repository): void
+    private function downloadImagesFromRepository(EntityRepository $repository): void
     {
         $queryBuilder = $repository->createQueryBuilder('o');
         $this->downloadImages($queryBuilder);
     }
 
-    protected function downloadImages(QueryBuilder $queryBuilder): void
+    private function downloadImages(QueryBuilder $queryBuilder): void
     {
         foreach ($queryBuilder->getQuery()->iterate() as $row) {
             /** @var AbstractImage $image */
@@ -118,7 +118,7 @@ class DownloadImageCommand extends ContainerAwareCommand
     /**
      * @return EntityManager|object
      */
-    protected function getManager(): ?object
+    private function getManager(): ?object
     {
         return $this->getContainer()->get('doctrine.orm.entity_manager');
     }
@@ -126,12 +126,12 @@ class DownloadImageCommand extends ContainerAwareCommand
     /**
      * @return string
      */
-    protected function getImageOriginalPath(AbstractImage $image): string
+    private function getImageOriginalPath(AbstractImage $image): string
     {
         return $this->input->getOption('image-original-path').$image->getPath();
     }
 
-    protected function downloadImage(AbstractImage $image)
+    private function downloadImage(AbstractImage $image)
     {
         $copyFrom = $this->getImageOriginalPath($image);
         $copyTo = $image->getAbsolutePath();

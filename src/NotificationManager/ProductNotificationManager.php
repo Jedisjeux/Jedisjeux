@@ -28,11 +28,11 @@ class ProductNotificationManager
      * ProductNotificationManager constructor.
      */
     public function __construct(
-        protected NotificationFactory $factory,
-        protected ObjectManager $manager,
-        protected UserRepository $userRepository,
-        protected RouterInterface $router,
-        protected TranslatorInterface $translator
+        private NotificationFactory $factory,
+        private ObjectManager $manager,
+        private UserRepository $userRepository,
+        private RouterInterface $router,
+        private TranslatorInterface $translator
     ) {
     }
 
@@ -69,7 +69,7 @@ class ProductNotificationManager
     /**
      * @param string $message
      */
-    protected function notifyUsers($message, ProductInterface $product, array $users)
+    private function notifyUsers($message, ProductInterface $product, array $users)
     {
         foreach ($users as $user) {
             $notification = $this->factory->createForProduct($product, $user->getCustomer());

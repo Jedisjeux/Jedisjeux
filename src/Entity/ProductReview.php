@@ -79,7 +79,7 @@ class ProductReview extends Review
      * @var string
      */
     #[ORM\Column(type: 'string', unique: true, nullable: true)]
-    protected $code;
+    private $code;
 
     /**
      * ProductReview constructor.

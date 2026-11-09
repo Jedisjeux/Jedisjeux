@@ -174,108 +174,108 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
      * @var string
      */
     #[ORM\Column(type: 'string', unique: true)]
-    protected $code;
+    private $code;
 
     /**
      * @var string
      */
     #[Gedmo\Slug(fields: ['title'])]
     #[ORM\Column(type: 'string', unique: true, nullable: true)]
-    protected $slug;
+    private $slug;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
-    protected $title;
+    private $title;
 
     /**
      * @var \DateTime|null
      */
     #[ORM\Column(type: 'datetime', nullable: true)]
-    protected $publishStartDate;
+    private $publishStartDate;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'text', nullable: true)]
-    protected $shortDescription;
+    private $shortDescription;
 
     /**
      * @var ArticleImage
      */
     #[ORM\OneToOne(targetEntity: ArticleImage::class, cascade: ['persist', 'merge'])]
     #[Assert\Valid]
-    protected $mainImage;
+    private $mainImage;
 
     /**
      * @var TaxonInterface
      */
     #[ORM\ManyToOne(targetEntity: TaxonInterface::class)]
-    protected $mainTaxon;
+    private $mainTaxon;
 
     /**
      * @var \DateTime|null
      */
     #[ORM\Column(type: 'datetime', nullable: true)]
-    protected $publishEndDate;
+    private $publishEndDate;
 
     /**
      * @var bool
      */
     #[ORM\Column(type: 'boolean')]
-    protected $publishable = true;
+    private $publishable = true;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
-    protected $status;
+    private $status;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $imagePath;
+    private $imagePath;
 
     /**
      * @var int
      */
     #[ORM\Column(type: 'integer')]
     #[Assert\NotBlank]
-    protected $viewCount = 0;
+    private $viewCount = 0;
 
     /**
      * @var SlideShowBlock|null
      */
     #[ORM\OneToOne(targetEntity: SlideShowBlock::class, cascade: ['persist', 'merge'])]
-    protected $slideShowBlock;
+    private $slideShowBlock;
 
     /**
      * @var ProductInterface
      */
     #[ORM\ManyToOne(targetEntity: ProductInterface::class, inversedBy: 'articles')]
-    protected $product;
+    private $product;
 
     /**
      * @var CustomerInterface
      */
     #[ORM\ManyToOne(targetEntity: CustomerInterface::class)]
-    protected $author;
+    private $author;
 
     /**
      * @var Topic
      */
     #[ORM\OneToOne(targetEntity: Topic::class, inversedBy: 'article')]
     #[ORM\JoinColumn(onDelete: 'SET NULL')]
-    protected $topic;
+    private $topic;
 
     /**
      * @var ArrayCollection
      */
-    protected $reviews;
+    private $reviews;
 
     /**
      * @var Collection|Block[]
@@ -283,31 +283,31 @@ class Article implements ResourceInterface, ReviewableInterface, RoutedItemInter
     #[ORM\OneToMany(targetEntity: Block::class, mappedBy: 'article', cascade: ['persist', 'merge'])]
     #[ORM\OrderBy(['position' => 'ASC'])]
     #[Assert\Valid]
-    protected $blocks;
+    private $blocks;
 
     /**
      * @var float
      */
     #[ORM\Column(type: 'float')]
-    protected $averageRating = 0;
+    private $averageRating = 0;
 
     /**
      * @var float
      */
     #[ORM\Column(type: 'float')]
-    protected $materialRating = 0;
+    private $materialRating = 0;
 
     /**
      * @var float
      */
     #[ORM\Column(type: 'float')]
-    protected $rulesRating = 0;
+    private $rulesRating = 0;
 
     /**
      * @var float
      */
     #[ORM\Column(type: 'float')]
-    protected $lifetimeRating = 0;
+    private $lifetimeRating = 0;
 
     /**
      * Article constructor.

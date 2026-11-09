@@ -44,7 +44,7 @@ class PostRepository extends EntityRepository
     /**
      * @return QueryBuilder
      */
-    protected function getQueryBuilder()
+    private function getQueryBuilder()
     {
         return $this
             ->createQueryBuilder('o')

@@ -27,10 +27,10 @@ class ArticleFeedDump
      * @param string $fileName
      */
     public function __construct(
-        protected FeedDumpService $feedDump,
-        protected EntityRepository $repository,
-        protected $rootDir,
-        protected $fileName
+        private FeedDumpService $feedDump,
+        private EntityRepository $repository,
+        private $rootDir,
+        private $fileName
     ) {
     }
 
@@ -64,7 +64,7 @@ class ArticleFeedDump
     /**
      * @return array
      */
-    protected function findPublishedArticles()
+    private function findPublishedArticles()
     {
         $queryBuilder = $this->repository->createQueryBuilder('o');
         $queryBuilder

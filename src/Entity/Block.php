@@ -33,65 +33,65 @@ class Block implements ResourceInterface
      * @var string
      */
     #[ORM\Column(type: 'string', unique: true, nullable: true)]
-    protected $code;
+    private $code;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $title;
+    private $title;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'text', nullable: true)]
-    protected $body;
+    private $body;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $imagePosition;
+    private $imagePosition;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $class;
+    private $class;
 
     /**
      * @var int
      */
     #[ORM\Column(type: 'integer')]
     #[Gedmo\SortablePosition]
-    protected $position;
+    private $position;
 
     /**
      * @var BlockImage
      */
     #[ORM\OneToOne(targetEntity: BlockImage::class, cascade: ['persist', 'merge'])]
-    protected $image;
+    private $image;
 
     /**
      * @var Article
      */
     #[Gedmo\SortableGroup]
     #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'blocks')]
-    protected $article;
+    private $article;
 
     /**
      * @var SlideShowBlock
      */
     #[Gedmo\SortableGroup]
     #[ORM\ManyToOne(targetEntity: SlideShowBlock::class, inversedBy: 'blocks', cascade: ['persist', 'merge'])]
-    protected $slideShowBlock;
+    private $slideShowBlock;
 
     /**
      * @var ProductInterface|null
      */
     #[ORM\ManyToOne(targetEntity: ProductInterface::class)]
     #[ORM\JoinColumn(onDelete: 'SET NULL')]
-    protected $product;
+    private $product;
 
     public function getCode(): ?string
     {

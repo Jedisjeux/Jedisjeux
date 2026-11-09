@@ -68,7 +68,7 @@ class DealerPriceRepository extends EntityRepository
     /**
      * {@inheritdoc}
      */
-    protected function getQueryBuilder()
+    private function getQueryBuilder()
     {
         return parent::createQueryBuilder('o')
             ->addSelect('dealer, product, productTranslation')

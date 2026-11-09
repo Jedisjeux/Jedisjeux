@@ -20,14 +20,14 @@ class Bbcode2Html
     /**
      * @var string
      */
-    protected $body;
+    private $body;
 
     /**
      * Bbcode2Html constructor.
      */
     public function __construct(
-        protected Connection $databaseConnection,
-        protected EntityRepository $productVariantRepository
+        private Connection $databaseConnection,
+        private EntityRepository $productVariantRepository
     ) {
     }
 
@@ -64,12 +64,12 @@ class Bbcode2Html
         return $body;
     }
 
-    protected function nl2p($body): string
+    private function nl2p($body): string
     {
         return '<p>'.str_replace("\n", '</p><p>', trim($body)).'</p>';
     }
 
-    protected function emptyTagsReplacement($body): string|array
+    private function emptyTagsReplacement($body): string|array
     {
         $body = str_replace('<p></p>', '', $body);
         $body = str_replace('</li></p><p><li>', '</li><li>', $body);
@@ -85,7 +85,7 @@ class Bbcode2Html
      *
      * @return string
      */
-    protected function emoticonReplacement($body): string|array|null
+    private function emoticonReplacement($body): string|array|null
     {
         $pattern = '/\<img src\=\"\{SMILIES_PATH\}\/icon_(.*?)\.gif\" alt\=\"(?P<alt>.*?)\" title\=\"(.*?)\" \/\>/ms';
         $replacement = '$2';
@@ -107,7 +107,7 @@ class Bbcode2Html
      *
      * @return string
      */
-    protected function quoteReplacement($body): string|array|null
+    private function quoteReplacement($body): string|array|null
     {
         $pattern = '/\[quote\=&quot;(?P<title>.*?)&quot;:(.*?)\](?P<body>.*)\[\/quote:(.*?)\]/ms';
         $replacement = <<<EOM
@@ -157,7 +157,7 @@ EOM;
      *
      * @return string
      */
-    protected function imageReplacement($body): string|array|null
+    private function imageReplacement($body): string|array|null
     {
         $pattern = '/\[img:(.*?)\](?P<path>.*?)\[\/img:(.*?)\]/ms';
         $replacement = '<img src="$2" class="img-responsive" />';
@@ -171,7 +171,7 @@ EOM;
      *
      * @return string
      */
-    protected function imageWithIdReplacement($body): string|array|null
+    private function imageWithIdReplacement($body): string|array|null
     {
         $pattern = '/\[image\=?(?P<properties>.*?):(.*?)\\](?P<id>.*?)\[\/image:(.*?)\\]/ms';
         preg_match_all($pattern, $body, $matches);
@@ -207,7 +207,7 @@ EOM;
      *
      * @return string
      */
-    protected function getImageNameById($id)
+    private function getImageNameById($id)
     {
         $query = sprintf('select img_nom from jedisjeux.jdj_images WHERE img_id = %s', $id);
 
@@ -219,7 +219,7 @@ EOM;
      *
      * @return string
      */
-    protected function gameWithIdReplacement($body): string|array|null
+    private function gameWithIdReplacement($body): string|array|null
     {
         $pattern = '/\[jeu:(.*?)\\](?P<id>.*?)\[\/jeu:(.*?)\\]/ms';
         preg_match_all($pattern, $body, $matches);
@@ -246,7 +246,7 @@ EOM;
      *
      * @return string
      */
-    protected function colorReplacement($body): string|array|null
+    private function colorReplacement($body): string|array|null
     {
         $pattern = '/\[color=(.*?)\](?P<text>.*?)\[\/color:(.*?)\]/ms';
         $replacement = '$2';
@@ -260,7 +260,7 @@ EOM;
      *
      * @return string
      */
-    protected function blockReplacement($body): string|array|null
+    private function blockReplacement($body): string|array|null
     {
         $pattern = '/\[bleft:(.*?)\](?P<text>.*?)\[\/bleft:(.*?)\]/ms';
         $replacement = '<div class="clearfix"></div><div style="margin-right: 10px" class="pull-left">$2</div>';
@@ -278,7 +278,7 @@ EOM;
      *
      * @return string
      */
-    protected function sizeReplacement($body): string|array|null
+    private function sizeReplacement($body): string|array|null
     {
         $pattern = '/\[size=(.*?)\](?P<text>.*?)\[\/size:(.*?)\]/ms';
         $replacement = '$2';
@@ -292,7 +292,7 @@ EOM;
      *
      * @return string
      */
-    protected function videoReplacement($body): string|array
+    private function videoReplacement($body): string|array
     {
         $pattern = '/\[flv=(.*?):(.*?)\](?P<text>.*?)\[\/flv:(.*?)\]/ms';
         $replacement = '<iframe style="max-width: 100%" width="800" height="450" src="$3" frameborder="0" allowfullscreen=""></iframe>';
@@ -312,7 +312,7 @@ EOM;
      *
      * @return string
      */
-    protected function urlReplacement($body): string|array|null
+    private function urlReplacement($body): string|array|null
     {
         $pattern = '/\[url=(?P<path>.*?):(.*?)\](?P<label>.*?)\[\/url:(.*?)\]/ms';
         $replacement = "<a href=\"$1\" target='_blank'>$3</a>";
@@ -326,7 +326,7 @@ EOM;
      *
      * @return string
      */
-    protected function boldReplacement($body): string|array|null
+    private function boldReplacement($body): string|array|null
     {
         $pattern = '/\[b:(.*?)\](?P<label>.*?)\[\/b:(.*?)\]/ms';
         $replacement = '<strong>$2</strong>';
@@ -340,7 +340,7 @@ EOM;
      *
      * @return string
      */
-    protected function italicReplacement($body): string|array|null
+    private function italicReplacement($body): string|array|null
     {
         $pattern = '/\[i:(.*?)\](?P<label>.*?)\[\/i:(.*?)\]/ms';
         $replacement = '<em>$2</em>';
@@ -354,7 +354,7 @@ EOM;
      *
      * @return string
      */
-    protected function underlineReplacement($body): string|array|null
+    private function underlineReplacement($body): string|array|null
     {
         $pattern = '/\[u:(.*?)\](?P<label>.*?)\[\/u:(.*?)\]/ms';
         $replacement = '<strong>$2</strong>';
@@ -368,7 +368,7 @@ EOM;
      *
      * @return string
      */
-    protected function emailReplacement($body): string|array|null
+    private function emailReplacement($body): string|array|null
     {
         $pattern = '/\[email:(.*?)\](?P<label>.*?)\[\/email:(.*?)\]/ms';
         $replacement = '<a href="mailto:$2">$2</a>';
@@ -382,7 +382,7 @@ EOM;
      *
      * @return string
      */
-    protected function centerReplacement($body): string|array|null
+    private function centerReplacement($body): string|array|null
     {
         $pattern = '/\[center:(.*?)\](?P<label>.*?)\[\/center:(.*?)\]/ms';
         $replacement = '$2';
@@ -396,7 +396,7 @@ EOM;
      *
      * @return string
      */
-    protected function listReplacement($body): string|array|null
+    private function listReplacement($body): string|array|null
     {
         $patterns = [
             '/\[list:[mou]?:?(.*?)\]/ms' => '</p><ul class="list-6">',
@@ -418,7 +418,7 @@ EOM;
      *
      * @return string
      */
-    protected function getImageOriginalPath($name, $size = null): string
+    private function getImageOriginalPath($name, $size = null): string
     {
         $size = null !== $size ? $size : '800';
 

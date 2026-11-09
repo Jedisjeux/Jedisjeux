@@ -26,7 +26,7 @@ class PostFactory implements FactoryInterface
     /**
      * @param string $className
      */
-    public function __construct(private $className, protected CustomerContextInterface $customerContext)
+    public function __construct(private $className, private CustomerContextInterface $customerContext)
     {
     }
 

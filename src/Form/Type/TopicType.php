@@ -29,7 +29,7 @@ class TopicType extends AbstractType
     /**
      * @var AuthorizationCheckerInterface
      */
-    protected $authorizationChecker;
+    private $authorizationChecker;
 
     /**
      * @param CustomerContextInterface $authorizationChecker

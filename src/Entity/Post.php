@@ -161,59 +161,59 @@ class Post implements ResourceInterface
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true, unique: true)]
-    protected $code;
+    private $code;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'text')]
     #[Assert\NotBlank]
-    protected $body;
+    private $body;
 
     /**
      * @var Topic
      */
     #[ORM\OneToOne(targetEntity: Topic::class, mappedBy: 'mainPost')]
-    protected $parent;
+    private $parent;
 
     /**
      * @var Topic
      */
     #[ORM\ManyToOne(targetEntity: Topic::class, inversedBy: 'posts')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    protected $topic;
+    private $topic;
 
     /**
      * @var GamePlay
      */
     #[ORM\ManyToOne(targetEntity: GamePlay::class)]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    protected $gamePlay;
+    private $gamePlay;
 
     /**
      * @var Article
      */
     #[ORM\ManyToOne(targetEntity: Article::class)]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
-    protected $article;
+    private $article;
 
     /**
      * @var CustomerInterface
      */
     #[ORM\ManyToOne(targetEntity: CustomerInterface::class)]
-    protected $author;
+    private $author;
 
     /**
      * @var Post
      */
     #[ORM\ManyToOne(targetEntity: Post::class, inversedBy: 'replies')]
-    protected $replyTo;
+    private $replyTo;
 
     /**
      * @var ArrayCollection
      */
     #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'replyTo')]
-    protected $replies;
+    private $replies;
 
     /**
      * Post constructor.

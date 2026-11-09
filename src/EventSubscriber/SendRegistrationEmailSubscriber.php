@@ -22,7 +22,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 class SendRegistrationEmailSubscriber implements EventSubscriberInterface
 {
-    public function __construct(protected SenderInterface $sender)
+    public function __construct(private SenderInterface $sender)
     {
     }
 

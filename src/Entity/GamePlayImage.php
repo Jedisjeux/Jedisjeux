@@ -34,13 +34,13 @@ class GamePlayImage extends AbstractImage
      * @var GamePlay
      */
     #[ORM\ManyToOne(targetEntity: GamePlay::class, inversedBy: 'images')]
-    protected $gamePlay;
+    private $gamePlay;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $description;
+    private $description;
 
     public function getGamePlay(): ?GamePlay
     {

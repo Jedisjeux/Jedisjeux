@@ -27,9 +27,9 @@ class TopicFactory implements FactoryInterface
 {
     public function __construct(
         private string $className,
-        protected CustomerContextInterface $customerContext,
-        protected RepositoryInterface $gamePlayRepository,
-        protected FactoryInterface $postFactory
+        private CustomerContextInterface $customerContext,
+        private RepositoryInterface $gamePlayRepository,
+        private FactoryInterface $postFactory
     ) {
     }
 

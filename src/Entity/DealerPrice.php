@@ -52,43 +52,43 @@ class DealerPrice implements ResourceInterface
      * @var Dealer
      */
     #[ORM\ManyToOne(targetEntity: Dealer::class)]
-    protected $dealer;
+    private $dealer;
 
     /**
      * @var Product
      */
     #[ORM\ManyToOne(targetEntity: Product::class)]
-    protected $product;
+    private $product;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', unique: true)]
-    protected $url;
+    private $url;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string')]
-    protected $name;
+    private $name;
 
     /**
      * @var int
      */
     #[ORM\Column(type: 'integer')]
-    protected $price;
+    private $price;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $barcode;
+    private $barcode;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string')]
-    protected $status;
+    private $status;
 
     public function getDealer(): ?Dealer
     {

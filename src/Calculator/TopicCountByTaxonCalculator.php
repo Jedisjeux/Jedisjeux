@@ -19,7 +19,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 class TopicCountByTaxonCalculator
 {
-    public function __construct(protected RepositoryInterface $topicRepository)
+    public function __construct(private RepositoryInterface $topicRepository)
     {
     }
 

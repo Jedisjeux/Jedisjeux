@@ -58,7 +58,7 @@ class ContactRequest implements ResourceInterface
      * @var string
      */
     #[ORM\Column(type: 'string')]
-    protected $firstName;
+    private $firstName;
 
     /**
      * @var string
@@ -66,20 +66,20 @@ class ContactRequest implements ResourceInterface
      * use Prophecy\Argument;
      */
     #[ORM\Column(type: 'string')]
-    protected $lastName;
+    private $lastName;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string')]
-    protected $email;
+    private $email;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'text')]
     #[Assert\NotBlank]
-    protected $body;
+    private $body;
 
     public function getFirstName(): ?string
     {

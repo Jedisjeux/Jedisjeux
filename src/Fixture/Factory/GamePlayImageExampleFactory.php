@@ -37,8 +37,8 @@ class GamePlayImageExampleFactory extends AbstractExampleFactory implements Exam
      * GamePlayExampleFactory constructor.
      */
     public function __construct(
-        protected FactoryInterface $gamePlayImageFactory,
-        protected RepositoryInterface $gamePlayRepository
+        private FactoryInterface $gamePlayImageFactory,
+        private RepositoryInterface $gamePlayRepository
     ) {
         $this->faker = Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();

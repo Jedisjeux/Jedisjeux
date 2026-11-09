@@ -33,12 +33,12 @@ class GamePlayType extends AbstractType
     /**
      * @var Collection|GamePlayImage[]
      */
-    protected $originalImages;
+    private $originalImages;
 
     /**
      * @var EntityManager
      */
-    protected $manager;
+    private $manager;
 
     /**
      * @param EntityManager $manager

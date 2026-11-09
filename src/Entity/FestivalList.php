@@ -53,49 +53,49 @@ class FestivalList implements ResourceInterface
     #[ORM\Column(type: 'string')]
     #[JMS\Expose]
     #[JMS\Groups(['Default'])]
-    protected $code;
+    private $code;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string')]
-    protected $name;
+    private $name;
 
     /**
      * @var string
      */
     #[Gedmo\Slug(fields: ['name'])]
     #[ORM\Column(type: 'string', unique: true)]
-    protected $slug;
+    private $slug;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'text', nullable: true)]
-    protected $description;
+    private $description;
 
     /**
      * @var \DateTime
      */
     #[ORM\Column(type: 'datetime', nullable: true)]
-    protected $startAt;
+    private $startAt;
 
     /**
      * @var \DateTime
      */
     #[ORM\Column(type: 'datetime', nullable: true)]
-    protected $endAt;
+    private $endAt;
 
     /**
      * @var FestivalListImage|null
      */
     #[ORM\ManyToOne(targetEntity: FestivalListImage::class, cascade: ['persist'])]
-    protected $image;
+    private $image;
 
     /**
      * @var Collection|FestivalListItem[]
      */
-    protected $items;
+    private $items;
 
     /**
      * FestivalList constructor.

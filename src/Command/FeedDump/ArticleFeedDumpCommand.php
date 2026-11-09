@@ -54,7 +54,7 @@ EOT
     /**
      * @return object|ArticleFeedDump
      */
-    protected function getArticleFeedDump(): ?object
+    private function getArticleFeedDump(): ?object
     {
         return $this->getContainer()->get('app.feed.dump.article');
     }

@@ -24,8 +24,8 @@ class GamePlayFactory implements FactoryInterface
 {
     public function __construct(
         private string $className,
-        protected ProductRepositoryInterface $productRepository,
-        protected CustomerContext $customerContext
+        private ProductRepositoryInterface $productRepository,
+        private CustomerContext $customerContext
     ) {
     }
 

@@ -38,12 +38,12 @@ class ArticleType extends AbstractType
     /**
      * @var Collection|Block[]
      */
-    protected $originalBlocks;
+    private $originalBlocks;
 
     /**
      * @var EntityManager
      */
-    protected $manager;
+    private $manager;
 
     /**
      * @param EntityManager $manager
@@ -121,7 +121,7 @@ class ArticleType extends AbstractType
     /**
      * @return array
      */
-    protected function getRatingChoiceValues(): array
+    private function getRatingChoiceValues(): array
     {
         return [
             'Choisissez une note' => 0,

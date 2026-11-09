@@ -25,26 +25,26 @@ class Player implements ResourceInterface
      * @var float
      */
     #[ORM\Column(type: 'float', nullable: true)]
-    protected $score;
+    private $score;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $name;
+    private $name;
 
     /**
      * @var CustomerInterface
      */
     #[ORM\ManyToOne(targetEntity: CustomerInterface::class)]
-    protected $customer;
+    private $customer;
 
     /**
      * @var GamePlay
      */
     #[ORM\ManyToOne(targetEntity: GamePlay::class, inversedBy: 'players')]
     #[ORM\JoinColumn(nullable: false)]
-    protected $gamePlay;
+    private $gamePlay;
 
     public function getScore(): ?float
     {

@@ -53,7 +53,7 @@ EOT
         return 0;
     }
 
-    protected function calculateProductCountByTaxons()
+    private function calculateProductCountByTaxons()
     {
         $this->calculateProductCountByTaxonCode(Taxon::CODE_MECHANISM);
         $this->calculateProductCountByTaxonCode(Taxon::CODE_THEME);
@@ -63,7 +63,7 @@ EOT
     /**
      * @param string $rootCode
      */
-    protected function calculateProductCountByTaxonCode($rootCode)
+    private function calculateProductCountByTaxonCode($rootCode)
     {
         $taxons = $this->getTaxonRepository()->findChildren($rootCode, $this->getContainer()->getParameter('locale'));
 
@@ -78,7 +78,7 @@ EOT
     /**
      * @return ProductCountByTaxonUpdater|object
      */
-    protected function getProductCountByTaxonUpdater(): ?object
+    private function getProductCountByTaxonUpdater(): ?object
     {
         return $this->getContainer()->get('App\Updater\ProductCountByTaxonUpdater');
     }
@@ -86,7 +86,7 @@ EOT
     /**
      * @return TaxonRepository|object
      */
-    protected function getTaxonRepository(): ?object
+    private function getTaxonRepository(): ?object
     {
         return $this->getContainer()->get('sylius.repository.taxon');
     }
@@ -94,7 +94,7 @@ EOT
     /**
      * @return EntityManager|object
      */
-    protected function getManager(): ?object
+    private function getManager(): ?object
     {
         return $this->getContainer()->get('doctrine.orm.entity_manager');
     }

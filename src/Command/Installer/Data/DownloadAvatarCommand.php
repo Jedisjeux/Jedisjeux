@@ -55,7 +55,7 @@ class DownloadAvatarCommand extends ContainerAwareCommand
     /**
      * @return EntityRepository $repository
      */
-    protected function getRepository(): ?object
+    private function getRepository(): ?object
     {
         return $this->getContainer()->get('app.repository.avatar');
     }

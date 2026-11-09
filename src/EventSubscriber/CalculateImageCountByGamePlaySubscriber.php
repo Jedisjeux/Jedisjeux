@@ -25,7 +25,7 @@ class CalculateImageCountByGamePlaySubscriber implements EventSubscriber
     /**
      * CalculatePostCountByTopicSubscriber constructor.
      */
-    public function __construct(protected ImageCountByGamePlayUpdater $updater)
+    public function __construct(private ImageCountByGamePlayUpdater $updater)
     {
     }
 

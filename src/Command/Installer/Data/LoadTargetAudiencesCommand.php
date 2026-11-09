@@ -68,7 +68,7 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
     /**
      * @return TaxonInterface
      */
-    protected function createOrReplaceTaxon(array $data, TaxonInterface $parentTaxon)
+    private function createOrReplaceTaxon(array $data, TaxonInterface $parentTaxon)
     {
         $locale = $this->getContainer()->getParameter('locale');
 
@@ -97,7 +97,7 @@ class LoadTargetAudiencesCommand extends ContainerAwareCommand
     /**
      * @return TaxonSlugGeneratorInterface|object
      */
-    protected function getTaxonSlugGenerator(): ?object
+    private function getTaxonSlugGenerator(): ?object
     {
         return $this->getContainer()->get('sylius.generator.taxon_slug');
     }

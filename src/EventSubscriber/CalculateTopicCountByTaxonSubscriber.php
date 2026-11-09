@@ -25,7 +25,7 @@ class CalculateTopicCountByTaxonSubscriber implements EventSubscriberInterface
     /**
      * TopicCountByTaxonSubscriber constructor.
      */
-    public function __construct(protected TopicCountByTaxonUpdater $updater)
+    public function __construct(private TopicCountByTaxonUpdater $updater)
     {
     }
 

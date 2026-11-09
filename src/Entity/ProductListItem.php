@@ -66,13 +66,13 @@ class ProductListItem implements ResourceInterface
      * @var ProductList
      */
     #[ORM\ManyToOne(targetEntity: ProductList::class, inversedBy: 'items')]
-    protected $list;
+    private $list;
 
     /**
      * @var ProductInterface
      */
     #[ORM\ManyToOne(targetEntity: ProductInterface::class, inversedBy: 'listItems')]
-    protected $product;
+    private $product;
 
     public function getList(): ?ProductList
     {

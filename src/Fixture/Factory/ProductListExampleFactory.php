@@ -37,7 +37,7 @@ class ProductListExampleFactory extends AbstractExampleFactory implements Exampl
     public function __construct(
         private FactoryInterface $productListFactory,
         private FactoryInterface $productListItemFactory,
-        protected RepositoryInterface $customerRepository,
+        private RepositoryInterface $customerRepository,
         private RepositoryInterface $productRepository
     ) {
         $this->faker = Factory::create('fr_FR');

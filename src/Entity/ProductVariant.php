@@ -91,54 +91,54 @@ class ProductVariant extends BaseProductVariant implements ProductVariantInterfa
      */
     #[ORM\OneToMany(targetEntity: ProductVariantImage::class, mappedBy: 'variant', cascade: ['persist', 'merge', 'remove'])]
     #[JMS\Groups(['Detailed'])]
-    protected $images;
+    private $images;
 
     /**
      * @var \DateTime
      */
     #[ORM\Column(type: 'date', nullable: true)]
     #[JMS\Groups(['Detailed'])]
-    protected $releasedAt;
+    private $releasedAt;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
     #[JMS\Groups(['Detailed'])]
-    protected $releasedAtPrecision;
+    private $releasedAtPrecision;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $oldHref;
+    private $oldHref;
 
     /**
      * @var ProductBox[]|Collection
      */
     #[ORM\OneToMany(targetEntity: ProductBox::class, mappedBy: 'productVariant')]
-    protected $boxes;
+    private $boxes;
 
     /**
      * @var Collection
      */
     #[ORM\ManyToMany(targetEntity: Person::class, inversedBy: 'designerProducts', cascade: ['persist', 'merge'])]
     #[ORM\JoinTable(name: 'jdj_designer_product_variant', joinColumns: [new ORM\JoinColumn(name: 'productvariant_id', referencedColumnName: 'id')], inverseJoinColumns: [new ORM\JoinColumn(name: 'person_id', referencedColumnName: 'id')])]
-    protected $designers;
+    private $designers;
 
     /**
      * @var Collection
      */
     #[ORM\ManyToMany(targetEntity: Person::class, inversedBy: 'artistProducts', cascade: ['persist', 'merge'])]
     #[ORM\JoinTable(name: 'jdj_artist_product_variant', joinColumns: [new ORM\JoinColumn(name: 'productvariant_id', referencedColumnName: 'id')], inverseJoinColumns: [new ORM\JoinColumn(name: 'person_id', referencedColumnName: 'id')])]
-    protected $artists;
+    private $artists;
 
     /**
      * @var Collection
      */
     #[ORM\ManyToMany(targetEntity: Person::class, inversedBy: 'publisherProducts', cascade: ['persist', 'merge'])]
     #[ORM\JoinTable(name: 'jdj_publisher_product_variant', joinColumns: [new ORM\JoinColumn(name: 'productvariant_id', referencedColumnName: 'id')], inverseJoinColumns: [new ORM\JoinColumn(name: 'person_id', referencedColumnName: 'id')])]
-    protected $publishers;
+    private $publishers;
 
     /**
      * ProductVariant constructor.

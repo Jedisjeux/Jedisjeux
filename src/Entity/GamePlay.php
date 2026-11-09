@@ -105,53 +105,53 @@ class GamePlay implements ResourceInterface
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true, unique: true)]
-    protected $code;
+    private $code;
 
     /**
      * @var int
      */
     #[ORM\Column(type: 'integer', nullable: true, options: ['unsigned' => true])]
-    protected $duration;
+    private $duration;
 
     /**
      * @var int
      */
     #[ORM\Column(type: 'integer', nullable: true)]
-    protected $playerCount;
+    private $playerCount;
 
     /**
      * @var \DateTime
      */
     #[ORM\Column(type: 'date', nullable: true)]
-    protected $playedAt;
+    private $playedAt;
 
     /**
      * @var ProductInterface
      */
     #[ORM\ManyToOne(targetEntity: ProductInterface::class, inversedBy: 'gamePlays')]
     #[ORM\JoinColumn(nullable: false)]
-    protected $product;
+    private $product;
 
     /**
      * @var CustomerInterface
      */
     #[ORM\ManyToOne(targetEntity: CustomerInterface::class)]
     #[ORM\JoinColumn(nullable: false)]
-    protected $author;
+    private $author;
 
     /**
      * @var Topic
      */
     #[ORM\OneToOne(targetEntity: Topic::class, inversedBy: 'gamePlay')]
     #[ORM\JoinColumn(onDelete: 'SET NULL')]
-    protected $topic;
+    private $topic;
 
     /**
      * @var ArrayCollection|GamePlayImage[]
      */
     #[ORM\OneToMany(targetEntity: GamePlayImage::class, mappedBy: 'gamePlay', cascade: ['persist', 'merge', 'remove'])]
     #[Assert\Valid]
-    protected $images;
+    private $images;
 
     /**
      * @var int
@@ -163,7 +163,7 @@ class GamePlay implements ResourceInterface
      * @var ArrayCollection|Player[]
      */
     #[ORM\OneToMany(targetEntity: Player::class, mappedBy: 'gamePlay', cascade: ['persist', 'merge', 'remove'])]
-    protected $players;
+    private $players;
 
     /**
      * GamePlay constructor.

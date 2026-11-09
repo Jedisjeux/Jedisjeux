@@ -154,7 +154,7 @@ class GamePlayRepository extends EntityRepository
     /**
      * @return QueryBuilder
      */
-    protected function getQueryBuilder()
+    private function getQueryBuilder()
     {
         return $this->createQueryBuilder('o')
             ->select('o', 'product', 'variant', 'productTranslation', 'image', 'topic', 'article')

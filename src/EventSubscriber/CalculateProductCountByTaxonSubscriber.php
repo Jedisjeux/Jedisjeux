@@ -25,7 +25,7 @@ class CalculateProductCountByTaxonSubscriber implements EventSubscriberInterface
     /**
      * CalculateProductCountByTaxonSubscriber constructor.
      */
-    public function __construct(protected ProductCountByTaxonUpdater $updater)
+    public function __construct(private ProductCountByTaxonUpdater $updater)
     {
     }
 
