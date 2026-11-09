@@ -1,18 +1,13 @@
-<!-- banner start -->
-<!-- ================ -->
-<div class="banner border-clear light-translucent-bg" style="background-image:url('{{ asset('frontend/images/shop-banner-2.jpg') }}');background-position: 50% 32%;">
+<div class="editorial-catalog">
     {% include 'frontend/year_award/index/_breadcrumb.html.twig' %}
-    <div class="container">
-        <div class="row justify-content-lg-center">
-            <div class="col-lg-8 text-center pv-20">
-                <h2 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
-                    {{ pageTitle }}
-                </h2>
-                <div class="separator object-non-visible mt-10" data-animation-effect="fadeIn"
-                     data-effect-delay="100"></div>
-            </div>
+    <section class="editorial-catalog__intro">
+        <div class="container">
+            <span class="editorial-eyebrow">La ludothèque</span>
+            <h1>{{ 'app.ui.award_winning_games'|trans }}</h1>
+            <p>Retrouvez les jeux récompensés par les grands prix ludiques, année après année.</p>
         </div>
+    </section>
+    <div class="editorial-catalog__filters">
+        {% include 'frontend/year_award/index/_filters.html.twig' %}
     </div>
-    {% include 'frontend/year_award/index/_filters.html.twig' %}
 </div>
-<!-- banner end -->

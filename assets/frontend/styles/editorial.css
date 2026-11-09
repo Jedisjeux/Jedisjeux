@@ -154,9 +154,6 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
 @media (min-width: 768px) { .editorial-article-grid--three { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .editorial-secondary-grid { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(260px,1fr); gap: 34px; margin-top: 44px; }
 .editorial-secondary-grid > div { min-width: 0; }
-.editorial-home .image-box.style-2 { overflow: hidden; border: 1px solid var(--editorial-border); border-radius: 12px; background: var(--ed-surface); box-shadow: 0 5px 18px rgba(var(--ed-shadow-rgb),.05); }
-.editorial-home .image-box.style-2 .overlay-container img { width: 100%; }
-.editorial-home .image-box.style-2 .body { padding: 18px; }
 .editorial-home .media { padding: 12px 0; }
 .editorial-home .media img { border-radius: 7px; }
 .editorial-home .editorial-play-section { margin-top: 38px; }
@@ -165,20 +162,9 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
 .editorial-products .editorial-section-heading { margin-bottom: 22px; }
 .editorial-products .row.grid-space-10 { margin-right: -8px; margin-left: -8px; }
 .editorial-products .row.grid-space-10 > div { padding-right: 8px; padding-left: 8px; }
-.editorial-products .image-box.style-2 { height: 100%; margin-bottom: 0; border-color: var(--ed-line); border-radius: 9px; background: var(--ed-surface); }
 .editorial-releases + .editorial-releases { padding-top: 0; }
 .editorial-releases__more { margin: 18px 0 0; text-align: right; }
 .editorial-releases__more a { color: var(--ed-accent); font-size: 13px; font-weight: 700; }
-.editorial-products .image-box.style-2 .overlay-container { aspect-ratio: 1.05; }
-.editorial-products .image-box.style-2 .overlay-container > img { width: 100%; height: 100%; object-fit: cover; }
-.editorial-products .image-box.style-2 .overlay-bottom { padding: 12px; background: linear-gradient(transparent,rgba(var(--ed-shadow-rgb),.85)); }
-.editorial-products .image-box.style-2 .overlay-bottom .lead { font: 700 17px 'PT Serif', Georgia, serif; }
-.editorial-products .image-box.style-2 .body { padding: 14px; }
-.editorial-products .image-box.style-2 .body > p:first-child { margin-bottom: 8px; color: var(--ed-star); }
-.editorial-products .image-box.style-2 .body > p:not(:first-child) { min-height: 48px; color: var(--ed-text-soft); font-size: 12px; line-height: 1.5; }
-.editorial-products .image-box.style-2 ul.list-icons { display: flex; flex-wrap: wrap; gap: 5px 9px; min-height: 34px; margin: 8px 0 12px; color: var(--ed-text-soft); }
-.editorial-products .image-box.style-2 ul.list-icons li { display: inline-block; margin: 0; font-size: 10px; }
-.editorial-products .image-box.style-2 .btn-default { padding: 6px 10px; border-radius: 18px; background: var(--ed-accent); border-color: var(--ed-accent); color: var(--ed-accent-contrast); font-size: 11px; }
 .editorial-community { padding: 28px 0 34px; background: var(--editorial-panel); border-top: 1px solid var(--editorial-border-soft); border-bottom: 1px solid var(--editorial-border-soft); }
 .editorial-community__panel { display: grid; grid-template-columns: minmax(0,2.6fr) minmax(240px,1fr); align-items: center; gap: 28px; padding: 22px 26px; border: 1px solid var(--editorial-border); border-radius: 10px; background: rgba(var(--ed-surface-rgb),.52); box-shadow: 0 4px 18px rgba(var(--ed-shadow-rgb),.035); }
 .editorial-community__main h2, .editorial-categories h2 { margin: 0 0 16px; color: var(--ed-ink); font: 700 22px/1.2 'PT Serif', Georgia, serif; text-transform: none; }
@@ -1146,8 +1132,6 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
   .editorial-game-actions--intro { align-items: flex-start; flex-direction: column; gap: 10px; padding: 13px; }
   .editorial-game-actions__links { gap: 8px 12px; }
   .editorial-products { padding: 18px 0 36px; }
-  .editorial-products .image-box.style-2 .body { padding: 10px; }
-  .editorial-products .image-box.style-2 .body > p:not(:first-child) { display: none; }
   .editorial-community__panel { grid-template-columns: 1fr; gap: 16px; padding: 19px; }
   .editorial-categories { padding: 0 20px; }
   .editorial-community__stats { grid-template-columns: repeat(2,minmax(0,1fr)); row-gap: 12px; }

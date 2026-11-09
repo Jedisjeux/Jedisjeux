@@ -13,7 +13,8 @@
         {% endif %}
     </a>
     <div class="editorial-catalog-card__body">
-        {% if product.mainTaxon is not null %}<span class="editorial-catalog-card__category">{{ product.mainTaxon.name }}</span>{% endif %}
+        {% set card_category = card_category|default(product.mainTaxon is not null ? product.mainTaxon.name : null) %}
+        {% if card_category is not empty %}<span class="editorial-catalog-card__category">{{ card_category }}</span>{% endif %}
         <h2 itemprop="name"><a href="{{ productPath }}">{{ product.name }}</a></h2>
 
         {% if product.averageRating > 0 %}
