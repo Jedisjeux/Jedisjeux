@@ -19,7 +19,6 @@
 !/etc/build/.gitkeep
 
 /behat.yml
-/phpspec.yml
 /phpunit.xml
 
 Makefile

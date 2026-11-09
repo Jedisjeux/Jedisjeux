@@ -10,7 +10,6 @@ commands=(
     validate-twig
     validate-yaml-files
     validate-yarn-packages
-    test-phpspec
     test-phpstan
     test-phpunit
     test-installer

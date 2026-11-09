@@ -110,12 +110,6 @@ function psalm(#[AsRawTokens] array $args = []): int
     return docker_exit_code(['php', '-d', 'memory_limit=2G', 'vendor/bin/psalm', '--show-info=false', ...$args], 'app-builder');
 }
 
-#[AsTask(description: 'Run phpspec in the builder container', namespace: 'test')]
-function phpspec(#[AsRawTokens] array $args = []): int
-{
-    return docker_exit_code(['vendor/bin/phpspec', 'run', '--no-interaction', ...$args], 'app-builder');
-}
-
 #[AsTask(description: 'Run PHPUnit in the builder container', namespace: 'test')]
 function phpunit(#[AsRawTokens] array $args = []): int
 {

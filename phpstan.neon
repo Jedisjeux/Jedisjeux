@@ -18,7 +18,6 @@ parameters:
         - '**/DependencyInjection/Configuration.php'
 
         # Test dependencies
-        - 'spec/**.php'
         - 'tests/**.php'
 
         # These packages aren't in require-dev of the global package

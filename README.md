@@ -58,10 +58,9 @@ castor app:symfony --env=test doctrine:database:create
 castor app:symfony --env=test doctrine:migrations:migrate -n
 ```
 
-Then run [phpspec](https://phpspec.net), [PHPUnit](https://phpunit.de) and [Behat](https://behat.org):
+Then run [PHPUnit](https://phpunit.de) and [Behat](https://behat.org):
 
 ```bash
-castor test:phpspec
 castor test:phpunit
 castor test:behat
 ```

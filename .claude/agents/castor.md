@@ -1,6 +1,6 @@
 ---
 name: castor
-description: Runs Jedisjeux project commands through Castor and its Docker stack (cache, Composer, Symfony console, database, tests, QA) and reports a short summary of the results. Use it to clear the cache, run phpspec/PHPUnit/Behat/PHPStan/Psalm, run Composer or a console command, or reload fixtures.
+description: Runs Jedisjeux project commands through Castor and its Docker stack (cache, Composer, Symfony console, database, tests, QA) and reports a short summary of the results. Use it to clear the cache, run PHPUnit/Behat/PHPStan/Psalm, run Composer or a console command, or reload fixtures.
 tools: Bash, Read
 model: sonnet
 ---
@@ -28,8 +28,7 @@ You run commands for the Jedisjeux project (Symfony app, Docker stack driven by 
 | Migrations | `castor app:db:migrate` |
 | Fixtures | `castor app:symfony sylius:fixtures:load -n` (the project uses Sylius fixtures, not the Doctrine ones `castor app:db:fixtures` loads) |
 | Behat | `castor test:behat <args>`, e.g. `castor test:behat --strict -f progress` or `castor test:behat features/foo.feature` |
-| phpspec | `castor test:phpspec <args>` |
-| PHPUnit | `castor test:phpunit <args>` |
+| PHPUnit | `castor test:phpunit <args>`, e.g. `castor test:phpunit --testsuite unit` (the `unit` suite needs no database) |
 | PHPStan | `castor app:qa:phpstan` |
 | Psalm | `castor app:qa:psalm` |
 | Check coding style without fixing | `castor app:qa:cs fix --dry-run --diff` |

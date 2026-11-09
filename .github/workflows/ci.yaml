@@ -158,10 +158,6 @@ jobs:
         run: castor app:symfony --env=test cache:warmup
 
       -
-        name: Run PHPSpec
-        run: castor test:phpspec -f dot
-
-      -
         name: Run PHPUnit
         run: castor test:phpunit
 
