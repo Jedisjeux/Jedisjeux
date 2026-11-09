@@ -5,11 +5,25 @@
 {% set productPath = path('sylius_frontend_product_show', { 'slug': product.slug }) %}
 
 <article class="editorial-catalog-card" itemscope itemtype="https://schema.org/Game">
-    <a class="editorial-catalog-card__image" href="{{ productPath }}" aria-label="{{ product.name }}">
+    <a class="editorial-catalog-card__image{{ card_award is defined ? ' editorial-catalog-card__image--awarded' }}" href="{{ productPath }}" aria-label="{{ product.name }}">
         {% if product.mainImage is not null %}
             {{ images.fit(product.mainImage.webPath, product.name) }}
         {% else %}
             <span class="editorial-catalog-card__placeholder"><i class="fa fa-cubes" aria-hidden="true">{{ ux_icon('fa:cubes', {class: 'fa-svg'}) }}</i></span>
+        {% endif %}
+        {% if card_award is defined and card_award.award is not null %}
+            {% set awardImage = card_award.award.image %}
+            <span class="editorial-catalog-card__award">
+                {% if awardImage is not null and awardImage.webPath is not null %}
+                    <img class="editorial-catalog-card__award-logo" src="{{ awardImage.webPath|imagine_filter('thumbnail') }}" alt="" loading="lazy">
+                {% else %}
+                    <span class="editorial-catalog-card__award-logo"><i class="fa fa-trophy" aria-hidden="true">{{ ux_icon('fa:trophy', {class: 'fa-svg'}) }}</i></span>
+                {% endif %}
+                <span class="editorial-catalog-card__award-text">
+                    <strong>{{ card_award.award.name }}</strong>
+                    {% if card_award.year is not empty %}<span>{{ card_award.year }}</span>{% endif %}
+                </span>
+            </span>
         {% endif %}
     </a>
     <div class="editorial-catalog-card__body">

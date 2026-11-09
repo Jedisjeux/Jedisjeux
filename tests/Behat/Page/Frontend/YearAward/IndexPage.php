@@ -30,6 +30,12 @@ class IndexPage extends SymfonyPage
      */
     public function isYearAwardOnList($title)
     {
-        return null !== $this->getDocument()->find('css', sprintf('#year-award-list .editorial-catalog-card__category:contains("%s")', $title));
+        foreach ($this->getDocument()->findAll('css', '#year-award-list .editorial-catalog-card__award-text') as $element) {
+            if ($title === trim((string) preg_replace('/\s+/', ' ', $element->getText()))) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

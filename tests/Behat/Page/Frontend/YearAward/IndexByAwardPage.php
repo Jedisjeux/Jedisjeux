@@ -31,7 +31,7 @@ class IndexByAwardPage extends SymfonyPage implements NamesListPageInterface
     {
         return array_map(
             static fn (NodeElement $element): string => trim($element->getText()),
-            $this->getDocument()->findAll('css', '#year-award-list .editorial-catalog-card__category'),
+            $this->getDocument()->findAll('css', '#year-award-list .editorial-catalog-card__award-text'),
         );
     }
 }
