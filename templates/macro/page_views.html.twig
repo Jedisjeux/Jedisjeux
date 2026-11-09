@@ -1,6 +1,3 @@
-{% macro render(id, object, pagePath) %}
-    <div id="page-views"
-         data-object="{{ object }}"
-         data-id="{{ id }}"
-         data-page-path="{{ pagePath }}"></div>
+{% macro render(id, resource) %}
+    <div id="page-views" data-resource="{{ resource }}" data-id="{{ id }}" hidden></div>
 {% endmacro %}

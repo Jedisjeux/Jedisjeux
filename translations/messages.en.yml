@@ -237,9 +237,6 @@ app:
         score: Score
         see_later: See later
         select_people: Select people
-        session_count: Session count
-        sessions_of_current_month: Sessions of current month
-        sessions_of_current_year: Sessions of current year
         short_description: Short description
         show_posts: Show posts
         show_game_sheet: Show game sheet

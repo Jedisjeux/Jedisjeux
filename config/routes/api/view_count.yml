@@ -1,0 +1,8 @@
+app_api_view_count_increment:
+    methods: [POST]
+    path: /{resource}/{id}/views
+    defaults:
+        _controller: App\Controller\ViewCountController::incrementAction
+    requirements:
+        resource: articles|products|topics
+        id: \d+
