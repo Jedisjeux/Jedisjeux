@@ -1,17 +1,12 @@
 {% set pageTitle = game_award.name %}
 
-{% include 'frontend/year_award/indexByAward/_breadcrumb.html.twig' %}
-<div class="container">
-    <div class="row justify-content-lg-center">
-        <div class="col-lg-8 text-center pv-20">
-            <h2 class="title object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
-                {{ pageTitle }}
-            </h2>
-            <div class="separator object-non-visible mt-10" data-animation-effect="fadeIn"
-                 data-effect-delay="100"></div>
-            <div class="text-center object-non-visible" data-animation-effect="fadeIn" data-effect-delay="100">
-                {{ game_award.description|raw }}
-            </div>
+<div>
+    {% include 'frontend/year_award/indexByAward/_breadcrumb.html.twig' %}
+    <section class="editorial-catalog__intro">
+        <div class="container">
+            <span class="editorial-eyebrow">La ludothèque · {{ 'app.ui.award_winning_games'|trans }}</span>
+            <h1>{{ game_award.name }}</h1>
+            {% if game_award.description is not empty %}<div class="editorial-catalog__description">{{ game_award.description|raw }}</div>{% endif %}
         </div>
-    </div>
+    </section>
 </div>

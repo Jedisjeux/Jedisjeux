@@ -1,7 +1,6 @@
-<!-- banner start -->
-<!-- ================ -->
-<div class="banner border-clear light-translucent-bg" style="background-image:url('{{ asset('frontend/images/shop-banner-2.jpg') }}');background-position: 50% 32%;">
+<div class="editorial-catalog">
     {{ component('GameAward:Banner', {slug: app.request.get('slug')}) }}
-    {% include 'frontend/year_award/index/_filters.html.twig' %}
+    <div class="editorial-catalog__filters">
+        {% include 'frontend/year_award/index/_filters.html.twig' %}
+    </div>
 </div>
-<!-- banner end -->
