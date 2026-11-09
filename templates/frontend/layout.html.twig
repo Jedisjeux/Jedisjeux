@@ -65,8 +65,9 @@
 
 {# Icons cloned by the scripts #}
 <template id="app-rating-star"><i class="fa fa-star" aria-hidden="true">{{ ux_icon('fa:star', {class: 'fa-svg'}) }}</i></template>
-{% for icon in ['user', 'child', 'clock-o', 'cog', 'picture-o'] %}
-    <template id="app-entity-icon-{{ icon }}">{{ fa_icon('fa fa-' ~ icon) }}</template>
+{% from 'macro/icon.html.twig' import icon %}
+{% for name in ['user', 'age', 'clock', 'tag'] %}
+    <template id="app-entity-icon-{{ name }}">{{ icon(name) }}</template>
 {% endfor %}
 <script>
     (function () {
