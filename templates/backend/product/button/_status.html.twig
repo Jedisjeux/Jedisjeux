@@ -1,10 +1,7 @@
 {% import _self as self %}
 
 {% macro updateStateButton(product, transition, icon, color) %}
-    <form class="d-inline-block" action="{{ path('sylius_admin_product_update_state', {
-        'id': product.id,
-        'transition': transition
-    }) }}" method="post">
+    <form class="d-inline-block" action="{{ path('sylius_admin_product_' ~ transition, {'id': product.id}) }}" method="post">
         <input type="hidden" name="_method" value="PATCH">
         <button class="btn {{ color|default('') }}" type="submit">
             {{ ux_icon('tabler:' ~ icon, {'class': 'icon'}) }}

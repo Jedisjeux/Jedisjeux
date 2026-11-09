@@ -34,6 +34,7 @@ final class YearAwardGrid
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
+            ->setLimits([12])
             ->setRepositoryMethod('createListQueryBuilder', [
                 $this->locale,
                 '$slug',

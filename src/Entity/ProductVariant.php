@@ -16,10 +16,70 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
+use Sylius\Resource\Metadata\AsResource;
+use Sylius\Resource\Metadata\Create;
+use Sylius\Resource\Metadata\Delete;
+use Sylius\Resource\Metadata\Index;
+use Sylius\Resource\Metadata\Update;
 
 #[ORM\Entity]
 #[JMS\ExclusionPolicy('all')]
 #[ORM\Table(name: 'sylius_product_variant')]
+#[AsResource(
+    alias: 'sylius.product_variant',
+    section: 'backend',
+    templatesDir: 'backend/crud',
+    routePrefix: '/admin',
+    vars: [
+        'templates' => ['form' => 'backend/product_variant/_form.html.twig'],
+    ],
+    operations: [
+        new Index(
+            path: 'products/{productId}/variants/',
+            grid: 'sylius_backend_product_variant',
+            vars: [
+                'route' => ['parameters' => ['productId' => '$productId']],
+                'icon' => 'cubes',
+                'subheader' => 'sylius.ui.manage_variants',
+            ],
+        ),
+        new Create(
+            path: 'products/{productId}/variants/new',
+            factoryMethod: 'createForProduct',
+            factoryArguments: [
+                'product' => "@=throw_not_found_on_null(sylius_repositories.get('sylius.repository.product').find(request.attributes.get('productId')))",
+            ],
+            redirectToRoute: 'sylius_backend_product_variant_update',
+            redirectArguments: [
+                'productId' => 'resource.product.id',
+                'id' => 'resource.id',
+            ],
+            vars: ['route' => ['parameters' => ['productId' => '$productId']]],
+        ),
+        new Update(
+            path: 'products/{productId}/variants/{id}/edit',
+            repositoryMethod: 'findOneBy',
+            repositoryArguments: [
+                'criteria' => "@={'id': request.attributes.get('id'), 'product': request.attributes.get('productId')}",
+            ],
+            redirectToRoute: 'sylius_backend_product_variant_index',
+            redirectArguments: ['productId' => 'resource.product.id'],
+            vars: [
+                'route' => [
+                    'parameters' => [
+                        'id' => '$id',
+                        'productId' => '$productId',
+                    ],
+                ],
+            ],
+        ),
+        new Delete(
+            path: 'product-variants/{id}',
+            redirectToRoute: 'sylius_backend_product_variant_index',
+            redirectArguments: ['productId' => 'resource.product.id'],
+        ),
+    ],
+)]
 class ProductVariant extends BaseProductVariant implements ProductVariantInterface
 {
     const RELEASED_AT_PRECISION_ON_DAY = 'on-day';

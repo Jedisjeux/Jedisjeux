@@ -29,6 +29,7 @@ final class ProductFromTaxonGrid
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
+            ->setLimits([16])
             ->setRepositoryMethod('createListQueryBuilder', [
                 'locale' => $this->locale,
                 'onlyPublished' => true,

@@ -113,7 +113,7 @@ class TaxonContext implements Context
     }
 
     /**
-     * @Given /^there is a (mechanism|theme) "([^"]+)"$/
+     * @Given /^there is(?:| also) a (mechanism|theme|zone) "([^"]+)"$/
      */
     public function thereIsTaxon($taxonCode, $taxonName)
     {

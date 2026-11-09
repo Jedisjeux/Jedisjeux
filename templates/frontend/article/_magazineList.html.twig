@@ -1,8 +1,9 @@
 {% import 'macro/messages.html.twig' as messages %}
+{% set articles = articles.data is defined ? articles.data : articles %}
 
-{% if articles.data|length > 0 %}
+{% if articles|length > 0 %}
 <div class="editorial-article-grid">
-    {% for article in articles.data %}
+    {% for article in articles %}
         {% include 'frontend/article/_single.html.twig' %}
     {% endfor %}
 </div>

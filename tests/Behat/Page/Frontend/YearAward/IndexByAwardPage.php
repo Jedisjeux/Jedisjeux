@@ -1,0 +1,37 @@
+<?php
+
+/*
+ * This file is part of Jedisjeux.
+ *
+ * (c) Loïc Frémont
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace App\Tests\Behat\Page\Frontend\YearAward;
+
+use App\Tests\Behat\Page\Frontend\NamesListPageInterface;
+use Behat\Mink\Element\NodeElement;
+use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+
+class IndexByAwardPage extends SymfonyPage implements NamesListPageInterface
+{
+    public function getRouteName(): string
+    {
+        return 'app_frontend_year_award_index_by_award';
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getNames(): array
+    {
+        return array_map(
+            static fn (NodeElement $element): string => trim($element->getText()),
+            $this->getDocument()->findAll('css', '#year-award-list .lead'),
+        );
+    }
+}

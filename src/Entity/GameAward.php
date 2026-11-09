@@ -14,10 +14,28 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Metadata\AsResource;
+use Sylius\Resource\Metadata\Create;
+use Sylius\Resource\Metadata\Delete;
+use Sylius\Resource\Metadata\Index;
+use Sylius\Resource\Metadata\Update;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity]
 #[ORM\Table('jdj_game_award')]
+#[AsResource(
+    alias: 'app.game_award',
+    section: 'backend',
+    templatesDir: 'backend/crud',
+    routePrefix: '/admin',
+    vars: ['subheader' => 'app.ui.manage_game_awards'],
+    operations: [
+        new Index(grid: 'app_backend_game_award', vars: ['icon' => 'trophy']),
+        new Create(redirectToRoute: 'app_backend_game_award_update'),
+        new Update(redirectToRoute: 'app_backend_game_award_update'),
+        new Delete(),
+    ],
+)]
 class GameAward implements ResourceInterface
 {
     use IdentifiableTrait;

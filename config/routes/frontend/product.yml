@@ -1,61 +1,6 @@
-sylius_product:
-    resource: |
-        alias: sylius.product
-        path: /jeux
-        templates: frontend/game
-        redirect: index
-    type: sylius.resource
-
-sylius_frontend_product_index:
-    methods: [GET]
-    path: /jeux-de-societe/
-    defaults:
-        _controller: sylius.controller.product::indexWithTaxonsAction
-        _sylius:
-            paginate: 16
-            grid: sylius_frontend_product
-            template: frontend/product/index.html.twig
-
 sylius_frontend_product_release_index:
     methods: [GET]
     path: /jeux-de-societe/les-sorties
     defaults:
         _controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
-        template:    frontend/game/releaseIndex.html.twig
-
-sylius_frontend_product_index_by_person:
-    methods: [GET]
-    path: /jeux-de-societe/personnes/{slug}
-    defaults:
-        _controller: sylius.controller.product::indexByPersonAction
-        _sylius:
-            grid: sylius_frontend_product_from_person
-            paginate: 16
-            template: frontend/product/indexByPerson.html.twig
-
-sylius_frontend_product_index_by_taxon:
-    methods: [GET]
-    path: /jeux-de-societe/{slug}
-    defaults:
-        _controller: sylius.controller.product::indexByTaxonAction
-        _sylius:
-            grid: sylius_frontend_product_from_taxon
-            paginate: 16
-            template: frontend/product/indexByTaxon.html.twig
-    requirements:
-        slug: "[^?]+"
-    options:
-      expose: true
-
-sylius_frontend_product_show:
-    methods: [GET]
-    path: /jeu-de-societe/{slug}
-    defaults:
-        _controller: sylius.controller.product::showAction
-        _sylius:
-            repository:
-                method: findOneBySlug
-                arguments: ['%locale%', $slug, expr:service('security.authorization_checker').isGranted('ROLE_PRODUCT_MANAGER')]
-            template: frontend/product/show.html.twig
-    options:
-      expose: true
+        template:    frontend/product/releases.html.twig

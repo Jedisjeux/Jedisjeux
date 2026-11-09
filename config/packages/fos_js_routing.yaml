@@ -1,0 +1,11 @@
+fos_js_routing:
+    # The #[AsResource] operations cannot carry the "expose" route option
+    routes_to_expose:
+        - app_frontend_article_index_by_taxon
+        - app_frontend_person_index
+        - app_frontend_person_index_by_taxon
+        - app_frontend_topic_index_by_taxon
+        - app_frontend_year_award_index_by_award
+        - sylius_frontend_product_index_by_taxon
+        - sylius_frontend_product_review_update
+        - sylius_frontend_product_show

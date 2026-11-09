@@ -15,12 +15,72 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Metadata\ApplyStateMachineTransition;
+use Sylius\Resource\Metadata\AsResource;
+use Sylius\Resource\Metadata\Create;
+use Sylius\Resource\Metadata\Delete;
+use Sylius\Resource\Metadata\Index;
+use Sylius\Resource\Metadata\Update;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Attribute as Vich;
 
 #[ORM\Entity]
 #[Vich\Uploadable]
 #[ORM\Table(name: 'jdj_product_file')]
+#[AsResource(
+    alias: 'app.product_file',
+    section: 'backend',
+    templatesDir: 'backend/crud',
+    routePrefix: '/admin',
+    vars: ['subheader' => 'app.ui.manage_product_files'],
+    operations: [
+        new Index(grid: 'app_backend_product_file', vars: ['icon' => 'th']),
+        new Update(
+            redirectToRoute: 'app_backend_product_file_update',
+            vars: [
+                'templates' => [
+                    'toolbar' => 'backend/product_file/_toolbar.html.twig',
+                    'form' => 'backend/product_file/_form.html.twig',
+                ],
+            ],
+        ),
+        new Delete(),
+        new ApplyStateMachineTransition(
+            path: 'product-files/{id}/accept',
+            methods: ['PUT'],
+            stateMachineGraph: 'app_product_file',
+            stateMachineTransition: 'accept',
+        ),
+        new ApplyStateMachineTransition(
+            path: 'product-files/{id}/reject',
+            methods: ['PUT'],
+            stateMachineGraph: 'app_product_file',
+            stateMachineTransition: 'reject',
+        ),
+    ],
+)]
+#[AsResource(
+    alias: 'app.product_file',
+    section: 'frontend',
+    operations: [
+        new Index(
+            path: '/products/{slug}/files/',
+            template: 'frontend/product_file/index.html.twig',
+            grid: 'app_frontend_product_file',
+        ),
+        new Create(
+            path: '/products/{slug}/files/new',
+            template: 'frontend/product_file/create.html.twig',
+            factoryMethod: 'createForProduct',
+            factoryArguments: [
+                'product' => "@=throw_not_found_on_null(sylius_repositories.get('sylius.repository.product').findOneBySlug(request.getLocale(), request.attributes.get('slug')))",
+            ],
+            notificationMessage: 'app.product_file.wait_for_the_acceptation',
+            redirectToRoute: 'sylius_frontend_product_show',
+            redirectArguments: ['slug' => 'resource.product.slug'],
+        ),
+    ],
+)]
 class ProductFile extends File implements ResourceInterface
 {
     const STATUS_NEW = 'new';

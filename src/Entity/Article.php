@@ -11,6 +11,7 @@
 
 namespace App\Entity;
 
+use App\Twig\Context\TaxonContextFactory;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,6 +23,13 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Resource\Metadata\ApplyStateMachineTransition;
+use Sylius\Resource\Metadata\AsResource;
+use Sylius\Resource\Metadata\Create;
+use Sylius\Resource\Metadata\Delete;
+use Sylius\Resource\Metadata\Index;
+use Sylius\Resource\Metadata\Show;
+use Sylius\Resource\Metadata\Update;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -30,6 +38,125 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity]
 #[ORM\Table(name: 'jdj_article')]
 #[ORM\Index(name: 'publishable_idx', columns: ['publishable'])]
+#[AsResource(
+    alias: 'app.article',
+    section: 'backend',
+    templatesDir: 'backend/crud',
+    routePrefix: '/admin',
+    vars: [
+        'subheader' => 'app.ui.manage_articles',
+        'templates' => ['form' => 'backend/article/_form.html.twig'],
+    ],
+    operations: [
+        new Index(grid: 'app_backend_article', vars: ['icon' => 'newspaper']),
+        new Create(redirectToRoute: 'app_backend_article_update'),
+        new Update(
+            redirectToRoute: 'app_backend_article_update',
+            vars: [
+                'templates' => [
+                    'form' => 'backend/article/_form.html.twig',
+                    'toolbar' => 'backend/article/_toolbar.html.twig',
+                ],
+            ],
+        ),
+        new Delete(),
+        new Index(
+            shortName: 'per_product_index',
+            path: 'products/{productId}/articles/',
+            template: 'backend/crud/index.html.twig',
+            grid: 'app_backend_article_for_product',
+        ),
+        new Create(
+            shortName: 'create_for_product',
+            eventShortName: 'create',
+            path: 'articles/products/{productId}/new',
+            template: 'backend/crud/create.html.twig',
+            factoryMethod: 'createForProduct',
+            factoryArguments: [
+                'product' => "@=throw_not_found_on_null(sylius_repositories.get('sylius.repository.product').find(request.attributes.get('productId')))",
+            ],
+            redirectToRoute: 'app_backend_article_update',
+            vars: [
+                'route' => [
+                    'name' => 'app_backend_article_create_for_product',
+                    'parameters' => ['productId' => '$productId'],
+                ],
+            ],
+        ),
+        new Create(
+            shortName: 'create_for_product_review',
+            eventShortName: 'create',
+            path: 'articles/reviews/{productId}/new',
+            template: 'backend/crud/create.html.twig',
+            factoryMethod: 'createReviewArticleForProduct',
+            factoryArguments: [
+                'product' => "@=throw_not_found_on_null(sylius_repositories.get('sylius.repository.product').find(request.attributes.get('productId')))",
+            ],
+            redirectToRoute: 'app_backend_article_update',
+            vars: [
+                'route' => [
+                    'name' => 'app_backend_article_create_for_product_review',
+                    'parameters' => ['productId' => '$productId'],
+                ],
+            ],
+        ),
+        new ApplyStateMachineTransition(
+            path: 'articles/{id}/ask_for_review',
+            methods: ['PATCH'],
+            stateMachineGraph: 'app_article',
+            stateMachineTransition: 'ask_for_review',
+            redirectToRoute: 'app_backend_article_update',
+        ),
+        new ApplyStateMachineTransition(
+            path: 'articles/{id}/ask_for_publication',
+            methods: ['PATCH'],
+            stateMachineGraph: 'app_article',
+            stateMachineTransition: 'ask_for_publication',
+            redirectToRoute: 'app_backend_article_update',
+        ),
+        new ApplyStateMachineTransition(
+            path: 'articles/{id}/publish',
+            methods: ['PATCH'],
+            stateMachineGraph: 'app_article',
+            stateMachineTransition: 'publish',
+            redirectToRoute: 'app_backend_article_update',
+        ),
+    ],
+)]
+#[AsResource(
+    alias: 'app.article',
+    section: 'frontend',
+    operations: [
+        new Index(
+            path: '/articles/',
+            template: 'frontend/article/index.html.twig',
+            grid: 'app_frontend_article',
+        ),
+        new Index(
+            shortName: 'index_by_product',
+            path: '/jeu-de-societe/{productSlug}/articles/',
+            template: 'frontend/article/index.html.twig',
+            grid: 'app_frontend_article',
+        ),
+        new Index(
+            shortName: 'index_by_taxon',
+            path: '/articles/{slug}',
+            routeRequirements: ['slug' => '[^?]+'],
+            template: 'frontend/article/indexByTaxon.html.twig',
+            grid: 'app_frontend_article',
+            twigContextFactory: TaxonContextFactory::class,
+        ),
+        new Show(
+            path: '/article/{slug}',
+            template: 'frontend/article/show.html.twig',
+            repositoryMethod: 'findOneBySlug',
+            repositoryArguments: [
+                'slug' => "@=request.attributes.get('slug')",
+                'showUnpublished' => "@=is_granted('ROLE_ARTICLE_MANAGER')",
+            ],
+        ),
+    ],
+)]
 class Article implements ResourceInterface, ReviewableInterface, RoutedItemInterface
 {
     use IdentifiableTrait;

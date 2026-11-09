@@ -19,15 +19,17 @@ Avant d'aborder chaque concept de Jedisjeux, voici comment l'application est str
 
 [Twig](https://twig.symfony.com/) est le moteur de gabarits utilisé par Symfony : rapide, sûr et flexible.
 
+Les fragments de page qui ont leurs propres données sont des [composants Twig](../components/).
+
 ## Bibliothèques tierces
 
 Jedisjeux s'appuie sur de nombreuses bibliothèques :
 
-- [Sylius](https://docs.sylius.com/) pour les ressources (routage, contrôleurs), les fixtures, les grilles, les jeux (produits), les avis et la taxonomie ;
+- [Sylius](https://docs.sylius.com/) pour les ressources (pages déclarées avec `#[AsResource]`), les fixtures, les grilles, les jeux (produits), les avis et la taxonomie ;
 - [Sylius Admin UI](https://github.com/Sylius/Stack) (Bootstrap Admin UI et Twig Hooks) pour l'interface d'administration ;
 - [LiipImagineBundle](https://github.com/liip/LiipImagineBundle) pour le traitement des images, les miniatures et le recadrage ;
 - [VichUploaderBundle](https://github.com/dustin10/VichUploaderBundle) pour l'envoi de fichiers ;
 - [Pagerfanta](https://github.com/BabDev/Pagerfanta) pour la pagination ;
 - [Winzou State Machine](https://github.com/winzou/StateMachineBundle) pour les machines à états (cycle de publication des jeux et articles) ;
 - [FOSCKEditorBundle](https://github.com/FriendsOfSymfony/FOSCKEditorBundle) pour l'éditeur de texte riche ;
-- [Symfony UX](https://ux.symfony.com/) et AssetMapper pour le JavaScript du front.
+- [Symfony UX](https://ux.symfony.com/) (composants Twig et dynamiques) et AssetMapper pour le JavaScript du front.

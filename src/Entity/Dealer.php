@@ -15,6 +15,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Metadata\AsResource;
+use Sylius\Resource\Metadata\Create;
+use Sylius\Resource\Metadata\Delete;
+use Sylius\Resource\Metadata\Index;
+use Sylius\Resource\Metadata\Show;
+use Sylius\Resource\Metadata\Update;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -22,6 +28,23 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'jdj_dealer')]
+#[AsResource(
+    alias: 'app.dealer',
+    section: 'backend',
+    templatesDir: 'backend/crud',
+    routePrefix: '/admin',
+    vars: [
+        'subheader' => 'app.ui.manage_dealers',
+        'templates' => ['form' => 'backend/dealer/_form.html.twig'],
+    ],
+    operations: [
+        new Index(grid: 'app_backend_dealer', vars: ['icon' => 'building']),
+        new Create(redirectToRoute: 'app_backend_dealer_update'),
+        new Update(redirectToRoute: 'app_backend_dealer_update'),
+        new Show(),
+        new Delete(),
+    ],
+)]
 class Dealer implements ResourceInterface
 {
     use IdentifiableTrait;

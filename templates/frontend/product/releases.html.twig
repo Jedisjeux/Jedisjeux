@@ -1,0 +1,34 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% set pageTitle = 'app.ui.releases'|trans %}
+{% set activeMenu = 'product' %}
+
+{% block content %}
+    <div class="editorial-catalog">
+        {% include 'frontend/product/releases/_breadcrumb.html.twig' %}
+        <section class="editorial-catalog__intro">
+            <div class="container">
+                <span class="editorial-eyebrow">La ludothèque</span>
+                <h1>{{ 'app.ui.releases'|trans }}</h1>
+                <p>Les jeux qui sortent ce mois-ci, ceux qui viennent de sortir et ceux qui arrivent bientôt.</p>
+            </div>
+        </section>
+    </div>
+
+    {% for period, title in {
+        'this_month': 'app.ui.releases_of_the_month',
+        'next_months': 'app.ui.upcoming_releases',
+        'previous_months': 'app.ui.past_releases',
+    } %}
+        <section id="releases-{{ period|replace({'_': '-'}) }}" class="section editorial-products editorial-releases">
+            <div class="container">
+                <div class="editorial-section-heading">
+                    <div><span class="editorial-eyebrow">{{ 'app.ui.releases'|trans }}</span><h2>{{ title|trans }}</h2></div>
+                </div>
+                {{ component('Product:Releases', {period: period}) }}
+            </div>
+        </section>
+    {% endfor %}
+
+    {% include 'frontend/footer/_top.html.twig' %}
+{% endblock content %}

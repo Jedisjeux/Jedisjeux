@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Behat\Context\Ui\Backend;
 
+use App\Tests\Behat\Page\Backend\Customer\CreatePage;
 use App\Tests\Behat\Page\Backend\Customer\IndexPage;
+use App\Tests\Behat\Page\Backend\Customer\ShowPage;
 use App\Tests\Behat\Page\Backend\Customer\UpdatePage;
 use Behat\Behat\Context\Context;
 use App\Tests\Behat\Bridge\Service\Resolver\CurrentPageResolverInterface;
@@ -40,7 +42,9 @@ final class ManagingCustomersContext implements Context
     public function __construct(
         IndexPage $indexPage,
         UpdatePage $updatePage,
-        CurrentPageResolverInterface $currentPageResolver
+        CurrentPageResolverInterface $currentPageResolver,
+        private readonly CreatePage $createPage,
+        private readonly ShowPage $showPage,
     ) {
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
@@ -230,5 +234,53 @@ final class ManagingCustomersContext implements Context
     public function iDoNotChooseCreateAccountOption()
     {
         // Intentionally left blank.
+    }
+
+    /**
+     * @Given I want to create a new customer
+     */
+    public function iWantToCreateANewCustomer(): void
+    {
+        $this->createPage->open();
+    }
+
+    /**
+     * @When I specify their email as :email
+     */
+    public function iSpecifyTheirEmailAs(string $email): void
+    {
+        $this->createPage->specifyEmail($email);
+    }
+
+    /**
+     * @When I choose to create their account with password :password
+     */
+    public function iChooseToCreateTheirAccountWithPassword(string $password): void
+    {
+        $this->createPage->createAccountWithPassword($password);
+    }
+
+    /**
+     * @When I add them
+     */
+    public function iAddThem(): void
+    {
+        $this->createPage->create();
+    }
+
+    /**
+     * @When /^I view the details of (this customer)$/
+     */
+    public function iViewTheDetailsOfThisCustomer(CustomerInterface $customer): void
+    {
+        $this->showPage->open(['id' => $customer->getId()]);
+    }
+
+    /**
+     * @Then I should see their email :email
+     */
+    public function iShouldSeeTheirEmail(string $email): void
+    {
+        Assert::true($this->showPage->hasContent($email));
     }
 }

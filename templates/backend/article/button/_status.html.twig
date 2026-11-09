@@ -1,10 +1,7 @@
 {% import _self as self %}
 
 {% macro updateStateButton(article, transition, icon, class) %}
-    <form class="d-inline-block" action="{{ path('app_backend_article_update_state', {
-        'id': article.id,
-        'transition': transition
-    }) }}" method="post">
+    <form class="d-inline-block" action="{{ path('app_backend_article_' ~ transition, {'id': article.id}) }}" method="post">
         <input type="hidden" name="_method" value="PATCH">
         <button class="btn {{ class|default('btn-outline-primary') }}" type="submit">
             {{ ux_icon('tabler:' ~ icon, {'class': 'icon'}) }}

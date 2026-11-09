@@ -101,7 +101,7 @@
                 <div class="editorial-game-actions editorial-game-actions--intro">
                     <div class="editorial-game-actions__rating">
                         <strong>{{ 'app.ui.your_rating'|trans }}</strong>
-                        {{ render(url('sylius_partial_product_rating_show', { 'productId': product.id })) }}
+                        {{ component('ProductReview:Rating', {productId: product.id}) }}
                     </div>
                     <div class="editorial-game-actions__links">
                         <a href="#" class="wishlist" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus pr-1" aria-hidden="true">{{ ux_icon('fa:plus', {class: 'fa-svg'}) }}</i>Ajouter à</a>
@@ -122,7 +122,7 @@
                                 </form>
                             </li>
                         </ul>
-                        {{ render(url('sylius_partial_product_review_show_create_or_update_link', {'productSlug': product.slug})) }}
+                        {{ component('ProductReview:ReviewLink', {productSlug: product.slug}) }}
                         <a href="{{ path('app_frontend_game_play_create', { 'productSlug': product.slug } ) }}" class="wishlist"><i class="fa fa-table pr-1" aria-hidden="true">{{ ux_icon('fa:table', {class: 'fa-svg'}) }}</i>Enregistrer une partie</a>
                     </div>
                 </div>

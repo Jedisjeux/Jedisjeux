@@ -31,6 +31,7 @@ final class TopicFromTaxonGrid
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
+            ->setLimits([10])
             ->setRepositoryMethod('createFrontendListQueryBuilder', [
                 'localeCode' => $this->locale,
                 'showPrivate' => 'expr:service(\'security.authorization_checker\').isGranted(\'ROLE_STAFF\')',

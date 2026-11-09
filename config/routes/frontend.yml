@@ -1,59 +1,14 @@
+# The other front-end routes are the operations declared with #[AsResource] on the entities
+
 app_homepage:
     resource: "frontend/homepage.yml"
-
-app_frontend_partial:
-    resource: "frontend/partial.yml"
-    prefix: /_partial
-
-app_article:
-    resource: "frontend/article.yml"
 
 app_account:
     resource: "frontend/account.yml"
     prefix: "mon-compte"
 
-app_contact_request:
-    resource: "frontend/contact_request.yml"
-
-app_festival_list_item:
-    resource: "frontend/festival_list_item.yml"
-
-app_forum:
-    resource: "frontend/forum.yml"
-
-app_game_play:
-    resource: "frontend/game_play.yml"
-
-app_game_play_image:
-    resource: "frontend/game_play_image.yml"
-
-app_person:
-    resource: "frontend/person.yml"
-
 sylius_product:
     resource: "frontend/product.yml"
 
-app_frontend_product_file:
-    resource: "frontend/product_file.yml"
-    prefix: /products/{slug}/files
-
-app_frontend_product_list_item:
-    resource: "frontend/product_list_item.yml"
-
-app_frontend_product_box:
-    resource: "frontend/product_box.yml"
-    prefix: /products/{slug}/boxes
-
-sylius_frontend_product_review:
-    resource: "frontend/product_review.yml"
-    prefix: /products/{slug}/reviews
-
-app_frontend_user:
-    resource: "frontend/user.yml"
-    prefix: /utilisateurs/{username}
-
 sylius_security:
     resource: "frontend/security.yml"
-
-app_frontend_year_award:
-    resource: "frontend/year_award.yml"

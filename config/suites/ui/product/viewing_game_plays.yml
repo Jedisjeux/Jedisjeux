@@ -14,8 +14,10 @@ default:
                 - App\Tests\Behat\Context\Setup\SecurityContext
                 - App\Tests\Behat\Context\Setup\CustomerContext
                 - App\Tests\Behat\Context\Setup\GamePlayContext
+                - App\Tests\Behat\Context\Setup\GamePlayImageContext
                 - App\Tests\Behat\Context\Setup\ProductContext
 
                 - App\Tests\Behat\Context\Ui\Frontend\GamePlayContext
+                - App\Tests\Behat\Context\Ui\Frontend\BrowsingListsContext
             filters:
                 tags: "@viewing_game_plays&&@ui"

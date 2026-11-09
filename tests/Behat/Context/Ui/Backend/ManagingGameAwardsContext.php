@@ -118,4 +118,22 @@ final class ManagingGameAwardsContext implements Context
             'name' => (string) $name,
         ]));
     }
+
+    /**
+     * @When I delete the game award :name
+     */
+    public function iDeleteTheGameAward($name)
+    {
+        $this->indexPage->deleteResourceOnPage(['name' => $name]);
+    }
+
+    /**
+     * @Then there should not be the game award :name anymore
+     */
+    public function thereShouldNotBeTheGameAwardAnymore($name)
+    {
+        $this->indexPage->open();
+
+        Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $name]));
+    }
 }

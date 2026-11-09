@@ -1,6 +1,6 @@
 <!-- files start -->
 <div class="margin-clear space-top">
-    {{ render(url('app_frontend_partial_product_file_latest', {'productId': product.id, 'template': 'frontend/product_file/_list.html.twig'})) }}
+    {{ component('ProductFile:LatestForProduct', {productId: product.id}) }}
 
     <a href="{{ path('app_frontend_product_file_index', {'slug': product.slug}) }}"
        class="btn btn-gray btn-sm margin-clear">

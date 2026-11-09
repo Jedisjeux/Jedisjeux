@@ -9,7 +9,6 @@ sylius_review:
                 classes:
                     model: App\Entity\ProductReview
                     repository: App\Repository\ProductReviewRepository
-                    controller: App\Controller\ProductReviewController
                     form: App\Form\Type\ProductReviewType
         article:
             subject: App\Entity\Article

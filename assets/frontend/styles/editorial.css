@@ -166,6 +166,9 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
 .editorial-products .row.grid-space-10 { margin-right: -8px; margin-left: -8px; }
 .editorial-products .row.grid-space-10 > div { padding-right: 8px; padding-left: 8px; }
 .editorial-products .image-box.style-2 { height: 100%; margin-bottom: 0; border-color: var(--ed-line); border-radius: 9px; background: var(--ed-surface); }
+.editorial-releases + .editorial-releases { padding-top: 0; }
+.editorial-releases__more { margin: 18px 0 0; text-align: right; }
+.editorial-releases__more a { color: var(--ed-accent); font-size: 13px; font-weight: 700; }
 .editorial-products .image-box.style-2 .overlay-container { aspect-ratio: 1.05; }
 .editorial-products .image-box.style-2 .overlay-container > img { width: 100%; height: 100%; object-fit: cover; }
 .editorial-products .image-box.style-2 .overlay-bottom { padding: 12px; background: linear-gradient(transparent,rgba(var(--ed-shadow-rgb),.85)); }

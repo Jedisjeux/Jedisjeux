@@ -28,6 +28,7 @@ final class PersonGrid
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
+            ->setLimits([16])
             ->setRepositoryMethod('createFrontendListQueryBuilder', [
                 'criteria' => 'expr:service(\'request_stack\').getCurrentRequest().get(\'criteria\', [])',
                 'sorting' => 'expr:service(\'request_stack\').getCurrentRequest().get(\'sorting\', [])',

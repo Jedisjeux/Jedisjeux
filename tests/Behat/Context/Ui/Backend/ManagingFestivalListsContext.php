@@ -14,6 +14,7 @@ namespace App\Tests\Behat\Context\Ui\Backend;
 use App\Entity\FestivalList;
 use App\Tests\Behat\Page\Backend\FestivalList\CreatePage;
 use App\Tests\Behat\Page\Backend\FestivalList\IndexPage;
+use App\Tests\Behat\Page\Backend\FestivalList\UpdatePage;
 use Behat\Behat\Context\Context;
 use Webmozart\Assert\Assert;
 
@@ -29,10 +30,56 @@ final class ManagingFestivalListsContext implements Context
      */
     private $createPage;
 
-    public function __construct(IndexPage $indexPage, CreatePage $createPage)
+    /**
+     * @var UpdatePage
+     */
+    private $updatePage;
+
+    public function __construct(IndexPage $indexPage, CreatePage $createPage, UpdatePage $updatePage)
     {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
+        $this->updatePage = $updatePage;
+    }
+
+    /**
+     * @When I want to browse festival lists
+     */
+    public function iWantToBrowseFestivalLists()
+    {
+        $this->indexPage->open();
+    }
+
+    /**
+     * @Given I want to edit festival list :festivalList
+     */
+    public function iWantToEditTheFestivalList(FestivalList $festivalList)
+    {
+        $this->updatePage->open(['id' => $festivalList->getId()]);
+    }
+
+    /**
+     * @When I change its name as :name
+     */
+    public function iChangeItsNameAs($name)
+    {
+        $this->updatePage->nameIt($name);
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @When I delete festival list with name :name
+     */
+    public function iDeleteFestivalListWithName($name)
+    {
+        $this->indexPage->deleteResourceOnPage(['name' => $name]);
     }
 
     /**
@@ -97,5 +144,33 @@ final class ManagingFestivalListsContext implements Context
         $this->indexPage->open();
 
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $festivalList->getName()]));
+    }
+
+    /**
+     * @Then I should see the festival list named :name in the list
+     */
+    public function iShouldSeeTheFestivalListNamedInTheList($name)
+    {
+        $this->indexPage->open();
+
+        Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $name]));
+    }
+
+    /**
+     * @Then /^there should be (\d+) festival lists in the list$/
+     */
+    public function thereShouldBeFestivalListsInTheList($number)
+    {
+        Assert::same($this->indexPage->countItems(), (int) $number);
+    }
+
+    /**
+     * @Then there should not be :name festival list anymore
+     */
+    public function thereShouldNotBeFestivalListAnymore($name)
+    {
+        $this->indexPage->open();
+
+        Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $name]));
     }
 }

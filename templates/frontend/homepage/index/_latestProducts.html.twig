@@ -7,16 +7,7 @@
             <div><span class="editorial-eyebrow">La ludothèque</span><h2>Jeux à découvrir</h2></div>
             <a href="{{ path('sylius_frontend_product_index') }}">Tous les jeux {{ icon('arrow-right') }}</a>
         </div>
-        {{ render(url('sylius_partial_product_index', {
-            'paginate': 4,
-            'template': 'frontend/product/grid/_fourColumns.html.twig',
-            'criteria': {
-                'status': 'PUBLISHED'
-            },
-            'sorting': {
-                'createdAt': 'desc'
-            }
-        })) }}
+        {{ component('Product:Latest', {count: 4}) }}
     </div>
 </section>
 <!-- section end -->

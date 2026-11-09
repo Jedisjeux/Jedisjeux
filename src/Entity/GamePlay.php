@@ -14,6 +14,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Metadata\AsResource;
+use Sylius\Resource\Metadata\Create;
+use Sylius\Resource\Metadata\Delete;
+use Sylius\Resource\Metadata\Index;
+use Sylius\Resource\Metadata\Show;
+use Sylius\Resource\Metadata\Update;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -21,6 +27,75 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'jdj_game_play')]
+#[AsResource(
+    alias: 'app.game_play',
+    section: 'backend',
+    templatesDir: 'backend/crud',
+    routePrefix: '/admin',
+    vars: ['subheader' => 'app.ui.manage_game_plays'],
+    operations: [
+        new Index(grid: 'app_backend_game_play', vars: ['icon' => 'play']),
+        new Update(redirectToRoute: 'app_backend_game_play_update'),
+        new Delete(),
+    ],
+)]
+#[AsResource(
+    alias: 'app.game_play',
+    section: 'frontend',
+    operations: [
+        new Index(
+            path: '/parties/',
+            template: 'frontend/game_play/index.html.twig',
+            grid: 'app_frontend_game_play',
+        ),
+        new Index(
+            shortName: 'index_by_product',
+            path: '/jeu-de-societe/{productSlug}/parties/',
+            template: 'frontend/game_play/indexByProduct.html.twig',
+            grid: 'app_frontend_game_play',
+        ),
+        new Create(
+            path: '/jeu-de-societe/{productSlug}/parties/new',
+            template: 'frontend/game_play/create.html.twig',
+            factoryMethod: 'createForProduct',
+            factoryArguments: [
+                'locale' => '@=request.getLocale()',
+                'productSlug' => "@=request.attributes.get('productSlug')",
+            ],
+            redirectToRoute: 'app_frontend_game_play_show',
+            redirectArguments: [
+                'productSlug' => 'resource.product.slug',
+                'id' => 'resource.id',
+            ],
+        ),
+        new Update(
+            path: '/jeu-de-societe/{productSlug}/parties/{id}/edit',
+            template: 'frontend/game_play/update.html.twig',
+            repositoryMethod: 'findOneBy',
+            repositoryArguments: [
+                'criteria' => "@={'id': request.attributes.get('id'), 'author': user ? user.getCustomer() : null}",
+            ],
+            redirectToRoute: 'app_frontend_game_play_show',
+            redirectArguments: [
+                'productSlug' => 'resource.product.slug',
+                'id' => 'resource.id',
+            ],
+        ),
+        new Show(
+            path: '/jeu-de-societe/{productSlug}/parties/{id}',
+            template: 'frontend/game_play/show.html.twig',
+            repositoryMethod: 'find',
+            repositoryArguments: ['id' => "@=request.attributes.get('id')"],
+        ),
+        new Index(
+            shortName: 'account_index',
+            routeName: 'app_frontend_account_game_play_index',
+            path: '/mon-compte/parties/',
+            template: 'frontend/account/game_play/index.html.twig',
+            grid: 'app_frontend_game_play_from_author',
+        ),
+    ],
+)]
 class GamePlay implements ResourceInterface
 {
     use IdentifiableTrait;

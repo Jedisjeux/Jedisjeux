@@ -2,6 +2,9 @@ app:
     user:
         username:
             unique: This username is already used.
+    festival_list_item:
+        product:
+            unique: This game is already in this list.
     product:
         player_count:
             min_value_should_not_be_greater_than_max_value: Min value should not be greater than max value.

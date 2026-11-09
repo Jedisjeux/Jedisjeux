@@ -12,6 +12,8 @@
 namespace App\Tests\Behat\Context\Setup;
 
 use App\Entity\FestivalList;
+use App\Entity\FestivalListItem;
+use App\Entity\Product;
 use App\Fixture\Factory\FestivalListExampleFactory;
 use Behat\Behat\Context\Context;
 use App\Tests\Behat\Bridge\Service\SharedStorageInterface;
@@ -40,7 +42,8 @@ class FestivalListContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FestivalListExampleFactory $festivalListFactory,
-        RepositoryInterface $festivalListRepository
+        RepositoryInterface $festivalListRepository,
+        private readonly RepositoryInterface $festivalListItemRepository,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->festivalListFactory = $festivalListFactory;
@@ -60,5 +63,18 @@ class FestivalListContext implements Context
         ]);
 
         $this->festivalListRepository->add($festivalList);
+        $this->sharedStorage->set('festival_list', $festivalList);
+    }
+
+    /**
+     * @Given /^(festival list "[^"]+") contains ("[^"]+" product)$/
+     */
+    public function festivalListContainsProduct(FestivalList $festivalList, Product $product)
+    {
+        $festivalListItem = new FestivalListItem();
+        $festivalListItem->setList($festivalList);
+        $festivalListItem->setProduct($product);
+
+        $this->festivalListItemRepository->add($festivalListItem);
     }
 }

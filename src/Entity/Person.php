@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Twig\Context\TaxonContextFactory;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,6 +11,12 @@ use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Resource\Metadata\AsResource;
+use Sylius\Resource\Metadata\Create;
+use Sylius\Resource\Metadata\Delete;
+use Sylius\Resource\Metadata\Index;
+use Sylius\Resource\Metadata\Show;
+use Sylius\Resource\Metadata\Update;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -19,6 +26,43 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[JMS\ExclusionPolicy('all')]
 #[ORM\Table(name: 'jdj_person')]
 #[ORM\Index(name: 'search_idx', columns: ['slug'])]
+#[AsResource(
+    alias: 'app.person',
+    section: 'backend',
+    templatesDir: 'backend/crud',
+    routePrefix: '/admin',
+    vars: [
+        'subheader' => 'app.ui.manage_people',
+        'templates' => ['form' => 'backend/person/_form.html.twig'],
+    ],
+    operations: [
+        new Index(grid: 'app_backend_person', vars: ['icon' => 'spy']),
+        new Create(redirectToRoute: 'app_backend_person_index'),
+        new Update(redirectToRoute: 'app_backend_person_index'),
+        new Show(),
+        new Delete(),
+    ],
+)]
+#[AsResource(
+    alias: 'app.person',
+    section: 'frontend',
+    operations: [
+        new Index(
+            path: '/ludographies/',
+            template: 'frontend/person/index.html.twig',
+            grid: 'app_frontend_person',
+        ),
+        new Index(
+            shortName: 'index_by_taxon',
+            path: '/ludographies/{slug}',
+            routeRequirements: ['slug' => '[^?]+'],
+            template: 'frontend/person/indexByZone.html.twig',
+            grid: 'app_frontend_person_from_taxon',
+            twigContextFactory: TaxonContextFactory::class,
+        ),
+        new Show(path: '/ludographie/{slug}', template: 'frontend/person/show.html.twig'),
+    ],
+)]
 class Person implements ResourceInterface
 {
     use IdentifiableTrait;

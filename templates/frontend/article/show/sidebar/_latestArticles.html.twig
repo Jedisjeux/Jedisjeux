@@ -15,18 +15,6 @@
 
 <section id="latest-articles" class="editorial-sidebar-card">
     <span class="editorial-eyebrow">{{ latestTitle }}</span>
-    {{ render(url('app_frontend_partial_article_index', {
-        'criteria': {
-            'status': 'published',
-            'mainTaxon': {
-                'mainTaxon': currentTaxon is not null ? currentTaxon.slug : null
-            }
-        },
-        'sorting': {
-            'publishStartDate': 'desc'
-        },
-        'paginate': 4,
-        'template': 'frontend/article/_simpleList.html.twig'
-    })) }}
+    {{ component('Article:LatestList', {count: 4, taxon: currentTaxon}) }}
     <a href="{{ articlesPath }}" class="editorial-sidebar-card__more">{{ 'app.ui.more'|trans }} <i class="fa fa-arrow-right" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i></a>
 </section>
