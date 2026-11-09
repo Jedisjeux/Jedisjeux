@@ -51,7 +51,7 @@ EOT
         return 0;
     }
 
-    protected function calculateReviewCountByProduct()
+    private function calculateReviewCountByProduct()
     {
         foreach ($this->createQueryBuilder()->getQuery()->iterate() as $row) {
             /** @var Product $product */
@@ -77,7 +77,7 @@ EOT
     /**
      * @return ReviewCountByProductUpdater|object
      */
-    protected function getReviewCountByProductUpdater(): ?object
+    private function getReviewCountByProductUpdater(): ?object
     {
         return $this->getContainer()->get('App\Updater\ReviewCountByProductUpdater');
     }
@@ -85,7 +85,7 @@ EOT
     /**
      * @return ProductRepository|object
      */
-    protected function getProductRepository(): ?object
+    private function getProductRepository(): ?object
     {
         return $this->getContainer()->get('sylius.repository.product');
     }
@@ -93,7 +93,7 @@ EOT
     /**
      * @return EntityManager|object
      */
-    protected function getManager(): ?object
+    private function getManager(): ?object
     {
         return $this->getContainer()->get('doctrine.orm.entity_manager');
     }

@@ -24,7 +24,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class TaxonFilterType extends AbstractType
 {
-    public function __construct(protected AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(private AuthorizationCheckerInterface $authorizationChecker)
     {
     }
 

@@ -58,7 +58,7 @@ class ArticleReviewType extends ReviewType
      *
      * @return array
      */
-    protected function createRatingList($maxRate)
+    private function createRatingList($maxRate)
     {
         $ratings = [];
         for ($i = 1; $i <= $maxRate; ++$i) {

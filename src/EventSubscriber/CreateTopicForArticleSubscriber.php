@@ -28,9 +28,9 @@ class CreateTopicForArticleSubscriber implements EventSubscriberInterface
      * CreateTopicForArticleSubscriber constructor.
      */
     public function __construct(
-        protected ObjectManager $manager,
-        protected TopicRepository $topicRepository,
-        protected TopicFactory $topicFactory
+        private ObjectManager $manager,
+        private TopicRepository $topicRepository,
+        private TopicFactory $topicFactory
     ) {
     }
 

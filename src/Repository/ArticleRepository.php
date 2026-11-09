@@ -200,7 +200,7 @@ class ArticleRepository extends EntityRepository
     /**
      * @return QueryBuilder
      */
-    protected function getQueryBuilder()
+    private function getQueryBuilder()
     {
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder

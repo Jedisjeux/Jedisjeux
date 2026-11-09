@@ -19,7 +19,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  */
 class ProductCountByTaxonCalculator
 {
-    public function __construct(protected RepositoryInterface $productRepository)
+    public function __construct(private RepositoryInterface $productRepository)
     {
     }
 

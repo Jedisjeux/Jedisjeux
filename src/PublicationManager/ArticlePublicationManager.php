@@ -24,7 +24,7 @@ class ArticlePublicationManager
     /**
      * ArticlePublicationManager constructor.
      */
-    public function __construct(protected ObjectManager $manager)
+    public function __construct(private ObjectManager $manager)
     {
     }
 

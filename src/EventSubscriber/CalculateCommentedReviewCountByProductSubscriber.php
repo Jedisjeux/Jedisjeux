@@ -19,7 +19,7 @@ use Doctrine\ORM\Events;
 
 class CalculateCommentedReviewCountByProductSubscriber implements EventSubscriber
 {
-    public function __construct(protected CommentedReviewCountByProductUpdater $updater)
+    public function __construct(private CommentedReviewCountByProductUpdater $updater)
     {
     }
 

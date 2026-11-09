@@ -21,19 +21,19 @@ class PersonImage extends AbstractImage
      * @var Person
      */
     #[ORM\ManyToOne(targetEntity: Person::class, inversedBy: 'images')]
-    protected $person;
+    private $person;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $description;
+    private $description;
 
     /**
      * @var bool
      */
     #[ORM\Column(type: 'boolean', name: 'is_main')]
-    protected $main = false;
+    private $main = false;
 
     public function getPerson(): ?Person
     {

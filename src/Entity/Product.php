@@ -183,20 +183,20 @@ class Product extends BaseProduct implements ProductInterface
      * @var string
      */
     #[ORM\Column(name: 'status', type: 'string')]
-    protected $status;
+    private $status;
 
     /**
      * @var ArrayCollection|TaxonInterface[]
      */
     #[ORM\ManyToMany(targetEntity: TaxonInterface::class)]
     #[ORM\JoinTable('sylius_product_taxon', inverseJoinColumns: [new ORM\JoinColumn(name: 'taxoninterface_id', referencedColumnName: 'id')])]
-    protected $taxons;
+    private $taxons;
 
     /**
      * @var TaxonInterface
      */
     #[ORM\ManyToOne(targetEntity: TaxonInterface::class)]
-    protected $mainTaxon;
+    private $mainTaxon;
 
     /**
      * @var int
@@ -206,7 +206,7 @@ class Product extends BaseProduct implements ProductInterface
     #[JMS\SerializedName('min_age')]
     #[JMS\Groups(['Default', 'Detailed'])]
     #[Assert\Range(min: 0, groups: ['sylius'])]
-    protected $minAge;
+    private $minAge;
 
     /**
      * @var int
@@ -216,7 +216,7 @@ class Product extends BaseProduct implements ProductInterface
     #[JMS\SerializedName('min_player_count')]
     #[JMS\Groups(['Default', 'Detailed'])]
     #[Assert\Range(min: 1, groups: ['sylius'])]
-    protected $minPlayerCount;
+    private $minPlayerCount;
 
     /**
      * @var int
@@ -226,7 +226,7 @@ class Product extends BaseProduct implements ProductInterface
     #[JMS\SerializedName('max_player_count')]
     #[JMS\Groups(['Default', 'Detailed'])]
     #[Assert\Range(min: 1, groups: ['sylius'])]
-    protected $maxPlayerCount;
+    private $maxPlayerCount;
 
     /**
      * @var int
@@ -236,7 +236,7 @@ class Product extends BaseProduct implements ProductInterface
     #[JMS\SerializedName('min_duration')]
     #[JMS\Groups(['Default', 'Detailed'])]
     #[Assert\Range(min: 1, groups: ['sylius'])]
-    protected $minDuration;
+    private $minDuration;
 
     /**
      * @var int
@@ -246,48 +246,48 @@ class Product extends BaseProduct implements ProductInterface
     #[JMS\SerializedName('max_duration')]
     #[JMS\Groups(['Default', 'Detailed'])]
     #[Assert\Range(min: 1, groups: ['sylius'])]
-    protected $maxDuration;
+    private $maxDuration;
 
     /**
      * @var bool
      */
     #[ORM\Column(type: 'boolean')]
-    protected $durationByPlayer;
+    private $durationByPlayer;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'text', nullable: true)]
-    protected $boxContent;
+    private $boxContent;
 
     /**
      * @var int
      */
     #[ORM\Column(type: 'integer')]
-    protected $viewCount = 0;
+    private $viewCount = 0;
 
     /**
      * @var int
      */
     #[ORM\Column(type: 'integer')]
-    protected $reviewCount = 0;
+    private $reviewCount = 0;
 
     /**
      * @var int
      */
     #[ORM\Column(type: 'integer')]
-    protected $commentedReviewCount = 0;
+    private $commentedReviewCount = 0;
 
     /**
      * @var ArrayCollection
      */
-    protected $reviews;
+    private $reviews;
 
     /**
      * @var ArrayCollection|ProductBarcode[]
      */
     #[ORM\OneToMany(targetEntity: ProductBarcode::class, mappedBy: 'product', cascade: ['persist', 'merge', 'remove'], orphanRemoval: true)]
-    protected $barcodes;
+    private $barcodes;
 
     /**
      * @var float
@@ -295,31 +295,31 @@ class Product extends BaseProduct implements ProductInterface
     #[ORM\Column(type: 'float')]
     #[JMS\Expose]
     #[JMS\Groups(['Default', 'Detailed'])]
-    protected $averageRating = 0;
+    private $averageRating = 0;
 
     /**
      * @var Collection|Article[]
      */
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'product')]
-    protected $articles;
+    private $articles;
 
     /**
      * @var Collection|GamePlay[]
      */
     #[ORM\OneToMany(targetEntity: GamePlay::class, mappedBy: 'product')]
-    protected $gamePlays;
+    private $gamePlays;
 
     /**
      * @var Collection|ProductList[]
      */
     #[ORM\OneToMany(targetEntity: ProductListItem::class, mappedBy: 'product')]
-    protected $listItems;
+    private $listItems;
 
     /**
      * @var Collection|Notification[]
      */
     #[ORM\OneToMany(targetEntity: Notification::class, mappedBy: 'product', cascade: ['remove'])]
-    protected $notifications;
+    private $notifications;
 
     /**
      * @var Collection|ProductVideo[]

@@ -37,8 +37,8 @@ class DealerExampleFactory extends AbstractExampleFactory implements ExampleFact
      * DealerExampleFactory constructor.
      */
     public function __construct(
-        protected FactoryInterface $dealerFactory,
-        protected FactoryInterface $dealerImageFactory
+        private FactoryInterface $dealerFactory,
+        private FactoryInterface $dealerImageFactory
     ) {
         $this->faker = Factory::create('fr_FR');
         $this->optionsResolver = new OptionsResolver();

@@ -22,7 +22,7 @@ class ProductCountByTaxonUpdater
     /**
      * ProductCountByTaxonUpdater constructor.
      */
-    public function __construct(protected ProductCountByTaxonCalculator $calculator)
+    public function __construct(private ProductCountByTaxonCalculator $calculator)
     {
     }
 

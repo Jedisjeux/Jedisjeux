@@ -24,7 +24,7 @@ class AddProductToAssociatedProductsUpdater extends AbstractProductAssociationUp
         $this->addProductToAssociatedProducts($product, $association);
     }
 
-    protected function addProductToAssociatedProducts(ProductInterface $product, ProductAssociationInterface $association)
+    private function addProductToAssociatedProducts(ProductInterface $product, ProductAssociationInterface $association)
     {
         $associationType = $association->getType();
 

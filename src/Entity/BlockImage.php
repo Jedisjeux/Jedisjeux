@@ -24,13 +24,13 @@ class BlockImage extends AbstractImage
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $label;
+    private $label;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $linkUrl;
+    private $linkUrl;
 
     public function getLabel(): ?string
     {

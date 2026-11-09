@@ -26,25 +26,25 @@ class DealerContact implements ResourceInterface
      */
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
-    protected $email;
+    private $email;
 
     /**
      * @var string|null
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $firstName;
+    private $firstName;
 
     /**
      * @var string|null
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $lastName;
+    private $lastName;
 
     /**
      * @var Dealer|null
      */
     #[ORM\ManyToOne(targetEntity: Dealer::class, inversedBy: 'contacts')]
-    protected $dealer;
+    private $dealer;
 
     public function getEmail(): ?string
     {

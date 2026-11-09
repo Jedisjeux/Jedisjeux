@@ -26,8 +26,8 @@ class ProductListFactory implements FactoryInterface
      */
     public function __construct(
         private $className,
-        protected CustomerContextInterface $customerContext,
-        protected TranslatorInterface $translator
+        private CustomerContextInterface $customerContext,
+        private TranslatorInterface $translator
     ) {
     }
 

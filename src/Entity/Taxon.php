@@ -87,31 +87,31 @@ class Taxon extends BaseTaxon
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $iconClass;
+    private $iconClass;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $color;
+    private $color;
 
     /**
      * @var bool
      */
     #[ORM\Column(type: 'boolean')]
-    protected $public;
+    private $public;
 
     /**
      * @var int
      */
     #[ORM\Column(type: 'integer')]
-    protected $topicCount;
+    private $topicCount;
 
     /**
      * @var int
      */
     #[ORM\Column(type: 'integer')]
-    protected $productCount;
+    private $productCount;
 
     /**
      * Taxon constructor.

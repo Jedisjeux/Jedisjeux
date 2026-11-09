@@ -27,37 +27,37 @@ class PriceList implements ResourceInterface
      * @var Dealer
      */
     #[ORM\OneToOne(targetEntity: Dealer::class, inversedBy: 'priceList')]
-    protected $dealer;
+    private $dealer;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $path;
+    private $path;
 
     /**
      * @var bool
      */
     #[ORM\Column(type: 'boolean')]
-    protected $headers = false;
+    private $headers = false;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $delimiter = ';';
+    private $delimiter = ';';
 
     /**
      * @var bool
      */
     #[ORM\Column(type: 'boolean', name: 'is_utf8')]
-    protected $utf8 = true;
+    private $utf8 = true;
 
     /**
      * @var bool
      */
     #[ORM\Column(type: 'boolean')]
-    protected $active = false;
+    private $active = false;
 
     public function getDealer(): ?Dealer
     {

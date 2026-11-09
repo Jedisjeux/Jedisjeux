@@ -83,13 +83,13 @@ class FestivalListItem implements ResourceInterface
      * @var FestivalList
      */
     #[ORM\ManyToOne(targetEntity: FestivalList::class)]
-    protected $list;
+    private $list;
 
     /**
      * @var ProductInterface
      */
     #[ORM\ManyToOne(targetEntity: ProductInterface::class)]
-    protected $product;
+    private $product;
 
     public function getList(): ?FestivalList
     {

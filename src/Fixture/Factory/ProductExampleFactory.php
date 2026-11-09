@@ -42,8 +42,8 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
     public function __construct(
         private ProductFactoryInterface $productFactory,
         private FactoryInterface $productVariantImageFactory,
-        protected RepositoryInterface $personRepository,
-        protected RepositoryInterface $taxonRepository,
+        private RepositoryInterface $personRepository,
+        private RepositoryInterface $taxonRepository,
         private SlugGeneratorInterface $slugGenerator
     ) {
         $this->faker = Factory::create('fr_FR');

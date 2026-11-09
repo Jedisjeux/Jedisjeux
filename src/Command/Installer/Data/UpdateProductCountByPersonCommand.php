@@ -54,12 +54,12 @@ EOT
         return 0;
     }
 
-    protected function calculateProductCountByPersons()
+    private function calculateProductCountByPersons()
     {
         $this->calculateProductCountByPerson();
     }
 
-    protected function calculateProductCountByPerson()
+    private function calculateProductCountByPerson()
     {
         foreach ($this->createQueryBuilder()->getQuery()->iterate() as $row) {
             /** @var Person $person */
@@ -85,7 +85,7 @@ EOT
     /**
      * @return ProductCountByPersonUpdater|object
      */
-    protected function getProductCountByPersonUpdater(): ?object
+    private function getProductCountByPersonUpdater(): ?object
     {
         return $this->getContainer()->get('App\Updater\ProductCountByPersonUpdater');
     }
@@ -93,7 +93,7 @@ EOT
     /**
      * @return ProductRepository|object
      */
-    protected function getPersonRepository(): ?object
+    private function getPersonRepository(): ?object
     {
         return $this->getContainer()->get('app.repository.person');
     }
@@ -101,7 +101,7 @@ EOT
     /**
      * @return EntityManager|object
      */
-    protected function getManager(): ?object
+    private function getManager(): ?object
     {
         return $this->getContainer()->get('doctrine.orm.entity_manager');
     }

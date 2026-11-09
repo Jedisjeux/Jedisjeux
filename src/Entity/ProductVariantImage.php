@@ -26,25 +26,25 @@ class ProductVariantImage extends AbstractImage
      * @var ProductVariantInterface
      */
     #[ORM\ManyToOne(targetEntity: ProductVariantInterface::class, inversedBy: 'images')]
-    protected $variant;
+    private $variant;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string', nullable: true)]
-    protected $description;
+    private $description;
 
     /**
      * @var bool
      */
     #[ORM\Column(type: 'boolean', name: 'is_main')]
-    protected $main;
+    private $main;
 
     /**
      * @var bool
      */
     #[ORM\Column(type: 'boolean', name: 'is_material')]
-    protected $material;
+    private $material;
 
     /**
      * ProductVariantImage constructor.

@@ -27,7 +27,7 @@ class AddTopicFollowerSubscriber implements EventSubscriberInterface
     /**
      * AddTopicFollowerSubscriber constructor.
      */
-    public function __construct(protected CustomerContextInterface $customerContext)
+    public function __construct(private CustomerContextInterface $customerContext)
     {
     }
 

@@ -72,14 +72,14 @@ class ProductList implements ResourceInterface
     #[ORM\Column(type: 'string')]
     #[JMS\Expose]
     #[JMS\Groups(['Default'])]
-    protected $code;
+    private $code;
 
     /**
      * @var string
      */
     #[Gedmo\Slug(fields: ['name'])]
     #[ORM\Column(type: 'string', unique: true)]
-    protected $slug;
+    private $slug;
 
     /**
      * @var string
@@ -88,21 +88,21 @@ class ProductList implements ResourceInterface
     #[Assert\NotBlank]
     #[JMS\Expose]
     #[JMS\Groups(['Default'])]
-    protected $name;
+    private $name;
 
     /**
      * @var CustomerInterface
      */
     #[ORM\ManyToOne(targetEntity: CustomerInterface::class)]
     #[ORM\JoinColumn(nullable: false)]
-    protected $owner;
+    private $owner;
 
     /**
      * @var Collection
      */
     #[ORM\OneToMany(targetEntity: ProductListItem::class, mappedBy: 'list', cascade: ['all'])]
     #[ORM\OrderBy(['createdAt' => 'ASC'])]
-    protected $items;
+    private $items;
 
     /**
      * ProductList constructor.

@@ -111,7 +111,7 @@ class Topic implements ResourceInterface
      * @var string
      */
     #[ORM\Column(type: 'string', unique: true)]
-    protected $code;
+    private $code;
 
     /**
      * @var string
@@ -119,14 +119,14 @@ class Topic implements ResourceInterface
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
     #[JMS\Expose]
-    protected $title;
+    private $title;
 
     /**
      * @var CustomerInterface
      */
     #[ORM\ManyToOne(targetEntity: CustomerInterface::class)]
     #[ORM\JoinColumn(nullable: false)]
-    protected $author;
+    private $author;
 
     /**
      * @var Post
@@ -134,57 +134,57 @@ class Topic implements ResourceInterface
     #[ORM\OneToOne(targetEntity: Post::class, inversedBy: 'parent', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     #[Assert\Valid]
-    protected $mainPost;
+    private $mainPost;
 
     /**
      * @var ArrayCollection
      */
     #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'topic', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    protected $posts;
+    private $posts;
 
     /**
      * @var int
      */
     #[ORM\Column(type: 'integer')]
     #[JMS\Expose]
-    protected $postCount;
+    private $postCount;
 
     /**
      * @var int
      */
     #[ORM\Column(type: 'integer')]
-    protected $viewCount = 0;
+    private $viewCount = 0;
 
     /**
      * @var \DateTime
      */
     #[ORM\Column(type: 'datetime', nullable: true)]
-    protected $lastPostCreatedAt;
+    private $lastPostCreatedAt;
 
     /**
      * @var Taxon
      */
     #[ORM\ManyToOne(targetEntity: TaxonInterface::class)]
-    protected $mainTaxon;
+    private $mainTaxon;
 
     /**
      * @var GamePlay
      */
     #[ORM\OneToOne(targetEntity: GamePlay::class, mappedBy: 'topic')]
-    protected $gamePlay;
+    private $gamePlay;
 
     /**
      * @var Article
      */
     #[ORM\OneToOne(targetEntity: Article::class, mappedBy: 'topic')]
-    protected $article;
+    private $article;
 
     /**
      * @var ArrayCollection|CustomerInterface[]
      */
     #[ORM\ManyToMany(targetEntity: CustomerInterface::class)]
     #[ORM\JoinTable(name: 'jdj_topic_follower', inverseJoinColumns: [new ORM\JoinColumn(name: 'customerinterface_id', referencedColumnName: 'id')])]
-    protected $followers;
+    private $followers;
 
     /**
      * Topic constructor.

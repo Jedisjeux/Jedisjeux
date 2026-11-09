@@ -24,7 +24,7 @@ class LiipSerializeHandler implements SubscribingHandlerInterface
     /**
      * LiipSerializeHandler constructor.
      */
-    public function __construct(protected CacheManager $manager)
+    public function __construct(private CacheManager $manager)
     {
     }
 

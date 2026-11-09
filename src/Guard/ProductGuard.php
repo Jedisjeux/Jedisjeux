@@ -21,7 +21,7 @@ class ProductGuard
     /**
      * ArticleGuard constructor.
      */
-    public function __construct(protected AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(private AuthorizationCheckerInterface $authorizationChecker)
     {
     }
 

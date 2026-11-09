@@ -26,7 +26,7 @@ class ProductTranslation extends BaseProductTranslation
      * @var string
      */
     #[ORM\Column(type: 'text', nullable: true)]
-    protected $shortDescription;
+    private $shortDescription;
 
     public function getShortDescription(): ?string
     {

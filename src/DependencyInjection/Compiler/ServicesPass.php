@@ -46,7 +46,7 @@ class ServicesPass implements CompilerPassInterface
         }
     }
 
-    protected function processFactories(ContainerBuilder $container)
+    private function processFactories(ContainerBuilder $container)
     {
         $topicFactoryDefinition = $container->getDefinition('app.factory.topic');
         $topicFactoryDefinition
@@ -99,7 +99,7 @@ class ServicesPass implements CompilerPassInterface
             ->addArgument(new Reference('translator.default'));
     }
 
-    protected function processFormTypes(ContainerBuilder $container)
+    private function processFormTypes(ContainerBuilder $container)
     {
         $articleFormTypeDefinition = $container->getDefinition(ArticleType::class);
         $articleFormTypeDefinition

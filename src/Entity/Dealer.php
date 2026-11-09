@@ -54,14 +54,14 @@ class Dealer implements ResourceInterface
      */
     #[ORM\Column(type: 'string', unique: true)]
     #[Assert\NotBlank]
-    protected $code;
+    private $code;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
-    protected $name;
+    private $name;
 
     /**
      * @var DealerImage
@@ -69,7 +69,7 @@ class Dealer implements ResourceInterface
     #[ORM\OneToOne(targetEntity: DealerImage::class, cascade: ['persist'])]
     #[Assert\Type(type: 'App\Entity\DealerImage')]
     #[Assert\Valid]
-    protected $image;
+    private $image;
 
     /**
      * @var PriceList
@@ -77,19 +77,19 @@ class Dealer implements ResourceInterface
     #[ORM\OneToOne(targetEntity: PriceList::class, mappedBy: 'dealer', cascade: ['persist', 'merge', 'remove'])]
     #[Assert\Type(type: 'App\Entity\PriceList')]
     #[Assert\Valid]
-    protected $priceList;
+    private $priceList;
 
     /**
      * @var ArrayCollection|PubBanner[]
      */
     #[ORM\OneToMany(targetEntity: PubBanner::class, mappedBy: 'dealer', orphanRemoval: true, cascade: ['persist', 'merge', 'remove'])]
-    protected $pubBanners;
+    private $pubBanners;
 
     /**
      * @var Collection|DealerContact[]
      */
     #[ORM\OneToMany(targetEntity: DealerContact::class, mappedBy: 'dealer', orphanRemoval: true, cascade: ['persist', 'merge', 'remove'])]
-    protected $contacts;
+    private $contacts;
 
     /**
      * Dealer constructor.

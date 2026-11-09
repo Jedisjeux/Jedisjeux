@@ -29,11 +29,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class CreateTopicNotificationSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        protected CustomerContextInterface $customerContext,
-        protected NotificationFactory $notificationFactory,
-        protected ObjectManager $manager,
-        protected EntityRepository $notificationRepository,
-        protected TranslatorInterface $translator
+        private CustomerContextInterface $customerContext,
+        private NotificationFactory $notificationFactory,
+        private ObjectManager $manager,
+        private EntityRepository $notificationRepository,
+        private TranslatorInterface $translator
     ) {
     }
 

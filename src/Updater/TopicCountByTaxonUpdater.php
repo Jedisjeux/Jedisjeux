@@ -22,7 +22,7 @@ class TopicCountByTaxonUpdater
     /**
      * TopicCountByTaxonSubscriber constructor.
      */
-    public function __construct(protected TopicCountByTaxonCalculator $calculator)
+    public function __construct(private TopicCountByTaxonCalculator $calculator)
     {
     }
 

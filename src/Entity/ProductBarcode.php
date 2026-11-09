@@ -28,13 +28,13 @@ class ProductBarcode implements ResourceInterface
      * @var ProductInterface|Product
      */
     #[ORM\ManyToOne(targetEntity: ProductInterface::class, inversedBy: 'barcodes')]
-    protected $product;
+    private $product;
 
     /**
      * @var string
      */
     #[ORM\Column(type: 'string')]
-    protected $code;
+    private $code;
 
     /**
      * @return Product|ProductInterface|null

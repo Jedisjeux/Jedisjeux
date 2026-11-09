@@ -26,9 +26,9 @@ class ArticleFactory implements FactoryInterface
 {
     public function __construct(
         private string $className,
-        protected RepositoryInterface $productRepository,
-        protected CustomerContextInterface $customerContext,
-        protected FactoryInterface $blockFactory
+        private RepositoryInterface $productRepository,
+        private CustomerContextInterface $customerContext,
+        private FactoryInterface $blockFactory
     ) {
     }
 

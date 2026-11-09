@@ -74,7 +74,7 @@ class Person implements ResourceInterface
     #[ORM\Column(type: 'string', unique: true)]
     #[JMS\Expose]
     #[JMS\Groups(['Default'])]
-    protected $code;
+    private $code;
 
     /**
      * @var string
@@ -122,38 +122,38 @@ class Person implements ResourceInterface
      * @var int
      */
     #[ORM\Column(type: 'integer')]
-    protected $productCount = 0;
+    private $productCount = 0;
 
     /**
      * @var int
      */
     #[ORM\Column(type: 'integer')]
-    protected $productCountAsDesigner = 0;
+    private $productCountAsDesigner = 0;
 
     /**
      * @var int
      */
     #[ORM\Column(type: 'integer')]
-    protected $productCountAsArtist = 0;
+    private $productCountAsArtist = 0;
 
     /**
      * @var int
      */
     #[ORM\Column(type: 'integer')]
-    protected $productCountAsPublisher = 0;
+    private $productCountAsPublisher = 0;
 
     /**
      * @var PersonImage[]|Collection
      */
     #[ORM\OneToMany(targetEntity: PersonImage::class, mappedBy: 'person', cascade: ['persist', 'merge', 'remove'])]
-    protected $images;
+    private $images;
 
     /**
      * @var Collection
      */
     #[ORM\ManyToMany(targetEntity: TaxonInterface::class)]
     #[ORM\JoinTable('jdj_person_taxon', inverseJoinColumns: [new ORM\JoinColumn(name: 'taxoninterface_id', referencedColumnName: 'id')])]
-    protected $taxons;
+    private $taxons;
 
     /**
      * @var ProductInterface[]|Collection

@@ -153,7 +153,7 @@ class ProductRepository extends BaseProductRepository
     /**
      * @return QueryBuilder
      */
-    protected function getQueryBuilder()
+    private function getQueryBuilder()
     {
         return parent::createQueryBuilder('o')
             ->select('o, option, variant, image, translation, mainTaxon')

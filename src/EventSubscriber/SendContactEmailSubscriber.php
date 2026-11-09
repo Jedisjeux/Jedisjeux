@@ -27,7 +27,7 @@ class SendContactEmailSubscriber implements EventSubscriberInterface
     /**
      * SendContactEmailSubscriber constructor.
      */
-    public function __construct(protected SenderInterface $sender, protected string $contactEmail)
+    public function __construct(private SenderInterface $sender, private string $contactEmail)
     {
     }
 

@@ -59,7 +59,7 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
     /**
      * @return TaxonInterface
      */
-    protected function createOrReplaceRootTaxon(array $data)
+    private function createOrReplaceRootTaxon(array $data)
     {
         /** @var Taxon $rootTaxon */
         $rootTaxon = $this->getRepository()->findOneBy(['code' => $data['code']]);
@@ -79,7 +79,7 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
     /**
      * @return TaxonSlugGeneratorInterface|object
      */
-    protected function getTaxonSlugGenerator(): ?object
+    private function getTaxonSlugGenerator(): ?object
     {
         return $this->getContainer()->get('sylius.generator.taxon_slug');
     }
@@ -87,7 +87,7 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
     /**
      * @return array
      */
-    protected function getRootTaxons(): array
+    private function getRootTaxons(): array
     {
         return [
             [
@@ -123,7 +123,7 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
     /**
      * @return Factory
      */
-    protected function getFactory(): ?object
+    private function getFactory(): ?object
     {
         return $this->getContainer()->get('sylius.factory.taxon');
     }
@@ -131,7 +131,7 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
     /**
      * @return EntityRepository
      */
-    protected function getRepository(): ?object
+    private function getRepository(): ?object
     {
         return $this->getContainer()->get('sylius.repository.taxon');
     }
@@ -139,7 +139,7 @@ class LoadRootTaxonsCommand extends ContainerAwareCommand
     /**
      * @return EntityManager
      */
-    protected function getManager(): ?object
+    private function getManager(): ?object
     {
         return $this->getContainer()->get('doctrine.orm.entity_manager');
     }

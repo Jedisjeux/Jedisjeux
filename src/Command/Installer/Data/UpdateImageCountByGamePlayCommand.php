@@ -54,7 +54,7 @@ EOT
         return 0;
     }
 
-    protected function calculateImageCountByGamePlays()
+    private function calculateImageCountByGamePlays()
     {
         foreach ($this->createQueryBuilder()->getQuery()->iterate() as $row) {
             /** @var GamePlay $gamePlay */
@@ -80,7 +80,7 @@ EOT
     /**
      * @return ImageCountByGamePlayUpdater|object
      */
-    protected function getImageCountByGamePlayUpdater(): ImageCountByGamePlayUpdater
+    private function getImageCountByGamePlayUpdater(): ImageCountByGamePlayUpdater
     {
         return $this->getContainer()->get('App\Updater\ImageCountByGamePlayUpdater');
     }
@@ -88,7 +88,7 @@ EOT
     /**
      * @return RepositoryInterface|object
      */
-    protected function getGamePlayRepository(): RepositoryInterface
+    private function getGamePlayRepository(): RepositoryInterface
     {
         return $this->getContainer()->get('app.repository.game_play');
     }
@@ -96,7 +96,7 @@ EOT
     /**
      * @return EntityManager|object
      */
-    protected function getManager(): ?object
+    private function getManager(): ?object
     {
         return $this->getContainer()->get('doctrine.orm.entity_manager');
     }
