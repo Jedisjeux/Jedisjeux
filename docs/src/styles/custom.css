@@ -1,0 +1,18 @@
+/* Colors of the Jedisjeux admin (assets/backend/styles/app.css) */
+:root {
+    --sl-color-accent-low: #133e56;
+    --sl-color-accent: #4baeb4;
+    --sl-color-accent-high: #c9ecee;
+}
+
+:root[data-theme='light'] {
+    --sl-color-accent-low: #d5eff0;
+    --sl-color-accent: #2f868c;
+    --sl-color-accent-high: #133e56;
+}
+
+/* Frame the screenshots so they stand out from the page */
+.sl-markdown-content img {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+}

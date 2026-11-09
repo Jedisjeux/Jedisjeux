@@ -1,0 +1,35 @@
+---
+title: Documentation Jedisjeux
+description: Guide d'utilisation de l'administration et documentation technique de Jedisjeux.
+template: splash
+hero:
+  tagline: Le site de jeux de société Jedisjeux, basé sur Symfony et Sylius.
+  actions:
+    - text: Guide utilisateur
+      link: user-guide/games/
+      icon: right-arrow
+    - text: Architecture
+      link: book/architecture/overview/
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+  <Card title="Guide utilisateur" icon="open-book">
+    Gérer les [jeux](user-guide/games/) (ré-éditions, traductions, séries, extensions) et rédiger des [articles](user-guide/articles/game-review/).
+  </Card>
+  <Card title="Architecture" icon="setting">
+    Les [concepts](book/architecture/overview/) de l'application : fixtures, grilles et routage avec les bundles Sylius.
+  </Card>
+  <Card title="API REST" icon="seti:json">
+    Les [points d'entrée](api/products/) exposés par l'API.
+  </Card>
+  <Card title="Exploitation" icon="rocket">
+    La [configuration du serveur](server/) et le [déploiement](deployment/) en production.
+  </Card>
+</CardGrid>
+
+:::note
+La documentation technique suppose une connaissance du framework Symfony. Pour le découvrir, commencer par la [documentation de Symfony](https://symfony.com/doc/current/index.html).
+:::

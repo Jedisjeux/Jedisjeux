@@ -1,0 +1,20 @@
+{
+  "name": "jedisjeux-docs",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "screenshots": "node scripts/screenshots.mjs"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.42.10",
+    "astro": "^7.4.7",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.65.0"
+  }
+}
