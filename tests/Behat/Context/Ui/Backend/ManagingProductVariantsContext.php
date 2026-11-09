@@ -13,6 +13,7 @@ namespace App\Tests\Behat\Context\Ui\Backend;
 
 use App\Tests\Behat\Page\Backend\ProductVariant\CreatePage;
 use App\Tests\Behat\Page\Backend\ProductVariant\IndexPage;
+use App\Tests\Behat\Page\Backend\ProductVariant\UpdatePage;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
@@ -29,10 +30,16 @@ final class ManagingProductVariantsContext implements Context
      */
     private $createPage;
 
-    public function __construct(IndexPage $indexPage, CreatePage $createPage)
+    /**
+     * @var UpdatePage
+     */
+    private $updatePage;
+
+    public function __construct(IndexPage $indexPage, CreatePage $createPage, UpdatePage $updatePage)
     {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
+        $this->updatePage = $updatePage;
     }
 
     /**
@@ -92,5 +99,53 @@ final class ManagingProductVariantsContext implements Context
         $this->indexPage->open(['productId' => $product->getId()]);
 
         Assert::true($this->indexPage->isSingleResourceOnPage(['name' => $productVariantName]));
+    }
+
+    /**
+     * @Given /^I want to edit the "([^"]+)" variant of (this product)$/
+     */
+    public function iWantToEditTheVariantOfThisProduct(string $variantName, ProductInterface $product)
+    {
+        foreach ($product->getVariants() as $variant) {
+            if ($variantName === $variant->getName()) {
+                $this->updatePage->open(['productId' => $product->getId(), 'id' => $variant->getId()]);
+
+                return;
+            }
+        }
+
+        throw new \InvalidArgumentException(sprintf('The product has no "%s" variant.', $variantName));
+    }
+
+    /**
+     * @When I rename it to :name
+     */
+    public function iRenameItTo($name)
+    {
+        $this->updatePage->nameIt($name);
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @When I delete the product variant :name
+     */
+    public function iDeleteTheProductVariant($name)
+    {
+        $this->indexPage->deleteResourceOnPage(['name' => $name]);
+    }
+
+    /**
+     * @Then I should not see the product variant :name in the list
+     */
+    public function iShouldNotSeeTheProductVariantInTheList($name)
+    {
+        Assert::false($this->indexPage->isSingleResourceOnPage(['name' => $name]));
     }
 }

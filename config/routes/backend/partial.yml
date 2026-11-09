@@ -1,7 +1,0 @@
-app_backend_partial_article:
-    resource: partial/article.yml
-    prefix: /articles
-
-sylius_backend_partial_customer:
-    resource: partial/customer.yml
-    prefix: /customers

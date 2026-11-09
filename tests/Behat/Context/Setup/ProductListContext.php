@@ -18,6 +18,7 @@ use App\Entity\User;
 use App\Fixture\Factory\ProductExampleFactory;
 use App\Fixture\Factory\ProductListExampleFactory;
 use Behat\Behat\Context\Context;
+use Sylius\Component\Product\Model\ProductInterface;
 use Doctrine\Persistence\ObjectManager;
 use App\Tests\Behat\Bridge\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -96,6 +97,7 @@ class ProductListContext implements Context
         $productList = $this->productListFactory->create([
             'owner' => $customer,
             'name' => $name,
+            'products' => [],
         ]);
 
         $this->productListRepository->add($productList);
@@ -111,6 +113,7 @@ class ProductListContext implements Context
         $productList = $this->productListFactory->create([
             'code' => ProductList::CODE_GAME_LIBRARY,
             'owner' => $user->getCustomer(),
+            'products' => [],
         ]);
 
         $this->productListRepository->add($productList);
@@ -133,6 +136,55 @@ class ProductListContext implements Context
         $productListItem->setProduct($product);
 
         $productList->addItem($productListItem);
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this product list) contains ("[^"]+" product)$/
+     * @Given /^(this product list) also contains ("[^"]+" product)$/
+     */
+    public function thisProductListContainsProduct(ProductList $productList, ProductInterface $product): void
+    {
+        /** @var ProductListItem $productListItem */
+        $productListItem = $this->productListItemFactory->createNew();
+        $productListItem->setProduct($product);
+
+        $productList->addItem($productListItem);
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^my game library(?:| also) contains "([^"]+)"$/
+     */
+    public function myGameLibraryContains(string $productName): void
+    {
+        /** @var Customer $customer */
+        $customer = $this->sharedStorage->get('customer');
+
+        /** @var ProductList|null $gameLibrary */
+        $gameLibrary = $this->productListRepository->findOneBy([
+            'owner' => $customer,
+            'code' => ProductList::CODE_GAME_LIBRARY,
+        ]);
+
+        if (null === $gameLibrary) {
+            /** @var ProductList $gameLibrary */
+            $gameLibrary = $this->productListFactory->create([
+                'code' => ProductList::CODE_GAME_LIBRARY,
+                'owner' => $customer,
+                'products' => [],
+            ]);
+            $this->productListRepository->add($gameLibrary);
+        }
+
+        $product = $this->productFactory->create(['name' => $productName]);
+        $this->productRepository->add($product);
+
+        /** @var ProductListItem $productListItem */
+        $productListItem = $this->productListItemFactory->createNew();
+        $productListItem->setProduct($product);
+
+        $gameLibrary->addItem($productListItem);
         $this->objectManager->flush();
     }
 }

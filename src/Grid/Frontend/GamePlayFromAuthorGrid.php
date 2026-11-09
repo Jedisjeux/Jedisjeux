@@ -32,6 +32,7 @@ final class GamePlayFromAuthorGrid
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
+            ->setLimits([12])
             ->setRepositoryMethod('createListQueryBuilder', [
                 $this->locale,
                 'expr:service(\'app.context.customer\').getCustomer().getId()',

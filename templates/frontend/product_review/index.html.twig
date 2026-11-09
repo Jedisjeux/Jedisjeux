@@ -22,12 +22,7 @@
 
                     <div class="row">
                         <div class="col-md-3">
-                            {{
-                                render(url('sylius_frontend_partial_product_show_by_slug', {
-                                    'slug': app.request.attributes.get('slug'),
-                                    'template': 'frontend/product/_box.html.twig'
-                                }))
-                            }}
+                            {{ component('Product:Box', {slug: app.request.attributes.get('slug')}) }}
                         </div>
                         <div class="col-md-9" id="product-reviews">
                             {% include 'frontend/product_review/_list.html.twig' with {'product_reviews': product_reviews.data} %}</div>

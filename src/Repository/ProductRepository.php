@@ -20,7 +20,6 @@ use Doctrine\ORM\Mapping;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
-use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use SyliusLabs\AssociationHydrator\AssociationHydrator;
@@ -132,23 +131,6 @@ class ProductRepository extends BaseProductRepository
                 ->andWhere($queryBuilder->expr()->eq('yearAward', ':yearAward'))
                 ->setParameter('yearAward', $yearAward);
         }
-
-        return $queryBuilder;
-    }
-
-    public function createListOfMostPlayedQueryBuilder($localeCode, CustomerInterface $author)
-    {
-        $queryBuilder = $this->createListQueryBuilder($localeCode);
-
-        $queryBuilder
-            ->addSelect('count(gamePlay.id) as HIDDEN gamePlayCount')
-            ->join('o.gamePlays', 'gamePlay')
-            ->andWhere('gamePlay.author = :author')
-            ->andWhere($queryBuilder->expr()->between('gamePlay.playedAt', ':thisYearStart', ':thisYearEnd'))
-            ->setParameter('author', $author)
-            ->setParameter('thisYearStart', new \DateTime('first day of January'))
-            ->setParameter('thisYearEnd', new \DateTime('last day of December'))
-            ->addOrderBy('gamePlayCount', 'desc');
 
         return $queryBuilder;
     }

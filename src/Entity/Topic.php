@@ -11,6 +11,7 @@
 
 namespace App\Entity;
 
+use App\Twig\Context\ForumTaxonContextFactory;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,6 +19,12 @@ use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Resource\Metadata\AsResource;
+use Sylius\Resource\Metadata\BulkDelete;
+use Sylius\Resource\Metadata\Create;
+use Sylius\Resource\Metadata\Delete;
+use Sylius\Resource\Metadata\Index;
+use Sylius\Resource\Metadata\Update;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -26,6 +33,75 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity]
 #[JMS\ExclusionPolicy('all')]
 #[ORM\Table('jdj_topic')]
+#[AsResource(
+    alias: 'app.topic',
+    section: 'backend',
+    templatesDir: 'backend/crud',
+    routePrefix: '/admin',
+    vars: [
+        'subheader' => 'app.ui.manage_topics',
+        'templates' => ['form' => 'backend/topic/_form.html.twig'],
+    ],
+    operations: [
+        new Index(grid: 'app_backend_topic', vars: ['icon' => 'comment']),
+        new Create(redirectToRoute: 'app_backend_topic_update'),
+        new Update(redirectToRoute: 'app_backend_topic_update'),
+        new Delete(),
+        new BulkDelete(),
+    ],
+)]
+#[AsResource(
+    alias: 'app.topic',
+    section: 'frontend',
+    operations: [
+        new Index(path: '/topics/', template: 'frontend/topic/index.html.twig', grid: 'app_frontend_topic'),
+        new Create(
+            path: '/topics/new',
+            template: 'frontend/topic/create.html.twig',
+            redirectToRoute: 'app_frontend_post_index_by_topic',
+            redirectArguments: ['topicId' => 'resource.id'],
+        ),
+        new Create(
+            shortName: 'create_for_taxon',
+            eventShortName: 'create',
+            path: '/topics/{taxonId}/new',
+            template: 'frontend/topic/create.html.twig',
+            factoryMethod: 'createForTaxon',
+            factoryArguments: [
+                'taxon' => "@=throw_not_found_on_null(sylius_repositories.get('sylius.repository.taxon').find(request.attributes.get('taxonId')))",
+            ],
+            redirectToRoute: 'app_frontend_post_index_by_topic',
+            redirectArguments: ['topicId' => 'resource.id'],
+        ),
+        new Update(
+            path: '/topics/{id}/edit',
+            template: 'frontend/topic/update.html.twig',
+            repositoryMethod: 'findOneBy',
+            repositoryArguments: [
+                'criteria' => "@={'id': request.attributes.get('id'), 'author': user ? user.getCustomer() : null}",
+            ],
+            redirectToRoute: 'app_frontend_post_index_by_topic',
+            redirectArguments: ['topicId' => 'resource.id'],
+        ),
+        new Delete(
+            path: '/topics/{id}',
+            methods: ['DELETE'],
+            repositoryMethod: 'findOneBy',
+            repositoryArguments: [
+                'criteria' => "@={'id': request.attributes.get('id'), 'author': user ? user.getCustomer() : null}",
+            ],
+            redirectToRoute: 'app_frontend_topic_index',
+        ),
+        new Index(
+            shortName: 'index_by_taxon',
+            path: '/topics/{slug}',
+            routeRequirements: ['slug' => '[^?]+'],
+            template: 'frontend/topic/index.html.twig',
+            grid: 'app_frontend_topic_from_taxon',
+            twigContextFactory: ForumTaxonContextFactory::class,
+        ),
+    ],
+)]
 class Topic implements ResourceInterface
 {
     use IdentifiableTrait;

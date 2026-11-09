@@ -1,7 +1,7 @@
 {% from 'macro/icon.html.twig' import icon %}
 
 <div class="space-top">
-    {{ render(url('app_frontend_partial_product_game_play_latest', {'productId': product.id, 'template': 'frontend/game_play/_list2.html.twig'})) }}
+    {{ component('GamePlay:LatestForProduct', {productId: product.id}) }}
 
     <div class="editorial-game-play-actions">
         <a class="editorial-review-more" href="{{ path('app_frontend_game_play_index_by_product', {'productSlug': product.slug}) }}">

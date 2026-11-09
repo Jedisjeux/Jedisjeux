@@ -16,9 +16,11 @@ app_api:
     defaults:
         _format: json
 
-partial:
-    resource: "routes/partial.yml"
-    prefix: /_partial
+# Routes of the operations declared with #[AsResource] on the entities.
+# Loaded after the YAML routes, so that /jeux-de-societe/les-sorties wins over /jeux-de-societe/{slug}
+sylius_resource:
+    resource: 'sylius.symfony.routing.loader.resource'
+    type: service
 
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.yaml"

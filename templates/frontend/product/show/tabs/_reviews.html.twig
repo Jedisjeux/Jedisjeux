@@ -1,7 +1,7 @@
 {% from 'macro/icon.html.twig' import icon %}
 
 <div class="space-top">
-    {{ render(url('sylius_frontend_partial_product_review_latest', {'productId': product.id, 'template': 'frontend/product_review/_list.html.twig'})) }}
+    {{ component('ProductReview:LatestForProduct', {productId: product.id}) }}
 
     <a class="editorial-review-more" href="{{ path('sylius_frontend_product_review_index', {'slug': product.slug}) }}">
         {{ 'app.ui.view_more_reviews'|trans }} {{ icon('arrow-right') }}

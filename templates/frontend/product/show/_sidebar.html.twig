@@ -2,13 +2,7 @@
 <!-- ================ -->
 <aside class="col-12 editorial-game-sidebar">
     <div class="sidebar">
-        {{ render(url('app_partial_dealer_price_index', {
-            template: 'frontend/dealer_price/_list.html.twig',
-            paginate: 4,
-            criteria: {
-                'product': product.id
-            }
-        })) }}
+        {{ component('DealerPrice:ForProduct', {productId: product.id}) }}
 
         {% include 'frontend/pub_banner/_sidebar.html.twig' %}
     </div>

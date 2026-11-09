@@ -19,6 +19,10 @@ use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Metadata\AsResource;
+use Sylius\Resource\Metadata\Delete;
+use Sylius\Resource\Metadata\Index;
+use Sylius\Resource\Metadata\Update;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -27,6 +31,32 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity]
 #[JMS\ExclusionPolicy('all')]
 #[ORM\Table(name: 'jdj_product_list')]
+#[AsResource(
+    alias: 'app.product_list',
+    section: 'backend',
+    templatesDir: 'backend/crud',
+    routePrefix: '/admin',
+    vars: ['subheader' => 'app.ui.manage_product_lists'],
+    operations: [
+        new Index(grid: 'app_backend_product_list', vars: ['icon' => 'list']),
+        new Update(redirectToRoute: 'app_backend_product_list_update'),
+        new Delete(),
+    ],
+)]
+#[AsResource(
+    alias: 'app.product_list',
+    section: 'frontend',
+    operations: [
+        new Index(
+            shortName: 'account_index',
+            routeName: 'app_frontend_account_product_list_index',
+            path: '/mon-compte/mes-listes-de-jeux/',
+            template: 'frontend/account/product_list/index.html.twig',
+            repositoryMethod: 'createPaginator',
+            repositoryArguments: ['criteria' => "@={'owner': user ? user.getCustomer() : null}"],
+        ),
+    ],
+)]
 class ProductList implements ResourceInterface
 {
     use IdentifiableTrait;

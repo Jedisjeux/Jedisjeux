@@ -4,7 +4,7 @@
             <div><span class="editorial-eyebrow">Ce qu'en pensent les joueurs</span><h2>{{ 'sylius.ui.reviews'|trans }}</h2></div>
         </div>
         <div>
-            {{ render(url('sylius_frontend_partial_person_review_latest', {'count': 4, 'personId': person.id, 'template': 'frontend/product_review/_list2.html.twig'})) }}
+            {{ component('ProductReview:LatestByPerson', {count: 4, personId: person.id}) }}
         </div>
     </div>
 </section>

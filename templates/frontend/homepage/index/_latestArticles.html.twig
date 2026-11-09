@@ -1,8 +1,3 @@
 <h3 class="title">{{ 'app.ui.recent_articles'|trans }}</h3>
 <div class="separator-2"></div>
-{{ render(url('app_frontend_partial_article_index', {
-    'template': 'frontend/article/_magazineList.html.twig',
-    'paginate': 4,
-    'sorting': {
-        'publishStartDate': 'desc'
-    }} )) }}
+{{ component('Article:Latest', {count: 4}) }}

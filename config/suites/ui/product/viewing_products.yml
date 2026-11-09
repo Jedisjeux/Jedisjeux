@@ -25,5 +25,6 @@ default:
                 - App\Tests\Behat\Context\Setup\YearAwardContext
 
                 - App\Tests\Behat\Context\Ui\Frontend\ProductContext
+                - App\Tests\Behat\Context\Ui\Frontend\ProductReleasesContext
             filters:
                 tags: "@viewing_products&&@ui"

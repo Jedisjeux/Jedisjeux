@@ -3,13 +3,16 @@ imports:
 
     - suites/ui/account/customer.yml
     - suites/ui/account/email_verification.yml
+    - suites/ui/account/lists.yml
     - suites/ui/account/login.yml
     - suites/ui/account/registration.yml
     - suites/ui/account/statistics.yml
     - suites/ui/admin/dashboard.yml
     - suites/ui/article/adding_article_comments.yml
     - suites/ui/article/editing_article_comments.yml
+    - suites/ui/article/managing_article_reviews.yml
     - suites/ui/article/managing_articles.yml
+    - suites/ui/article/managing_product_articles.yml
     - suites/ui/article/removing_article_comments.yml
     - suites/ui/article/viewing_articles.yml
     - suites/ui/contact/managing_contact_requests.yml
@@ -33,6 +36,7 @@ imports:
     - suites/ui/product/editing_product_reviews.yml
     - suites/ui/product/managing_game_awards.yml
     - suites/ui/product/managing_game_plays.yml
+    - suites/ui/product/managing_product_association_types.yml
     - suites/ui/product/managing_products.yml
     - suites/ui/product/managing_product_boxes.yml
     - suites/ui/product/managing_product_files.yml
@@ -59,5 +63,6 @@ imports:
     - suites/ui/topic/removing_topic_posts.yml
     - suites/ui/topic/viewing_topics.yml
     - suites/ui/user/managing_customers.yml
+    - suites/ui/user/managing_customer_groups.yml
     - suites/ui/user/viewing_game_libraries.yml
     - suites/ui/user/viewing_users.yml

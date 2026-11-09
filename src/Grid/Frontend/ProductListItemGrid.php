@@ -33,6 +33,7 @@ final class ProductListItemGrid
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
+            ->setLimits([12])
             ->setRepositoryMethod('createQueryBuilderByProductList', [
                 '$productListSlug',
                 $this->locale,

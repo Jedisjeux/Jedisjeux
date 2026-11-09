@@ -14,6 +14,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Metadata\ApplyStateMachineTransition;
+use Sylius\Resource\Metadata\AsResource;
+use Sylius\Resource\Metadata\Create;
+use Sylius\Resource\Metadata\Delete;
+use Sylius\Resource\Metadata\Index;
+use Sylius\Resource\Metadata\Update;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -21,6 +27,55 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'jdj_product_box')]
+#[AsResource(
+    alias: 'app.product_box',
+    section: 'backend',
+    templatesDir: 'backend/crud',
+    routePrefix: '/admin',
+    vars: ['subheader' => 'app.ui.manage_product_boxes'],
+    operations: [
+        new Index(grid: 'app_backend_product_box', vars: ['icon' => 'th']),
+        new Update(
+            redirectToRoute: 'app_backend_product_box_update',
+            vars: [
+                'templates' => [
+                    'toolbar' => 'backend/product_box/_toolbar.html.twig',
+                    'form' => 'backend/product_box/_form.html.twig',
+                ],
+            ],
+        ),
+        new Delete(),
+        new ApplyStateMachineTransition(
+            path: 'product-boxes/{id}/accept',
+            methods: ['PUT'],
+            stateMachineGraph: 'app_product_box',
+            stateMachineTransition: 'accept',
+        ),
+        new ApplyStateMachineTransition(
+            path: 'product-boxes/{id}/reject',
+            methods: ['PUT'],
+            stateMachineGraph: 'app_product_box',
+            stateMachineTransition: 'reject',
+        ),
+    ],
+)]
+#[AsResource(
+    alias: 'app.product_box',
+    section: 'frontend',
+    operations: [
+        new Create(
+            path: '/products/{slug}/boxes/new',
+            template: 'frontend/product_box/create.html.twig',
+            factoryMethod: 'createForProduct',
+            factoryArguments: [
+                'product' => "@=throw_not_found_on_null(sylius_repositories.get('sylius.repository.product').findOneBySlug(request.getLocale(), request.attributes.get('slug')))",
+            ],
+            notificationMessage: 'app.product_box.wait_for_the_acceptation',
+            redirectToRoute: 'sylius_frontend_product_show',
+            redirectArguments: ['slug' => 'resource.product.slug'],
+        ),
+    ],
+)]
 class ProductBox implements ResourceInterface
 {
     use IdentifiableTrait;

@@ -18,12 +18,30 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Metadata\AsResource;
+use Sylius\Resource\Metadata\Create;
+use Sylius\Resource\Metadata\Delete;
+use Sylius\Resource\Metadata\Index;
+use Sylius\Resource\Metadata\Update;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
 #[ORM\Entity]
 #[ORM\Table('jdj_festival_list')]
+#[AsResource(
+    alias: 'app.festival_list',
+    section: 'backend',
+    templatesDir: 'backend/crud',
+    routePrefix: '/admin',
+    vars: ['subheader' => 'app.ui.manage_festival_lists'],
+    operations: [
+        new Index(grid: 'app_backend_festival_list', vars: ['icon' => 'list']),
+        new Create(redirectToRoute: 'app_backend_festival_list_update'),
+        new Update(redirectToRoute: 'app_backend_festival_list_update'),
+        new Delete(),
+    ],
+)]
 class FestivalList implements ResourceInterface
 {
     use IdentifiableTrait;

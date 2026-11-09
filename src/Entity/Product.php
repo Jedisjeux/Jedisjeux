@@ -11,6 +11,8 @@
 
 namespace App\Entity;
 
+use App\Twig\Context\PersonContextFactory;
+use App\Twig\Context\TaxonContextFactory;
 use App\Validator\Constraints as CustomAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -21,6 +23,13 @@ use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Product\Model\ProductTranslationInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Resource\Metadata\ApplyStateMachineTransition;
+use Sylius\Resource\Metadata\AsResource;
+use Sylius\Resource\Metadata\Create;
+use Sylius\Resource\Metadata\Delete;
+use Sylius\Resource\Metadata\Index;
+use Sylius\Resource\Metadata\Show;
+use Sylius\Resource\Metadata\Update;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -30,6 +39,135 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[CustomAssert\MaxPlayerCountGreaterThanOrEqualMinPlayer(groups: ['sylius'])]
 #[JMS\ExclusionPolicy('all')]
 #[ORM\Table(name: 'sylius_product')]
+#[AsResource(
+    alias: 'sylius.product',
+    section: 'admin',
+    templatesDir: 'backend/crud',
+    routePrefix: '/admin',
+    vars: [
+        'subheader' => 'sylius.ui.manage_products',
+        'templates' => ['form' => 'backend/product/_form.html.twig'],
+    ],
+    operations: [
+        new Index(
+            path: 'products/',
+            grid: 'sylius_backend_product',
+            vars: [
+                'icon' => 'cube',
+                'actions' => ['create' => ['route' => 'sylius_admin_product_create']],
+            ],
+        ),
+        new Create(
+            path: 'products/new',
+            factoryMethod: 'createWithVariant',
+            redirectToRoute: 'sylius_admin_product_update',
+        ),
+        new Create(
+            shortName: 'from_bgg_new',
+            eventShortName: 'create',
+            path: 'products/bgg/new',
+            template: 'backend/crud/create.html.twig',
+            factoryMethod: 'createFromBgg',
+            factoryArguments: ['bggPath' => "@=request.query.get('bggPath')"],
+            redirectToRoute: 'sylius_admin_product_update',
+            vars: [
+                'route' => [
+                    'name' => 'sylius_admin_product_from_bgg_new',
+                    'parameters' => ['bggPath' => '$bggPath'],
+                ],
+            ],
+        ),
+        new Create(
+            shortName: 'from_bgg_bookmarklet_new',
+            eventShortName: 'create',
+            path: 'products/bgg/import',
+            template: 'backend/crud/create.html.twig',
+            factoryMethod: 'createFromBggPayload',
+            factoryArguments: ['payload' => "@=request.query.get('data')"],
+            redirectToRoute: 'sylius_admin_product_update',
+            vars: [
+                'route' => [
+                    'name' => 'sylius_admin_product_from_bgg_bookmarklet_new',
+                    'parameters' => ['data' => '$data'],
+                ],
+            ],
+        ),
+        new Update(
+            redirectToRoute: 'sylius_admin_product_update',
+            vars: [
+                'templates' => [
+                    'form' => 'backend/product/_form.html.twig',
+                    'toolbar' => 'backend/product/_toolbar.html.twig',
+                ],
+            ],
+        ),
+        new Delete(),
+        new ApplyStateMachineTransition(
+            path: 'products/{id}/ask_for_translation',
+            methods: ['PATCH'],
+            stateMachineGraph: 'sylius_product',
+            stateMachineTransition: 'ask_for_translation',
+            redirectToRoute: 'sylius_admin_product_update',
+        ),
+        new ApplyStateMachineTransition(
+            path: 'products/{id}/ask_for_review',
+            methods: ['PATCH'],
+            stateMachineGraph: 'sylius_product',
+            stateMachineTransition: 'ask_for_review',
+            redirectToRoute: 'sylius_admin_product_update',
+        ),
+        new ApplyStateMachineTransition(
+            path: 'products/{id}/ask_for_publication',
+            methods: ['PATCH'],
+            stateMachineGraph: 'sylius_product',
+            stateMachineTransition: 'ask_for_publication',
+            redirectToRoute: 'sylius_admin_product_update',
+        ),
+        new ApplyStateMachineTransition(
+            path: 'products/{id}/publish',
+            methods: ['PATCH'],
+            stateMachineGraph: 'sylius_product',
+            stateMachineTransition: 'publish',
+            redirectToRoute: 'sylius_admin_product_update',
+        ),
+    ],
+)]
+#[AsResource(
+    alias: 'sylius.product',
+    section: 'frontend',
+    operations: [
+        new Index(
+            path: '/jeux-de-societe/',
+            template: 'frontend/product/index.html.twig',
+            grid: 'sylius_frontend_product',
+        ),
+        new Index(
+            shortName: 'index_by_person',
+            path: '/jeux-de-societe/personnes/{slug}',
+            template: 'frontend/product/indexByPerson.html.twig',
+            grid: 'sylius_frontend_product_from_person',
+            twigContextFactory: PersonContextFactory::class,
+        ),
+        new Index(
+            shortName: 'index_by_taxon',
+            path: '/jeux-de-societe/{slug}',
+            routeRequirements: ['slug' => '[^?]+'],
+            template: 'frontend/product/indexByTaxon.html.twig',
+            grid: 'sylius_frontend_product_from_taxon',
+            twigContextFactory: TaxonContextFactory::class,
+        ),
+        new Show(
+            path: '/jeu-de-societe/{slug}',
+            template: 'frontend/product/show.html.twig',
+            repositoryMethod: 'findOneBySlug',
+            repositoryArguments: [
+                'locale' => '@=request.getLocale()',
+                'slug' => "@=request.attributes.get('slug')",
+                'showUnpublished' => "@=is_granted('ROLE_PRODUCT_MANAGER')",
+            ],
+        ),
+    ],
+)]
 class Product extends BaseProduct implements ProductInterface
 {
     /**

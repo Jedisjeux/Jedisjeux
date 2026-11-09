@@ -1,0 +1,12 @@
+{% import 'macro/messages.html.twig' as messages %}
+{% from 'macro/icon.html.twig' import icon %}
+
+{% if products is not empty %}
+    {% include 'frontend/product/grid/_fourColumns.html.twig' %}
+
+    <p class="editorial-releases__more">
+        <a href="{{ path('sylius_frontend_product_index', catalogParameters) }}">Toutes ces sorties {{ icon('arrow-right') }}</a>
+    </p>
+{% else %}
+    {{ messages.info('app.ui.there_are_no_releases') }}
+{% endif %}

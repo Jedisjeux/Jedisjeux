@@ -39,6 +39,7 @@ app:
         create: Topic has been successfully created.
         update: Topic has been successfully updated.
         delete: Topic has been successfully deleted.
+        bulk_delete: Topics have been successfully deleted.
 sylius:
     product:
         create: Product has been successfully created.

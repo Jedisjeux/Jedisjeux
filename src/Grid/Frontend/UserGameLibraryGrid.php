@@ -31,6 +31,7 @@ final class UserGameLibraryGrid
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
+            ->setLimits([300])
             ->setRepositoryMethod('createQueryBuilderForGameLibrary', [
                 'expr:service(\'sylius.repository.customer\').findOneByUsername($username)',
                 $this->locale,

@@ -69,9 +69,6 @@ security:
             context: user
 
     access_control:
-        - { path: "^/_partial.*", role: PUBLIC_ACCESS, ips: [127.0.0.1, ::1] }
-        - { path: "^/_partial.*", role: ROLE_NO_ACCESS }
-
         - { path: ^/login, role: PUBLIC_ACCESS }
         - { path: ^/register, role: PUBLIC_ACCESS }
         - { path: ^/resetting, role: PUBLIC_ACCESS }

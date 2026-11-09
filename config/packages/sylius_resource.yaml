@@ -1,4 +1,11 @@
 sylius_resource:
+    mapping:
+        # Resources declared with #[AsResource]
+        paths:
+            - '%kernel.project_dir%/src/Entity'
+        # Resources of the Sylius models, which cannot carry attributes
+        imports:
+            - '%kernel.project_dir%/config/sylius/resources'
     drivers:
         - doctrine/orm
     resources:
@@ -7,7 +14,6 @@ sylius_resource:
                 model: App\Entity\Article
                 factory: App\Factory\ArticleFactory
                 repository: App\Repository\ArticleRepository
-                controller: App\Controller\ArticleController
                 form: App\Form\Type\ArticleType
         app.article_image:
             classes:
@@ -82,7 +88,6 @@ sylius_resource:
             classes:
                 model: App\Entity\Person
                 repository: App\Repository\PersonRepository
-                controller: App\Controller\PersonController
                 form: App\Form\Type\PersonType
         app.person_image:
             classes:
@@ -116,7 +121,6 @@ sylius_resource:
             classes:
                 model: App\Entity\ProductListItem
                 repository: App\Repository\ProductListItemRepository
-                controller: App\Controller\ProductListItemController
         app.product_video:
             classes:
                 model: App\Entity\ProductVideo
@@ -145,7 +149,6 @@ sylius_resource:
             classes:
                 model: App\Entity\Topic
                 factory: App\Factory\TopicFactory
-                controller: App\Controller\TopicController
                 repository: App\Repository\TopicRepository
                 form:  App\Form\Type\TopicType
         app.post:
@@ -153,7 +156,6 @@ sylius_resource:
                 model: App\Entity\Post
                 factory: App\Factory\PostFactory
                 repository: App\Repository\PostRepository
-                controller: App\Controller\PostController
                 form: App\Form\Type\PostType
         app.product_variant_image:
             classes:

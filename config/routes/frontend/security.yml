@@ -14,19 +14,6 @@ sylius_frontend_login_check:
 app_frontend_logout:
     path: /logout
 
-app_frontend_register:
-    path: /register
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.customer::createAction
-        _sylius:
-            form: App\Form\Type\Customer\CustomerSimpleRegistrationType
-            event: register
-            template: frontend/register.html.twig
-            redirect:
-                route: app_homepage
-            flash: sylius.customer.register
-
 sylius_user_request_password_reset_token:
     path: /forgotten-password
     methods: [GET, POST]

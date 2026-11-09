@@ -31,7 +31,7 @@ final class TaxonContext implements Context
     }
 
     /**
-     * @Transform /^"([^"]+)" (taxon|mechanism|theme|category)$/
+     * @Transform /^"([^"]+)" (taxon|mechanism|theme|category|zone)$/
      * @Transform /^taxon with "([^"]+)" name/
      * @Transform /^taxon "([^"]+)"$/
      * @Transform /^category "([^"]+)"$/

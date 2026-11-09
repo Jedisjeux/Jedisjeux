@@ -13,12 +13,32 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Metadata\AsResource;
+use Sylius\Resource\Metadata\Create;
+use Sylius\Resource\Metadata\Delete;
+use Sylius\Resource\Metadata\Index;
+use Sylius\Resource\Metadata\Show;
+use Sylius\Resource\Metadata\Update;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'jdj_dealer_price')]
+#[AsResource(
+    alias: 'app.dealer_price',
+    section: 'backend',
+    templatesDir: 'backend/crud',
+    routePrefix: '/admin',
+    vars: ['subheader' => 'app.ui.manage_dealer_prices'],
+    operations: [
+        new Index(grid: 'app_backend_dealer_price', vars: ['icon' => 'euro']),
+        new Create(redirectToRoute: 'app_backend_dealer_price_index'),
+        new Update(redirectToRoute: 'app_backend_dealer_price_index'),
+        new Show(),
+        new Delete(),
+    ],
+)]
 class DealerPrice implements ResourceInterface
 {
     use IdentifiableTrait;

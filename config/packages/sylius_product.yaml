@@ -4,7 +4,6 @@ sylius_product:
             classes:
                 model: App\Entity\Product
                 repository: App\Repository\ProductRepository
-                controller: App\Controller\ProductController
                 form: App\Form\Type\ProductType
             translation:
                 classes:

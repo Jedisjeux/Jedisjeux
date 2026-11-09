@@ -165,6 +165,7 @@ app:
         move_up: Move up
         move_down: Move down
         my_game_library: My game library
+        game_list: Game list
         my_game_lists: My game lists
         my_game_plays: My game plays
         my_statistics: My statistics
@@ -251,6 +252,11 @@ app:
         style: Style
         themes: Themes
         there_are_no_articles: There are no articles.
+        releases: Releases
+        releases_of_the_month: Releases of the month
+        upcoming_releases: Upcoming releases
+        past_releases: Releases of the previous months
+        there_are_no_releases: There are no releases in this period.
         there_are_no_files: There are no files.
         there_are_no_game_plays: There are no game plays.
         topic: Topic

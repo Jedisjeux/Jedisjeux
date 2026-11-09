@@ -50,27 +50,15 @@ final class DealerGrid
 
 Une grille peut aussi en étendre une autre avec `->extends('app_backend_article')`, comme `ArticleForProductGrid` qui liste les articles d'un jeu.
 
-## Générer le routage
+## Afficher la grille
 
-SyliusResourceBundle génère une interface CRUD complète qui utilise la grille. Il suffit de la déclarer dans le routage (voir [Routage](../routing/)) :
+La grille est affichée par l'opération `Index` de la ressource, déclarée avec `#[AsResource]` sur l'entité (voir [Routage](../routing/)) :
 
-```yaml title="config/routes/backend/dealer.yml"
-app_backend_dealer:
-    resource: |
-        alias: app.dealer
-        section: backend
-        templates: backend/crud
-        redirect: update
-        grid: app_backend_dealer
-        vars:
-            all:
-                subheader: app.ui.manage_dealers
-                templates:
-                    form: backend/dealer/_form.html.twig
-            index:
-                icon: building
-    type: sylius.resource
+```php title="src/Entity/Dealer.php"
+new Index(grid: 'app_backend_dealer', vars: ['icon' => 'building']),
 ```
+
+Le nombre de lignes par page vient des `limits` de la grille : la première valeur est celle par défaut.
 
 ## Pour aller plus loin
 

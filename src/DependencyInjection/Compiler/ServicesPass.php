@@ -58,6 +58,11 @@ class ServicesPass implements CompilerPassInterface
         $postFactoryDefinition
             ->addArgument(new Reference('app.context.customer'));
 
+        // SyliusReviewBundle registers these factories itself, out of reach of the #[AsResource] operations
+        foreach (['sylius.factory.product_review', 'sylius.factory.article_review'] as $reviewFactoryId) {
+            $container->findDefinition($reviewFactoryId)->addTag('sylius.resource_factory');
+        }
+
         $notificationFactoryDefinition = $container->getDefinition('app.factory.notification');
         $notificationFactoryDefinition
             ->addMethodCall('setRouter', [new Reference('router')])

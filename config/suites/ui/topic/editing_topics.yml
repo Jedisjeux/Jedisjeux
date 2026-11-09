@@ -18,6 +18,7 @@ default:
                 - App\Tests\Behat\Context\Setup\TaxonContext
 
                 - App\Tests\Behat\Context\Ui\Frontend\TopicContext
+                - App\Tests\Behat\Context\Ui\Frontend\RemovingTopicsContext
                 - App\Tests\Behat\Context\Ui\Frontend\NotificationContext
             filters:
                 tags: "@editing_topics&&@ui"

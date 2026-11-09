@@ -165,6 +165,7 @@ app:
         move_up: Monter
         move_down: Descendre
         my_game_library: Ma ludothèque
+        game_list: Liste de jeux
         my_game_lists: Mes listes de jeu
         my_game_plays: Mes parties de jeu
         my_statistics: Mes statistiques
@@ -251,6 +252,11 @@ app:
         style: Style
         themes: Thèmes
         there_are_no_articles: Il n'y a aucun article.
+        releases: Les sorties
+        releases_of_the_month: Sorties du mois
+        upcoming_releases: Prochaines sorties
+        past_releases: Sorties des mois précédents
+        there_are_no_releases: "Il n'y a aucune sortie sur cette période."
         there_are_no_files: Il n'y a aucun fichier.
         there_are_no_game_plays: Il n'y a aucune partie.
         topic: Sujet

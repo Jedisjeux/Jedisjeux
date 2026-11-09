@@ -20,13 +20,13 @@
     {% if is_granted('ROLE_ADMIN') %}
         <div class="row row-cards">
             <div class="col-lg-6">
-                {{ render(url('sylius_backend_partial_customer_latest', {'count': 5, 'template': 'backend/dashboard/_customers.html.twig'})) }}
+                {{ component('Dashboard:LatestCustomers') }}
             </div>
             <div class="col-lg-6">
-                {{ render(url('app_backend_partial_article_latest', {'count': 5, 'template': 'backend/dashboard/_articles.html.twig'})) }}
+                {{ component('Dashboard:LatestArticles') }}
             </div>
         </div>
     {% elseif is_granted('ROLE_ARTICLE_MANAGER') %}
-        {{ render(url('app_backend_partial_article_latest', {'count': 5, 'template': 'backend/dashboard/_articles.html.twig'})) }}
+        {{ component('Dashboard:LatestArticles') }}
     {% endif %}
 {% endblock %}

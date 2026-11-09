@@ -1,9 +1,9 @@
-{% if resource is null %}
-    {% set path = path('sylius_frontend_product_review_create', { 'slug': app.request.get('productSlug') } ) %}
+{% if product_review is null %}
+    {% set path = path('sylius_frontend_product_review_create', { 'slug': productSlug } ) %}
 {% else %}
-    {% set path = path('sylius_frontend_product_review_update', { 'slug': app.request.get('productSlug'), 'id': resource.id } ) %}
+    {% set path = path('sylius_frontend_product_review_update', { 'slug': productSlug, 'id': product_review.id } ) %}
 {% endif %}
 
-<a id="productReviewButton" href="{{ path }}" class="wishlist" data-product-slug="{{ app.request.get('productSlug') }}">
+<a id="productReviewButton" href="{{ path }}" class="wishlist" data-product-slug="{{ productSlug }}">
     <i class="fa fa-star-o pl-10 pr-1" aria-hidden="true">{{ ux_icon('fa:star-o', {class: 'fa-svg'}) }}</i>Votre avis
 </a>

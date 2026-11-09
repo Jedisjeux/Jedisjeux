@@ -1,15 +1,11 @@
-{% extends "base.html.twig" %}
+{% extends "frontend/layout.html.twig" %}
 
-{% block headline %}
-    {{ product_list }}
-{% endblock %}
+{% set pageTitle = product_list.name %}
 
-{% block breadcrumb_content %}
-    {{ parent() }}
-    <a href="#">Listes de jeux</a>
-    / {{ product_list }}
-{% endblock %}
+{% block content -%}
+    {% include 'frontend/product_list_item/index/_banner.html.twig' %}
 
-{% block body -%}
     {% include 'frontend/product_list_item/index/_content.html.twig' %}
+
+    {% include 'frontend/footer/_top.html.twig' %}
 {% endblock %}

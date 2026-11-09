@@ -75,4 +75,14 @@ class IndexPage extends SymfonyPage
 
         return count($posts);
     }
+
+    public function canRemoveTopic(): bool
+    {
+        return null !== $this->getDocument()->find('css', '.editorial-thread-controls__delete');
+    }
+
+    public function removeTopic(): void
+    {
+        $this->getDocument()->find('css', '.editorial-thread-controls__delete')->press();
+    }
 }

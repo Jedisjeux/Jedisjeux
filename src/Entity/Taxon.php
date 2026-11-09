@@ -14,12 +14,48 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
+use Sylius\Resource\Metadata\AsResource;
+use Sylius\Resource\Metadata\Create;
+use Sylius\Resource\Metadata\Delete;
+use Sylius\Resource\Metadata\Index;
+use Sylius\Resource\Metadata\Update;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'sylius_taxon')]
+#[AsResource(
+    alias: 'sylius.taxon',
+    section: 'backend',
+    templatesDir: 'backend/crud',
+    routePrefix: '/admin/taxons',
+    vars: ['templates' => ['form' => 'backend/taxon/_form.html.twig']],
+    operations: [
+        new Index(path: '/', grid: 'sylius_backend_root_taxon'),
+        new Index(
+            shortName: 'index_by_parent',
+            path: 'children/{id}/',
+            template: 'backend/crud/index.html.twig',
+            grid: 'sylius_backend_taxon_from_root',
+        ),
+        new Create(
+            shortName: 'create_for_parent',
+            eventShortName: 'create',
+            path: 'new/{id}',
+            template: 'backend/crud/create.html.twig',
+            factoryMethod: 'createForParent',
+            factoryArguments: [
+                'parent' => "@=throw_not_found_on_null(sylius_repositories.get('sylius.repository.taxon').find(request.attributes.get('id')))",
+            ],
+            redirectToRoute: 'sylius_backend_taxon_index',
+            vars: ['subheader' => 'sylius.ui.manage_categorization_of_your_products'],
+        ),
+        new Create(path: 'roots/new', redirectToRoute: 'sylius_backend_taxon_index'),
+        new Update(path: '{id}/edit', redirectToRoute: 'sylius_backend_taxon_index'),
+        new Delete(path: '{id}', redirectToRoute: 'sylius_backend_taxon_index'),
+    ],
+)]
 class Taxon extends BaseTaxon
 {
     // taxons of articles

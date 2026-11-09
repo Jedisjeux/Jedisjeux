@@ -1,4 +1,4 @@
-{% set activeMenu = metadata is defined ? metadata.name : 'home' %}
+{% set activeMenu = activeMenu|default(metadata is defined ? metadata.name : 'home') %}
 
 <!-- main-menu -->
 <ul class="navbar-nav ml-xl-auto">
@@ -12,10 +12,7 @@
         <ul class="dropdown-menu editorial-nav-menu" aria-labelledby="seventh-dropdown">
             <li class="editorial-nav-menu__heading">Le magazine</li>
             <li><a href="{{ path('app_frontend_article_index') }}"><i class="fa fa-newspaper-o" aria-hidden="true">{{ ux_icon('fa:newspaper-o', {class: 'fa-svg'}) }}</i>{{ 'sylius.ui.all'|trans }}</a></li>
-            {{  render(url('sylius_partial_taxon_index_by_code', {
-                'code': constant('App\\Entity\\Taxon::CODE_ARTICLE'),
-                'template': 'frontend/taxon/_listForArticles.html.twig'
-            })) }}
+            {{ component('Taxon:ArticleMenu', {code: constant('App\\Entity\\Taxon::CODE_ARTICLE')}) }}
         </ul>
     </li>
     <li class="nav-item {% if 'product' == activeMenu %}active {% endif %}dropdown">
@@ -24,10 +21,7 @@
             <li class="editorial-nav-menu__column">
                 <span class="editorial-nav-menu__heading">Par public</span>
                 <ul>
-                    {{ render(url('sylius_partial_taxon_index_by_code', {
-                        'code': constant('App\\Entity\\Taxon::CODE_TARGET_AUDIENCE'),
-                        'template': 'frontend/taxon/_listForProducts.html.twig'
-                    })) }}
+                    {{ component('Taxon:ProductMenu', {code: constant('App\\Entity\\Taxon::CODE_TARGET_AUDIENCE')}) }}
                 </ul>
             </li>
             <li class="editorial-nav-menu__column">
@@ -36,6 +30,7 @@
                     <li><a href="{{ path('sylius_frontend_product_index', {'criteria': {'reviewCount': {value: 5}}, 'sorting': {'averageRating': 'desc'}}) }}"><i class="fa fa-star" aria-hidden="true">{{ ux_icon('fa:star', {class: 'fa-svg'}) }}</i>{{ 'app.ui.top_rated'|trans }}</a></li>
                     <li><a href="{{ path('sylius_frontend_product_index', {'sorting': {'viewCount': 'desc'}}) }}"><i class="fa fa-eye" aria-hidden="true">{{ ux_icon('fa:eye', {class: 'fa-svg'}) }}</i>{{ 'app.ui.most_viewed'|trans }}</a></li>
                     <li><a href="{{ path('sylius_frontend_product_index', {'sorting': {'commentedReviewCount': 'desc'}}) }}"><i class="fa fa-comments" aria-hidden="true">{{ ux_icon('fa:comments', {class: 'fa-svg'}) }}</i>{{ 'app.ui.top_commented'|trans }}</a></li>
+                    <li><a href="{{ path('sylius_frontend_product_release_index') }}"><i class="fa fa-calendar" aria-hidden="true">{{ ux_icon('fa:calendar', {class: 'fa-svg'}) }}</i>{{ 'app.ui.releases'|trans }}</a></li>
                     <li><a href="{{ path('app_frontend_year_award_index') }}"><i class="fa fa-trophy" aria-hidden="true">{{ ux_icon('fa:trophy', {class: 'fa-svg'}) }}</i>{{ 'app.ui.award_winning_games'|trans }}</a></li>
                 </ul>
             </li>

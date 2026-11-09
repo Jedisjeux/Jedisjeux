@@ -7,86 +7,8 @@ app_backend_dashboard:
         _controller:  App\Controller\StatisticsController::indexAction
         template:     'backend/index.html.twig'
 
-app_backend_partial:
-    resource: "backend/partial.yml"
-    prefix: /_partial
-
 app_backend_ajax:
     resource: backend/ajax.yml
     prefix: /ajax
     defaults:
         _format: json
-
-app_admin_person:
-    resource: backend/person.yml
-
-app_backend_article:
-    resource: backend/article.yml
-
-sylius_backend_article_review:
-    resource: backend/article_review.yml
-
-app_admin_contact_request:
-    resource: backend/contact_request.yml
-
-sylius_backend_customer:
-    resource: backend/customer.yml
-
-sylius_backend_customer_group:
-    resource: backend/customer_group.yml
-
-app_backend_festival_list:
-    resource: backend/festival_list.yml
-
-app_backend_festival_list_item:
-    resource: backend/festival_list_item.yml
-    prefix: festival-lists/{festivalListId}/items
-
-sylius_admin_taxon:
-    resource: backend/taxon.yml
-    prefix: /taxons
-
-app_backend_person:
-    resource: backend/person.yml
-
-sylius_admin_product:
-    resource: backend/product.yml
-
-sylius_backend_product_association_type:
-    resource: backend/product_association_type.yml
-
-app_backend_product_list:
-    resource: backend/product_list.yml
-
-app_backend_product_box:
-    resource: backend/product_box.yml
-
-app_backend_product_file:
-    resource: backend/product_file.yml
-
-sylius_backend_product_review:
-    resource: backend/product_review.yml
-
-sylius_backend_product_variant:
-    resource: backend/product_variant.yml
-
-app_backend_dealer:
-    resource: backend/dealer.yml
-
-app_backend_dealer_price:
-    resource: backend/dealer_price.yml
-
-app_backend_game_award:
-    resource: backend/game_award.yml
-
-app_backend_game_play:
-    resource: backend/game_play.yml
-
-app_backend_post:
-    resource: backend/post.yml
-
-app_backend_topic:
-    resource: backend/topic.yml
-
-app_backend_year_award:
-    resource: backend/year_award.yml

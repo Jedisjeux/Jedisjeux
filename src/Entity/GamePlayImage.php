@@ -9,12 +9,25 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Sylius\Resource\Metadata\AsResource;
+use Sylius\Resource\Metadata\Index;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'jdj_game_play_image')]
+#[AsResource(
+    alias: 'app.game_play_image',
+    section: 'frontend',
+    operations: [
+        new Index(
+            path: '/images/parties/',
+            template: 'frontend/game_play_image/index.html.twig',
+            grid: 'app_frontend_game_play_image',
+        ),
+    ],
+)]
 class GamePlayImage extends AbstractImage
 {
     /**

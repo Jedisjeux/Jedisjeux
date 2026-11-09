@@ -33,6 +33,7 @@ final class GamePlayGrid
     public function __invoke(GridBuilderInterface $gridBuilder): void
     {
         $gridBuilder
+            ->setLimits([12])
             ->setRepositoryMethod('createFrontendListQueryBuilder', [
                 'locale' => $this->locale,
                 'criteria' => 'expr:service(\'request_stack\').getCurrentRequest().get(\'criteria\', [])',

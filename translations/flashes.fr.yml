@@ -39,6 +39,7 @@ app:
         create: Le sujet a bien été créé.
         update: Le sujet a bien été mis à jour.
         delete: Le sujet a bien été supprimé.
+        bulk_delete: Les sujets ont bien été supprimés.
 sylius:
     product:
         create: Le jeu a bien été créé.
