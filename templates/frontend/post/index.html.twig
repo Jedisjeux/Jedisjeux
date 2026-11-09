@@ -1,4 +1,5 @@
 {% extends 'frontend/layout.html.twig' %}
+{% import 'macro/page_views.html.twig' as page_views %}
 
 {% set pageTitle %}
     {{ topic.title }}
@@ -21,4 +22,5 @@
     <!-- main-container end -->
 
     {% include 'frontend/post/index/_footerTop.html.twig' %}
+    {{ page_views.render(topic.id, 'topics') }}
 {% endblock content %}

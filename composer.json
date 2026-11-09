@@ -30,7 +30,6 @@
     "friendsofsymfony/jsrouting-bundle": "^3.5",
     "friendsofsymfony/rest-bundle": "^3.8",
     "gesdinet/jwt-refresh-token-bundle": "^1.0",
-    "google/apiclient": "^2.0",
     "guzzlehttp/guzzle": "^6.2 || ^7.0",
     "incenteev/hashed-asset-bundle": "^1.0",
     "karser/karser-recaptcha3-bundle": "^0.1.3",

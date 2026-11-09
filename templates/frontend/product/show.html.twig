@@ -1,4 +1,5 @@
 {% extends 'frontend/layout.html.twig' %}
+{% import 'macro/page_views.html.twig' as page_views %}
 
 {% set pageTitle %}
     {{ product.name }}
@@ -13,4 +14,5 @@
     {% include 'frontend/product/show/_variants.html.twig' %}
     {% include 'frontend/product/show/_associations.html.twig' %}
     {% include 'frontend/product/show/_footerTop.html.twig' %}
+    {{ page_views.render(product.id, 'products') }}
 {% endblock content %}

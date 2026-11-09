@@ -140,14 +140,6 @@ services:
         tags:
             - { name: form.type, alias: sylius_product_review_rating }
 
-    sylius.form.type.product_view_count:
-        class: App\Form\Type\ProductViewCountType
-        arguments:
-            - "%sylius.model.product.class%"
-            - []
-        tags:
-            - { name: form.type, alias: sylius_product_view_count }
-
     sylius.form.type.sylius_product_associations:
         class: App\Form\Type\ProductAssociationsType
         arguments:
@@ -413,29 +405,6 @@ services:
         decorates: "app.factory.product_file"
         arguments:
             $factory: '@App\Factory\ProductFileFactory.inner'
-
-    app.google_analytics.client:
-        class: Google_Client
-        calls:
-            - [ setApplicationName, ['Jedisjeux'] ]
-            - [ setAuthConfig, ['%env(GOOGLE_ANALYTICS_PRIVATE_KEY_FILE)%'] ]
-            - [ addScope, ['https://www.googleapis.com/auth/analytics.readonly'] ]
-
-    app.google_analytics.page_views:
-        class: App\GoogleAnalytics\PageViewsService
-        arguments:
-            - "@app.google_analytics.client"
-            - '%env(GOOGLE_ANALYTICS_PROFILE_ID)%'
-        public: true
-
-    app.google_analytics.session:
-        class: App\GoogleAnalytics\SessionService
-        arguments:
-            - "@app.google_analytics.client"
-            - '%env(GOOGLE_ANALYTICS_PROFILE_ID)%'
-
-    App\GoogleAnalytics\PageViewsService: '@app.google_analytics.page_views'
-    App\GoogleAnalytics\SessionService: '@app.google_analytics.session'
 
     App\Templating\Helper\CurrencyHelper:
         lazy: true

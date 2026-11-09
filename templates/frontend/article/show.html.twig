@@ -9,5 +9,5 @@
     {% include 'frontend/article/show/_main.html.twig' %}
     {% include 'frontend/article/show/_comments.html.twig' %}
     {% include 'frontend/article/show/_footerTop.html.twig' %}
-    {{ page_views.render(article.id, 'article', path('app_frontend_article_show', {'slug' : article.slug})) }}
+    {{ page_views.render(article.id, 'articles') }}
 {% endblock content %}

@@ -5,3 +5,7 @@ framework:
             homepage.cache:
                 adapter: cache.app
                 default_lifetime: 600
+            # Visitors whose view of an article, a game or a topic was already counted
+            view_count.cache:
+                adapter: cache.app
+                default_lifetime: 3600

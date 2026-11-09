@@ -42,17 +42,7 @@
         <env name="GOOGLE_RECAPTCHA_SITE_KEY" value=""/>
         <env name="GOOGLE_RECAPTCHA_SECRET" value=""/>
         <!-- ###- google/recaptcha ### -->
-
-        <!-- ###+ google/apiclient ### -->
-        <env name="GOOGLE_API_KEY" value=""/>
-        <env name="GOOGLE_CLIENT_ID" value=""/>
-        <env name="GOOGLE_CLIENT_SECRET" value=""/>
-        <!-- ###- google/apiclient ### -->
-
         <!-- ###+ google/analytics ### -->
-        <env name="GOOGLE_ANALYTICS_TRACKING_ID" value="UA-XXXXX-1"/>
-        <env name="GOOGLE_ANALYTICS_PROFILE_ID" value="XXXXXXXX"/>
-        <env name="GOOGLE_ANALYTICS_PRIVATE_KEY_FILE" value="Resources/credentials/client_secret.json"/>
         <!-- ###- google/analytics ### -->
 
         <!-- ###+ nelmio/cors-bundle ### -->
