@@ -395,12 +395,6 @@
     "phpspec/php-diff": {
         "version": "v1.1.0"
     },
-    "phpspec/phpspec": {
-        "version": "4.3.2"
-    },
-    "phpspec/prophecy": {
-        "version": "1.8.0"
-    },
     "phpstan/phpstan": {
         "version": "0.12.55"
     },

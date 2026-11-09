@@ -12,6 +12,7 @@
 namespace App\Tests\Controller;
 
 use ApiTestCase\JsonApiTestCase;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -36,10 +37,8 @@ class ProductApiTest extends JsonApiTestCase
         'ACCEPT' => 'application/json',
     ];
 
-    /**
-     * @test
-     */
-    public function it_allows_showing_product()
+    #[Test]
+    public function it_allows_showing_product(): void
     {
         $products = $this->loadFixturesFromFile('resources/products.yml');
         $product = $products['product1'];

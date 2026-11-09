@@ -29,5 +29,6 @@
         "IdenticalEqual": false,
         "NotIdenticalNotEqual": false
     },
-    "testFramework":"phpspec"
+    "testFramework": "phpunit",
+    "testFrameworkOptions": "--testsuite=unit"
 }
