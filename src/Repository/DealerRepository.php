@@ -21,7 +21,7 @@ class DealerRepository extends EntityRepository
     /**
      * {@inheritdoc}
      */
-    public function createFilterPaginator(array $criteria = null, array $sorting = null)
+    public function createFilterPaginator(?array $criteria = null, ?array $sorting = null)
     {
         $queryBuilder = $this->createQueryBuilder('o');
 

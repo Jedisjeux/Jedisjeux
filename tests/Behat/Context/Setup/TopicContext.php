@@ -69,7 +69,7 @@ class TopicContext implements Context
      * @param string                 $title
      * @param CustomerInterface|null $customer
      */
-    public function thereIsTopicWithTitleWrittenByCustomer($title, CustomerInterface $customer = null, $date = 'now')
+    public function thereIsTopicWithTitleWrittenByCustomer($title, ?CustomerInterface $customer = null, $date = 'now')
     {
         if (null === $customer) {
             $customer = $this->sharedStorage->get('customer');

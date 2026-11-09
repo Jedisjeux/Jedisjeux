@@ -58,8 +58,8 @@ class ProductFileContext implements Context
     public function thisProductHasAFileWithStatus(
         ProductInterface $product,
         string $title,
-        string $status = null,
-        CustomerInterface $customer = null
+        ?string $status = null,
+        ?CustomerInterface $customer = null
     ): void {
         $this->createProductFile([
             'product' => $product,

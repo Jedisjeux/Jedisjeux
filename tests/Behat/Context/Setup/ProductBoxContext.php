@@ -52,8 +52,8 @@ class ProductBoxContext implements Context
      */
     public function thisProductHasABoxWithStatus(
         ProductInterface $product,
-        string $status = null,
-        CustomerInterface $customer = null
+        ?string $status = null,
+        ?CustomerInterface $customer = null
     ): void {
         $this->createProduct([
             'product' => $product,
@@ -67,7 +67,7 @@ class ProductBoxContext implements Context
      */
     public function thisProductHasABoxHigh(
         ProductInterface $product,
-        int $height = null
+        ?int $height = null
     ): void {
         $this->createProduct([
             'product' => $product,

@@ -115,7 +115,7 @@ class ArticleRepository extends EntityRepository
         return $queryBuilder;
     }
 
-    public function createFrontendListQueryBuilder(string $localeCode, string $taxonSlug = null, string $productSlug = null, array $criteria = []): QueryBuilder
+    public function createFrontendListQueryBuilder(string $localeCode, ?string $taxonSlug = null, ?string $productSlug = null, array $criteria = []): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
@@ -195,7 +195,7 @@ class ArticleRepository extends EntityRepository
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator(array $criteria = null, array $sorting = null, $status = Article::STATUS_PUBLISHED)
+    public function createFilterPaginator(?array $criteria = null, ?array $sorting = null, $status = Article::STATUS_PUBLISHED)
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
@@ -252,7 +252,7 @@ class ArticleRepository extends EntityRepository
      *
      * @return Pagerfanta
      */
-    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = null, array $sorting = null, $status = Article::STATUS_PUBLISHED)
+    public function createByTaxonPaginator(TaxonInterface $taxon, ?array $criteria = null, ?array $sorting = null, $status = Article::STATUS_PUBLISHED)
     {
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
