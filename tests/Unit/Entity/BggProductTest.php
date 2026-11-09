@@ -97,6 +97,24 @@ final class BggProductTest extends TestCase
         $this->assertFalse($this->sut->hasMechanism('Variable Phase Order'));
     }
 
+    public function testItInitializesCategoriesArrayByDefault(): void
+    {
+        $this->assertSame([], $this->sut->getCategories());
+    }
+
+    public function testItAddsCategories(): void
+    {
+        $this->sut->addCategory('Economic');
+        $this->assertTrue($this->sut->hasCategory('Economic'));
+    }
+
+    public function testItRemovesCategories(): void
+    {
+        $this->sut->addCategory('Economic');
+        $this->sut->removeCategory('Economic');
+        $this->assertFalse($this->sut->hasCategory('Economic'));
+    }
+
     public function testItInitializesDesignersArrayByDefault(): void
     {
         $this->assertSame([], $this->sut->getDesigners());
