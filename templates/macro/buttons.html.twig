@@ -44,7 +44,7 @@
 
     {% if disabled %}
         <span class="btn btn-primary disabled">
-            <i class="glyphicon glyphicon-pencil"></i><span>{{ message }}</span>
+            <i class="fa fa-pencil" aria-hidden="true">{{ ux_icon('fa:pencil', {class: 'fa-svg'}) }}</i> <span>{{ message }}</span>
         </span>
     {% else %}
     {{ buttons.btn(url, message, id, 'pencil', 'btn-primary') }}
@@ -54,7 +54,7 @@
 {% macro delete(url, message, disabled, resourceId = null) %}
     {% if disabled %}
         <span class="btn btn-danger disabled">
-            <i class="glyphicon glyphicon-trash"></i><span>{{ message is empty ? 'label.delete'|trans : message }}</span>
+            <i class="fa fa-trash" aria-hidden="true">{{ ux_icon('fa:trash', {class: 'fa-svg'}) }}</i> <span>{{ message is empty ? 'label.delete'|trans : message }}</span>
         </span>
     {% else %}
         <form action="{{ url }}" name="form" method="post" style="display: inline;">
