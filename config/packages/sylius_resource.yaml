@@ -78,9 +78,6 @@ sylius_resource:
                 model: App\Entity\GamePlayImage
                 repository: App\Repository\GamePlayImageRepository
                 form: App\Form\Type\GamePlayImageType
-        app.not_found_page:
-            classes:
-                model: App\Entity\NotFound
         app.person:
             classes:
                 model: App\Entity\Person
@@ -128,10 +125,6 @@ sylius_resource:
             classes:
                 model: App\Entity\PubBanner
                 form: App\Form\Type\PubBannerType
-        app.redirection:
-            classes:
-                model: App\Entity\Redirection
-                form: App\Form\Type\RedirectionType
         app.slide_show_block:
             classes:
                 model: App\Entity\SlideShowBlock

@@ -70,13 +70,11 @@ app:
         edit_product_box: Modifier la boite de jeu
         edit_product_file: Modifier le fichier de jeu
         edit_product_list: Modifier la liste de jeu
-        edit_redirection: Modifier la redirection
         edit_string_block: Modifer le bloc de chaîne
         edit_topic: Modifier le sujet
         editor: Editeur
         editors: Editeurs
         error: Erreur
-        errors: Erreurs
         favorite_game: Jeu favori
         festival_lists: Listes de festival
         festival_list_items: Items de liste de festival
@@ -141,13 +139,11 @@ app:
         manage_festival_list_items: Gérer les items de liste de festival
         manage_game_awards: Gérer les récompenses de jeu
         manage_game_plays: Gérer les parties de jeu
-        manage_not_found_pages: Gérer les pages non trouvées
         manage_people: Gérer les personnes
         manage_posts: Gérer les messages
         manage_product_boxes: Gérer les boites de jeu
         manage_product_files: Gérer les fichiers de jeu
         manage_product_lists: Gérer les listes de jeu
-        manage_redirections: Gérer les redirections
         manage_string_blocks: Gérer les blocs de chaîne
         manage_topics: Gérer les sujets
         manage_year_awards: Gérer les récompenses annuelles
@@ -183,7 +179,6 @@ app:
         new_list: Nouvelle liste
         new_person: Nouvelle personne
         new_product_box: Nouvelle boite de jeu
-        new_redirection: Nouvelle redirection
         new_post: Nouveau message
         new_string_block: Nouveau bloc de chaîne
         new_topic: Nouveau sujet
@@ -192,7 +187,6 @@ app:
         no_game_play_in_year: "Aucune partie enregistrée en %year%."
         normal: Normal
         not_found_page: Page introuvable
-        not_found_pages: Pages non trouvées
         oldest_release_first: Sorti plus récemment en dernier
         overview_of_your_website: Aperçu de votre site web
         partnership: Partenariat
@@ -230,9 +224,6 @@ app:
         react_on_this_game_play: Réagir à cette partie de jeu
         recent_articles: Articles récents
         redactor: Rédacteur
-        redirection: Redirection
-        redirections: Redirections
-        redirection_count: Nombre de redirections
         referer: Référent
         register_a_game_play: Enregistrer une partie
         registered_at: Inscrit le

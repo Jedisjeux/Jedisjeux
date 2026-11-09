@@ -70,13 +70,11 @@ app:
         edit_product_box: Edit product box
         edit_product_file: Edit product file
         edit_product_list: Edit product list
-        edit_redirection: Edit redirection
         edit_string_block: Edit string block
         edit_topic: Edit topic
         editor: Editor
         editors: Editors
         error: Error
-        errors: Errors
         favorite_game: Favorite game
         festival_lists: Festival Lists
         festival_list_items: Festival List items
@@ -141,13 +139,11 @@ app:
         manage_festival_list_items: Manage festival list items
         manage_game_awards: Manage game awards
         manage_game_plays: Manage game plays
-        manage_not_found_pages: Manage not found pages
         manage_people: Manage people
         manage_posts: Manage posts
         manage_product_boxes: Manage product boxes
         manage_product_files: Manage product files
         manage_product_lists: Manage product lists
-        manage_redirections: Manage redirections
         manage_string_blocks: Manage string blocks
         manage_topics: Manage topics
         manage_year_awards: Manage year awards
@@ -183,7 +179,6 @@ app:
         new_list: New list
         new_person: New person
         new_product_box: New product box
-        new_redirection: New redirection
         new_post: New post
         new_string_block: New string block
         new_topic: New topic
@@ -192,7 +187,6 @@ app:
         no_game_play_in_year: "No game play recorded in %year%."
         normal: Normal
         not_found_page: Not found page
-        not_found_pages: not_found_pages
         oldest_release_first: Oldest release first
         overview_of_your_website: Overview of your website
         partnership: Partnership
@@ -230,9 +224,6 @@ app:
         react_on_this_game_play: React on this game play
         recent_articles: Recent articles
         redactor: Redactor
-        redirection: Redirection
-        redirections: Redirections
-        redirection_count: Redirection count
         referer: Referer
         register_a_game_play: Register a game play
         registered_at: Registered at

@@ -1049,8 +1049,5 @@
         "files": [
             "config/packages/zenstruck_foundry.yaml"
         ]
-    },
-    "zenstruck/redirect-bundle": {
-        "version": "v3.1.0"
     }
 }

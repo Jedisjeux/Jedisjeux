@@ -38,7 +38,7 @@ class FestivalListExampleFactory extends AbstractExampleFactory implements Examp
     private $optionsResolver;
 
     /**
-     * RedirectionExampleFactory constructor.
+     * FestivalListExampleFactory constructor.
      */
     public function __construct(FactoryInterface $festivalListFactory)
     {

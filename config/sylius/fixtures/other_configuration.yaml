@@ -560,9 +560,6 @@ sylius_fixtures:
                 pub_banner:
                     options:
                         random: 2
-                redirection:
-                    options:
-                        random: 10
                 festival_list:
                     options:
                         random: 5
