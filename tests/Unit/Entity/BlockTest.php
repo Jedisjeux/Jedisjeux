@@ -18,6 +18,7 @@ use App\Entity\Block;
 use App\Entity\BlockImage;
 use App\Entity\SlideShowBlock;
 use PHPUnit\Framework\TestCase;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 final class BlockTest extends TestCase
@@ -132,5 +133,18 @@ final class BlockTest extends TestCase
 
         $this->sut->setSlideShowBlock($slideShowBlock);
         $this->assertSame($slideShowBlock, $this->sut->getSlideShowBlock());
+    }
+
+    public function testItHasNoProductByDefault(): void
+    {
+        $this->assertNull($this->sut->getProduct());
+    }
+
+    public function testItsProductIsMutable(): void
+    {
+        $product = $this->createStub(ProductInterface::class);
+
+        $this->sut->setProduct($product);
+        $this->assertSame($product, $this->sut->getProduct());
     }
 }

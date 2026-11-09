@@ -797,6 +797,16 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
 .editorial-article-figure__zoom { position: absolute; right: 10px; bottom: 10px; display: grid; width: 32px; height: 32px; place-items: center; border-radius: 50%; background: rgba(var(--ed-surface-rgb),.9); color: var(--ed-ink); font-size: 13px; opacity: 0; transition: opacity .2s ease; }
 .editorial-article-figure > a:hover .editorial-article-figure__zoom { opacity: 1; }
 .editorial-article-figure figcaption { margin-top: 7px; color: var(--ed-muted); font-size: 12px; font-style: italic; line-height: 1.5; }
+/* Game linked to a block */
+.editorial-block-game { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; clear: both; margin: 18px 0 0; padding: 9px 14px; border: 1px solid var(--editorial-border-soft); border-radius: 8px; background: var(--ed-tint); color: var(--ed-text-soft); font-size: 13px; line-height: 1.4; }
+.editorial-block-game .ed-icon { width: 14px; height: 14px; margin-right: 5px; color: var(--ed-accent); vertical-align: -2px; }
+.editorial-article-block .editorial-block-game__name { color: var(--ed-ink); font-weight: 700; text-decoration: none; }
+.editorial-article-block .editorial-block-game__name:hover { color: var(--ed-accent); text-decoration: none; }
+.editorial-article-block .editorial-block-game__facts { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0; padding: 0; list-style: none; }
+.editorial-block-game__facts li { white-space: nowrap; }
+.editorial-article-block .editorial-block-game__link { margin-left: auto; color: var(--ed-accent); font-size: 12px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.editorial-article-block .editorial-block-game__link:hover { color: var(--ed-accent-strong); text-decoration: none; }
+.editorial-block-game__link .ed-icon { margin: 0 0 0 4px; }
 /* Game cards embedded in the contents by entities.js */
 .entity[data-entity="game"] { clear: both; }
 .editorial-game-embed { display: flex; gap: 18px; margin: 22px 0; padding: 14px; overflow: hidden; border: 1px solid var(--editorial-border); border-radius: 10px; background: var(--ed-surface); box-shadow: 0 4px 14px rgba(var(--ed-shadow-rgb),.035); }

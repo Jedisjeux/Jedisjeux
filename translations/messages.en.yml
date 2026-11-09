@@ -123,6 +123,7 @@ app:
         latest_videos: Latest videos
         less_commented_first: Less commented first
         lifetime_rating: Lifetime rating
+        linked_game: Linked game
         list_articles: List articles
         list_games: List games
         list_reviews: List reviews
