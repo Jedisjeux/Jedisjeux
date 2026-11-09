@@ -88,9 +88,18 @@ jobs:
   test-application:
     runs-on: ubuntu-latest
 
-    name: "Test application"
+    name: "Test application (PHP ${{ matrix.php }})"
 
     timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # 8.2 runs in production, 8.5 is the migration target: the code must work on both
+        php: ["8.2", "8.5"]
+
+    env:
+      APP_PHP_VERSION: ${{ matrix.php }}
 
     steps:
       -
@@ -173,7 +182,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: "Behat logs"
+          name: "Behat logs (PHP ${{ matrix.php }})"
           path: etc/build/
           if-no-files-found: ignore
 
@@ -182,6 +191,6 @@ jobs:
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: "Symfony logs"
+          name: "Symfony logs (PHP ${{ matrix.php }})"
           path: var/log/
           if-no-files-found: ignore

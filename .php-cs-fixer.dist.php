@@ -10,7 +10,7 @@ return (new PhpCsFixer\Config())
         'modifier_keywords' => false,
         'no_empty_phpdoc' => false,
         'no_superfluous_phpdoc_tags' => false,
-        'nullable_type_declaration_for_default_null_value' => false,
+        'nullable_type_declaration_for_default_null_value' => true,
         'phpdoc_separation' => false,
         'statement_indentation' => false,
         'trailing_comma_in_multiline' => false,

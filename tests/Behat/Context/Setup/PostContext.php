@@ -71,7 +71,7 @@ class PostContext implements Context
      * @Given /^(this topic) has(?:| also) a post added by (customer "[^"]+"), created "[^"]+"$/
      * @Given /^I wrote a post to (this topic)$/
      */
-    public function topicHasAPostAddedByCustomer(Topic $topic, CustomerInterface $customer = null, $date = 'now')
+    public function topicHasAPostAddedByCustomer(Topic $topic, ?CustomerInterface $customer = null, $date = 'now')
     {
         if (null === $customer) {
             $customer = $this->sharedStorage->get('customer');
@@ -113,7 +113,7 @@ class PostContext implements Context
      * @param Article           $article
      * @param CustomerInterface $customer
      */
-    public function articleHasACommentAddedByCustomer(Article $article, CustomerInterface $customer = null)
+    public function articleHasACommentAddedByCustomer(Article $article, ?CustomerInterface $customer = null)
     {
         if (null === $customer) {
             $customer = $this->sharedStorage->get('customer');
@@ -146,7 +146,7 @@ class PostContext implements Context
      * @param GamePlay          $gamePlay
      * @param CustomerInterface $customer
      */
-    public function gamePlayHasACommentAddedByCustomer(GamePlay $gamePlay, CustomerInterface $customer = null)
+    public function gamePlayHasACommentAddedByCustomer(GamePlay $gamePlay, ?CustomerInterface $customer = null)
     {
         if (null === $customer) {
             $customer = $this->sharedStorage->get('customer');

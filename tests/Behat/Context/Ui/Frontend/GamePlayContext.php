@@ -93,7 +93,7 @@ final class GamePlayContext implements Context
      * @When /^I specify its playing date as "([^"]*)"$/
      * @When I do not specify its playing date
      */
-    public function iSpecifyItsPlayingDateAs(string $playedAt = null)
+    public function iSpecifyItsPlayingDateAs(?string $playedAt = null)
     {
         $this->createPage->setPlayedAt($playedAt);
     }
@@ -102,7 +102,7 @@ final class GamePlayContext implements Context
      * @When /^I specify its duration as "([^"]*)"$/
      * @When I do not specify its duration
      */
-    public function iSpecifyItsDurationAs(int $duration = null)
+    public function iSpecifyItsDurationAs(?int $duration = null)
     {
         $this->createPage->setDuration($duration);
     }
@@ -111,7 +111,7 @@ final class GamePlayContext implements Context
      * @When /^I specify its player count as "([^"]*)"$/
      * @When I do not specify its player count
      */
-    public function iSpecifyItsPlayerCountAs(int $playerCount = null)
+    public function iSpecifyItsPlayerCountAs(?int $playerCount = null)
     {
         $this->createPage->setPlayerCount($playerCount);
     }

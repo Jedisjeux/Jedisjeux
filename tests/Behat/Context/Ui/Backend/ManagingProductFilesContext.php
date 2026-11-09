@@ -74,7 +74,7 @@ final class ManagingProductFilesContext implements Context
      * @When I change its title to :title
      * @When I remove its title
      */
-    public function iChangeItsTitle(string $title = null)
+    public function iChangeItsTitle(?string $title = null)
     {
         $this->updatePage->specifyTitle($title);
     }

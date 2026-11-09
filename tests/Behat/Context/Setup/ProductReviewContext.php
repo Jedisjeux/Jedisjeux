@@ -53,7 +53,7 @@ class ProductReviewContext implements Context
      * @param ProductInterface  $product
      * @param CustomerInterface $customer
      */
-    public function productHasAReview(ProductInterface $product, CustomerInterface $customer = null)
+    public function productHasAReview(ProductInterface $product, ?CustomerInterface $customer = null)
     {
         if (null === $customer) {
             $customer = $this->sharedStorage->get('customer');

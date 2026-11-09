@@ -54,9 +54,9 @@ class ProductRepository extends BaseProductRepository
         $localeCode,
         $onlyPublished = true,
         array $criteria = [],
-        TaxonInterface $taxon = null,
-        Person $person = null,
-        YearAward $yearAward = null
+        ?TaxonInterface $taxon = null,
+        ?Person $person = null,
+        ?YearAward $yearAward = null
     ) {
         $queryBuilder = $this->createQueryBuilder('o');
 

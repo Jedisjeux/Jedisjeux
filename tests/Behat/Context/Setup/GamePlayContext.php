@@ -90,7 +90,7 @@ class GamePlayContext implements Context
      * @param ProductInterface  $product
      * @param CustomerInterface $customer
      */
-    public function productHasAGamePlay(ProductInterface $product, CustomerInterface $customer = null, $daysSinceCreation = null)
+    public function productHasAGamePlay(ProductInterface $product, ?CustomerInterface $customer = null, $daysSinceCreation = null)
     {
         if (null === $customer) {
             $customer = $this->sharedStorage->get('customer');

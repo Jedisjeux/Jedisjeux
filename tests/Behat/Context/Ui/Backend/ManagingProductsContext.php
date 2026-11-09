@@ -68,7 +68,7 @@ final class ManagingProductsContext implements Context
      * @Given I want to create a new product
      * @Given I want to create a new product via bgg url :bggPath
      */
-    public function iWantToCreateANewProduct(string $bggPath = null)
+    public function iWantToCreateANewProduct(?string $bggPath = null)
     {
         if (null !== $bggPath) {
             $this->createFromBggPage->open([

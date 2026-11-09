@@ -25,7 +25,7 @@ class PersonRepository extends EntityRepository
     /**
      * @return QueryBuilder
      */
-    public function createListQueryBuilder(TaxonInterface $taxon = null)
+    public function createListQueryBuilder(?TaxonInterface $taxon = null)
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('image')
@@ -50,7 +50,7 @@ class PersonRepository extends EntityRepository
     /**
      * @return QueryBuilder
      */
-    public function createFrontendListQueryBuilder(array $criteria = [], array $sorting = [], TaxonInterface $taxon = null)
+    public function createFrontendListQueryBuilder(array $criteria = [], array $sorting = [], ?TaxonInterface $taxon = null)
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('image')

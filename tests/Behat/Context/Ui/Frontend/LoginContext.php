@@ -134,7 +134,7 @@ final class LoginContext implements Context
      * @When I specify my new password as :password
      * @When I do not specify my new password
      */
-    public function iSpecifyMyNewPassword(string $password = null)
+    public function iSpecifyMyNewPassword(?string $password = null)
     {
         $this->resetPasswordPage->specifyNewPassword($password);
     }
@@ -143,7 +143,7 @@ final class LoginContext implements Context
      * @When I confirm my new password as :password
      * @When I do not confirm my new password
      */
-    public function iConfirmMyNewPassword(string $password = null)
+    public function iConfirmMyNewPassword(?string $password = null)
     {
         $this->resetPasswordPage->specifyConfirmPassword($password);
     }

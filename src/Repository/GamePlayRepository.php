@@ -208,7 +208,7 @@ class GamePlayRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    public function createFrontendListQueryBuilder($locale, array $criteria = [], string $productSlug = null)
+    public function createFrontendListQueryBuilder($locale, array $criteria = [], ?string $productSlug = null)
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->distinct()

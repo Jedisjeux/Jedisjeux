@@ -22,7 +22,7 @@ class YearAwardRepository extends EntityRepository
      *
      * @return QueryBuilder
      */
-    public function createListQueryBuilder($locale, string $awardSlug = null)
+    public function createListQueryBuilder($locale, ?string $awardSlug = null)
     {
         $queryBuilder = $this->createQueryBuilder('o');
 

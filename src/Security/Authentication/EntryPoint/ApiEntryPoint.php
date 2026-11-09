@@ -24,7 +24,7 @@ class ApiEntryPoint implements AuthenticationEntryPointInterface
     /**
      * {@inheritdoc}
      */
-    public function start(Request $request, AuthenticationException $authException = null): \Symfony\Component\HttpFoundation\Response
+    public function start(Request $request, ?AuthenticationException $authException = null): \Symfony\Component\HttpFoundation\Response
     {
         $response = new JsonResponse();
         $response->setContent($authException->getMessage());

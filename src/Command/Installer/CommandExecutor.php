@@ -55,7 +55,7 @@ final class CommandExecutor
      *
      * @throws \Exception
      */
-    public function runCommand($command, $parameters = [], OutputInterface $output = null)
+    public function runCommand($command, $parameters = [], ?OutputInterface $output = null)
     {
         $parameters = array_merge(
             ['command' => $command],

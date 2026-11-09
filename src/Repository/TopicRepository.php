@@ -71,7 +71,7 @@ class TopicRepository extends EntityRepository
     public function createFrontendListQueryBuilder(
         string $localeCode,
         bool $showPrivate = false,
-        TaxonInterface $taxon = null
+        ?TaxonInterface $taxon = null
     ): QueryBuilder {
         $queryBuilder = $this->createQueryBuilder('o');
 
