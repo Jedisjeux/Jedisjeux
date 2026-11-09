@@ -24,7 +24,7 @@ services:
             target: frontend
             args:
                 BUILDKIT_SYNTAX: 'ghcr.io/castor-php/twig-dockerfile:0.1'
-                php_version: '8.2'
+                php_version: '8.3'
                 php_extensions: '["apcu","bcmath","curl","iconv","intl","mbstring","pgsql","uuid","xml","zip","mysql","gd"]'
                 pie_version: 1.0.0
             cache_from:
@@ -56,7 +56,7 @@ services:
             target: builder
             args:
                 BUILDKIT_SYNTAX: 'ghcr.io/castor-php/twig-dockerfile:0.1'
-                php_version: '8.2'
+                php_version: '8.3'
                 php_extensions: '["apcu","bcmath","curl","iconv","intl","mbstring","pgsql","uuid","xml","zip","mysql","gd"]'
                 pie_version: 1.0.0
                 node_version: 24.x
@@ -83,7 +83,7 @@ services:
         configs:
             -
                 source: app-php-ini-cli
-                target: /etc/php/8.2/cli/conf.d/99-castor.ini
+                target: /etc/php/8.3/cli/conf.d/99-castor.ini
 volumes:
     mariadb-data: {}
 configs:

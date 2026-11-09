@@ -105,8 +105,8 @@ after 'deploy:updated', :compile_asset_map do
 end
 after 'deploy:updated', 'deploy:migrate'
 
-# CentOS 6 (SysV init): gracefully reload PHP-FPM so OPcache picks up the new release
-set :php_fpm_service, ENV.fetch('PHP_FPM_SERVICE') { 'php82-php-fpm' }
+# Gracefully reload PHP-FPM so OPcache picks up the new release
+set :php_fpm_service, ENV.fetch('PHP_FPM_SERVICE') { 'php83-php-fpm' }
 
 namespace :deploy do
   task :reload_php_fpm do
