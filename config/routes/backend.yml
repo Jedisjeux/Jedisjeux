@@ -82,14 +82,8 @@ app_backend_game_award:
 app_backend_game_play:
     resource: backend/game_play.yml
 
-app_backend_not_found_page:
-    resource: backend/not_found_page.yml
-
 app_backend_post:
     resource: backend/post.yml
-
-app_backend_redirection:
-    resource: backend/redirection.yml
 
 app_backend_topic:
     resource: backend/topic.yml

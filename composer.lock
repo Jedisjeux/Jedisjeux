@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6ea7e01429287f2fe638fc6b9af7ba50",
+    "content-hash": "9848d46e0b21d2c59392cc89edca658e",
     "packages": [
         {
             "name": "babdev/pagerfanta-bundle",
@@ -15102,75 +15102,6 @@
                 }
             ],
             "time": "2025-04-02T11:40:23+00:00"
-        },
-        {
-            "name": "zenstruck/redirect-bundle",
-            "version": "v3.11.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zenstruck/redirect-bundle.git",
-                "reference": "c1daef22d83870cdb09bbfa3dfc7cccae6179df0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zenstruck/redirect-bundle/zipball/c1daef22d83870cdb09bbfa3dfc7cccae6179df0",
-                "reference": "c1daef22d83870cdb09bbfa3dfc7cccae6179df0",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/doctrine-bundle": "^2.6|^3.0",
-                "doctrine/orm": "^2.6|^3.0",
-                "php": ">=8.1",
-                "symfony/framework-bundle": "^6.4|^7.0|^8.0"
-            },
-            "require-dev": {
-                "matthiasnoback/symfony-dependency-injection-test": "^4.3|^5.0|^6.0",
-                "phpunit/phpunit": "9.6.13|^10.0",
-                "symfony/browser-kit": "^6.4|^7.0|^8.0",
-                "symfony/config": "^6.4|^7.0|^8.0",
-                "symfony/form": "^6.4|^7.0|^8.0",
-                "symfony/phpunit-bridge": "^7.4",
-                "symfony/translation": "^6.4|^7.0|^8.0",
-                "symfony/validator": "^6.4|^7.0|^8.0",
-                "zenstruck/browser": "^1.6",
-                "zenstruck/foundry": "^2.8.1"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Zenstruck\\RedirectBundle\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kevin Bond",
-                    "email": "kevinbond@gmail.com"
-                }
-            ],
-            "description": "Store redirects for your site and keeps statistics on redirects and 404 errors",
-            "homepage": "https://github.com/kbond/ZenstruckRedirectBundle",
-            "keywords": [
-                "redirect"
-            ],
-            "support": {
-                "issues": "https://github.com/zenstruck/redirect-bundle/issues",
-                "source": "https://github.com/zenstruck/redirect-bundle/tree/v3.11.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/kbond",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/nikophil",
-                    "type": "github"
-                }
-            ],
-            "time": "2026-01-08T16:17:49+00:00"
         }
     ],
     "packages-dev": [

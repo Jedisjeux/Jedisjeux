@@ -88,8 +88,7 @@
     "webmozart/assert": "^1.9",
     "willdurand/hateoas-bundle": "^2.7",
     "winzou/state-machine-bundle": "^0.5 || ^0.6",
-    "zenstruck/foundry": "^1.14",
-    "zenstruck/redirect-bundle": "^3.1"
+    "zenstruck/foundry": "^1.14"
   },
   "require-dev": {
     "behat/behat": "^3.2",

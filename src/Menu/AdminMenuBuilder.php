@@ -60,7 +60,6 @@ final class AdminMenuBuilder implements MenuBuilderInterface
 
         if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
             $this->addContactSubMenu($menu);
-            $this->addErrorsSubMenu($menu);
             $this->addConfigurationSubMenu($menu);
         }
 
@@ -186,23 +185,6 @@ final class AdminMenuBuilder implements MenuBuilderInterface
     /**
      * @return ItemInterface
      */
-    private function addErrorsSubMenu(ItemInterface $menu)
-    {
-        $errors = $menu
-            ->addChild('errors')
-            ->setLabel('app.ui.errors')
-            ->setLabelAttribute('icon', 'tabler:alert-triangle');
-
-        $errors
-            ->addChild('backend_not_found_page', ['route' => 'app_backend_not_found_page_index'])
-            ->setLabel('app.ui.not_found_pages');
-
-        return $errors;
-    }
-
-    /**
-     * @return ItemInterface
-     */
     private function addConfigurationSubMenu(ItemInterface $menu)
     {
         $configuration = $menu
@@ -217,9 +199,6 @@ final class AdminMenuBuilder implements MenuBuilderInterface
         $configuration
             ->addChild('backend_dealer_price', ['route' => 'app_backend_dealer_price_index'])
             ->setLabel('app.ui.prices');
-
-        $configuration->addChild('backend_redirection', ['route' => 'app_backend_redirection_index'])
-            ->setLabel('app.ui.redirections');
 
         $configuration
             ->addChild('backend_customer_group', ['route' => 'sylius_backend_customer_group_index'])

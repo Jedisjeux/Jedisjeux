@@ -78,12 +78,6 @@ EOT
             'app:images-of-products:load',
             'app:images-of-persons:load',
             'app:avatars-of-users:load',
-            'app:redirections-for-index-pages:load',
-            'app:redirections-for-news:load',
-            'app:redirections-for-people:load',
-            'app:redirections-for-products:load',
-            'app:redirections-for-review-articles:load',
-            'app:redirections-for-articles:load',
             'app:dealers-prices:import',
         ];
 
