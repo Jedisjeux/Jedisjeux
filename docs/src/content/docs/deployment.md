@@ -25,7 +25,9 @@ castor app:deploy
 
 ### Depuis GitHub Actions
 
-Lancer le workflow « Deploy » depuis l'onglet Actions et choisir la branche à déployer. Il a besoin de ces secrets sur l'environnement `production` :
+Le workflow « Deploy » se lance tout seul quand la CI passe sur `main` : chaque merge part en production, sans validation manuelle. Il déploie le commit testé par la CI.
+
+Pour déployer une autre branche, lancer le workflow depuis l'onglet Actions et la choisir. Il a besoin de ces secrets sur l'environnement `production` :
 
 - `SSH_PRIVATE_KEY` : une clé privée autorisée pour `jedisjeux@51.75.125.242` ;
 - `SSH_KNOWN_HOSTS` : la sortie de `ssh-keyscan 51.75.125.242`.
