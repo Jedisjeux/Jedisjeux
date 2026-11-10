@@ -107,7 +107,6 @@
   border-color: #55acee;
 }
 .social-links:not(.animated-effect-1) li.twitter a:hover,
-.colored.social-links li.twitter a,
 .social-links.animated-effect-1 li.twitter a:after,
 .btn.twitter {
   background-color: #55acee;
@@ -118,7 +117,6 @@
   border-color: #b31217;
 }
 .social-links:not(.animated-effect-1) li.youtube a:hover,
-.colored.social-links li.youtube a,
 .social-links.animated-effect-1 li.youtube a:after,
 .btn.youtube {
   background-color: #b31217;
@@ -129,7 +127,6 @@
   border-color: #3b5998;
 }
 .social-links:not(.animated-effect-1) li.facebook a:hover,
-.colored.social-links li.facebook a,
 .social-links.animated-effect-1 li.facebook a:after,
 .btn.facebook {
   background-color: #3b5998;

@@ -1,7 +1,6 @@
 // Front-end entrypoint, the order of the stylesheets matters: Bootstrap 4, the base styles, the rules of the former
 // template, the helpers, the forms, then the editorial design
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './css/animations.css';
 import './styles/components.css';
 import './styles/base.css';
 

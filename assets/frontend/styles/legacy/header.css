@@ -7,8 +7,7 @@
 .header-first {
   padding: 12px 0 0 0;
 }
-.fixed-header-on .header.fixed,
-.fixed-header-on header.header.transparent-header-on {
+.fixed-header-on .header.fixed {
   position: fixed;
   width: 100%;
   top: 0;
