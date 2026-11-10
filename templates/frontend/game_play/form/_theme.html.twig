@@ -1,0 +1,116 @@
+{% extends 'frontend/form/vertical.html.twig' %}
+
+{# Form theme of the game play entry: stacked rows, then the players and the photos as compact cards #}
+
+{% block form_row -%}
+    <div class="form-group{% if icon_class is defined %} has-feedback{% endif %}">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {% if icon_class is defined %}
+            {{ fa_icon(icon_class, {class: 'form-control-feedback pr-4'}) }}
+        {% endif %}
+        {% if help_label is defined %}
+            <small class="form-text">{{ help_label }}</small>
+        {% endif %}
+    </div>
+{%- endblock form_row %}
+
+{% block _app_game_play_playedAt_row %}
+    {% set icon_class = 'fa fa-calendar' %}
+
+    {{- block('form_row') -}}
+{% endblock %}
+
+{% block _app_game_play_duration_row %}
+    {% set icon_class = 'fa fa-clock-o' %}
+
+    {{- block('form_row') -}}
+{% endblock %}
+
+{% block _app_game_play_playerCount_row %}
+    {% set icon_class = 'fa fa-users' %}
+
+    {{- block('form_row') -}}
+{% endblock %}
+
+{# Collections: the list, then an add button; form-collection.js handles the data-form-collection attributes #}
+{% block _app_game_play_players_widget %}
+    {% set add_label = 'Ajouter un joueur' %}
+    {% set delete_label = 'Retirer ce joueur' %}
+
+    {{- block('editorial_collection_widget') -}}
+{% endblock %}
+
+{% block _app_game_play_images_widget %}
+    {% set add_label = 'Ajouter une photo' %}
+    {% set delete_label = 'Retirer cette photo' %}
+
+    {{- block('editorial_collection_widget') -}}
+{% endblock %}
+
+{% block editorial_collection_widget %}
+    {% import _self as self %}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' editorial-collection')|trim}) %}
+
+    <div data-form-type="collection" {{ block('widget_container_attributes') }}
+        {% if prototype is defined and allow_add %}data-prototype="{{ self.collection_item(prototype, allow_delete, delete_label, '__name__')|e('html_attr') }}"{% endif %}>
+        {{ form_errors(form) }}
+
+        <div class="editorial-collection__list" data-form-collection="list">
+            {% for child in form %}
+                {{ self.collection_item(child, allow_delete, delete_label, loop.index0) }}
+            {% endfor %}
+        </div>
+
+        {% if prototype is defined and allow_add %}
+            <button type="button" class="editorial-collection__add" data-form-collection="add">
+                <i class="fa fa-plus" aria-hidden="true">{{ ux_icon('fa:plus', {class: 'fa-svg'}) }}</i>
+                {{ add_label }}
+            </button>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% macro collection_item(form, allow_delete, delete_label, index) %}
+    <div class="editorial-collection__item" data-form-collection="item" data-form-collection-index="{{ index }}">
+        {{ form_widget(form) }}
+        {% if allow_delete %}
+            <button type="button" class="editorial-collection__delete" data-form-collection="delete" title="{{ delete_label }}" aria-label="{{ delete_label }}">
+                <i class="fa fa-trash" aria-hidden="true">{{ ux_icon('fa:trash-o', {class: 'fa-svg'}) }}</i>
+            </button>
+        {% endif %}
+    </div>
+{% endmacro %}
+
+{# A player: the name and the score on one line #}
+{% block _app_game_play_players_entry_widget %}
+    <div class="editorial-collection__fields editorial-collection__fields--player">
+        <div class="form-group">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name, {attr: {placeholder: 'Pseudo ou prénom'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.score) }}
+            {{ form_widget(form.score, {attr: {placeholder: '0'}}) }}
+        </div>
+    </div>
+{% endblock %}
+
+{# A photo: its preview once saved, the file and its description. A saved photo keeps its file, so it is not asked again #}
+{% block _app_game_play_images_entry_widget %}
+    {% import 'macro/image.html.twig' as images %}
+    {% set image = form.vars.value %}
+    {% set saved = image is not null and image.webPath is defined and image.webPath is not empty %}
+
+    <div class="editorial-collection__fields editorial-collection__fields--photo">
+        {% if saved %}
+            <div class="editorial-collection__preview">
+                {{ images.render(image.webPath, 'thumbnail', image.description) }}
+            </div>
+        {% endif %}
+        <div class="editorial-collection__photo-fields">
+            {{ form_row(form.file, saved ? {required: false, label: 'Remplacer l’image'} : {}) }}
+            {{ form_row(form.description, {attr: {placeholder: 'Le plateau en fin de partie…'}}) }}
+        </div>
+    </div>
+{% endblock %}

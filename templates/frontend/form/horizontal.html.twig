@@ -98,39 +98,6 @@ col-sm-9
     {% endapply %}
 {% endmacro %}
 
-{% block _app_game_play_duration_row %}
-    {% set icon_class= 'fa fa-clock-o' %}
-    {% set help_label = 'app.ui.type_duration_in_minute'|trans  %}
-
-    {{- block('form_row') -}}
-{% endblock %}
-
-{% block _app_game_play_playedAt_row %}
-    {% set icon_class= 'fa fa-calendar' %}
-
-    {{- block('form_row') -}}
-{% endblock %}
-
-{% block app_game_play_image_widget %}
-    {% import 'macro/image.html.twig' as images %}
-
-    {% set image = form.vars.value %}
-
-    {% if image is not null %}
-        <div class="row">
-        <div class="col-md-3">
-            {{ images.render(image.webPath) }}
-        </div>
-        <div class="col-md-9">
-    {% endif %}
-    {{ form_row(form.file) }}
-    {{ form_row(form.description) }}
-    {% if image %}
-        </div>
-        </div>
-    {% endif %}
-{% endblock %}
-
 {% block _app_contact_request_firstName_row %}
     {% set icon_class= 'fa fa-user' %}
 

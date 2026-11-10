@@ -118,6 +118,7 @@
   color: var(--ed-accent);
   font-weight: 600;
   line-height: 1.6;
+  content: 'Parcourir';
 }
 .main-container form .custom-file-input:focus ~ .custom-file-label {
   border-color: var(--ed-accent);
@@ -241,4 +242,106 @@
 }
 .main-container form .pull-right > .pull-right > .btn {
   margin: 0;
+}
+
+/* Collections (frontend/game_play/form/_theme.html.twig): each item is a card with its delete button, then an add button */
+.editorial-collection__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.editorial-collection__list:empty {
+  display: none;
+}
+.editorial-collection__item {
+  position: relative;
+  padding: 14px 52px 14px 14px;
+  border: 1px solid var(--ed-line);
+  border-radius: 10px;
+  background: var(--ed-panel);
+}
+.main-container form .editorial-collection__item .form-group {
+  margin-bottom: 0;
+}
+.main-container form .editorial-collection__item label {
+  margin-bottom: 5px;
+  color: var(--ed-text-soft);
+  font-size: 11px;
+}
+.editorial-collection__fields--player {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 120px;
+  gap: 12px;
+}
+.editorial-collection__fields--photo {
+  display: flex;
+  gap: 14px;
+}
+.editorial-collection__preview {
+  flex: 0 0 96px;
+}
+.editorial-collection__preview img {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.editorial-collection__photo-fields {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.editorial-collection__delete {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--ed-line);
+  border-radius: 50%;
+  background: var(--ed-surface);
+  color: var(--ed-muted);
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color .15s ease, color .15s ease;
+}
+.editorial-collection__delete:hover,
+.editorial-collection__delete:focus-visible {
+  border-color: #b5534f;
+  color: #b5534f;
+  outline: 0;
+}
+.editorial-collection__add {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 8px 15px;
+  border: 1px dashed var(--ed-line-strong);
+  border-radius: 24px;
+  background: transparent;
+  color: var(--ed-accent);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+.editorial-collection__add:hover,
+.editorial-collection__add:focus-visible {
+  border-color: var(--ed-accent);
+  background: var(--ed-tint);
+  outline: 0;
+}
+@media (max-width: 575px) {
+  .editorial-collection__fields--player {
+    grid-template-columns: minmax(0,1fr) 90px;
+  }
+  .editorial-collection__fields--photo {
+    flex-direction: column;
+  }
 }
