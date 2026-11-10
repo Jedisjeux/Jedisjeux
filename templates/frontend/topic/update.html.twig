@@ -1,36 +1,21 @@
-{% extends "frontend/layout.html.twig" %}
-
-{% import 'macro/actions.html.twig' as action %}
+{% extends 'frontend/layout.html.twig' %}
 
 {% set pageTitle = 'app.ui.edit_topic'|trans %}
 
-{% block content -%}
-    <!-- main-container start -->
-    <!-- ================ -->
-    <section class="main-container">
-
-        <div class="container">
-            <div class="row">
-
-                <!-- main start -->
-                <!-- ================ -->
-                <div class="main col-md-12">
-
-                    <!-- page-title start -->
-                    <!-- ================ -->
-                    <h1 class="page-title">{{ pageTitle }}</h1>
-                    <div class="separator-2"></div>
-                    <!-- page-title end -->
-
-                    {% form_theme form 'frontend/form/horizontal.html.twig' %}
-
-                    {{ form_start(form) }}
-                    <input type="hidden" name="_method" value="PUT"/>
-                    {% include 'frontend/topic/_form.html.twig' %}
-                    {{ action.update() }}
-                    {{ form_end(form) }}
-                </div>
+{% block content %}
+    {% embed 'frontend/post/_compose.html.twig' with {
+        eyebrow: 'Forum · ' ~ resource.title,
+        lead: 'Ajustez le titre, la catégorie ou le premier message de votre sujet.',
+        breadcrumb: [{label: 'app.ui.forum'|trans, url: path('app_frontend_topic_index')}, {label: resource.title, url: path('app_frontend_post_index_by_topic', {topicId: resource.id})}],
+        tips: ['Vérifiez qu’un sujet proche n’existe pas déjà.', 'Choisissez la catégorie qui correspond le mieux.', 'Un titre clair aide la communauté à vous répondre.'],
+        update: true,
+    } %}
+        {% block fields %}
+            <div class="editorial-compose__grid">
+                {{ form_row(form.title, {attr: {placeholder: 'De quoi voulez-vous parler ?'}}) }}
+                {{ form_row(form.mainTaxon) }}
             </div>
-        </div>
-    </section>
+            {{ form_row(form.mainPost.body, {label: 'sylius.ui.message'|trans}) }}
+        {% endblock %}
+    {% endembed %}
 {% endblock content %}

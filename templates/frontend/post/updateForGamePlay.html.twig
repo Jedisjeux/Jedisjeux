@@ -1,40 +1,20 @@
-{% extends "frontend/layout.html.twig" %}
-
-{% import 'macro/actions.html.twig' as action %}
+{% extends 'frontend/layout.html.twig' %}
 
 {% set pageTitle = 'app.ui.edit_post'|trans %}
 
-{% block content -%}
-    {% form_theme form 'bootstrap_4_layout.html.twig' %}
-
-    {#{% include 'frontend/post/updateForGamePlay/_breadcrumb.html.twig' %}#}
-
-    <!-- main-container start -->
-    <!-- ================ -->
-    <section class="main-container">
-
-        <div class="container">
-            <div class="row">
-
-                <!-- main start -->
-                <!-- ================ -->
-                <div class="main col-md-12">
-
-                    <!-- page-title start -->
-                    <!-- ================ -->
-                    <h1 class="page-title">{{ pageTitle }}</h1>
-                    <div class="separator-2"></div>
-                    <!-- page-title end -->
-
-                    {% form_theme form 'frontend/form/horizontal.html.twig' %}
-
-                    {{ form_start(form) }}
-                    <input type="hidden" name="_method" value="PUT"/>
-                    {% include 'frontend/post/_form.html.twig' %}
-                    {{ action.update() }}
-                    {{ form_end(form) }}
-                </div>
-            </div>
-        </div>
-    </section>
+{% block content %}
+    {% set gamePlay = resource.gamePlay %}
+    {% set gamePlayUrl = path('app_frontend_game_play_show', {productSlug: gamePlay.product.slug, id: gamePlay.id}) %}
+    {% embed 'frontend/post/_compose.html.twig' with {
+        eyebrow: 'Parties · ' ~ gamePlay.product.name,
+        lead: 'Corrigez ou complétez votre commentaire.',
+        breadcrumb: [{label: 'app.ui.game_plays'|trans, url: path('app_frontend_game_play_index')}, {label: gamePlay.product.name, url: gamePlayUrl}],
+        context: {label: 'Vous commentez la partie de', title: gamePlay.product.name, url: gamePlayUrl},
+        tips: ['Restez courtois, même en cas de désaccord.', 'Partagez votre avis ou votre expérience du jeu.', 'Relisez-vous avant de publier.'],
+        update: true,
+    } %}
+        {% block fields %}
+            {{ form_row(form.body, {label: 'sylius.ui.message'|trans}) }}
+        {% endblock %}
+    {% endembed %}
 {% endblock content %}

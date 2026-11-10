@@ -1,35 +1,20 @@
 {% extends 'frontend/layout.html.twig' %}
 
-{% import 'macro/actions.html.twig' as action %}
-
-{% set pageTitle = 'app.ui.new_topic'| trans %}
+{% set pageTitle = 'app.ui.new_topic'|trans %}
 
 {% block content %}
-    <!-- main-container start -->
-    <!-- ================ -->
-    <section class="main-container">
-
-        <div class="container">
-            <div class="row">
-
-                <!-- main start -->
-                <!-- ================ -->
-                <div class="main col-md-12">
-
-                    <!-- page-title start -->
-                    <!-- ================ -->
-                    <h1 class="page-title">{{ pageTitle }}</h1>
-                    <div class="separator-2"></div>
-                    <!-- page-title end -->
-
-                    {% form_theme form 'frontend/form/horizontal.html.twig' %}
-
-                    {{ form_start(form) }}
-                    {% include 'frontend/topic/_form.html.twig' %}
-                    {{ action.create() }}
-                    {{ form_end(form) }}
-                </div>
+    {% embed 'frontend/post/_compose.html.twig' with {
+        eyebrow: 'Forum · Nouveau sujet',
+        lead: 'Lancez une discussion avec la communauté : une question, une découverte, un compte-rendu…',
+        breadcrumb: [{label: 'app.ui.forum'|trans, url: path('app_frontend_topic_index')}],
+        tips: ['Vérifiez qu’un sujet proche n’existe pas déjà.', 'Choisissez la catégorie qui correspond le mieux.', 'Un titre clair aide la communauté à vous répondre.'],
+    } %}
+        {% block fields %}
+            <div class="editorial-compose__grid">
+                {{ form_row(form.title, {attr: {placeholder: 'De quoi voulez-vous parler ?'}}) }}
+                {{ form_row(form.mainTaxon) }}
             </div>
-        </div>
-    </section>
+            {{ form_row(form.mainPost.body, {label: 'sylius.ui.message'|trans}) }}
+        {% endblock %}
+    {% endembed %}
 {% endblock content %}
