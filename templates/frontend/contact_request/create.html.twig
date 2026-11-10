@@ -1,56 +1,75 @@
 {% extends 'frontend/layout.html.twig' %}
 
-{% import 'macro/social_links.html.twig' as social_links %}
 {% set pageTitle = 'sylius.ui.contact_us'|trans %}
 
 {% block content %}
-    {% include 'frontend/contact_request/create/_banner.html.twig' %}
+    {% include 'frontend/contact_request/create/_breadcrumb.html.twig' %}
 
-    <!-- main-container start -->
-    <!-- ================ -->
-    <section class="main-container">
+    <div class="editorial-catalog editorial-contact">
+        <section class="editorial-catalog__intro">
+            <div class="container">
+                <span class="editorial-eyebrow">L’association · Écrivez-nous</span>
+                <h1>{{ pageTitle }}</h1>
+                <p>{{ 'sylius.ui.use_the_contact_form_below_to_send_us_a_message'|trans }}</p>
+            </div>
+        </section>
+    </div>
 
+    <section class="main-container editorial-contact-main">
         <div class="container">
-            <div class="row">
+            <div class="editorial-contact__layout">
+                <aside class="editorial-contact__welcome">
+                    <span class="editorial-eyebrow">Une question, une idée ?</span>
+                    <h2>On vous lit avec plaisir.</h2>
+                    <p>Jedisjeux est animé par des bénévoles passionnés : chaque message est lu par un membre de l’équipe.</p>
+                    <ul class="editorial-contact__reasons">
+                        <li><i class="fa fa-puzzle-piece" aria-hidden="true">{{ ux_icon('fa:puzzle-piece', {class: 'fa-svg'}) }}</i> Proposer un jeu ou une actualité</li>
+                        <li><i class="fa fa-flag" aria-hidden="true">{{ ux_icon('fa:flag', {class: 'fa-svg'}) }}</i> Signaler une erreur sur le site</li>
+                        <li><i class="fa fa-users" aria-hidden="true">{{ ux_icon('fa:users', {class: 'fa-svg'}) }}</i> Rejoindre l’équipe de bénévoles</li>
+                    </ul>
 
-                <!-- main start -->
-                <!-- ================ -->
-                <div class="main col-8 space-bottom">
-                    <div class="contact-form">
-                        {% form_theme form 'frontend/form/vertical.html.twig' %}
+                    {% if head_office is not empty %}
+                        <p class="editorial-contact__address"><i class="fa fa-map-marker" aria-hidden="true">{{ ux_icon('fa:map-marker', {class: 'fa-svg'}) }}</i><span>{{ head_office }}</span></p>
+                    {% endif %}
 
-                        {{ form_start(form, {'attr': {'class': 'margin-clear'}}) }}
-                        {{ form_widget(form) }}
-                        <button type="submit"
-                                class="submit-button btn btn-lg btn-default">
-                            {{ 'sylius.ui.send'|trans }}
-                        </button>
-                        {{ form_end(form) }}
-                    </div>
-                </div>
-                <!-- main end -->
-
-                <!-- sidebar start -->
-                <!-- ================ -->
-                <aside class="col-lg-3 ml-xl-auto">
-                    <div class="sidebar">
-                        <div class="side vertical-divider-left">
-                            <h3 class="title logo-font"><span class="text-default">Jedisjeux</span></h3>
-                            <div class="separator-2 mt-20"></div>
-                            <ul class="list">
-                                <li><i class="fa fa-home pr-10" aria-hidden="true">{{ ux_icon('fa:home', {class: 'fa-svg'}) }}</i>{{ head_office }}</li>
-                            </ul>
-                            <ul class="social-links circle small margin-clear clearfix animated-effect-1">
-                                {{ social_links.list() }}
-                            </ul>
-                        </div>
+                    <div class="editorial-contact__social">
+                        <span class="editorial-contact__label">Suivez-nous</span>
+                        <ul>
+                            <li><a href="https://www.facebook.com/jedisjeux" aria-label="Facebook"><i class="fa fa-facebook" aria-hidden="true">{{ ux_icon('fa:facebook', {class: 'fa-svg'}) }}</i></a></li>
+                            <li><a href="https://twitter.com/jedisjeux" aria-label="Twitter"><i class="fa fa-twitter" aria-hidden="true">{{ ux_icon('fa:twitter', {class: 'fa-svg'}) }}</i></a></li>
+                            <li><a href="https://www.youtube.com/user/jedisjeux" aria-label="YouTube"><i class="fa fa-youtube-play" aria-hidden="true">{{ ux_icon('fa:youtube-play', {class: 'fa-svg'}) }}</i></a></li>
+                            <li><a href="https://github.com/Jedisjeux/Jedisjeux" aria-label="GitHub"><i class="fa fa-github" aria-hidden="true">{{ ux_icon('fa:github', {class: 'fa-svg'}) }}</i></a></li>
+                        </ul>
                     </div>
                 </aside>
-                <!-- sidebar end -->
+
+                <div class="editorial-contact__panel">
+                    <h2>Votre message</h2>
+                    <p class="editorial-contact__hint">Tous les champs sont obligatoires.</p>
+
+                    {% form_theme form 'frontend/form/vertical.html.twig' %}
+                    {{ form_start(form, {'attr': {'class': 'editorial-contact__form'}}) }}
+                        {{ form_errors(form) }}
+
+                        <div class="editorial-contact__names">
+                            {{ form_row(form.firstName) }}
+                            {{ form_row(form.lastName) }}
+                        </div>
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.body, {attr: {'placeholder': 'Dites-nous tout…'}}) }}
+                        {{ form_rest(form) }}
+
+                        <div class="editorial-contact__submit">
+                            <button type="submit" class="btn btn-default">
+                                {{ 'sylius.ui.send'|trans }}
+                                <i class="fa fa-arrow-right" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i>
+                            </button>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
     </section>
-    <!-- main-container end -->
 
-    {% include 'frontend/contact_request/create/_footerTop.html.twig' %}
+    {% include 'frontend/footer/_top.html.twig' %}
 {% endblock content %}

@@ -706,6 +706,29 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
 .editorial-register__submit .btn:hover { border-color: var(--ed-ink); background: var(--ed-ink); }
 .editorial-register__login { margin: 18px 0 0; padding-top: 14px; border-top: 1px solid var(--editorial-border-soft); color: var(--ed-muted); font-size: 11px; text-align: right; }
 .editorial-register__login a { color: var(--ed-accent); font-weight: 700; }
+/* Public contact */
+.editorial-contact .editorial-catalog__intro { padding-bottom: 21px; }
+.editorial-contact-main { padding: 30px 0 46px; background: var(--editorial-panel); }
+.editorial-contact-main > .container { max-width: 1120px; }
+.editorial-contact__layout { display: grid; grid-template-columns: minmax(250px,.78fr) minmax(0,1.22fr); overflow: hidden; border: 1px solid var(--editorial-border); border-radius: 12px; background: var(--ed-surface); box-shadow: 0 7px 24px rgba(var(--ed-shadow-rgb),.055); }
+.editorial-contact__welcome { display: flex; flex-direction: column; padding: 34px 30px; background: var(--ed-tint); }
+.editorial-contact__welcome h2 { margin: 9px 0 12px; color: var(--ed-ink); font: 700 29px/1.14 'PT Serif',Georgia,serif; }
+.editorial-contact__welcome > p { margin: 0 0 23px; color: var(--ed-text-soft); font-size: 13px; line-height: 1.65; }
+.editorial-contact__reasons { display: flex; flex-direction: column; gap: 13px; margin: 0; padding: 0; color: var(--ed-text); font-size: 12px; list-style: none; }
+.editorial-contact__reasons li { display: flex; align-items: center; gap: 10px; }
+.editorial-contact__reasons li i, .editorial-contact__address i { display: grid; width: 28px; height: 28px; flex: 0 0 28px; place-items: center; border: 1px solid var(--ed-line); border-radius: 50%; background: rgba(var(--ed-surface-rgb),.65); color: var(--ed-accent); font-size: 12px; }
+.editorial-contact__welcome > p.editorial-contact__address { display: flex; align-items: center; gap: 10px; margin: 22px 0 0; color: var(--ed-text); font-size: 12px; }
+.editorial-contact__social { margin-top: auto; padding-top: 26px; }
+.editorial-contact__label { display: block; margin-bottom: 9px; color: var(--ed-muted); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.editorial-contact__social ul { display: flex; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.editorial-contact__social a { display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid var(--ed-line); border-radius: 50%; background: var(--ed-surface); color: var(--ed-text); font-size: 15px; transition: border-color .15s ease, color .15s ease, background .15s ease; }
+.editorial-contact__social a:hover, .editorial-contact__social a:focus { border-color: var(--ed-accent); background: var(--ed-surface); color: var(--ed-accent); text-decoration: none; }
+.editorial-contact__panel { min-width: 0; padding: 32px 36px 27px; }
+.editorial-contact__panel > h2 { margin: 0 0 4px; color: var(--ed-ink); font: 700 23px/1.2 'PT Serif',Georgia,serif; text-transform: none; }
+.editorial-contact__hint { margin: 0 0 21px; color: var(--ed-muted); font-size: 11px; }
+.main-container .editorial-contact__form, .editorial-contact__form { margin: 0; }
+.editorial-contact__names { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+.editorial-contact__submit { display: flex; justify-content: flex-end; padding-top: 3px; }
 /* Public login */
 .editorial-login .editorial-catalog__intro { padding-bottom: 21px; }
 .editorial-login-main { padding: 30px 0 46px; background: var(--editorial-panel); }
@@ -1096,6 +1119,14 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
   .editorial-login__panel .form-horizontal label { padding-bottom: 5px; text-align: left; }
   .editorial-login__panel .form-horizontal .form-group.row { margin-right: 0; margin-left: 0; }
   .editorial-login__panel .form-horizontal .form-group.row > div { width: 100%; padding: 0; }
+  .editorial-contact-main { padding: 18px 0 30px; }
+  .editorial-contact__layout { grid-template-columns: 1fr; }
+  .editorial-contact__welcome { padding: 23px 21px; }
+  .editorial-contact__welcome h2 { font-size: 25px; }
+  .editorial-contact__welcome > p { margin-bottom: 16px; }
+  .editorial-contact__panel { padding: 24px 19px 20px; }
+  .editorial-contact__names { grid-template-columns: 1fr; }
+  .editorial-contact__submit .btn { justify-content: center; width: 100%; }
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .editorial-game-layout > .editorial-game-gallery { flex: 0 0 40%; max-width: 40%; }
