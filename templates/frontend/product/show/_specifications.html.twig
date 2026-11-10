@@ -5,7 +5,7 @@
 
 {% macro show_people(people) %}
     {% for person in people %}{% apply spaceless %}
-        {% if not loop.first %}, {% endif %}<a href="{{ path('sylius_frontend_product_index_by_person', { 'slug': person.slug } ) }}">{{ person }}</a>
+        {% if not loop.first %}, {% endif %}<a href="{{ path('app_frontend_person_show', { 'slug': person.slug }) }}">{{ person }}</a>
     {% endapply %}{% endfor %}
 {% endmacro %}
 
