@@ -1,0 +1,244 @@
+/* Editorial look of the public forms (reviews, game plays, topics, posts, contact…), built on the editorial tokens.
+   Loaded before editorial.css so that the page-specific rules there (login, register, catalog filters) keep the last word. */
+
+/* Rows and labels */
+.main-container form .form-group {
+  margin-bottom: 20px;
+}
+.main-container form label,
+.main-container form legend.col-form-label,
+.main-container form .col-form-label {
+  margin-bottom: 7px;
+  color: var(--ed-ink);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.main-container form .col-form-label {
+  padding-top: 11px;
+  padding-bottom: 0;
+}
+.main-container form .form-check-label,
+.main-container form .custom-control-label {
+  margin-bottom: 0;
+  color: var(--ed-text);
+  font-weight: 400;
+}
+.main-container form label.required:after {
+  margin-left: 3px;
+  color: var(--ed-accent);
+  content: '*';
+}
+.main-container form .form-text,
+.main-container form .help-block {
+  margin-top: 6px;
+  color: var(--ed-muted) !important;
+  font-size: 12px;
+}
+
+/* Fields */
+.main-container form .form-control {
+  min-height: 42px;
+  height: auto;
+  padding: 9px 40px 9px 13px;
+  border: 1px solid var(--ed-line);
+  border-radius: 8px;
+  background-color: var(--ed-surface);
+  box-shadow: none;
+  color: var(--ed-ink);
+  font-size: 14px;
+  font-weight: 400;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.main-container form .form-control:hover {
+  border-color: var(--ed-line-strong);
+}
+.main-container form .form-control:focus {
+  border-color: var(--ed-accent);
+  box-shadow: 0 0 0 3px rgba(22,125,136,.12);
+  outline: 0;
+}
+.main-container form .form-control::placeholder {
+  color: var(--ed-muted);
+  opacity: 1;
+}
+.main-container form .form-control:disabled,
+.main-container form .form-control[readonly] {
+  background-color: var(--ed-panel);
+  color: var(--ed-text-soft);
+}
+.main-container form textarea.form-control {
+  min-height: 120px;
+  line-height: 1.6;
+}
+.main-container form select.form-control {
+  padding-right: 13px;
+}
+.main-container form input[type="checkbox"],
+.main-container form input[type="radio"] {
+  accent-color: var(--ed-accent);
+}
+.main-container form .has-feedback .form-control-feedback {
+  height: 42px;
+  line-height: 42px !important;
+  color: var(--ed-muted);
+}
+.main-container form .has-feedback label ~ .form-control-feedback {
+  top: 27px;
+}
+
+/* File inputs */
+.main-container form .custom-file {
+  height: 42px;
+}
+.main-container form .custom-file-input {
+  height: 42px;
+  cursor: pointer;
+}
+.main-container form .custom-file-label {
+  height: 42px;
+  padding: 9px 13px;
+  overflow: hidden;
+  border: 1px solid var(--ed-line);
+  border-radius: 8px;
+  background: var(--ed-surface);
+  color: var(--ed-text-soft);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.main-container form .custom-file-label:after {
+  height: 40px;
+  padding: 9px 14px;
+  border-left: 1px solid var(--ed-line);
+  border-radius: 0 7px 7px 0;
+  background: var(--ed-panel);
+  color: var(--ed-accent);
+  font-weight: 600;
+  line-height: 1.6;
+}
+.main-container form .custom-file-input:focus ~ .custom-file-label {
+  border-color: var(--ed-accent);
+  box-shadow: 0 0 0 3px rgba(22,125,136,.12);
+}
+
+/* Errors */
+.main-container form .form-control.is-invalid,
+.main-container form .is-invalid .form-control,
+.main-container form .custom-file-input.is-invalid ~ .custom-file-label {
+  border-color: #b5534f;
+}
+.main-container form .form-control.is-invalid:focus {
+  box-shadow: 0 0 0 3px rgba(181,83,79,.14);
+}
+.main-container form .invalid-feedback,
+.main-container form .form-error-message {
+  margin-top: 6px;
+  color: #b5534f;
+  font-size: 12px;
+}
+.main-container form .invalid-feedback .badge-danger {
+  margin-right: 4px;
+  background: #b5534f;
+}
+
+/* Rich text editor (CKEditor 4): same frame as the other fields. Its skin icons and its editing area stay light, so the
+   toolbar keeps the light tokens in the dark theme too */
+.main-container .cke_chrome {
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid var(--ed-line);
+  border-radius: 8px;
+  box-shadow: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.main-container .cke_chrome:focus-within {
+  border-color: var(--ed-accent);
+  box-shadow: 0 0 0 3px rgba(22,125,136,.12);
+}
+.main-container .cke_inner {
+  background: #fff;
+}
+.main-container .cke_top {
+  padding: 6px 8px 2px;
+  border-bottom: 1px solid #e7edf2;
+  background: #f7f9fc;
+  box-shadow: none;
+}
+.main-container .cke_bottom {
+  border-top: 1px solid #e7edf2;
+  background: #f7f9fc;
+  box-shadow: none;
+}
+.main-container .cke_toolgroup {
+  border-radius: 6px;
+}
+
+/* Star rating field */
+.rating .rating__star {
+  color: var(--ed-line-strong);
+  transition: color .1s ease, transform .1s ease;
+}
+.rating .rating__star.is-selected {
+  color: var(--ed-star);
+}
+.rating button.rating__star:hover,
+.rating button.rating__star:focus-visible {
+  transform: scale(1.12);
+  outline: 0;
+}
+.main-container form .rating.md {
+  gap: 3px;
+  font-size: 26px;
+}
+
+/* Actions: the editorial pill buttons */
+.main-container form .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.main-container form .btn .fa-svg {
+  width: 13px;
+  height: 13px;
+}
+.main-container form .btn-default,
+.main-container form .btn-primary {
+  border: 1px solid var(--ed-accent);
+  background: var(--ed-accent);
+  color: var(--ed-accent-contrast);
+}
+.main-container form .btn-default:hover,
+.main-container form .btn-default:focus,
+.main-container form .btn-primary:hover,
+.main-container form .btn-primary:focus {
+  border-color: var(--ed-ink);
+  background: var(--ed-ink);
+  color: var(--ed-page);
+}
+.main-container form .btn-danger {
+  border: 1px solid var(--ed-line);
+  background: var(--ed-surface);
+  color: var(--ed-text);
+}
+.main-container form .btn-danger:hover,
+.main-container form .btn-danger:focus {
+  border-color: #b5534f;
+  background: var(--ed-surface);
+  color: #b5534f;
+}
+.main-container form .pull-right > .pull-right {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}
+.main-container form .pull-right > .pull-right > .btn {
+  margin: 0;
+}

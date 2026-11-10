@@ -1,5 +1,5 @@
 // Front-end entrypoint, the order of the stylesheets matters: Bootstrap 4, the base styles, the rules of the former
-// template, the helpers, then the editorial design
+// template, the helpers, the forms, then the editorial design
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/animations.css';
 import './styles/components.css';
@@ -19,6 +19,7 @@ import './styles/legacy/social-links.css';
 import './styles/legacy/scroll-to-top.css';
 
 import './styles/helpers.css';
+import './styles/forms.css';
 import './styles/editorial.css';
 
 import './js/stimulus.js';
