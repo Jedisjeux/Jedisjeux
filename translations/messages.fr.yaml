@@ -1,4 +1,19 @@
 app:
+    oauth:
+        continue_with: Continuer avec %provider%
+        or: ou avec votre compte Jedisjeux
+        connected_accounts: Comptes connectés
+        connected_accounts_help: Liez vos comptes Google, Facebook ou GitHub pour vous connecter en un clic.
+        no_provider: Aucune connexion externe n'est disponible pour le moment.
+        link: Lier
+        unlink: Délier
+        linked_state: Lié
+        register:
+            title: Choisissez votre pseudo
+            intro: Votre compte %provider% est prêt à être utilisé sur Jedisjeux.
+            hint: Vous vous connecterez ensuite avec %provider%, sans mot de passe.
+            verification_needed: Un lien de confirmation vous sera envoyé à cette adresse avant de pouvoir vous connecter.
+            existing_account: Vous avez déjà un compte ? Connectez-vous, puis liez %provider% depuis « Mon compte ».
     ui:
         avatar: Avatar
         create_user: Créer un utilisateur

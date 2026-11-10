@@ -1,4 +1,19 @@
 app:
+    oauth:
+        continue_with: Continue with %provider%
+        or: or with your Jedisjeux account
+        connected_accounts: Connected accounts
+        connected_accounts_help: Link your Google, Facebook or GitHub accounts to sign in with one click.
+        no_provider: No external sign-in is available for now.
+        link: Link
+        unlink: Unlink
+        linked_state: Linked
+        register:
+            title: Choose your username
+            intro: Your %provider% account is ready to be used on Jedisjeux.
+            hint: You will then sign in with %provider%, without password.
+            verification_needed: A confirmation link will be sent to this address before you can sign in.
+            existing_account: Already have an account? Sign in, then link %provider% from "My account".
     ui:
         avatar: Avatar
         create_user: Create an user

@@ -55,4 +55,5 @@ return [
     Sylius\TwigExtra\Symfony\SyliusTwigExtraBundle::class => ['all' => true],
     Sylius\AdminUi\Symfony\SyliusAdminUiBundle::class => ['all' => true],
     Sylius\BootstrapAdminUi\Symfony\SyliusBootstrapAdminUiBundle::class => ['all' => true],
+    KnpU\OAuth2ClientBundle\KnpUOAuth2ClientBundle::class => ['all' => true],
 ];

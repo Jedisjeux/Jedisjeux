@@ -11,5 +11,8 @@
         <li{% if active == 'change-password' %} class="active"{% endif %}>
             <a href="{{ path('sylius_frontend_account_change_password') }}">{{ 'sylius.ui.change_password'|trans }}</a>
         </li>
+        <li{% if active == 'oauth' %} class="active"{% endif %}>
+            <a href="{{ path('app_oauth_accounts') }}">{{ 'app.oauth.connected_accounts'|trans }}</a>
+        </li>
     </ul>
 </div>

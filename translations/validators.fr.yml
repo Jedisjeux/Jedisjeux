@@ -1,4 +1,6 @@
 app:
+    oauth:
+        email_taken: Un compte utilise déjà cette adresse. Connectez-vous avec lui, puis liez ce compte externe depuis « Mon compte ».
     user:
         username:
             unique: Ce nom d'utilisateur est déjà utilisé.

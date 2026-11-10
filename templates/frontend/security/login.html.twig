@@ -35,6 +35,8 @@
                     <h2>{{ pageTitle }}</h2>
                     <p class="editorial-login__hint">Entrez vos identifiants pour continuer.</p>
 
+                    {% include 'frontend/security/_oauth_buttons.html.twig' %}
+
                     {% form_theme form 'frontend/form/horizontal.html.twig' %}
                     <form class="form-horizontal" action="{{ path('sylius_frontend_login_check') }}" method="post">
                         {% if error %}

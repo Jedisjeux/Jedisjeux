@@ -1,4 +1,11 @@
 app:
+    oauth:
+        failure: Signing in with this external account failed, please try again.
+        linked: Your external account has been linked.
+        unlinked: Your external account has been unlinked.
+        already_linked: This external account is already linked to another Jedisjeux account.
+        registered: Welcome to Jedisjeux, your account has been created.
+        last_access: Set a password before unlinking your last external account.
     article:
         create: Article has been successfully created.
         update: Article has been successfully updated.

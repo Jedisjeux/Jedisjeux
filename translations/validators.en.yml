@@ -1,4 +1,6 @@
 app:
+    oauth:
+        email_taken: An account already uses this address. Sign in with it, then link this external account from "My account".
     user:
         username:
             unique: This username is already used.

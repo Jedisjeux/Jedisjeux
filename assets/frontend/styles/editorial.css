@@ -725,6 +725,19 @@ body { color: var(--ed-text); background: var(--editorial-page); font-family: 'R
 .editorial-compose__tips ul { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .editorial-compose__tips li { display: flex; align-items: flex-start; gap: 9px; color: var(--ed-text); font-size: 12px; line-height: 1.5; }
 .editorial-compose__tips li i { padding-top: 2px; color: var(--ed-accent); font-size: 11px; }
+/* Social sign-in */
+.editorial-oauth { margin: 0 0 18px; }
+.editorial-oauth__buttons { display: flex; flex-direction: column; gap: 9px; }
+.editorial-oauth__button { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 10px 16px; border: 1px solid var(--editorial-border); border-radius: 24px; background: var(--ed-surface); color: var(--ed-text); font-size: 11px; font-weight: 700; transition: border-color .15s ease, background .15s ease; }
+.editorial-oauth__button:hover, .editorial-oauth__button:focus { border-color: var(--ed-line-strong); background: var(--ed-tint); color: var(--ed-ink); text-decoration: none; }
+.editorial-oauth__button svg { width: 15px; height: 15px; }
+.editorial-oauth__button--google svg { color: #db4437; }
+.editorial-oauth__button--facebook svg { color: #1877f2; }
+.editorial-oauth__separator { display: flex; align-items: center; gap: 12px; margin: 18px 0 0; color: var(--ed-muted); font-size: 10px; }
+.editorial-oauth__separator::before, .editorial-oauth__separator::after { content: ''; flex: 1; border-top: 1px solid var(--editorial-border-soft); }
+.editorial-oauth-accounts__item { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.editorial-oauth-accounts__item form { margin: 0; }
+.editorial-oauth-accounts__name { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; }
 /* Game play entry */
 .editorial-play-entry .editorial-catalog__intro { padding-bottom: 21px; }
 .main-container.editorial-play-entry-main { padding: 30px 0 46px; background: var(--editorial-panel); }

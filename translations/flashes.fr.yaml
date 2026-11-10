@@ -1,4 +1,11 @@
 app:
+    oauth:
+        failure: La connexion avec ce compte externe a échoué, veuillez réessayer.
+        linked: Votre compte externe a bien été lié.
+        unlinked: Votre compte externe a bien été délié.
+        already_linked: Ce compte externe est déjà lié à un autre compte Jedisjeux.
+        registered: Bienvenue sur Jedisjeux, votre compte a bien été créé.
+        last_access: Définissez un mot de passe avant de délier votre dernier compte externe.
     address:
         create: L'adresse a bien été créée.
         update: L'adresse a bien été mise à jour.

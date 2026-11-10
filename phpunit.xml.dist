@@ -41,6 +41,9 @@
         <!-- https://www.google.com/recaptcha/admin -->
         <env name="GOOGLE_RECAPTCHA_SITE_KEY" value=""/>
         <env name="GOOGLE_RECAPTCHA_SECRET" value=""/>
+        <!-- Shows the GitHub sign-in, the other providers stay hidden -->
+        <env name="OAUTH_GITHUB_CLIENT_ID" value="test-client-id"/>
+        <env name="OAUTH_GITHUB_CLIENT_SECRET" value="test-client-secret"/>
         <!-- ###- google/recaptcha ### -->
         <!-- ###+ google/analytics ### -->
         <!-- ###- google/analytics ### -->

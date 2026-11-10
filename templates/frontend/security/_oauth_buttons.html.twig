@@ -1,0 +1,15 @@
+{% set oauthProviders = oauth_providers() %}
+{% if oauthProviders is not empty %}
+    {% set providerNames = {google: 'Google', facebook: 'Facebook', github: 'GitHub'} %}
+    <div class="editorial-oauth">
+        <div class="editorial-oauth__buttons">
+            {% for provider in oauthProviders %}
+                <a class="editorial-oauth__button editorial-oauth__button--{{ provider }}" href="{{ path('app_oauth_connect', {provider: provider}) }}">
+                    {{ ux_icon('fa:' ~ provider, {class: 'fa-svg', 'aria-hidden': 'true'}) }}
+                    <span>{{ 'app.oauth.continue_with'|trans({'%provider%': providerNames[provider]}) }}</span>
+                </a>
+            {% endfor %}
+        </div>
+        <p class="editorial-oauth__separator"><span>{{ 'app.oauth.or'|trans }}</span></p>
+    </div>
+{% endif %}

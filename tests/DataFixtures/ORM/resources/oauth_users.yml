@@ -1,0 +1,13 @@
+App\Entity\Customer:
+    customer_oliver:
+        email: 'oliver@doe.com'
+        emailCanonical: 'oliver@doe.com'
+
+App\Entity\User:
+    user_oliver:
+        plainPassword: '123pa$$word'
+        roles: [ROLE_USER]
+        enabled: true
+        customer: '@customer_oliver'
+        username: Oliver
+        usernameCanonical: oliver
