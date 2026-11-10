@@ -1,0 +1,80 @@
+{#
+    Writing page of the forum topics and of the messages (forum, article and game play comments), embedded with:
+    - pageTitle, eyebrow and lead: the intro
+    - breadcrumb: the links before the page title, as [{label, url}]
+    - context (optional): what the message answers, as {label, title, url}
+    - tips: the advice of the side column
+    - update: true on an edition, for the PUT method and the save button
+    - the "fields" block: the form rows
+#}
+{% import 'macro/actions.html.twig' as actions %}
+
+<div class="breadcrumb-container">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home pr-2" aria-hidden="true">{{ ux_icon('fa:home', {class: 'fa-svg'}) }}</i><a class="link-dark" href="{{ path('app_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
+            {% for item in breadcrumb %}
+                <li class="breadcrumb-item"><a class="link-dark" href="{{ item.url }}">{{ item.label }}</a></li>
+            {% endfor %}
+            <li class="breadcrumb-item active">{{ pageTitle }}</li>
+        </ol>
+    </div>
+</div>
+
+<div class="editorial-catalog editorial-compose">
+    <section class="editorial-catalog__intro">
+        <div class="container">
+            <span class="editorial-eyebrow">{{ eyebrow }}</span>
+            <h1>{{ pageTitle }}</h1>
+            <p>{{ lead }}</p>
+        </div>
+    </section>
+</div>
+
+<section class="main-container editorial-compose-main">
+    <div class="container">
+        <div class="editorial-compose__layout">
+            <div class="editorial-compose__panel">
+                {% form_theme form 'frontend/post/_theme.html.twig' %}
+
+                {{ form_start(form, {attr: {class: 'editorial-compose__form'}}) }}
+                    {% if update|default(false) %}
+                        <input type="hidden" name="_method" value="PUT"/>
+                    {% endif %}
+                    {{ form_errors(form) }}
+
+                    {% block fields %}{% endblock %}
+
+                    {{ form_rest(form) }}
+
+                    <div class="editorial-compose__actions">
+                        {{ actions.cancelButton() }}
+                        {% if update|default(false) %}
+                            {{ actions.updateButton() }}
+                        {% else %}
+                            {{ actions.createButton() }}
+                        {% endif %}
+                    </div>
+                {{ form_end(form) }}
+            </div>
+
+            <aside class="editorial-compose__aside">
+                {% if context|default(null) is not null %}
+                    <div class="editorial-compose__context">
+                        <span class="editorial-compose__label">{{ context.label }}</span>
+                        <a href="{{ context.url }}">{{ context.title }}</a>
+                    </div>
+                {% endif %}
+
+                <div class="editorial-compose__tips">
+                    <span class="editorial-compose__label">Avant de publier</span>
+                    <ul>
+                        {% for tip in tips %}
+                            <li><i class="fa fa-check" aria-hidden="true">{{ ux_icon('fa:check', {class: 'fa-svg'}) }}</i><span>{{ tip }}</span></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>

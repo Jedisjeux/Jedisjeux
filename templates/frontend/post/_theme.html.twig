@@ -1,0 +1,7 @@
+{% extends 'frontend/form/vertical.html.twig' %}
+
+{# Form theme of the topics and messages: the rich text editor has its own toolbar, so it gets no icon #}
+
+{% block textarea_row %}
+    {{- block('form_row') -}}
+{% endblock %}
