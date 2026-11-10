@@ -1,18 +1,82 @@
-<div class="alert alert-warning" role="alert">
-    <strong>Attention</strong> Jedisjeux ne propose pas de jouer en ligne.
-    <p>Cette fonctionnalité permet de saisir une partie jouée afin d'en faire un compte-rendu, se souvenir de tous les jeux auquels on a joué, faire des statistiques etc...</p>
-</div>
+{# Game play entry, shared by the creation and the edition: expects pageTitle, the form and the product of the game play #}
+{% import 'macro/actions.html.twig' as actions %}
+{% set product = resource.product %}
 
-<!-- Tabs start -->
-<!-- ================ -->
-<!-- ================ -->
-<div class="vertical">
-    {% include 'frontend/game_play/form/_tabs.html.twig' %}
-    <!-- Tab panes -->
-    <div class="tab-content" style="width: 100%">
-        {% include 'frontend/game_play/form/_main.html.twig' %}
-        {% include 'frontend/game_play/form/_players.html.twig' %}
-        {% include 'frontend/game_play/form/_images.html.twig' %}
+<div class="breadcrumb-container">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home pr-2" aria-hidden="true">{{ ux_icon('fa:home', {class: 'fa-svg'}) }}</i><a class="link-dark" href="{{ path('app_homepage') }}">{{ 'sylius.ui.home'|trans }}</a></li>
+            <li class="breadcrumb-item"><a class="link-dark" href="{{ path('sylius_frontend_product_index') }}">{{ 'app.ui.boardgames'|trans }}</a></li>
+            <li class="breadcrumb-item"><a class="link-dark" href="{{ path('sylius_frontend_product_show', {slug: product.slug}) }}">{{ product.name }}</a></li>
+            <li class="breadcrumb-item"><a class="link-dark" href="{{ path('app_frontend_game_play_index_by_product', {productSlug: product.slug}) }}">{{ 'app.ui.game_plays'|trans }}</a></li>
+            <li class="breadcrumb-item active">{{ pageTitle }}</li>
+        </ol>
     </div>
 </div>
-<!-- tabs end -->
+
+<div class="editorial-catalog editorial-play-entry">
+    <section class="editorial-catalog__intro">
+        <div class="container">
+            <span class="editorial-eyebrow">Parties · {{ product.name }}</span>
+            <h1>{{ pageTitle }}</h1>
+            <p>Gardez une trace de vos parties : la date, les joueurs, les scores et quelques photos.</p>
+        </div>
+    </section>
+</div>
+
+<section class="main-container editorial-play-entry-main">
+    <div class="container">
+        <div class="editorial-play-entry__layout">
+            <aside class="editorial-play-entry__aside">
+                {{ component('Product:Box', {slug: product.slug}) }}
+                <p class="editorial-play-entry__note">
+                    <i class="fa fa-info-circle" aria-hidden="true">{{ ux_icon('fa:info-circle', {class: 'fa-svg'}) }}</i>
+                    <span>Jedisjeux ne propose pas de jouer en ligne : notez ici une partie jouée autour d’une table pour en garder le compte-rendu, vous souvenir de vos jeux et suivre vos statistiques.</span>
+                </p>
+            </aside>
+
+            <div class="editorial-play-entry__panel">
+                {% form_theme form 'frontend/game_play/form/_theme.html.twig' %}
+
+                {{ form_start(form, {attr: {class: 'editorial-play-entry__form'}}) }}
+                    {% if resource.id is not null %}
+                        <input type="hidden" name="_method" value="PUT"/>
+                    {% endif %}
+                    {{ form_errors(form) }}
+
+                    <fieldset class="editorial-play-entry__section">
+                        <legend><span class="editorial-play-entry__step">1</span> La partie</legend>
+                        <div class="editorial-play-entry__grid">
+                            {{ form_row(form.playedAt, {attr: {placeholder: 'jj/mm/aaaa'}}) }}
+                            {{ form_row(form.duration, {attr: {placeholder: '45', min: 0}}) }}
+                            {{ form_row(form.playerCount, {attr: {placeholder: '4', min: 1}}) }}
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="editorial-play-entry__section">
+                        <legend><span class="editorial-play-entry__step">2</span> Joueurs et scores</legend>
+                        <p class="editorial-play-entry__hint">Ajoutez les joueurs autour de la table et leur score final.</p>
+                        {{ form_widget(form.players) }}
+                    </fieldset>
+
+                    <fieldset class="editorial-play-entry__section">
+                        <legend><span class="editorial-play-entry__step">3</span> Photos</legend>
+                        <p class="editorial-play-entry__hint">Le plateau, les joueurs, le moment décisif : ajoutez quelques souvenirs de la partie.</p>
+                        {{ form_widget(form.images) }}
+                    </fieldset>
+
+                    {{ form_rest(form) }}
+
+                    <div class="editorial-play-entry__actions">
+                        {{ actions.cancelButton(resource.id is not null ? path('app_frontend_game_play_show', {productSlug: product.slug, id: resource.id}) : path('app_frontend_game_play_index_by_product', {productSlug: product.slug})) }}
+                        {% if resource.id is not null %}
+                            {{ actions.updateButton() }}
+                        {% else %}
+                            {{ actions.createButton() }}
+                        {% endif %}
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</section>
