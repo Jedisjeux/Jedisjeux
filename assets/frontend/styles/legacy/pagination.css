@@ -1,6 +1,5 @@
 /* Former template: Pagination */
-ul.pagination,
-ul.pager {
+ul.pagination {
   margin: 20px 0 40px;
   text-align: left;
 }
@@ -18,8 +17,7 @@ ul.pagination .page-item:last-child {
 }
 ul.pagination .page-item .page-link,
 .pagination .page-item:first-child .page-link,
-.pagination .page-item:last-child .page-link,
-ul.pager .page-item .page-link {
+.pagination .page-item:last-child .page-link {
   text-align: center;
   padding: 0;
   height: 35px;

@@ -2,9 +2,7 @@
 .page-wrapper {
   background-color: #ffffff;
 }
-.banner.light-translucent-bg,
-.banner.dark-translucent-bg,
-.banner.default-translucent-bg {
+.banner.light-translucent-bg {
   min-height: 250px;
   padding-top: 60px;
   padding-bottom: 20px;
@@ -46,10 +44,7 @@
   border-top: 1px solid #f3f3f3;
   border-bottom: 1px solid #f3f3f3;
 }
-.light-translucent-bg,
-.dark-translucent-bg,
-.default-translucent-bg,
-.two-col-translucent-bg {
+.light-translucent-bg {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -60,10 +55,7 @@
   position: relative;
   overflow: hidden;
 }
-.light-translucent-bg:after,
-.dark-translucent-bg:after,
-.default-translucent-bg:after,
-.two-col-translucent-bg:after {
+.light-translucent-bg:after {
   content: "";
   position: absolute;
   top: 0;
@@ -77,10 +69,7 @@
   -webkit-backface-visibility: hidden;
   -webkit-transform: translateZ(0) scale(1, 1);
 }
-.light-translucent-bg > div,
-.dark-translucent-bg > div,
-.default-translucent-bg > div,
-.two-col-translucent-bg > div {
+.light-translucent-bg > div {
   z-index: 3;
   position: relative;
 }
@@ -114,9 +103,4 @@
 }
 #logo-footer.logo-font {
   font-size: 26px;
-}
-@media (min-width: 992px) {
-  .fixed-header-on .sidebar.affix {
-      top: 65px;
-  }
 }
