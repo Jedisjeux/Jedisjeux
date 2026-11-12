@@ -1,0 +1,53 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% set pageTitle = 'app.oauth.connected_accounts'|trans %}
+{% set providerNames = {google: 'Google', facebook: 'Facebook', github: 'GitHub'} %}
+
+{% block content %}
+    <section class="main-container">
+        <div class="container">
+            <div class="row">
+                <div class="main col-md-12">
+                    <h1 class="page-title">{{ pageTitle }}</h1>
+                    <div class="separator-2"></div>
+
+                    <div class="row">
+                        <div class="col-md-9 col-sm-8 col-md-push-3 col-sm-push-4">
+                            <p>{{ 'app.oauth.connected_accounts_help'|trans }}</p>
+
+                            {% if providers is empty %}
+                                <p class="text-muted">{{ 'app.oauth.no_provider'|trans }}</p>
+                            {% else %}
+                                <ul class="list-group editorial-oauth-accounts">
+                                    {% for provider in providers %}
+                                        <li class="list-group-item editorial-oauth-accounts__item">
+                                            <span class="editorial-oauth-accounts__name">
+                                                {{ ux_icon('fa:' ~ provider, {class: 'fa-svg', 'aria-hidden': 'true'}) }}
+                                                {{ providerNames[provider] }}
+                                            </span>
+                                            {% if user.getOAuthAccount(provider) is not null %}
+                                                {% if canUnlink %}
+                                                    <form method="post" action="{{ path('app_oauth_unlink', {provider: provider}) }}">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token('oauth_unlink_' ~ provider) }}">
+                                                        <button type="submit" class="btn btn-sm btn-default">{{ 'app.oauth.unlink'|trans }}</button>
+                                                    </form>
+                                                {% else %}
+                                                    <span class="text-muted" title="{{ 'app.oauth.last_access'|trans({}, 'flashes') }}">{{ 'app.oauth.linked_state'|trans }}</span>
+                                                {% endif %}
+                                            {% else %}
+                                                <a class="btn btn-sm btn-default" href="{{ path('app_oauth_connect', {provider: provider}) }}">{{ 'app.oauth.link'|trans }}</a>
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-md-pull-9 col-sm-pull-8">
+                            {% include 'frontend/account/_sidebar.html.twig' with {'active': 'oauth'} %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

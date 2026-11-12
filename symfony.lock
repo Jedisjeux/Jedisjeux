@@ -263,6 +263,9 @@
     "knplabs/knp-menu-bundle": {
         "version": "v2.2.1"
     },
+    "knpuniversity/oauth2-client-bundle": {
+        "version": "v2.20.2"
+    },
     "lakion/mink-debug-extension": {
         "version": "v1.2.3"
     },

@@ -58,6 +58,9 @@ security:
                 enable_csrf: true
                 csrf_parameter: _csrf_shop_security_token
                 csrf_token_id: shop_authenticate
+            custom_authenticators:
+                - App\Security\OAuth\OAuthAuthenticator
+            entry_point: form_login
             remember_me:
                 secret: "%env(APP_SECRET)%"
                 name: APP_FRONTEND_REMEMBER_ME

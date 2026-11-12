@@ -1,0 +1,50 @@
+{% extends 'frontend/layout.html.twig' %}
+
+{% set providerName = {google: 'Google', facebook: 'Facebook', github: 'GitHub'}[provider] %}
+{% set pageTitle = 'app.oauth.register.title'|trans %}
+
+{% block content %}
+    {% include 'frontend/register/_breadcrumb.html.twig' %}
+
+    <div class="editorial-catalog editorial-register">
+        <section class="editorial-catalog__intro">
+            <div class="container">
+                <span class="editorial-eyebrow">La communauté · Rejoignez-nous</span>
+                <h1>{{ pageTitle }}</h1>
+                <p>{{ 'app.oauth.register.intro'|trans({'%provider%': providerName}) }}</p>
+            </div>
+        </section>
+    </div>
+
+    <section class="editorial-register-main">
+        <div class="container">
+            <div class="editorial-register__layout">
+                <aside class="editorial-register__welcome">
+                    <span class="editorial-eyebrow">Une dernière étape</span>
+                    <h2>Comment vous appeler&nbsp;?</h2>
+                    <p>Votre pseudo sera visible par les autres membres : sur le forum, vos avis et vos parties.</p>
+                </aside>
+                <div class="editorial-register__panel">
+                    <h2>{{ 'sylius.ui.create_an_account'|trans }}</h2>
+                    <p class="editorial-register__hint">{{ 'app.oauth.register.hint'|trans({'%provider%': providerName}) }}</p>
+
+                    {% form_theme form 'frontend/form/horizontal.html.twig' %}
+                    {{ form_start(form, {attr: {class: 'form-horizontal'}}) }}
+                        {{ form_errors(form) }}
+                        {{ form_row(form.username, {attr: {'placeholder': 'sylius.ui.username'|trans}}) }}
+                        {{ form_row(form.email, {attr: {'placeholder': 'sylius.ui.email'|trans}}) }}
+                        {% if not emailVerified %}
+                            <p class="editorial-register__hint">{{ 'app.oauth.register.verification_needed'|trans }}</p>
+                        {% endif %}
+                        {{ form_rest(form) }}
+
+                        <div class="editorial-register__submit">
+                            <button type="submit" class="btn btn-default">{{ 'sylius.ui.create_an_account'|trans }} <i class="fa fa-arrow-right" aria-hidden="true">{{ ux_icon('fa:arrow-right', {class: 'fa-svg'}) }}</i></button>
+                        </div>
+                    {{ form_end(form) }}
+                    <p class="editorial-register__login">{{ 'app.oauth.register.existing_account'|trans({'%provider%': providerName}) }} <a href="{{ path('sylius_frontend_login') }}">Se connecter</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

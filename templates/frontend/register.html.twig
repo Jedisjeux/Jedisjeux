@@ -32,6 +32,8 @@
                     <h2>{{ 'sylius.ui.create_an_account'|trans }}</h2>
                     <p class="editorial-register__hint">Quelques informations suffisent pour commencer.</p>
 
+                    {% include 'frontend/security/_oauth_buttons.html.twig' %}
+
                     {% form_theme form 'frontend/form/horizontal.html.twig' %}
                     {{ form_errors(form) }}
 
