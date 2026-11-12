@@ -758,20 +758,20 @@
         },
         {
             "name": "doctrine/deprecations",
-            "version": "1.1.6",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/deprecations.git",
-                "reference": "d4fe3e6fd9bb9e72557a19674f44d8ac7db4c6ca"
+                "reference": "d2e16653a734c8784c1851ad68b02f997b53ca82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/d4fe3e6fd9bb9e72557a19674f44d8ac7db4c6ca",
-                "reference": "d4fe3e6fd9bb9e72557a19674f44d8ac7db4c6ca",
+                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/d2e16653a734c8784c1851ad68b02f997b53ca82",
+                "reference": "d2e16653a734c8784c1851ad68b02f997b53ca82",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1 || ^8.0"
+                "php": "^7.4 || ^8.0"
             },
             "conflict": {
                 "phpunit/phpunit": "<=7.5 || >=14"
@@ -800,9 +800,9 @@
             "homepage": "https://www.doctrine-project.org/",
             "support": {
                 "issues": "https://github.com/doctrine/deprecations/issues",
-                "source": "https://github.com/doctrine/deprecations/tree/1.1.6"
+                "source": "https://github.com/doctrine/deprecations/tree/1.2.0"
             },
-            "time": "2026-02-07T07:09:04+00:00"
+            "time": "2026-11-11T10:04:49+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -3724,30 +3724,30 @@
         },
         {
             "name": "laminas/laminas-stdlib",
-            "version": "3.21.0",
+            "version": "3.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-stdlib.git",
-                "reference": "b1c81514cfe158aadf724c42b34d3d0a8164c096"
+                "reference": "1053fe6ecbcf6f0352e687eda749ee16ace5cc8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-stdlib/zipball/b1c81514cfe158aadf724c42b34d3d0a8164c096",
-                "reference": "b1c81514cfe158aadf724c42b34d3d0a8164c096",
+                "url": "https://api.github.com/repos/laminas/laminas-stdlib/zipball/1053fe6ecbcf6f0352e687eda749ee16ace5cc8b",
+                "reference": "1053fe6ecbcf6f0352e687eda749ee16ace5cc8b",
                 "shasum": ""
             },
             "require": {
-                "php": "~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0"
+                "php": "~8.3.0 || ~8.4.0 || ~8.5.0 || ~8.6.0"
             },
             "conflict": {
                 "zendframework/zend-stdlib": "*"
             },
             "require-dev": {
                 "laminas/laminas-coding-standard": "^3.1.0",
-                "phpbench/phpbench": "^1.4.1",
-                "phpunit/phpunit": "^11.5.42",
-                "psalm/plugin-phpunit": "^0.19.5",
-                "vimeo/psalm": "^6.13.1"
+                "phpbench/phpbench": "^1.7.0",
+                "phpunit/phpunit": "^11.5.57",
+                "psalm/plugin-phpunit": "^0.19.7",
+                "vimeo/psalm": "^6.20.10"
             },
             "type": "library",
             "autoload": {
@@ -3775,11 +3775,11 @@
             },
             "funding": [
                 {
-                    "url": "https://funding.communitybridge.org/projects/laminas-project",
-                    "type": "community_bridge"
+                    "url": "https://crowdfunding.linuxfoundation.org/initiatives/laminas-project",
+                    "type": "custom"
                 }
             ],
-            "time": "2025-10-11T18:13:12+00:00"
+            "time": "2026-11-09T22:51:17+00:00"
         },
         {
             "name": "lcobucci/jwt",
@@ -5587,23 +5587,23 @@
         },
         {
             "name": "sylius/admin-ui",
-            "version": "v0.14.1",
+            "version": "v0.14.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/AdminUi.git",
-                "reference": "43dfc851a4155b410ff7e8bd7e41e244ec1b9fe8"
+                "reference": "9b34f33696bf79ebe9de780966b9d994c96b70e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/AdminUi/zipball/43dfc851a4155b410ff7e8bd7e41e244ec1b9fe8",
-                "reference": "43dfc851a4155b410ff7e8bd7e41e244ec1b9fe8",
+                "url": "https://api.github.com/repos/Sylius/AdminUi/zipball/9b34f33696bf79ebe9de780966b9d994c96b70e1",
+                "reference": "9b34f33696bf79ebe9de780966b9d994c96b70e1",
                 "shasum": ""
             },
             "require": {
                 "knplabs/knp-menu-bundle": "^3.0",
                 "php": "^8.1",
                 "sylius/resource-bundle": "^1.13 || ^1.14@alpha",
-                "sylius/twig-hooks": "^0.14.1",
+                "sylius/twig-hooks": "^0.14.2",
                 "symfony/http-kernel": "^6.4 || ^7.4 || ^8.0",
                 "symfony/security-bundle": "^6.4 || ^7.4 || ^8.0",
                 "symfony/security-http": "^6.4 || ^7.4 || ^8.0",
@@ -5646,7 +5646,7 @@
             "description": "Minimalist generic templates and routes for your admin panels",
             "support": {
                 "issues": "https://github.com/Sylius/AdminUi/issues",
-                "source": "https://github.com/Sylius/AdminUi/tree/v0.14.1"
+                "source": "https://github.com/Sylius/AdminUi/tree/v0.14.2"
             },
             "funding": [
                 {
@@ -5654,7 +5654,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-09T12:42:21+00:00"
+            "time": "2026-11-12T08:16:34+00:00"
         },
         {
             "name": "sylius/attribute",
@@ -5819,26 +5819,26 @@
         },
         {
             "name": "sylius/bootstrap-admin-ui",
-            "version": "v0.14.1",
+            "version": "v0.14.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/BootstrapAdminUi.git",
-                "reference": "1c2f18bcb70982c5378d00e62f2fbe9489ae65c4"
+                "reference": "a14e316df429e4fa0d7fafc140a56825bdb53967"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Sylius/BootstrapAdminUi/zipball/1c2f18bcb70982c5378d00e62f2fbe9489ae65c4",
-                "reference": "1c2f18bcb70982c5378d00e62f2fbe9489ae65c4",
+                "url": "https://api.github.com/repos/Sylius/BootstrapAdminUi/zipball/a14e316df429e4fa0d7fafc140a56825bdb53967",
+                "reference": "a14e316df429e4fa0d7fafc140a56825bdb53967",
                 "shasum": ""
             },
             "require": {
                 "pagerfanta/twig": "^4.6",
                 "php": "^8.1",
-                "sylius/admin-ui": "^0.14.1",
+                "sylius/admin-ui": "^0.14.2",
                 "sylius/grid-bundle": "^1.13 || ^1.15@alpha",
                 "sylius/resource-bundle": "^1.13 || ^1.14@alpha",
-                "sylius/twig-extra": "^0.14.1",
-                "sylius/twig-hooks": "^0.14.1",
+                "sylius/twig-extra": "^0.14.2",
+                "sylius/twig-hooks": "^0.14.2",
                 "symfony/asset": "^6.4 || ^7.4 || ^8.0",
                 "symfony/http-client": "^6.4 || ^7.4 || ^8.0",
                 "symfony/http-kernel": "^6.4 || ^7.4 || ^8.0",
@@ -5878,7 +5878,7 @@
             "description": "Build your Bootstrap admin panels with Sylius and Symfony UX",
             "support": {
                 "issues": "https://github.com/Sylius/BootstrapAdminUi/issues",
-                "source": "https://github.com/Sylius/BootstrapAdminUi/tree/v0.14.1"
+                "source": "https://github.com/Sylius/BootstrapAdminUi/tree/v0.14.2"
             },
             "funding": [
                 {
@@ -5886,7 +5886,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-09T12:42:21+00:00"
+            "time": "2026-11-12T08:16:34+00:00"
         },
         {
             "name": "sylius/customer",
@@ -7334,7 +7334,7 @@
         },
         {
             "name": "sylius/twig-extra",
-            "version": "v0.14.1",
+            "version": "v0.14.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/TwigExtra.git",
@@ -7397,7 +7397,7 @@
             "description": "Additional Twig extensions for your Symfony projects",
             "support": {
                 "issues": "https://github.com/Sylius/TwigExtra/issues",
-                "source": "https://github.com/Sylius/TwigExtra/tree/v0.14.1"
+                "source": "https://github.com/Sylius/TwigExtra/tree/v0.14.2"
             },
             "funding": [
                 {
@@ -7409,7 +7409,7 @@
         },
         {
             "name": "sylius/twig-hooks",
-            "version": "v0.14.1",
+            "version": "v0.14.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Sylius/TwigHooks.git",
@@ -7482,7 +7482,7 @@
             ],
             "description": "Composable Twig layouts",
             "support": {
-                "source": "https://github.com/Sylius/TwigHooks/tree/v0.14.1"
+                "source": "https://github.com/Sylius/TwigHooks/tree/v0.14.2"
             },
             "funding": [
                 {
